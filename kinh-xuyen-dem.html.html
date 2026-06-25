@@ -1127,3 +1127,102 @@ window.addEventListener('load', () => {
 </main>
 </body>
 </html>
+
+	<!-- MENU EYEMEDI --> <div class="eyemedi-menu"> <button class="menu-btn" onclick="toggleMenu()">☰</button> <div id="dropdownMenu" class="menu-content"> 
+    <a href="https://eyemedi.vn/">Trang chủ</a>
+    <a href="https://eyemedi.vn/kinh-mat-nam.html">Kính mát nam</a> 
+    <a href="https://eyemedi.vn/kinh-mat-nu.html">Kính mát nữ</a> 
+    <a href="https://eyemedi.vn/kinh-xuyen-dem.html">Kính xuyên đêm</a> 
+    <a href="https://eyemedi.vn/gong-kinh-can-nu.html">Gọng kính nữ</a> 
+    <a href="https://eyemedi.vn/gong-kinh-can-nam.html">Gọng kính nam</a> 
+    <a href="https://eyemedi.vn/trong-kinh-can-vien-loan.html">Bảng giá tròng kính</a>
+    <a href="https://eyemedi.vn/phu-kien-mat-kinh">Phụ kiện mắt </a> </div> </div> 
+    <a href="https://eyemedi.vn/do-khu-xa-thi-luc-mat.html">Đo thị lực mắt miễn phí</a>
+<style> .eyemedi-menu{ position:fixed; top:100px; left:20px; z-index:9999; } .menu-btn{ background:#0A6EB4; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="landing-title">https://eyemedi.vn/top-10-dia-chi-ban-mat-kinh-trong-kinh-lens-mat-uy-tin-nhat-sai-gon-tp-ho-chi-minh/</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(90deg, #ffb7eb 0%, #7fc8ff 100%);
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.10);
+            backdrop-filter: blur(4px);
+        }
+
+        .hotline-btn {
+            background: linear-gradient(90deg, #ffb7eb 0%, #7fc8ff 100%);
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 2rem;
+            box-shadow: 0 4px 24px rgba(226, 79, 169, .15);
+        }
+
+        .hotline-btn svg {
+            margin-right: 4px;
+        }
+
+        .jas-sale-pop {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 320px;
+            padding: 1rem;
+            font-size: 14px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .jas-sale-pop.slideUp {
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .jas-sale-pop img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .jas-sale-pop-content {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 0.75rem;
+            max-width: 200px;
+        }
+
+        .pe-7s-close {
+            cursor: pointer;
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #999;
+        }
+    </style>
