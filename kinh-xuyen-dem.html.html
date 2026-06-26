@@ -1155,7 +1155,7 @@ window.addEventListener('load', () => {
     <a href="https://eyemedi.vn/phu-kien-mat-kinh">Phụ kiện mắt </a> 
     <a href="https://eyemedi.vn/do-khu-xa-thi-luc-mat.html">Đo thị lực mắt miễn phí</a> 
 	</div> </div> 
-<style> .eyemedi-menu{ position:fixed; top:40px; left:3px; z-index:9999; } .menu-btn{ background:#0A6EB4; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
+<style> .eyemedi-menu{ position:fixed; top:40px; left:3px; z-index:9999; } .menu-btn{ background:#7fc8ff; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1164,7 +1164,7 @@ window.addEventListener('load', () => {
     <style>
         body {
             font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(90deg, #ffb7eb 0%, #7fc8ff 100%);
+            background: linear-gradient(90deg, #7fc8ff 0%, #ffffff 100%);
             min-height: 100vh;
         }
 
@@ -1243,3 +1243,149 @@ window.addEventListener('load', () => {
             color: #999;
         }
     </style>
+
+	<!-- ================= Popup Khuyến Mại ================= -->
+
+<style>
+#promo-popup{
+    position:fixed;
+    right:20px;
+    bottom:-100px;
+    width:520px;
+    height:60px;             /* khoảng 1.5cm */
+    background:linear-gradient(90deg, #7fc8ff 0%, #ffffff 100%);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    box-sizing:border-box;
+    z-index:999999;
+    font-family:Arial,Helvetica,sans-serif;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+    animation:
+        slideUp .8s ease forwards,
+        glow .8s infinite,
+        shake 2s infinite;
+}
+
+#promo-popup .text{
+    color:#ff3131;
+    font-size:18px;
+    font-weight:700;
+    white-space:nowrap;
+    animation:blink .8s infinite;
+}
+
+#promo-popup .btn-buy{
+    background:#FFD700;
+    color:#d90000;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:15px;
+    padding:8px 18px;
+    border-radius:30px;
+    transition:.3s;
+    animation:pulse .9s infinite;
+}
+
+#promo-popup .btn-buy:hover{
+    transform:scale(1.08);
+}
+
+#promo-popup .close{
+    color:#fff;
+    cursor:pointer;
+    font-size:22px;
+    margin-left:12px;
+    font-weight:bold;
+}
+
+@keyframes slideUp{
+    from{
+        bottom:-100px;
+        opacity:0;
+    }
+    to{
+        bottom:20px;
+        opacity:1;
+    }
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.08);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+@keyframes blink{
+    50%{
+        opacity:.45;
+    }
+}
+
+@keyframes glow{
+    50%{
+        box-shadow:
+        0 0 12px #FFD700,
+        0 0 25px #FFD700;
+    }
+}
+
+@keyframes shake{
+    0%,100%{
+        transform:translateX(0);
+    }
+    25%{
+        transform:translateX(-2px);
+    }
+    75%{
+        transform:translateX(2px);
+    }
+}
+
+@media(max-width:768px){
+
+#promo-popup{
+    width:95%;
+    left:2.5%;
+    right:auto;
+}
+
+#promo-popup .text{
+    font-size:15px;
+}
+
+#promo-popup .btn-buy{
+    padding:7px 14px;
+    font-size:13px;
+}
+
+}
+</style>
+
+<div id="promo-popup">
+
+<div class="text">
+🔥THU GỌNG CŨ 500.000Đ
+</div>
+
+<a class="btn-buy"
+href="https://zalo.me/0967190005"
+target="_blank">
+INBOX NGAY
+</a>
+
+<div class="close"
+onclick="document.getElementById('promo-popup').style.display='none'">
+×
+</div>
+
+</div>
