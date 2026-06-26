@@ -980,145 +980,29 @@ window.addEventListener('load', () => {
 
 </script>
 
-<!-- Popup Khuyến Mại Góc Phải -->
-
-<style>
-#promo-banner{
-    position:fixed;
-    top:-250px;
-    right:20px;
-    width:340px;
-    background:#e60000;
-    color:#FFD700;
-    border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-    z-index:99999;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
-
-    animation:
-        dropDown 1.2s ease forwards,
-        shake 1.8s infinite 1.5s;
-}
-
-.banner-header{
-    padding:18px 15px;
-    text-align:center;
-}
-
-.banner-header h2{
-    margin:0;
-    font-size:28px;
-    font-weight:900;
-    text-transform:uppercase;
-    animation:blinkText .8s infinite;
-}
-
-.banner-header p{
-    margin-top:10px;
-    font-size:17px;
-    color:#fff;
-    line-height:1.5;
-}
-
-.buy-btn{
-    display:block;
-    width:45%;
-    margin:15px auto 20px;
-    padding:14px;
-    text-align:center;
-    text-decoration:none;
-    font-size:20px;
-    font-weight:bold;
-    color:#e60000;
-    background:#FFD700;
-    border-radius:50px;
-    animation:pulse 1s infinite;
-}
-
-.buy-btn:hover{
-    transform:scale(1.05);
-}
-
-.close{
-    position:absolute;
-    top:100px;
-    right:12px;
-    color:#fff;
-    cursor:pointer;
-    font-size:28px;
-    font-weight:bold;
-}
-
-@keyframes dropDown{
-    from{
-        top:-250px;
-        opacity:0;
-    }
-    to{
-        top:20px;
-        opacity:1;
-    }
-}
-
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-        box-shadow:0 0 0 rgba(255,215,0,.6);
-    }
-    50%{
-        transform:scale(1.08);
-        box-shadow:0 0 20px rgba(255,215,0,1);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-@keyframes blinkText{
-    50%{
-        opacity:.4;
-    }
-}
-
-@keyframes shake{
-    0%,100%{
-        transform:translateX(0);
-    }
-    25%{
-        transform:translateX(-5px);
-    }
-    75%{
-        transform:translateX(5px);
-    }
-}
-
-@media(max-width:768px){
-    #promo-banner{
-        width:92%;
-        right:4%;
-    }
-}
-</style>
-
 <div id="promo-banner">
 
-<span class="close" onclick="document.getElementById('promo-banner').style.display='none'">×</span>
+    <div style="font-size:18px;font-weight:bold;color:#FFD700;white-space:nowrap;">
+        🔥 GIẢM NGAY 500.000Đ
+    </div>
 
-<div class="banner-header">
+    <a href="https://your-link-san-pham.com"
+       style="background:#FFD700;
+              color:#d90000;
+              text-decoration:none;
+              padding:8px 18px;
+              border-radius:30px;
+              font-weight:bold;
+              animation:pulse 1s infinite;">
+        MUA NGAY
+    </a>
 
-<p>
-Thu gọng cũ đổi gọng mới<br>
-<h2>🔥 Trị giá 500.000Đ 🔥</h2>
-<p>
-Thay tròng kính Giảm 10%<br>
-</p>
+    <span onclick="document.getElementById('promo-banner').style.display='none'"
+          style="color:#fff;font-size:22px;cursor:pointer;margin-left:10px;">
+        ×
+    </span>
 
-<a class="buy-btn"
-href="https://zalo.me/0967190005">
-👉 TƯ VẤN NGAY
-</a>
-
+</div>
 </div>
 
 </div>
