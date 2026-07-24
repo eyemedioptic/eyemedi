@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>eyemedi.vn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#fff;
+}
+
+/*========== HEADER ==========*/
+
+header{
+
+height:120px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border-bottom:1px solid #eee;
+
+position:relative;
+
+}
+
+.logo{
+
+font-size:70px;
+
+letter-spacing:18px;
+
+font-weight:300;
+
+color:#3d3028;
+
+}
+
+.menu{
+
+position:absolute;
+
+right:40px;
+
+top:35px;
+
+width:48px;
+
+height:48px;
+
+border:1px solid #333;
+
+border-radius:4px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+cursor:pointer;
+
+font-size:30px;
+
+}
+
+/*========== SLIDER ==========*/
+
+.slider{
+
+width:95%;
+
+max-width:1500px;
+
+height:520px;
+
+margin:40px auto;
+
+overflow:hidden;
+
+position:relative;
+
+border-radius:6px;
+
+}
+
+.track{
+
+display:flex;
+
+height:100%;
+
+transition:.6s;
+
+}
+
+.slide{
+
+min-width:100%;
+
+position:relative;
+
+}
+
+.slide img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+/*========== BUTTONS ==========*/
+
+.arrow{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+border:none;
+
+background:rgba(0,0,0,.35);
+
+color:white;
+
+font-size:28px;
+
+cursor:pointer;
+
+z-index:99;
+
+transition:.3s;
+
+}
+
+.arrow:hover{
+
+background:#111;
+
+}
+
+.prev{
+
+left:20px;
+
+}
+
+.next{
+
+right:20px;
+
+}
+
+/*========== DOTS ==========*/
+
+.dots{
+
+position:absolute;
+
+bottom:20px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:10px;
+
+}
+
+.dot{
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
+background:white;
+
+opacity:.5;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.dot.active{
+
+opacity:1;
+
+background:#f4b400;
+
+}
+
+/*========== MOBILE ==========*/
+
+@media(max-width:768px){
+
+.logo{
+
+font-size:42px;
+
+letter-spacing:10px;
+
+}
+
+header{
+
+height:90px;
+
+}
+
+.menu{
+
+right:18px;
+
+top:20px;
+
+}
+
+.slider{
+
+height:320px;
+
+margin:20px auto;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+EYEMEDI
+
+</div>
+
+<!-- MENU EYEMEDI --> <div class="eyemedi-menu"> <button class="menu-btn" onclick="toggleMenu()">☰</button> <div id="dropdownMenu" class="menu-content"> 
+    <a href="https://eyemedi.vn/">Trang chủ</a>
+    <a href="https://eyemedi.vn/kinh-mat-nam.html">Kính mát nam</a> 
+    <a href="https://eyemedi.vn/kinh-mat-nu.html">Kính mát nữ</a> 
+    <a href="https://eyemedi.vn/kinh-xuyen-dem.html">Kính xuyên đêm</a> 
+    <a href="https://eyemedi.vn/gong-kinh-can-nu.html">Gọng kính nữ</a> 
+    <a href="https://eyemedi.vn/gong-kinh-can-nam.html">Gọng kính nam</a> 
+    <a href="https://eyemedi.vn/trong-kinh-can-vien-loan.html">Bảng giá tròng kính</a>
+    <a href="https://eyemedi.vn/phu-kien-mat-kinh.html">Phụ kiện mắt </a> 
+    <a href="https://eyemedi.vn/dat-lich-do-mat.html">Đo mắt miễn phí</a> 
+	</div> </div> 
+<style> .eyemedi-menu{ position:fixed; top:10px; left:10px; z-index:9999; } .menu-btn{ background:#b8b8c1; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
+
+</header>
+
+<section class="slider">
+
+<div class="track">
+
+<div class="slide">
+
+<img src="banner1.png">
+
+</div>
+
+<div class="slide">
+
+<img src="banner2.png">
+
+</div>
+
+<div class="slide">
+
+<img src="banner3.png">
+
+</div>
+
+<div class="slide">
+
+<img src="banner4.png">
+
+</div>
+
+<div class="slide">
+
+<img src="banner5.png">
+
+</div>
+
+</div>
+
+<button class="arrow prev">❮</button>
+
+<button class="arrow next">❯</button>
+
+<div class="dots">
+
+<span class="dot active"></span>
+
+<span class="dot"></span>
+
+<span class="dot"></span>
+
+<span class="dot"></span>
+
+<span class="dot"></span>
+
+</div>
+
+</section>
+
+<script>
+
+const track=document.querySelector(".track");
+
+const slides=document.querySelectorAll(".slide");
+
+const dots=document.querySelectorAll(".dot");
+
+let index=0;
+
+function showSlide(i){
+
+track.style.transform="translateX(-"+(i*100)+"%)";
+
+dots.forEach(d=>d.classList.remove("active"));
+
+dots[i].classList.add("active");
+
+index=i;
+
+}
+
+document.querySelector(".next").onclick=function(){
+
+index++;
+
+if(index>=slides.length){
+
+index=0;
+
+}
+
+showSlide(index);
+
+}
+
+document.querySelector(".prev").onclick=function(){
+
+index--;
+
+if(index<0){
+
+index=slides.length-1;
+
+}
+
+showSlide(index);
+
+}
+
+dots.forEach((dot,i)=>{
+
+dot.onclick=function(){
+
+showSlide(i);
+
+}
+
+});
+
+setInterval(function(){
+
+index++;
+
+if(index>=slides.length){
+
+index=0;
+
+}
+
+showSlide(index);
+
+},5000);
+
+/* Vuốt trên điện thoại */
+
+let startX=0;
+
+track.addEventListener("touchstart",e=>{
+
+startX=e.touches[0].clientX;
+
+});
+
+track.addEventListener("touchend",e=>{
+
+let end=e.changedTouches[0].clientX;
+
+if(startX-end>50){
+
+index++;
+
+if(index>=slides.length) index=0;
+
+}
+
+if(end-startX>50){
+
+index--;
+
+if(index<0) index=slides.length-1;
+
+}
+
+showSlide(index);
+
+});
+
+</script>
+
+</body>
+</html>
+
+
+<!SẢN PHẨM SALE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Sản phẩm giảm giá</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#fff;
+}
+
+.section{
+max-width:1400px;
+margin:50px auto;
+padding:0 20px;
+}
+
+.title{
+text-align:center;
+font-size:48px;
+margin-bottom:50px;
+font-weight:500;
+}
+
+.swiper{
+padding-bottom:40px;
+}
+
+.product{
+
+text-align:center;
+padding:20px;
+background:#fff;
+transition:.3s;
+
+}
+
+.product:hover{
+
+transform:translateY(-8px);
+
+}
+
+.sale{
+
+letter-spacing:4px;
+font-size:14px;
+font-weight:bold;
+margin-bottom:15px;
+
+}
+
+.product img{
+
+width:220px;
+height:320px;
+object-fit:contain;
+transition:.3s;
+
+}
+
+.product:hover img{
+
+transform:scale(1.05);
+
+}
+
+.name{
+
+font-size:20px;
+font-weight:600;
+margin-top:25px;
+line-height:1.5;
+min-height:70px;
+
+}
+
+.price{
+
+margin-top:15px;
+font-size:20px;
+
+}
+
+.old{
+
+text-decoration:line-through;
+color:#555;
+
+}
+
+.new{
+
+color:red;
+font-weight:bold;
+margin-left:8px;
+
+}
+
+.buy{
+
+display:inline-block;
+margin-top:20px;
+padding:12px 35px;
+background:#111;
+color:#fff;
+text-decoration:none;
+border-radius:30px;
+transition:.3s;
+
+}
+
+.buy:hover{
+
+background:#c89b3c;
+
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+
+color:#1976ff;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="section">
+
+<h2 class="title">
+BEST SELLER 
+</h2>
+
+<div class="swiper mySwiper">
+
+<div class="swiper-wrapper">
+
+<div class="swiper-slide">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<img src="kinhmatnam.jpg">
+
+<div class="name">
+Kính mát nam
+</div>
+
+<div class="price">
+
+<span class="old">1.850.000đ</span>
+
+<span class="new">1.500.000đ</span>
+
+</div>
+
+<a href="https://eyemedi.vn/kinh-mat-nam.html" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+<div class="swiper-slide">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<img src="kinhmatnu.jpg">
+
+<div class="name">
+Kính mát nữ
+</div>
+
+<div class="price">
+
+<span class="old">2.150.000đ</span>
+
+<span class="new">1.500.000đ</span>
+
+</div>
+
+<a href="https://eyemedi.vn/kinh-mat-nu.html" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+<div class="swiper-slide">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<img src="gongkinhnam1.jpg">
+
+<div class="name">
+Gọng kính nam
+</div>
+
+<div class="price">
+
+<span class="old">950.000đ</span>
+
+<span class="new">750.000đ</span>
+
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+<div class="swiper-slide">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<img src="gongkinhnu.jpg">
+
+<div class="name">
+Gọng kính nữ
+</div>
+
+<div class="price">
+
+<span class="old">850.000đ</span>
+
+<span class="new">650.000đ</span>
+
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="swiper-button-next"></div>
+<div class="swiper-button-prev"></div>
+
+</div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+
+new Swiper(".mySwiper",{
+
+slidesPerView:2,
+
+spaceBetween:30,
+
+loop:true,
+
+autoplay:{
+delay:4000,
+disableOnInteraction:false
+},
+
+navigation:{
+nextEl:".swiper-button-next",
+prevEl:".swiper-button-prev"
+},
+
+breakpoints:{
+
+0:{
+slidesPerView:1
+},
+
+768:{
+slidesPerView:2
+}
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
+
+
+<!SẢN PHẨM HÀNG 1 html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sản phẩm giảm giá</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+.container{
+    max-width:1600px;
+    margin:50px auto;
+    padding:0 20px;
+}
+
+/* Tiêu đề */
+
+.title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.title h2{
+    font-size:52px;
+    font-weight:400;
+    color:#222;
+}
+
+.title span{
+    font-size:45px;
+    margin-right:15px;
+}
+
+.line{
+    width:180px;
+    height:2px;
+    background:#d8c7a2;
+    margin:20px auto;
+}
+
+/* Danh sách */
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:40px;
+
+}
+
+.product{
+
+    position:relative;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.product:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.sale{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
+    font-weight:600;
+
+}
+
+.image{
+
+    height:380px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.image img{
+
+    max-height:320px;
+
+    transition:.35s;
+
+}
+
+.product:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.name{
+
+    font-size:22px;
+
+    line-height:1.45;
+
+    margin-top:20px;
+
+    color:#333;
+
+    min-height:70px;
+
+}
+
+.price{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+}
+
+.old{
+
+    color:#444;
+
+    text-decoration:line-through;
+
+}
+
+.new{
+
+    color:#e60000;
+
+    font-weight:700;
+
+    margin-left:10px;
+
+}
+
+.buy{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:10px 28px;
+
+    background:#111;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.buy:hover{
+
+    background:#d4a017;
+
+}
+
+@media(max-width:1200px){
+
+.products{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.products{
+
+grid-template-columns:1fr;
+
+}
+
+.title h2{
+
+font-size:34px;
+
+}
+
+.image{
+
+height:280px;
+
+}
+
+.image img{
+
+max-height:220px;
+
+}
+
+.name{
+
+font-size:18px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+
+<h2>
+
+Luxury 
+
+</h2>
+
+<div class="line"></div>
+
+</div>
+
+<div class="products">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="60.png" alt="">
+</div>
+
+<div class="name">
+Monnach 50040
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch2.png" alt="">
+</div>
+
+<div class="name">
+Trend Icon 9670
+</div>
+
+<div class="price">
+<span class="old">1.050.000đ</span>
+<span class="new">800.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch3.png" alt="">
+</div>
+
+<div class="name">
+Daily Flex 61006
+</div>
+
+<div class="price">
+<span class="old">1.550.000đ</span>
+<span class="new">1.050.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch4.png" alt="">
+</div>
+
+<div class="name">
+K-mode 3305
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!SẢN PHẨM HÀNG 2 html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luxury</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+.container{
+    max-width:1600px;
+    margin:50px auto;
+    padding:0 20px;
+}
+
+/* Tiêu đề */
+
+.title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.title h2{
+    font-size:52px;
+    font-weight:400;
+    color:#222;
+}
+
+.title span{
+    font-size:45px;
+    margin-right:15px;
+}
+
+.line{
+    width:180px;
+    height:2px;
+    background:#d8c7a2;
+    margin:20px auto;
+}
+
+/* Danh sách */
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:40px;
+
+}
+
+.product{
+
+    position:relative;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.product:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.sale{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
+    font-weight:600;
+
+}
+
+.image{
+
+    height:380px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.image img{
+
+    max-height:320px;
+
+    transition:.35s;
+
+}
+
+.product:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.name{
+
+    font-size:22px;
+
+    line-height:1.45;
+
+    margin-top:20px;
+
+    color:#333;
+
+    min-height:70px;
+
+}
+
+.price{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+}
+
+.old{
+
+    color:#444;
+
+    text-decoration:line-through;
+
+}
+
+.new{
+
+    color:#e60000;
+
+    font-weight:700;
+
+    margin-left:10px;
+
+}
+
+.buy{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:10px 28px;
+
+    background:#111;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.buy:hover{
+
+    background:#d4a017;
+
+}
+
+@media(max-width:1200px){
+
+.products{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.products{
+
+grid-template-columns:1fr;
+
+}
+
+.title h2{
+
+font-size:34px;
+
+}
+
+.image{
+
+height:280px;
+
+}
+
+.image img{
+
+max-height:220px;
+
+}
+
+.name{
+
+font-size:18px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+
+<h2>
+
+Premium
+
+</h2>
+
+<div class="line"></div>
+
+</div>
+
+<div class="products">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch1.png" alt="">
+</div>
+
+<div class="name">
+Monnach 50040
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch2.png" alt="">
+</div>
+
+<div class="name">
+Trend Icon 9670
+</div>
+
+<div class="price">
+<span class="old">1.050.000đ</span>
+<span class="new">800.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch3.png" alt="">
+</div>
+
+<div class="name">
+Daily Flex 61006
+</div>
+
+<div class="price">
+<span class="old">1.550.000đ</span>
+<span class="new">1.050.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch4.png" alt="">
+</div>
+
+<div class="name">
+K-mode 3305
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!SẢN PHẨM HÀNG 3 html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sản phẩm giảm giá</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+.container{
+    max-width:1600px;
+    margin:50px auto;
+    padding:0 20px;
+}
+
+/* Tiêu đề */
+
+.title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.title h2{
+    font-size:52px;
+    font-weight:400;
+    color:#222;
+}
+
+.title span{
+    font-size:45px;
+    margin-right:15px;
+}
+
+.line{
+    width:180px;
+    height:2px;
+    background:#d8c7a2;
+    margin:20px auto;
+}
+
+/* Danh sách */
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:40px;
+
+}
+
+.product{
+
+    position:relative;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.product:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.sale{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
+    font-weight:600;
+
+}
+
+.image{
+
+    height:380px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.image img{
+
+    max-height:320px;
+
+    transition:.35s;
+
+}
+
+.product:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.name{
+
+    font-size:22px;
+
+    line-height:1.45;
+
+    margin-top:20px;
+
+    color:#333;
+
+    min-height:70px;
+
+}
+
+.price{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+}
+
+.old{
+
+    color:#444;
+
+    text-decoration:line-through;
+
+}
+
+.new{
+
+    color:#e60000;
+
+    font-weight:700;
+
+    margin-left:10px;
+
+}
+
+.buy{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:10px 28px;
+
+    background:#111;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.buy:hover{
+
+    background:#d4a017;
+
+}
+
+@media(max-width:1200px){
+
+.products{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.products{
+
+grid-template-columns:1fr;
+
+}
+
+.title h2{
+
+font-size:34px;
+
+}
+
+.image{
+
+height:280px;
+
+}
+
+.image img{
+
+max-height:220px;
+
+}
+
+.name{
+
+font-size:18px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+
+<h2>
+
+Hight Quality
+
+</h2>
+
+<div class="line"></div>
+
+</div>
+
+<div class="products">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch1.png" alt="">
+</div>
+
+<div class="name">
+Monnach 50040
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch2.png" alt="">
+</div>
+
+<div class="name">
+Trend Icon 9670
+</div>
+
+<div class="price">
+<span class="old">1.050.000đ</span>
+<span class="new">800.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch3.png" alt="">
+</div>
+
+<div class="name">
+Daily Flex 61006
+</div>
+
+<div class="price">
+<span class="old">1.550.000đ</span>
+<span class="new">1.050.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="images/watch4.png" alt="">
+</div>
+
+<div class="name">
+K-mode 3305
+</div>
+
+<div class="price">
+<span class="old">1.950.000đ</span>
+<span class="new">1.650.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+<!CHÂN TRANG html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Footer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+}
+
+.footer{
+
+    background:#fff5df;
+
+    padding:80px 20px;
+
+    text-align:center;
+
+}
+
+.footer-logo{
+
+    font-size:64px;
+
+    letter-spacing:18px;
+
+    font-weight:300;
+
+    color:#3a302b;
+
+    margin-bottom:25px;
+
+}
+
+.footer-desc{
+
+    font-size:20px;
+
+    color:#333;
+
+    margin-bottom:55px;
+
+}
+
+.footer-contact{
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:#333;
+
+}
+
+.footer-contact p{
+
+    margin:8px 0;
+
+}
+
+.footer-email{
+
+    font-size:34px;
+
+    margin-top:10px;
+
+    font-weight:500;
+
+}
+
+.footer-social{
+
+    margin-top:45px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+}
+
+.footer-social a{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#111;
+
+    font-size:28px;
+
+    transition:.3s;
+
+    text-decoration:none;
+
+}
+
+.footer-social a:hover{
+
+    background:#111;
+
+    color:#fff;
+
+    transform:translateY(-6px);
+
+}
+
+@media(max-width:768px){
+
+.footer{
+
+padding:60px 20px;
+
+}
+
+.footer-logo{
+
+font-size:48px;
+
+letter-spacing:12px;
+
+}
+
+.footer-desc{
+
+font-size:18px;
+
+}
+
+.footer-contact{
+
+font-size:18px;
+
+}
+
+.footer-email{
+
+font-size:24px;
+
+}
+
+.footer-social{
+
+gap:20px;
+
+}
+
+.footer-social a{
+
+width:45px;
+
+height:45px;
+
+font-size:22px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<footer class="footer">
+
+    <h1 class="footer-logo">
+        EYEMEDI
+    </h1>
+
+    <p class="footer-desc">
+        Tinh tế - Tận tâm - Trách nhiệm - Trung thực - Thấu hiểu
+    </p>
+
+    <div class="footer-contact">
+
+        <p>Thông tin liên hệ</p>
+
+        <p>Hotline 0967 190005</p>
+
+        <p>Store: 63C Lạc Long Quân, P. Hòa Bình, TPHCM</p>
+
+        <div class="footer-email">
+            
+        </div>
+
+    </div>
+
+
+    <div class="footer-social">
+
+        <a href="https://www.facebook.com/EyemediOptic"><i class="fab fa-facebook"></i></a>
+
+        <a href="https://www.instagram.com/eyemedi.optic/"><i class="fab fa-instagram"></i></a>
+
+        <a href="https://www.tiktok.com/@eyemedi.optic"><i class="fab fa-tiktok"></i></a>
+
+        <a href="https://www.threads.com/@eyemedi.optic"><i class="fab fa-threads"></i></a> 
+
+
+    </div>
+
+</footer>
+
+<a href="https://m.me/516748655103084"
+   class="messenger-btn"
+   target="_blank">
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg">
+
+</a>
+
+<style>
+
+.messenger-btn{
+
+position:fixed;
+
+bottom:25px;
+
+right:25px;
+
+width:65px;
+
+height:65px;
+
+border-radius:50%;
+
+background:#0084ff;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+z-index:99999;
+
+transition:.3s;
+
+animation:pulse 2s infinite;
+
+}
+
+.messenger-btn:hover{
+
+transform:scale(1.1);
+
+}
+
+.messenger-btn img{
+
+width:38px;
+
+height:38px;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+box-shadow:0 0 0 0 rgba(0,132,255,.6);
+
+}
+
+70%{
+
+box-shadow:0 0 0 18px rgba(0,132,255,0);
+
+}
+
+100%{
+
+box-shadow:0 0 0 0 rgba(0,132,255,0);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.messenger-btn{
+
+width:58px;
+
+height:58px;
+
+bottom:20px;
+
+right:20px;
+
+}
+
+}
+
+</style>
+
+</body>
+</html>
