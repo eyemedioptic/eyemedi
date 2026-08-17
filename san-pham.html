@@ -1,2146 +1,1930 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>eyemedi.vn</title>
+<title>EYEMEDI – Chăm sóc mắt & Kính mắt chuyên nghiệp</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description"
+content="EYEMEDI – Kính mắt, tròng kính, kính áp tròng và dịch vụ chăm sóc mắt chuyên nghiệp.">
+
+<meta name="keywords"
+content="Eyemedi, kính mắt, tròng kính, kính áp tròng, đo mắt, cắt kính">
+
+<meta name="theme-color" content="#0786BD">
+
+<link rel="icon" href="https://eyemedi.vn/favicon.ico">
 
 <style>
 
+:root{
+    --blue:#0786BD;
+    --blue-dark:#005B82;
+    --blue-light:#EAF7FC;
+    --text:#183B4D;
+    --gray:#667781;
+    --white:#ffffff;
+    --border:#E5EEF2;
+    --shadow:0 6px 25px rgba(0,80,120,.08);
+    --radius:16px;
+}
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-background:#fff;
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+    background:#fff;
+    color:var(--text);
+    line-height:1.5;
+    overflow-x:hidden;
 }
 
-/*========== HEADER ==========*/
+img{
+    display:block;
+    width:100%;
+}
 
-header{
+a{
+    text-decoration:none;
+    color:inherit;
+}
 
-height:120px;
+button{
+    font-family:inherit;
+}
 
-display:flex;
+/* =========================
+   HEADER
+========================= */
 
-justify-content:center;
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:76px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 3px 15px rgba(0,0,0,.04);
+}
 
-align-items:center;
+.header-inner{
+    max-width:1400px;
+    height:100%;
+    margin:auto;
+    padding:0 25px;
 
-border-bottom:1px solid #eee;
-
-position:relative;
-
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
 }
 
 .logo{
-
-font-size:70px;
-
-letter-spacing:18px;
-
-font-weight:300;
-
-color:#3d3028;
-
+    flex-shrink:0;
 }
 
-.menu{
-
-position:absolute;
-
-right:40px;
-
-top:35px;
-
-width:48px;
-
-height:48px;
-
-border:1px solid #333;
-
-border-radius:4px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-cursor:pointer;
-
-font-size:30px;
-
+.logo img{
+    width:150px;
+    height:auto;
+    object-fit:contain;
 }
 
-/*========== SLIDER ==========*/
-
-.slider{
-
-width:95%;
-
-max-width:1500px;
-
-height:520px;
-
-margin:40px auto;
-
-overflow:hidden;
-
-position:relative;
-
-border-radius:6px;
-
+.nav{
+    display:flex;
+    align-items:center;
+    gap:5px;
 }
 
-.track{
-
-display:flex;
-
-height:100%;
-
-transition:.6s;
-
+.nav a{
+    padding:10px 13px;
+    font-size:14px;
+    font-weight:600;
+    color:#285263;
+    border-radius:8px;
+    transition:.25s;
 }
 
-.slide{
-
-min-width:100%;
-
-position:relative;
-
+.nav a:hover{
+    color:var(--blue);
+    background:var(--blue-light);
 }
 
-.slide img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-display:block;
-
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-/*========== BUTTONS ==========*/
-
-.arrow{
-
-position:absolute;
-
-top:50%;
-
-transform:translateY(-50%);
-
-width:58px;
-
-height:58px;
-
-border-radius:50%;
-
-border:none;
-
-background:rgba(0,0,0,.35);
-
-color:white;
-
-font-size:28px;
-
-cursor:pointer;
-
-z-index:99;
-
-transition:.3s;
-
+.header-btn{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    cursor:pointer;
 }
 
-.arrow:hover{
-
-background:#111;
-
+.header-btn:hover{
+    background:var(--blue-light);
+    color:var(--blue);
 }
 
-.prev{
-
-left:20px;
-
+.menu-btn{
+    display:none;
 }
 
-.next{
+/* =========================
+   MOBILE MENU
+========================= */
 
-right:20px;
-
+.mobile-menu{
+    position:fixed;
+    top:76px;
+    right:-100%;
+    width:290px;
+    height:calc(100vh - 76px);
+    background:#fff;
+    z-index:999;
+    box-shadow:-5px 0 25px rgba(0,0,0,.1);
+    padding:25px 20px;
+    transition:.35s;
 }
 
-/*========== DOTS ==========*/
-
-.dots{
-
-position:absolute;
-
-bottom:20px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-display:flex;
-
-gap:10px;
-
+.mobile-menu.active{
+    right:0;
 }
 
-.dot{
-
-width:12px;
-
-height:12px;
-
-border-radius:50%;
-
-background:white;
-
-opacity:.5;
-
-cursor:pointer;
-
-transition:.3s;
-
+.mobile-menu a{
+    display:block;
+    padding:15px 10px;
+    border-bottom:1px solid var(--border);
+    color:var(--text);
+    font-weight:600;
 }
 
-.dot.active{
-
-opacity:1;
-
-background:#f4b400;
-
-}
-
-/*========== MOBILE ==========*/
-
-@media(max-width:768px){
-
-.logo{
-
-font-size:42px;
-
-letter-spacing:10px;
-
-}
-
-header{
-
-height:90px;
-
-}
-
-.menu{
-
-right:18px;
-
-top:20px;
-
-}
-
-.slider{
-
-height:320px;
-
-margin:20px auto;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">
-
-EYEMEDI
-
-</div>
-
-<!-- MENU EYEMEDI --> <div class="eyemedi-menu"> <button class="menu-btn" onclick="toggleMenu()">☰</button> <div id="dropdownMenu" class="menu-content"> 
-    <a href="https://eyemedi.vn/">Trang chủ</a>
-    <a href="https://eyemedi.vn/kinh-mat-nam.html">Kính mát nam</a> 
-    <a href="https://eyemedi.vn/kinh-mat-nu.html">Kính mát nữ</a> 
-    <a href="https://eyemedi.vn/kinh-xuyen-dem.html">Kính xuyên đêm</a> 
-    <a href="https://eyemedi.vn/gong-kinh-can-nu.html">Gọng kính nữ</a> 
-    <a href="https://eyemedi.vn/gong-kinh-can-nam.html">Gọng kính nam</a> 
-    <a href="https://eyemedi.vn/trong-kinh-can-vien-loan.html">Bảng giá tròng kính</a>
-    <a href="https://eyemedi.vn/phu-kien-mat-kinh.html">Phụ kiện mắt </a> 
-    <a href="https://eyemedi.vn/dat-lich-do-mat.html">Đo mắt miễn phí</a> 
-	</div> </div> 
-<style> .eyemedi-menu{ position:fixed; top:10px; left:10px; z-index:9999; } .menu-btn{ background:#b8b8c1; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
-
-</header>
-
-<section class="slider">
-
-<div class="track">
-
-<div class="slide">
-
-<img src="banner1.png">
-
-</div>
-
-<div class="slide">
-
-<img src="banner2.png">
-
-</div>
-
-<div class="slide">
-
-<img src="banner3.png">
-
-</div>
-
-<div class="slide">
-
-<img src="banner4.png">
-
-</div>
-
-<div class="slide">
-
-<img src="banner5.png">
-
-</div>
-
-</div>
-
-<button class="arrow prev">❮</button>
-
-<button class="arrow next">❯</button>
-
-<div class="dots">
-
-<span class="dot active"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-<span class="dot"></span>
-
-</div>
-
-</section>
-
-<script>
-
-const track=document.querySelector(".track");
-
-const slides=document.querySelectorAll(".slide");
-
-const dots=document.querySelectorAll(".dot");
-
-let index=0;
-
-function showSlide(i){
-
-track.style.transform="translateX(-"+(i*100)+"%)";
-
-dots.forEach(d=>d.classList.remove("active"));
-
-dots[i].classList.add("active");
-
-index=i;
-
-}
-
-document.querySelector(".next").onclick=function(){
-
-index++;
-
-if(index>=slides.length){
-
-index=0;
-
-}
-
-showSlide(index);
-
-}
-
-document.querySelector(".prev").onclick=function(){
-
-index--;
-
-if(index<0){
-
-index=slides.length-1;
-
-}
-
-showSlide(index);
-
-}
-
-dots.forEach((dot,i)=>{
-
-dot.onclick=function(){
-
-showSlide(i);
-
-}
-
-});
-
-setInterval(function(){
-
-index++;
-
-if(index>=slides.length){
-
-index=0;
-
-}
-
-showSlide(index);
-
-},5000);
-
-/* Vuốt trên điện thoại */
-
-let startX=0;
-
-track.addEventListener("touchstart",e=>{
-
-startX=e.touches[0].clientX;
-
-});
-
-track.addEventListener("touchend",e=>{
-
-let end=e.changedTouches[0].clientX;
-
-if(startX-end>50){
-
-index++;
-
-if(index>=slides.length) index=0;
-
-}
-
-if(end-startX>50){
-
-index--;
-
-if(index<0) index=slides.length-1;
-
-}
-
-showSlide(index);
-
-});
-
-</script>
-
-</body>
-</html>
-
-
-<!SẢN PHẨM SALE html>
-<html lang="vi">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Sản phẩm giảm giá</title>
-
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#fff;
+/* =========================
+   COMMON
+========================= */
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    padding:0 25px;
 }
 
 .section{
-max-width:1400px;
-margin:50px auto;
-padding:0 20px;
+    padding:60px 0;
 }
 
-.title{
-text-align:center;
-font-size:48px;
-margin-bottom:50px;
-font-weight:500;
+.section-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:25px;
 }
 
-.swiper{
-padding-bottom:40px;
+.section-title{
+    font-size:28px;
+    font-weight:800;
+    color:var(--blue-dark);
 }
 
-.product{
-
-text-align:center;
-padding:20px;
-background:#fff;
-transition:.3s;
-
+.section-title span{
+    color:var(--blue);
 }
 
-.product:hover{
-
-transform:translateY(-8px);
-
+.section-subtitle{
+    margin-top:5px;
+    color:var(--gray);
+    font-size:14px;
 }
 
-.sale{
-
-letter-spacing:4px;
-font-size:14px;
-font-weight:bold;
-margin-bottom:15px;
-
+.view-all{
+    color:var(--blue);
+    font-weight:700;
+    font-size:14px;
 }
 
-.product img{
+/* =========================
+   HERO SLIDER
+========================= */
 
-width:220px;
-height:320px;
-object-fit:contain;
-transition:.3s;
-
+.hero{
+    position:relative;
+    overflow:hidden;
+    background:#eef8fc;
 }
 
-.product:hover img{
-
-transform:scale(1.05);
-
+.hero-slider{
+    position:relative;
+    width:100%;
+    overflow:hidden;
 }
 
-.name{
-
-font-size:20px;
-font-weight:600;
-margin-top:25px;
-line-height:1.5;
-min-height:70px;
-
+.hero-track{
+    display:flex;
+    transition:transform .6s ease;
 }
 
-.price{
-
-margin-top:15px;
-font-size:20px;
-
+.hero-slide{
+    min-width:100%;
+    position:relative;
 }
 
-.old{
-
-text-decoration:line-through;
-color:#555;
-
+.hero-slide img{
+    width:100%;
+    aspect-ratio:16/6;
+    object-fit:cover;
 }
 
-.new{
-
-color:red;
-font-weight:bold;
-margin-left:8px;
-
+.hero-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.9);
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    cursor:pointer;
+    z-index:5;
+    font-size:22px;
+    color:var(--blue-dark);
 }
 
-.buy{
-
-display:inline-block;
-margin-top:20px;
-padding:12px 35px;
-background:#111;
-color:#fff;
-text-decoration:none;
-border-radius:30px;
-transition:.3s;
-
+.hero-arrow:hover{
+    background:var(--blue);
+    color:#fff;
 }
 
-.buy:hover{
-
-background:#c89b3c;
-
+.hero-prev{
+    left:20px;
 }
 
-.swiper-button-next,
-.swiper-button-prev{
+.hero-next{
+    right:20px;
+}
 
-color:#1976ff;
+.dots{
+    position:absolute;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:7px;
+    z-index:5;
+}
 
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,.65);
+    cursor:pointer;
+}
+
+.dot.active{
+    width:25px;
+    border-radius:10px;
+    background:var(--blue);
+}
+
+/* =========================
+   HORIZONTAL CAROUSEL
+========================= */
+
+.carousel-wrapper{
+    position:relative;
+}
+
+.horizontal-carousel{
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    padding:5px 2px 15px;
+}
+
+.horizontal-carousel::-webkit-scrollbar{
+    display:none;
+}
+
+/* PRODUCT 2 COLUMNS */
+
+.product-card{
+    flex:0 0 calc(50% - 10px);
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.product-card img{
+    aspect-ratio:4/5;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.product-card:hover img{
+    transform:scale(1.03);
+}
+
+.product-info{
+    padding:15px;
+    background:#fff;
+}
+
+.product-name{
+    font-weight:700;
+    color:var(--text);
+}
+
+.product-desc{
+    color:var(--gray);
+    font-size:13px;
+    margin-top:3px;
+}
+
+/* =========================
+   SQUARE ADS 4 COLUMNS
+========================= */
+
+.ad-card{
+    flex:0 0 calc(25% - 15px);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    background:#fff;
+}
+
+.ad-card img{
+    aspect-ratio:1/1;
+    object-fit:cover;
+    transition:.35s;
+}
+
+.ad-card:hover img{
+    transform:scale(1.04);
+}
+
+/* =========================
+   SERVICE 2 COLUMNS
+========================= */
+
+.service-card{
+    flex:0 0 calc(50% - 10px);
+    border-radius:var(--radius);
+    overflow:hidden;
+    position:relative;
+    background:#fff;
+    box-shadow:var(--shadow);
+}
+
+.service-card img{
+    aspect-ratio:16/10;
+    object-fit:cover;
+}
+
+.service-overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:40px 20px 18px;
+    background:linear-gradient(
+        transparent,
+        rgba(0,60,90,.85)
+    );
+    color:#fff;
+}
+
+.service-title{
+    font-size:19px;
+    font-weight:800;
+}
+
+.service-description{
+    font-size:13px;
+    opacity:.9;
+}
+
+/* =========================
+   SOCIAL
+========================= */
+
+.social-section{
+    background:var(--blue-light);
+}
+
+.social-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.social-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+}
+
+.social-card img{
+    aspect-ratio:1/1;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.social-card:hover img{
+    transform:scale(1.06);
+}
+
+.social-label{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:15px;
+    color:#fff;
+    font-weight:800;
+    background:linear-gradient(
+        transparent,
+        rgba(0,50,75,.9)
+    );
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    padding:55px 25px;
+}
+
+.cta-box{
+    max-width:1400px;
+    margin:auto;
+    border-radius:22px;
+    padding:45px;
+    background:
+    linear-gradient(
+        120deg,
+        #007EB5,
+        #00A3D9
+    );
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.cta-title{
+    font-size:30px;
+    font-weight:800;
+}
+
+.cta-text{
+    margin-top:8px;
+    opacity:.9;
+}
+
+.cta-buttons{
+    display:flex;
+    gap:12px;
+    flex-shrink:0;
+}
+
+.cta-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:13px 22px;
+    background:#fff;
+    color:var(--blue-dark);
+    border-radius:10px;
+    font-weight:800;
+}
+
+.cta-btn.outline{
+    background:transparent;
+    border:1px solid rgba(255,255,255,.8);
+    color:#fff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    background:#073D58;
+    color:#fff;
+    padding-top:55px;
+}
+
+.footer-grid{
+    max-width:1400px;
+    margin:auto;
+    padding:0 25px 45px;
+
+    display:grid;
+    grid-template-columns:
+    1.5fr
+    1fr
+    1fr
+    1.3fr;
+
+    gap:40px;
+}
+
+.footer-logo{
+    width:155px;
+    margin-bottom:18px;
+}
+
+.footer-description{
+    color:#c8e1ec;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.footer h3{
+    font-size:16px;
+    margin-bottom:18px;
+}
+
+.footer-links a{
+    display:block;
+    color:#c8e1ec;
+    margin-bottom:10px;
+    font-size:14px;
+    transition:.2s;
+}
+
+.footer-links a:hover{
+    color:#fff;
+    transform:translateX(3px);
+}
+
+.contact-item{
+    margin-bottom:12px;
+    color:#c8e1ec;
+    font-size:14px;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.12);
+    padding:18px 25px;
+    text-align:center;
+    color:#a9ccd9;
+    font-size:13px;
+}
+
+/* =========================
+   FLOATING BUTTONS
+========================= */
+
+.floating-buttons{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:900;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.float-btn{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:23px;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    transition:.25s;
+}
+
+.float-btn:hover{
+    transform:scale(1.08);
+}
+
+.phone{
+    background:#0786BD;
+}
+
+.zalo{
+    background:#0068FF;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .nav{
+        display:none;
+    }
+
+    .menu-btn{
+        display:flex;
+    }
+
+    .hero-slide img{
+        aspect-ratio:16/7;
+    }
+
+    .ad-card{
+        flex:0 0 calc(33.333% - 14px);
+    }
+
+    .social-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .header{
+        height:65px;
+    }
+
+    .header-inner{
+        padding:0 15px;
+    }
+
+    .logo img{
+        width:120px;
+    }
+
+    .mobile-menu{
+        top:65px;
+        height:calc(100vh - 65px);
+    }
+
+    .container{
+        padding:0 15px;
+    }
+
+    .section{
+        padding:38px 0;
+    }
+
+    .section-header{
+        margin-bottom:17px;
+    }
+
+    .section-title{
+        font-size:22px;
+    }
+
+    .section-subtitle{
+        font-size:12px;
+    }
+
+    .hero-slide img{
+        aspect-ratio:1.5/1;
+        object-fit:cover;
+    }
+
+    .hero-arrow{
+        width:36px;
+        height:36px;
+        font-size:17px;
+    }
+
+    .hero-prev{
+        left:10px;
+    }
+
+    .hero-next{
+        right:10px;
+    }
+
+    .product-card{
+        flex:0 0 calc(50% - 8px);
+    }
+
+    .product-card img{
+        aspect-ratio:4/5;
+    }
+
+    .ad-card{
+        flex:0 0 calc(50% - 8px);
+    }
+
+    .service-card{
+        flex:0 0 calc(50% - 8px);
+    }
+
+    .service-overlay{
+        padding:30px 12px 12px;
+    }
+
+    .service-title{
+        font-size:15px;
+    }
+
+    .service-description{
+        font-size:11px;
+    }
+
+    .social-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .cta{
+        padding:30px 15px;
+    }
+
+    .cta-box{
+        padding:30px 22px;
+        display:block;
+    }
+
+    .cta-title{
+        font-size:24px;
+    }
+
+    .cta-buttons{
+        margin-top:20px;
+        flex-direction:column;
+    }
+
+    .cta-btn{
+        width:100%;
+    }
+
+    .footer{
+        padding-top:40px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+        gap:28px;
+    }
+
+    .floating-buttons{
+        right:12px;
+        bottom:12px;
+    }
+
+    .float-btn{
+        width:48px;
+        height:48px;
+        font-size:20px;
+    }
 }
 
 </style>
-
 </head>
+
 
 <body>
 
-<section class="section">
 
-<h2 class="title">
-BEST SELLER 
-</h2>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-<div class="swiper mySwiper">
+<header class="header">
 
-<div class="swiper-wrapper">
+<div class="header-inner">
 
-<div class="swiper-slide">
+<a href="https://eyemedi.vn" class="logo">
 
-<div class="product">
+<img
+src="https://eyemedi.vn/wp-content/uploads/2026/05/logo-eyemedi.png"
+alt="EYEMEDI">
 
-<div class="sale"></div>
+</a>
 
-<img src="kinhmatnam.jpg">
 
-<div class="name">
-Kính mát nam
-</div>
+<nav class="nav">
 
-<div class="price">
+<a href="https://eyemedi.vn">Trang chủ</a>
 
-<span class="old">1.850.000đ</span>
+<a href="https://eyemedi.vn/gong-kinh">Gọng kính</a>
 
-<span class="new">1.500.000đ</span>
+<a href="https://eyemedi.vn/trong-kinh">Tròng kính</a>
 
-</div>
+<a href="https://eyemedi.vn/kinh-mat">Kính mát</a>
 
-<a href="https://eyemedi.vn/kinh-mat-nam.html" class="buy">Đặt mua</a>
+<a href="https://eyemedi.vn/kinh-ap-trong">Contact Lens</a>
 
-</div>
+<a href="https://eyemedi.vn/dich-vu">Dịch vụ</a>
 
-</div>
+<a href="https://eyemedi.vn/khuyen-mai">Khuyến mãi</a>
 
-<div class="swiper-slide">
+</nav>
 
-<div class="product">
 
-<div class="sale"></div>
+<div class="header-actions">
 
-<img src="kinhmatnu.jpg">
+<button class="header-btn"
+onclick="window.location.href='tel:0967190005'">
+☎
+</button>
 
-<div class="name">
-Kính mát nữ
-</div>
-
-<div class="price">
-
-<span class="old">2.150.000đ</span>
-
-<span class="new">1.500.000đ</span>
-
-</div>
-
-<a href="https://eyemedi.vn/kinh-mat-nu.html" class="buy">Đặt mua</a>
+<button
+class="header-btn menu-btn"
+id="menuBtn">
+☰
+</button>
 
 </div>
 
 </div>
 
-<div class="swiper-slide">
+</header>
 
-<div class="product">
 
-<div class="sale"></div>
+<!-- MOBILE MENU -->
 
-<img src="gongkinhnam1.jpg">
+<div class="mobile-menu" id="mobileMenu">
 
-<div class="name">
-Gọng kính nam
-</div>
+<a href="https://eyemedi.vn">Trang chủ</a>
 
-<div class="price">
+<a href="https://eyemedi.vn/gong-kinh">Gọng kính</a>
 
-<span class="old">950.000đ</span>
+<a href="https://eyemedi.vn/trong-kinh">Tròng kính</a>
 
-<span class="new">750.000đ</span>
+<a href="https://eyemedi.vn/kinh-mat">Kính mát</a>
 
-</div>
+<a href="https://eyemedi.vn/kinh-ap-trong">Contact Lens</a>
 
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+<a href="https://eyemedi.vn/dich-vu">Dịch vụ</a>
 
-</div>
+<a href="https://eyemedi.vn/khuyen-mai">Khuyến mãi</a>
 
-</div>
-
-<div class="swiper-slide">
-
-<div class="product">
-
-<div class="sale"></div>
-
-<img src="gongkinhnu.jpg">
-
-<div class="name">
-Gọng kính nữ
-</div>
-
-<div class="price">
-
-<span class="old">850.000đ</span>
-
-<span class="new">650.000đ</span>
+<a href="https://eyemedi.vn/lien-he">Liên hệ</a>
 
 </div>
 
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+
+<!-- =====================================================
+     HERO BANNER 6 SLIDES
+===================================================== -->
+
+<section class="hero">
+
+<div class="hero-slider">
+
+<div class="hero-track" id="heroTrack">
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 1">
+</a>
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/gong-kinh">
+
+<img
+src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 2">
+</a>
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/trong-kinh">
+
+<img
+src="https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 3">
+</a>
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/kinh-mat">
+
+<img
+src="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 4">
+</a>
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/kinh-ap-trong">
+
+<img
+src="https://images.unsplash.com/photo-1585488439904-7e9f9f9f7c0e?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 5">
+</a>
+
+
+<a class="hero-slide"
+href="https://eyemedi.vn/dich-vu">
+
+<img
+src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1800&q=90"
+alt="Eyemedi Banner 6">
+</a>
+
 
 </div>
 
-</div>
 
-</div>
+<button class="hero-arrow hero-prev" id="heroPrev">
+‹
+</button>
 
-<div class="swiper-button-next"></div>
-<div class="swiper-button-prev"></div>
+<button class="hero-arrow hero-next" id="heroNext">
+›
+</button>
+
+
+<div class="dots" id="heroDots"></div>
 
 </div>
 
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<h2 class="section-title">
+Sản phẩm <span>nổi bật</span>
+</h2>
+
+<p class="section-subtitle">
+Khám phá các sản phẩm được khách hàng yêu thích
+</p>
+
+</div>
+
+<a
+href="https://eyemedi.vn/san-pham"
+class="view-all">
+Xem tất cả →
+</a>
+
+</div>
+
+
+<div class="horizontal-carousel" id="productCarousel">
+
+
+<a
+class="product-card"
+href="https://eyemedi.vn/gong-kinh">
+
+<img
+src="https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=800&q=85"
+alt="Gọng kính">
+
+<div class="product-info">
+
+<div class="product-name">
+Gọng kính cao cấp
+</div>
+
+<div class="product-desc">
+Thiết kế thời trang – nhẹ – bền
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="product-card"
+href="https://eyemedi.vn/trong-kinh">
+
+<img
+src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=85"
+alt="Tròng kính">
+
+<div class="product-info">
+
+<div class="product-name">
+Tròng kính cao cấp
+</div>
+
+<div class="product-desc">
+Trong suốt – chống UV – bảo vệ mắt
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="product-card"
+href="https://eyemedi.vn/kinh-mat">
+
+<img
+src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=85"
+alt="Kính mát">
+
+<div class="product-info">
+
+<div class="product-name">
+Kính mát
+</div>
+
+<div class="product-desc">
+Phong cách thời trang & bảo vệ mắt
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="product-card"
+href="https://eyemedi.vn/kinh-ap-trong">
+
+<img
+src="https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=800&q=85"
+alt="Contact Lens">
+
+<div class="product-info">
+
+<div class="product-name">
+Contact Lens
+</div>
+
+<div class="product-desc">
+Tự nhiên – thoải mái – an toàn
+</div>
+
+</div>
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AD BANNERS 4 COLUMNS
+===================================================== -->
+
+<section class="section"
+style="background:#F7FBFD;">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<h2 class="section-title">
+Ưu đãi <span>đặc biệt</span>
+</h2>
+
+<p class="section-subtitle">
+Chương trình khuyến mãi mới nhất tại EYEMEDI
+</p>
+
+</div>
+
+</div>
+
+
+<div class="horizontal-carousel"
+id="adsCarousel">
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 1">
+
+</a>
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 2">
+
+</a>
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 3">
+
+</a>
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 4">
+
+</a>
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 5">
+
+</a>
+
+
+<a
+class="ad-card"
+href="https://eyemedi.vn/khuyen-mai">
+
+<img
+src="https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=700&q=85"
+alt="Khuyến mãi 6">
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<h2 class="section-title">
+Dịch vụ <span>EYEMEDI</span>
+</h2>
+
+<p class="section-subtitle">
+Chăm sóc thị lực toàn diện
+</p>
+
+</div>
+
+<a
+href="https://eyemedi.vn/dich-vu"
+class="view-all">
+Xem dịch vụ →
+</a>
+
+</div>
+
+
+<div
+class="horizontal-carousel"
+id="serviceCarousel">
+
+
+<a
+class="service-card"
+href="https://eyemedi.vn/dich-vu/do-mat">
+
+<img
+src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1000&q=85"
+alt="Đo mắt">
+
+<div class="service-overlay">
+
+<div class="service-title">
+Đo mắt chuyên nghiệp
+</div>
+
+<div class="service-description">
+Kiểm tra thị lực & tư vấn kính phù hợp
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="service-card"
+href="https://eyemedi.vn/dich-vu/cat-kinh">
+
+<img
+src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1000&q=85"
+alt="Cắt kính">
+
+<div class="service-overlay">
+
+<div class="service-title">
+Cắt kính chính xác
+</div>
+
+<div class="service-description">
+Công nghệ hiện đại – độ chính xác cao
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="service-card"
+href="https://eyemedi.vn/dich-vu/kinh-da-trong">
+
+<img
+src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=1000&q=85"
+alt="Kính đa tròng">
+
+<div class="service-overlay">
+
+<div class="service-title">
+Tư vấn kính đa tròng
+</div>
+
+<div class="service-description">
+Đo và tư vấn cá nhân hóa
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="service-card"
+href="https://eyemedi.vn/chinh-sach-bao-hanh">
+
+<img
+src="https://images.unsplash.com/photo-1580281658223-9b93f18ae9ae?auto=format&fit=crop&w=1000&q=85"
+alt="Chăm sóc khách hàng">
+
+<div class="service-overlay">
+
+<div class="service-title">
+Chăm sóc khách hàng
+</div>
+
+<div class="service-description">
+Bảo hành & hậu mãi tận tâm
+</div>
+
+</div>
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SOCIAL + MAP
+===================================================== -->
+
+<section class="section social-section">
+
+<div class="container">
+
+<div class="section-header">
+
+<div>
+
+<h2 class="section-title">
+Kết nối <span>EYEMEDI</span>
+</h2>
+
+<p class="section-subtitle">
+Theo dõi EYEMEDI trên các nền tảng
+</p>
+
+</div>
+
+</div>
+
+
+<div class="social-grid">
+
+
+<a
+class="social-card"
+href="https://facebook.com"
+target="_blank">
+
+<img
+src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=700&q=85"
+alt="Facebook Eyemedi">
+
+<div class="social-label">
+Facebook
+</div>
+
+</a>
+
+
+<a
+class="social-card"
+href="https://tiktok.com"
+target="_blank">
+
+<img
+src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&w=700&q=85"
+alt="TikTok Eyemedi">
+
+<div class="social-label">
+TikTok
+</div>
+
+</a>
+
+
+<a
+class="social-card"
+href="https://zalo.me"
+target="_blank">
+
+<img
+src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=85"
+alt="Zalo Eyemedi">
+
+<div class="social-label">
+Zalo
+</div>
+
+</a>
+
+
+<a
+class="social-card"
+href="https://maps.google.com/?q=Eyemedi+Ho+Chi+Minh"
+target="_blank">
+
+<img
+src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=700&q=85"
+alt="Google Maps">
+
+<div class="social-label">
+Google Maps – Chỉ đường
+</div>
+
+</a>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta">
+
+<div class="cta-box">
+
+<div>
+
+<div class="cta-title">
+Bạn cần tư vấn về đôi mắt?
+</div>
+
+<div class="cta-text">
+EYEMEDI sẵn sàng đồng hành cùng bạn trong việc lựa chọn kính phù hợp.
+</div>
+
+</div>
+
+
+<div class="cta-buttons">
+
+<a
+href="tel:0967190005"
+class="cta-btn">
+☎ Gọi ngay
+</a>
+
+<a
+href="https://zalo.me/0967190005"
+target="_blank"
+class="cta-btn outline">
+Nhắn Zalo
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<div class="footer-grid">
+
+
+<div>
+
+<img
+class="footer-logo"
+src="https://eyemedi.vn/wp-content/uploads/2026/05/logo-eyemedi-white.png"
+alt="EYEMEDI">
+
+<p class="footer-description">
+
+EYEMEDI là hệ thống chăm sóc mắt và kính mắt,
+mang đến các sản phẩm kính chất lượng cùng
+dịch vụ tư vấn, đo mắt và chăm sóc khách hàng
+chuyên nghiệp.
+
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Sản phẩm</h3>
+
+<div class="footer-links">
+
+<a href="https://eyemedi.vn/gong-kinh">
+Gọng kính
+</a>
+
+<a href="https://eyemedi.vn/trong-kinh">
+Tròng kính
+</a>
+
+<a href="https://eyemedi.vn/kinh-mat">
+Kính mát
+</a>
+
+<a href="https://eyemedi.vn/kinh-ap-trong">
+Contact Lens
+</a>
+
+<a href="https://eyemedi.vn/phu-kien-mat-kinh">
+Phụ kiện mắt kính
+</a>
+
+</div>
+
+</div>
+
+
+<div>
+
+<h3>Dịch vụ</h3>
+
+<div class="footer-links">
+
+<a href="https://eyemedi.vn/dich-vu">
+Dịch vụ EYEMEDI
+</a>
+
+<a href="https://eyemedi.vn/dich-vu/do-mat">
+Đo mắt
+</a>
+
+<a href="https://eyemedi.vn/dich-vu/cat-kinh">
+Cắt kính
+</a>
+
+<a href="https://eyemedi.vn/bac-si-chuyen-khoa-2">
+Tư vấn chuyên khoa
+</a>
+
+<a href="https://eyemedi.vn/chinh-sach-bao-hanh">
+Chính sách bảo hành
+</a>
+
+</div>
+
+</div>
+
+
+<div>
+
+<h3>Liên hệ</h3>
+
+<div class="contact-item">
+📍 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM
+</div>
+
+<div class="contact-item">
+☎ 0967 190 005
+</div>
+
+<div class="contact-item">
+🌐 eyemedi.vn
+</div>
+
+<div class="contact-item">
+📍 Google Maps – EYEMEDI
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+© 2026 EYEMEDI. All Rights Reserved.
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     FLOATING BUTTONS
+===================================================== -->
+
+<div class="floating-buttons">
+
+<a
+class="float-btn zalo"
+href="https://zalo.me/0967190005"
+target="_blank"
+aria-label="Zalo">
+Z
+</a>
+
+<a
+class="float-btn phone"
+href="tel:0967190005"
+aria-label="Gọi EYEMEDI">
+☎
+</a>
+
+</div>
+
+
 
 <script>
 
-new Swiper(".mySwiper",{
+/* =====================================================
+   MOBILE MENU
+===================================================== */
 
-slidesPerView:2,
+const menuBtn =
+document.getElementById("menuBtn");
 
-spaceBetween:30,
+const mobileMenu =
+document.getElementById("mobileMenu");
 
-loop:true,
+menuBtn.addEventListener("click",function(){
 
-autoplay:{
-delay:4000,
-disableOnInteraction:false
-},
+mobileMenu.classList.toggle("active");
 
-navigation:{
-nextEl:".swiper-button-next",
-prevEl:".swiper-button-prev"
-},
+});
 
-breakpoints:{
 
-0:{
-slidesPerView:1
-},
+document.querySelectorAll(".mobile-menu a")
+.forEach(function(link){
 
-768:{
-slidesPerView:2
+link.addEventListener("click",function(){
+
+mobileMenu.classList.remove("active");
+
+});
+
+});
+
+
+/* =====================================================
+   HERO SLIDER
+===================================================== */
+
+const heroTrack =
+document.getElementById("heroTrack");
+
+const heroSlides =
+document.querySelectorAll(".hero-slide");
+
+const heroDots =
+document.getElementById("heroDots");
+
+const heroPrev =
+document.getElementById("heroPrev");
+
+const heroNext =
+document.getElementById("heroNext");
+
+let currentHero = 0;
+
+
+/* CREATE DOTS */
+
+heroSlides.forEach(function(_,index){
+
+const dot =
+document.createElement("span");
+
+dot.classList.add("dot");
+
+if(index===0){
+dot.classList.add("active");
 }
+
+dot.addEventListener("click",function(){
+
+goHero(index);
+
+});
+
+heroDots.appendChild(dot);
+
+});
+
+
+function goHero(index){
+
+if(index < 0){
+index = heroSlides.length - 1;
+}
+
+if(index >= heroSlides.length){
+index = 0;
+}
+
+currentHero = index;
+
+heroTrack.style.transform =
+"translateX(-" + (index * 100) + "%)";
+
+
+document.querySelectorAll(".dot")
+.forEach(function(dot,i){
+
+dot.classList.toggle(
+"active",
+i === index
+);
+
+});
+
+}
+
+
+heroPrev.addEventListener(
+"click",
+function(){
+goHero(currentHero - 1);
+}
+);
+
+
+heroNext.addEventListener(
+"click",
+function(){
+goHero(currentHero + 1);
+}
+);
+
+
+/* AUTO SLIDE */
+
+setInterval(function(){
+
+goHero(currentHero + 1);
+
+},5000);
+
+
+/* =====================================================
+   TOUCH SWIPE HERO
+===================================================== */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+heroTrack.addEventListener(
+"touchstart",
+function(e){
+
+touchStartX =
+e.changedTouches[0].screenX;
+
+},
+{passive:true}
+);
+
+
+heroTrack.addEventListener(
+"touchend",
+function(e){
+
+touchEndX =
+e.changedTouches[0].screenX;
+
+if(touchEndX < touchStartX - 50){
+
+goHero(currentHero + 1);
+
+}
+
+if(touchEndX > touchStartX + 50){
+
+goHero(currentHero - 1);
+
+}
+
+},
+{passive:true}
+);
+
+
+/* =====================================================
+   GENERIC CAROUSEL AUTO SCROLL
+===================================================== */
+
+function autoCarousel(id){
+
+const element =
+document.getElementById(id);
+
+if(!element) return;
+
+let direction = 1;
+
+setInterval(function(){
+
+const maxScroll =
+element.scrollWidth -
+element.clientWidth;
+
+if(element.scrollLeft >= maxScroll - 5){
+
+direction = -1;
+
+}
+
+if(element.scrollLeft <= 5){
+
+direction = 1;
+
+}
+
+element.scrollLeft +=
+direction * 1;
+
+},40);
+
+}
+
+
+autoCarousel("productCarousel");
+
+autoCarousel("adsCarousel");
+
+autoCarousel("serviceCarousel");
+
+
+/* =====================================================
+   PAUSE CAROUSEL WHEN MOUSE OVER
+===================================================== */
+
+[
+"productCarousel",
+"adsCarousel",
+"serviceCarousel"
+].forEach(function(id){
+
+const element =
+document.getElementById(id);
+
+let paused = false;
+
+element.addEventListener(
+"mouseenter",
+function(){
+paused=true;
+}
+);
+
+element.addEventListener(
+"mouseleave",
+function(){
+paused=false;
+}
+);
+
+});
+
+
+/* =====================================================
+   IMAGE LAZY LOAD
+===================================================== */
+
+document.querySelectorAll("img")
+.forEach(function(img){
+
+if(!img.hasAttribute("loading")){
+
+img.setAttribute(
+"loading",
+"lazy"
+);
 
 }
 
 });
 
+
 </script>
 
-</body>
-</html>
-
-
-<!SẢN PHẨM HÀNG 1 html>
-<html lang="vi">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sản phẩm giảm giá</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#fff;
-}
-
-.container{
-    max-width:1600px;
-    margin:50px auto;
-    padding:0 20px;
-}
-
-/* Tiêu đề */
-
-.title{
-    text-align:center;
-    margin-bottom:50px;
-}
-
-.title h2{
-    font-size:52px;
-    font-weight:400;
-    color:#222;
-}
-
-.title span{
-    font-size:45px;
-    margin-right:15px;
-}
-
-.line{
-    width:180px;
-    height:2px;
-    background:#d8c7a2;
-    margin:20px auto;
-}
-
-/* Danh sách */
-
-.products{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:40px;
-
-}
-
-.product{
-
-    position:relative;
-
-    transition:.35s;
-
-    cursor:pointer;
-
-}
-
-.product:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.sale{
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    font-size:15px;
-
-    letter-spacing:4px;
-
-    font-weight:600;
-
-}
-
-.image{
-
-    height:380px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.image img{
-
-    max-height:320px;
-
-    transition:.35s;
-
-}
-
-.product:hover img{
-
-    transform:scale(1.06);
-
-}
-
-.name{
-
-    font-size:22px;
-
-    line-height:1.45;
-
-    margin-top:20px;
-
-    color:#333;
-
-    min-height:70px;
-
-}
-
-.price{
-
-    margin-top:15px;
-
-    font-size:20px;
-
-}
-
-.old{
-
-    color:#444;
-
-    text-decoration:line-through;
-
-}
-
-.new{
-
-    color:#e60000;
-
-    font-weight:700;
-
-    margin-left:10px;
-
-}
-
-.buy{
-
-    display:inline-block;
-
-    margin-top:20px;
-
-    padding:10px 28px;
-
-    background:#111;
-
-    color:#fff;
-
-    border-radius:30px;
-
-    text-decoration:none;
-
-    transition:.3s;
-
-}
-
-.buy:hover{
-
-    background:#d4a017;
-
-}
-
-@media(max-width:1200px){
-
-.products{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.products{
-
-grid-template-columns:1fr;
-
-}
-
-.title h2{
-
-font-size:34px;
-
-}
-
-.image{
-
-height:280px;
-
-}
-
-.image img{
-
-max-height:220px;
-
-}
-
-.name{
-
-font-size:18px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="title">
-
-<h2>
-
-Luxury 
-
-</h2>
-
-<div class="line"></div>
-
-</div>
-
-<div class="products">
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="60.png" alt="">
-</div>
-
-<div class="name">
-Monnach 50040
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch2.png" alt="">
-</div>
-
-<div class="name">
-Trend Icon 9670
-</div>
-
-<div class="price">
-<span class="old">1.050.000đ</span>
-<span class="new">800.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch3.png" alt="">
-</div>
-
-<div class="name">
-Daily Flex 61006
-</div>
-
-<div class="price">
-<span class="old">1.550.000đ</span>
-<span class="new">1.050.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch4.png" alt="">
-</div>
-
-<div class="name">
-K-mode 3305
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
-</html>
-
-<!SẢN PHẨM HÀNG 2 html>
-<html lang="vi">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Luxury</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#fff;
-}
-
-.container{
-    max-width:1600px;
-    margin:50px auto;
-    padding:0 20px;
-}
-
-/* Tiêu đề */
-
-.title{
-    text-align:center;
-    margin-bottom:50px;
-}
-
-.title h2{
-    font-size:52px;
-    font-weight:400;
-    color:#222;
-}
-
-.title span{
-    font-size:45px;
-    margin-right:15px;
-}
-
-.line{
-    width:180px;
-    height:2px;
-    background:#d8c7a2;
-    margin:20px auto;
-}
-
-/* Danh sách */
-
-.products{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:40px;
-
-}
-
-.product{
-
-    position:relative;
-
-    transition:.35s;
-
-    cursor:pointer;
-
-}
-
-.product:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.sale{
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    font-size:15px;
-
-    letter-spacing:4px;
-
-    font-weight:600;
-
-}
-
-.image{
-
-    height:380px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.image img{
-
-    max-height:320px;
-
-    transition:.35s;
-
-}
-
-.product:hover img{
-
-    transform:scale(1.06);
-
-}
-
-.name{
-
-    font-size:22px;
-
-    line-height:1.45;
-
-    margin-top:20px;
-
-    color:#333;
-
-    min-height:70px;
-
-}
-
-.price{
-
-    margin-top:15px;
-
-    font-size:20px;
-
-}
-
-.old{
-
-    color:#444;
-
-    text-decoration:line-through;
-
-}
-
-.new{
-
-    color:#e60000;
-
-    font-weight:700;
-
-    margin-left:10px;
-
-}
-
-.buy{
-
-    display:inline-block;
-
-    margin-top:20px;
-
-    padding:10px 28px;
-
-    background:#111;
-
-    color:#fff;
-
-    border-radius:30px;
-
-    text-decoration:none;
-
-    transition:.3s;
-
-}
-
-.buy:hover{
-
-    background:#d4a017;
-
-}
-
-@media(max-width:1200px){
-
-.products{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.products{
-
-grid-template-columns:1fr;
-
-}
-
-.title h2{
-
-font-size:34px;
-
-}
-
-.image{
-
-height:280px;
-
-}
-
-.image img{
-
-max-height:220px;
-
-}
-
-.name{
-
-font-size:18px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="title">
-
-<h2>
-
-Premium
-
-</h2>
-
-<div class="line"></div>
-
-</div>
-
-<div class="products">
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch1.png" alt="">
-</div>
-
-<div class="name">
-Monnach 50040
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch2.png" alt="">
-</div>
-
-<div class="name">
-Trend Icon 9670
-</div>
-
-<div class="price">
-<span class="old">1.050.000đ</span>
-<span class="new">800.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch3.png" alt="">
-</div>
-
-<div class="name">
-Daily Flex 61006
-</div>
-
-<div class="price">
-<span class="old">1.550.000đ</span>
-<span class="new">1.050.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch4.png" alt="">
-</div>
-
-<div class="name">
-K-mode 3305
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
-</html>
-
-<!SẢN PHẨM HÀNG 3 html>
-<html lang="vi">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Sản phẩm giảm giá</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#fff;
-}
-
-.container{
-    max-width:1600px;
-    margin:50px auto;
-    padding:0 20px;
-}
-
-/* Tiêu đề */
-
-.title{
-    text-align:center;
-    margin-bottom:50px;
-}
-
-.title h2{
-    font-size:52px;
-    font-weight:400;
-    color:#222;
-}
-
-.title span{
-    font-size:45px;
-    margin-right:15px;
-}
-
-.line{
-    width:180px;
-    height:2px;
-    background:#d8c7a2;
-    margin:20px auto;
-}
-
-/* Danh sách */
-
-.products{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:40px;
-
-}
-
-.product{
-
-    position:relative;
-
-    transition:.35s;
-
-    cursor:pointer;
-
-}
-
-.product:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.sale{
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    font-size:15px;
-
-    letter-spacing:4px;
-
-    font-weight:600;
-
-}
-
-.image{
-
-    height:380px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.image img{
-
-    max-height:320px;
-
-    transition:.35s;
-
-}
-
-.product:hover img{
-
-    transform:scale(1.06);
-
-}
-
-.name{
-
-    font-size:22px;
-
-    line-height:1.45;
-
-    margin-top:20px;
-
-    color:#333;
-
-    min-height:70px;
-
-}
-
-.price{
-
-    margin-top:15px;
-
-    font-size:20px;
-
-}
-
-.old{
-
-    color:#444;
-
-    text-decoration:line-through;
-
-}
-
-.new{
-
-    color:#e60000;
-
-    font-weight:700;
-
-    margin-left:10px;
-
-}
-
-.buy{
-
-    display:inline-block;
-
-    margin-top:20px;
-
-    padding:10px 28px;
-
-    background:#111;
-
-    color:#fff;
-
-    border-radius:30px;
-
-    text-decoration:none;
-
-    transition:.3s;
-
-}
-
-.buy:hover{
-
-    background:#d4a017;
-
-}
-
-@media(max-width:1200px){
-
-.products{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.products{
-
-grid-template-columns:1fr;
-
-}
-
-.title h2{
-
-font-size:34px;
-
-}
-
-.image{
-
-height:280px;
-
-}
-
-.image img{
-
-max-height:220px;
-
-}
-
-.name{
-
-font-size:18px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="title">
-
-<h2>
-
-Hight Quality
-
-</h2>
-
-<div class="line"></div>
-
-</div>
-
-<div class="products">
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch1.png" alt="">
-</div>
-
-<div class="name">
-Monnach 50040
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch2.png" alt="">
-</div>
-
-<div class="name">
-Trend Icon 9670
-</div>
-
-<div class="price">
-<span class="old">1.050.000đ</span>
-<span class="new">800.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch3.png" alt="">
-</div>
-
-<div class="name">
-Daily Flex 61006
-</div>
-
-<div class="price">
-<span class="old">1.550.000đ</span>
-<span class="new">1.050.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-<div class="product">
-
-<div class="sale"></div>
-
-<div class="image">
-<img src="images/watch4.png" alt="">
-</div>
-
-<div class="name">
-K-mode 3305
-</div>
-
-<div class="price">
-<span class="old">1.950.000đ</span>
-<span class="new">1.650.000đ</span>
-</div>
-
-<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
-</html>
-
-<!CHÂN TRANG html>
-<html lang="vi">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Footer</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Poppins',sans-serif;
-}
-
-.footer{
-
-    background:#fff5df;
-
-    padding:80px 20px;
-
-    text-align:center;
-
-}
-
-.footer-logo{
-
-    font-size:64px;
-
-    letter-spacing:18px;
-
-    font-weight:300;
-
-    color:#3a302b;
-
-    margin-bottom:25px;
-
-}
-
-.footer-desc{
-
-    font-size:20px;
-
-    color:#333;
-
-    margin-bottom:55px;
-
-}
-
-.footer-contact{
-
-    font-size:22px;
-
-    line-height:1.8;
-
-    color:#333;
-
-}
-
-.footer-contact p{
-
-    margin:8px 0;
-
-}
-
-.footer-email{
-
-    font-size:34px;
-
-    margin-top:10px;
-
-    font-weight:500;
-
-}
-
-.footer-social{
-
-    margin-top:45px;
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:35px;
-
-}
-
-.footer-social a{
-
-    width:55px;
-
-    height:55px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#111;
-
-    font-size:28px;
-
-    transition:.3s;
-
-    text-decoration:none;
-
-}
-
-.footer-social a:hover{
-
-    background:#111;
-
-    color:#fff;
-
-    transform:translateY(-6px);
-
-}
-
-@media(max-width:768px){
-
-.footer{
-
-padding:60px 20px;
-
-}
-
-.footer-logo{
-
-font-size:48px;
-
-letter-spacing:12px;
-
-}
-
-.footer-desc{
-
-font-size:18px;
-
-}
-
-.footer-contact{
-
-font-size:18px;
-
-}
-
-.footer-email{
-
-font-size:24px;
-
-}
-
-.footer-social{
-
-gap:20px;
-
-}
-
-.footer-social a{
-
-width:45px;
-
-height:45px;
-
-font-size:22px;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<footer class="footer">
-
-    <h1 class="footer-logo">
-        EYEMEDI
-    </h1>
-
-    <p class="footer-desc">
-        Tinh tế - Tận tâm - Trách nhiệm - Trung thực - Thấu hiểu
-    </p>
-
-    <div class="footer-contact">
-
-        <p>Thông tin liên hệ</p>
-
-        <p>Hotline 0967 190005</p>
-
-        <p>Store: 63C Lạc Long Quân, P. Hòa Bình, TPHCM</p>
-
-        <div class="footer-email">
-            
-        </div>
-
-    </div>
-
-
-    <div class="footer-social">
-
-        <a href="https://www.facebook.com/EyemediOptic"><i class="fab fa-facebook"></i></a>
-
-        <a href="https://www.instagram.com/eyemedi.optic/"><i class="fab fa-instagram"></i></a>
-
-        <a href="https://www.tiktok.com/@eyemedi.optic"><i class="fab fa-tiktok"></i></a>
-
-        <a href="https://www.threads.com/@eyemedi.optic"><i class="fab fa-threads"></i></a> 
-
-
-    </div>
-
-</footer>
-
-<a href="https://m.me/516748655103084"
-   class="messenger-btn"
-   target="_blank">
-
-    <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg">
-
-</a>
-
-<style>
-
-.messenger-btn{
-
-position:fixed;
-
-bottom:25px;
-
-right:25px;
-
-width:65px;
-
-height:65px;
-
-border-radius:50%;
-
-background:#0084ff;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-box-shadow:0 10px 25px rgba(0,0,0,.3);
-
-z-index:99999;
-
-transition:.3s;
-
-animation:pulse 2s infinite;
-
-}
-
-.messenger-btn:hover{
-
-transform:scale(1.1);
-
-}
-
-.messenger-btn img{
-
-width:38px;
-
-height:38px;
-
-}
-
-@keyframes pulse{
-
-0%{
-
-box-shadow:0 0 0 0 rgba(0,132,255,.6);
-
-}
-
-70%{
-
-box-shadow:0 0 0 18px rgba(0,132,255,0);
-
-}
-
-100%{
-
-box-shadow:0 0 0 0 rgba(0,132,255,0);
-
-}
-
-}
-
-@media(max-width:768px){
-
-.messenger-btn{
-
-width:58px;
-
-height:58px;
-
-bottom:20px;
-
-right:20px;
-
-}
-
-}
-
-</style>
 
 </body>
 </html>
