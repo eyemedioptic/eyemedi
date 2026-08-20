@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EYEMEDI - elevate your style. Trung tâm thị lực, kính mắt, tròng kính và contact lens.">
+<meta name="theme-color" content="#0077B6">
+<title>EYEMEDI | elevate your style</title>
+
+<style>
+:root{
+  --blue:#0077B6;
+  --blue-dark:#005B8F;
+  --blue-deep:#063B57;
+  --blue-light:#EAF7FC;
+  --blue-soft:#F4FBFE;
+  --white:#fff;
+  --text:#16323F;
+  --muted:#6B7C85;
+  --border:#E4EEF2;
+  --shadow:0 12px 35px rgba(0,65,95,.10);
+  --radius:18px;
+  --container:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff;line-height:1.55}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%;height:auto}
+button{font:inherit}
+.container{width:min(var(--container),calc(100% - 40px));margin:auto}
+.section{padding:72px 0}
+.section.soft{background:var(--blue-soft)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:2px;color:var(--blue);font-weight:700;text-transform:uppercase;margin-bottom:7px}
+.section-title{font-size:32px;line-height:1.15;color:var(--blue-deep)}
+.section-desc{color:var(--muted);margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;border:0;cursor:pointer;transition:.25s}
+.btn:hover{background:var(--blue-dark);transform:translateY(-2px)}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--blue);display:grid;place-items:center;cursor:pointer;transition:.2s}
+.icon-btn:hover{background:var(--blue);color:#fff}
+.slider-controls{display:flex;gap:8px}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.header-inner{height:78px;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;min-width:170px}
+.logo strong{font-size:27px;letter-spacing:2px;color:var(--blue)}
+.logo span{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:-2px}
+.nav{display:flex;align-items:center;gap:20px;flex:1}
+.nav a{font-size:13px;font-weight:700;color:#304D5A;white-space:nowrap}
+.nav a:hover{color:var(--blue)}
+.header-actions{display:flex;align-items:center;gap:8px}
+.hotline{font-size:13px;font-weight:700;color:var(--blue);white-space:nowrap}
+.menu-toggle{display:none}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:#eef9fd}
+.hero-track{display:flex;transition:transform .6s ease}
+.hero-slide{min-width:100%;position:relative}
+.hero-slide img{height:min(650px,42vw);min-height:360px;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,38,58,.55),rgba(0,38,58,.08) 65%,transparent)}
+.hero-content{position:absolute;inset:0;display:flex;align-items:center}
+.hero-copy{max-width:600px;color:#fff}
+.hero-copy .eyebrow{color:#BCEFFF}
+.hero-copy h1{font-size:clamp(34px,4.5vw,64px);line-height:1.05;margin-bottom:16px}
+.hero-copy p{font-size:17px;max-width:560px;margin-bottom:24px;color:#f4fdff}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.hero-dot{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.55);cursor:pointer}
+.hero-dot.active{width:28px;border-radius:99px;background:#fff}
+
+/* NEWS */
+.news-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.3fr);gap:32px}
+.feature-news{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.feature-news img{aspect-ratio:1/1;object-fit:cover}
+.feature-body{padding:22px}
+.feature-body h3{font-size:24px;line-height:1.25;margin:7px 0 10px}
+.feature-body p{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;color:var(--muted)}
+.news-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.news-item{display:grid;grid-template-columns:92px 1fr;gap:12px;border:1px solid var(--border);border-radius:14px;padding:9px;background:#fff;transition:.25s}
+.news-item:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.news-item img{aspect-ratio:1/1;object-fit:cover;border-radius:9px}
+.news-item h4{font-size:14px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 4px}
+.news-item p{font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+
+/* HORIZONTAL CAROUSELS */
+.horizontal-wrap{position:relative}
+.horizontal-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 12px}
+.horizontal-track::-webkit-scrollbar{display:none}
+.product-card{flex:0 0 calc(50% - 9px);scroll-snap-align:start;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:0 8px 25px rgba(0,60,90,.06);transition:.25s}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.product-card img{aspect-ratio:4/5;object-fit:cover;background:var(--blue-soft)}
+.product-body{padding:17px}
+.product-body h3{font-size:18px;margin:4px 0}
+.product-body p{color:var(--muted);font-size:13px;margin-bottom:12px}
+.card-link{font-size:13px;color:var(--blue);font-weight:700}
+
+/* ADS */
+.ads-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:8px}
+.ads-track::-webkit-scrollbar{display:none}
+.ad-card{flex:0 0 calc(25% - 13.5px);scroll-snap-align:start;border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.ad-card img{aspect-ratio:1/1;object-fit:cover}
+.ad-card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,30,45,.48))}
+.ad-label{position:absolute;z-index:2;left:15px;right:15px;bottom:13px;color:#fff;font-weight:700;font-size:14px}
+
+/* SERVICES */
+.service-card{flex:0 0 calc(50% - 9px);scroll-snap-align:start;border-radius:var(--radius);overflow:hidden;position:relative;background:#ddd}
+.service-card img{aspect-ratio:16/9;object-fit:cover}
+.service-card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,35,52,.7))}
+.service-info{position:absolute;z-index:2;left:22px;right:22px;bottom:18px;color:#fff}
+.service-info h3{font-size:21px}
+.service-info p{font-size:13px;color:#eafaff}
+
+/* SOCIAL */
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.social-card{position:relative;overflow:hidden;border-radius:18px;box-shadow:var(--shadow);background:var(--blue)}
+.social-card img{aspect-ratio:1/1;object-fit:cover;transition:.4s}
+.social-card:hover img{transform:scale(1.05)}
+.social-overlay{position:absolute;inset:0;display:flex;align-items:end;padding:20px;background:linear-gradient(transparent,rgba(0,35,52,.72));color:#fff}
+.social-overlay strong{font-size:18px}
+
+/* FOOTER */
+.footer{background:var(--blue-deep);color:#dff6ff;padding:55px 0 20px}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px}
+.footer h3{color:#fff;font-size:15px;margin-bottom:15px}
+.footer p,.footer li{font-size:13px;color:#b9dce8}
+.footer ul{list-style:none;display:grid;gap:8px}
+.footer a:hover{color:#fff}
+.footer-brand strong{font-size:28px;letter-spacing:2px;color:#fff}
+.footer-brand .tag{font-size:10px;letter-spacing:2px;margin:2px 0 14px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:35px;padding-top:18px;display:flex;justify-content:space-between;gap:15px;font-size:12px;color:#9bc4d1}
+
+/* FLOATING */
+.floating{position:fixed;right:18px;bottom:18px;z-index:900;display:flex;flex-direction:column;gap:9px}
+.float-btn{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;box-shadow:0 10px 25px rgba(0,0,0,.18);font-size:12px}
+.float-call{background:#0077B6}
+.float-zalo{background:#0068FF}
+
+/* MOBILE MENU */
+.mobile-menu{position:fixed;inset:78px 0 0;background:#fff;z-index:999;padding:25px;transform:translateX(100%);transition:.3s;overflow:auto}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{display:block;padding:14px 0;border-bottom:1px solid var(--border);font-weight:700;color:var(--text)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .nav{gap:12px}
+  .nav a:nth-child(n+7){display:none}
+  .hotline{display:none}
+  .ad-card{flex-basis:calc(33.333% - 12px)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:800px){
+  .container{width:min(100% - 28px,var(--container))}
+  .section{padding:52px 0}
+  .section-head{align-items:start}
+  .section-title{font-size:27px}
+  .nav{display:none}
+  .menu-toggle{display:grid}
+  .header-inner{height:68px}
+  .logo strong{font-size:24px}
+  .header-actions .icon-btn:nth-child(2){display:none}
+  .mobile-menu{inset:68px 0 0}
+  .hero-slide img{height:auto;min-height:0;aspect-ratio:auto;object-fit:contain}
+  .hero-content{align-items:end;padding-bottom:35px}
+  .hero-copy{padding:0 10px}
+  .hero-copy h1{font-size:38px}
+  .hero-copy p{font-size:14px}
+  .news-layout{grid-template-columns:1fr}
+  .news-list{grid-template-columns:1fr}
+  .feature-body h3{font-size:21px}
+  .product-card{flex-basis:calc(78% - 9px)}
+  .ad-card{flex-basis:calc(72% - 9px)}
+  .service-card{flex-basis:88%}
+  .social-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .section-head .slider-controls{display:none}
+  .hero-slide img{height:auto;min-height:0;aspect-ratio:auto;object-fit:contain}
+  .hero-overlay{background:linear-gradient(0deg,rgba(0,35,52,.7),rgba(0,35,52,.05) 65%)}
+  .hero-copy h1{font-size:34px}
+  .news-item{grid-template-columns:78px 1fr}
+  .news-item h4{font-size:13px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{display:block}
+  .footer-bottom span{display:block;margin-top:7px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="EYEMEDI">
+      <div><strong>EYEMEDI</strong><span>ELEVATE YOUR STYLE</span></div>
+    </a>
+
+    <nav class="nav" id="desktopNav"></nav>
+
+    <div class="header-actions">
+      <a class="icon-btn" id="searchBtn" href="#" aria-label="Tìm kiếm">⌕</a>
+      <a class="icon-btn" id="headerCall" href="#" aria-label="Gọi EYEMEDI">☎</a>
+      <a class="btn" id="headerHotline" href="#">Gọi ngay</a>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu"></div>
+
+<main id="top">
+
+  <section class="hero" id="hero">
+    <div class="hero-track" id="heroTrack"></div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">EYEMEDI JOURNAL</div>
+          <h2 class="section-title">Tin tức & kiến thức thị lực</h2>
+          <p class="section-desc">Thông tin hữu ích về mắt, kính mắt và chăm sóc thị lực.</p>
+        </div>
+        <a class="btn" id="allNewsLink" href="#">Xem tất cả</a>
+      </div>
+      <div class="news-layout">
+        <a class="feature-news" id="featureNews" href="#">
+          <img id="featureImg" src="" alt="">
+          <div class="feature-body">
+            <div class="eyebrow">NỔI BẬT</div>
+            <h3 id="featureTitle"></h3>
+            <p id="featureText"></p>
+          </div>
+        </a>
+        <div class="news-list" id="newsList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft" id="products">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">EYEMEDI COLLECTION</div>
+          <h2 class="section-title">Sản phẩm nổi bật</h2>
+          <p class="section-desc">Khám phá những lựa chọn được quan tâm tại EYEMEDI.</p>
+        </div>
+        <div class="slider-controls">
+          <button class="icon-btn" data-scroll-target="productTrack" data-dir="-1">‹</button>
+          <button class="icon-btn" data-scroll-target="productTrack" data-dir="1">›</button>
+        </div>
+      </div>
+      <div class="horizontal-wrap">
+        <div class="horizontal-track" id="productTrack"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="ads">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">SPECIAL OFFERS</div>
+          <h2 class="section-title">Ưu đãi & quảng cáo</h2>
+        </div>
+        <div class="slider-controls">
+          <button class="icon-btn" data-scroll-target="adsTrack" data-dir="-1">‹</button>
+          <button class="icon-btn" data-scroll-target="adsTrack" data-dir="1">›</button>
+        </div>
+      </div>
+      <div class="ads-track" id="adsTrack"></div>
+    </div>
+  </section>
+
+  <section class="section soft" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">EYEMEDI CARE</div>
+          <h2 class="section-title">Dịch vụ khách hàng</h2>
+          <p class="section-desc">Chăm sóc thị lực và trải nghiệm kính mắt chuyên nghiệp.</p>
+        </div>
+        <div class="slider-controls">
+          <button class="icon-btn" data-scroll-target="serviceTrack" data-dir="-1">‹</button>
+          <button class="icon-btn" data-scroll-target="serviceTrack" data-dir="1">›</button>
+        </div>
+      </div>
+      <div class="horizontal-track" id="serviceTrack"></div>
+    </div>
+  </section>
+
+  <section class="section" id="social">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">CONNECT WITH US</div>
+          <h2 class="section-title">Kết nối cùng EYEMEDI</h2>
+          <p class="section-desc">Theo dõi, nhắn tin hoặc tìm đường đến showroom.</p>
+        </div>
+      </div>
+      <div class="social-grid" id="socialGrid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong>EYEMEDI</strong>
+        <div class="tag">ELEVATE YOUR STYLE</div>
+        <p id="footerIntro"></p>
+      </div>
+      <div>
+        <h3>SẢN PHẨM</h3>
+        <ul id="footerProducts"></ul>
+      </div>
+      <div>
+        <h3>DỊCH VỤ</h3>
+        <ul id="footerServices"></ul>
+      </div>
+      <div>
+        <h3>LIÊN HỆ</h3>
+        <ul id="footerContact"></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="copyright"></span>
+      <span>Thiết kế giao diện: EYEMEDI</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating">
+  <a class="float-btn float-call" id="floatCall" href="#" title="Gọi điện">CALL</a>
+  <a class="float-btn float-zalo" id="floatZalo" href="#" target="_blank" rel="noopener" title="Zalo">ZALO</a>
+</div>
+
+<script>
+/* ==========================================================
+   EYEMEDI CONFIGURATION
+   CHỈ CẦN THAY NỘI DUNG TRONG KHU VỰC NÀY
+   ========================================================== */
+
+const CONFIG = {
+
+  /* WEBSITE */
+  /* THỜI GIAN TỰ ĐỘNG CHUYỂN SLIDE */
+  autoplay: {
+    hero: 5000,      // Banner Top: 5 giây
+    products: 3000,  // Sản phẩm: 3 giây
+    services: 4000   // Khách hàng trải nghiệm: 4 giây
+    // Đơn vị: milliseconds (3000 = 3 giây)
+  },
+
+  site: {
+    name: "EYEMEDI",
+    tagline: "elevate your style",
+    phoneDisplay: "0967 190005",
+    phoneLink: "tel:+84967190005",
+    email: "contact@eyemedi.vn",
+    address: "63C Lạc Long Quân, Phường Hòa Bình, TPHCM",
+    copyright: "© 2026 EYEMEDI. All Rights Reserved."
+  },
+
+  /* MENU */
+  menu: [
+    {title:"Trang chủ", url:"#top"},
+    {title:"Giới thiệu", url:"#contact"},
+    {title:"Sản phẩm", url:"#products"},
+    {title:"Dịch vụ", url:"#services"},
+    {title:"Tin tức", url:"#news"},
+    {title:"Ưu đãi", url:"#ads"},
+    {title:"Liên hệ", url:"#contact"}
+  ],
+
+  /* 6 BANNER CHÍNH */
+  heroBanners: [
+    {
+      image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1920&q=85",
+      title:"Chăm sóc đôi mắt. Nâng tầm phong cách.",
+      text:"Khám phá hệ sinh thái kính mắt, tròng kính và dịch vụ chăm sóc thị lực tại EYEMEDI.",
+      button:"KHÁM PHÁ EYEMEDI",
+      url:"#products"
+    },
+    {
+      image:"https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1920&q=85",
+      title:"Bộ sưu tập kính mắt mới",
+      text:"Những thiết kế tinh tế dành cho phong cách hiện đại.",
+      button:"XEM SẢN PHẨM",
+      url:"#products"
+    },
+    {
+      image:"https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=1920&q=85",
+      title:"Tròng kính phù hợp cho đôi mắt",
+      text:"Tư vấn lựa chọn tròng kính theo nhu cầu học tập, làm việc và di chuyển.",
+      button:"TÌM HIỂU THÊM",
+      url:"#services"
+    },
+    {
+      image:"https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1920&q=85",
+      title:"Contact Lens – Tự tin mỗi ngày",
+      text:"Khám phá những lựa chọn contact lens phù hợp với phong cách của bạn.",
+      button:"XEM COLLECTION",
+      url:"#products"
+    },
+    {
+      image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1920&q=85",
+      title:"Kính mát & phong cách sống",
+      text:"Bảo vệ đôi mắt và hoàn thiện diện mạo mỗi ngày.",
+      button:"KHÁM PHÁ",
+      url:"#products"
+    },
+    {
+      image:"https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=1920&q=85",
+      title:"Trải nghiệm dịch vụ EYEMEDI",
+      text:"Tận tâm trong từng bước từ đo mắt, tư vấn đến chăm sóc sau bán hàng.",
+      button:"XEM DỊCH VỤ",
+      url:"#services"
+    }
+  ],
+
+  /* 1 TIN CHÍNH + 10 TIN NHỎ */
+  news: [
+    {
+      image:"https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85",
+      title:"5 dấu hiệu cho thấy bạn nên kiểm tra thị lực",
+      text:"Thị lực thay đổi âm thầm có thể ảnh hưởng đến công việc, học tập và chất lượng cuộc sống. Kiểm tra mắt định kỳ giúp phát hiện sớm các vấn đề về khúc xạ và sức khỏe đôi mắt.",
+      url:"#"
+    },
+    {image:"https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=400&q=80",title:"Khi nào nên thay tròng kính?",text:"Những dấu hiệu bạn không nên bỏ qua.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=400&q=80",title:"Cách chọn kính phù hợp khuôn mặt",text:"Gợi ý đơn giản để chọn form kính.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=400&q=80",title:"Bảo vệ mắt khi dùng máy tính",text:"Thói quen nhỏ giúp đôi mắt dễ chịu hơn.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&w=400&q=80",title:"Kính chống ánh sáng xanh là gì?",text:"Hiểu đúng về nhu cầu sử dụng.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=400&q=80",title:"Contact Lens và những lưu ý",text:"Sử dụng lens đúng cách, an toàn.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1509695507497-903c140c43b0?auto=format&fit=crop&w=400&q=80",title:"Chọn kính cho người lái xe",text:"Ưu tiên tầm nhìn và sự thoải mái.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=400&q=80",title:"Titan – lựa chọn bền nhẹ",text:"Tìm hiểu ưu điểm của gọng Titan.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=400&q=80",title:"Kính mát thời trang 2026",text:"Những xu hướng đáng chú ý.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1591076482161-42ce6d3f6b2d?auto=format&fit=crop&w=400&q=80",title:"Đo mắt định kỳ có cần thiết?",text:"Vì sao nên theo dõi thị lực?",url:"#"},
+    {image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80",title:"EYEMEDI – elevate your style",text:"Phong cách và trải nghiệm chăm sóc mắt.",url:"#"}
+  ],
+
+  /* SẢN PHẨM */
+  products: [
+    {image:"https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=900&q=85",category:"GỌNG KÍNH",title:"Titan Collection",text:"Thiết kế nhẹ, tinh tế và bền bỉ.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=900&q=85",category:"GỌNG KÍNH",title:"Modern Frame",text:"Phong cách hiện đại cho diện mạo mỗi ngày.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=85",category:"KÍNH MÁT",title:"Sunglasses Collection",text:"Bảo vệ đôi mắt và hoàn thiện phong cách.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=900&q=85",category:"TRÒNG KÍNH",title:"Lens Technology",text:"Giải pháp tròng kính theo nhu cầu sử dụng.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=900&q=85",category:"CONTACT LENS",title:"Contact Lens",text:"Tự tin, tự nhiên và tiện lợi.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1591076482161-42ce6d3f6b2d?auto=format&fit=crop&w=900&q=85",category:"PHỤ KIỆN",title:"Eyewear Accessories",text:"Những phụ kiện cần thiết cho kính mắt.",url:"#"}
+  ],
+
+  /* 4 BANNER QUẢNG CÁO */
+  ads: [
+    {image:"https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=700&q=85",title:"ĐO MẮT & TƯ VẤN",url:"#services"},
+    {image:"https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=700&q=85",title:"GỌNG KÍNH MỚI",url:"#products"},
+    {image:"https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=700&q=85",title:"TRÒNG KÍNH",url:"#products"},
+    {image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=85",title:"KÍNH MÁT",url:"#products"}
+  ],
+
+  /* DỊCH VỤ */
+  services: [
+    {image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1200&q=85",title:"Đo mắt & kiểm tra thị lực",text:"Trải nghiệm quy trình tư vấn thị lực chuyên nghiệp.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=85",title:"Tư vấn chọn kính",text:"Lựa chọn kiểu dáng và giải pháp phù hợp.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1200&q=85",title:"Cắt tròng & hoàn thiện kính",text:"Quy trình gia công và lắp ráp cẩn thận.",url:"#"},
+    {image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=85",title:"Bảo hành & hậu mãi",text:"Đồng hành cùng khách hàng sau khi mua kính.",url:"#"}
+  ],
+
+  /* MXH + MAPS */
+  social: [
+    {title:"Facebook",image:"https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=700&q=85",url:"https://facebook.com/"},
+    {title:"TikTok",image:"https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?auto=format&fit=crop&w=700&q=85",url:"https://tiktok.com/"},
+    {title:"Zalo",image:"https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=700&q=85",url:"https://zalo.me/"},
+    {title:"Google Maps",image:"https://images.unsplash.com/photo-1524666041070-9b8762545eac?auto=format&fit=crop&w=700&q=85",url:"https://maps.google.com/"}
+  ],
+
+  /* FOOTER */
+  footer: {
+    intro:"EYEMEDI mang đến trải nghiệm kính mắt, tròng kính và chăm sóc thị lực theo tinh thần Tinh tế – Tận tâm – Trách nhiệm – Trung thực – Thấu hiểu.",
+    products:["Kính mát nam","Kính mát nữ","Gọng kính nam","Gọng kính nữ","Tròng kính","Contact Lens"],
+    services:["Đo mắt","Tư vấn thị lực","Cắt tròng","Thay tròng","Bảo hành","Chăm sóc khách hàng"]
+  }
+};
+
+/* ==========================================================
+   RENDER
+   ========================================================== */
+
+const $ = id => document.getElementById(id);
+
+function safeUrl(url){ return url || "#"; }
+
+function renderMenu(){
+  $("desktopNav").innerHTML = CONFIG.menu.map(x=>`<a href="${safeUrl(x.url)}">${x.title}</a>`).join("");
+  $("mobileMenu").innerHTML = CONFIG.menu.map(x=>`<a href="${safeUrl(x.url)}">${x.title}</a>`).join("");
+}
+
+function renderHero(){
+  $("heroTrack").innerHTML = CONFIG.heroBanners.map((x,i)=>`
+    <div class="hero-slide">
+      <a href="${safeUrl(x.url)}">
+        <img src="${x.image}" alt="${x.title}" loading="${i===0?'eager':'lazy'}">
+      </a>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="container">
+          <div class="hero-copy">
+            <div class="eyebrow">EYEMEDI</div>
+            <h1>${x.title}</h1>
+            <p>${x.text}</p>
+            <a class="btn" href="${safeUrl(x.url)}">${x.button || "KHÁM PHÁ"} →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  $("heroDots").innerHTML = CONFIG.heroBanners.map((_,i)=>
+    `<button class="hero-dot ${i===0?'active':''}" data-hero="${i}" aria-label="Banner ${i+1}"></button>`
+  ).join("");
+}
+
+let heroIndex=0;
+let heroTimer;
+
+function setHero(index){
+  heroIndex=(index+CONFIG.heroBanners.length)%CONFIG.heroBanners.length;
+  $("heroTrack").style.transform=`translateX(-${heroIndex*100}%)`;
+  document.querySelectorAll(".hero-dot").forEach((d,i)=>d.classList.toggle("active",i===heroIndex));
+}
+function startHero(){
+  clearInterval(heroTimer);
+  heroTimer=setInterval(()=>setHero(heroIndex+1),CONFIG.autoplay.hero);
+}
+
+function renderNews(){
+  const main=CONFIG.news[0];
+  $("featureImg").src=main.image;
+  $("featureImg").alt=main.title;
+  $("featureTitle").textContent=main.title;
+  $("featureText").textContent=main.text;
+  $("featureNews").href=safeUrl(main.url);
+
+  $("newsList").innerHTML=CONFIG.news.slice(1,11).map(x=>`
+    <a class="news-item" href="${safeUrl(x.url)}">
+      <img src="${x.image}" alt="${x.title}" loading="lazy">
+      <div>
+        <div class="eyebrow">TIN TỨC</div>
+        <h4>${x.title}</h4>
+        <p>${x.text}</p>
+      </div>
+    </a>
+  `).join("");
+}
+
+function renderProducts(){
+  $("productTrack").innerHTML=CONFIG.products.map(x=>`
+    <a class="product-card" href="${safeUrl(x.url)}">
+      <img src="${x.image}" alt="${x.title}" loading="lazy">
+      <div class="product-body">
+        <div class="eyebrow">${x.category}</div>
+        <h3>${x.title}</h3>
+        <p>${x.text}</p>
+        <span class="card-link">KHÁM PHÁ →</span>
+      </div>
+    </a>
+  `).join("");
+}
+
+function renderAds(){
+  $("adsTrack").innerHTML=CONFIG.ads.map(x=>`
+    <a class="ad-card" href="${safeUrl(x.url)}">
+      <img src="${x.image}" alt="${x.title}" loading="lazy">
+      <div class="ad-label">${x.title} →</div>
+    </a>
+  `).join("");
+}
+
+function renderServices(){
+  $("serviceTrack").innerHTML=CONFIG.services.map(x=>`
+    <a class="service-card" href="${safeUrl(x.url)}">
+      <img src="${x.image}" alt="${x.title}" loading="lazy">
+      <div class="service-info">
+        <h3>${x.title}</h3>
+        <p>${x.text}</p>
+      </div>
+    </a>
+  `).join("");
+}
+
+function renderSocial(){
+  $("socialGrid").innerHTML=CONFIG.social.map(x=>`
+    <a class="social-card" href="${safeUrl(x.url)}" target="_blank" rel="noopener">
+      <img src="${x.image}" alt="${x.title}" loading="lazy">
+      <div class="social-overlay"><strong>${x.title} →</strong></div>
+    </a>
+  `).join("");
+}
+
+function renderFooter(){
+  $("footerIntro").textContent=CONFIG.footer.intro;
+  $("footerProducts").innerHTML=CONFIG.footer.products.map(x=>`<li><a href="#products">${x}</a></li>`).join("");
+  $("footerServices").innerHTML=CONFIG.footer.services.map(x=>`<li><a href="#services">${x}</a></li>`).join("");
+  $("footerContact").innerHTML=`
+    <li>${CONFIG.site.address}</li>
+    <li><a href="${CONFIG.site.phoneLink}">${CONFIG.site.phoneDisplay}</a></li>
+    <li><a href="mailto:${CONFIG.site.email}">${CONFIG.site.email}</a></li>
+  `;
+  $("copyright").textContent=CONFIG.site.copyright;
+}
+
+function renderGlobal(){
+  document.title=`${CONFIG.site.name} | ${CONFIG.site.tagline}`;
+  $("headerCall").href=CONFIG.site.phoneLink;
+  $("headerHotline").href=CONFIG.site.phoneLink;
+  $("floatCall").href=CONFIG.site.phoneLink;
+  const zalo=CONFIG.social.find(x=>x.title.toLowerCase()==="zalo");
+  $("floatZalo").href=zalo ? zalo.url : "#";
+  $("allNewsLink").href="#news";
+}
+
+function setupScrollButtons(){
+  document.querySelectorAll("[data-scroll-target]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const target=$(btn.dataset.scrollTarget);
+      const dir=Number(btn.dataset.dir||1);
+      target.scrollBy({left:dir*getCarouselStep(target),behavior:"smooth"});
+    });
+  });
+}
+
+/* Tính khoảng trượt theo từng card, tránh nhảy quá nhiều trên mobile */
+function getCarouselStep(track){
+  const card=track.firstElementChild;
+  if(!card) return track.clientWidth*.82;
+  const gap=parseFloat(getComputedStyle(track).gap)||0;
+  return card.getBoundingClientRect().width + gap;
+}
+
+/* Carousel tự động chạy từ PHẢI -> TRÁI.
+   Khi tới cuối sẽ quay mượt về đầu. */
+function startHorizontalAutoplay(trackId, interval){
+  const track=$(trackId);
+  if(!track) return null;
+
+  let timer=null;
+
+  function next(){
+    const maxScroll=track.scrollWidth-track.clientWidth;
+    const step=getCarouselStep(track);
+
+    if(maxScroll <= 2) return;
+
+    if(track.scrollLeft >= maxScroll-3){
+      track.scrollTo({left:0,behavior:"smooth"});
+    }else{
+      track.scrollBy({left:step,behavior:"smooth"});
+    }
+  }
+
+  function start(){
+    clearInterval(timer);
+    timer=setInterval(next,interval);
+  }
+
+  track.addEventListener("mouseenter",()=>clearInterval(timer));
+  track.addEventListener("mouseleave",start);
+  track.addEventListener("touchstart",()=>clearInterval(timer),{passive:true});
+  track.addEventListener("touchend",start,{passive:true});
+
+  start();
+  return {start,stop:()=>clearInterval(timer)};
+}
+
+function setupMobile(){
+  const toggle=$("menuToggle"), menu=$("mobileMenu");
+  toggle.addEventListener("click",()=>menu.classList.toggle("open"));
+  menu.addEventListener("click",e=>{
+    if(e.target.matches("a")) menu.classList.remove("open");
+  });
+}
+
+function setupHeroDots(){
+  document.querySelectorAll(".hero-dot").forEach(d=>{
+    d.addEventListener("click",()=>{
+      setHero(Number(d.dataset.hero));
+      startHero();
+    });
+  });
+}
+
+/* INITIALIZE */
+renderMenu();
+renderHero();
+renderNews();
+renderProducts();
+renderAds();
+renderServices();
+renderSocial();
+renderFooter();
+renderGlobal();
+setupScrollButtons();
+setupMobile();
+setupHeroDots();
+startHero();
+
+/* AUTOPLAY:
+   - Banner Top: trái -> phải, mỗi 5 giây
+   - Sản phẩm: phải -> trái, mỗi 3 giây
+   - Khách hàng trải nghiệm: phải -> trái, mỗi 4 giây */
+let productAutoplay = startHorizontalAutoplay("productTrack", CONFIG.autoplay.products);
+let serviceAutoplay = startHorizontalAutoplay("serviceTrack", CONFIG.autoplay.services);
+
+/* Pause all autoplay khi tab không hiển thị */
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    clearInterval(heroTimer);
+    if(productAutoplay) productAutoplay.stop();
+    if(serviceAutoplay) serviceAutoplay.stop();
+  }else{
+    startHero();
+    if(productAutoplay) productAutoplay.start();
+    if(serviceAutoplay) serviceAutoplay.start();
+  }
+});
+</script>
+
+</body>
+</html>
