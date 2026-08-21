@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0876c9">
+  <meta name="description" content="EYEMEDI - Kính mắt, chăm sóc thị lực và dịch vụ nhãn khoa.">
+  <meta property="og:title" content="EYEMEDI - Chăm sóc đôi mắt">
+  <meta property="og:description" content="Kính mắt, tròng kính, contact lens và dịch vụ chăm sóc thị lực.">
+  <title>EYEMEDI | Chăm sóc đôi mắt</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --blue:#0876c9;
+      --blue-dark:#075b9b;
+      --blue-light:#eaf6ff;
+      --cyan:#18a8df;
+      --text:#17324d;
+      --muted:#66788a;
+      --white:#fff;
+      --border:#e6eef5;
+      --shadow:0 10px 35px rgba(8,118,201,.10);
+      --radius:16px;
+      --container:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Be Vietnam Pro",Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.6;
+    }
+    img{display:block;width:100%;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .container{width:min(var(--container),calc(100% - 32px));margin:auto}
+
+    /* HEADER */
+    .topbar{
+      height:4px;
+      background:linear-gradient(90deg,var(--blue),var(--cyan));
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.97);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      font-size:25px;
+      color:var(--blue);
+      white-space:nowrap;
+    }
+    .logo-mark{
+      width:42px;height:42px;border-radius:50%;
+      display:grid;place-items:center;
+      color:#fff;
+      font-size:19px;
+      background:linear-gradient(135deg,var(--blue),var(--cyan));
+      box-shadow:0 8px 18px rgba(8,118,201,.22);
+    }
+    .logo small{
+      display:block;
+      font-size:9px;
+      letter-spacing:2px;
+      color:#7690a5;
+      margin-top:-4px;
+      font-weight:600;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav-links a{
+      padding:10px 12px;
+      font-size:14px;
+      font-weight:600;
+      color:#38566e;
+      border-radius:10px;
+      transition:.2s;
+    }
+    .nav-links a:hover{background:var(--blue-light);color:var(--blue)}
+    .nav-cta{
+      background:var(--blue)!important;
+      color:#fff!important;
+      padding:11px 17px!important;
+      box-shadow:0 7px 18px rgba(8,118,201,.2);
+    }
+    .menu-btn{
+      display:none;
+      width:42px;height:42px;border:1px solid var(--border);
+      border-radius:10px;background:#fff;color:var(--blue);
+      cursor:pointer;font-size:22px;
+    }
+
+    /* HERO */
+    .hero{background:#f4fbff}
+    .hero-slider{position:relative;overflow:hidden}
+    .hero-track{display:flex;transition:transform .55s ease}
+    .hero-slide{
+      min-width:100%;
+      position:relative;
+      aspect-ratio:21/7;
+      overflow:hidden;
+    }
+    .hero-slide img{height:100%;object-fit:cover}
+    .hero-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(2,48,84,.65),rgba(2,48,84,.08) 70%);
+      display:flex;align-items:center;
+    }
+    .hero-copy{color:#fff;max-width:590px}
+    .hero-copy .eyebrow{
+      text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:700;
+      color:#bfeeff;margin-bottom:8px;
+    }
+    .hero-copy h1{
+      margin:0 0 12px;font-size:clamp(26px,4vw,50px);
+      line-height:1.15;
+    }
+    .hero-copy p{margin:0 0 20px;max-width:500px;color:#eefaff}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border:0;border-radius:10px;padding:12px 20px;
+      background:var(--blue);color:#fff;font-weight:700;cursor:pointer;
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px);filter:brightness(.96)}
+    .btn-light{background:#fff;color:var(--blue)}
+    .slider-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:44px;height:44px;border:0;border-radius:50%;
+      background:rgba(255,255,255,.9);color:var(--blue);
+      cursor:pointer;font-size:25px;z-index:3;box-shadow:0 6px 20px rgba(0,0,0,.12)
+    }
+    .slider-arrow.prev{left:18px}.slider-arrow.next{right:18px}
+    .dots{
+      position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+      display:flex;gap:7px;z-index:3;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;border:0;background:rgba(255,255,255,.55);
+      cursor:pointer;padding:0;
+    }
+    .dot.active{width:24px;border-radius:10px;background:#fff}
+
+    /* SECTIONS */
+    section{padding:72px 0}
+    .section-head{
+      display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px
+    }
+    .section-head h2{margin:0;font-size:30px;line-height:1.25}
+    .section-head p{margin:7px 0 0;color:var(--muted);font-size:14px}
+    .section-title-line{
+      display:flex;align-items:center;gap:10px
+    }
+    .section-title-line:before{
+      content:"";width:5px;height:34px;border-radius:5px;background:var(--blue)
+    }
+    .view-all{color:var(--blue);font-weight:700;font-size:14px}
+
+    /* NEWS */
+    .news-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+    .featured-news{
+      border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+      background:#fff;box-shadow:var(--shadow)
+    }
+    .featured-news .thumb{aspect-ratio:1/1;overflow:hidden}
+    .featured-news .thumb img{height:100%;object-fit:cover;transition:.5s}
+    .featured-news:hover img{transform:scale(1.035)}
+    .featured-body{padding:20px}
+    .category{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--blue)}
+    .featured-body h3{font-size:22px;line-height:1.35;margin:7px 0 9px}
+    .featured-body p{
+      margin:0;color:var(--muted);font-size:14px;
+      display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden
+    }
+    .news-list{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+      max-height:100%;
+    }
+    .news-item{
+      display:grid;grid-template-columns:100px 1fr;gap:12px;
+      align-items:center;padding:10px;border:1px solid var(--border);
+      border-radius:13px;background:#fff;transition:.2s;min-width:0;
+    }
+    .news-item:hover{border-color:#b8def5;box-shadow:var(--shadow)}
+    .news-item .thumb{aspect-ratio:1/1;border-radius:10px;overflow:hidden}
+    .news-item img{height:100%;object-fit:cover}
+    .news-item h4{
+      margin:3px 0 3px;font-size:13px;line-height:1.35;
+      display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden
+    }
+    .news-item p{
+      margin:0;color:var(--muted);font-size:11px;
+      display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden
+    }
+
+    /* HORIZONTAL CAROUSEL */
+    .soft-section{background:#f7fcff}
+    .carousel-wrap{position:relative}
+    .horizontal-track{
+      display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;
+      scrollbar-width:none;scroll-snap-type:x mandatory;padding:3px 2px 10px
+    }
+    .horizontal-track::-webkit-scrollbar{display:none}
+    .product-card{
+      flex:0 0 calc((100% - 18px)/2);
+      scroll-snap-align:start;border-radius:var(--radius);overflow:hidden;
+      background:#fff;border:1px solid var(--border);box-shadow:var(--shadow)
+    }
+    .product-card .image{aspect-ratio:3/4;overflow:hidden}
+    .product-card img{height:100%;object-fit:cover;transition:.45s}
+    .product-card:hover img{transform:scale(1.04)}
+    .product-body{padding:17px}
+    .product-body h3{margin:0 0 5px;font-size:18px}
+    .product-body p{margin:0;color:var(--muted);font-size:13px}
+    .carousel-controls{display:flex;gap:8px}
+    .circle-btn{
+      width:40px;height:40px;border:1px solid var(--border);background:#fff;
+      border-radius:50%;cursor:pointer;color:var(--blue);font-size:20px
+    }
+
+    /* AD 4 COLUMNS */
+    .ad-track .ad-card{
+      flex:0 0 calc((100% - 54px)/4);
+      scroll-snap-align:start;border-radius:15px;overflow:hidden;
+      border:1px solid var(--border);background:#fff;box-shadow:var(--shadow)
+    }
+    .ad-card img{aspect-ratio:1/1;object-fit:cover;transition:.4s}
+    .ad-card:hover img{transform:scale(1.03)}
+
+    /* SERVICE */
+    .service-card{
+      flex:0 0 calc((100% - 18px)/2);
+      scroll-snap-align:start;border-radius:var(--radius);overflow:hidden;
+      position:relative;aspect-ratio:16/10;background:#ddd
+    }
+    .service-card img{height:100%;object-fit:cover;transition:.45s}
+    .service-card:hover img{transform:scale(1.04)}
+    .service-overlay{
+      position:absolute;left:0;right:0;bottom:0;padding:35px 18px 17px;
+      color:#fff;background:linear-gradient(transparent,rgba(0,35,62,.78))
+    }
+    .service-overlay h3{margin:0;font-size:18px}
+
+    /* SOCIAL */
+    .social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .social-card{
+      position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:1/1;
+      border:1px solid var(--border);box-shadow:var(--shadow)
+    }
+    .social-card img{height:100%;object-fit:cover;transition:.4s}
+    .social-card:hover img{transform:scale(1.05)}
+    .social-overlay{
+      position:absolute;inset:0;display:flex;align-items:end;
+      padding:18px;background:linear-gradient(transparent,rgba(0,35,62,.75));
+      color:#fff
+    }
+    .social-overlay strong{font-size:18px}.social-overlay span{display:block;font-size:12px}
+
+    /* CTA */
+    .contact-cta{
+      padding:28px;border-radius:20px;background:linear-gradient(135deg,var(--blue),#11a5dc);
+      color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;
+      margin-top:30px
+    }
+    .contact-cta h3{margin:0 0 5px;font-size:23px}.contact-cta p{margin:0;color:#e6f8ff;font-size:13px}
+
+    /* FOOTER */
+    footer{background:#073d69;color:#d8edf9}
+    .footer-main{padding:55px 0 35px}
+    .footer-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr 1.25fr;gap:35px}
+    footer h3{color:#fff;margin:0 0 14px;font-size:16px}
+    footer p,footer li{font-size:13px;color:#b8d6e7}
+    footer ul{padding:0;margin:0;list-style:none}
+    footer li{margin:7px 0}
+    .footer-logo{color:#fff;margin-bottom:12px}
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.12);padding:17px 0;
+      font-size:12px;color:#9fc3d8;display:flex;justify-content:space-between;gap:15px
+    }
+
+    /* FLOATING BUTTONS */
+    .floating{
+      position:fixed;right:18px;bottom:18px;z-index:900;display:flex;flex-direction:column;gap:10px
+    }
+    .float-btn{
+      width:50px;height:50px;border-radius:50%;display:grid;place-items:center;
+      color:#fff;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.2);font-size:13px
+    }
+    .call{background:#0c9b57}.zalo{background:#0876c9}
+
+    /* MOBILE NAV */
+    @media(max-width:900px){
+      .nav-links{
+        position:absolute;top:82px;left:16px;right:16px;
+        display:none;flex-direction:column;align-items:stretch;
+        padding:10px;background:#fff;border:1px solid var(--border);
+        border-radius:14px;box-shadow:var(--shadow)
+      }
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px 14px}
+      .menu-btn{display:block}
+      .nav-cta{text-align:center}
+      .news-grid{grid-template-columns:1fr}
+      .news-list{grid-template-columns:1fr 1fr}
+      .ad-track .ad-card{flex-basis:calc((100% - 18px)/2)}
+      .social-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:600px){
+      .container{width:min(var(--container),calc(100% - 22px))}
+      section{padding:48px 0}
+      .nav{min-height:68px}
+      .nav-links{top:72px}
+      .logo{font-size:21px}.logo-mark{width:37px;height:37px}
+      .hero-slide{aspect-ratio:4/5}
+      .hero-overlay{background:linear-gradient(0deg,rgba(2,48,84,.78),rgba(2,48,84,.05))}
+      .hero-copy{align-self:end;padding-bottom:42px}
+      .hero-copy h1{font-size:29px}
+      .hero-copy p{font-size:13px}
+      .slider-arrow{width:38px;height:38px;font-size:20px}
+      .section-head{align-items:flex-start}
+      .section-head h2{font-size:23px}
+      .view-all{display:none}
+      .news-list{grid-template-columns:1fr}
+      .news-item{grid-template-columns:86px 1fr}
+      .product-card{flex-basis:78%}
+      .ad-track .ad-card{flex-basis:46%}
+      .service-card{flex-basis:88%}
+      .social-grid{gap:10px}
+      .social-overlay{padding:12px}
+      .social-overlay strong{font-size:14px}
+      .social-overlay span{font-size:10px}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column}
+      .contact-cta{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top" aria-label="EYEMEDI">
+        <span class=""></span>
+        <span>EYEMEDI<small>elevate your style</small></span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Mở menu">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#top">Trang chủ</a>
+        <a href="#news">Tin tức</a>
+        <a href="#products">Sản phẩm</a>
+        <a href="#services">Dịch vụ</a>
+        <a href="#social">Kết nối</a>
+        <a class="nav-cta" href="tel:0967190005">☎ 0967 190 005</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO  SLIDES -->
+    <section class="hero" style="padding:0">
+      <div class="hero-slider" id="heroSlider">
+        <div class="hero-track" id="heroTrack">
+
+          <a class="hero-slide" href="#products">
+            <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1800&q=85" alt="Kính mắt EYEMEDI">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <h1></h1>
+              <p></p>
+              <span class="https://eyemedi/san-pham.html"></span>
+            </div></div>
+          </a>
+
+          <a class="hero-slide" href="#services">
+            <img src="https://images.unsplash.com/photo-1556306535-38febf6782e7?auto=format&fit=crop&w=1800&q=85" alt="Đo mắt">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <div class="eyebrow">DỊCH VỤ</div>
+              <h1>Đo mắt & tư vấn kính chuyên nghiệp</h1>
+              <p>Quy trình tư vấn rõ ràng, hỗ trợ lựa chọn giải pháp phù hợp nhu cầu sử dụng.</p>
+              <span class="btn btn-light">Xem dịch vụ →</span>
+            </div></div>
+          </a>
+
+          <a class="hero-slide" href="#products">
+            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1800&q=85" alt="Tròng kính">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <div class="eyebrow">LENS COLLECTION</div>
+              <h1>Tròng kính hiện đại cho cuộc sống số</h1>
+              <p>Bảo vệ thị lực, tối ưu trải nghiệm nhìn trong học tập, công việc và lái xe.</p>
+              <span class="btn btn-light">Xem bộ sưu tập →</span>
+            </div></div>
+          </a>
+
+          <a class="hero-slide" href="#products">
+            <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1800&q=85" alt="Gọng kính">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <div class="eyebrow">FRAME COLLECTION</div>
+              <h1>Gọng kính tinh tế – Phù hợp từng khuôn mặt</h1>
+              <p>Từ phong cách thanh lịch đến trẻ trung, hiện đại và cá tính.</p>
+              <span class="btn btn-light">Xem gọng kính →</span>
+            </div></div>
+          </a>
+
+          <a class="hero-slide" href="#services">
+            <img src="https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1800&q=85" alt="Kính đa tròng">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <div class="eyebrow">VISION SOLUTIONS</div>
+              <h1>Giải pháp thị lực dành cho mọi độ tuổi</h1>
+              <p>Tư vấn kính đa tròng và các giải pháp thị lực theo nhu cầu cá nhân.</p>
+              <span class="btn btn-light">Tìm hiểu thêm →</span>
+            </div></div>
+          </a>
+
+          <a class="hero-slide" href="tel:0967190005">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1800&q=85" alt="EYEMEDI showroom">
+            <div class="hero-overlay"><div class="container hero-copy">
+              <div class="eyebrow">EYEMEDI SHOWROOM</div>
+              <h1>Đến EYEMEDI để được tư vấn trực tiếp</h1>
+              <p>Liên hệ để được hỗ trợ về sản phẩm, dịch vụ và lịch tư vấn.</p>
+              <span class="btn btn-light">Gọi EYEMEDI →</span>
+            </div></div>
+          </a>
+
+        </div>
+        <button class="slider-arrow prev" id="heroPrev" aria-label="Slide trước">‹</button>
+        <button class="slider-arrow next" id="heroNext" aria-label="Slide tiếp">›</button>
+        <div class="dots" id="heroDots"></div>
+      </div>
+    </section>
+
+ <!SẢN PHẨM HÀNG 1 html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sản phẩm giảm giá</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#fff;
+}
+
+.container{
+    max-width:1600px;
+    margin:50px auto;
+    padding:0 20px;
+}
+
+/* Tiêu đề */
+
+.title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.title h2{
+    font-size:52px;
+    font-weight:400;
+    color:#222;
+}
+
+.title span{
+    font-size:45px;
+    margin-right:15px;
+}
+
+.line{
+    width:180px;
+    height:2px;
+    background:#d8c7a2;
+    margin:20px auto;
+}
+
+/* Danh sách */
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:40px;
+
+}
+
+.product{
+
+    position:relative;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+}
+
+.product:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.sale{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    font-size:15px;
+
+    letter-spacing:4px;
+
+    font-weight:600;
+
+}
+
+.image{
+
+    height:380px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.image img{
+
+    max-height:320px;
+
+    transition:.35s;
+
+}
+
+.product:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.name{
+
+    font-size:22px;
+
+    line-height:1.45;
+
+    margin-top:20px;
+
+    color:#333;
+
+    min-height:70px;
+
+}
+
+.price{
+
+    margin-top:15px;
+
+    font-size:20px;
+
+}
+
+.old{
+
+    color:#444;
+
+    text-decoration:line-through;
+
+}
+
+.new{
+
+    color:#e60000;
+
+    font-weight:700;
+
+    margin-left:10px;
+
+}
+
+.buy{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:10px 28px;
+
+    background:#111;
+
+    color:#fff;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.buy:hover{
+
+    background:#d4a017;
+
+}
+
+@media(max-width:1200px){
+
+.products{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.products{
+
+grid-template-columns:1fr;
+
+}
+
+.title h2{
+
+font-size:34px;
+
+}
+
+.image{
+
+height:280px;
+
+}
+
+.image img{
+
+max-height:220px;
+
+}
+
+.name{
+
+font-size:18px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">
+
+<h2>
+
+Luxury Lens 
+
+</h2>
+
+<div class="line"></div>
+
+</div>
+
+<div class="products">
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="clearlens.jpg" alt="zoom">
+</div>
+<div class="name">
+Clear Lens cận đơn
+</p>1 hộp (32 chiếc)
+</div>
+Độ cận từ -0.50 đến -16.00D
+</p> Độ viễn từ +8.00 đến +0.00
+</p> DIA: 14.4  - B.C: 8.6
+<div class="price">
+<span class="old">1.250.000đ</span>
+<span class="new">950.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="First Make.jpg" alt="">
+</div>
+
+<div class="name">
+First Make Brown
+</p> 1 hộp (10 chiếc)
+</div>
+Lens màu nâu tự nhiên
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">6.50.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="Sheer Make.jpg" alt="">
+</div>
+<div class="name">
+Sheer Make Gray
+</p> 1 hộp (10 chiếc)
+</div>
+Lens màu xám có vân tia
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">650.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="Sweetie Make.jpg" alt="">
+</div>
+
+<div class="name">
+Sweetie Make Choco
+</p> 1 hộp (10 chiếc)
+</div>
+Màu nâu choco tự nhiên
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">650.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="lenscanloan.png" alt="">
+</div>
+
+<div class="name">
+Clear Lens CẬN - LOẠN
+</p> 1 hộp (32 chiếc)
+</div>
+Độ cận từ -0.50 đến -16.00D
+</p>Độ viễn từ +8.00 đến +0.00
+</p>Độ loạn -0.75; -1.25; -1.75; -2.25
+</p>Trục loạn 20; 90; 160; 180
+<div class="price">
+<span class="old"> 1.250.000đ</span>
+<span class="new">950.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="Natural Make.jpg" alt="">
+</div>
+
+<div class="name">
+Natrural Make Black
+</p> 1 hộp (10 chiếc)
+</div>
+Màu đen tự nhiên
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">650.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="Rich Make.jpg" alt="">
+</div>
+
+<div class="name">
+Rich Make Brown
+</p> 1 hộp (10 chiếc)
+</div>
+Màu nâu vân hình
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">650.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+<div class="product">
+
+<div class="sale"></div>
+
+<div class="image">
+<img src="Base Make.jpg" alt="">
+</div>
+
+<div class="name">
+Base Make Choco
+</p> 1 hộp (10 chiếc)
+</div>
+Màu nâu nâu vân tia
+</p>Độ cận từ -0.50 đến -12.00D
+</p>Độ viễn từ +3.00 đến +0.00
+<div class="price">
+<span class="old">650.000đ</span>
+<span class="new">550.000đ</span>
+</div>
+
+<a href="zalo.me/0967190005" class="buy">Đặt mua</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
+   
+<!-- SQUARE ADS 16 COLUMNS -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-title-line"><h2>Sản phẩm mới</h2></div>
+            <p>Các mẫu mới được cập nhật tại EYEMEDI.</p>
+          </div>
+          <div class="carousel-controls">
+            <button class="circle-btn" data-scroll="adsTrack" data-dir="-1">‹</button>
+            <button class="circle-btn" data-scroll="adsTrack" data-dir="1">›</button>
+          </div>
+        </div>
+
+        <div class="horizontal-track ad-track" id="adsTrack">
+          <a class="ad-card" href="#"><img src="trongzinmi.jpg"alt="Tròng kính đổi màu"></a>
+          <a class="ad-card" href="#"><img src="lenscanloan.png" alt="Kính áp tròng cận loạn"></a>
+          <a class="ad-card" href="#"><img src="hopdungmatkinh.jpg" alt="Hộp đựng mắt kính"></a>
+          <a class="ad-card" href="#"><img src="kinhmatnu.jpg" alt="Quảng cáo 4"></a>
+        
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="services" class="soft-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-title-line"><h2>Dịch vụ & trải nghiệm</h2></div>
+            <p>Hình ảnh dịch vụ, không gian và trải nghiệm khách hàng.</p>
+          </div>
+          <div class="carousel-controls">
+            <button class="circle-btn" data-scroll="serviceTrack" data-dir="-1">‹</button>
+            <button class="circle-btn" data-scroll="serviceTrack" data-dir="1">›</button>
+          </div>
+        </div>
+
+        <div class="horizontal-track" id="serviceTrack">
+          <a class="service-card" href="#"><img src="trainghiemdomat.jpg" alt="Đo mắt"><div class="service-overlay"><h3>Đo mắt & tư vấn thị lực</h3></div></a>
+          <a class="service-card" href="#"><img src="tuvan.jpg" alt="Tư vấn kính"><div class="service-overlay"><h3>Tư vấn lựa chọn kính</h3></div></a>
+          <a class="service-card" href="#"><img src="khachhang.jpg" alt="Khách hàng"><div class="service-overlay"><h3>Trải nghiệm khách hàng</h3></div></a>
+          <a class="service-card" href="#"><img src="phothutuong.jpg"><div class="service-overlay"><h3>Không gian EYEMEDI</h3></div></a>
+          <a class="service-card" href="#"><img src="thietbi.jpg" alt="Thiết bị"><div class="service-overlay"><h3>Thiết bị đo mắt hiện đại</h3></div></a>
+        </div>
+
+        <div class="contact-cta">
+          <div><h3>Cần tư vấn về mắt kính & tròng kính cận?</h3><p>Hãy đến EYEMEDI để được hỗ trợ tốt nhất về thị lực mắt kính & tròng kính.</p></div>
+          <a class="btn btn-light" href="tel:0967190005">☎ 0967 190 005</a>
+        </div>
+      </div>
+    </section>
+
+ <!-- NEWS -->
+    <section id="news">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-title-line"><h2>Tin tức & kiến thức</h2></div>
+            <p>Cập nhật thông tin, kiến thức hữu ích về y khoa, Bác sĩ giỏi.</p>
+          </div>
+          <a class="view-all" href="#">Xem tất cả →</a>
+        </div>
+
+        <div class="news-grid">
+          <a class="featured-news" href="https://eyemedi.vn/bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm.html">
+            <div class="thumb">
+              <img src="bsnguyenduytri.jpg" alt="Tin tức nổi bật">
+            </div>
+            <div class="featured-body">
+              <span class="category">Kiến thức y khoa</span>
+              <h3>BS.CKII Nguyễn Duy Trì – Chuyên gia Y học hạt nhân trong điều trị ung bướu</h3>
+              <p>Bác sĩ Nguyễn Duy Trì là chuyên gia có thâm niên trong lĩnh vực tầm soát, chẩn đoán và điều trị các bệnh lý khối u, đặc biệt chuyên sâu về các bệnh lý tuyến giáp, tuyến vú....</p>
+            </div>
+          </a>
+
+          <div class="news-list">
+            <a class="news-item" href="https://eyemedi.vn/bac-si-phau-thuat-tham-my-quan-10-tphcm.html"><div class="thumb"><img src="drdacquang1.jpg" alt=""></div><div><span class="category">BS Thẩm mỹ</span><h4>Bác sĩ phẫu thuật Thẩm giỏi có phòng khám tại Quận 10 uy tín, đầy đủ giấy phép.</h4><p>Bác sĩ Thẩm Mỹ CK2: Trần Đắc Quang - Phòng khám 366 Cao Thắng, Phường 12, Quận 10, TPHCM</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay.html"><div class="thumb"><img src="trongzinmi.jpg" alt=""></div><div><span class="category">Tròng kính cận</span><h4>Cách chọn tròng kính nhiều công dụng</h4><p>Tròng kính đổi màu chống UV, ASX</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/bac-si-kham-mat-gioi-o-tphcm.html"><div class="thumb"><img src="" alt="bsbuiquangtuan.jpg"></div><div><span class="category">Bác sĩ mắt</span><h4>Bác sĩ khám mắt giỏi và uy tín ở TPHCM</h4><p>Khám và điều trị các bệnh nội khoa về mắt: Viêm kết giác mạc, Bệnh lý đáy mắt</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/top-5-dia-chi-cat-trong-kinh-can-vien-loan-uy-tin-tai-tp-hcm.html"><div class="thumb"><img src="kiemtrathiluc.jpg" alt=""></div><div><span class="category">Optic Store</span><h4>Địa chỉ đo mắt cắt kính cận tại TPHCM</h4><p>Chọn đúng để chăm sóc thị lực của bạn.</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/kinh-xuyen-dem.html"><div class="thumb"><img src="8602.jpg" alt=""></div><div><span class="category">Kính xuyên đêm</span><h4>Hỗ trợ lái xe đêm</h4><p>Chống chói đèn, nhìn rõ đuồng đêm</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm.html"><div class="thumb"><img src="lenscanloan.png" alt=""></div><div><span class="category">Kính áp tròng</span><h4>Địa chỉ bán lens mắt uy tín</h4><p>Nhiều mẫu lens mới cao cấp</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/che-do-bao-hanh.html"><div class="thumb"><img src="baohanhgong.webp" alt=""></div><div><span class="category">Chế độ bảo hành</span><h4>Công nghệ đo mắt hiện đại</h4><p>Tối ưu hóa quá trình tư vấn.</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/dat-lich-do-mat.html"><div class="thumb"><img src="eyemedi1.jpg" alt=""></div><div><span class="category">EYEMEDI</span><h4>Không gian trải nghiệm tại EYEMEDI</h4><p>Khám phá showroom của chúng tôi.</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/dat-lich-do-mat.html"><div class="thumb"><img src="tuvan.jpg" alt=""></div><div><span class="category">Dịch vụ</span><h4>Quy trình tư vấn kính tại EYEMEDI</h4><p>Minh bạch, tận tâm và cá nhân hóa.</p></div></a>
+
+            <a class="news-item" href="https://eyemedi.vn/phu-kien-mat-kinh"><div class="thumb"><img src="phukienmatkinh.jpg" alt=""></div><div><span class="category">Phụ kiện</span><h4>Kính mắt – phụ kiện của phong cách</h4><p>Chọn kính để hoàn thiện diện mạo.</p></div></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+ <!-- SQUARE ADS 10 COLUMNS -->
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-title-line"><h2>Thương hiệu liên kết</h2></div>
+            <p>Các thương hiệu đồng hành với EYEMEDI.</p>
+          </div>
+          <div class="carousel-controls">
+            <button class="circle-btn" data-scroll="adsTrack" data-dir="-1">‹</button>
+            <button class="circle-btn" data-scroll="adsTrack" data-dir="1">›</button>
+          </div>
+        </div>
+
+        <div class="horizontal-track ad-track" id="adsTrack">
+          <a class="ad-card" href="https://fininvest.vn/mo-tai-khoan-chung-khoan-ekyc-kbsv.html"><img src="motaikhoan.png"alt="Hướng dẫn đầu tư"></a>
+          <a class="ad-card" href="https://sihylens.vn"><img src="sihy.jpg" alt="Luxury Contact Lens"></a>
+          <a class="ad-card" href="https://drdacquang.com/"><img src="drdacquang2.jpg" alt="Bác sĩ thẩm mỹ"></a>
+          <a class="ad-card" href="https://ungbuoumedilabo.vn/"><img src="phongkhammedilabo.jpg" alt="Phòng khám ung bướu"></a>
+         
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SOCIAL + MAP -->
+    <section id="social">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-title-line"><h2>Kết nối với EYEMEDI</h2></div>
+            <p>Theo dõi, liên hệ và tìm đường đến showroom.</p>
+          </div>
+        </div>
+
+        <div class="social-grid">
+          <a class="social-card" href="https://www.facebook.com/eyemedioptic" target="_blank" rel="noopener">
+            <img src="facebook.png" alt="Facebook EYEMEDI">
+            <div class="social-overlay"><div><strong>Facebook</strong><span>Tư vấn nhanh</span></div></div>
+          </a>
+          <a class="social-card" href="https://www.tiktok.com/eyemedi.optic" target="_blank" rel="noopener">
+            <img src="tiktok.png" alt="TikTok EYEMEDI">
+            <div class="social-overlay"><div><strong>TikTok</strong><span>Xem video mới</span></div></div>
+          </a>
+          <a class="social-card" href="shopee.vn/shop/1839583008" target="_blank" rel="noopener">
+            <img src="shopee.jpg" alt="Zalo EYEMEDI">
+            <div class="social-overlay"><div><strong>Zalo</strong><span>Mua liền tay</span></div></div>
+          </a>
+          <a class="social-card" href="https://maps.app.goo.gl/hQ9BKNU5FiNXPLH96"_blank" rel="noopener">
+            <img src="googlemaps.png" alt="Google Maps EYEMEDI">
+            <div class="social-overlay"><div><strong>Google Maps</strong><span>Chỉ đường đến EYEMEDI</span></div></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-main">
+      <div class="footer-grid">
+        <div>
+          <div class="logo footer-logo"><span class="logo-mark">E</span><span>EYEMEDI<small>elevate your style</small></span></div>
+          <p>EYEMEDI hướng đến trải nghiệm chăm sóc thị lực chuyên nghiệp, minh bạch và tận tâm.</p>
+          <p><strong>5T:</strong> Tinh tế • Tận tâm • Trách nhiệm • Trung thực • Thấu hiểu</p>
+        </div>
+
+        <div>
+          <h3>Sản phẩm</h3>
+          <ul>
+            <li><a href="#">Gọng kính</a></li>
+            <li><a href="#">Tròng kính</a></li>
+            <li><a href="#">Kính mát</a></li>
+            <li><a href="#">Contact Lens</a></li>
+            <li><a href="#">Phụ kiện</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Dịch vụ</h3>
+          <ul>
+            <li><a href="#">Đo mắt</a></li>
+            <li><a href="#">Tư vấn kính</a></li>
+            <li><a href="#">Cắt kính</a></li>
+            <li><a href="#">Kính đa tròng</a></li>
+            <li><a href="#">Chăm sóc kính</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Liên hệ</h3>
+          <p><strong>Địa chỉ 1: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</p>
+	   <p><strong>Địa chỉ 2: 634 Cách Mạng Tháng 8, Phường Nhiêu Lộc, TP. Hồ Chí Minh</p>
+	   <p><strong>Địa chỉ 3: 49B Nguyễn Thông, Phường Nhiêu Lộc, TP. Hồ Chí Minh</p>
+          <p><strong>Hotline: <a href="tel:0967190005">0967 190 005</a></p>
+          <p><strong>Giờ làm việc: 08:30 – 21:30 hằng ngày</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© 2026 EYEMEDI. All rights reserved.</span>
+      <span>Kính gọng • Tròng kính & Contact Lens • Chăm sóc thị lực mắt </span>
+    </div>
+  </footer>
+
+  <!-- FLOATING CONTACT -->
+  <div class="floating">
+    <a class="float-btn call" href="m.me/eyemedioptic" aria-label="Gọi EYEMEDI">⚡️</a>
+    <a class="float-btn zalo" href="https://zalo.me/0967190005" target="_blank" rel="noopener" aria-label="Zalo EYEMEDI">Zalo</a>
+  </div>
+
+  <script>
+    /* =========================
+       MOBILE MENU
+    ========================== */
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      menuBtn.textContent = navLinks.classList.contains('open') ? '×' : '☰';
+    });
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    /* =========================
+       HERO SLIDER
+    ========================== */
+    const heroTrack = document.getElementById('heroTrack');
+    const heroSlides = [...heroTrack.children];
+    const heroDots = document.getElementById('heroDots');
+    let heroIndex = 0;
+    let heroTimer;
+
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Đến slide ' + (i + 1));
+      dot.addEventListener('click', () => goHero(i));
+      heroDots.appendChild(dot);
+    });
+
+    function goHero(index){
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+      [...heroDots.children].forEach((d,i)=>d.classList.toggle('active', i === heroIndex));
+      restartHero();
+    }
+    function nextHero(){goHero(heroIndex + 1)}
+    function prevHero(){goHero(heroIndex - 1)}
+    function restartHero(){
+      clearInterval(heroTimer);
+      heroTimer = setInterval(nextHero, 5000);
+    }
+    document.getElementById('heroNext').addEventListener('click', nextHero);
+    document.getElementById('heroPrev').addEventListener('click', prevHero);
+    restartHero();
+
+    /* =========================
+       GENERIC HORIZONTAL SCROLL
+    ========================== */
+    document.querySelectorAll('[data-scroll]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const track = document.getElementById(btn.dataset.scroll);
+        const amount = track.clientWidth * 0.75 * Number(btn.dataset.dir);
+        track.scrollBy({left:amount, behavior:'smooth'});
+      });
+    });
+
+    /* =========================
+       TOUCH SWIPE FOR HERO
+    ========================== */
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const heroSlider = document.getElementById('heroSlider');
+
+    heroSlider.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive:true});
+
+    heroSlider.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const distance = touchEndX - touchStartX;
+      if(Math.abs(distance) > 50){
+        distance < 0 ? nextHero() : prevHero();
+      }
+    }, {passive:true});
+
+    /* =========================
+       PAUSE HERO ON HOVER
+    ========================== */
+    heroSlider.addEventListener('mouseenter', () => clearInterval(heroTimer));
+    heroSlider.addEventListener('mouseleave', restartHero);
+
+    /* =========================
+       SIMPLE REVEAL ANIMATION
+    ========================== */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.08});
+
+    document.querySelectorAll('.featured-news,.news-item,.product-card,.ad-card,.service-card,.social-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = 'opacity .55s ease, transform .55s ease';
+      observer.observe(el);
+    });
+
+    /* =========================
+       PREVENT BROKEN DEMO LINKS
+       ========================== */
+    document.querySelectorAll('a[href="#"]').forEach(a => {
+      a.addEventListener('click', e => e.preventDefault());
+    });
+  </script>
+</body>
+</html>
