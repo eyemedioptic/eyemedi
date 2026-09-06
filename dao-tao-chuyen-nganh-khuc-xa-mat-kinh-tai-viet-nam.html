@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Optometry Academy | Đào tạo Khúc xạ - Nhãn kính - Kính áp tròng</title>
+  <meta name="description" content="Chương trình đào tạo chuyên sâu: đo khúc xạ thị lực, kỹ thuật mài lắp & định tâm tròng kính, kỹ thuật kính áp tròng." />
+  <style>
+    :root{
+      --navy:#082f5b;
+      --navy2:#0d477f;
+      --blue:#1c77c3;
+      --gold:#d2a446;
+      --light:#f4f8fc;
+      --text:#16324f;
+      --muted:#66788a;
+      --white:#fff;
+      --shadow:0 18px 50px rgba(8,47,91,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1160px,92%);margin:auto}
+    .topbar{
+      background:var(--navy);color:#dbe9f7;font-size:14px;padding:8px 0
+    }
+    .topbar .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    header{
+      position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);border-bottom:1px solid #e8eef5;
+    }
+    nav{display:flex;align-items:center;justify-content:space-between;min-height:76px;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;color:var(--navy);letter-spacing:.2px}
+    .logo{
+      width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(145deg,var(--navy),var(--blue));color:white;
+      box-shadow:0 8px 20px rgba(8,47,91,.22);font-size:22px;border:2px solid #e6c66f
+    }
+    .brand small{display:block;font-weight:600;color:var(--gold);font-size:11px;letter-spacing:2px}
+    .navlinks{display:flex;gap:24px;align-items:center;font-size:15px;font-weight:700}
+    .navlinks a:hover{color:var(--blue)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:13px 20px;border-radius:999px;font-weight:800;border:0;cursor:pointer;
+      transition:.2s ease;
+    }
+    .btn-primary{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;box-shadow:0 10px 24px rgba(28,119,195,.24)}
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-outline{border:1.5px solid #c9d8e7;background:white;color:var(--navy)}
+    .hero{
+      overflow:hidden;position:relative;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(28,119,195,.18), transparent 35%),
+        radial-gradient(circle at 10% 90%, rgba(210,164,70,.15), transparent 25%),
+        linear-gradient(180deg,#fafdff 0%,#eef6fd 100%);
+      padding:86px 0 70px;
+    }
+    .hero::after{
+      content:"";position:absolute;right:-130px;top:30px;width:520px;height:520px;border-radius:50%;
+      border:1px solid rgba(28,119,195,.15);box-shadow:0 0 0 70px rgba(28,119,195,.04),0 0 0 140px rgba(28,119,195,.025)
+    }
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;position:relative;z-index:1}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;
+      background:white;border:1px solid #dbe7f3;color:var(--navy2);font-weight:800;font-size:13px
+    }
+    h1{font-size:clamp(38px,5vw,68px);line-height:1.05;margin:18px 0 22px;color:var(--navy);letter-spacing:-2px}
+    h1 span{color:var(--blue)}
+    .hero p{font-size:19px;color:#526a82;max-width:700px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .hero-points{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+    .hero-point{
+      background:rgba(255,255,255,.82);border:1px solid #dce9f4;border-radius:16px;padding:14px;
+      font-weight:800;color:var(--navy);font-size:14px
+    }
+    .visual{
+      position:relative;min-height:470px;display:grid;place-items:center
+    }
+    .eye-card{
+      width:390px;max-width:100%;aspect-ratio:1/1;border-radius:42px;
+      background:linear-gradient(145deg,#fff,#e8f2fa);box-shadow:var(--shadow);
+      display:grid;place-items:center;position:relative;border:1px solid #d8e7f3
+    }
+    .eye{
+      width:245px;height:145px;border:13px solid var(--navy);border-radius:55% 45% 55% 45% / 50% 50% 50% 50%;
+      transform:rotate(-2deg);position:relative;background:#fff;
+    }
+    .iris{
+      width:112px;height:112px;border-radius:50%;position:absolute;left:50%;top:50%;
+      transform:translate(-50%,-50%);background:
+      radial-gradient(circle,#061b33 0 17%,#4db4e7 18% 33%,#1766a4 34% 58%,#092f5b 59% 100%);
+      box-shadow:inset 0 0 0 8px rgba(255,255,255,.12)
+    }
+    .scan,.scan:before,.scan:after{position:absolute;border-radius:50%;border:2px solid rgba(28,119,195,.5)}
+    .scan{width:170px;height:170px;left:50%;top:50%;transform:translate(-50%,-50%)}
+    .scan:before{content:"";width:120px;height:120px;left:23px;top:23px}
+    .scan:after{content:"";width:60px;height:60px;left:53px;top:53px}
+    .float-card{
+      position:absolute;background:white;border:1px solid #dce8f2;border-radius:16px;padding:14px 16px;
+      box-shadow:0 15px 35px rgba(8,47,91,.13);font-weight:800;color:var(--navy);font-size:14px
+    }
+    .fc1{left:-8px;top:55px}.fc2{right:-10px;bottom:68px}.fc3{left:36px;bottom:18px}
+    section{padding:84px 0}
+    .section-head{text-align:center;max-width:780px;margin:0 auto 42px}
+    .kicker{color:var(--gold);font-weight:900;letter-spacing:1.8px;text-transform:uppercase;font-size:13px}
+    h2{font-size:clamp(30px,4vw,46px);line-height:1.15;color:var(--navy);margin:10px 0 14px}
+    .section-head p{color:var(--muted);font-size:17px}
+    .tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .track{
+      background:white;border:1px solid #e0eaf3;border-radius:var(--radius);padding:28px;box-shadow:0 12px 36px rgba(8,47,91,.06);
+      position:relative;overflow:hidden
+    }
+    .track:before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+    .icon{
+      width:58px;height:58px;border-radius:18px;background:#eef6fd;display:grid;place-items:center;
+      font-size:29px;margin-bottom:18px
+    }
+    .track h3{margin:0 0 10px;color:var(--navy);font-size:23px}
+    .track p{color:var(--muted)}
+    .track ul{padding-left:18px;color:#41566c}
+    .track li{margin:8px 0}
+    .curriculum{background:var(--light)}
+    .curr-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start}
+    .panel{background:white;border-radius:var(--radius);padding:30px;border:1px solid #dfeaf3;box-shadow:var(--shadow)}
+    .panel h3{font-size:28px;color:var(--navy);margin-top:0}
+    .module{
+      display:flex;gap:16px;padding:18px 0;border-bottom:1px dashed #d6e2ec
+    }
+    .module:last-child{border-bottom:0}
+    .num{
+      flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:900
+    }
+    .module b{color:var(--navy);display:block;margin-bottom:4px}
+    .module span{color:var(--muted);font-size:14px}
+    .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:18px}
+    .stat{background:#f7fbff;border:1px solid #dce9f4;padding:20px;border-radius:16px}
+    .stat strong{font-size:30px;color:var(--blue);display:block}
+    .why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .why-item{padding:22px;border-radius:18px;background:#fff;border:1px solid #e3ebf3;text-align:center}
+    .why-item .icon{margin:0 auto 12px}
+    .why-item b{color:var(--navy)}
+    .cta{
+      background:linear-gradient(135deg,#082f5b,#0d477f 55%,#1c77c3);color:white;position:relative;overflow:hidden
+    }
+    .cta .container{display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}
+    .cta h2{color:white}
+    .cta p{color:#d7e7f6}
+    .form{
+      background:white;color:var(--text);padding:28px;border-radius:24px;box-shadow:0 25px 60px rgba(0,0,0,.18)
+    }
+    .form h3{margin-top:0;color:var(--navy)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    input,select,textarea{
+      width:100%;padding:13px 14px;border:1px solid #cfdae5;border-radius:12px;font:inherit;outline:none;background:#fbfdff
+    }
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,119,195,.09)}
+    textarea{min-height:95px;resize:vertical}
+    .field{margin-bottom:12px}
+    footer{background:#051f3a;color:#aac0d5;padding:34px 0}
+    .footer-grid{display:flex;justify-content:space-between;gap:22px;align-items:center;flex-wrap:wrap}
+    .footer-grid b{color:#fff}
+    .mobile-toggle{display:none;font-size:26px;background:transparent;border:0;color:var(--navy)}
+    @media(max-width:900px){
+      .hero-grid,.curr-grid,.cta .container{grid-template-columns:1fr}
+      .tracks{grid-template-columns:1fr}
+      .why{grid-template-columns:repeat(2,1fr)}
+      .visual{min-height:400px}
+      .navlinks{display:none}
+      .mobile-toggle{display:block}
+    }
+    @media(max-width:620px){
+      .hero{padding-top:58px}
+      .hero-points{grid-template-columns:1fr}
+      .why{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+      .topbar .container{justify-content:center;text-align:center}
+      h1{letter-spacing:-1px}
+      .eye-card{width:330px}
+      .fc1{left:0}.fc2{right:0}.fc3{left:20px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div>🎓 Đào tạo thực hành chuyên sâu ngành Khúc xạ – Nhãn kính – Kính áp tròng</div>
+      <div>📍 TP. Hồ Chí Minh &nbsp; • &nbsp; 📞 0967 190005</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a class="brand" href="#home">
+          <span class="logo">◉</span>
+          <span>OPTOMETRY ACADEMY<small>VISION • OPTICAL • CONTACT LENS</small></span>
+        </a>
+        <div class="navlinks">
+          <a href="#programs">Chương trình</a>
+          <a href="#curriculum">Nội dung học</a>
+          <a href="#why">Lợi ích</a>
+          <a href="#register">Đăng ký</a>
+        </div>
+        <a class="btn btn-primary" href="http://zalo.me/0931877833">Tư vấn khóa học</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">● Chương trình đào tạo chuyên môn thực hành</div>
+          <h1>ĐÀO TẠO <span>KHÚC XẠ & NHÃN KÍNH</span> CHUYÊN SÂU</h1>
+          <p>Trang bị kiến thức nền tảng đến kỹ thuật thực hành chuyên sâu, hướng đến khả năng ứng dụng thực tế trong đo khúc xạ thị lực, mài lắp – định tâm tròng kính và kính áp tròng.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#register">Đăng ký tư vấn</a>
+            <a class="btn btn-outline" href="#programs">Xem chương trình học</a>
+          </div>
+          <div class="hero-points">
+            <div class="hero-point">✓ Học lý thuyết + thực hành</div>
+            <div class="hero-point">✓ Quy trình chuẩn nghề</div>
+            <div class="hero-point">✓ Hướng dẫn trực tiếp</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="eye-card">
+            <div class="eye">
+              <div class="iris"></div>
+              <div class="scan"></div>
+            </div>
+            <div class="float-card fc1">👁 Đo khúc xạ chuyên sâu</div>
+            <div class="float-card fc2">👓 Mài lắp & định tâm chuẩn</div>
+            <div class="float-card fc3">◉ Kiến thức về Contact Lens</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">3 nhóm kỹ năng trọng tâm</div>
+          <h2>Chương trình đào tạo thực hành toàn diện</h2>
+          <p>Tập trung vào năng lực nghề nghiệp có thể ứng dụng ngay trong môi trường cửa hàng kính, trung tâm thị lực và dịch vụ kính áp tròng.</p>
+        </div>
+
+        <div class="tracks">
+          <article class="track">
+            <div class="icon">👁</div>
+            <h3>Đo khúc xạ thị lực chuyên sâu</h3>
+            <p>Hệ thống hóa quy trình khám – đo – phân tích để nâng cao độ chính xác và khả năng tư vấn.</p>
+            <ul>
+              <li>Khúc xạ khách quan & chủ quan</li>
+              <li>Đánh giá cận – viễn – loạn thị</li>
+              <li>Cân bằng thị giác hai mắt</li>
+              <li>Kiểm tra thị lực gần & nhu cầu sử dụng</li>
+              <li>Phân tích kết quả và tư vấn kính phù hợp</li>
+            </ul>
+          </article>
+
+          <article class="track">
+            <div class="icon">⚙️</div>
+            <h3>Mài lắp & định tâm tròng kính</h3>
+            <p>Rèn kỹ năng kỹ thuật từ đo thông số gọng đến hoàn thiện kính đạt yêu cầu thẩm mỹ và quang học.</p>
+            <ul>
+              <li>Đo PD, chiều cao lắp kính</li>
+              <li>Đọc thông số gọng & tròng</li>
+              <li>Block – mài – lắp hoàn thiện</li>
+              <li>Định tâm đơn tròng & đa tròng</li>
+              <li>Kiểm tra sai số, chỉnh kính sau lắp</li>
+            </ul>
+          </article>
+
+          <article class="track">
+            <div class="icon">◉</div>
+            <h3>Kỹ thuật kính áp tròng chuyên sâu</h3>
+            <p>Nắm nguyên tắc lựa chọn, đánh giá độ phù hợp và hướng dẫn sử dụng kính áp tròng an toàn.</p>
+            <ul>
+              <li>Cấu trúc & vật liệu kính áp tròng</li>
+              <li>Thông số DIA, BC, Power</li>
+              <li>Đánh giá độ ôm và di động kính</li>
+              <li>Hướng dẫn đeo – tháo – vệ sinh</li>
+              <li>Nhận diện tình huống cần chuyển khám chuyên khoa</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="curriculum" class="curriculum">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Lộ trình học tập</div>
+          <h2>Từ nền tảng đến thực hành chuyên môn</h2>
+          <p>Nội dung có thể điều chỉnh theo trình độ đầu vào của học viên và mô hình lớp học.</p>
+        </div>
+
+        <div class="curr-grid">
+          <div class="panel">
+            <h3>Phù hợp với</h3>
+            <p>Người đang làm trong ngành kính mắt, chủ cửa hàng kính, nhân viên kỹ thuật, người muốn bổ sung kỹ năng thực hành hoặc phát triển chuyên môn về thị lực và kính áp tròng.</p>
+            <div class="stats">
+              <div class="stat"><strong>03</strong><span>Khối chuyên môn chính</span></div>
+              <div class="stat"><strong>70%</strong><span>Định hướng thực hành</span></div>
+              <div class="stat"><strong>1:1</strong><span>Sửa thao tác theo tình huống</span></div>
+              <div class="stat"><strong>Case</strong><span>Học qua tình huống thực tế</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Nội dung đào tạo đề xuất</h3>
+            <div class="module"><div class="num">01</div><div><b>Nền tảng quang học & thị giác</b><span>Khái niệm khúc xạ, nguyên lý tròng kính, thị lực và nhu cầu nhìn.</span></div></div>
+            <div class="module"><div class="num">02</div><div><b>Quy trình đo khúc xạ thị lực</b><span>Thao tác thiết bị, chủ quan – khách quan, kiểm chứng và ghi đơn kính.</span></div></div>
+            <div class="module"><div class="num">03</div><div><b>Kỹ thuật đo và định tâm</b><span>PD, chiều cao, khoảng cách đỉnh kính, thông số gọng và căn chỉnh.</span></div></div>
+            <div class="module"><div class="num">04</div><div><b>Mài lắp tròng kính</b><span>Quy trình block, mài, lắp, kiểm tra và xử lý lỗi thường gặp.</span></div></div>
+            <div class="module"><div class="num">05</div><div><b>Kính áp tròng</b><span>Lựa chọn thông số, fitting cơ bản, hướng dẫn sử dụng và chăm sóc.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="section-head">
+          <div class="kicker">Giá trị chương trình</div>
+          <h2>Học để làm được – không chỉ học lý thuyết</h2>
+        </div>
+        <div class="why">
+          <div class="why-item"><div class="icon">🎯</div><b>Chuẩn hóa thao tác</b><p>Thực hành theo quy trình rõ ràng, dễ áp dụng.</p></div>
+          <div class="why-item"><div class="icon">🧪</div><b>Thực hành thiết bị</b><p>Rèn kỹ năng đo, mài lắp và kiểm tra thành phẩm.</p></div>
+          <div class="why-item"><div class="icon">🧠</div><b>Phân tích tình huống</b><p>Hiểu nguyên nhân, sai số và cách xử lý phù hợp.</p></div>
+          <div class="why-item"><div class="icon">📈</div><b>Nâng cao chuyên môn</b><p>Tạo nền tảng phát triển nghề nghiệp lâu dài.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="register" class="cta">
+      <div class="container">
+        <div>
+          <div class="kicker" style="color:#f0c85e">Đăng ký tư vấn</div>
+          <h2>Sẵn sàng nâng cao kỹ năng ngành nhãn kính?</h2>
+          <p>Để lại thông tin để nhận tư vấn về lịch học, thời lượng chương trình, học phí và nội dung phù hợp với trình độ hiện tại.</p>
+          <p><b>Hotline:</b> 0967 190005<br><b>Email:</b> daotao.khucxamatkinh@gmail.com<br><b>Khu vực:</b> TP. Hồ Chí Minh</p>
+        </div>
+
+        <form class="form" onsubmit="submitForm(event)">
+          <h3>Nhận thông tin khóa học</h3>
+          <div class="row">
+            <div class="field"><input required name="name" placeholder="Họ và tên" /></div>
+            <div class="field"><input required name="phone" placeholder="Số điện thoại" /></div>
+          </div>
+          <div class="field">
+            <select name="course">
+              <option>Đo khúc xạ thị lực chuyên sâu</option>
+              <option>Mài lắp & định tâm tròng kính</option>
+              <option>Kỹ thuật kính áp tròng</option>
+              <option>Chương trình tổng hợp</option>
+            </select>
+          </div>
+          <div class="field"><textarea name="note" placeholder="Nội dung cần tư vấn thêm"></textarea></div>
+          <button class="btn btn-primary" style="width:100%" type="submit">Gửi đăng ký</button>
+          <div id="msg" style="margin-top:10px;font-size:14px;color:#39735c"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><b>OPTOMETRY ACADEMY</b><br>Đào tạo Khúc xạ • Nhãn kính • Kính áp tròng</div>
+      <div>© 2026. All rights reserved.</div>
+    </div>
+  </footer>
+
+<script>
+function submitForm(e){
+  e.preventDefault();
+  const f = e.target;
+  const name = f.elements.name.value.trim();
+  document.getElementById('msg').textContent = name
+    ? `Cảm ơn ${name}! Thông tin đã được ghi nhận trên giao diện demo.`
+    : 'Cảm ơn bạn! Thông tin đã được ghi nhận.';
+  f.reset();
+}
+</script>
+</body>
+</html>
