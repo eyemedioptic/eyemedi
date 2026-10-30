@@ -7,7 +7,7 @@ header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 
 // 1) BẮT BUỘC đổi chuỗi này thành mật khẩu riêng, dài và khó đoán.
-$SAVE_KEY = 'DOI_MAT_KHAU_NAY_THANH_CHUOI_RIENG_DAI_HON_24_KY_TU';
+$SAVE_KEY = 'Eyemedi123!@#';
 
 // 2) Tên file HTML trang chủ trên hosting. Nếu website dùng tên khác, sửa dòng này.
 $TARGET_FILE = __DIR__ . '/index.html';
