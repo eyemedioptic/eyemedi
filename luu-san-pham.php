@@ -10,7 +10,7 @@ header('Cache-Control: no-store');
 $SAVE_KEY = 'Eyemedi123!@#';
 
 // 2) Tên file HTML trang chủ trên hosting. Nếu website dùng tên khác, sửa dòng này.
-$TARGET_FILE = __DIR__ . '/index.html';
+$TARGET_FILE = __DIR__ . '/san-pham.html';
 
 function reply($status, $message, $extra = []) {
     http_response_code($status);
