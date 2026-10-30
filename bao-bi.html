@@ -1,0 +1,149 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bao Bì Triệu Thảo | Đặt hàng trực tuyến</title><style>:root{--main:#176b48;--bg:#f5f7f5}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#25352d;background:var(--bg)}header{background:white;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:5}.wrap{max-width:1160px;margin:auto;padding:18px}header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:800;font-size:22px;color:var(--main)}button{cursor:pointer;border:0;border-radius:7px;padding:11px 15px;background:var(--main);color:white}.hero{padding:55px 18px;text-align:center;background:linear-gradient(110deg,#dceee3,#fff)}.hero h1{font-size:clamp(26px,4vw,42px);margin:0 0 12px}.hero p{color:#566}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:18px}.product{background:white;border:1px solid #e5e8e5;border-radius:12px;overflow:hidden}.photo{height:210px;background:#e7eee8;display:grid;place-items:center;color:#718278}.photo img{width:100%;height:100%;object-fit:cover}.info{padding:16px}.info h3{margin:0 0 8px}.desc{font-size:14px;color:#667;min-height:35px}.old{text-decoration:line-through;color:#888;font-size:14px}.price{color:#c32d32;font-weight:800;font-size:21px;margin:6px 0 12px}.product button{width:100%}.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:25px}.cart{background:white;padding:18px;border-radius:12px;align-self:start;position:sticky;top:85px}.cart-item{border-bottom:1px solid #eee;padding:12px 0}.cart-item small{color:#666}.qty{display:flex;align-items:center;gap:8px;margin-top:8px}.qty button{padding:5px 10px}.total{font-size:20px;font-weight:bold;margin:20px 0}input,textarea{width:100%;padding:12px;border:1px solid #ccd4ce;border-radius:7px;margin:6px 0 12px;font:inherit}label{font-size:13px;font-weight:600}.submit{width:100%;font-size:16px}.note{font-size:12px;color:#677;margin-top:12px;line-height:1.5}footer{text-align:center;padding:32px;color:#687}@media(max-width:800px){.layout{grid-template-columns:1fr}.cart{position:static}}</style></head><body><header><div class="wrap"><div class="brand">BAO BÌ TRIỆU THẢO</div><a href="#gio-hang">🛒 Giỏ hàng (<span id="count">0</span>)</a></div></header><section class="hero"><h1>Giải pháp bao bì cho doanh nghiệp</h1><p>Chọn sản phẩm và đặt hàng nhanh chóng, thuận tiện.</p><a href="#san-pham"><button>Xem sản phẩm</button></a></section><main class="wrap layout"><section id="san-pham"><h2>Danh mục sản phẩm</h2><p style="color:#667">Danh mục sản phẩm từ website hiện tại. Giá đang chờ cập nhật, vui lòng liên hệ để nhận báo giá.</p><div class="grid" id="products"></div></section><aside class="cart" id="gio-hang"><h2>🛒 Giỏ hàng</h2><div id="cart-items">Chưa có sản phẩm.</div><div class="total">Tổng cộng: <span id="total">0 ₫</span></div><form id="order-form"><h3>Thông tin nhận hàng</h3><label>Họ và tên *</label><input name="name" required maxlength="120"><label>Số điện thoại *</label><input name="phone" required pattern="[0-9+ .()-]{9,20}" title="Nhập số điện thoại hợp lệ"><label>Địa chỉ giao hàng *</label><textarea name="address" required rows="2"></textarea><label>Ghi chú</label><textarea name="note" rows="2"></textarea><button class="submit" type="submit" id="submit">Gửi đơn hàng</button><p id="status" role="status"></p><p class="note">Đơn hàng được gửi qua dịch vụ FormSubmit đến email nhận đơn. Chủ website cần xác nhận email kích hoạt dịch vụ lần đầu. Không thu thập thông tin thanh toán thẻ.</p></form></aside></main><footer>© Bao Bì Triệu Thảo</footer><script>
+// CẬP NHẬT SẢN PHẨM TẠI ĐÂY. Để trống cho tới khi có dữ liệu chính xác từ website cũ.
+const PRODUCTS = [
+  {
+    "id": "sp1",
+    "name": "Túi đựng rác cuộn màu",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp2",
+    "name": "Túi niêm phong dán miệng",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp3",
+    "name": "Túi nước lèo",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp4",
+    "name": "In Catalogue",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp5",
+    "name": "In banner",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp6",
+    "name": "In name card",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp7",
+    "name": "In tem nhãn",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp8",
+    "name": "Túi zip trong suốt",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp9",
+    "name": "Túi bóng mỡ trắng zin",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp10",
+    "name": "Túi zip ghép",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp11",
+    "name": "Bóng mỡ trắng thường",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp12",
+    "name": "Túi xốp 2 ly hồng",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp13",
+    "name": "Túi rác cuộn đen",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp14",
+    "name": "Túi hút chân không",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp15",
+    "name": "Túi zip chỉ đỏ",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp16",
+    "name": "Túi hột xoài",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  },
+  {
+    "id": "sp17",
+    "name": "Túi bóng mỡ",
+    "description": "Liên hệ để xác nhận quy cách, số lượng và báo giá.",
+    "image": "",
+    "price": 0,
+    "salePrice": 0
+  }
+];
+const EMAIL='trieuhoangthao5871@gmail.com';
+const cart={};const money=n=>n>0?new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND'}).format(n):'Liên hệ báo giá';
+function renderProducts(){document.getElementById('products').innerHTML=PRODUCTS.length?PRODUCTS.map(p=>`<article class="product"><div class="photo">${p.image?`<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}">`:'Hình sản phẩm'}</div><div class="info"><h3>${escapeHtml(p.name)}</h3><div class="desc">${escapeHtml(p.description||'')}</div><div class="old">${p.salePrice<p.price?money(p.price):''}</div><div class="price">${money(p.salePrice??p.price)}</div><button onclick="add(${JSON.stringify(p.id).replace(/"/g,'&quot;')})">Thêm vào giỏ hàng</button></div></article>`).join(''):'<p>Chưa có dữ liệu sản phẩm. Vui lòng bổ sung danh mục từ website cũ vào mảng PRODUCTS.</p>'}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function add(id){cart[id]=(cart[id]||0)+1;renderCart()}
+function change(id,n){cart[id]=(cart[id]||0)+n;if(cart[id]<=0)delete cart[id];renderCart()}
+function renderCart(){let total=0,count=0;document.getElementById('cart-items').innerHTML=Object.entries(cart).map(([id,q])=>{const p=PRODUCTS.find(x=>String(x.id)===id);if(!p)return '';total+=(p.salePrice??p.price)*q;count+=q;return `<div class="cart-item"><strong>${escapeHtml(p.name)}</strong><br><small>${money(p.salePrice??p.price)} / sản phẩm</small><div class="qty"><button type="button" onclick='change(${JSON.stringify(id)},-1)'>−</button>${q}<button type="button" onclick='change(${JSON.stringify(id)},1)'>+</button></div></div>`}).join('')||'Chưa có sản phẩm.';document.getElementById('total').textContent=money(total);document.getElementById('count').textContent=count;return total}
+document.getElementById('order-form').addEventListener('submit',async e=>{e.preventDefault();const total=renderCart(),status=document.getElementById('status'),btn=document.getElementById('submit');if(!total){status.textContent='Vui lòng thêm sản phẩm vào giỏ hàng.';return}const data=new FormData(e.target);const lines=Object.entries(cart).map(([id,q])=>{const p=PRODUCTS.find(x=>String(x.id)===id);return `${p.name} | SL: ${q} | Đơn giá: ${money(p.salePrice??p.price)} | Thành tiền: ${money((p.salePrice??p.price)*q)}`});const payload=new FormData();payload.append('_subject','Đơn hàng mới - Bao Bì Triệu Thảo');payload.append('_captcha','true');payload.append('_template','table');payload.append('Khách hàng',data.get('name'));payload.append('Số điện thoại',data.get('phone'));payload.append('Địa chỉ',data.get('address'));payload.append('Ghi chú',data.get('note'));payload.append('Chi tiết đơn hàng',lines.join('\n'));payload.append('Tổng cộng',money(total));btn.disabled=true;status.textContent='Đang gửi đơn hàng...';try{const r=await fetch(`https://formsubmit.co/ajax/${EMAIL}`,{method:'POST',body:payload,headers:{Accept:'application/json'}});const j=await r.json();if(!r.ok||j.success===false||j.success==='false')throw Error('Không gửi được');status.textContent='Đã tiếp nhận yêu cầu gửi đơn. Vui lòng kiểm tra email xác nhận/kích hoạt FormSubmit và hộp thư nhận đơn.';e.target.reset();Object.keys(cart).forEach(k=>delete cart[k]);renderCart()}catch(err){status.textContent='Không thể gửi đơn hàng. Vui lòng thử lại hoặc liên hệ cửa hàng.'}finally{btn.disabled=false}});
+renderProducts();renderCart();</script></body></html>
