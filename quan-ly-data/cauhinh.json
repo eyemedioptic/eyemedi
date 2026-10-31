@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "repo": {
+  "owner": "eyemedioptic",
+  "name": "eyemedi",
+  "branch": "eyemedi.vn"
+ },
+ "site": "https://eyemedi.vn/",
+ "siteName": "EYEMEDI",
+ "token": {
+  "iv": "KOD6yrgp9EonN9oj",
+  "ct": "RrVgBkk4GEVAli8NsJvHbDjtQUU2ypiBmTVZjT0BYeIBxEk5Sl61nk84gpcC5xFu+qMMAFk+AFVY6gVO8AsP5jeAdzKcTCOW6KIu/n1FG7iuwJEEQgsCYbGlb97V7srIlVBD5edlFKkAVBk4iw=="
+ },
+ "lock": {
+  "salt": "49VEfuHck/UCh/WCA3KzqQ==",
+  "iv": "ndUmCTmbyT/OwnnL",
+  "ct": "0nyjd1S/MKfQQ1s1Tn1sB2eq"
+ },
+ "users": [
+  {
+   "u": "eyemedi",
+   "name": "EYEMEDI",
+   "role": "admin",
+   "active": true,
+   "salt": "WKhZwhPn08gfPTQWbhoGLg==",
+   "iv": "+RP5hav27tPF2jzq",
+   "ct": "oAPX0nLKXIU9CR3SaGxWFrsgs8yUWULZaJqHK+FsKMNgcMTFe6KZlQW/GU4onaii"
+  }
+ ],
+ "locks": {},
+ "kw": {},
+ "created": "2026-10-31T15:56:54+07:00"
+}
