@@ -104,7 +104,7 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 .ngan h3 button{border:0;background:none;font-size:24px;cursor:pointer;color:var(--kem)}
 #dsGio{flex:1;overflow:auto;padding:12px 18px}
 .dong{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
-.dong .sl{display:flex;gap:6px;align-items:center}.dong .sl button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--kem);cursor:pointer}
+.dong .tn{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none;border:1px solid var(--line)}.dong .tt{flex:1;display:flex;flex-direction:column;gap:2px;line-height:1.35}.dong .tt b{color:var(--kem);font-weight:600;font-size:14px}.dong .tt small{color:var(--vang);font-weight:600}.tong{margin:14px 0 0;color:var(--mo)}.tong b{color:var(--vang)}.dong .sl{flex:none;display:flex;gap:6px;align-items:center}.dong .sl button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--kem);cursor:pointer}
 .ngan form{padding:16px 18px;border-top:1px solid var(--line);display:grid;gap:8px}
 .gui{border:0;background:var(--vang);color:var(--den);font-weight:700;border-radius:99px;padding:13px;cursor:pointer;font-family:inherit}
 @media(max-width:900px){.hero .wrap.tru{grid-template-columns:repeat(2,1fr)}.hero .wrap,.nq,.dinhvi{grid-template-columns:1fr}.luoi{grid-template-columns:repeat(2,1fr)}.tru,.menu-quan{grid-template-columns:repeat(2,1fr)}.cot{grid-template-columns:1fr}.menu{display:none}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}.gallery figure:first-child{grid-column:span 2}footer .wrap{grid-template-columns:1fr}.btn.vien{margin:10px 0 0}}
@@ -240,14 +240,14 @@ const SAN_PHAM=[
 {id:'hop-qua',anh:'velaro-hop-qua',ten:'Hộp quà VELARO',loai:'Quà tặng',mota:'Set quà cà phê sang trọng cho đối tác, khách hàng và người thân.',gia:0}
 ];
 /* ============================================= */
-const fmt=n=>n>0?n.toLocaleString('vi-VN')+'₫':'Liên hệ';
+const fmt=n=>n>0?n.toLocaleString('vi-VN')+'₫':'Nhận báo giá';
 let loc='Tất cả',gio={};
 function veLoc(){const ds=['Tất cả',...new Set(SAN_PHAM.map(p=>p.loai))];document.getElementById('loc').innerHTML=ds.map(x=>`<button class="${x===loc?'on':''}" onclick="loc='${x}';veLoc();veSP()">${x}</button>`).join('')}
 function veSP(){document.getElementById('luoi').innerHTML=SAN_PHAM.filter(p=>loc==='Tất cả'||p.loai===loc).map(p=>`<article class="sp" id="${p.id}"><div class="anh"><img src="images/${p.anh}.webp" alt="${p.ten}" width="800" height="800" loading="lazy"></div><div class="nd"><span class="nhan">${p.loai}</span><h3>${p.ten}</h3><p>${p.mota}</p><div class="gia">${fmt(p.gia)}</div><button onclick="them('${p.id}')">Thêm vào giỏ</button></div></article>`).join('')}
 function them(id){gio[id]=(gio[id]||0)+1;veGio();moGio()}
 function doi(id,d){gio[id]=(gio[id]||0)+d;if(gio[id]<=0)delete gio[id];veGio()}
 function veGio(){const ids=Object.keys(gio);document.getElementById('dem').textContent=ids.reduce((a,i)=>a+gio[i],0);let tong=0;
-document.getElementById('dsGio').innerHTML=ids.length?ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);tong+=p.gia*gio[i];return `<div class="dong"><span>${p.ten}<br><small>${fmt(p.gia)}</small></span><span class="sl"><button onclick="doi('${i}',-1)">−</button>${gio[i]}<button onclick="doi('${i}',1)">+</button></span></div>`}).join('')+`<p><b>Tạm tính: ${tong>0?fmt(tong):'Liên hệ báo giá'}</b></p>`:'<p>Giỏ hàng trống.</p>'}
+document.getElementById('dsGio').innerHTML=ids.length?ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);tong+=p.gia*gio[i];return `<div class="dong"><img class="tn" src="images/${p.anh}.webp" alt="${p.ten}" width="56" height="56"><span class="tt"><b>${p.ten}</b><small>${p.gia>0?fmt(p.gia):'Nhận báo giá'}</small></span><span class="sl"><button onclick="doi('${i}',-1)" aria-label="Giảm">−</button>${gio[i]}<button onclick="doi('${i}',1)" aria-label="Tăng">+</button></span></div>`}).join('')+`<p class="tong">Tạm tính: <b>${tong>0?fmt(tong):'Nhận báo giá'}</b>${tong>0&&ids.some(i=>!SAN_PHAM.find(x=>x.id===i).gia)?' + sản phẩm nhận báo giá':''}</p>`:'<p>Giỏ hàng trống.</p>'}
 function moGio(){document.body.classList.add('mo-gio')}function dongGio(){document.body.classList.remove('mo-gio')}
 function lh(){let t='';if(CONFIG.zalo)t+=`\n\nZalo: ${CONFIG.zalo}`;if(CONFIG.hotline)t+=`\nHotline: ${CONFIG.hotline}`;return t}
 const EMAIL_NHAN='eyemedi.group@gmail.com';
@@ -260,7 +260,7 @@ catch(_){kq.textContent='Chưa gửi được, vui lòng gửi nội dung dướ
 finally{nut.disabled=false;nut.textContent=cu}}
 document.getElementById('datHang').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const ids=Object.keys(gio);const kq=document.getElementById('kq');
 if(!ids.length){kq.textContent='Bạn chưa chọn sản phẩm.';return}
-const ds=ids.map(i=>'- '+SAN_PHAM.find(x=>x.id===i).ten+' x'+gio[i]).join('\n');
+const ds=ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);return '- '+p.ten+' x'+gio[i]+' ('+fmt(p.gia)+')'}).join('\n');
 const don='ĐƠN HÀNG VELARO\n'+ds+`\nKhách: ${f.get('ten')} – ${f.get('sdt')}\nĐịa chỉ: ${f.get('dc')}`;
 const ok=await guiEmail('Đơn hàng VELARO – '+f.get('ten'),{'Họ tên':f.get('ten'),'Số điện thoại':f.get('sdt'),'Địa chỉ giao hàng':f.get('dc'),'Sản phẩm':ds},kq,e.submitter||e.target.querySelector('.gui'),don);
 if(ok){gio={};veGio();e.target.reset()}});
