@@ -165,6 +165,19 @@ a.the:hover{box-shadow:0 8px 24px rgba(7,58,60,.12);transform:translateY(-2px)}
 .the .gia{font-weight:700;color:#0b5558;font-size:16px;margin-top:auto}
 .the .nut-mua{display:block;text-align:center;background:#0b5558;color:#fff!important;border-radius:99px;padding:9px 12px;font-weight:600;font-size:14px}
 .the .nut-mua:hover{background:#073a3c}
+.lk-slider{position:relative;overflow:hidden;border-radius:16px;margin:14px 0 20px;background:#073a3c}
+.lk-track{display:flex;transition:transform .6s ease}
+.lk-slide{flex:0 0 100%;position:relative;display:block;aspect-ratio:16/9;max-height:440px;overflow:hidden;color:#fff;text-decoration:none}
+.lk-slide img{width:100%;height:100%;object-fit:cover;display:block;animation:lkZoom 8s ease-in-out infinite alternate}
+@keyframes lkZoom{from{transform:scale(1)}to{transform:scale(1.12) translate(-2%,-1%)}}
+.lk-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 22px 34px;background:linear-gradient(transparent,rgba(0,0,0,.72))}
+.lk-cap b{display:block;font-size:clamp(17px,2.4vw,24px);margin-bottom:4px}.lk-cap span{font-size:14px;opacity:.92}
+.lk-prev,.lk-next{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-size:22px;line-height:1;cursor:pointer;color:#073a3c}
+.lk-prev{left:10px}.lk-next{right:10px}
+.lk-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px}
+.lk-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.5);cursor:pointer}.lk-dots button.on{background:#fff;width:22px;border-radius:8px}
+@media (prefers-reduced-motion:reduce){.lk-slide img{animation:none}}
+@media(max-width:600px){.lk-cap{padding:30px 14px 28px}.lk-cap span{font-size:12.5px;display:block;line-height:1.4}.lk-prev,.lk-next{width:30px;height:30px;font-size:18px;top:35%}}
 @media(max-width:600px){.luoi,.luoi.ba,.luoi.bon{grid-template-columns:1fr 1fr;gap:10px}.the .nd{padding:10px}.the b{font-size:14px}}
 </style>
 
@@ -325,12 +338,7 @@ a.the:hover{box-shadow:0 8px 24px rgba(7,58,60,.12);transform:translateY(-2px)}
 
   <h2>Thương hiệu liên kết</h2>
   <p>Các thương hiệu đồng hành với EYEMEDI:</p>
-<ul>
-<li><a href="https://biz.droppii.vn/registry?pid=User_invite&amp;is_from_ref_link=true&amp;af_xp=referral&amp;onelink_id=BXy4&amp;deep_link_value=droppiiappsflyer-%2Fauth_sponsor&amp;source_caller=ui&amp;shortlink=refferal&amp;ref=TranThiHuekinhmat&amp;is_trial=True&amp;deep_link_sub1=by_pass_authorization&amp;af_dp=droppiiappsflyer%3A%2F%2F" rel="sponsored nofollow noopener" target="_blank">Droppii</a> – không bỏ vốn nhập hàng, không lo tồn kho.</li>
-<li><a href="https://fininvest.vn" rel="sponsored nofollow noopener" target="_blank">Fininvest</a> – hướng dẫn đầu tư.</li>
-<li><a href="https://drdacquang.com/" rel="nofollow noopener" target="_blank">Phòng khám thẩm mỹ Dr Đắc Quang</a>.</li>
-<li><a href="https://ungbuoumedilabo.vn/" rel="nofollow noopener" target="_blank">Phòng khám Ung Bướu Medilabo Việt Nam</a>.</li>
-</ul>
+<div class="lk-slider"><div class="lk-track"><a class="lk-slide" href="https://biz.droppii.vn/registry?pid=User_invite&amp;is_from_ref_link=true&amp;af_xp=referral&amp;onelink_id=BXy4&amp;deep_link_value=droppiiappsflyer-%2Fauth_sponsor&amp;source_caller=ui&amp;shortlink=refferal&amp;ref=TranThiHuekinhmat&amp;is_trial=True&amp;deep_link_sub1=by_pass_authorization&amp;af_dp=droppiiappsflyer%3A%2F%2F" rel="sponsored nofollow noopener" target="_blank"><img src="/images/the/lk-droppii.webp" width="800" height="450" alt="Droppii" loading="lazy"><span class="lk-cap"><b>Droppii</b><span>Kinh doanh online không bỏ vốn nhập hàng, không lo tồn kho.</span></span></a><a class="lk-slide" href="https://fininvest.vn" rel="sponsored nofollow noopener" target="_blank"><img src="/images/the/lk-fininvest.webp" width="800" height="450" alt="Fininvest" loading="lazy"><span class="lk-cap"><b>Fininvest</b><span>Kiến thức và hướng dẫn đầu tư cho người mới.</span></span></a><a class="lk-slide" href="https://drdacquang.com/" rel="nofollow noopener" target="_blank"><img src="/images/the/lk-drdacquang.webp" width="800" height="450" alt="Phòng khám thẩm mỹ Dr Đắc Quang" loading="lazy"><span class="lk-cap"><b>Phòng khám thẩm mỹ Dr Đắc Quang</b><span>BS CK2 Trần Đắc Quang – 366 Cao Thắng, Quận 10.</span></span></a><a class="lk-slide" href="https://ungbuoumedilabo.vn/" rel="nofollow noopener" target="_blank"><img src="/images/the/lk-medilabo.webp" width="800" height="450" alt="Phòng khám Ung Bướu Medilabo" loading="lazy"><span class="lk-cap"><b>Phòng khám Ung Bướu Medilabo</b><span>Tầm soát, chẩn đoán và điều trị bệnh lý khối u.</span></span></a></div><button type="button" class="lk-prev" aria-label="Trước">‹</button><button type="button" class="lk-next" aria-label="Tiếp">›</button><div class="lk-dots"></div></div>
 
   <h2>Kết nối với EYEMEDI</h2>
   <p>Theo dõi, liên hệ và tìm đường đến showroom:</p>
@@ -424,5 +432,6 @@ a.the:hover{box-shadow:0 8px 24px rgba(7,58,60,.12);transform:translateY(-2px)}
  window.addEventListener('scroll',function(){if(m.open)m.open=false},{passive:true});
 })();
 </script>
+<script>document.querySelectorAll('.lk-slider').forEach(function(w){var tr=w.querySelector('.lk-track'),n=tr.children.length,i=0,t,d=w.querySelector('.lk-dots');for(var k=0;k<n;k++){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(k+1));(function(k){b.onclick=function(){go(k)}})(k);d.appendChild(b)}function go(k){i=(k+n)%n;tr.style.transform='translateX('+(-100*i)+'%)';[].forEach.call(d.children,function(b,j){b.className=j==i?'on':''});clearInterval(t);t=setInterval(function(){go(i+1)},3500)}w.querySelector('.lk-prev').onclick=function(){go(i-1)};w.querySelector('.lk-next').onclick=function(){go(i+1)};w.onmouseenter=function(){clearInterval(t)};w.onmouseleave=function(){go(i)};go(0)});</script>
 </body>
 </html>
