@@ -222,7 +222,7 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 <input name="ten" placeholder="Họ tên" required>
 <input name="sdt" placeholder="Số điện thoại" required>
 <textarea name="dc" placeholder="Địa chỉ giao hàng" rows="2" required></textarea>
-<button class="gui" type="submit">Tạo đơn hàng</button>
+<button class="gui" type="submit">Gửi đơn hàng</button>
 <div id="kq"></div>
 </form>
 </aside>
@@ -250,13 +250,24 @@ function veGio(){const ids=Object.keys(gio);document.getElementById('dem').textC
 document.getElementById('dsGio').innerHTML=ids.length?ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);tong+=p.gia*gio[i];return `<div class="dong"><span>${p.ten}<br><small>${fmt(p.gia)}</small></span><span class="sl"><button onclick="doi('${i}',-1)">−</button>${gio[i]}<button onclick="doi('${i}',1)">+</button></span></div>`}).join('')+`<p><b>Tạm tính: ${tong>0?fmt(tong):'Liên hệ báo giá'}</b></p>`:'<p>Giỏ hàng trống.</p>'}
 function moGio(){document.body.classList.add('mo-gio')}function dongGio(){document.body.classList.remove('mo-gio')}
 function lh(){let t='';if(CONFIG.zalo)t+=`\n\nZalo: ${CONFIG.zalo}`;if(CONFIG.hotline)t+=`\nHotline: ${CONFIG.hotline}`;return t}
-document.getElementById('datHang').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);const ids=Object.keys(gio);
-if(!ids.length){document.getElementById('kq').textContent='Bạn chưa chọn sản phẩm.';return}
-const don='ĐƠN HÀNG VELARO\n'+ids.map(i=>'- '+SAN_PHAM.find(x=>x.id===i).ten+' x'+gio[i]).join('\n')+`\nKhách: ${f.get('ten')} – ${f.get('sdt')}\nĐịa chỉ: ${f.get('dc')}`;
-document.getElementById('kq').textContent='Đơn hàng đã tạo. Gửi nội dung dưới đây qua Zalo hoặc hotline để xác nhận:\n\n'+don+lh();try{navigator.clipboard.writeText(don).catch(()=>{})}catch(_){}});
-document.getElementById('formNq').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
+const EMAIL_NHAN='eyemedi.group@gmail.com';
+async function guiEmail(tieuDe,duLieu,kq,nut,noiDung){
+nut.disabled=true;const cu=nut.textContent;nut.textContent='Đang gửi...';kq.textContent='';
+try{const r=await fetch('https://formsubmit.co/ajax/'+EMAIL_NHAN,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.assign({_subject:tieuDe,_template:'table',_captcha:'false','Trang':location.href},duLieu))});
+const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw 0;
+kq.textContent='Đã gửi thành công! VELARO sẽ liên hệ lại với bạn sớm nhất.';return true}
+catch(_){kq.textContent='Chưa gửi được, vui lòng gửi nội dung dưới đây qua Zalo hoặc hotline:\n\n'+noiDung+lh();return false}
+finally{nut.disabled=false;nut.textContent=cu}}
+document.getElementById('datHang').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const ids=Object.keys(gio);const kq=document.getElementById('kq');
+if(!ids.length){kq.textContent='Bạn chưa chọn sản phẩm.';return}
+const ds=ids.map(i=>'- '+SAN_PHAM.find(x=>x.id===i).ten+' x'+gio[i]).join('\n');
+const don='ĐƠN HÀNG VELARO\n'+ds+`\nKhách: ${f.get('ten')} – ${f.get('sdt')}\nĐịa chỉ: ${f.get('dc')}`;
+const ok=await guiEmail('Đơn hàng VELARO – '+f.get('ten'),{'Họ tên':f.get('ten'),'Số điện thoại':f.get('sdt'),'Địa chỉ giao hàng':f.get('dc'),'Sản phẩm':ds},kq,e.submitter||e.target.querySelector('.gui'),don);
+if(ok){gio={};veGio();e.target.reset()}});
+document.getElementById('formNq').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const kq=document.getElementById('kqNq');
 const nd=`ĐĂNG KÝ NHƯỢNG QUYỀN VELARO\nHọ tên: ${f.get('ten')}\nSĐT: ${f.get('sdt')}\nKhu vực: ${f.get('kv')||'—'}`;
-document.getElementById('kqNq').textContent='Gửi nội dung dưới đây qua Zalo hoặc hotline để được tư vấn:\n\n'+nd+lh();try{navigator.clipboard.writeText(nd).catch(()=>{})}catch(_){}});
+const ok=await guiEmail('Đăng ký nhượng quyền VELARO – '+f.get('ten'),{'Họ tên':f.get('ten'),'Số điện thoại':f.get('sdt'),'Khu vực dự kiến':f.get('kv')||'—'},kq,e.submitter||e.target.querySelector('.gui'),nd);
+if(ok)e.target.reset()});
 (function(){const l=[];if(CONFIG.hotline)l.push('Hotline: '+CONFIG.hotline);if(CONFIG.zalo)l.push('Zalo: '+CONFIG.zalo);if(CONFIG.diaChi)l.push('Địa chỉ: '+CONFIG.diaChi);if(CONFIG.email)l.push('Email: '+CONFIG.email);document.getElementById('lienHe').innerHTML=l.join('<br>')})();
 veLoc();veSP();veGio();
 </script>
