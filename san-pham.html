@@ -413,6 +413,12 @@ formatFooterAddress();linkifyFooterPhones();
 showHeroSlide(0);restartHeroTimer();
 renderProducts();updateCount();
 </script>
+<script>
+/* Mở thẳng sản phẩm/danh mục từ link: san-pham.html?sp=<mã> hoặc ?cat=<danh mục> */
+window.addEventListener('load',function(){var q=new URLSearchParams(location.search),sp=q.get('sp'),cat=q.get('cat');
+ try{if(cat&&typeof filterCategory==='function')filterCategory(cat);
+ if(sp&&typeof openDetail==='function')openDetail(sp);}catch(e){}});
+</script>
 </body>
 </html>
 
