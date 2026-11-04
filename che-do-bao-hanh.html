@@ -1,551 +1,358 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chế độ bảo hành gọng kính và tròng kính | EYEMEDI</title>
+<meta name="description" content="Chế độ bảo hành gọng kính trọn thời gian sử dụng tại EYEMEDI: siết ốc, chỉnh form, thay ve mũi, đổi độ tròng, hỗ trợ rơi vỡ. Xem chi tiết quyền lợi.">
+<meta name="author" content="EYEMEDI">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://eyemedi.vn/che-do-bao-hanh.html">
+<meta name="theme-color" content="#eaf8fc">
+<!-- Thẻ chia sẻ Facebook / Zalo -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="EYEMEDI">
+<meta property="og:title" content="Chế độ bảo hành gọng kính và tròng kính">
+<meta property="og:description" content="Chế độ bảo hành gọng kính trọn thời gian sử dụng tại EYEMEDI: siết ốc, chỉnh form, thay ve mũi, đổi độ tròng, hỗ trợ rơi vỡ. Xem chi tiết quyền lợi.">
+<meta property="og:url" content="https://eyemedi.vn/che-do-bao-hanh.html">
+<meta property="og:image" content="https://eyemedi.vn/images/che-do-bao-hanh.webp">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chế độ bảo hành gọng kính và tròng kính">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="article:author" content="EYEMEDI">
+<meta property="article:published_time" content="2026-06-27">
+<meta property="article:modified_time" content="2026-11-04">
+<link rel="icon" href="favicon.ico">
 <style>
-    /* Khóa toàn trang vào khổ fullpx và căn giữa màn hình */
-    html {
-        background-color: #333; /* Nền tối bên ngoài vùng khóa */
-        display: flex;
-        justify-content: center;
-    }
+/* EYEMEDI – CSS dùng chung cho mọi trang SEO (trình duyệt lưu cache 1 lần) */
+:root{--ink:#073a3c;--muted:#5b7378;--pale:#eaf8fc;--line:#d7e8ed;--accent:#0a6d70}
+*{box-sizing:border-box}
+body{margin:0;background:#f7fcfe;color:var(--ink);font-family:Inter,Arial,sans-serif;line-height:1.6}
+a{color:var(--accent)}
+img{max-width:100%;height:auto;display:block}
 
-    body {
-        margin: 0;
-        padding: 300;
-        width: 100%;
-        max-width: fullpx; /* Khóa khổ toàn trang */
-        min-height: 100vh;
-        background-color: #f5f5f0 ; /* Màu kem giấy cho vùng nội dung #f4ece0 #fdfaf1 */
-        box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Đổ bóng tạo chiều sâu */
-	overflow-x: hidden; /* Chống tràn ngang */
-    }
+/* Header */
+.site-header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(12px,4vw,54px);background:rgba(247,252,254,.97);border-bottom:1px solid #dcebef;box-shadow:0 5px 18px rgba(7,58,60,.06)}
+.brand-link{text-decoration:none}
+.brand{display:inline-flex;flex-direction:column;align-items:center;font-size:clamp(22px,3.2vw,34px);letter-spacing:.1em;font-weight:300;color:#30383a;line-height:1}
+.brand small{margin-top:6px;font-size:clamp(10px,1.3vw,14px);letter-spacing:.12em;color:#64757a}
+.menu{position:relative}
+.menu>summary{display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #c7e0e7;border-radius:999px;background:#fff;font-weight:700;font-size:13px;cursor:pointer;list-style:none}
+.menu>summary::-webkit-details-marker{display:none}
+.menu nav{position:absolute;right:0;top:calc(100% + 10px);width:min(290px,calc(100vw - 24px));padding:8px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 16px 42px rgba(7,58,60,.16);display:grid;gap:2px}
+.menu nav a{padding:10px 12px;border-radius:10px;color:var(--ink);font-size:14px;font-weight:700;text-decoration:none}
+.menu nav a:hover{background:#f0f8fa}
 
+/* Breadcrumb */
+.breadcrumb{max-width:820px;margin:0 auto;padding:14px 5% 0;font-size:13px;color:var(--muted)}
+.breadcrumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.breadcrumb li+li:before{content:"›";margin-right:6px}
+.breadcrumb a{color:var(--muted);text-decoration:none}
 
-/* Ghim Header cố định với màu xanh biển */
-.header-fixed-container {
-    position: fixed;
-    top: 150;
-    width: 100%;
-    max-width: 950px; 
-    height: 40px;
-    background-color: #e1f5fe; /* Xanh biển nhạt */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    border-bottom: 2px solid #01579b; /* Đường kẻ xanh biển đậm bên dưới */
-}
+/* Bài viết */
+.article{padding:20px 5% 48px;background:#fff}
+.article article{max-width:820px;margin:0 auto;color:#2b3f43;font-size:16px;line-height:1.75}
+.eyebrow{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#4d7a80}
+.article h1{margin:0 0 14px;font-size:clamp(24px,3.2vw,34px);line-height:1.25;color:var(--ink)}
+.article h2{margin:32px 0 12px;font-size:clamp(20px,2.4vw,24px);color:var(--ink)}
+.article h3{margin:22px 0 10px;font-size:19px;color:var(--ink)}
+.article p{margin:0 0 14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:0 0 18px}
+.sapo{font-size:17px;font-weight:500;color:#1f3437}
+.article figure{margin:20px 0;border-radius:18px;overflow:hidden;background:#eef6f8}
+.article figcaption{padding:10px 14px;font-size:13px;color:#526d72;text-align:center}
+.box{margin:20px 0;padding:14px 18px;background:#f0f8fa;border-left:4px solid var(--accent);border-radius:10px}
+.faq details{margin:0 0 10px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:#fbfeff}
+.faq summary{font-weight:700;cursor:pointer}
+.author{display:flex;gap:14px;align-items:center;margin:28px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fbfeff;font-size:14px}
+.author img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.cta{display:inline-block;padding:12px 22px;border-radius:999px;background:var(--accent);color:#fff!important;font-weight:700;text-decoration:none}
+.cta:hover{background:var(--ink)}
+.related ul{padding-left:20px}
+.disclaimer{font-size:13px;color:#61777b;font-style:italic}
 
+/* Footer */
+footer{background:var(--ink);color:#eaf8fc;padding:35px 5%;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+footer .brand{color:#fff}
+footer p,footer li{color:#c3dfe4;font-size:13px;margin:6px 0}
+footer strong{color:#fff}
+footer a{color:#fff}
+footer ul{list-style:none;padding:0;margin:0}
 
-<title>Chế độ bảo hành gọng kính trọn thời gian sử dụng tại Eyemedi</title>
+/* Nút liên hệ nổi */
+.float-contact{position:fixed;right:14px;bottom:16px;display:grid;gap:8px;z-index:99}
+.float-contact a{padding:10px 14px;border-radius:999px;background:var(--accent);color:#fff;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+/* ===== Khung chuẩn: mọi phần căn theo 1 khổ ===== */
+:root{--w:840px}
+.wrap{width:min(var(--w),100% - 32px);margin:0 auto}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(247,252,254,.97);border-bottom:1px solid #dcebef;box-shadow:0 5px 18px rgba(7,58,60,.06);padding:0;display:block}
+.site-header .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 0}
+.site-header .brand-link{grid-column:1;justify-self:start;margin-left:20px}
+.site-header .menu{grid-column:3;justify-self:end}
+.breadcrumb{max-width:none;padding:14px 0 0}
+.article{padding:20px 0 48px;background:#fff}
+.article article{max-width:none}
+footer{display:block;padding:35px 0}
+footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.float-contact{right:max(14px,calc((100vw - var(--w)) / 2 + 14px));bottom:18px}
+.float-contact a{display:flex;align-items:center;justify-content:center;width:52px;height:52px;padding:0;border-radius:50%;font-size:12px}
+.float-contact a svg{width:26px;height:26px;fill:#fff}
+.float-contact .zalo{background:#0068ff}
+.float-contact .mess{background:#a334fa}
+.float-contact .call{background:#e53935}
 
-<style>
+/* Hiệu ứng sóng nhẹ cho Messenger */
+.float-contact .mess{position:relative}
+.float-contact .mess:before,.float-contact .mess:after{content:"";position:absolute;inset:0;border-radius:50%;background:#a334fa;opacity:.5;z-index:-1;animation:song 2.4s ease-out infinite}
+.float-contact .mess:after{animation-delay:1.2s}
+@keyframes song{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.float-contact .mess:before,.float-contact .mess:after{animation:none}}
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+/* Sản phẩm tham khảo */
+/* Slide ảnh chính */
+.slider{position:relative;margin:20px 0;border-radius:18px;overflow:hidden;background:#eef6f8}
+.slides{display:flex;transition:transform .6s ease}
+.slide{flex:0 0 100%;margin:0!important;border-radius:0!important}
+.slide img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.dots{position:absolute;left:0;right:0;bottom:44px;display:flex;justify-content:center;gap:8px}
+.dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer}
+.dots button.on{background:#fff;width:22px;border-radius:5px}
+/* Thẻ sản phẩm cuộn ngang */
+.sp-row{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
+.sp-row::-webkit-scrollbar{display:none}
+.sp-card{flex:0 0 calc((100% - 36px)/4);min-width:150px;scroll-snap-align:start;display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff;text-decoration:none;color:var(--ink);font-size:14px}
+.sp-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;background:#eef6f8}
+.sp-card span{color:var(--accent);font-weight:700;font-size:13px}
+@media(max-width:600px){.sp-card{flex-basis:calc((100% - 12px)/2)}}
 
-body{
-font-family:'Be Vietnam Pro',sans-serif;
-background:#f3f5f7;
-color:#333;
-line-height:1.8;
-}
-
-.article{
-
-max-width:860px;
-margin:40px auto;
-background:#fff;
-padding:45px;
-border-radius:12px;
-box-shadow:0 5px 25px rgba(0,0,0,.08);
-
-}
-
-.category{
-
-display:inline-block;
-background:#005baa;
-color:#fff;
-padding:6px 14px;
-border-radius:30px;
-font-size:13px;
-font-weight:600;
-margin-bottom:18px;
-
-}
-
-h1{
-
-font-size:42px;
-line-height:1.3;
-margin-bottom:20px;
-font-weight:800;
-color:#111;
-
-}
-
-.meta{
-
-color:#777;
-font-size:14px;
-margin-bottom:35px;
-
-}
-
-.intro{
-
-font-size:22px;
-font-weight:600;
-color:#444;
-margin-bottom:30px;
-
-}
-
-p{
-
-font-size:19px;
-margin-bottom:22px;
-text-align:justify;
-
-}
-
-img{
-
-width:100%;
-border-radius:10px;
-margin:30px 0 12px;
-display:block;
-
-}
-
-.caption{
-
-text-align:center;
-font-size:14px;
-color:#777;
-margin-bottom:30px;
-
-}
-
-blockquote{
-
-background:#eef7ff;
-border-left:5px solid #005baa;
-padding:18px 25px;
-margin:35px 0;
-font-size:21px;
-font-weight:600;
-font-style:italic;
-
-}
-
-.cta{
-
-margin-top:45px;
-background:#005baa;
-padding:35px;
-border-radius:12px;
-text-align:center;
-color:#fff;
-
-}
-
-.cta h2{
-
-margin-bottom:15px;
-
-}
-
-.cta a{
-
-display:inline-block;
-margin-top:20px;
-background:#FFD700;
-color:#111;
-padding:14px 35px;
-border-radius:50px;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
-
-}
-
-.cta a:hover{
-
-transform:scale(1.05);
-
-}
-
-@media(max-width:768px){
-
-.article{
-
-padding:25px;
-margin:15px;
-
-}
-
-h1{
-
-font-size:30px;
-
-}
-
-.intro{
-
-font-size:20px;
-
-}
-
-p{
-
-font-size:17px;
-
-}
-
-}
-
+.sp-tk{margin:18px 0 24px;padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:#f7fcfe}
+.sp-tk>strong{display:block;margin-bottom:10px}
+footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 </style>
-<meta name="description" content="Khách hàng được hỗ trợ bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác nhằm giúp chiếc kính luôn bền đẹp và sử dụng thoải mái trong thời gian dài.">
-<meta property="article:modified_time" content="2026-11-02">
-</head>
 
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"Organization","@id":"https://eyemedi.vn/#org","name":"EYEMEDI","url":"https://eyemedi.vn/",
+   "logo":"https://eyemedi.vn/images/logo-eyemedi.png","telephone":"+84967190005",
+   "sameAs":["https://www.facebook.com/eyemedioptic","https://zalo.me/0967190005"]},
+  {"@type":"Optician","name":"EYEMEDI Lạc Long Quân","parentOrganization":{"@id":"https://eyemedi.vn/#org"},"telephone":"+84967190005","openingHours":"Mo-Su 08:30-21:30","address":{"@type":"PostalAddress","streetAddress":"63C Lạc Long Quân","addressLocality":"Phường Hòa Bình","addressRegion":"TP. Hồ Chí Minh","addressCountry":"VN"}},
+  {"@type":"Optician","name":"EYEMEDI Dĩ An","parentOrganization":{"@id":"https://eyemedi.vn/#org"},"telephone":"+84967190005","openingHours":"Mo-Su 08:30-21:30","address":{"@type":"PostalAddress","streetAddress":"169 Nguyễn Đức Thiệu","addressLocality":"Phường Dĩ An","addressRegion":"TP. Hồ Chí Minh","addressCountry":"VN"}},
+  {"@type":"Optician","name":"EYEMEDI Bình Hưng Hòa A","parentOrganization":{"@id":"https://eyemedi.vn/#org"},"telephone":"+84967190005","openingHours":"Mo-Su 08:30-21:30","address":{"@type":"PostalAddress","streetAddress":"19C Đường số 5D","addressLocality":"Phường Bình Hưng Hòa A","addressRegion":"TP. Hồ Chí Minh","addressCountry":"VN"}},
+  {"@type":"Optician","name":"EYEMEDI Cách Mạng Tháng 8","parentOrganization":{"@id":"https://eyemedi.vn/#org"},"telephone":"+84967190005","openingHours":"Mo-Su 08:30-21:30","address":{"@type":"PostalAddress","streetAddress":"634 Cách Mạng Tháng 8","addressLocality":"Phường Nhiêu Lộc","addressRegion":"TP. Hồ Chí Minh","addressCountry":"VN"}},
+  {"@type":"Optician","name":"EYEMEDI Nghĩa Lộ","parentOrganization":{"@id":"https://eyemedi.vn/#org"},"telephone":"+84967190005","openingHours":"Mo-Su 08:30-21:30","address":{"@type":"PostalAddress","streetAddress":"169 Nghĩa Lộ","addressLocality":"Phường Yên Nghĩa","addressRegion":"TP. Hà Nội","addressCountry":"VN"}},
+  {"@type":"Article","headline":"Chế độ bảo hành gọng kính và tròng kính","description":"Chế độ bảo hành gọng kính trọn thời gian sử dụng tại EYEMEDI: siết ốc, chỉnh form, thay ve mũi, đổi độ tròng, hỗ trợ rơi vỡ. Xem chi tiết quyền lợi.",
+   "image":["https://eyemedi.vn/images/che-do-bao-hanh.webp","https://eyemedi.vn/images/che-do-bao-hanh-1.webp"],
+   "datePublished":"2026-06-27","dateModified":"2026-11-04",
+   "author":{"@id":"https://eyemedi.vn/#org"},"publisher":{"@id":"https://eyemedi.vn/#org"},
+   "mainEntityOfPage":"https://eyemedi.vn/che-do-bao-hanh.html"},
+   {"@type":"ImageObject","contentUrl":"https://eyemedi.vn/images/che-do-bao-hanh-1.webp","name":"Chế độ bảo hành gọng kính và tròng kính - ảnh 1","description":"Kỹ thuật viên EYEMEDI siết ốc, chỉnh form gọng kính cho khách","width":1200,"height":800},
+   {"@type":"ImageObject","contentUrl":"https://eyemedi.vn/images/che-do-bao-hanh-2.webp","name":"Chế độ bảo hành gọng kính và tròng kính - ảnh 2","description":"Thay ve mũi kính – một quyền lợi trong chế độ bảo hành tại EYEMEDI","width":1200,"height":800},
+   {"@type":"ImageObject","contentUrl":"https://eyemedi.vn/images/che-do-bao-hanh-3.webp","name":"Chế độ bảo hành gọng kính và tròng kính - ảnh 3","description":"Khách hàng đo khúc xạ bằng máy tự động tại EYEMEDI","width":1200,"height":800},
+  {"@type":"BreadcrumbList","itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://eyemedi.vn/"},
+   {"@type":"ListItem","position":2,"name":"Chính sách"},
+   {"@type":"ListItem","position":3,"name":"Chế độ bảo hành gọng kính và tròng kính"}]},
+  {"@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"EYEMEDI hỗ trợ bảo hành những gì?","acceptedAnswer":{"@type":"Answer","text":"Bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác."}},
+   {"@type":"Question","name":"Kính cũ có được đổi lấy kính mới không?","acceptedAnswer":{"@type":"Answer","text":"Có. EYEMEDI có chương trình Thu cũ đổi mới, giúp tiết kiệm chi phí khi nâng cấp gọng kính và tròng kính thế hệ mới."}},
+   {"@type":"Question","name":"Kiểm tra thị lực tại EYEMEDI có mất phí không?","acceptedAnswer":{"@type":"Answer","text":"Không. EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí cho khách hàng."}}]}
+ ]
+}
+</script>
+</head>
 <body>
 
-<div class="article">
+<header class="site-header">
+ <div class="wrap">
+  <a href="/" class="brand-link" aria-label="EYEMEDI - Trang chủ"><span class="brand">EYEMEDI<small>elevate your style</small></span></a>
+  <details class="menu" id="menu">
+    <summary>☰ MENU</summary>
+    <nav aria-label="Điều hướng chính">
+      <a href="/">Trang chủ</a>
+      <a href="/san-pham.html?cat=Gọng kính cận">Gọng kính cận</a>
+      <a href="/san-pham.html?cat=Kính thời trang">Kính thời trang</a>
+      <a href="/kinh-ap-trong.html">Kính áp tròng</a>
+      <a href="/trong-kinh-can-vien-loan.html">Tròng kính mắt</a>
+      <a href="/phu-kien-mat-kinh.html">Phụ kiện mắt kính</a>
+      <a href="/dat-lich-do-mat.html">Đặt lịch đo mắt</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+  </details>
+ </div>
+</header>
 
-<div class="category">
-⚡      EYEMEDI NEW
+<nav class="breadcrumb wrap" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Trang chủ</a></li>
+    <li><span>Chính sách</span></li>
+    <li aria-current="page">Chế độ bảo hành gọng kính và tròng kính</li>
+  </ol>
+</nav>
+
+<main class="article">
+<article class="wrap">
+  <p class="eyebrow">Danh mục: Chính sách</p>
+  <!-- H1 = TIÊU ĐỀ TRANG (chỉ 1 thẻ H1) -->
+  <h1>Chế độ bảo hành gọng kính và tròng kính</h1>
+  <p class="meta">
+    <span>Tác giả: EYEMEDI</span>
+    <span>Cập nhật: <time datetime="2026-11-04">04/11/2026</time></span>
+  </p>
+
+  <!-- ĐOẠN MỞ ĐẦU: 2–3 câu tóm tắt, trả lời ngay câu hỏi chính -->
+  <p class="sapo">An tâm sử dụng – đồng hành dài lâu cùng khách hàng. Tại EYEMEDI, chúng tôi không chỉ cung cấp những chiếc kính chất lượng mà còn xây dựng hệ thống bảo hành toàn diện, giúp bạn an tâm trong suốt quá trình sử dụng với chính sách hậu mãi rõ ràng, minh bạch và tận tâm.</p>
+
+  <!-- KHỐI ẢNH CHÍNH: slide 5 ảnh, tự chuyển sau 3 giây.
+       Máy chọn ngẫu nhiên 5 ảnh trong kho EYEMEDI-1 … EYEMEDI-50,
+       rồi đổi tên theo tên trang: che-do-bao-hanh-1.webp … che-do-bao-hanh-5.webp -->
+  <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Ảnh Chế độ bảo hành gọng kính và tròng kính">
+    <div class="slides">
+      <figure class="slide"><img src="images/che-do-bao-hanh-1.webp" width="1200" height="800" alt="Kỹ thuật viên EYEMEDI siết ốc, chỉnh form gọng kính cho khách" title="Chế độ bảo hành gọng kính và tròng kính - ảnh 1" fetchpriority="high"><figcaption>Kỹ thuật viên EYEMEDI siết ốc, chỉnh form gọng kính cho khách</figcaption></figure>
+      <figure class="slide"><img src="images/che-do-bao-hanh-2.webp" width="1200" height="800" alt="Thay ve mũi kính – một quyền lợi trong chế độ bảo hành tại EYEMEDI" title="Chế độ bảo hành gọng kính và tròng kính - ảnh 2" loading="lazy"><figcaption>Thay ve mũi kính – một quyền lợi trong chế độ bảo hành tại EYEMEDI</figcaption></figure>
+      <figure class="slide"><img src="images/che-do-bao-hanh-3.webp" width="1200" height="800" alt="Khách hàng đo khúc xạ bằng máy tự động tại EYEMEDI" title="Chế độ bảo hành gọng kính và tròng kính - ảnh 3" loading="lazy"><figcaption>Khách hàng đo khúc xạ bằng máy tự động tại EYEMEDI</figcaption></figure>
+    </div>
+    <div class="dots"></div>
+  </div>
+
+
+  <!-- SẢN PHẨM THAM KHẢO: 8 sản phẩm từ danh-sach-san-pham.csv, bộ sản phẩm không trùng giữa các trang.
+       Thẻ cuộn ngang, tự lướt sang trái sau 3 giây, bấm vào mở trang sản phẩm -->
+  <section class="sp-tk" aria-label="Sản phẩm tham khảo">
+    <strong>Sản phẩm tham khảo</strong>
+    <div class="sp-row" id="spRow">
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-dem-mui-silicon"><img src="https://eyemedi.vn/images/san-pham/pk-dem-mui-silicon.webp" width="300" height="300" alt="Đệm mũi kính silicon" loading="lazy"><b>Đệm mũi kính silicon</b><span>25.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-khan-lau-a03"><img src="https://eyemedi.vn/images/san-pham/pk-khan-lau-a03.webp" width="300" height="300" alt="Khăn lau tròng kính EYEMEDI" loading="lazy"><b>Khăn lau tròng kính EYEMEDI</b><span>25.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-nuoc-xit-ao"><img src="https://eyemedi.vn/images/san-pham/pk-nuoc-xit-ao.webp" width="300" height="300" alt="Nước vệ sinh tròng kính" loading="lazy"><b>Nước vệ sinh tròng kính</b><span>30.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-hop-kinh-eyemedi"><img src="https://eyemedi.vn/images/san-pham/pk-hop-kinh-eyemedi.webp" width="300" height="300" alt="Hộp đựng kính EYEMEDI" loading="lazy"><b>Hộp đựng kính EYEMEDI</b><span>50.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-boc-cang-silicon"><img src="https://eyemedi.vn/images/san-pham/pk-boc-cang-silicon.webp" width="300" height="300" alt="Bọc đuôi càng kính silicon" loading="lazy"><b>Bọc đuôi càng kính silicon</b><span>35.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=pk-combo-ve-sinh"><img src="https://eyemedi.vn/images/san-pham/pk-combo-ve-sinh.webp" width="300" height="300" alt="Bộ phụ kiện bảo quản mắt kính" loading="lazy"><b>Bộ phụ kiện bảo quản mắt kính</b><span>65.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=trong-phu-vang-156"><img src="https://eyemedi.vn/images/san-pham/trong-phu-vang-156.webp" width="300" height="300" alt="Tròng phủ váng 1.56" loading="lazy"><b>Tròng phủ váng 1.56</b><span>320.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=trong-trang-cung-156"><img src="https://eyemedi.vn/images/san-pham/trong-trang-cung-156.webp" width="300" height="300" alt="Tròng tráng cứng 1.56" loading="lazy"><b>Tròng tráng cứng 1.56</b><span>150.000đ</span></a>
+    </div>
+  </section>
+
+  <!-- THÂN BÀI: máy tự dựng từ các cặp H2_n / NOI_DUNG_n trong file .txt (số phần tùy bài) -->
+  <h2>Quyền lợi bảo hành gọng kính và tròng kính</h2>
+  <p>Đội ngũ kỹ thuật viên EYEMEDI luôn kiểm tra và chăm sóc kính miễn phí cho khách hàng. Khi mua kính tại EYEMEDI, bạn được hỗ trợ:</p>
+<ul>
+<li>Bảo hành lỗi kỹ thuật của gọng kính.</li>
+<li>Siết ốc, chỉnh form kính khi bị lỏng, lệch.</li>
+<li><a href="/phu-kien-mat-kinh.html">Thay ve mũi</a> khi ve bị ố, cứng hoặc hư.</li>
+<li>Vệ sinh kính.</li>
+<li><a href="/trong-kinh-can-vien-loan.html">Đổi độ tròng kính</a> khi độ mắt thay đổi.</li>
+<li>Hỗ trợ khi kính bị rơi vỡ.</li>
+</ul>
+<p>Cùng nhiều quyền lợi khác, giúp chiếc kính luôn bền đẹp và đeo thoải mái trong thời gian dài.</p>
+<blockquote>“Không chỉ là một chiếc kính đẹp, mà còn là sự an tâm trong suốt quá trình sử dụng.”</blockquote>
+
+  <h2>Chương trình thu cũ đổi mới</h2>
+  <p>Ngoài các chính sách bảo hành tiêu chuẩn, EYEMEDI còn triển khai chương trình <strong>Thu cũ đổi mới</strong>, giúp khách hàng tiết kiệm chi phí khi nâng cấp lên gọng kính và tròng kính thế hệ mới.</p>
+
+  <h2>Mẹo giữ kính bền đẹp giữa các lần bảo hành</h2>
+  <ul>
+<li>Cầm kính bằng hai tay khi đeo và tháo để gọng không bị lệch form.</li>
+<li>Lau tròng bằng khăn chuyên dụng và nước vệ sinh tròng kính, tránh dùng áo hay khăn giấy.</li>
+<li>Cất kính vào hộp khi không dùng, không úp mặt tròng xuống bàn.</li>
+<li>Không để kính trên táp-lô ô tô hoặc nơi có nhiệt độ cao.</li>
+</ul>
+<p>Các phụ kiện như khăn lau, nước vệ sinh, hộp đựng, đệm mũi silicon có sẵn tại <a href="/phu-kien-mat-kinh.html">phụ kiện mắt kính EYEMEDI</a>.</p>
+
+  <h2>EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí</h2>
+  <p>Với đội ngũ chuyên viên giàu kinh nghiệm cùng hệ thống thiết bị hiện đại, EYEMEDI cam kết mang đến trải nghiệm chăm sóc thị lực chuyên nghiệp, tận tâm và lâu dài. Khách hàng được <a href="/dat-lich-do-mat.html">đo mắt, kiểm tra thị lực miễn phí</a> và tư vấn cắt kính phù hợp.</p>
+<p>Store: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh – <a href="https://www.google.com/maps/search/?api=1&amp;query=Eyemedi+Optic+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" target="_blank" rel="noopener">📍 Chỉ đường đến EYEMEDI</a></p>
+
+  <div class="box">
+    <strong>Đo thị lực miễn phí tại EYEMEDI</strong>
+    <p>Kính bị lỏng, lệch form hay cần thay ve mũi? Mang kính đến EYEMEDI để được kiểm tra, chăm sóc và đo lại thị lực miễn phí.</p>
+    <a class="cta" href="/dat-lich-do-mat.html">👁 Đặt lịch đo mắt</a>
+  </div>
+
+  <section class="faq">
+    <h2>Câu hỏi thường gặp</h2>
+    <details><summary>EYEMEDI hỗ trợ bảo hành những gì?</summary><p>Bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác.</p></details>
+    <details><summary>Kính cũ có được đổi lấy kính mới không?</summary><p>Có. EYEMEDI có chương trình Thu cũ đổi mới, giúp tiết kiệm chi phí khi nâng cấp gọng kính và tròng kính thế hệ mới.</p></details>
+    <details><summary>Kiểm tra thị lực tại EYEMEDI có mất phí không?</summary><p>Không. EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí cho khách hàng.</p></details>
+  </section>
+
+  <div class="author">
+    <div><strong>EYEMEDI</strong> – Trung tâm thị lực nhãn kính chuyên sâu.<br>5 chi nhánh tại TP. Hồ Chí Minh và Hà Nội · Hotline 0967 190 005</div>
+  </div>
+
+  <section class="related">
+    <h2>Bài viết liên quan</h2>
+    <ul>
+      <li><a href="/dat-lich-do-mat.html">Đặt lịch đo mắt, kiểm tra thị lực tại EYEMEDI</a></li>
+      <li><a href="/trong-kinh-can-vien-loan.html">Bảng giá tròng kính cận, viễn, loạn</a></li>
+      <li><a href="/phu-kien-mat-kinh.html">Phụ kiện bảo quản mắt kính</a></li>
+    </ul>
+  </section>
+</article>
+</main>
+<footer id="lien-he">
+ <div class="wrap">
+  <div>
+    <span class="brand">EYEMEDI<small>elevate your style</small></span>
+    <p>Trung tâm thị lực nhãn kính chuyên sâu</p>
+    <p class="slogan">Tinh tế • Tận tâm • Trách nhiệm • Trung thực • Thấu hiểu</p>
+    <p>Hướng đến trải nghiệm chăm sóc thị lực chuyên nghiệp, minh bạch và tận tâm.</p>
+  </div>
+  <div>
+    <strong>Hệ thống cửa hàng</strong>
+    <ul>
+      <li>63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</li>
+      <li>169 Nguyễn Đức Thiệu, Phường Dĩ An, TP. Hồ Chí Minh</li>
+      <li>19C Đường số 5D, Phường Bình Hưng Hòa A, TP. Hồ Chí Minh</li>
+      <li>634 Cách Mạng Tháng 8, Phường Nhiêu Lộc, TP. Hồ Chí Minh</li>
+      <li>169 Nghĩa Lộ, Phường Yên Nghĩa, TP. Hà Nội</li>
+    </ul>
+  </div>
+  <div>
+    <strong>Liên hệ</strong>
+    <p>Hotline: <a href="tel:0967190005">0967 190 005</a></p>
+    <p>Giờ làm việc: 08:30 – 21:30 hằng ngày</p>
+    <ul>
+            <li><a href="/che-do-bao-hanh.html">Chế độ bảo hành</a></li>
+                </ul>
+  </div>
+ </div>
+</footer>
+
+<div class="float-contact">
+  <a class="zalo" href="https://zalo.me/0967190005" rel="nofollow noopener" target="_blank" aria-label="Chat Zalo"><b>Zalo</b></a>
+  <a class="mess" href="https://m.me/eyemedioptic" rel="nofollow noopener" target="_blank" aria-label="Chat Messenger"><svg viewBox="0 0 24 24"><path d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.1 7.1v3.3l3-1.7c1.2.3 2.5.5 3.9.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7z"/></svg></a>
 </div>
 
-<h1>
-👉  CHẾ ĐỘ BẢO HÀNH KÍNH GỌNG & TRÒNG KÍNH TẠI EYEMEDI
-</h1>
 
-<div class="meta">
-Đăng ngày: 27/06/2026 • EYEMEDI News
-</div>
-
-<div class="intro">
-An tâm sử dụng – Đồng hành dài lâu cùng khách hàng.
-</div>
-
-<p>
-
-Tại EYEMEDI, chúng tôi không chỉ cung cấp những chiếc kính chất lượng mà còn xây dựng hệ thống bảo hành toàn diện nhằm mang đến sự an tâm trong suốt quá trình sử dụng. Mỗi khách hàng đều được chăm sóc với chính sách hậu mãi rõ ràng, minh bạch và tận tâm.
-
-</p>
-
-<div class="caption">
-Đội ngũ kỹ thuật viên EYEMEDI luôn kiểm tra và chăm sóc kính miễn phí.
-</div>
-
-<img src="baohanhgong.webp" alt="Hình ảnh 1">
-<p>
-
-Khách hàng được hỗ trợ bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác nhằm giúp chiếc kính luôn bền đẹp và sử dụng thoải mái trong thời gian dài.
-
-</p>
-
-<blockquote>
-
-"Không chỉ là một chiếc kính đẹp, mà còn là sự an tâm trong suốt quá trình sử dụng."
-
-</blockquote>
-
-<p>
-
-Ngoài các chính sách bảo hành tiêu chuẩn, EYEMEDI còn triển khai chương trình Thu cũ đổi mới giúp khách hàng tiết kiệm chi phí khi nâng cấp gọng kính và tròng kính thế hệ mới.
-
-</p>
-
-<img src="domat.jpg" alt="Hình ảnh 2">
-
-<div class="caption">
-Khách hàng trải nghiệm dịch vụ đo thị lực và cắt kính tại EYEMEDI.
-</div>
-
-<p>
-
-Với đội ngũ chuyên viên giàu kinh nghiệm cùng hệ thống thiết bị hiện đại, EYEMEDI cam kết mang đến trải nghiệm chăm sóc thị lực chuyên nghiệp, tận tâm và lâu dài.
-
-</p>
-
-<img src="thayvemui.jpg" alt="Hình ảnh 3">
-
-<div class="cta">
-
-<h2>
-EYEMEDI HỖ TRỢ ĐO MẮT, KIỂM TRA THỊ LỰC MIỄN PHÍ
-</h2>
-
-<p>
-Tại Store: 63C Lạc Long, Quân, Phường Hòa Bình, TP. Hồ Chí Minh
-</p>
-
-<a href="https://www.google.com/maps/dir/10.769414,106.6447384/Eyemedi+Optic,+63C+L%E1%BA%A1c+Long+Qu%C3%A2n,+H%C3%B2a+B%C3%ACnh,+H%E1%BB%93+Ch%C3%AD+Minh+70000,+Vi%E1%BB%87t+Nam/@10.7693834,106.6421327,17z/data=!3m1!4b1!4m17!1m7!3m6!1s0x31752f1a47511c2f:0x2407f2dbd557f609!2sEyemedi+Optic!8m2!3d10.7693569!4d106.6446698!16s%2Fg%2F11njw532jn!4m8!1m1!4e1!1m5!1m1!1s0x31752f1a47511c2f:0x2407f2dbd557f609!2m2!1d106.6446698!2d10.7693569?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D">
-📍 Chỉ đường đến EYEMEDI
-</a>
-
-</div>
-
-</div>
-
+<script>
+/* Slide ảnh chính: 3 giây */
+(function(){var w=document.querySelector('#slider .slides'),n=w.children.length,i=0,d=document.querySelector('#slider .dots'),t;
+ for(var k=0;k<n;k++){var b=document.createElement('button');b.setAttribute('aria-label','Ảnh '+(k+1));b.onclick=(function(k){return function(){go(k);run()}})(k);d.appendChild(b)}
+ function go(k){i=(k+n)%n;w.style.transform='translateX(-'+i*100+'%)';[].forEach.call(d.children,function(b,j){b.className=j==i?'on':''})}
+ function run(){clearInterval(t);t=setInterval(function(){go(i+1)},3000)}
+ go(0);run();})();
+/* Sản phẩm tham khảo: tự lướt sang trái 3 giây */
+(function(){var r=document.getElementById('spRow'),t;
+ function step(){var c=r.querySelector('.sp-card');if(!c)return;var x=c.offsetWidth+12;
+  if(r.scrollLeft+r.clientWidth>=r.scrollWidth-5)r.scrollLeft=0;else r.scrollLeft+=x}
+ function run(){clearInterval(t);t=setInterval(step,3000)}
+ r.addEventListener('mouseenter',function(){clearInterval(t)});r.addEventListener('mouseleave',run);
+ r.addEventListener('touchstart',function(){clearInterval(t)},{passive:true});r.addEventListener('touchend',run);
+ run();})();
+</script>
+<script>
+(function(){var m=document.getElementById('menu'),t;
+ document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m.open=false});
+ m.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){m.open=false})});
+ m.addEventListener('mouseleave',function(){t=setTimeout(function(){m.open=false},400)});
+ m.addEventListener('mouseenter',function(){clearTimeout(t)});
+ window.addEventListener('scroll',function(){if(m.open)m.open=false},{passive:true});
+})();
+</script>
 </body>
 </html>
-
-<!-- MENU EYEMEDI --> <div class="eyemedi-menu"> <button class="menu-btn" onclick="toggleMenu()">☰</button> <div id="dropdownMenu" class="menu-content"> 
-    <a href="https://eyemedi.vn/">Trang chủ</a>
-    <a href="https://eyemedi.vn/kinh-mat-nam.html">Kính mát nam</a> 
-    <a href="https://eyemedi.vn/kinh-mat-nu.html">Kính mát nữ</a> 
-    <a href="https://eyemedi.vn/kinh-xuyen-dem.html">Kính xuyên đêm</a> 
-    <a href="https://eyemedi.vn/gong-kinh-can-nu.html">Gọng kính nữ</a> 
-    <a href="https://eyemedi.vn/gong-kinh-can-nam.html">Gọng kính nam</a> 
-    <a href="https://eyemedi.vn/trong-kinh-can-vien-loan.html">Bảng giá tròng kính</a>
-    <a href="https://eyemedi.vn/phu-kien-mat-kinh">Phụ kiện mắt </a> 
-     <a href="https://eyemedi.vn/che-do-bao-hanh.html">Chính sách bảo hành</a>
-    <a href="https://eyemedi.vn/dat-lich-do-mat.html">Đo thị lực mắt miễn phí</a>
-	</div> </div> 
-<style> .eyemedi-menu{ position:fixed; top:10px; left:3px; z-index:9999; } .menu-btn{ background:#7fc8ff; color:#fff; border:none; padding:12px 16px; font-size:24px; border-radius:8px; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,0.2); } .menu-content{ display:none; margin-top:8px; min-width:220px; background:#ffffff; border-radius:10px; overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.15); } .menu-content a{ display:block; padding:12px 15px; text-decoration:none; color:#333; border-bottom:1px solid #f1f1f1; font-family:Arial, sans-serif; transition:0.3s; } .menu-content a:hover{ background:#EAF6FF; color:#0A6EB4; } .show{ display:block; } </style> <script> function toggleMenu() { document.getElementById("dropdownMenu") .classList.toggle("show"); } // Click ngoài menu sẽ tự đóng window.onclick = function(event) { if (!event.target.matches('.menu-btn')) { var dropdown = document.getElementById("dropdownMenu"); if (dropdown.classList.contains('show')) { dropdown.classList.remove('show'); } } } </script>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="landing-title">Chế độ bảo hành gọng kính trọn thời gian sử dụng tại Eyemedi</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(90deg, #7fc8ff 0%, #ffffff 100%);
-            min-height: 100vh;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.10);
-            backdrop-filter: blur(4px);
-        }
-
-        .hotline-btn {
-            background: linear-gradient(90deg, #ffb7eb 0%, #7fc8ff 100%);
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 2rem;
-            box-shadow: 0 4px 24px rgba(226, 79, 169, .15);
-        }
-
-        .hotline-btn svg {
-            margin-right: 4px;
-        }
-
-        .jas-sale-pop {
-            display: none;
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 9999;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 1rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            max-width: 320px;
-            padding: 1rem;
-            font-size: 14px;
-            transition: all 0.4s ease-in-out;
-        }
-
-        .jas-sale-pop.slideUp {
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        @keyframes slideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .jas-sale-pop img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 0.5rem;
-        }
-
-        .jas-sale-pop-content {
-            display: inline-block;
-            vertical-align: top;
-            margin-left: 0.75rem;
-            max-width: 200px;
-        }
-
-        .pe-7s-close {
-            cursor: pointer;
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            color: #999;
-        }
-    </style>
-
-	<!-- ================= Popup Khuyến Mại ================= -->
-
-<style>
-#promo-popup{
-    position:fixed;
-    right:20px;
-    bottom:-100px;
-    width:520px;
-    height:60px;             /* khoảng 1.5cm */
-    background:linear-gradient(90deg, #7fc8ff 0%, #ffffff 100%);
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px;
-    box-sizing:border-box;
-    z-index:999999;
-    font-family:Arial,Helvetica,sans-serif;
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
-
-    animation:
-        slideUp .8s ease forwards,
-        glow .8s infinite,
-        shake 2s infinite;
-}
-
-#promo-popup .text{
-    color:#ff3131;
-    font-size:18px;
-    font-weight:700;
-    white-space:nowrap;
-    animation:blink .8s infinite;
-}
-
-#promo-popup .btn-buy{
-    background:#FFD700;
-    color:#d90000;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:15px;
-    padding:8px 18px;
-    border-radius:30px;
-    transition:.3s;
-    animation:pulse .9s infinite;
-}
-
-#promo-popup .btn-buy:hover{
-    transform:scale(1.08);
-}
-
-#promo-popup .close{
-    color:#fff;
-    cursor:pointer;
-    font-size:22px;
-    margin-left:12px;
-    font-weight:bold;
-}
-
-@keyframes slideUp{
-    from{
-        bottom:-100px;
-        opacity:0;
-    }
-    to{
-        bottom:20px;
-        opacity:1;
-    }
-}
-
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.08);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-@keyframes blink{
-    50%{
-        opacity:.45;
-    }
-}
-
-@keyframes glow{
-    50%{
-        box-shadow:
-        0 0 12px #FFD700,
-        0 0 25px #FFD700;
-    }
-}
-
-@keyframes shake{
-    0%,100%{
-        transform:translateX(0);
-    }
-    25%{
-        transform:translateX(-2px);
-    }
-    75%{
-        transform:translateX(2px);
-    }
-}
-
-@media(max-width:768px){
-
-#promo-popup{
-    width:95%;
-    left:2.5%;
-    right:auto;
-}
-
-#promo-popup .text{
-    font-size:15px;
-}
-
-#promo-popup .btn-buy{
-    padding:7px 14px;
-    font-size:13px;
-}
-
-}
-</style>
-
-<div id="promo-popup">
-
-<div class="text">
-🔥Tặng gọng khi cắt tròng kính cận!
-</div>
-
-<a class="btn-buy"
-href="https://zalo.me/0967190005"
-target="_blank">
-INBOX
-</a>
-
-<div class="close"
-onclick="document.getElementById('promo-popup').style.display='none'">
-×
-</div>
-
-</div>
