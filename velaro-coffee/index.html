@@ -108,7 +108,7 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 .ngan form{padding:16px 18px;border-top:1px solid var(--line);display:grid;gap:8px}
 .gui{border:0;background:var(--vang);color:var(--den);font-weight:700;border-radius:99px;padding:13px;cursor:pointer;font-family:inherit}
 @media(max-width:900px){.hero .wrap.tru{grid-template-columns:repeat(2,1fr)}.hero .wrap,.nq,.dinhvi{grid-template-columns:1fr}.luoi{grid-template-columns:repeat(2,1fr)}.tru,.menu-quan{grid-template-columns:repeat(2,1fr)}.cot{grid-template-columns:1fr}.menu{display:none}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}.gallery figure:first-child{grid-column:span 2}footer .wrap{grid-template-columns:1fr}.btn.vien{margin:10px 0 0}}
-@media(max-width:520px){.hero h1{font-size:40px;line-height:1.15;letter-spacing:.02em;margin:10px 0 14px}.hero h1 .gach{display:none}.hero h1 .h1-phu{display:block;font-size:25px;letter-spacing:0;margin-top:4px;white-space:nowrap}.hero .slogan{font-size:19px}.luoi{grid-template-columns:1fr 1fr;gap:12px}.sp h3{font-size:16px}.sp .nd{padding:12px}.sp p{font-size:13px}}
+@media(max-width:520px){.hero .wrap>div{min-width:0}.hero h1,.hero .slogan{white-space:nowrap;overflow:hidden}.hero h1{line-height:1.2;margin:10px 0 12px}.luoi{grid-template-columns:1fr 1fr;gap:12px}.sp h3{font-size:16px}.sp .nd{padding:12px}.sp p{font-size:13px}}
 .zalo-float{position:fixed;right:18px;bottom:18px;z-index:30;width:60px;height:60px;border-radius:50%;background:#0068ff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;text-decoration:none;font-family:Arial,sans-serif;box-shadow:0 8px 22px #0068ff66;animation:zlRung 2.4s infinite}
 .zalo-float:before,.zalo-float:after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #0068ff;animation:zlSong 2s infinite;z-index:-1}
 .zalo-float:after{animation-delay:1s}
@@ -293,6 +293,13 @@ const ok=await guiEmail('Đăng ký nhượng quyền VELARO – '+f.get('ten'),
 if(ok)e.target.reset()});
 (function(){const l=[];if(CONFIG.hotline)l.push('Hotline: '+CONFIG.hotline);if(CONFIG.zalo)l.push('Zalo: '+CONFIG.zalo);if(CONFIG.diaChi)l.push('Địa chỉ: '+CONFIG.diaChi);if(CONFIG.email)l.push('Email: '+CONFIG.email);document.getElementById('lienHe').innerHTML=l.join('<br>')})();
 veLoc();veSP();veGio();
+</script>
+<script>
+/* Điện thoại: co cỡ chữ để tiêu đề và slogan nằm vừa 1 dòng */
+function vuaMotDong(){const dt=innerWidth<=520;document.querySelectorAll('.hero h1,.hero .slogan').forEach(el=>{
+el.style.fontSize='';if(!dt)return;let fs=parseFloat(getComputedStyle(el).fontSize);const max=el.tagName==='H1'?34:22;fs=Math.min(fs,max);el.style.fontSize=fs+'px';
+let n=0;while(el.scrollWidth>el.clientWidth&&fs>12&&n++<60){fs-=.5;el.style.fontSize=fs+'px'}})}
+vuaMotDong();addEventListener('resize',vuaMotDong);if(document.fonts)document.fonts.ready.then(vuaMotDong);addEventListener('load',vuaMotDong);
 </script>
 </body>
 </html>
