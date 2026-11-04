@@ -142,6 +142,24 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 .form-box .ok{display:none;color:#2e7d32;font-weight:700;text-align:center;margin-top:12px}
 .article figure:not(.slide) img{max-height:520px;width:auto;max-width:100%;margin:0 auto}
 .article figure:not(.slide){background:#f4f9fb;text-align:center}
+
+/* Lưới thẻ (dùng cho trang tổng hợp) */
+.luoi{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:14px 0 18px}
+.luoi.nho{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+.luoi.ba{grid-template-columns:repeat(3,1fr)}
+.luoi.bon{grid-template-columns:repeat(4,1fr)}
+.the{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;text-decoration:none;color:var(--ink);transition:box-shadow .2s,transform .2s}
+a.the:hover{box-shadow:0 8px 24px rgba(7,58,60,.12);transform:translateY(-2px)}
+.the img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#eef6f8}
+.the .nd{padding:12px 14px 14px}
+.the .nhan{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#4d7a80;margin-bottom:4px}
+.the b{display:block;font-size:15px;line-height:1.35;margin-bottom:4px}
+.the span.mo{display:block;font-size:13.5px;line-height:1.5;color:#526d72}
+.the .icon{font-size:28px;line-height:1;margin-bottom:8px}
+.nut-mxh{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.nut-mxh a{padding:10px 18px;border-radius:999px;background:var(--accent);color:#fff;font-weight:700;text-decoration:none;font-size:14px}
+.nut-mxh a:hover{background:var(--ink)}
+@media(max-width:600px){.luoi,.luoi.ba,.luoi.bon{grid-template-columns:1fr 1fr;gap:10px}.the .nd{padding:10px}.the b{font-size:14px}}
 </style>
 
 <script type="application/ld+json">
@@ -253,51 +271,47 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 
   <!-- THÂN BÀI: máy tự dựng từ các cặp H2_n / NOI_DUNG_n trong file .txt (số phần tùy bài) -->
   <h2>Dịch vụ tại EYEMEDI</h2>
-  <h3>Đo thị lực chuyên sâu</h3>
-<p>Quy trình tư vấn rõ ràng, hỗ trợ lựa chọn giải pháp phù hợp nhu cầu sử dụng. <a href="/dat-lich-do-mat.html">Xem dịch vụ đo mắt →</a></p>
-<h3>Tròng kính hiện đại cho cuộc sống số</h3>
-<p>Bảo vệ thị lực, tối ưu trải nghiệm nhìn trong học tập, công việc và lái xe. <a href="/trong-kinh-can-vien-loan.html">Xem bộ sưu tập tròng kính →</a></p>
-<h3>Gọng kính tinh tế – phù hợp từng khuôn mặt</h3>
-<p>Từ phong cách thanh lịch đến trẻ trung, hiện đại và cá tính. <a href="/san-pham.html">Xem gọng kính →</a></p>
-<h3>Giải pháp thị lực dành cho mọi độ tuổi</h3>
-<p>Tư vấn kính đa tròng và các giải pháp thị lực theo nhu cầu cá nhân. <a href="/trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong.html">Tìm hiểu tròng kính đa tròng →</a></p>
-<h3>Đến EYEMEDI để được tư vấn trực tiếp</h3>
-<p>Liên hệ để được hỗ trợ về sản phẩm, dịch vụ và lịch tư vấn: <a href="tel:0967190005">☎ 0967 190 005</a>.</p>
+  <p>EYEMEDI mang đến dịch vụ chăm sóc thị lực trọn gói: từ đo mắt, tư vấn tròng, chọn gọng đến bảo hành sau mua.</p>
+<div class="luoi bon">
+<a class="the" href="/dat-lich-do-mat.html"><span class="nd"><span class="icon">👁</span><b>Đo thị lực chuyên sâu</b><span class="mo">Quy trình tư vấn rõ ràng, hỗ trợ lựa chọn giải pháp phù hợp nhu cầu sử dụng.</span></span></a>
+<a class="the" href="/trong-kinh-can-vien-loan.html"><span class="nd"><span class="icon">🔍</span><b>Tròng kính hiện đại cho cuộc sống số</b><span class="mo">Bảo vệ thị lực, tối ưu trải nghiệm nhìn trong học tập, công việc và lái xe.</span></span></a>
+<a class="the" href="/san-pham.html"><span class="nd"><span class="icon">👓</span><b>Gọng kính tinh tế – phù hợp từng khuôn mặt</b><span class="mo">Từ phong cách thanh lịch đến trẻ trung, hiện đại và cá tính.</span></span></a>
+<a class="the" href="/trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong.html"><span class="nd"><span class="icon">🧓</span><b>Giải pháp thị lực mọi độ tuổi</b><span class="mo">Tư vấn kính đa tròng và các giải pháp thị lực theo nhu cầu cá nhân.</span></span></a>
+</div>
+<p>Đến EYEMEDI để được tư vấn trực tiếp về sản phẩm, dịch vụ và lịch hẹn: <a href="tel:0967190005">☎ 0967 190 005</a>.</p>
 
   <h2>Sản phẩm nổi bật</h2>
   <p>Các sản phẩm được quan tâm nhiều nhất tại EYEMEDI.</p>
-<ul>
-<li><a href="/gong-kinh-can-hoc-sinh.html">Gọng kính cận học sinh</a> – bền bỉ, nhẹ nhàng, chắc chắn và phù hợp lứa tuổi.</li>
-<li><a href="/gong-kinh-can-nu.html">Gọng kính cận nữ</a> – giải pháp thị lực cho học tập, công việc và cuộc sống số.</li>
-<li><a href="/gong-kinh-can-nam.html">Gọng kính cận nam</a> – kết hợp phong cách và sự thoải mái trong từng trải nghiệm.</li>
-<li><a href="/kinh-mat-nam.html">Kính mát nam</a> – nhiều lựa chọn màu sắc và nhu cầu sử dụng.</li>
-<li><a href="/kinh-mat-nu.html">Kính mát nữ</a> – đa dạng kiểu mẫu, hợp mọi xu hướng, phong cách.</li>
-<li><a href="/kinh-xuyen-dem.html">Kính xuyên đêm</a> – chống chói, chống bám nước, chống bụi, nhìn rõ đường đêm.</li>
-</ul>
-<figure><img src="/gonghocsinh.jpg" alt="Gọng kính cận học sinh tại EYEMEDI" loading="lazy"></figure>
+<div class="luoi ba">
+<a class="the" href="/gong-kinh-can-hoc-sinh.html"><img src="/images/the/gonghocsinh.webp" width="480" height="360" alt="Gọng kính cận học sinh" loading="lazy"><span class="nd"><span class="nhan">Gọng kính</span><b>Gọng kính cận học sinh</b><span class="mo">Bền bỉ, nhẹ nhàng, chắc chắn và phù hợp lứa tuổi.</span></span></a>
+<a class="the" href="/gong-kinh-can-nu.html"><img src="/images/the/gongkinhnu.webp" width="480" height="360" alt="Gọng kính cận nữ" loading="lazy"><span class="nd"><span class="nhan">Gọng kính</span><b>Gọng kính cận nữ</b><span class="mo">Giải pháp thị lực cho học tập, công việc và cuộc sống số.</span></span></a>
+<a class="the" href="/gong-kinh-can-nam.html"><img src="/images/the/p-stylesilver.webp" width="480" height="360" alt="Gọng kính cận nam" loading="lazy"><span class="nd"><span class="nhan">Gọng kính</span><b>Gọng kính cận nam</b><span class="mo">Kết hợp phong cách và sự thoải mái trong từng trải nghiệm.</span></span></a>
+<a class="the" href="/kinh-mat-nam.html"><img src="/images/the/p28220.webp" width="480" height="360" alt="Kính mát nam" loading="lazy"><span class="nd"><span class="nhan">Kính mát</span><b>Kính mát nam</b><span class="mo">Nhiều lựa chọn màu sắc và nhu cầu sử dụng.</span></span></a>
+<a class="the" href="/kinh-mat-nu.html"><img src="/images/the/sunnu4.webp" width="480" height="360" alt="Kính mát nữ" loading="lazy"><span class="nd"><span class="nhan">Kính mát</span><b>Kính mát nữ</b><span class="mo">Đa dạng kiểu mẫu, hợp mọi xu hướng, phong cách.</span></span></a>
+<a class="the" href="/kinh-xuyen-dem.html"><img src="/images/the/8602.webp" width="480" height="360" alt="Kính xuyên đêm" loading="lazy"><span class="nd"><span class="nhan">Kính lái xe</span><b>Kính xuyên đêm</b><span class="mo">Chống chói, chống bám nước, chống bụi, nhìn rõ đường đêm.</span></span></a>
+</div>
 
-  <h2>Tin tức và kiến thức</h2>
+  <h2>Tin tức và kiến thức mắt kính</h2>
   <p>Cập nhật thông tin, kiến thức hữu ích về mắt kính, y khoa và bác sĩ giỏi.</p>
-<ul>
-<li><strong>Kiến thức y khoa:</strong> <a href="/bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm.html">BS.CKII Nguyễn Duy Trì – chuyên gia Y học hạt nhân trong điều trị ung bướu</a>.</li>
-<li><strong>BS thẩm mỹ:</strong> <a href="/bac-si-phau-thuat-tham-my-quan-10-tphcm.html">Bác sĩ phẫu thuật thẩm mỹ giỏi có phòng khám tại Quận 10</a> – BS CK2 Trần Đắc Quang, 366 Cao Thắng, Quận 10.</li>
-<li><strong>Tròng kính cận:</strong> <a href="/top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay.html">Cách chọn tròng kính nhiều công dụng</a> – tròng kính đổi màu chống UV, chống ánh sáng xanh.</li>
-<li><strong>Bác sĩ mắt:</strong> <a href="/bac-si-kham-mat-gioi-o-tphcm.html">Bác sĩ khám mắt giỏi và uy tín ở TP.HCM</a> – khám, điều trị bệnh nội khoa về mắt.</li>
-<li><strong>Optic store:</strong> <a href="/top-5-dia-chi-cat-trong-kinh-can-vien-loan-uy-tin-tai-tp-hcm.html">Địa chỉ đo mắt cắt kính cận tại TP.HCM</a>.</li>
-<li><strong>Kính xuyên đêm:</strong> <a href="/kinh-xuyen-dem.html">Hỗ trợ lái xe đêm</a> – chống chói đèn, nhìn rõ đường đêm.</li>
-<li><strong>Kính áp tròng:</strong> <a href="/top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm.html">Địa chỉ bán lens mắt uy tín</a> – nhiều mẫu lens mới cao cấp.</li>
-<li><strong>Chế độ bảo hành:</strong> <a href="/che-do-bao-hanh.html">Chính sách bảo hành gọng và tròng kính</a>.</li>
-<li><strong>Kiến thức mắt:</strong> <a href="/benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi.html">dấu hiệu đục thủy tinh thể và nhược thị ở trẻ</a>.</li>
-</ul>
+<div class="luoi bon">
+<a class="the" href="/bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm.html"><img src="/images/the/bsnguyenduytri.webp" width="480" height="360" alt="BS.CKII Nguyễn Duy Trì – chuyên gia Y học hạt nhân" loading="lazy"><span class="nd"><span class="nhan">Kiến thức y khoa</span><b>BS.CKII Nguyễn Duy Trì – chuyên gia Y học hạt nhân</b><span class="mo">Chuyên gia tầm soát, chẩn đoán và điều trị bệnh lý khối u, tuyến giáp, tuyến vú.</span></span></a>
+<a class="the" href="/bac-si-phau-thuat-tham-my-quan-10-tphcm.html"><img src="/images/the/drdacquang1.webp" width="480" height="360" alt="Bác sĩ phẫu thuật thẩm mỹ giỏi tại Quận 10" loading="lazy"><span class="nd"><span class="nhan">BS thẩm mỹ</span><b>Bác sĩ phẫu thuật thẩm mỹ giỏi tại Quận 10</b><span class="mo">BS CK2 Trần Đắc Quang – phòng khám 366 Cao Thắng, Quận 10.</span></span></a>
+<a class="the" href="/top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay.html"><img src="/images/the/trongzinmi.webp" width="480" height="360" alt="Cách chọn tròng kính nhiều công dụng" loading="lazy"><span class="nd"><span class="nhan">Tròng kính cận</span><b>Cách chọn tròng kính nhiều công dụng</b><span class="mo">Tròng kính đổi màu chống UV, chống ánh sáng xanh.</span></span></a>
+<a class="the" href="/bac-si-kham-mat-gioi-o-tphcm.html"><img src="/images/the/bsbuiquangtuan.webp" width="480" height="360" alt="Bác sĩ khám mắt giỏi và uy tín ở TP.HCM" loading="lazy"><span class="nd"><span class="nhan">Bác sĩ mắt</span><b>Bác sĩ khám mắt giỏi và uy tín ở TP.HCM</b><span class="mo">Khám và điều trị các bệnh nội khoa về mắt: viêm kết giác mạc, bệnh lý đáy mắt.</span></span></a>
+<a class="the" href="/top-5-dia-chi-cat-trong-kinh-can-vien-loan-uy-tin-tai-tp-hcm.html"><img src="/images/the/kiemtrathiluc.webp" width="480" height="360" alt="Địa chỉ đo mắt cắt kính cận tại TP.HCM" loading="lazy"><span class="nd"><span class="nhan">Optic store</span><b>Địa chỉ đo mắt cắt kính cận tại TP.HCM</b><span class="mo">Chọn đúng để chăm sóc thị lực của bạn.</span></span></a>
+<a class="the" href="/top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm.html"><img src="/images/the/lenscanloan.webp" width="480" height="360" alt="Địa chỉ bán lens mắt uy tín" loading="lazy"><span class="nd"><span class="nhan">Kính áp tròng</span><b>Địa chỉ bán lens mắt uy tín</b><span class="mo">Nhiều mẫu lens mới cao cấp.</span></span></a>
+<a class="the" href="/che-do-bao-hanh.html"><img src="/images/the/baohanhgong.webp" width="480" height="360" alt="Chế độ bảo hành gọng và tròng kính" loading="lazy"><span class="nd"><span class="nhan">Chính sách</span><b>Chế độ bảo hành gọng và tròng kính</b><span class="mo">Siết ốc, chỉnh form, thay ve mũi, đổi độ tròng, hỗ trợ rơi vỡ.</span></span></a>
+<a class="the" href="/benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi.html"><img src="/images/the/domat.webp" width="480" height="360" alt="Đục thủy tinh thể và nhược thị" loading="lazy"><span class="nd"><span class="nhan">Kiến thức mắt</span><b>Đục thủy tinh thể và nhược thị</b><span class="mo">Dấu hiệu nhận biết sớm và hướng điều trị.</span></span></a>
+</div>
 
   <h2>Không gian và trải nghiệm tại EYEMEDI</h2>
-  <ul>
-<li><a href="/dat-lich-do-mat.html">Không gian trải nghiệm tại EYEMEDI</a> – khám phá showroom của chúng tôi.</li>
-<li><a href="/dat-lich-do-mat.html">Quy trình tư vấn kính tại EYEMEDI</a> – minh bạch, tận tâm và cá nhân hóa.</li>
-<li><a href="/phu-kien-mat-kinh.html">Kính mắt – phụ kiện của phong cách</a> – chọn kính để hoàn thiện diện mạo.</li>
-</ul>
-<p>Hình ảnh dịch vụ, không gian và trải nghiệm khách hàng: đo mắt và tư vấn thị lực, tư vấn lựa chọn kính, trải nghiệm khách hàng, không gian EYEMEDI và thiết bị đo mắt hiện đại.</p>
-<figure><img src="/phothutuong.jpg" alt="Không gian EYEMEDI – định hướng chuyên sâu trong lĩnh vực nhãn kính" loading="lazy"></figure>
+  <p>Hình ảnh dịch vụ, không gian và trải nghiệm khách hàng tại showroom EYEMEDI.</p>
+<div class="luoi bon">
+<a class="the" href="/dat-lich-do-mat.html"><img src="/images/the/trainghiemdomat.webp" width="480" height="360" alt="Đo mắt và tư vấn thị lực" loading="lazy"><span class="nd"><b>Đo mắt và tư vấn thị lực</b><span class="mo">Không gian trải nghiệm tại EYEMEDI.</span></span></a>
+<a class="the" href="/dat-lich-do-mat.html"><img src="/images/the/tuvan.webp" width="480" height="360" alt="Tư vấn lựa chọn kính" loading="lazy"><span class="nd"><b>Tư vấn lựa chọn kính</b><span class="mo">Quy trình minh bạch, tận tâm và cá nhân hóa.</span></span></a>
+<a class="the" href="/dat-lich-do-mat.html"><img src="/images/the/thietbi.webp" width="480" height="360" alt="Thiết bị đo mắt hiện đại" loading="lazy"><span class="nd"><b>Thiết bị đo mắt hiện đại</b><span class="mo">Đo khúc xạ tự động, kết quả chính xác.</span></span></a>
+<a class="the" href="/phu-kien-mat-kinh.html"><img src="/images/the/phukienmatkinh.webp" width="480" height="360" alt="Kính mắt – phụ kiện của phong cách" loading="lazy"><span class="nd"><b>Kính mắt – phụ kiện của phong cách</b><span class="mo">Chọn kính để hoàn thiện diện mạo.</span></span></a>
+</div>
 <h3>Cần tư vấn về mắt kính và tròng kính cận?</h3>
 <p>Hãy đến EYEMEDI để được hỗ trợ tốt nhất về thị lực, mắt kính và tròng kính. Gọi <a href="tel:0967190005">☎ 0967 190 005</a>.</p>
 
@@ -312,12 +326,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 
   <h2>Kết nối với EYEMEDI</h2>
   <p>Theo dõi, liên hệ và tìm đường đến showroom:</p>
-<ul>
-<li><a href="https://www.facebook.com/eyemedioptic" rel="nofollow noopener" target="_blank">Facebook</a> – tư vấn nhanh.</li>
-<li><a href="https://www.tiktok.com/@eyemedi.optic" rel="nofollow noopener" target="_blank">TikTok</a> – xem video mới.</li>
-<li><a href="https://shopee.vn/eyemedi.optic" rel="nofollow noopener" target="_blank">Shopee</a> – mua liền tay.</li>
-<li><a href="https://maps.app.goo.gl/hQ9BKNU5FiNXPLH96" rel="noopener" target="_blank">Google Maps</a> – chỉ đường đến EYEMEDI.</li>
-</ul>
+<div class="nut-mxh"><a href="https://www.facebook.com/eyemedioptic" rel="nofollow noopener" target="_blank">Facebook</a><a href="https://www.tiktok.com/@eyemedi.optic" rel="nofollow noopener" target="_blank">TikTok</a><a href="https://shopee.vn/eyemedi.optic" rel="nofollow noopener" target="_blank">Shopee</a><a href="https://zalo.me/0967190005" rel="nofollow noopener" target="_blank">Zalo</a><a href="https://maps.app.goo.gl/hQ9BKNU5FiNXPLH96" rel="noopener" target="_blank">📍 Google Maps</a></div>
 
   <div class="box">
     <strong>Đo thị lực miễn phí tại EYEMEDI</strong>
