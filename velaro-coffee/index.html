@@ -109,6 +109,13 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 .gui{border:0;background:var(--vang);color:var(--den);font-weight:700;border-radius:99px;padding:13px;cursor:pointer;font-family:inherit}
 @media(max-width:900px){.hero .wrap.tru{grid-template-columns:repeat(2,1fr)}.hero .wrap,.nq,.dinhvi{grid-template-columns:1fr}.luoi{grid-template-columns:repeat(2,1fr)}.tru,.menu-quan{grid-template-columns:repeat(2,1fr)}.cot{grid-template-columns:1fr}.menu{display:none}.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:160px}.gallery figure:first-child{grid-column:span 2}footer .wrap{grid-template-columns:1fr}.btn.vien{margin:10px 0 0}}
 @media(max-width:520px){.luoi{grid-template-columns:1fr 1fr;gap:12px}.sp h3{font-size:16px}.sp .nd{padding:12px}.sp p{font-size:13px}}
+.zalo-noi{position:fixed;right:18px;bottom:20px;z-index:30;width:60px;height:60px;border-radius:50%;background:#0068ff;color:#fff;display:flex;align-items:center;justify-content:center;font:700 15px Arial,sans-serif;text-decoration:none;box-shadow:0 6px 18px #0068ff66;animation:zlLac 2.5s ease-in-out infinite}
+.zalo-noi::before,.zalo-noi::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #0068ff;animation:zlSong 2s ease-out infinite}
+.zalo-noi::after{animation-delay:1s}
+@keyframes zlSong{from{transform:scale(1);opacity:.8}to{transform:scale(1.8);opacity:0}}
+@keyframes zlLac{0%,100%{transform:rotate(0)}5%{transform:rotate(-12deg)}10%{transform:rotate(12deg)}15%{transform:rotate(-8deg)}20%{transform:rotate(0)}}
+.mo-gio .zalo-noi{display:none}
+@media (prefers-reduced-motion:reduce){.zalo-noi,.zalo-noi::before,.zalo-noi::after{animation:none}}
 </style>
 </head>
 <body>
@@ -214,6 +221,7 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 <div><b>Café</b><p>Coffee Shop<br>Experience<br>Franchise</p></div>
 </div></footer>
 
+<a class="zalo-noi" href="https://zalo.me/0869222638" target="_blank" rel="nofollow noopener" aria-label="Chat Zalo với VELARO">Zalo</a>
 <div class="lop" onclick="dongGio()"></div>
 <aside class="ngan" aria-label="Giỏ hàng">
 <h3>Giỏ hàng <button onclick="dongGio()" aria-label="Đóng">×</button></h3>
@@ -229,7 +237,7 @@ footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}footer b{co
 
 <script>
 /* ====== CẬP NHẬT THÔNG TIN THẬT TẠI ĐÂY ====== */
-const CONFIG={hotline:'0869 222 638',zalo:'zalo.me/0967190005',diaChi:'',email:''};
+const CONFIG={hotline:'0869 222 638',zalo:'',diaChi:'',email:''};
 /* gia: số tiền (đ). Để 0 = hiển thị "Liên hệ". */
 const SAN_PHAM=[
 {id:'signature-blend',anh:'velaro-signature-blend',ten:'VELARO Signature Blend 250g',loai:'Ground',mota:'100% cà phê Việt rang xay – đậm đà, hậu ngọt, hợp pha phin và cà phê sữa.',gia:0},
@@ -249,14 +257,14 @@ function doi(id,d){gio[id]=(gio[id]||0)+d;if(gio[id]<=0)delete gio[id];veGio()}
 function veGio(){const ids=Object.keys(gio);document.getElementById('dem').textContent=ids.reduce((a,i)=>a+gio[i],0);let tong=0;
 document.getElementById('dsGio').innerHTML=ids.length?ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);tong+=p.gia*gio[i];return `<div class="dong"><img class="tn" src="images/${p.anh}.webp" alt="${p.ten}" width="56" height="56"><span class="tt"><b>${p.ten}</b><small>${p.gia>0?fmt(p.gia):'Nhận báo giá'}</small></span><span class="sl"><button onclick="doi('${i}',-1)" aria-label="Giảm">−</button>${gio[i]}<button onclick="doi('${i}',1)" aria-label="Tăng">+</button></span></div>`}).join('')+`<p class="tong">Tạm tính: <b>${tong>0?fmt(tong):'Nhận báo giá'}</b>${tong>0&&ids.some(i=>!SAN_PHAM.find(x=>x.id===i).gia)?' + sản phẩm nhận báo giá':''}</p>`:'<p>Giỏ hàng trống.</p>'}
 function moGio(){document.body.classList.add('mo-gio')}function dongGio(){document.body.classList.remove('mo-gio')}
-function lh(){let t='';if(CONFIG.zalo)t+=`\n\nZalo: ${CONFIG.zalo}`;if(CONFIG.hotline)t+=`\nHotline: ${CONFIG.hotline}`;return t}
+function lh(){return CONFIG.hotline?`\n\nHotline: ${CONFIG.hotline}`:''}
 const EMAIL_NHAN='eyemedi.group@gmail.com';
 async function guiEmail(tieuDe,duLieu,kq,nut,noiDung){
 nut.disabled=true;const cu=nut.textContent;nut.textContent='Đang gửi...';kq.textContent='';
 try{const r=await fetch('https://formsubmit.co/ajax/'+EMAIL_NHAN,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.assign({_subject:tieuDe,_template:'table',_captcha:'false','Trang':location.href},duLieu))});
 const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw 0;
 kq.textContent='Đã gửi thành công! VELARO sẽ liên hệ lại với bạn sớm nhất.';return true}
-catch(_){kq.textContent='Chưa gửi được, vui lòng gửi nội dung dưới đây qua Zalo hoặc hotline:\n\n'+noiDung+lh();return false}
+catch(_){kq.textContent='Chưa gửi được, vui lòng gửi nội dung dưới đây qua Zalo (nút góc phải) hoặc hotline:\n\n'+noiDung+lh();return false}
 finally{nut.disabled=false;nut.textContent=cu}}
 document.getElementById('datHang').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const ids=Object.keys(gio);const kq=document.getElementById('kq');
 if(!ids.length){kq.textContent='Bạn chưa chọn sản phẩm.';return}
