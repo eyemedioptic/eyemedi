@@ -266,13 +266,28 @@ document.getElementById('dsGio').innerHTML=ids.length?ids.map(i=>{const p=SAN_PH
 function moGio(){document.body.classList.add('mo-gio')}function dongGio(){document.body.classList.remove('mo-gio')}
 function lh(){return CONFIG.hotline?`\n\nHotline: ${CONFIG.hotline}`:''}
 const EMAIL_NHAN='eyemedi.group@gmail.com';
-async function guiEmail(tieuDe,duLieu,kq,nut,noiDung){
-nut.disabled=true;const cu=nut.textContent;nut.textContent='Đang gửi...';kq.textContent='';
-try{const r=await fetch('https://formsubmit.co/ajax/'+EMAIL_NHAN,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(Object.assign({_subject:tieuDe,_template:'table',_captcha:'false','Trang':location.href},duLieu))});
+/* Gửi email: lưu đơn chờ gửi vào máy khách trước, gửi bằng keepalive (vẫn đi tiếp khi khách thoát trang),
+   tự thử lại 3 lần; nếu khách đóng trang khi chưa gửi xong thì lần mở web sau sẽ tự gửi lại. */
+const KHO='velaro_cho_gui';
+function docCho(){try{return JSON.parse(localStorage.getItem(KHO)||'[]')}catch(_){return[]}}
+function ghiCho(ds){try{localStorage.setItem(KHO,JSON.stringify(ds))}catch(_){}}
+async function guiMot(goi){
+const body=new URLSearchParams(Object.assign({_subject:goi.tieuDe,_template:'table',_captcha:'false','Trang':location.href,'Mã gửi':goi.ma},goi.duLieu));
+const r=await fetch('https://formsubmit.co/ajax/'+EMAIL_NHAN,{method:'POST',body,keepalive:true,headers:{'Accept':'application/json'}});
 const j=await r.json().catch(()=>({}));if(!r.ok||j.success===false||j.success==='false')throw 0;
-kq.textContent='Đã gửi thành công! VELARO sẽ liên hệ lại với bạn sớm nhất.';return true}
-catch(_){kq.textContent='Chưa gửi được, vui lòng gửi nội dung dưới đây qua Zalo (nút góc phải) hoặc hotline:\n\n'+noiDung+lh();return false}
-finally{nut.disabled=false;nut.textContent=cu}}
+ghiCho(docCho().filter(x=>x.ma!==goi.ma))}
+async function guiEmail(tieuDe,duLieu,kq,nut,noiDung){
+nut.disabled=true;nut.dataset.cu=nut.dataset.cu||nut.textContent;nut.textContent='Đang gửi...';kq.textContent='Đang gửi, vui lòng chờ...';
+const goi={ma:Date.now().toString(36)+Math.random().toString(36).slice(2,6),tieuDe,duLieu};
+ghiCho(docCho().concat(goi));
+for(let lan=1;lan<=3;lan++){
+ try{await guiMot(goi);kq.textContent='Đã gửi thành công! VELARO sẽ liên hệ lại với bạn sớm nhất.';nut.textContent='Đã gửi ✓';
+  setTimeout(()=>{nut.disabled=false;nut.textContent=nut.dataset.cu},4000);return true}
+ catch(_){if(lan<3){kq.textContent='Mạng chậm, đang thử gửi lại ('+(lan+1)+'/3)...';await new Promise(r=>setTimeout(r,2500*lan))}}}
+kq.textContent='Chưa gửi được do mạng. Đơn đã được lưu và sẽ tự gửi lại khi bạn mở lại trang. Bạn cũng có thể gửi ngay qua Zalo (nút góc phải) hoặc hotline:\n\n'+noiDung+lh();
+nut.disabled=false;nut.textContent='Gửi lại';return false}
+/* Lần mở web sau: tự gửi các đơn còn chờ */
+window.addEventListener('load',()=>{docCho().forEach(g=>{guiMot(g).catch(()=>{})})});
 document.getElementById('datHang').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const ids=Object.keys(gio);const kq=document.getElementById('kq');
 if(!ids.length){kq.textContent='Bạn chưa chọn sản phẩm.';return}
 const ds=ids.map(i=>{const p=SAN_PHAM.find(x=>x.id===i);return '- '+p.ten+' x'+gio[i]+' ('+fmt(p.gia)+')'}).join('\n');
