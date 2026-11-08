@@ -65,7 +65,7 @@ section.products{padding:55px 5%}.section-head{display:flex;justify-content:spac
 .main-menu-links>a:hover,.main-menu-links>.service-menu>summary:hover{background:#f0f8fa}
 .main-menu-links>.service-menu{position:relative;width:100%}
 .main-menu-links>.service-menu[open] .service-links{display:grid;position:static;min-width:0;width:auto;margin:2px 0 7px;padding:6px;background:#f4fafb;border:0;border-radius:10px;box-shadow:none;gap:2px}
-.main-menu-links>.service-menu .service-links button{width:100%;min-height:40px;padding:9px 11px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:13px;text-align:left;white-space:normal}
+.main-menu-links>.service-menu .service-links button{width:100%;min-height:40px;padding:9px 11px;border:0;border-radius:8px;background:transparent;color:var(--ink);font-size:13px;text-align:left;white-space:normal}.service-menu .service-links a{display:block;width:100%;min-height:40px;padding:9px 11px;border-radius:8px;color:var(--ink);font-size:13px;font-weight:400;text-decoration:none;line-height:1.5}.service-menu .service-links a:hover{background:#eef8fa}
 .main-menu-links>.service-menu .service-links button:hover{background:#e8f4f7}
 @media(max-width:600px){.site-header{padding:11px 14px;gap:8px}.site-header .brand{font-size:25px}.site-header .brand small{font-size:12px}.header-actions{gap:7px}.site-header .cart-button{padding:10px 12px;min-height:42px;font-size:13px}.main-menu-dropdown>summary{padding:9px 11px;min-height:42px;font-size:13px;gap:6px}.menu-icon{font-size:18px}.main-menu-links{top:calc(100% + 9px);width:min(290px,calc(100vw - 24px))}}
 @media(max-width:380px){.site-header{padding-left:10px;padding-right:10px}.site-header .brand{font-size:22px}.site-header .brand small{font-size:11px}.site-header .cart-button{font-size:12px;padding:9px 10px}.main-menu-dropdown>summary{font-size:12px;padding:8px 9px}}
@@ -184,11 +184,18 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
         <summary aria-label="Mở menu"><span class="menu-icon">☰</span><span>MENU</span><span class="menu-chevron">▾</span></summary>
         <div class="main-menu-links">
           <a href="#" onclick="showHome();closeMainMenu();return false">Trang chủ</a>
-          <a href="#products" onclick="filterCategory('Gọng kính cận');return false">Gọng kính cận</a>
-          <a href="#products" onclick="filterCategory('Kính thời trang');return false">Kính thời trang</a>
-          <a href="#products" onclick="filterCategory('Kính áp tròng');return false">Kính áp tròng</a>
-          <a href="#products" onclick="filterCategory('Tròng kính mắt');return false">Tròng kính mắt</a>
-          <a href="#products" onclick="filterCategory('Phụ kiện mắt kính');return false">Phụ kiện mắt kính</a>
+          <details class="service-menu">
+            <summary>Sản phẩm <span>▾</span></summary>
+            <div class="service-links">
+              <a href="#products" onclick="filterCategory('Gọng kính cận');return false">Gọng kính cận</a>
+              <a href="#products" onclick="filterCategory('Kính thời trang');return false">Kính thời trang</a>
+              <a href="#products" onclick="filterCategory('Kính áp tròng');return false">Kính áp tròng</a>
+              <a href="#products" onclick="filterCategory('Tròng kính mắt');return false">Tròng kính mắt</a>
+              <a href="#products" onclick="filterCategory('Phụ kiện mắt kính');return false">Phụ kiện mắt kính</a>
+              <a href="/chuyen-muc.html?nhom=kinh-mat" onclick="closeMainMenu()">Bài viết: Tròng kính &amp; gọng kính</a>
+              <a href="/chuyen-muc.html?nhom=lens" onclick="closeMainMenu()">Bài viết: Kính áp tròng &amp; phụ kiện</a>
+            </div>
+          </details>
           <details class="service-menu">
             <summary>Dịch vụ EYEMEDI <span>▾</span></summary>
             <div class="service-links">
@@ -528,5 +535,6 @@ function pbInit(){var tr=document.getElementById('pbTrack');if(!tr||tr.children.
 pbInit();
 </script>
 
+<script>(function(){var m=document.getElementById('mainMenuDropdown'),t;if(!m)return;m.addEventListener('mouseleave',function(){t=setTimeout(function(){if(window.closeMainMenu)closeMainMenu();else m.removeAttribute('open')},400)});m.addEventListener('mouseenter',function(){clearTimeout(t)});})();</script>
 </body>
 </html>
