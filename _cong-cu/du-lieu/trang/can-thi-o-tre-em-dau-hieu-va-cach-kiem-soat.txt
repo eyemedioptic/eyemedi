@@ -1,0 +1,48 @@
+TIEU_DE: Cận thị ở trẻ em: dấu hiệu sớm và cách kiểm soát tăng độ
+TITLE: Cận thị ở trẻ em: dấu hiệu và cách kiểm soát | EYEMEDI
+SLUG: can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat
+TU_KHOA_CHINH: cận thị ở trẻ em
+TU_KHOA_PHU: kiểm soát cận thị, trẻ tăng độ cận nhanh, ortho-k, atropine liều thấp, tròng kính kiểm soát cận thị
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: có
+MO_TA_SEO: Cận thị ở trẻ em: dấu hiệu nhận biết sớm, vì sao tăng độ nhanh và các cách kiểm soát như tròng kính chuyên dụng, Ortho-K. Đo mắt miễn phí tại EYEMEDI.
+NGAY_DANG: 2026-11-10
+ANH_RIENG:
+anh-rieng/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat-1.jpg | Bé gái đeo kính cận gọng hồng – cận thị ở trẻ em
+anh-rieng/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat-2.jpg | Trẻ nhỏ đeo kính cận gọng tròn khi học tập
+anh-rieng/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat-3.jpg | Học sinh đeo kính cận cần kiểm tra mắt định kỳ
+anh-rieng/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat-4.jpg | Trẻ em đeo kính gọng đen kiểm soát cận thị
+anh-rieng/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat-5.jpg | Trẻ học tập cùng bạn, cần nghỉ mắt để hạn chế tăng độ cận
+DOAN_MO_DAU: Cận thị ở trẻ em đang tăng nhanh do học tập nhiều, dùng thiết bị điện tử sớm và ít hoạt động ngoài trời. Phát hiện sớm và kiểm soát đúng cách giúp làm chậm tốc độ tăng độ, giảm nguy cơ biến chứng khi trưởng thành.
+H2_1: Dấu hiệu trẻ bị cận thị cần lưu ý
+NOI_DUNG_1: <ul>
+<li>Nheo mắt, nghiêng đầu khi nhìn bảng hoặc tivi, hay ngồi sát màn hình.</li>
+<li>Dụi mắt, chớp mắt nhiều, kêu mỏi mắt, nhức đầu sau giờ học.</li>
+<li>Chép bài chậm, nhìn nhầm chữ trên bảng, kết quả học tập giảm.</li>
+</ul>
+<p>Trẻ nên được kiểm tra mắt định kỳ, nhất là khi bố mẹ cũng bị cận. Nhìn mờ kéo dài cũng có thể do nguyên nhân khác, xem thêm <a href="/mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri.html">mắt bị nhòe mờ do đâu</a>.</p>
+H2_2: Các cách kiểm soát cận thị tiến triển ở trẻ
+NOI_DUNG_2: <ul>
+<li><b>Tròng kính kiểm soát cận thị:</b> thiết kế nhiều vùng hội tụ giúp làm chậm tăng độ, dễ dùng với trẻ nhỏ. Tham khảo dòng <a href="/trong-kinh-chemi-sieu-mong-chinh-hang-han-quoc.html">tròng Chemi U10 cho học sinh</a>.</li>
+<li><b>Kính áp tròng Ortho-K:</b> đeo ban đêm để định hình giác mạc tạm thời, ban ngày nhìn rõ không cần kính; cần bác sĩ chỉ định và theo dõi.</li>
+<li><b>Thuốc nhỏ atropine liều thấp:</b> là thuốc kê đơn, chỉ dùng theo chỉ định và theo dõi của bác sĩ nhãn khoa.</li>
+<li><b>Thói quen tốt:</b> ra ngoài trời ít nhất 2 giờ mỗi ngày, học nơi đủ sáng, nghỉ mắt theo quy tắc 20-20-20.</li>
+</ul>
+H2_3: Khi nào nên đưa trẻ đi đo mắt?
+NOI_DUNG_3: <p>Nên kiểm tra mắt cho trẻ trước khi vào lớp 1 và định kỳ 6 tháng một lần khi đã đeo kính. Nếu độ cận tăng từ 0.5 độ trở lên mỗi năm, phụ huynh nên đưa trẻ khám bác sĩ nhãn khoa để có phác đồ kiểm soát phù hợp. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa mắt.</p>
+<p>EYEMEDI hỗ trợ <a href="/dat-lich-do-mat.html">đo thị lực, đo khúc xạ miễn phí</a> và tư vấn <a href="/gong-kinh-can-hoc-sinh.html">gọng kính cận cho học sinh</a> bền, nhẹ.</p>
+LOI_KEU_GOI: Con hay nheo mắt, ngồi sát tivi? Đưa bé đến EYEMEDI đo mắt miễn phí và tư vấn kính kiểm soát cận thị, 08:30 – 21:30 hằng ngày.
+HOI_1: Cận thị ở trẻ em có chữa khỏi được không?
+DAP_1: Cận thị không tự hết. Các phương pháp hiện nay giúp làm chậm tốc độ tăng độ; phẫu thuật khúc xạ chỉ cân nhắc khi trưởng thành và độ đã ổn định.
+HOI_2: Trẻ bao nhiêu tuổi có thể dùng Ortho-K?
+DAP_2: Ortho-K thường dùng cho trẻ đủ lớn để hợp tác đeo, tháo và vệ sinh kính, theo chỉ định và theo dõi định kỳ của bác sĩ nhãn khoa.
+HOI_3: Đeo kính thường xuyên có làm trẻ tăng độ nhanh hơn không?
+DAP_3: Không. Đeo kính đúng độ giúp trẻ nhìn rõ, giảm mỏi mắt. Kính sai độ hoặc không đeo mới khiến mắt điều tiết nhiều và khó chịu.
+SAN_PHAM: trong-perfect-uv-u6, baby-2212, panda-tr90, trong-156-uv420-blue-cut, trong-160-as-blue-control, swallow-m2027, pk-boc-cang-silicon, pk-dem-mui-silicon
+LIEN_QUAN: mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri | Mắt bị nhòe mờ: nguyên nhân và cách điều trị; benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Đục thủy tinh thể và nhược thị; gong-kinh-can-hoc-sinh | Gọng kính cận cho học sinh
+LINK_TRONG_BAI: mắt bị nhòe mờ → mat-bi-nhoe-mo...; tròng Chemi U10 → trong-kinh-chemi...; đo thị lực miễn phí → dat-lich-do-mat; gọng kính cận cho học sinh → gong-kinh-can-hoc-sinh
+LINK_VAO_TU: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi, gong-kinh-can-hoc-sinh, trong-kinh-chemi-sieu-mong-chinh-hang-han-quoc
+NGUON_ANH: Unsplash (Unsplash License – miễn phí thương mại)
+KIEM_TRA_TRUNG: Không trùng; trang nhược thị chỉ nhắc mắt lười, không bàn kiểm soát cận thị.
+NGUON_THAM_KHAO: tamanhhospital.vn (kiểm soát cận thị); voh.com.vn (BV Mắt Cao Thắng); Bệnh viện Mắt Sài Gòn Biên Hòa; nghiên cứu LAMP, ATOM.

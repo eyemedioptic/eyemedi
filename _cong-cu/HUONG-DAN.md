@@ -17,10 +17,13 @@ Thư mục `_cong-cu/` không được xuất ra web (GitHub Pages bỏ qua thư
 - Bài 300–450 chữ, 3 phần H2, 3 FAQ, title 50–60 ký tự, mô tả 140–160 ký tự, 8 sản phẩm (trùng ≤4/8 với trang khác), 3 bài liên quan, 2–4 link trong bài, 2–3 trang cũ trỏ link vào.
 - Không ghi năm (2026) vào tiêu đề. Bài y khoa: không hứa chữa khỏi, có câu "không thay thế chẩn đoán của bác sĩ chuyên khoa".
 - Bài về bác sĩ/cơ sở: chỉ dùng thông tin công khai, không xếp hạng, không ưu tiên ai, không bịa thông tin.
-- Ảnh: chỉ dùng kho-anh hoặc ảnh sếp gửi; không lấy ảnh có bản quyền trên mạng.
+- Ảnh: dùng ảnh miễn bản quyền từ Unsplash (Unsplash License, KHÔNG dùng ảnh Unsplash+/Getty), ảnh sếp gửi, hoặc kho-anh. Không dùng ảnh có bản quyền khác.
+  Cách lấy ảnh Unsplash: WebFetch trang https://unsplash.com/s/photos/<tu-khoa> để lấy danh sách URL images.unsplash.com/photo-...; tải bằng curl `https://images.unsplash.com/photo-<id>?fm=jpg&q=80&w=1600&fit=crop` vào `_cong-cu/anh-rieng/<slug>-<n>.jpg`; khai báo trong file .txt bằng khối `ANH_RIENG:` (mỗi dòng `anh-rieng/<slug>-n.jpg | mô tả`), bỏ ANH_KHO/MO_TA_ANH. Ghi `NGUON_ANH:`.
+- ẢNH ĐẠI DIỆN (ảnh slide 1 → images/<slug>.webp) KHÔNG ĐƯỢC TRÙNG với bất kỳ bài nào trên chuyen-muc.html. Kiểm tra bằng average-hash 16x16 (sai khác < 20 bit = trùng) trước khi gửi duyệt.
 - Tham khảo nguồn uy tín, viết lại hoàn toàn, ghi NGUON_THAM_KHAO.
 
 ## Sau khi sếp duyệt
+Có sẵn script: viết file cấu hình JSON (xem đầu `_cong-cu/dang_bai.py`) rồi chạy `python3 _cong-cu/dang_bai.py <YYYY-MM-DD> cau-hinh.json` từ gốc repo – script làm bước 1–5 bên dưới. Nên chạy thử trên bản sao repo để làm ảnh chụp xem trước trang Chuyên mục.
 1. Copy `xuat/<slug>.html` → gốc repo, `xuat/images/*` → `images/`.
 2. `chuyen-muc.html`: "Bài viết nổi bật" giữ bài chính "Tiệm kính mắt gần đây" + 2 bài MỚI NHẤT bên cạnh; bài cũ bị đẩy ra chuyển lên đầu `#moi-nhat` ("Bài viết tiếp theo"); thêm thẻ bài vào nhóm đúng (`#bac-si`, `#kien-thuc`, `#kinh-mat`, `#lens`).
 3. Gắn link vào từ 2–3 trang cũ (thêm 1 câu `<p>` tự nhiên trong thân bài).

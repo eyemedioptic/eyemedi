@@ -1,0 +1,49 @@
+TIEU_DE: Cách chọn và đeo kính áp tròng cho người mới bắt đầu
+TITLE: Cách đeo kính áp tròng cho người mới bắt đầu | EYEMEDI
+SLUG: cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau
+TU_KHOA_CHINH: đeo kính áp tròng lần đầu
+TU_KHOA_PHU: cách đeo lens, người mới đeo lens, đeo kính áp tròng bao lâu, cách tháo lens, chọn kính áp tròng
+DANH_MUC: Kính áp tròng
+SLUG_DANH_MUC: kinh-ap-trong
+Y_KHOA: có
+MO_TA_SEO: Đeo kính áp tròng lần đầu: cách chọn lens đúng độ, các bước đeo và tháo an toàn, đeo bao lâu mỗi ngày. Đo mắt miễn phí, tư vấn lens tại EYEMEDI.
+NGAY_DANG: 2026-11-10
+ANH_RIENG:
+anh-rieng/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau-1.jpg | Kính áp tròng mềm áp sát giác mạc khi đeo đúng cách
+anh-rieng/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau-2.jpg | Người mới chuẩn bị đeo kính áp tròng với tay sạch và hộp lens
+anh-rieng/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau-3.jpg | Mắt khỏe, sáng khi đeo kính áp tròng đúng thời gian khuyến cáo
+anh-rieng/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau-4.jpg | Cận cảnh mống mắt – kính áp tròng cần đúng độ và đường kính
+anh-rieng/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau-5.jpg | Đôi mắt tự nhiên khi đeo lens trong suốt hằng ngày
+DOAN_MO_DAU: Đeo kính áp tròng lần đầu không khó nếu bạn chọn đúng loại lens, đúng độ và tập thao tác sạch sẽ ngay từ đầu. Người mới nên đo mắt trước, bắt đầu với lens dùng 1 ngày hoặc lens tháng mềm, và chỉ đeo vài giờ trong tuần đầu để mắt làm quen.
+H2_1: Chọn kính áp tròng phù hợp khi mới bắt đầu
+NOI_DUNG_1: <ul>
+<li><b>Đo mắt trước khi mua:</b> độ cận, loạn của lens khác kính gọng, cần đo khúc xạ để chọn đúng độ và đường kính.</li>
+<li><b>Ưu tiên lens 1 ngày hoặc lens tháng mềm:</b> lens 1 ngày không cần ngâm rửa, sạch sẽ nhất; lens tháng tiết kiệm hơn nhưng phải vệ sinh kỹ.</li>
+<li><b>Chất liệu thấm oxy tốt:</b> silicone hydrogel giúp giác mạc nhận đủ oxy, đỡ khô mắt khi ngồi máy tính.</li>
+<li><b>Mua nơi uy tín:</b> lens chính hãng, còn hạn, có hướng dẫn sử dụng. Xem thêm <a href="/top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm.html">địa chỉ mua lens uy tín tại TP.HCM</a>.</li>
+</ul>
+H2_2: Các bước đeo và tháo lens an toàn
+NOI_DUNG_2: <ol>
+<li>Rửa tay bằng xà phòng, lau khô bằng khăn không xơ.</li>
+<li>Đặt lens lên đầu ngón trỏ, kiểm tra lens không bị lộn mặt (mép lens cong đều như chiếc bát).</li>
+<li>Kéo mi dưới xuống, nhìn lên trên rồi áp nhẹ lens vào lòng trắng mắt, chớp mắt vài lần để lens vào đúng vị trí.</li>
+<li>Khi tháo: nhìn lên, kéo lens xuống lòng trắng rồi dùng ngón cái và ngón trỏ kẹp nhẹ lấy ra.</li>
+<li>Lens tháng phải ngâm bằng <a href="/nuoc-ngam-kinh-ap-trong.html">nước ngâm kính áp tròng</a> chuyên dụng, thay dung dịch mỗi lần.</li>
+</ol>
+H2_3: Đeo kính áp tròng bao lâu là an toàn?
+NOI_DUNG_3: <p>Tuần đầu nên đeo khoảng 4 tiếng mỗi ngày rồi tăng dần; khi đã quen, phần lớn khuyến cáo giữ ở mức 8 tiếng/ngày. Không ngủ khi đeo lens, không dùng nước máy để rửa lens hay hộp đựng, thay hộp đựng định kỳ và bỏ lens khi hết hạn.</p>
+<p>Tháo lens ngay nếu mắt đỏ, đau, chảy nước nhiều hoặc nhìn mờ, và đi khám mắt sớm. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa mắt. Bạn có thể <a href="/dat-lich-do-mat.html">đặt lịch đo mắt miễn phí</a> trước khi chọn lens.</p>
+LOI_KEU_GOI: Mới đeo lens lần đầu? Ghé EYEMEDI đo mắt miễn phí, chọn lens đúng độ và được hướng dẫn đeo, tháo tận tình, 08:30 – 21:30 hằng ngày.
+HOI_1: Người mới đeo kính áp tròng nên chọn loại nào?
+DAP_1: Nên bắt đầu với lens 1 ngày hoặc lens tháng mềm, chất liệu thấm oxy tốt, đúng độ đã đo. Lens 1 ngày tiện và vệ sinh nhất cho người mới.
+HOI_2: Đeo kính áp tròng lần đầu bị cộm có sao không?
+DAP_2: Cảm giác hơi lạ trong vài phút đầu là bình thường. Nếu cộm, đau, đỏ kéo dài, hãy tháo ra kiểm tra lens có bị lộn mặt, bẩn hay rách không và đi khám nếu không đỡ.
+HOI_3: Có được ngủ khi đeo kính áp tròng không?
+DAP_3: Không nên. Ngủ khi đeo lens làm giác mạc thiếu oxy, tăng nguy cơ viêm loét giác mạc, kể cả ngủ trưa ngắn.
+SAN_PHAM: eye-coffret-base-make, eye-coffret-natural-make, lens-can-loan, pk-hop-kinh-eyemedi, pk-khan-lau-a03, pk-combo-ve-sinh, trong-160-as-blue-control, panda-tr90
+LIEN_QUAN: nuoc-ngam-kinh-ap-trong | Nước ngâm kính áp tròng; top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm | Địa chỉ mua lens uy tín TP.HCM; giai-phap-cho-mat-khuyet-mong-mat-aniridia | Giải pháp cho mắt khuyết mống mắt
+LINK_TRONG_BAI: địa chỉ mua lens uy tín → top-10-dia-chi-shop-lens...; nước ngâm kính áp tròng → nuoc-ngam-kinh-ap-trong; đặt lịch đo mắt → dat-lich-do-mat
+LINK_VAO_TU: nuoc-ngam-kinh-ap-trong, top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm
+NGUON_ANH: Unsplash (Unsplash License – miễn phí thương mại)
+KIEM_TRA_TRUNG: Không trùng; khác góc với trang nước ngâm và trang địa chỉ mua lens.
+NGUON_THAM_KHAO: vinmec.com; nhathuoclongchau.com.vn; tamanhhospital.vn; vnexpress.net (đeo kính áp tròng an toàn).
