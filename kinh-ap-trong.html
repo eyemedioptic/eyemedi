@@ -449,61 +449,16 @@ if(activeCategory!==HOME_CATEGORY&&!window.PAGE_CATEGORY)setTimeout(()=>document
 
 <!-- NÚT MESSENGER NHẤP NHÁY -->
 <a href="https://m.me/eyemedioptic" class="messenger-float" target="_blank" rel="noopener" aria-label="Chat Messenger với EYEMEDI">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="Messenger">
-  <span>Chat ngay</span>
+  <svg viewBox="0 0 36 36" width="30" height="30" aria-hidden="true"><path fill="#fff" d="M18 3C9.7 3 3 9.2 3 16.9c0 4.4 2.2 8.3 5.6 10.9V33l5.1-2.8c1.4.4 2.8.6 4.3.6 8.3 0 15-6.2 15-13.9S26.3 3 18 3zm1.5 18.7-3.8-4.1-7.5 4.1 8.2-8.8 3.9 4.1 7.4-4.1-8.2 8.8z"/></svg>
 </a>
-
 <style>
-.messenger-float {
-    position: fixed;
-    right: 20px;
-    bottom: 25px;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: #0084ff;
-    color: #fff;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.25);
-    animation: messengerPulse 1.2s infinite;
-}
-
-.messenger-float img {
-    width: 30px;
-    height: 30px;
-}
-
-.messenger-float span {
-    color: #fff;
-}
-
-@keyframes messengerPulse {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0,132,255,.6);
-    }
-    50% {
-        transform: scale(1.08);
-        box-shadow: 0 0 0 10px rgba(0,132,255,0);
-    }
-}
-
-.messenger-float:hover {
-    background: #0064d2;
-}
-
-@media (max-width: 600px) {
-    .messenger-float {
-        right: 12px;
-        bottom: 18px;
-    }
-}
+.messenger-float{position:fixed;right:20px;bottom:25px;z-index:99999;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#00b2ff,#006aff 55%,#a033ff);box-shadow:0 6px 18px rgba(0,106,255,.45);text-decoration:none;animation:mfPulse 1.6s ease-in-out infinite}
+.messenger-float::before,.messenger-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,132,255,.55);animation:mfWave 2s ease-out infinite;pointer-events:none}
+.messenger-float::after{animation-delay:1s}
+.messenger-float svg{position:relative;z-index:1}
+@keyframes mfWave{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+@keyframes mfPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@media(max-width:600px){.messenger-float{right:12px;bottom:18px;width:52px;height:52px}}
 </style>
 
 <!-- POPUP KHUYẾN MÃI EYEMEDI -->

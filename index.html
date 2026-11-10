@@ -478,48 +478,16 @@ if(activeCategory!=='Tất cả'&&!window.PAGE_CATEGORY)setTimeout(()=>document.
 
 <!-- NÚT MESSENGER NHẤP NHÁY -->
 <a href="https://m.me/eyemedioptic" class="messenger-float" target="_blank" rel="noopener" aria-label="Chat Messenger với EYEMEDI">
-  <svg viewBox="0 0 36 36" aria-hidden="true"><path fill="#fff" d="M18 3C9.7 3 3 9.2 3 16.9c0 4.4 2.2 8.3 5.6 10.8V33l5.1-2.8c1.4.4 2.8.6 4.3.6 8.3 0 15-6.2 15-13.9S26.3 3 18 3zm1.5 18.7-3.8-4.1-7.5 4.1 8.2-8.7 3.9 4.1 7.4-4.1-8.2 8.7z"/></svg>
-  <span>Chat ngay</span>
+  <svg viewBox="0 0 36 36" width="30" height="30" aria-hidden="true"><path fill="#fff" d="M18 3C9.7 3 3 9.2 3 16.9c0 4.4 2.2 8.3 5.6 10.9V33l5.1-2.8c1.4.4 2.8.6 4.3.6 8.3 0 15-6.2 15-13.9S26.3 3 18 3zm1.5 18.7-3.8-4.1-7.5 4.1 8.2-8.8 3.9 4.1 7.4-4.1-8.2 8.8z"/></svg>
 </a>
-<!-- POPUP KHUYẾN MÃI EYEMEDI -->
-<div id="promo-popup" role="dialog" aria-label="Ưu đãi EYEMEDI">
-  <button class="promo-close" type="button" onclick="closePromo()" aria-label="Đóng ưu đãi">×</button>
-  <div class="promo-title">🎉 ƯU ĐÃI ĐẶC BIỆT</div>
-  <div class="promo-content">
-    <strong>MUA GỌNG TẶNG TRÒNG</strong>
-    <p>Tặng tròng kính phủ siêu váng Hydrophobic – Hỗ trợ đo thị lực</p>
-    <a href="https://zalo.me/0967190005" class="promo-btn" target="_blank" rel="noopener">NHẬN ƯU ĐÃI</a>
-  </div>
-</div>
 <style>
-.messenger-float{position:fixed;right:20px;bottom:25px;z-index:950;display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0084ff;color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;border-radius:30px;box-shadow:0 4px 15px rgba(0,0,0,.25);animation:messengerPulse 1.2s infinite}
-.messenger-float img{width:30px;height:30px}
-.messenger-float span{color:#fff}
-@keyframes messengerPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(0,132,255,.6)}50%{transform:scale(1.08);box-shadow:0 0 0 10px rgba(0,132,255,0)}}
-.messenger-float:hover{background:#0064d2}
-#promo-popup{display:none;position:fixed;left:20px;bottom:20px;width:280px;box-sizing:border-box;background:#fff;border:2px solid #0876c9;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.25);z-index:950;font-family:Arial,sans-serif;overflow:hidden;animation:promoBlink 1.4s infinite}
-.promo-title{background:#0876c9;color:#fff;text-align:center;padding:12px 30px;font-size:16px;font-weight:bold}
-.promo-content{padding:16px;text-align:center;color:#222}
-.promo-content strong{color:#0876c9;font-size:16px}
-.promo-content p{font-size:14px;line-height:1.5}
-.promo-btn{display:inline-block;background:#e53935;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold}
-.promo-close{position:absolute;top:4px;right:8px;border:none;background:transparent;color:#fff;font-size:25px;cursor:pointer;z-index:2}
-@keyframes promoBlink{0%,100%{transform:scale(1);box-shadow:0 5px 20px rgba(0,0,0,.2)}50%{transform:scale(1.03);box-shadow:0 0 14px rgba(8,118,201,.65)}}
-@media(max-width:600px){.messenger-float{right:12px;bottom:18px;padding:10px}.messenger-float span{display:none}#promo-popup{left:10px;bottom:12px;width:255px}}
-/* Không che giỏ hàng / chi tiết sản phẩm khi đang mở */
-body:has(.overlay.show) .messenger-float,body:has(.overlay.show) #promo-popup{display:none !important}
-/* Ẩn khu vực quản lý nội dung trên trang chủ */
-#editorModal,#editModal,.editor-modal,.edit-modal,.admin-panel,#editorPanel,#managerOverlay,#editSiteBtn{display:none !important}
-.hero.pb-slider{display:block !important;position:relative;overflow:hidden;padding:0 !important;grid-template-columns:none !important;height:clamp(340px,46vw,620px);background:#0d2a2c}
-.pb-track{display:flex;height:100%;transition:transform .6s ease}
-.pb-slide{position:relative;flex:0 0 100%;height:100%;overflow:hidden;display:block;cursor:pointer}
-.pb-bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8);transform:scale(1.1)}
-.hero.pb-slider .pb-slide img{position:relative;display:block;width:100%;height:100% !important;object-fit:contain;transition:transform .3s}
-.pb-slide:hover img{transform:scale(1.02)}
-.pb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.9);color:#073a3c;font-size:28px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.2)}
-.pb-prev{left:16px}.pb-next{right:16px}
-.pb-count{position:absolute;right:16px;bottom:14px;z-index:2;padding:5px 11px;border-radius:99px;background:rgba(0,0,0,.45);color:#fff;font-size:13px;font-weight:600}
-@media(max-width:600px){.hero.pb-slider{height:100vw;max-height:560px}.pb-arrow{width:36px;height:36px;font-size:22px}.pb-prev{left:8px}.pb-next{right:8px}}
+.messenger-float{position:fixed;right:20px;bottom:25px;z-index:99999;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#00b2ff,#006aff 55%,#a033ff);box-shadow:0 6px 18px rgba(0,106,255,.45);text-decoration:none;animation:mfPulse 1.6s ease-in-out infinite}
+.messenger-float::before,.messenger-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,132,255,.55);animation:mfWave 2s ease-out infinite;pointer-events:none}
+.messenger-float::after{animation-delay:1s}
+.messenger-float svg{position:relative;z-index:1}
+@keyframes mfWave{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.9);opacity:0}}
+@keyframes mfPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@media(max-width:600px){.messenger-float{right:12px;bottom:18px;width:52px;height:52px}}
 </style>
 <script>
 function closePromo(){var p=document.getElementById('promo-popup');if(p)p.style.display='none';try{sessionStorage.setItem('eyemedi_promo_closed','1')}catch(e){}}
