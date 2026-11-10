@@ -1,0 +1,50 @@
+TIEU_DE: Những nguyên nhân phổ biến gây mờ mắt đột ngột
+TITLE: Nguyên nhân phổ biến gây mờ mắt đột ngột | EYEMEDI
+SLUG: nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot
+TU_KHOA_CHINH: mờ mắt đột ngột
+TU_KHOA_PHU: mắt mờ đột ngột nguyên nhân, bong võng mạc, glaucoma góc đóng cấp, đột quỵ mắt, khám mắt cấp cứu TPHCM
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: có
+MO_TA_SEO: Mờ mắt đột ngột có thể do bong võng mạc, glaucoma cấp, tắc mạch hay đột quỵ. Nhận biết dấu hiệu nguy hiểm, nơi khám cấp cứu TPHCM, đo mắt miễn phí tại EYEMEDI.
+NGAY_DANG: 2026-11-04
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Mờ mắt đột ngột là khi thị lực giảm rõ trong vài phút đến vài ngày. Nguyên nhân có thể đơn giản như khô mắt, đường huyết dao động, nhưng cũng có thể là cấp cứu nhãn khoa như bong võng mạc, glaucoma góc đóng cấp hay tắc mạch máu võng mạc – xử lý càng sớm càng giữ được thị lực.
+ANH_RIENG:
+anh-rieng/mo-phong-bong-den-che-tam-nhin.jpg | Mô phỏng bóng đen che tầm nhìn và chấm đen trôi – dấu hiệu bong võng mạc gây mờ mắt đột ngột
+anh-rieng/mo-phong-quang-sang-quanh-den.jpg | Mô phỏng quầng sáng quanh đèn – dấu hiệu glaucoma góc đóng cấp
+kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt EYEMEDI – kiểm tra thị lực khi mắt mờ đột ngột
+kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính sau khi đo thị lực tại EYEMEDI
+kho-anh/EYEMEDI-1.webp | Kiểm tra thị lực bằng tròng kính thử tại EYEMEDI
+H2_1: 6 nguyên nhân phổ biến gây mờ mắt đột ngột
+NOI_DUNG_1: <ol>
+<li><b>Bong, rách võng mạc:</b> thấy chớp sáng, nhiều chấm đen trôi rồi xuất hiện bóng đen như tấm màn che một phần tầm nhìn.</li>
+<li><b>Glaucoma góc đóng cấp:</b> mắt đỏ, đau nhức dữ dội lan lên đầu, buồn nôn, thấy quầng sáng quanh đèn.</li>
+<li><b>Tắc mạch máu võng mạc ("đột quỵ mắt"):</b> mờ hoặc mất thị lực một mắt, thường không đau, hay gặp ở người bệnh tim mạch.</li>
+<li><b>Đột quỵ não:</b> mờ hoặc mất một nửa thị trường kèm méo miệng, yếu tay chân, nói khó.</li>
+<li><b>Viêm dây thần kinh thị giác:</b> mờ nhanh, đau khi đưa mắt, màu sắc nhạt đi.</li>
+<li><b>Đường huyết dao động, khô mắt nặng, đau nửa đầu:</b> mờ thoáng qua, thường hồi phục nhưng vẫn cần kiểm tra.</li>
+</ol>
+H2_2: Dấu hiệu cần đi cấp cứu ngay
+NOI_DUNG_2: <p>Hãy đến bệnh viện ngay, không chờ tự khỏi, khi mờ mắt đột ngột kèm một trong các dấu hiệu: mất thị lực một mắt, bóng đen che tầm nhìn, đau mắt dữ dội, nhìn đôi, hoặc dấu hiệu đột quỵ (gọi 115). Không tự nhỏ thuốc khi chưa rõ nguyên nhân.</p>
+<p>Nếu chỉ mờ nhẹ, lúc rõ lúc mờ, nên đo thị lực sớm để loại trừ tật khúc xạ. Xem thêm <a href="/mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri.html">nguyên nhân mắt bị nhòe mờ kéo dài</a>.</p>
+H2_3: Nơi khám mắt cấp cứu uy tín tại TPHCM
+NOI_DUNG_3: <ul>
+<li><b>Bệnh viện Mắt TP.HCM</b> – 280 Điện Biên Phủ (Quận 3 cũ), có khoa cấp cứu mắt; điện thoại cấp cứu (028) 3932 5716.</li>
+<li><b>Bệnh viện Chợ Rẫy</b> – 201B Nguyễn Chí Thanh (Quận 5 cũ): bệnh viện tuyến cuối, có khoa Mắt và cấp cứu đa khoa.</li>
+<li><b>Bệnh viện Nhân dân 115</b> – 527 Sư Vạn Hạnh (Quận 10 cũ): thế mạnh điều trị đột quỵ.</li>
+</ul>
+<p>Với tình trạng mờ nhẹ, không kèm dấu hiệu nguy hiểm, EYEMEDI hỗ trợ <a href="/dat-lich-do-mat.html">kiểm tra thị lực, đo khúc xạ hoàn toàn miễn phí</a> và hướng dẫn bạn đến chuyên khoa phù hợp khi cần.</p>
+LOI_KEU_GOI: Mắt mờ nhẹ, lúc rõ lúc mờ? Ghé EYEMEDI đo thị lực miễn phí tại 5 chi nhánh, 08:30 – 21:30. Mờ đột ngột kèm đau hoặc mất thị lực: đi cấp cứu ngay.
+HOI_1: Mờ mắt đột ngột có nguy hiểm không?
+DAP_1: Có thể rất nguy hiểm nếu do bong võng mạc, glaucoma cấp, tắc mạch võng mạc hay đột quỵ. Cần đi khám càng sớm càng tốt, tốt nhất trong vài giờ đầu.
+HOI_2: Mờ mắt đột ngột một bên nên làm gì?
+DAP_2: Đến ngay bệnh viện có chuyên khoa mắt hoặc cấp cứu. Nếu kèm méo miệng, yếu tay chân, nói khó, gọi 115 vì có thể là đột quỵ.
+HOI_3: EYEMEDI có kiểm tra thị lực miễn phí không?
+DAP_3: Có. EYEMEDI đo thị lực, đo khúc xạ miễn phí tại 5 chi nhánh; trường hợp nghi bệnh lý sẽ được tư vấn đến bác sĩ nhãn khoa.
+SAN_PHAM: da-trong-156-hsmc, trong-phu-vang-156, trong-174-blue-protect, tomy-9555, baby-2212, swallow-m2027, pk-khan-lau-a03, vision-one
+LIEN_QUAN: mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri | Mắt bị nhòe mờ: nguyên nhân và cách điều trị; benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Đục thủy tinh thể và nhược thị; top-11-bac-si-kham-mat-gioi-quan-tphcm | Bác sĩ chuyên khoa mắt giỏi TP.HCM
+LINK_TRONG_BAI: nguyên nhân mắt bị nhòe mờ kéo dài → mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri; kiểm tra thị lực, đo khúc xạ hoàn toàn miễn phí → dat-lich-do-mat
+LINK_VAO_TU: mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri, top-11-bac-si-kham-mat-gioi-quan-tphcm, benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi
+KIEM_TRA_TRUNG: Jaccard 0,29 với trang mắt nhòe mờ (<0,4). Từ khóa chính "mờ mắt đột ngột" khác "mắt bị nhòe mờ"; bệnh viện giới thiệu khác trang nhòe mờ (chỉ trùng BV Mắt TP.HCM). Ảnh trùng ≤1/5.
+NGUON_THAM_KHAO: bangkokhospital.com (nhìn mờ đột ngột); pharmacity.vn; vinmec.com; nhathuoclongchau.com.vn; hellobacsi.com, medpro.vn (địa chỉ bệnh viện).

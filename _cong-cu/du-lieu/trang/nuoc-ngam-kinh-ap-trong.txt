@@ -1,0 +1,56 @@
+TIEU_DE: Nước ngâm kính áp tròng – phụ kiện không thể thiếu khi đeo lens
+TITLE: Nước ngâm kính áp tròng: cách chọn và dùng đúng | EYEMEDI
+SLUG: nuoc-ngam-kinh-ap-trong
+TU_KHOA_CHINH: nước ngâm kính áp tròng
+TU_KHOA_PHU: dung dịch ngâm lens, nước ngâm lens loại nào tốt, QeyeCare B5, X2 Solution, cách ngâm kính áp tròng, khay đựng lens
+DANH_MUC: Phụ kiện mắt kính
+SLUG_DANH_MUC: phu-kien-mat-kinh
+Y_KHOA: có
+MO_TA_SEO: Nước ngâm kính áp tròng giúp làm sạch, khử khuẩn, giữ ẩm cho lens. Review QeyeCare B5, X2 Solution chứa Sodium Hyaluronate và 5 bước ngâm lens an toàn.
+NGAY_DANG: 2026-11-05
+NGAY_CAP_NHAT: 2026-11-05
+DOAN_MO_DAU: Nước ngâm kính áp tròng là phụ kiện bắt buộc với người đeo lens dùng nhiều lần. Sau mỗi lần tháo, mặt lens bám protein, chất nhờn và vi khuẩn từ nước mắt, bụi. Ngâm đúng dung dịch giúp lens sạch, mềm, đỡ cộm và giảm nguy cơ viêm giác mạc.
+ANH_RIENG:
+anh-rieng/nuoc-ngam-qeyecare-x2.jpg | Nước ngâm kính áp tròng QeyeCare B5 và X2 Sodium Hyaluronate 360ml
+anh-rieng/qeyecare-b5-nuoc-ngam-lens.jpg | Dung dịch ngâm lens đa năng QeyeCare B5 Sodium Hyaluronate
+anh-rieng/x2-nuoc-ngam-lens-360ml.jpg | Nước ngâm kính áp tròng X2 Sodium Hyaluronate 360ml
+anh-rieng/cac-buoc-ngam-rua-lens.jpg | 5 bước ngâm rửa kính áp tròng đúng cách
+anh-rieng/luu-y-bao-quan-lens.jpg | Nên và không nên khi bảo quản kính áp tròng
+H2_1: Vì sao phải dùng nước ngâm kính áp tròng?
+NOI_DUNG_1: <p>Dung dịch đa năng (multi-purpose solution) làm cùng lúc 4 việc trong một chai:</p>
+<ul>
+<li><b>Làm sạch:</b> gỡ cặn protein, lipid bám trên bề mặt lens.</li>
+<li><b>Khử khuẩn:</b> chất sát khuẩn nồng độ thấp diệt vi khuẩn, nấm.</li>
+<li><b>Tráng rửa:</b> rửa trôi cặn bẩn sau khi chà.</li>
+<li><b>Ngâm, giữ ẩm:</b> giữ lens mềm, không khô cứng hay biến dạng.</li>
+</ul>
+<p>Nước máy, nước lọc hay nước muối sinh lý <b>không có khả năng khử khuẩn</b> nên không thay được dung dịch ngâm.</p>
+H2_2: Chọn nước ngâm lens loại nào tốt?
+NOI_DUNG_2: <p>Tại EYEMEDI có 2 dòng dung dịch đa năng chứa <b>Sodium Hyaluronate (HA)</b> giúp lens giữ ẩm, đeo êm, hợp người hay khô mắt:</p>
+<ul>
+<li><b>QeyeCare B5:</b> dung dịch đa năng Sodium Hyaluronate, chai 360ml, làm sạch, tráng, khử khuẩn, ngâm, bôi trơn và loại bỏ protein trên lens. Dòng QeyeCare còn có thuốc nhỏ mắt (EyeDrops) cho người đeo lens.</li>
+<li><b>X2 Solution:</b> dung dịch đa năng Sodium Hyaluronate 360ml với đủ 6 công dụng tương tự, dùng cho kính áp tròng mềm.</li>
+</ul>
+<p>Khi mua, hãy chọn loại đa năng có chất dưỡng ẩm, dung tích phù hợp (chai lớn cho người đeo hằng ngày) và xem kỹ <b>hạn dùng sau khi mở nắp</b> ghi trên chai.</p>
+H2_3: 5 bước ngâm rửa kính áp tròng đúng cách
+NOI_DUNG_3: <ol>
+<li>Rửa tay bằng xà phòng, lau khô bằng khăn sạch.</li>
+<li>Đặt lens lên lòng bàn tay, nhỏ vài giọt dung dịch, chà nhẹ mỗi mặt khoảng 10 giây.</li>
+<li>Tráng lại lens bằng dung dịch mới.</li>
+<li>Cho lens vào khay chứa dung dịch <b>mới hoàn toàn</b>, đóng nắp, ngâm ít nhất 4 giờ hoặc qua đêm.</li>
+<li>Sau khi đeo, đổ bỏ dung dịch cũ, tráng khay và úp cho khô; thay khay mới 1–3 tháng/lần.</li>
+</ol>
+<p>Tuyệt đối không châm thêm dung dịch mới vào dung dịch cũ. Thông tin chỉ mang tính tham khảo; nếu mắt đỏ, đau, nhìn mờ, hãy tháo lens và đi khám ngay.</p>
+LOI_KEU_GOI: Đến EYEMEDI để đo mắt miễn phí, chọn kính áp tròng đúng độ và được hướng dẫn đeo, tháo, ngâm lens an toàn.
+HOI_1: Ngâm kính áp tròng bao lâu thì đeo được?
+DAP_1: Nên ngâm ít nhất 4 giờ hoặc qua đêm trong dung dịch đa năng mới để lens được khử khuẩn đủ thời gian trước khi đeo lại.
+HOI_2: Có dùng nước muối sinh lý ngâm lens được không?
+DAP_2: Không. Nước muối sinh lý chỉ dùng để tráng, không khử khuẩn, nên không thay được nước ngâm kính áp tròng.
+HOI_3: Mở nắp nước ngâm lens dùng được bao lâu?
+DAP_3: Tùy hãng, thường từ 1 đến 3 tháng sau khi mở; xem hướng dẫn trên chai và ghi ngày mở nắp để dùng đúng hạn.
+SAN_PHAM: lens-can-loan, eye-coffret-natural-make, eye-coffret-sheer-make, eye-coffret-rich-make, pk-hop-kinh-eyemedi, pk-khan-lau-a03, pk-dem-mui-silicon, pk-boc-cang-silicon
+LIEN_QUAN: kinh-ap-trong | Kính áp tròng tại EYEMEDI; top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm | Shop lens uy tín tại TP.HCM; phu-kien-kinh-mat | Phụ kiện mắt kính
+LINK_TRONG_BAI: 
+LINK_VAO_TU: kinh-ap-trong, phu-kien-kinh-mat, top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm
+KIEM_TRA_TRUNG: Jaccard cao nhất 0,31 (kinh-ap-trong). Từ khóa chính mới "nước ngâm kính áp tròng". Ảnh sản phẩm của chủ thương hiệu + 2 ảnh tự vẽ. Sản phẩm trùng ≤4.
+NGUON_THAM_KHAO: Thông tin trên bao bì sản phẩm QeyeCare B5 và X2 Solution do EYEMEDI phân phối; hướng dẫn sử dụng dung dịch đa năng.

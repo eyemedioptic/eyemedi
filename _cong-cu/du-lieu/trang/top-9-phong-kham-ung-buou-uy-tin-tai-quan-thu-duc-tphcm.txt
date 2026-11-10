@@ -1,0 +1,52 @@
+TIEU_DE: Top 1 bác sĩ ung bướu giỏi, điều trị hiệu quả tại TP.HCM
+TITLE: Khám ung bướu ở đâu TP.HCM? Bác sĩ ung bướu giỏi | EYEMEDI
+SLUG: top-9-phong-kham-ung-buou-uy-tin-tai-quan-thu-duc-tphcm
+TU_KHOA_CHINH: bác sĩ ung bướu giỏi TP.HCM
+TU_KHOA_PHU: khám ung bướu ở đâu, phòng khám ung bướu Thủ Đức, BS Nguyễn Duy Trì, Medilabo
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: Khám ung bướu ở đâu uy tín tại TP.HCM? Thông tin BS.CKII Nguyễn Duy Trì – BV Ung Bướu TP.HCM và phòng khám ung bướu Medilabo, 486 Hoàng Hữu Nam.
+NGAY_DANG: 2023-06-20
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Trong những năm gần đây, bệnh ung bướu đang ngày càng phổ biến và là nỗi lo của rất nhiều người. Việc tìm đến một bác sĩ giỏi để chữa trị là điều mà mọi người luôn quan tâm. Eyemedi giới thiệu vị bác sĩ ung bướu giỏi, chuyên môn cao tại TPHCM để các bạn có thông tin và thăm khám tại cơ sở uy tín.
+ANH_RIENG:
+bacsinguyenduytri.jpg | BS.CKII Nguyễn Duy Trì – Phó Trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM
+doingubsnguyenduytri.jpg | Bác sĩ Nguyễn Duy Trì cùng đội ngũ Phòng khám Ung Bướu Medilabo Việt Nam
+phongkhammedilabo.jpg | Phòng khám chuyên khoa Ung Bướu Medilabo Việt Nam, 486 Hoàng Hữu Nam
+H2_1: BS.CKII Nguyễn Duy Trì – Bệnh viện Ung Bướu TP.HCM
+NOI_DUNG_1: <p>Chức vụ: Phó Trưởng khoa Khoa Y học hạt nhân</p>
+<p><strong>Chuyên môn chính:</strong></p>
+<ul>
+<li>Khám và điều trị các bệnh lý liên quan đến tuyến giáp (bướu giáp, ung thư tuyến giáp...).</li>
+<li>Khám và điều trị các bệnh ung bướu thông thường.</li>
+<li>Khám, phát hiện sớm ung thư và theo dõi định kỳ cho bệnh nhân đang hoặc đã điều trị ung bướu.</li>
+</ul>
+<p>Hình ảnh Bác sĩ Nguyễn Duy Trì - Phó Trưởng khoa Y Học Hạt Nhân BV Ung Bướu TPHCM</p>
+<figure><img src="/images/bacsinguyenduytri.webp" alt="Hình ảnh 1" loading="lazy"></figure>
+<p>Bác sĩ Nguyễn Duy Trì là chuyên gia có thâm niên trong lĩnh vực tầm soát, chẩn đoán và điều trị các bệnh lý khối u, đặc biệt chuyên sâu về các bệnh lý tuyến giáp, tuyến vú...</p>
+<h3>Các dịch vụ chuyên khoa thế mạnh</h3>
+<ul>
+<li>Bệnh lý tuyến giáp: Khám, tư vấn, siêu âm chẩn đoán chuyên sâu và lên phác đồ điều trị cho các bệnh lý bướu cổ, suy giáp, cường giáp, và ung thư tuyến giáp.</li>
+<li>Tầm soát ung bướu: Thực hiện khám lâm sàng, siêu âm định vị và phát hiện sớm các hạch, u vùng cổ, u vú, bướu phần mềm hoặc các khối u thông thường khác trên cơ thể</li>
+<li>Xét nghiệm tế bào (FNA): Chọc hút tế bào bằng kim nhỏ dưới hướng dẫn của siêu âm để chẩn đoán nhanh, chính xác bản chất khối u là lành tính hay ác tính.</li>
+<li>Theo dõi định kỳ: Quản lý bệnh án và tái khám định kỳ cho các bệnh nhân ung bướu đã hoặc đang trong quá trình điều trị</li>
+</ul>
+<figure><img src="/images/doingubsnguyenduytri.webp" alt="Hình ảnh 2" loading="lazy"></figure>
+<p>Bác sĩ Nguyễn Duy Trì tại phòng khám Ung Bướu Medilabo Việt Nam.</p>
+<p>Ngoài vị trí Phó trưởng khoa Y Học Hạt Nhân tại Bệnh Viện Ung Bướu TPHCM. Bác Sĩ Nguyễn Duy Trì còn phụ trách Phòng Khám Chuyên Khoa Ung Bướu Medilabo Việt Nam - Tại đây, bệnh nhân được tư vấn và theo dõi các bệnh lý ung bướu tốt nhất. Phòng khám do BS.CKII Nguyễn Duy Trì trực tiếp phụ trách chuyên môn.</p>
+<figure><img src="/images/phongkhammedilabo.webp" alt="Hình ảnh 3" loading="lazy"></figure>
+H2_2: Phòng khám chuyên khoa Ung Bướu Medilabo Việt Nam
+NOI_DUNG_2: <p>Địa chỉ: 486 Hoàng Hữu Nam, Phường Long Bình, TP. Hồ Chí Minh</p>
+<p><a href="https://www.google.com/maps/place/PH%C3%92NG+KH%C3%81M+UNG+B%C6%AF%E1%BB%9AU+MEDILABO+VI%E1%BB%86T+NAM/@10.8724531,106.8121798,17z/data=!3m1!4b1!4m6!3m5!1s0x3174d90032e242f5:0x90e93ebd44daa3ee!8m2!3d10.8724478!4d106.8147547!16s%2Fg%2F11zktcmxy4?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D">📍 Chỉ đường đến MEDILABO</a></p>
+LOI_KEU_GOI: Bên cạnh sức khỏe tổng quát, đừng quên kiểm tra mắt định kỳ. EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn kính phù hợp.
+HOI_1: BS.CKII Nguyễn Duy Trì đang công tác ở đâu?
+DAP_1: Bác sĩ là Phó Trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM, đồng thời phụ trách chuyên môn Phòng khám chuyên khoa Ung Bướu Medilabo Việt Nam.
+HOI_2: Phòng khám Ung Bướu Medilabo Việt Nam ở đâu?
+DAP_2: Phòng khám ở 486 Hoàng Hữu Nam, Phường Long Bình, TP. Hồ Chí Minh.
+HOI_3: Bác sĩ Nguyễn Duy Trì có thế mạnh chuyên môn gì?
+DAP_3: Bệnh lý tuyến giáp, tầm soát ung bướu, xét nghiệm tế bào FNA dưới hướng dẫn siêu âm và theo dõi định kỳ cho bệnh nhân ung bướu.
+SAN_PHAM: trong-167-blue-protect, trong-174-blue-protect, trong-160-x-drive, da-trong-156-photo-gray, mayblass-24030, mayblass-s11890, swallow-m2027, swallow-s12019
+LIEN_QUAN: toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm | Toplist bác sĩ, phòng khám ung bướu uy tín TP.HCM; bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm | BS.CKII Nguyễn Duy Trì – chuyên gia Y học hạt nhân; phong-kham-ung-buou | Bác sĩ và phòng khám ung bướu tại TP.HCM
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

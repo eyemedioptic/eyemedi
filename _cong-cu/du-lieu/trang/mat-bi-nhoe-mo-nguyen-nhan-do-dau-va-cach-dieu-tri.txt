@@ -1,0 +1,51 @@
+TIEU_DE: Mắt bị nhòe mờ: nguyên nhân do đâu và cách điều trị
+TITLE: Mắt bị nhòe mờ: nguyên nhân và cách điều trị | EYEMEDI
+SLUG: mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri
+TU_KHOA_CHINH: mắt bị nhòe mờ
+TU_KHOA_PHU: mắt nhìn mờ nguyên nhân, nhìn mờ nhòe, kiểm tra thị lực miễn phí, phòng khám mắt uy tín TPHCM, tật khúc xạ
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: có
+MO_TA_SEO: Mắt bị nhòe mờ do tật khúc xạ, khô mắt hay bệnh lý? Tìm hiểu nguyên nhân, cách điều trị, phòng khám mắt uy tín TPHCM và kiểm tra thị lực miễn phí tại EYEMEDI.
+NGAY_DANG: 2026-11-04
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Mắt bị nhòe mờ phần lớn do tật khúc xạ (cận, viễn, loạn, lão thị) hoặc khô mắt, nhưng cũng có thể là dấu hiệu của đục thủy tinh thể, glaucoma hay bệnh võng mạc. Cách xử lý đúng là kiểm tra thị lực sớm để biết nguyên nhân – EYEMEDI hỗ trợ đo mắt hoàn toàn miễn phí.
+ANH_RIENG:
+anh-rieng/mo-phong-bang-thi-luc-nhoe-mo.jpg | Mô phỏng bảng thị lực khi mắt nhìn rõ và khi mắt bị nhòe mờ
+anh-rieng/mo-phong-nhin-mo-nhoe.jpg | Mô phỏng tầm nhìn bình thường và nhìn mờ nhòe tại cửa hàng EYEMEDI
+kho-anh/EYEMEDI-8.webp | Đo khúc xạ bằng máy tự động để tìm nguyên nhân mắt nhìn mờ tại EYEMEDI
+kho-anh/EYEMEDI-6.webp | Khách hàng kiểm tra thị lực miễn phí khi mắt bị nhòe mờ tại EYEMEDI
+kho-anh/EYEMEDI-7.webp | Chuyên viên EYEMEDI tư vấn kính phù hợp sau khi đo mắt
+H2_1: Nguyên nhân khiến mắt bị nhòe mờ
+NOI_DUNG_1: <ul>
+<li><b>Tật khúc xạ:</b> cận thị mờ khi nhìn xa, viễn thị mờ khi nhìn gần, loạn thị nhòe ở mọi khoảng cách; sau 40 tuổi thường thêm lão thị.</li>
+<li><b>Khô mắt, mỏi mắt:</b> dùng điện thoại, máy tính lâu khiến màng nước mắt kém ổn định, nhìn nhòe lúc có lúc không, kèm cộm xốn.</li>
+<li><b>Đục thủy tinh thể:</b> thủy tinh thể mất trong suốt, mờ như nhìn qua sương, chói khi gặp đèn xe ban đêm.</li>
+<li><b>Glaucoma, bệnh võng mạc, tiểu đường:</b> có thể gây giảm thị lực âm thầm hoặc đột ngột.</li>
+</ul>
+<p>Tìm hiểu thêm về <a href="/benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi.html">đục thủy tinh thể và nhược thị</a>.</p>
+H2_2: Cách điều trị mắt nhìn mờ theo từng nguyên nhân
+NOI_DUNG_2: <p>Nhìn mờ do tật khúc xạ được điều chỉnh bằng kính gọng hoặc kính áp tròng đúng độ; một số trường hợp có thể cân nhắc phẫu thuật khúc xạ. Khô mắt cải thiện khi nghỉ mắt theo quy tắc 20-20-20 và dùng nước mắt nhân tạo theo hướng dẫn. Đục thủy tinh thể, glaucoma hay bệnh võng mạc cần bác sĩ nhãn khoa chẩn đoán và điều trị chuyên sâu.</p>
+<p>Cần đi khám ngay nếu mờ đột ngột, mờ một bên mắt, kèm đau nhức, đỏ mắt hoặc thấy chớp sáng.</p>
+<p>Nếu mắt mờ xảy ra rất nhanh, xem ngay <a href="/nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot.html">các nguyên nhân gây mờ mắt đột ngột</a>.</p>
+<p>Người đeo lens hay bị mờ do cặn bám trên mặt kính; hãy vệ sinh bằng <a href="/nuoc-ngam-kinh-ap-trong.html">nước ngâm kính áp tròng</a> chuyên dụng.</p>
+H2_3: Phòng khám mắt uy tín tại TPHCM và kiểm tra thị lực miễn phí
+NOI_DUNG_3: <ul>
+<li><b>Bệnh viện Mắt TP.HCM</b> – 280 Điện Biên Phủ (Quận 3 cũ): bệnh viện chuyên khoa mắt công lập lớn của thành phố.</li>
+<li><b>Bệnh viện Mắt Sài Gòn</b> – 473 Cách Mạng Tháng 8 (Quận 10 cũ): hệ thống nhãn khoa tư nhân từ năm 2004.</li>
+<li><b>Bệnh viện Đại học Y Dược TP.HCM</b> – 215 Hồng Bàng (Quận 5 cũ): khoa Mắt khám và điều trị chuyên sâu.</li>
+</ul>
+<p>Khi mới thấy nhìn nhòe, bạn có thể ghé EYEMEDI để <a href="/dat-lich-do-mat.html">đo thị lực, đo khúc xạ miễn phí</a>. Nếu nghi bệnh lý, EYEMEDI sẽ khuyên bạn đến bác sĩ nhãn khoa. Xem <a href="/dia-chi-do-mat-cat-kinh-can.html">cửa hàng kính mắt gần đây</a>.</p>
+LOI_KEU_GOI: Mắt nhòe mờ? Đến EYEMEDI kiểm tra thị lực, đo khúc xạ hoàn toàn miễn phí tại 5 chi nhánh, 08:30 – 21:30 hằng ngày.
+HOI_1: Mắt bị nhòe mờ là bệnh gì?
+DAP_1: Thường gặp nhất là tật khúc xạ và khô mắt. Ngoài ra có thể do đục thủy tinh thể, glaucoma, bệnh võng mạc hoặc tiểu đường, cần đo mắt và khám để xác định.
+HOI_2: Mắt nhìn mờ có tự hết không?
+DAP_2: Mờ do mỏi mắt, khô mắt có thể đỡ khi nghỉ ngơi. Nếu nhòe kéo dài hoặc mờ đột ngột, bạn nên đi đo mắt, khám mắt sớm.
+HOI_3: Kiểm tra thị lực ở EYEMEDI có mất phí không?
+DAP_3: Không. EYEMEDI đo thị lực, đo khúc xạ miễn phí tại tất cả chi nhánh, mở cửa 08:30 – 21:30 hằng ngày.
+SAN_PHAM: trong-160-x-drive, trong-167-blue-protect, da-trong-156-photo-gray, lens-can-loan, panda-tr90, gold-optic-2231, p-sufiar-fc9909, pk-nuoc-xit-ao
+LIEN_QUAN: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Đục thủy tinh thể và nhược thị; bac-si-kham-mat-gioi-o-tphcm | Bác sĩ khám mắt giỏi ở TP.HCM; top-11-bac-si-kham-mat-gioi-quan-tphcm | Bác sĩ chuyên khoa mắt giỏi TP.HCM
+LINK_TRONG_BAI: đục thủy tinh thể và nhược thị → benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi; đo thị lực, đo khúc xạ miễn phí → dat-lich-do-mat; địa chỉ đo mắt EYEMEDI → dia-chi-do-mat-cat-kinh-can
+LINK_VAO_TU: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi, bac-si-kham-mat-gioi-o-tphcm, dat-lich-do-mat
+KIEM_TRA_TRUNG: Không trùng (Jaccard cao nhất 0,22). Từ khóa chính mới. Ảnh: 2 ảnh tự làm + 3 ảnh kho chưa trang nào dùng.
+NGUON_THAM_KHAO: msdmanuals.com (nhìn mờ); pharmacity.vn (mắt nhìn mờ); nhathuoclongchau.com.vn; vnexpress.net; medpro.vn, hellobacsi.com (địa chỉ bệnh viện mắt).

@@ -1,0 +1,81 @@
+TIEU_DE: Eyemedi Luxury Sun – kính mát thời trang nữ trendy
+TITLE: Kính mát nữ trendy Eyemedi Luxury Sun chống UV | EYEMEDI
+SLUG: kinh-mat-nu-trendy
+TU_KHOA_CHINH: kính mát nữ trendy
+TU_KHOA_PHU: kính mát thời trang nữ, kính chống UV420, Luxury Sun, kính râm nữ, kính mát mắt mèo
+DANH_MUC: Kính mát nữ
+SLUG_DANH_MUC: kinh-mat-nu
+MO_TA_SEO: Kính mát nữ trendy Eyemedi Luxury Sun: chống UV420, chống bụi, nhẹ nhàng, nhiều màu gọng và tròng. Giá 550.000đ, tặng hộp đựng và khăn lau.
+NGAY_DANG: 2026-11-02
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Eyemedi Luxury Sun là mẫu kính mát thời trang nữ nhẹ nhàng, chống UV420, chống bụi, hợp phong cách trendy dạo phố. Một chiếc kính mát đẹp vừa bảo vệ đôi mắt vừa là phụ kiện thể hiện phong cách.
+PIXEL: 1020078554329275
+FORM_URL: https://script.google.com/macros/s/AKfycbxvwS3KkFEGwI-QxtoLHtJGziFARJTiKnjeOy5mZijFhJOfzvCtwI-690Lvt6L94_1n6w/exec
+FORM_TIEU_DE: Đặt mua Eyemedi Luxury Sun
+FORM_TRUONG: Họ và Tên | Họ và tên
+Số điện thoại | Số điện thoại | tel
+Địa chỉ nhận hàng | Địa chỉ chi tiết (số nhà, tên đường...)
+Chọn màu gọng | Chọn màu gọng
+Chọn màu tròng | Chọn màu tròng
+FORM_NUT: HOÀN TẤT ĐẶT HÀNG
+FORM_CAM_ON: Gửi đơn hàng thành công! EYEMEDI sẽ liên hệ xác nhận.
+FORM_GHI_CHU: 🚚 Miễn ship trên toàn quốc
+ANH_RIENG:
+versace.jpg | Kính mát thời trang nữ Eyemedi Luxury Sun
+hermes.jpg | Mắt kính thời trang nữ hàng hiệu
+cateyesun.jpg | Kính mát nữ thời trang Vidic
+matmeo.jpg | Kính mát nữ dáng mắt mèo
+Noir8.jpg | Kính thời trang Noir8 Luxury Sun
+H2_1: Eyemedi Luxury Sun – thông tin sản phẩm
+NOI_DUNG_1: <p>Tên sản phẩm: Breeze Sun Luxury</p>
+<p>Mã sản phẩm: Breeze</p>
+<p>Màu gọng: Nâu trà, Xanh đen, Đen xám</p>
+<p>Màu tròng: Gray (đen), Brown (nâu trà)</p>
+<p>Phụ kiện: Hộp đựng mắt kính Eyemedi</p>
+<p>Thiết bị: Khăn lau vệ sinh tròng kính</p>
+<p><strong>Giá: 550.000đ</strong> (giá gốc 750.000đ, tiết kiệm 200.000đ – giảm 35%). Mua 1 được 3: kính, hộp đựng và khăn lau.</p>
+<p>Nhẹ nhàng, thời trang, chống UV420, chống bụi</p>
+<p>Hợp phong cách Trendy, thời trang dạo phố</p>
+<figure><img src="/images/noir8.webp" alt="Kính thời trang Noir8" loading="lazy"></figure>
+<figure><img src="/images/breeze3.webp" alt="Kính thời trang Mắt mèo" loading="lazy"></figure>
+<p><strong>Sản phẩm best seller:</strong> Noir8 Luxury Sun, Breeze Luxury Sun.</p>
+<p>Mẫu kính mát thời trang 2026</p>
+<p>10.000+ khách hàng lựa chọn.</p>
+H2_2: Tỏa sáng thần thái, khẳng định phong cách riêng
+NOI_DUNG_2: <p>Một chiếc kính mát đẹp không chỉ giúp bảo vệ đôi mắt mà còn là phụ kiện thể hiện phong cách và cá tính riêng. Eyemedi Luxury Sun ra đời dành cho những cô nàng yêu thích vẻ đẹp sang trọng, hiện đại và luôn muốn nổi bật trong mọi khoảnh khắc.</p>
+<p>Sở hữu thiết kế thanh lịch cùng những đường nét tinh tế, Eyemedi Luxury Sun dễ dàng phù hợp với nhiều phong cách thời trang khác nhau. Từ những bộ váy nữ tính, trang phục công sở thanh lịch đến phong cách năng động khi dạo phố hay du lịch, mẫu kính này đều tạo nên điểm nhấn cuốn hút cho tổng thể trang phục.</p>
+<h3>Gọng đen – tròng đen</h3>
+<p>Sự kết hợp giữa gọng vàng Gold sang trọng và tròng đen cá tính tạo nên vẻ đẹp đẳng cấp, thời thượng. Đây là lựa chọn hoàn hảo cho những cô nàng yêu thích phong cách nổi bật nhưng vẫn giữ được nét thanh lịch.</p>
+<h3>Gọng đen – tròng trà</h3>
+<p>Mẫu kính dành cho những tín đồ yêu thích phong cách tối giản. Sắc đen kinh điển mang lại vẻ đẹp hiện đại, bí ẩn và không bao giờ lỗi mốt, phù hợp với mọi hoàn cảnh sử dụng.</p>
+<h3>Điểm nhấn cho mọi phong cách</h3>
+<p>Không chỉ là phụ kiện chống nắng, Eyemedi Luxury Sun còn giúp tôn lên đường nét khuôn mặt, tạo cảm giác tự tin và cuốn hút hơn khi xuất hiện trước đám đông. Thiết kế thời trang cùng bảng màu sang trọng giúp sản phẩm trở thành lựa chọn lý tưởng cho những cô nàng yêu thích sự tinh tế và đẳng cấp.</p>
+<p>Thanh lịch khi đi làm, Nổi bật khi dạo phố, Sang trọng trong những chuyến du lịch, Dễ dàng phối hợp với nhiều phong cách thời trang. "</p>
+<p>Nếu bạn đang tìm kiếm một mẫu kính mát thời trang để chụp hình, để đi dạo phố, chống bụi khi lái xe, hoặc dùng trong những chuyến du lịch, dã ngoại. Hãy chọn sản phẩm nhà Eyemedi.</p>
+H2_3: Chế độ bảo hành kính gọng & tròng kính
+NOI_DUNG_3: <p>An tâm sử dụng – Đồng hành dài lâu cùng khách hàng</p>
+<p>Tại EYEMEDI, chúng tôi không chỉ bán kính — mà còn mang đến trải nghiệm chăm sóc và hậu mãi tận tâm sau mua hàng. Với hệ thống bảo hành toàn diện dành cho gọng kính &amp; tròng kính, khách hàng luôn được hỗ trợ tốt nhất trong suốt quá trình sử dụng.</p>
+<p><strong>Bảo hành gọng kính chính hãng:</strong> Hỗ trợ sửa chữa hoặc đổi mới đối với các lỗi kỹ thuật từ nhà sản xuất như mối hàn, bản lề, ốc và càng kính. Đồng thời, khách hàng được siết ốc, chỉnh form, cân bằng kính và nắn càng miễn phí trọn đời.</p>
+<p><strong>Chăm sóc kính luôn như mới:</strong> Miễn phí thay ve mũi, đuôi càng trong 12 tháng cùng dịch vụ vệ sinh, khử khuẩn, làm sạch siêu âm và spa kính trọn đời, giúp chiếc kính luôn sạch đẹp và thoải mái khi sử dụng.</p>
+<p><strong>Bảo hành tròng kính chuyên nghiệp:</strong> Hỗ trợ đổi mới nếu lớp phủ chống chói, chống ánh sáng xanh hoặc phủ váng dầu bị lỗi kỹ thuật. Khách hàng còn được đổi độ tròng 1 lần miễn phí khi chưa thích nghi và hỗ trợ đặc biệt với tròng đa tròng Progressive.</p>
+<p><strong>Đồng hành dài lâu cùng khách hàng:</strong> Hỗ trợ đổi mới khi tròng nứt vỡ do lỗi lắp ráp, chính sách hỗ trợ chi phí khi rơi vỡ, cùng chương trình thu cũ đổi mới giúp tiết kiệm chi phí và dễ dàng nâng cấp kính phù hợp hơn."</p>
+H2_4: Về EYEMEDI Optic
+NOI_DUNG_4: <p>EYEMEDI OPTIC – Nơi chăm sóc thị lực chuyên nghiệp và tận tâm.</p>
+<p>Cung cấp gọng kính, tròng kính và kính áp tròng chính hãng, chất lượng cao.</p>
+<p>Đo khúc xạ thị lực chính xác cùng đội ngũ tư vấn giàu kinh nghiệm.</p>
+<p>Đồng hành lâu dài với chính sách bảo hành uy tín, mang đến sự an tâm cho mọi khách hàng.</p>
+H2_5: Cam kết khi mua hàng tại EYEMEDI
+NOI_DUNG_5: <p>Hàng chính hãng.</p>
+<p>Kiểm tra hàng khi nhận.</p>
+<p>Đổi lỗi trong 7 ngày kèm theo hóa đơn mua hàng. Bảo hành 12 tháng.</p>
+LOI_KEU_GOI: Đặt mua Eyemedi Luxury Sun qua form phía trên hoặc ghé 63C Lạc Long Quân để thử kính trực tiếp. Miễn ship toàn quốc.
+HOI_1: Kính Eyemedi Luxury Sun có chống tia UV không?
+DAP_1: Có. Kính chống UV420, chống bụi, nhẹ nhàng, hợp phong cách trendy dạo phố, đi làm hay du lịch.
+HOI_2: Mẫu Breeze Sun Luxury có những màu nào?
+DAP_2: Màu gọng: nâu trà, xanh đen, đen xám; màu tròng: Gray (đen) và Brown (nâu trà).
+HOI_3: Mua kính được tặng kèm gì?
+DAP_3: Mua 1 được 3: kính kèm hộp đựng mắt kính Eyemedi và khăn lau vệ sinh tròng kính; miễn ship toàn quốc.
+SAN_PHAM: sun-luxury, vidic-luxury-sun-p28220, kinh-mat-nu-350, ventor-g, kinh-xuyen-dem-night-view, vision-one, pk-hop-kinh-eyemedi, pk-khan-lau-a03
+LIEN_QUAN: kinh-mat-nu | Kính mát nữ tại EYEMEDI; kinh-xuyen-dem | Kính xuyên đêm hỗ trợ lái xe; che-do-bao-hanh | Chế độ bảo hành kính
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

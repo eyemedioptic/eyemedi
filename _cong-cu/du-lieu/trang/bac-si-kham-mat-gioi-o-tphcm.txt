@@ -1,0 +1,117 @@
+TIEU_DE: Top 10 bác sĩ chuyên khoa mắt uy tín tại TP.HCM
+TITLE: Top 10 bác sĩ khám mắt giỏi ở TP.HCM uy tín | EYEMEDI
+SLUG: bac-si-kham-mat-gioi-o-tphcm
+TU_KHOA_CHINH: bác sĩ khám mắt giỏi ở TP.HCM
+TU_KHOA_PHU: bác sĩ chuyên khoa mắt, bệnh viện mắt TP.HCM, khám mắt ở đâu, đo mắt cắt kính
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: Top 10 bác sĩ khám mắt giỏi ở TP.HCM: BS Bùi Quang Tuấn, Trịnh Bạch Tuyết, Võ Thị Hoàng Lan… kèm danh sách bệnh viện mắt uy tín và nơi đo mắt, cắt kính.
+NGAY_DANG: 2023-06-22
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Eyemedi là hệ thống nền tảng trực tuyến cung cấp các giải pháp chuyên khoa mắt chăm sóc thị lực và cung cấp các sản phẩm mắt kính cận viễn loạn chính xác. Eyemedi còn là nền tảng kết nối mạng lưới các phòng khám, bác sĩ đa khoa, chuyên khoa ung bướu, chuyên khoa nhi, bác sĩ chuyên khoa phẫu thuật thẩm mỹ. Nhập khẩu và phân phối các sản phẩm mỹ làm đẹp cho Spa, thẩm mỹ viện và cá nhân.
+ANH_RIENG:
+kiemtrathiluc.jpg | Kiểm tra thị lực bằng tròng kính thử tại EYEMEDI
+kho-anh/EYEMEDI-6.webp | Khách hàng trải nghiệm đo mắt tại EYEMEDI
+kho-anh/EYEMEDI-8.webp | Đo khúc xạ bằng máy đo tự động tại EYEMEDI
+H2_1: EYEMEDI – chuyên giải pháp khúc xạ mắt kính
+NOI_DUNG_1: <p>Chuyên đo mắt và kiểm tra thị lực chính xác, cung cấp sản phẩm gọng kính tốt, tròng kính tối ưu nhất với mắt và độ khúc xạ.</p>
+<figure><img src="/images/kiemtrathiluc.webp" alt="Eyemedi - nơi đo mắt và cắt tròng kính cận uy tín" loading="lazy"></figure>
+<p>Trước khi đi khám, bạn có thể tìm hiểu <a href="/mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri.html">vì sao mắt nhìn mờ nhòe</a> và các dấu hiệu cần đi khám sớm.</p>
+H2_2: Top 10 bác sĩ khám mắt giỏi, uy tín ở TP.HCM
+NOI_DUNG_2: <p>Chuyên: khám các bệnh lý chuyên khoa mắt</p>
+<p>Phẫu thuật Phaco đục thủy tinh thể.</p>
+<p>Phẫu thuật khúc xạ Lasik, Femtosecond Lasik.</p>
+<p>Cross Linking cho điều trị khúc xạ và bệnh lý giác mạc chóp.</p>
+<p>Kiểm soát cận thị bằng phương pháp Ortho-K</p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2026/04/14/114005-bac-si-kham-mat-nguyen-quang-tuan.png" alt="Bác sĩ mắt uy tín tại TPHCM" loading="lazy"></figure>
+<h3>1.Bác sĩ Bùi Quang Tuấn</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2021/06/01/110833-bac-si-trinh-bach-tuyet-1.jpg" alt="Bác sĩ chuyên khoa mắt Trịnh Bạch Tuyết" loading="lazy"></figure>
+<h3>2.BS Trịnh Bạch Tuyết</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/10/01/084257bs-vo-thi-hoang-lan.jpg" alt="Bác sĩ chuyên khoa mắt Võ Thị Hoàng Lan" loading="lazy"></figure>
+<h3>3.BS Võ Thị Hoàng Lan</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/10/01/084257bs-doan-hong-dung.jpg" alt="Bác sĩ chuyên khoa mắt Nguyễn Thị Mỹ Dung" loading="lazy"></figure>
+<h3>4.BS Nguyễn Thị Mỹ Dung</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/09/25/165645bs-hong-van-hiep.jpg" alt="Bác sĩ chuyên khoa mắt Hồng Văn Hiệp" loading="lazy"></figure>
+<h3>5.BS Hồng Văn Hiệp</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2024/07/02/110650-bac-si-mat-jd-ferwerda.png" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>6.BS J.D. Ferwerda</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w256/2025/12/02/155005-bs-trinh-ngoc-thuy-an-1.jpg" alt="Bác sĩ chuyên khoa mắt Trịnh Ngọc Thúy An" loading="lazy"></figure>
+<h3>7.BS Trịnh Ngọc Thùy An</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2025/05/21/105241-bac-si-mat-tphcm-nguyen-phuong-ha.png" alt="Bác sĩ chuyên khoa mắt Nguyễn Phương Hà" loading="lazy"></figure>
+<h3>8. BS Nguyễn Phương Hà</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w256/2025/12/02/104302-bs-ha-nhu-quynh-1.jpg" alt="Bác sĩ chuyên khoa mắt Hà Như Quỳnh" loading="lazy"></figure>
+<h3>9.BS Hà Như Quỳnh</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://api.docosan.com/images/doctor/1209/thumb/img2021083110440898565800.png" alt="Bác sĩ chuyên khoa mắt Trần Anh Tuấn" loading="lazy"></figure>
+<h3>10.BS Trần Anh Tuấn</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<p>Tham khảo thêm các <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu điều trị sẹo uy tín tại TP.HCM</a>.</p>
+H2_3: Các dịch vụ khám chuyên khoa mắt
+NOI_DUNG_3: <p><strong>Các dịch vụ khám chuyên khoa mắt:</strong></p>
+<ul>
+<li>Khám và điều trị các bệnh nội khoa về mắt: Viêm kết giác mạc, Bệnh lý đáy mắt</li>
+<li>Đo khúc xạ mắt, cắt kính</li>
+<li>Bệnh lý về cườm nước – glaucoma</li>
+<li>Bệnh lý về <a href="/benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi.html">cườm khô – đục thủy tinh thể</a>.</li>
+<li>Lasik Cận thị – Viễn thị – Lão thị</li>
+</ul>
+H2_4: BS.CKII Nguyễn Duy Trì – chuyên gia ung bướu
+NOI_DUNG_4: <figure><img src="/images/bsnguyenduytri.webp" alt="" loading="lazy"></figure>
+<p>Bác sĩ Nguyễn Duy Trì là chuyên gia có thâm niên trong lĩnh vực tầm soát, chẩn đoán và điều trị các bệnh lý khối u, đặc biệt chuyên sâu về các bệnh lý tuyến giáp, tuyến vú...</p>
+H2_5: Danh sách các bệnh viện mắt tại TP.HCM
+NOI_DUNG_5: <ul>
+<li>Bệnh viện Mắt TP.HCM:</li>
+</ul>
+<p>Địa chỉ: 280 Điện Biên Phủ, Phường Võ Thị Sáu, Quận 3</p>
+<p>Thế mạnh: Bệnh viện chuyên khoa mắt tuyến cuối của thành phố, quy tụ đội ngũ chuyên gia đầu ngành và máy móc hiện đại. Khám Bảo hiểm y tế (BHYT).</p>
+<ul>
+<li>Khoa Mắt - Bệnh viện Đại học Y Dược TP.HCM:</li>
+</ul>
+<p>Địa chỉ: 215 Hồng Bàng, Phường 11, Quận 5</p>
+<p>Thế mạnh: Kết hợp giữa khám lâm sàng và nghiên cứu, dịch vụ chuyên nghiệp, tiếp nhận khám BHYT</p>
+<ul>
+<li>Khoa Mắt - Bệnh viện Trưng Vương</li>
+</ul>
+<p>Địa chỉ: 266 Lý Thường Kiệt, Phường 14, Quận 10</p>
+<p>Thế mạnh: Nổi bật trong phẫu thuật khúc xạ, mộng thịt, Glaucoma, chi phí khám chữa bệnh theo yêu cầu và BHYT tốt</p>
+<ul>
+<li>Bệnh viện Chuyên khoa Mắt Cao Thắng</li>
+</ul>
+<p>Địa chỉ: 135B Trần Bình Trọng, Phường 2, Quận 5</p>
+<p>Thế mạnh: Bệnh viện tư nhân lâu đời, tiêu chuẩn quốc tế, điều trị các bệnh lý về võng mạc, khúc xạ và nhãn nhi.</p>
+<ul>
+<li>Bệnh viện Mắt Quốc tế Việt - Nga</li>
+</ul>
+<p>Địa chỉ: Số 1 đường 3 Tháng 2, Phường 11, Quận 10</p>
+<p>Thế mạnh: Nổi tiếng với công nghệ điều trị và phẫu thuật mắt tiêu chuẩn châu Âu.</p>
+H2_6: Phòng khám phẫu thuật thẩm mỹ Dr Đắc Quang
+NOI_DUNG_6: <figure><img src="/images/pkdrdacquang.webp" alt="Phòng khám thẩm mỹ Dr Đắc Quang" loading="lazy"></figure>
+<p>Phòng khám Chuyên Khoa Phẫu Thuật Thẩm Mỹ Dr Đắc Quang.</p>
+<p>Eyemedi giới thiệu tới các bạn một Phòng khám chuyên khoa Phẫu Thuật Thẩm Mỹ uy tín tại Quận 10 TPHCM.</p>
+<p>Tìm hiểu thêm về các <a href="/bac-si-phau-thuat-tham-my-gioi-tai-tphcm.html">bác sĩ phẫu thuật thẩm mỹ giỏi tại TP.HCM</a>.</p>
+H2_7: Địa chỉ phòng khám Dr Đắc Quang và EYEMEDI
+NOI_DUNG_7: <p>Địa chỉ: 366 Cao Thắng, Phường Hòa Hưng (Phường 12, Quận 10), TP Hồ Chí Minh</p>
+<p>Chuyên dịch vụ phẫu thuật thẩm mỹ mắt, mũi, cẳm, ngực, và hút mỡ.</p>
+<p>Phòng khám CKPTTM Dr Đắc Quang do Bác Sĩ CKII Thẩm Mỹ Trần Đắc Quang</p>
+<p><a href="/">EYEMEDI - CHUYÊN KHÚC XẠ MẮT KÍNH Địa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</a></p>
+<p><a href="https://www.google.com/maps/place/Eyemedi+Optic/@10.7693622,106.6420949,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f1a47511c2f:0x2407f2dbd557f609!8m2!3d10.7693569!4d106.6446698!16s%2Fg%2F11njw532jn?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D">📍 Đến đo mắt trực tiếp tại EYEMEDI</a></p>
+LOI_KEU_GOI: Cần kiểm tra mắt, đo độ hay cắt kính? EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn tròng, gọng phù hợp.
+HOI_1: Top bác sĩ khám mắt giỏi ở TP.HCM gồm những ai?
+DAP_1: Danh sách gồm Bác sĩ Bùi Quang Tuấn, BS Trịnh Bạch Tuyết, BS Võ Thị Hoàng Lan, BS Nguyễn Thị Mỹ Dung, BS Hồng Văn Hiệp, BS J.D. Ferwerda, BS Trịnh Ngọc Thùy An, BS Nguyễn Phương Hà, BS Hà Như Quỳnh và BS Trần Anh Tuấn.
+HOI_2: Bệnh viện Mắt TP.HCM ở đâu, có khám BHYT không?
+DAP_2: Bệnh viện Mắt TP.HCM ở 280 Điện Biên Phủ, Phường Võ Thị Sáu, Quận 3, có khám Bảo hiểm y tế (BHYT).
+HOI_3: Muốn đo mắt, cắt kính thì đến đâu?
+DAP_3: Bạn có thể đến EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM để được đo thị lực miễn phí và tư vấn kính phù hợp.
+SAN_PHAM: da-trong-158-kts-can, da-trong-158-kts-vien, da-trong-dat-theo-yeu-cau, trong-160-x-drive, lens-can-loan, gala-21061, gold-optic-2231, eyemedi-korea-metal-style
+LIEN_QUAN: top-11-bac-si-kham-mat-gioi-quan-tphcm | Toplist bác sĩ chuyên khoa mắt giỏi tại TP.HCM; benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Bệnh lý đục thủy tinh thể và nhược thị; dia-chi-do-mat-cat-kinh-can | Cửa hàng kính mắt gần đây
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

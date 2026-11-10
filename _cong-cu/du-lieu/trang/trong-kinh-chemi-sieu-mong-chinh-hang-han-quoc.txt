@@ -1,0 +1,50 @@
+TIEU_DE: Tròng kính Chemi – tròng kính siêu mỏng chính hãng Hàn Quốc
+TITLE: Tròng kính Chemi siêu mỏng chính hãng Hàn Quốc | EYEMEDI
+SLUG: trong-kinh-chemi-sieu-mong-chinh-hang-han-quoc
+TU_KHOA_CHINH: tròng kính Chemi
+TU_KHOA_PHU: tròng kính siêu mỏng, Chemi Hàn Quốc, Chemi U2, Chemi U6, Chemi PhotoBlue, Chemi X-Drive, Chemi U10, tròng 1.74
+DANH_MUC: Tròng kính mắt
+SLUG_DANH_MUC: trong-kinh-can-vien-loan
+Y_KHOA: 
+MO_TA_SEO: Tròng kính Chemi chính hãng Hàn Quốc: các dòng U2, U6 lọc ánh sáng xanh, PhotoBlue đổi màu, U10 cho học sinh, tròng siêu mỏng 1.74. Cắt kính tại EYEMEDI.
+NGAY_DANG: 2026-11-08
+NGAY_CAP_NHAT: 2026-11-08
+DOAN_MO_DAU: Tròng kính Chemi là thương hiệu của Chemiglas, nhà sản xuất tròng kính nhựa có trụ sở và nhà máy tại Hàn Quốc. Chemi có nhiều dòng tròng với chiết suất và lớp phủ khác nhau, trong đó dòng chiết suất cao 1.74 cho tròng siêu mỏng, phù hợp người cận, viễn độ cao.
+ANH_RIENG:
+anh-rieng/chemi-174-crystal-u2.jpg | Tròng kính Chemi 1.74 Aspheric Crystal U2 siêu mỏng chính hãng Hàn Quốc
+anh-rieng/chemi-u2-chong-uv.jpg | Tròng kính Chemi U2 tiêu chuẩn chống tia UV
+anh-rieng/chemi-u6-loc-anh-sang-xanh.jpg | Tròng kính Chemi U6 lọc ánh sáng xanh cho người dùng máy tính
+anh-rieng/chemi-photoblue-doi-mau.jpg | Tròng kính Chemi PhotoBlue đổi màu, lọc ánh sáng xanh
+anh-rieng/chemi-u10-kiem-soat-can-thi.jpg | Tròng kính Chemi U10 kiểm soát cận thị cho học sinh
+H2_1: Các dòng tròng kính Chemi phổ biến
+NOI_DUNG_1: <ul>
+<li><b>Chemi U2 Crystal:</b> tròng tiêu chuẩn có lớp phủ cứng, chống tia UV400, dùng hằng ngày.</li>
+<li><b>Chemi U6:</b> lọc ánh sáng xanh, hợp người làm việc nhiều với máy tính, điện thoại.</li>
+<li><b>Chemi PhotoBlue:</b> đổi màu khi ra nắng, kết hợp lọc ánh sáng xanh, một cặp dùng được cả trong nhà lẫn ngoài trời.</li>
+<li><b>Chemi X-Drive:</b> giảm chói đèn pha, hỗ trợ nhìn rõ hơn khi lái xe ban đêm.</li>
+<li><b>Chemi U10:</b> dòng dành cho học sinh, chất liệu polycarbonate nhẹ, chịu va đập, hỗ trợ kiểm soát tiến triển cận thị.</li>
+</ul>
+<div class="chemi-luoi"><figure><img src="/images/chemi-174-crystal-u2.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi 1.74 Aspheric Crystal U2 siêu mỏng"><figcaption>Chemi 1.74 Aspheric Crystal U2 siêu mỏng</figcaption></figure><figure><img src="/images/chemi-u2-chong-uv.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi U2 tiêu chuẩn chống UV"><figcaption>Chemi U2 tiêu chuẩn chống UV</figcaption></figure><figure><img src="/images/chemi-u6-loc-anh-sang-xanh.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi U6 lọc ánh sáng xanh"><figcaption>Chemi U6 lọc ánh sáng xanh</figcaption></figure><figure><img src="/images/chemi-photoblue-doi-mau.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi PhotoBlue đổi màu, lọc ánh sáng xanh"><figcaption>Chemi PhotoBlue đổi màu, lọc ánh sáng xanh</figcaption></figure><figure><img src="/images/chemi-x-drive-chong-choi-lai-xe.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi X-Drive chống chói khi lái xe"><figcaption>Chemi X-Drive chống chói khi lái xe</figcaption></figure><figure><img src="/images/chemi-u10-kiem-soat-can-thi.webp" width="600" height="600" loading="lazy" alt="Tròng kính Chemi U10 kiểm soát cận thị học sinh"><figcaption>Chemi U10 kiểm soát cận thị học sinh</figcaption></figure></div>
+H2_2: Tròng siêu mỏng 1.74 – cho người cận, viễn độ cao
+NOI_DUNG_2: <p>Chiết suất càng cao, tròng càng mỏng ở cùng một độ kính. Dòng Chemi 1.74 Aspheric thiết kế phi cầu giúp mép tròng mỏng, nhẹ, ít bị hiệu ứng "mắt nhỏ" khi đeo kính cận nặng.</p>
+<p>Người cận nhẹ thường chỉ cần chiết suất 1.56–1.60; người độ cao nên cân nhắc 1.67 hoặc 1.74. Nên chọn chiết suất theo độ mắt và loại gọng, không nhất thiết lấy mức cao nhất.</p>
+H2_3: Cắt tròng kính Chemi tại EYEMEDI
+NOI_DUNG_3: <ol>
+<li>Đo khúc xạ miễn phí để xác định độ chính xác.</li>
+<li>Tư vấn dòng tròng và chiết suất phù hợp nhu cầu, ngân sách.</li>
+<li>Kiểm tra tên dòng, chiết suất, lớp phủ trên bao bì tròng chính hãng trước khi cắt.</li>
+<li>Cắt lắp, chỉnh gọng vừa mặt và bảo hành theo chính sách.</li>
+</ol>
+LOI_KEU_GOI: Ghé EYEMEDI 63C Lạc Long Quân để đo mắt miễn phí và chọn tròng kính Chemi siêu mỏng phù hợp với độ mắt của bạn.
+HOI_1: Tròng kính Chemi của nước nào?
+DAP_1: Chemi là thương hiệu tròng kính của Chemiglas, có trụ sở và nhà máy sản xuất tại Hàn Quốc.
+HOI_2: Tròng Chemi 1.74 có mỏng không?
+DAP_2: 1.74 là chiết suất cao, cho tròng mỏng và nhẹ hơn rõ rệt so với 1.56 ở cùng độ cận, phù hợp người cận hoặc viễn độ cao.
+HOI_3: Học sinh nên dùng tròng Chemi nào?
+DAP_3: Có thể tham khảo dòng U10 bằng polycarbonate nhẹ, chịu va đập; nên đo mắt và tái khám định kỳ để theo dõi độ cận.
+SAN_PHAM: trong-perfect-uv-u6, trong-174-blue-protect, trong-167-blue-protect, da-trong-158-kts-can, da-trong-158-kts-vien, p-sufiar-fc9885, vidic-p9602, trong-160-x-drive
+LIEN_QUAN: top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay | Top 10+ tròng kính cận tốt; gia-thay-trong-kinh-can-vien-loan-chinh-hang | Giá thay tròng kính cận viễn loạn; trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong | Tròng kính cận viễn loạn & đa tròng chính hãng
+LINK_TRONG_BAI: 
+LINK_VAO_TU: top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay, gia-thay-trong-kinh-can-vien-loan-chinh-hang, trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong
+KIEM_TRA_TRUNG: Từ khóa chính mới "tròng kính Chemi". Ảnh do Giám đốc cung cấp (sản phẩm Chemi đang bán).
+NGUON_THAM_KHAO: nhathuoclongchau.com.vn (tròng kính Chemi có tốt không); mytour.vn; bao bì/ấn phẩm Chemi do Giám đốc cung cấp. Viết lại hoàn toàn.

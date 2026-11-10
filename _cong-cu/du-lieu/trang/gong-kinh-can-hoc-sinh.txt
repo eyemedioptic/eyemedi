@@ -1,0 +1,107 @@
+TIEU_DE: Gọng kính tại EYEMEDI có những loại nào?
+TITLE: Gọng kính cận các loại – tặng gọng 0đ khi cắt tròng | EYEMEDI
+SLUG: gong-kinh-can-hoc-sinh
+TU_KHOA_CHINH: gọng kính cận
+TU_KHOA_PHU: gọng kính cận học sinh, gọng titanium, gọng kim loại bọc nhựa, gọng nhựa TR90, tặng gọng 0đ
+DANH_MUC: Gọng kính cận
+SLUG_DANH_MUC: gong-kinh-can
+MO_TA_SEO: Gọng kính cận tại EYEMEDI: titanium, kim loại bọc nhựa, nhựa TR90 cho học sinh, nam, nữ. Tặng gọng 0đ khi cắt tròng, đo thị lực miễn phí.
+NGAY_DANG: 2026-11-02
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI! Đây là cơ hội để bạn thay diện mạo mới cho chiếc kính với chi phí tiết kiệm, kèm đo thị lực miễn phí và tư vấn gọng phù hợp khuôn mặt.
+PIXEL: 1020078554329275
+FORM_URL: https://script.google.com/macros/s/AKfycbwTMU5uBOF5NaOefIZNVhk6wfIxUwSF9K7Ic8fLSeOiowcAUXTd-HU6KFlMxfFMqcN2Ew/exec
+FORM_TIEU_DE: Đặt lịch nhận ưu đãi tặng gọng 0đ
+FORM_TRUONG: Họ và Tên | Họ và tên
+Số điện thoại | Số điện thoại | tel
+Địa chỉ | Địa chỉ hoặc Email
+FORM_NUT: HOÀN TẤT ĐẶT LỊCH
+FORM_CAM_ON: Gửi thành công! EYEMEDI sẽ liên hệ xác nhận lịch hẹn.
+FORM_GHI_CHU: 🚚 Miễn ship trên toàn quốc
+ANH_RIENG:
+gong0d.png | Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI
+kho-anh/EYEMEDI-4.webp | Khu trưng bày gọng kính tại EYEMEDI
+kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt tại cửa hàng EYEMEDI
+H2_1: Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI
+NOI_DUNG_1: <p>Đây là cơ hội để bạn thay diện mạo mới cho chiếc kính với chi phí tiết kiệm hơn bao giờ hết!</p>
+<h3>Ưu đãi hấp dẫn tại EYEMEDI</h3>
+<p>Tặng gọng kính 0Đ khi cắt tròng kính (áp dụng với các mẫu gọng trong chương trình của Eyemedi).</p>
+<p>Đo và kiểm tra thị lực hoàn toàn miễn phí với trang thiết bị hiện đại</p>
+<p>Tư vấn lựa chọn gọng kính và tròng kính phù hợp với độ mắt, khuôn mặt và nhu cầu sử dụng.</p>
+<h3>Vì sao nên chọn gọng kính tại EYEMEDI?</h3>
+<ul>
+<li>Đa dạng mẫu mã, phù hợp nhiều phong cách.</li>
+<li>Chất liệu chính hãng, bền đẹp.</li>
+<li>Tư vấn lựa chọn theo khuôn mặt và nhu cầu sử dụng.</li>
+<li>Hỗ trợ đo và kiểm tra thị lực miễn phí.</li>
+<li>Lưu trữ toa kính trên hệ thống để thuận tiện cho các lần thay kính sau.</li>
+</ul>
+<p>Không chỉ đa dạng về chất liệu và kiểu dáng, EYEMEDI còn luôn đặt chất lượng và trải nghiệm khách hàng lên hàng đầu. Đội ngũ tư vấn sẽ giúp bạn lựa chọn gọng kính phù hợp với khuôn mặt, nhu cầu sử dụng và ngân sách. Bên cạnh đó, EYEMEDI hỗ trợ đo và kiểm tra thị lực hoàn toàn miễn phí, đồng thời lưu trữ thông tin toa kính trên hệ thống để thuận tiện cho việc thay kính hoặc tái khám sau này.</p>
+H2_2: Cửa hàng EYEMEDI và các dòng kính nổi bật
+NOI_DUNG_2: <p>Địa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</p>
+<p>Hotline: <a href="tel:0967190005">0967 190005</a></p>
+<figure><img src="/images/sunnu4.webp" alt="Kính mát nữ" loading="lazy"></figure>
+<h3>Kính thời trang "Sun Luxury" cho nữ</h3>
+<p>Các mẫu mới nhất hiện nay, phù hợp với nhiều phong cách.</p>
+<p><a href="https://eyemedi.vn/kinh-mat-nu.html">Xem chi tiết</a></p>
+<figure><img src="/images/29037.webp" alt="Kính mát nam" loading="lazy"></figure>
+<h3>Kính mát nam, kính thời trang cho phái mạnh</h3>
+<p>Lịch lãm, đẳng cấp, tạo phong cách dấu ấn riêng</p>
+<p><a href="https://eyemedi.vn/kinh-mat-nam.html">Xem chi tiết</a></p>
+<figure><img src="/images/8602.webp" alt="Kính đi đêm" loading="lazy"></figure>
+<h3>Kính xuyên đêm - Hỗ trợ lái xe trời đêm an toàn</h3>
+<p>Chống bụi, chống chói lóa đèn xe ngược chiều, nhìn rõ đường đêm.</p>
+<p><a href="https://eyemedi.vn/kinh-xuyen-dem.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhnu.webp" alt="Kính gọng nữ" loading="lazy"></figure>
+<h3>Gọng kính nữ, kính cận &amp; giả cận</h3>
+<p>Gọng kính cận các loại: Nhựa TR90, nhựa dẻo, kim loại bọc nhựa, Titanium...</p>
+<p><a href="https://eyemedi.vn/gong-kinh-can-nu.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhnam.webp" alt="Kính gọng nam" loading="lazy"></figure>
+<h3>Gọng kính nam, kính cận &amp; giả cận</h3>
+<p>Gọng nhựa TR90, nhựa dẻo, kim loại bọc nhựa, kim loại Titanium...</p>
+<p><a href="https://eyemedi.vn/gong-kinh-can-nam.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhhocsinh.webp" alt="Gọng kính cận học sinh" loading="lazy"></figure>
+<h3>Gọng kính cận học sinh (nam &amp; nữ)</h3>
+<p>Gọng nhựa TR90, nhựa dẻo, kim loại bọc nhựa, kim loại Titanium...</p>
+<p><a href="https://eyemedi.vn/gong-kinh-can-hoc-sinh.html">Xem chi tiết</a></p>
+H2_3: Các loại gọng kính tại EYEMEDI
+NOI_DUNG_3: <p>Tại Eyemedi, chúng tôi cung cấp đa dạng các dòng gọng kính từ phổ thông đến cao cấp, đáp ứng nhu cầu học tập, làm việc, thời trang và sử dụng hằng ngày. Dưới đây là 3 nhóm chất liệu gọng kính phổ biến nhất.</p>
+<h3>1. Gọng Titanium &amp; Gọng Kim Loại – Sang trọng, bền bỉ</h3>
+<p>Đây là dòng gọng cao cấp được nhiều khách hàng yêu thích nhờ thiết kế thanh lịch và độ bền vượt trội. Eyemedi cung cấp các chất liệu như Pure Titanium, Beta Titanium, Memory Titanium, Stainless Steel (thép không gỉ) và các hợp kim kim loại cao cấp.</p>
+<h3>2. Gọng Kim Loại Bọc Nhựa – Hiện đại và thời trang</h3>
+<ul>
+<li>Gọng kim loại bọc nhựa là sự kết hợp giữa phần viền nhựa cao cấp và càng kính bằng kim loại, mang lại vẻ ngoài trẻ trung nhưng vẫn đảm bảo độ chắc chắn. Các chất liệu phổ biến gồm Acetate kết hợp Titanium hoặc thép không gỉ, TR90 kết hợp Titanium hoặc thép.</li>
+</ul>
+<h3>3. Gọng Nhựa – Nhẹ, linh hoạt và đa dạng</h3>
+<p>Đây là dòng gọng được nhiều khách hàng lựa chọn nhờ sự thoải mái khi sử dụng và mẫu mã phong phú. Eyemedi cung cấp nhiều chất liệu như TR90, Acetate, Ultem, CP, Polycarbonate (PC) và Nylon.</p>
+H2_4: Đặt lịch ngay hôm nay để nhận ưu đãi
+NOI_DUNG_4: <ul>
+<li>Nhận ngay gọng kính 0Đ khi cắt tròng kính theo chương trình ưu đãi.</li>
+<li>Kiểm tra thị lực miễn phí.</li>
+<li>Tư vấn khúc xạ chính xác.</li>
+</ul>
+H2_5: Chính sách bảo hành tại EYEMEDI
+NOI_DUNG_5: <p><strong>Bảo hành gọng kính chính hãng:</strong> Hỗ trợ sửa chữa hoặc đổi mới đối với các lỗi kỹ thuật từ nhà sản xuất như mối hàn, bản lề, ốc và càng kính. Đồng thời, khách hàng được siết ốc, chỉnh form, cân bằng kính và nắn càng miễn phí trọn đời.</p>
+<p><strong>Chăm sóc kính luôn như mới:</strong> Miễn phí thay ve mũi, đuôi càng trong 12 tháng cùng dịch vụ vệ sinh, khử khuẩn, làm sạch siêu âm và spa kính trọn đời, giúp chiếc kính luôn sạch đẹp và thoải mái khi sử dụng.</p>
+<p><strong>Bảo hành tròng kính chuyên nghiệp:</strong> Hỗ trợ đổi mới nếu lớp phủ chống chói, chống ánh sáng xanh hoặc phủ váng dầu bị lỗi kỹ thuật. Khách hàng còn được đổi độ tròng 1 lần miễn phí khi chưa thích nghi và hỗ trợ đặc biệt với tròng đa tròng Progressive.</p>
+<p><strong>Đồng hành dài lâu cùng khách hàng:</strong> Hỗ trợ đổi mới khi tròng nứt vỡ do lỗi lắp ráp, chính sách hỗ trợ chi phí khi rơi vỡ, cùng chương trình thu cũ đổi mới giúp tiết kiệm chi phí và dễ dàng nâng cấp kính phù hợp hơn."</p>
+H2_6: Về EYEMEDI Optic
+NOI_DUNG_6: <p>EYEMEDI OPTIC – Nơi chăm sóc thị lực chuyên nghiệp và tận tâm.</p>
+<p>Cung cấp gọng kính, tròng kính và kính áp tròng chính hãng, chất lượng cao.</p>
+<p>Đo khúc xạ thị lực chính xác cùng đội ngũ tư vấn giàu kinh nghiệm.</p>
+<p>Đồng hành lâu dài với chính sách bảo hành uy tín, mang đến sự an tâm cho mọi khách hàng.</p>
+H2_7: Cam kết khi mua hàng tại EYEMEDI
+NOI_DUNG_7: <p>Hàng chính hãng.</p>
+<p>Kiểm tra hàng khi nhận.</p>
+<p>Đổi lỗi trong 7 ngày kèm theo hóa đơn mua hàng. Bảo hành 12 tháng.</p>
+LOI_KEU_GOI: Đặt lịch ngay để nhận gọng kính 0đ khi cắt tròng theo chương trình, kiểm tra thị lực miễn phí và tư vấn khúc xạ chính xác.
+HOI_1: EYEMEDI có những loại gọng kính nào?
+DAP_1: Gọng titanium và kim loại (sang trọng, bền bỉ), gọng kim loại bọc nhựa (hiện đại, thời trang) và gọng nhựa như TR90, nhựa dẻo (nhẹ, linh hoạt, đa dạng); có mẫu cho học sinh, nam và nữ.
+HOI_2: Chương trình tặng gọng 0đ áp dụng thế nào?
+DAP_2: Tặng gọng kính 0đ khi cắt tròng kính cận, áp dụng với các mẫu gọng trong chương trình của EYEMEDI.
+HOI_3: Gọng kính được bảo hành ra sao?
+DAP_3: Sửa chữa hoặc đổi mới với lỗi kỹ thuật từ nhà sản xuất (mối hàn, bản lề, ốc, càng); siết ốc, chỉnh form, nắn càng miễn phí trọn đời; miễn phí thay ve mũi, đuôi càng trong 12 tháng.
+SAN_PHAM: mayblass-24030, mayblass-s11890, p-sufiar-2804, panda-tr90, baby-2212, eyemedi-korea-metal-style, tommy-gold-titanium-ip, vidic-p9602
+LIEN_QUAN: gong-kinh-can-nam | Gọng kính cận nam; gong-kinh-can-nu | Gọng kính cận nữ; che-do-bao-hanh | Chế độ bảo hành gọng kính
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

@@ -1,0 +1,49 @@
+TIEU_DE: Giải pháp thẩm mỹ và hỗ trợ thị lực cho mắt khuyết mống mắt (aniridia)
+TITLE: Giải pháp cho mắt khuyết mống mắt aniridia | EYEMEDI
+SLUG: giai-phap-cho-mat-khuyet-mong-mat-aniridia
+TU_KHOA_CHINH: khuyết mống mắt
+TU_KHOA_PHU: aniridia, mất sắc tố mống mắt, kính áp tròng mống mắt nhân tạo, mống mắt nhân tạo, loạn sắc tố mắt, chói sáng sợ ánh sáng
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: có
+MO_TA_SEO: Khuyết mống mắt (aniridia) gây chói, sợ sáng, kém thẩm mỹ. Tìm hiểu lens mống mắt, kính lọc sáng, mống mắt nhân tạo – đo mắt miễn phí tại EYEMEDI.
+NGAY_DANG: 2026-11-09
+NGAY_CAP_NHAT: 2026-11-09
+DOAN_MO_DAU: Khuyết mống mắt (aniridia) là tình trạng mống mắt – phần tròng đen tạo màu mắt – thiếu một phần hoặc gần như hoàn toàn, khiến đồng tử trông rất to, ánh sáng lọt vào mắt quá nhiều. Người bệnh thường chói, sợ ánh sáng và ngại vẻ ngoài của mắt. Hiện có nhiều giải pháp giúp mắt dễ chịu và tự nhiên hơn, tùy mức độ và chỉ định của bác sĩ nhãn khoa.
+ANH_RIENG:
+kho-anh/EYEMEDI-1.webp | Kiểm tra thị lực bằng tròng thử cho người khuyết mống mắt tại EYEMEDI
+kho-anh/EYEMEDI-2.webp | Đo khúc xạ tự động trước khi chọn kính hỗ trợ cho mắt aniridia
+kho-anh/EYEMEDI-7.webp | Chuyên viên tư vấn kính lọc sáng giảm chói cho mắt thiếu mống mắt
+kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính râm, kính đổi màu hỗ trợ mắt sợ ánh sáng
+kho-anh/EYEMEDI-3.webp | Cửa hàng EYEMEDI hỗ trợ đo mắt miễn phí cho người loạn sắc tố mắt
+H2_1: Khuyết mống mắt, mất sắc tố mống mắt là gì?
+NOI_DUNG_1: <p>Mống mắt hoạt động như màn chắn sáng của máy ảnh: co lại khi trời nắng, giãn ra khi trời tối. Khi mống mắt thiếu hoặc mất sắc tố, mắt không còn điều tiết được lượng sáng, gây <b>chói lóa, sợ ánh sáng, nhìn mờ</b>.</p>
+<ul>
+<li><b>Bẩm sinh:</b> thường do đột biến gen PAX6, gặp ở cả hai mắt, có thể đi kèm đục thủy tinh thể, glaucoma, bệnh giác mạc.</li>
+<li><b>Mắc phải:</b> sau chấn thương, phẫu thuật hoặc viêm màng bồ đào.</li>
+<li><b>Loạn, thiếu sắc tố mống mắt:</b> mống mắt nhạt màu, cũng gây chói.</li>
+</ul>
+<p>Người bệnh cần khám định kỳ vì nguy cơ <a href="/benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi.html">đục thủy tinh thể và nhược thị</a> cao hơn bình thường.</p>
+H2_2: Giải pháp thẩm mỹ và hỗ trợ chức năng cho mắt
+NOI_DUNG_2: <ul>
+<li><b>Kính áp tròng mống mắt nhân tạo (prosthetic lens):</b> lens in hình mống mắt, vùng giữa trong suốt tạo đồng tử nhân tạo, vừa che khuyết vừa giảm chói. Loại này được đặt làm riêng theo màu mắt còn lại và cần bác sĩ chỉ định.</li>
+<li><b>Kính lọc sáng, kính đổi màu, kính râm chống UV:</b> giảm chói khi ra nắng, lái xe; có thể kết hợp độ cận, viễn, loạn. Ban đêm có thể dùng <a href="/kinh-xuyen-dem.html">kính chống chói lái xe ban đêm</a>.</li>
+<li><b>Mống mắt nhân tạo đặt trong mắt:</b> phẫu thuật cấy mống mắt silicon hoặc vòng acrylic, thường kết hợp mổ đục thủy tinh thể, giúp cải thiện chói và thẩm mỹ.</li>
+</ul>
+<p>Lens màu thời trang thông thường không thay thế được lens mống mắt y khoa; chỉ dùng <a href="/kinh-ap-trong.html">kính áp tròng</a> khi bác sĩ cho phép.</p>
+H2_3: Khám và chọn giải pháp ở đâu?
+NOI_DUNG_3: <p>Người bị khuyết mống mắt nên khám tại bệnh viện mắt hoặc <a href="/bac-si-kham-mat-gioi-o-tphcm.html">bác sĩ chuyên khoa mắt giỏi</a> để đánh giá giác mạc, nhãn áp, thủy tinh thể trước khi chọn lens hoặc phẫu thuật.</p>
+<p>EYEMEDI hỗ trợ <a href="/dat-lich-do-mat.html">đo thị lực, đo khúc xạ miễn phí</a>, tư vấn kính đổi màu, kính râm chống UV đúng độ để giảm chói hằng ngày. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa mắt.</p>
+LOI_KEU_GOI: Mắt chói, sợ ánh sáng do khuyết mống mắt? Đến EYEMEDI đo mắt miễn phí và chọn kính giảm chói phù hợp, 08:30 – 21:30 hằng ngày.
+HOI_1: Khuyết mống mắt có chữa khỏi được không?
+DAP_1: Mống mắt không tự mọc lại. Các giải pháp như kính áp tròng mống mắt, kính lọc sáng hay mống mắt nhân tạo giúp giảm chói và cải thiện thẩm mỹ, cần bác sĩ nhãn khoa chỉ định.
+HOI_2: Người khuyết mống mắt có đeo lens màu được không?
+DAP_2: Nên dùng lens mống mắt y khoa đặt làm riêng theo chỉ định bác sĩ. Lens màu thời trang thường không che đủ và không có vùng đồng tử chuẩn để giảm chói.
+HOI_3: Kính nào giúp giảm chói cho mắt thiếu mống mắt?
+DAP_3: Kính râm chống UV, kính đổi màu khi ra nắng và kính chống chói ban đêm, có thể làm kèm độ cận, viễn, loạn. EYEMEDI đo mắt và tư vấn miễn phí.
+SAN_PHAM: eye-coffret-base-make, eye-coffret-first-make, lens-can-loan, da-trong-156-photo-gray, kinh-xuyen-dem-night-view, sun-luxury, trong-perfect-uv-u6, vidic-luxury-sun-p28220
+LIEN_QUAN: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Đục thủy tinh thể và nhược thị; mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri | Mắt bị nhòe mờ: nguyên nhân và cách điều trị; nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot | Nguyên nhân gây mờ mắt đột ngột
+LINK_TRONG_BAI: đục thủy tinh thể và nhược thị → benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi; kính chống chói lái xe ban đêm → kinh-xuyen-dem; kính áp tròng → kinh-ap-trong; bác sĩ chuyên khoa mắt giỏi → bac-si-kham-mat-gioi-o-tphcm; đo thị lực, đo khúc xạ miễn phí → dat-lich-do-mat
+LINK_VAO_TU: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi, mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri, nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot
+KIEM_TRA_TRUNG: Không trùng – chưa trang nào về mống mắt/aniridia. Từ khóa chính mới. Sản phẩm trùng tối đa 2/8. Ảnh kho trùng tối đa 2/5.
+NGUON_THAM_KHAO: NICE (HTG547, HTG546 – artificial iris implant); Survey of Ophthalmology 2023 (Romano và cs., artificial iris in congenital aniridia); Current Opinion in Ophthalmology 2016 (iris prosthesis options).

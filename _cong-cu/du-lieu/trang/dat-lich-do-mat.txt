@@ -1,0 +1,116 @@
+TIEU_DE: Đặt lịch đo mắt – dịch vụ đo thị lực chuẩn quốc tế tại EYEMEDI
+TITLE: Đặt lịch đo mắt, kiểm tra thị lực miễn phí | EYEMEDI
+SLUG: dat-lich-do-mat
+TU_KHOA_CHINH: đặt lịch đo mắt
+TU_KHOA_PHU: kiểm tra thị lực miễn phí, đo khúc xạ, đo mắt Quận 11, cửa hàng mắt kính Quận 11
+DANH_MUC: Dịch vụ
+SLUG_DANH_MUC: dich-vu
+MO_TA_SEO: Đặt lịch đo mắt tại EYEMEDI: kiểm tra thị lực toàn phần chính xác, hoàn toàn miễn phí, quy trình 6 bước chuẩn quốc tế. 63C Lạc Long Quân, TP.HCM.
+NGAY_DANG: 2026-11-02
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: EYEMEDI Optic cung cấp dịch vụ kiểm tra thị lực toàn phần chính xác và hoàn toàn miễn phí. Một chiếc kính chất lượng bắt đầu từ quy trình đo thị lực chuẩn – đặt lịch ngay để được chuyên viên hỗ trợ.
+PIXEL: 1020078554329275
+FORM_URL: https://script.google.com/macros/s/AKfycbwTMU5uBOF5NaOefIZNVhk6wfIxUwSF9K7Ic8fLSeOiowcAUXTd-HU6KFlMxfFMqcN2Ew/exec
+FORM_TIEU_DE: Đặt lịch đo mắt
+FORM_TRUONG: Họ và Tên | Họ và tên
+Số điện thoại | Số điện thoại | tel
+Địa chỉ | Địa chỉ hoặc Email
+FORM_NUT: HOÀN TẤT ĐẶT LỊCH
+FORM_CAM_ON: Gửi thành công! EYEMEDI sẽ liên hệ xác nhận lịch hẹn.
+FORM_GHI_CHU: 🚚 Miễn ship trên toàn quốc
+ANH_RIENG:
+domat.jpg | Khách hàng đo khúc xạ bằng máy tự động tại EYEMEDI
+kho-anh/EYEMEDI-6.webp | Khách hàng trải nghiệm đo mắt tại EYEMEDI
+kho-anh/EYEMEDI-1.webp | Kiểm tra thị lực bằng tròng kính thử tại EYEMEDI
+H2_1: Dịch vụ đo thị lực chuẩn quốc tế tại EYEMEDI
+NOI_DUNG_1: <p>Một chiếc kính chất lượng không chỉ đến từ gọng đẹp hay tròng kính cao cấp mà còn bắt đầu từ một quy trình đo thị lực chính xác. Tại Eyemedi, chúng tôi áp dụng quy trình đo thị lực và đo khúc xạ theo tiêu chuẩn quốc tế, kết hợp giữa hệ thống thiết bị hiện đại và đội ngũ chuyên viên được đào tạo chuyên sâu nhằm mang đến kết quả chính xác, giúp khách hàng có được thị lực tối ưu.</p>
+<p><strong>1. Khai thác nhu cầu sử dụng kính:</strong> Chuyên viên sẽ tìm hiểu thói quen sinh hoạt, công việc, học tập và các vấn đề khách hàng đang gặp phải để đưa ra phương án kiểm tra phù hợp.</p>
+<p><strong>2. Kiểm tra thị lực ban đầu:</strong> Đánh giá khả năng nhìn xa, nhìn gần và thị lực của từng mắt theo tiêu chuẩn quốc tế.</p>
+<p><strong>3. Đo khúc xạ bằng máy tự động:</strong> Sử dụng hệ thống máy đo khúc xạ hiện đại để xác định nhanh các thông số ban đầu về độ cận, viễn và loạn thị với độ chính xác cao.</p>
+<p><strong>4. Kiểm tra bằng bộ tròng kính thử:</strong> Đây là bước quan trọng giúp tinh chỉnh từng chỉ số, xác định mức độ nhìn rõ và cảm giác thoải mái của khách hàng trước khi cắt kính.</p>
+<p><strong>5. Cân bằng thị giác hai mắt:</strong> Kiểm tra sự phối hợp giữa hai mắt, khả năng điều tiết và tối ưu thị lực giúp đeo kính dễ chịu, hạn chế mỏi mắt.</p>
+<p><strong>6. Tư vấn giải pháp phù hợp:</strong> Dựa trên kết quả đo và nhu cầu sử dụng, Eyemedi sẽ tư vấn loại tròng kính, chiết suất, lớp phủ và gọng kính phù hợp nhất với từng khách hàng.</p>
+<h3>Thiết bị hiện đại – độ chính xác cao</h3>
+<p>Eyemedi đầu tư hệ thống máy đo thị lực và đo khúc xạ hiện đại, hỗ trợ đánh giá nhanh và chính xác các thông số của mắt. Kết hợp với quy trình kiểm tra bằng tròng kính thử theo tiêu chuẩn quốc tế, khách hàng luôn được đảm bảo kết quả đo có độ tin cậy cao trước khi cắt kính.</p>
+<h3>Đối tượng nên kiểm tra thị lực định kỳ</h3>
+<ul>
+<li>Học sinh, sinh viên.</li>
+<li>Nhân viên văn phòng làm việc với máy tính nhiều giờ.</li>
+<li>Người thường xuyên sử dụng điện thoại.</li>
+<li>Người lái xe.</li>
+<li>Người trên 40 tuổi.</li>
+<li>Người đang đeo kính hoặc kính áp tròng.</li>
+<li>Người có biểu hiện nhìn mờ, nhức đầu, mỏi mắt.</li>
+</ul>
+<h3>Cam kết của EYEMEDI</h3>
+<ul>
+<li>Quy trình đo thị lực chuẩn.</li>
+<li>Thiết bị đo hiện đại, chính xác.</li>
+<li>Kiểm tra kỹ lưỡng từng thông số thị giác.</li>
+<li>Tư vấn trung thực, phù hợp với nhu cầu sử dụng.</li>
+<li>Hỗ trợ theo dõi và kiểm tra thị lực định kỳ.</li>
+</ul>
+<p>Bạn đang thấy <a href="/mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri.html">mắt bị nhòe mờ</a>? Đặt lịch để được đo thị lực miễn phí.</p>
+<p>Chọn <a href="/tiem-kinh-mat-gan-day-tai-tphcm.html">cửa hàng kính mắt gần nhà</a> để đặt lịch đo mắt.</p>
+H2_2: Sản phẩm nổi bật tại EYEMEDI
+NOI_DUNG_2: <figure><img src="/images/sunnu4.webp" alt="Kính mát nữ" loading="lazy"></figure>
+<h3>Kính thời trang "Sun Luxury" cho nữ</h3>
+<p>Các mẫu mới nhất hiện nay, phù hợp với nhiều phong cách.</p>
+<p><a href="https://eyemedi.vn/kinh-mat-nu.html">Xem chi tiết</a></p>
+<figure><img src="/images/29037.webp" alt="Kính mát nam" loading="lazy"></figure>
+<h3>Kính mát nam, kính thời trang cho phái mạnh</h3>
+<p>Lịch lãm, đẳng cấp, tạo phong cách dấu ấn riêng</p>
+<p><a href="https://eyemedi.vn/kinh-mat-nam.html">Xem chi tiết</a></p>
+<figure><img src="/images/8602.webp" alt="Kính xuyên đêm" loading="lazy"></figure>
+<h3>Kính xuyên đêm - Hỗ trợ lái xe trời đêm an toàn</h3>
+<p>Chống bụi, chống chói lóa đèn xe ngược chiều, nhìn rõ đường đêm.</p>
+<p><a href="https://eyemedi.vn/kinh-xuyen-dem.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhnu.webp" alt="Gọng kính nữ" loading="lazy"></figure>
+<h3>Gọng kính nữ, kính cận &amp; giả cận</h3>
+<p>Gọng kính cận các loại: Nhựa TR90, nhựa dẻo, kim loại bọc nhựa, Titanium...</p>
+<p><a href="https://eyemedi.vn/gong-kinh-can-nam.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhnam.webp" alt="Gọng kính nam" loading="lazy"></figure>
+<h3>Gọng kính nam, kính cận &amp; giả cận</h3>
+<p>Gọng nhựa TR90, nhựa dẻo, kim loại bọc nhựa, kim loại Titanium...</p>
+<p><a href="/gong-kinh-can-nam.html">Xem chi tiết</a></p>
+<figure><img src="/images/gongkinhhocsinh.webp" alt="Gọng kính cận" loading="lazy"></figure>
+<h3>Gọng kính cận học sinh (nam &amp; nữ)</h3>
+<p>Gọng nhựa TR90, nhựa dẻo, kim loại bọc nhựa, kim loại Titanium...</p>
+<p><a href="https://eyemedi.vn/gong-kinh-can-nu.html">Xem chi tiết</a></p>
+H2_3: Vì sao cần đo thị lực chuẩn quốc tế?
+NOI_DUNG_3: <p><strong>Đo đúng – Cắt đúng – Nhìn rõ từng chi tiết</strong></p>
+<p>Nhiều trường hợp nhìn mờ, đau đầu, mỏi mắt hoặc đeo kính không thoải mái không phải do tròng kính kém chất lượng mà đến từ việc đo sai độ hoặc bỏ sót các chỉ số quan trọng của mắt.</p>
+<p>Một quy trình đo thị lực chuẩn sẽ giúp:</p>
+<ul>
+<li>Xác định chính xác độ cận, viễn, loạn thị.</li>
+<li>Đánh giá khả năng điều tiết và phối hợp của hai mắt.</li>
+<li>Giảm tình trạng mỏi mắt, chóng mặt khi đeo kính.</li>
+<li>Mang lại thị lực rõ nét và cảm giác dễ chịu khi sử dụng kính trong thời gian dài.</li>
+<li>Theo dõi sự thay đổi thị lực để có giải pháp điều chỉnh kịp thời.</li>
+</ul>
+H2_4: Chính sách hậu mãi tại EYEMEDI
+NOI_DUNG_4: <p>Tại EYEMEDI, chúng tôi không chỉ bán kính — mà còn mang đến trải nghiệm chăm sóc và hậu mãi tận tâm sau mua hàng. Với hệ thống bảo hành toàn diện dành cho gọng kính &amp; tròng kính, khách hàng luôn được hỗ trợ tốt nhất trong suốt quá trình sử dụng.</p>
+<p><strong>Bảo hành gọng kính chính hãng:</strong> Hỗ trợ sửa chữa hoặc đổi mới đối với các lỗi kỹ thuật từ nhà sản xuất như mối hàn, bản lề, ốc và càng kính. Đồng thời, khách hàng được siết ốc, chỉnh form, cân bằng kính và nắn càng miễn phí trọn đời.</p>
+<p><strong>Chăm sóc kính luôn như mới:</strong> Miễn phí thay ve mũi, đuôi càng trong 12 tháng cùng dịch vụ vệ sinh, khử khuẩn, làm sạch siêu âm và spa kính trọn đời, giúp chiếc kính luôn sạch đẹp và thoải mái khi sử dụng.</p>
+<p><strong>Bảo hành tròng kính chuyên nghiệp:</strong> Hỗ trợ đổi mới nếu lớp phủ chống chói, chống ánh sáng xanh hoặc phủ váng dầu bị lỗi kỹ thuật. Khách hàng còn được đổi độ tròng 1 lần miễn phí khi chưa thích nghi và hỗ trợ đặc biệt với tròng đa tròng Progressive.</p>
+<p><strong>Đồng hành dài lâu cùng khách hàng:</strong> Hỗ trợ đổi mới khi tròng nứt vỡ do lỗi lắp ráp, chính sách hỗ trợ chi phí khi rơi vỡ, cùng chương trình thu cũ đổi mới giúp tiết kiệm chi phí và dễ dàng nâng cấp kính phù hợp hơn."</p>
+H2_5: Về EYEMEDI Optic
+NOI_DUNG_5: <p>EYEMEDI OPTIC – Nơi chăm sóc thị lực chuyên nghiệp và tận tâm.</p>
+<p>Cung cấp gọng kính, tròng kính và kính áp tròng chính hãng, chất lượng cao.</p>
+<p>Đo khúc xạ thị lực chính xác cùng đội ngũ tư vấn giàu kinh nghiệm.</p>
+<p>Đồng hành lâu dài với chính sách bảo hành uy tín, mang đến sự an tâm cho mọi khách hàng.</p>
+H2_6: Cam kết khi mua hàng tại EYEMEDI
+NOI_DUNG_6: <p>Hàng chính hãng.</p>
+<p>Kiểm tra hàng khi nhận.</p>
+<p>Đổi lỗi trong 7 ngày kèm theo hóa đơn mua hàng. Bảo hành 12 tháng.</p>
+LOI_KEU_GOI: Điền form đặt lịch phía trên hoặc gọi 0967 190 005 để được đo thị lực miễn phí tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM.
+HOI_1: Quy trình đo thị lực tại EYEMEDI gồm những bước nào?
+DAP_1: 6 bước: khai thác nhu cầu sử dụng kính, kiểm tra thị lực ban đầu, đo khúc xạ bằng máy tự động, kiểm tra bằng bộ tròng kính thử, cân bằng thị giác hai mắt và tư vấn giải pháp phù hợp.
+HOI_2: Ai nên kiểm tra thị lực định kỳ?
+DAP_2: Học sinh, sinh viên; nhân viên văn phòng dùng máy tính nhiều; người dùng điện thoại thường xuyên; người lái xe; người trên 40 tuổi; người đang đeo kính hoặc kính áp tròng; người có biểu hiện nhìn mờ, nhức đầu, mỏi mắt.
+HOI_3: Kiểm tra thị lực tại EYEMEDI có mất phí không?
+DAP_3: Không. EYEMEDI kiểm tra thị lực toàn phần hoàn toàn miễn phí.
+SAN_PHAM: trong-160-x-drive, trong-156-uv420-blue-cut, da-trong-156-photo-gray, lens-can-loan, swallow-m2027, gold-optic-2231, gala-21061, kingbraver-6413
+LIEN_QUAN: che-do-bao-hanh | Chế độ bảo hành gọng và tròng kính; benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi | Đục thủy tinh thể và nhược thị; kinh-mat-nu-trendy | Kính mát nữ thời trang Luxury Sun
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

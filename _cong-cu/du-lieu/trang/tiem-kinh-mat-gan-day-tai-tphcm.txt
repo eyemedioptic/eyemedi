@@ -1,0 +1,55 @@
+TIEU_DE: Tiệm kính mắt gần đây tại TP.HCM: Địa chỉ uy tín, đúng giá, dịch vụ chất lượng
+TITLE: Tiệm kính mắt gần đây tại TP.HCM uy tín, đúng giá | EYEMEDI
+SLUG: tiem-kinh-mat-gan-day-tai-tphcm
+TU_KHOA_CHINH: tiệm kính mắt gần đây
+TU_KHOA_PHU: tiệm mắt kính TP.HCM, cửa hàng kính mắt gần tôi, cắt kính cận gần đây, đo mắt miễn phí, giá cắt kính cận
+DANH_MUC: Dịch vụ
+SLUG_DANH_MUC: dich-vu
+Y_KHOA: 
+MO_TA_SEO: Tiệm kính mắt gần đây tại TP.HCM: 4 cửa hàng EYEMEDI đo mắt miễn phí, cắt kính lấy liền, bảng giá gọng và tròng niêm yết rõ. Xem địa chỉ gần bạn nhất.
+NGAY_DANG: 2026-11-05
+NGAY_CAP_NHAT: 2026-11-05
+DOAN_MO_DAU: Đang tìm tiệm kính mắt gần đây tại TP.HCM? EYEMEDI có 4 cửa hàng ở Quận 11, Quận 3, Bình Tân (cũ) và Dĩ An, mở cửa 08:30 – 21:30 mỗi ngày. Khách được đo mắt miễn phí, chọn gọng, cắt tròng theo toa và nhận kính trong ngày với giá niêm yết rõ ràng.
+ANH_RIENG:
+kho-anh/EYEMEDI-3.webp | Tiệm kính mắt EYEMEDI gần đây tại TP.HCM – không gian cửa hàng
+kho-anh/EYEMEDI-4.webp | Khu trưng bày gọng kính và bàn tư vấn tại tiệm kính mắt EYEMEDI
+kho-anh/EYEMEDI-2.webp | Đo khúc xạ bằng máy tự động miễn phí tại cửa hàng kính mắt EYEMEDI
+kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt tại tiệm mắt kính EYEMEDI TP.HCM
+kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính trong ngày tại tiệm kính mắt EYEMEDI
+H2_1: 4 tiệm kính mắt EYEMEDI tại TP.HCM – chọn chi nhánh gần bạn
+NOI_DUNG_1: <ul>
+<li><b>Quận 11 (cũ):</b> 63C Lạc Long Quân, Phường Hòa Bình – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
+<li><b>Quận 3 (cũ):</b> 634 Cách Mạng Tháng 8, Phường Nhiêu Lộc – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+634+C%C3%A1ch+M%E1%BA%A1ng+Th%C3%A1ng+8" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
+<li><b>Bình Tân (cũ):</b> 19C Đường số 5D, Phường Bình Hưng Hòa A – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+19C+%C4%90%C6%B0%E1%BB%9Dng+s%E1%BB%91+5D" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
+<li><b>Dĩ An:</b> 169 Nguyễn Đức Thiệu, Phường Dĩ An – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+169+Nguy%E1%BB%85n+%C4%90%E1%BB%A9c+Thi%E1%BB%87u" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
+</ul>
+<p>Cửa hàng nào cũng có máy đo khúc xạ tự động, bộ kính thử và sẵn nhiều mẫu gọng, tròng thông dụng, nên phần lớn khách chọn xong là cắt lắp và nhận kính ngay. Hotline chung: <a href="tel:0967190005">0967 190 005</a>. Xem thêm <a href="/dia-chi-do-mat-cat-kinh-can.html">không gian cửa hàng EYEMEDI Quận 11</a>.</p>
+H2_2: Bảng giá tham khảo – đúng giá, niêm yết rõ
+NOI_DUNG_2: <ul>
+<li>Đo thị lực, đo khúc xạ: <b>miễn phí</b>.</li>
+<li>Gọng kính cận: từ 450.000đ (gọng Hàn Quốc) đến gọng titan cao cấp.</li>
+<li>Tròng kính cận: từ 150.000đ/cặp (tròng tráng cứng 1.56), tròng lọc ánh sáng xanh từ 450.000đ/cặp.</li>
+<li>Đa tròng: từ 600.000đ/cặp; kính áp tròng từ 650.000đ.</li>
+</ul>
+<p>Giá đã gồm công cắt lắp. Xem chi tiết <a href="/gia-thay-trong-kinh-can-vien-loan-chinh-hang.html">giá thay tròng kính cận viễn loạn</a>.</p>
+H2_3: Cách chọn tiệm kính mắt uy tín gần nhà
+NOI_DUNG_3: <ol>
+<li><b>Có đo khúc xạ bài bản:</b> máy đo tự động kết hợp thử kính thực tế, không chỉ đo nhanh vài phút.</li>
+<li><b>Giá niêm yết công khai:</b> báo giá gọng, tròng trước khi cắt, không phát sinh.</li>
+<li><b>Tròng chính hãng, có thẻ bảo hành:</b> ghi rõ chiết suất, lớp phủ.</li>
+<li><b>Chính sách sau bán:</b> chỉnh gọng, vệ sinh kính miễn phí, <a href="/che-do-bao-hanh.html">bảo hành gọng và tròng</a> rõ ràng.</li>
+<li><b>Gần nhà, mở cửa muộn:</b> tiện quay lại đo kiểm tra, chỉnh gọng hay thay ve mũi bất cứ lúc nào.</li>
+</ol>
+LOI_KEU_GOI: Ghé tiệm kính mắt EYEMEDI gần bạn nhất để đo mắt miễn phí và nhận kính trong ngày – mở cửa 08:30 – 21:30 hằng ngày.
+HOI_1: Tiệm kính mắt nào gần đây tại TP.HCM uy tín?
+DAP_1: EYEMEDI có 4 cửa hàng tại 63C Lạc Long Quân, 634 Cách Mạng Tháng 8, 19C Đường số 5D và 169 Nguyễn Đức Thiệu, đo mắt miễn phí, giá niêm yết rõ ràng.
+HOI_2: Cắt kính cận mất bao lâu?
+DAP_2: Với tròng có sẵn, EYEMEDI cắt lắp và giao kính trong ngày; tròng đặt theo độ đặc biệt cần thêm vài ngày.
+HOI_3: Làm kính cận trọn bộ hết bao nhiêu tiền?
+DAP_3: Tham khảo từ khoảng 600.000đ (gọng 450.000đ + tròng tráng cứng 150.000đ/cặp); giá thay đổi theo loại gọng và tròng bạn chọn.
+SAN_PHAM: eyemedi-korea-metal-style, king-braver-61006-9670, miusen-tr88095, p-ormegar-2207, tommy-gold-33029, vidic-ems, trong-trang-cung-156, trong-156-uv420-blue-cut
+LIEN_QUAN: dia-chi-do-mat-cat-kinh-can | Cửa hàng kính mắt gần đây; top-5-dia-chi-cat-trong-kinh-can-vien-loan-uy-tin-tai-tp-hcm | Địa chỉ cắt tròng kính cận uy tín; dat-lich-do-mat | Đặt lịch đo mắt miễn phí
+LINK_TRONG_BAI: không gian cửa hàng EYEMEDI Quận 11 → dia-chi-do-mat-cat-kinh-can; giá thay tròng kính cận viễn loạn → gia-thay-trong-kinh-can-vien-loan-chinh-hang; bảo hành gọng và tròng → che-do-bao-hanh
+LINK_VAO_TU: dia-chi-do-mat-cat-kinh-can, top-5-dia-chi-cat-trong-kinh-can-vien-loan-uy-tin-tai-tp-hcm, dat-lich-do-mat
+KIEM_TRA_TRUNG: Jaccard cao nhất 0,24 (dia-chi-do-mat-cat-kinh-can). Từ khóa chính mới "tiệm kính mắt gần đây". Góc nội dung: tìm chi nhánh gần + bảng giá. Ảnh trùng ≤2/5. Sản phẩm trùng ≤2/8.
+NGUON_THAM_KHAO: Dữ liệu cửa hàng và bảng giá sản phẩm của EYEMEDI.

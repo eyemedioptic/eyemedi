@@ -1,0 +1,69 @@
+TIEU_DE: EYEMEDI tuyển dụng nhân viên bán hàng ngành mắt kính
+TITLE: Tuyển nhân viên bán hàng mắt kính, làm theo ca | EYEMEDI
+SLUG: tuyen-dung.html
+TU_KHOA_CHINH: tuyển nhân viên bán hàng mắt kính
+TU_KHOA_PHU: việc làm bán thời gian sinh viên, việc làm theo ca, tuyển dụng EYEMEDI
+DANH_MUC: Giới thiệu
+SLUG_DANH_MUC: gioi-thieu
+MO_TA_SEO: EYEMEDI tuyển nhân viên bán hàng ngành mắt kính làm theo ca: lương giờ 20k–35k + 5% doanh thu, không cần kinh nghiệm, được đào tạo. Ứng tuyển ngay.
+NGAY_DANG: 2026-11-02
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: EYEMEDI tuyển nhân viên bán hàng làm theo ca, phù hợp sinh viên và lao động phổ thông: không yêu cầu kinh nghiệm, được đào tạo bài bản, lương theo giờ cộng thưởng doanh thu.
+FORM_URL: https://script.google.com/macros/s/AKfycbwRHH2aiMjVICCKt-BIBYyKEdj_AXsYzVIFJo953oc2sVmmoyzG62fD0IVu0Ga1jlqX/exec
+FORM_TIEU_DE: Đăng ký ứng tuyển
+FORM_TRUONG: Họ và Tên | Họ và tên
+Số điện thoại | Số điện thoại | tel
+Email | Email | email
+Địa chỉ Email | Địa chỉ (số nhà & đường...)
+Năm sinh | Năm sinh
+Quê quán | Quê quán
+Vị trí ứng tuyển | Vị trí ứng tuyển
+Kinh nghiệm | Kinh nghiệm
+FORM_NUT: HOÀN TẤT ĐĂNG KÝ
+FORM_CAM_ON: Gửi đăng ký thành công! EYEMEDI sẽ gửi bạn lịch phỏng vấn.
+FORM_GHI_CHU: Khi bạn gửi đăng ký ứng tuyển, chúng tôi sẽ gửi bạn lịch phỏng vấn!
+ANH_RIENG:
+eyemedituyendung.jpg | EYEMEDI tuyển dụng nhân viên bán hàng ngành mắt kính
+kho-anh/EYEMEDI-7.webp | Nhân viên EYEMEDI tư vấn kính cho khách hàng
+kho-anh/EYEMEDI-4.webp | Không gian làm việc tại cửa hàng EYEMEDI
+H2_1: Vị trí tuyển dụng: nhân viên bán hàng ngành mắt kính
+NOI_DUNG_1: <p>1. Vị trí tuyển: Nhân viên bán hàng tại Store:</p>
+<p>2. Thời gian làm việc: Làm việc theo ca + % HH</p>
+<p>3. Mức lương: Lương theo giờ + 5% chốt bill</p>
+<p>4. Kinh nghiệm: Không yêu cầu &amp; được đào tạo</p>
+<figure><img src="/images/eyemedituyendung.webp" alt="Tuyển dụng" loading="lazy"></figure>
+H2_2: Mô tả công việc
+NOI_DUNG_2: <p>Báo cáo kết quả công việc và doanh thu.</p>
+<p>Tư vấn sản phẩm cho khách hàng các kênh</p>
+<p>Chăm sóc khách hàng đã sử dụng sản phẩm dịch vụ</p>
+<p>Trưng bày, kiểm kê, sắp xếp và bày trí sản phẩm</p>
+
+H2_3: Yêu cầu
+NOI_DUNG_3: <h3>Tư vấn bán hàng</h3>
+<ul>
+<li>Không yêu cầu kinh nghiệm... Được đào tạo sau</li>
+<li>Có kinh nghiệm là lợi thế khi ứng tuyển</li>
+<li>Nhanh nhẹn, xử lý tình huống tốt</li>
+<li>Chân thật, ham học hỏi, chịu khó</li>
+<li>Vui vẻ hòa đồng, nhiệt huyết trong công việc</li>
+</ul>
+H2_4: Quyền lợi
+NOI_DUNG_4: <p>Nhân viên kinh doanh: Lương theo giờ làm (Lương giờ từ 20k - 35k) + 5% doanh thu</p>
+<ul>
+<li>Thử việc 2 tháng → Ký HĐLĐ &amp; chế độ theo thỏa thuận</li>
+<li>Môi trường trẻ trung – năng động – chuyên nghiệp</li>
+<li>Được đào tạo bài bản về sản phẩm &amp; kỹ năng bán hàng</li>
+<li>Cơ hội phát triển thu nhập &amp; thăng tiến rõ ràng 🚀.</li>
+</ul>
+<p><b>Khi bạn gửi đăng ký ứng tuyển. Chúng tôi sẽ gửi bạn lịch phỏng vấn!</b>.</p>
+LOI_KEU_GOI: Muốn trải nghiệm môi trường làm việc trước? Ghé cửa hàng EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM.
+HOI_1: Ứng tuyển có cần kinh nghiệm không?
+DAP_1: Không yêu cầu kinh nghiệm, bạn sẽ được đào tạo; có kinh nghiệm là lợi thế khi ứng tuyển.
+HOI_2: Thu nhập của nhân viên bán hàng thế nào?
+DAP_2: Lương theo giờ làm (từ 20k – 35k/giờ) cộng 5% doanh thu; thử việc 2 tháng rồi ký HĐLĐ, chế độ theo thỏa thuận.
+HOI_3: Thời gian làm việc ra sao?
+DAP_3: Làm việc theo ca, phù hợp sinh viên và người cần việc làm bán thời gian.
+SAN_PHAM: swallow-s12019, tomy-9555, gala-21061, gold-optic-2231, trong-trang-cung-156, pk-khan-lau-a03, eye-coffret-sheer-make, kinh-xuyen-dem-night-view
+LIEN_QUAN: che-do-bao-hanh | Chế độ bảo hành tại EYEMEDI; dat-lich-do-mat | Dịch vụ đo thị lực tại EYEMEDI; dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam | Đào tạo khúc xạ & nhãn kính
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

@@ -1,0 +1,43 @@
+TIEU_DE: Bác sĩ giỏi điều trị ung bướu tuyến giáp tại TPHCM
+TITLE: Bác sĩ giỏi điều trị ung bướu tuyến giáp TPHCM | EYEMEDI
+SLUG: bac-si-gioi-dieu-tri-ung-buou-tuyen-giap-tai-tphcm
+TU_KHOA_CHINH: bác sĩ điều trị ung bướu tuyến giáp TPHCM
+TU_KHOA_PHU: ung thư tuyến giáp, nhân giáp, điều trị I-131, y học hạt nhân, Phòng khám Medilabo
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: Bác sĩ giỏi điều trị ung bướu tuyến giáp tại TPHCM: BS.CKII Nguyễn Duy Trì, Phó Trưởng khoa Y học hạt nhân BV Ung Bướu, khám tại Medilabo Long Bình.
+NGAY_DANG: 2026-11-04
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Khi cần tìm bác sĩ giỏi điều trị ung bướu tuyến giáp tại TPHCM, nhiều người bệnh lựa chọn BS.CKII Nguyễn Duy Trì – Phó Trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM. Ngoài công tác tại bệnh viện, bác sĩ phụ trách chuyên môn tại Phòng khám Medilabo Việt Nam, 486 Hoàng Hữu Nam, Phường Long Bình, TP.HCM.
+ANH_RIENG:
+bsnguyenduytri.jpg | BS.CKII Nguyễn Duy Trì – bác sĩ điều trị ung bướu tuyến giáp tại TPHCM
+doingubsnguyenduytri.jpg | Đội ngũ chuyên môn cùng BS.CKII Nguyễn Duy Trì tại Phòng khám Medilabo
+phongkhammedilabo.jpg | Phòng khám Medilabo Việt Nam, 486 Hoàng Hữu Nam, Phường Long Bình, TP.HCM
+H2_1: BS.CKII Nguyễn Duy Trì – chuyên gia y học hạt nhân về tuyến giáp
+NOI_DUNG_1: <p>Là Phó Trưởng khoa Y học hạt nhân, bác sĩ Duy Trì thường xuyên tiếp nhận người bệnh có nhân giáp, bướu giáp và ung thư tuyến giáp từ nhiều tỉnh thành. Quá trình công tác được giới thiệu tại <a href="/bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm.html">hồ sơ bác sĩ Nguyễn Duy Trì</a>.</p>
+<p>Thế mạnh chuyên môn:</p>
+<ul>
+<li>Đánh giá nhân giáp bằng siêu âm, xét nghiệm hormone, chọc hút tế bào khi cần.</li>
+<li>Điều trị ung thư tuyến giáp thể biệt hóa sau phẫu thuật bằng i-ốt phóng xạ I-131.</li>
+<li>Theo dõi sau điều trị, phát hiện sớm tái phát, di căn.</li>
+</ul>
+H2_2: Y học hạt nhân trong điều trị ung thư tuyến giáp
+NOI_DUNG_2: <p>Phần lớn ung thư tuyến giáp là thể biệt hóa (thể nhú, thể nang), tiên lượng tốt nếu phát hiện sớm. Phác đồ thường gồm mổ cắt tuyến giáp, uống I-131 để hủy mô giáp còn sót, rồi dùng hormone thay thế. Bác sĩ y học hạt nhân quyết định liều I-131 và đánh giá đáp ứng qua Thyroglobulin, xạ hình toàn thân.</p>
+<p>Nên đi khám sớm khi thấy khối u vùng cổ, khàn tiếng kéo dài, nuốt vướng hoặc nổi hạch cổ.</p>
+H2_3: Phòng khám Medilabo Việt Nam – gần Bệnh viện Ung Bướu cơ sở 2
+NOI_DUNG_3: <p>Phòng khám Medilabo Việt Nam do bác sĩ Duy Trì phụ trách chuyên môn, cách Bệnh viện Ung Bướu TP.HCM cơ sở 2 (số 12 đường 400, Phường Tăng Nhơn Phú) khoảng 400 m – thuận tiện tái khám, xét nghiệm hoặc tư vấn trước khi nhập viện.</p>
+<p>Nên mang theo kết quả siêu âm, xét nghiệm và giấy ra viện cũ khi đi khám. Xem thêm <a href="/toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm.html">danh sách phòng khám ung bướu uy tín tại TP.HCM</a>.</p>
+LOI_KEU_GOI: Chăm sóc sức khỏe toàn diện cũng cần kiểm tra mắt định kỳ. EYEMEDI đo thị lực miễn phí và tư vấn kính phù hợp tại 5 chi nhánh.
+HOI_1: Bác sĩ nào điều trị ung bướu tuyến giáp giỏi tại TPHCM?
+DAP_1: BS.CKII Nguyễn Duy Trì – Phó Trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM – có nhiều kinh nghiệm chẩn đoán, điều trị và theo dõi ung thư tuyến giáp.
+HOI_2: Có thể khám với bác sĩ Nguyễn Duy Trì ở đâu?
+DAP_2: Tại Phòng khám Medilabo Việt Nam, 486 Hoàng Hữu Nam, Phường Long Bình, TP.HCM, cách Bệnh viện Ung Bướu cơ sở 2 khoảng 400 m.
+HOI_3: Điều trị I-131 dùng cho trường hợp nào?
+DAP_3: I-131 thường được chỉ định cho ung thư tuyến giáp thể biệt hóa sau phẫu thuật, nhằm hủy mô giáp còn sót và điều trị tổn thương di căn hấp thu i-ốt. Chỉ định cụ thể do bác sĩ chuyên khoa quyết định.
+SAN_PHAM: trong-perfect-uv-u6, trong-160-as-blue-control, trong-156-uv420-blue-cut, da-trong-156-hsmc-asx, merriandy-29392, tommy-gold-titanium-ip, kingbraver-6413, pk-combo-ve-sinh
+LIEN_QUAN: bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm | BS.CKII Nguyễn Duy Trì – chuyên gia Y học hạt nhân; bac-si-ung-buou | Bác sĩ ung bướu giỏi tại TP.HCM; phong-kham-ung-buou | Phòng khám, bệnh viện ung bướu TP.HCM
+LINK_TRONG_BAI: hồ sơ bác sĩ Nguyễn Duy Trì → bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm; danh sách phòng khám ung bướu uy tín tại TP.HCM → toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm
+LINK_VAO_TU: bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm, bac-si-ung-buou, phong-kham-ung-buou
+KIEM_TRA_TRUNG: Gần trùng 0,42 với bac-si-ung-buou (Giám đốc chọn làm trang mới góc tuyến giáp). Từ khóa chính riêng. Sản phẩm trùng ≤4/8. Ảnh 3 ảnh riêng, trùng 2 với trang cũ.
+NGUON_THAM_KHAO: benhvienungbuou.vn; medpro.vn (Bệnh viện Ung Bướu cơ sở 2); pharmacity.vn (điều trị ung thư tuyến giáp); Tạp chí Y Dược thực hành 175 (I-131 tại BV Ung Bướu TP.HCM); thông tin do Giám đốc cung cấp.

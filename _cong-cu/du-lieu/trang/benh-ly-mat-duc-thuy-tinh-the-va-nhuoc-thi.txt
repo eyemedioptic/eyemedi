@@ -1,0 +1,41 @@
+TIEU_DE: Bệnh lý mắt đục thủy tinh thể và nhược thị
+SLUG: benh-ly-mat-duc-thuy-tinh-the-va-nhuoc-thi
+TU_KHOA_CHINH: đục thủy tinh thể và nhược thị
+TU_KHOA_PHU: đục thủy tinh thể bẩm sinh, nhược thị ở trẻ em, mắt lười, cườm khô, khám mắt cho trẻ
+DANH_MUC: Kiến thức mắt
+Y_KHOA: có
+SLUG_DANH_MUC: kien-thuc-mat
+MO_TA_SEO: Đục thủy tinh thể và nhược thị: nguyên nhân, dấu hiệu nhận biết sớm và cách điều trị hiệu quả. Đặt lịch đo thị lực tại EYEMEDI ngay hôm nay.
+NGAY_DANG: 2026-11-04
+DOAN_MO_DAU: Đục thủy tinh thể và nhược thị là hai bệnh lý mắt có thể làm giảm thị lực lâu dài nếu phát hiện muộn. Đục thủy tinh thể thường gặp ở người lớn tuổi, nhược thị chủ yếu ở trẻ nhỏ, và đục thủy tinh thể bẩm sinh là một nguyên nhân gây nhược thị.
+ANH_KHO: 1,2 (kho mới có 2 ảnh hợp lệ)
+MO_TA_ANH_1: Minh họa mắt bị đục thủy tinh thể khiến hình ảnh mờ như có sương
+MO_TA_ANH_2: Bác sĩ kiểm tra thủy tinh thể cho người lớn tuổi bằng đèn khe
+MO_TA_ANH_3: Trẻ nhỏ được đo thị lực để phát hiện sớm nhược thị
+MO_TA_ANH_4: Bịt mắt lành giúp mắt nhược thị của trẻ hoạt động nhiều hơn
+MO_TA_ANH_5: Khám mắt định kỳ tại EYEMEDI cho cả người lớn và trẻ em
+H2_1: Đục thủy tinh thể là gì?
+NOI_DUNG_1: <p>Thủy tinh thể là thấu kính trong suốt nằm sau mống mắt, giúp hội tụ ánh sáng lên võng mạc. Khi protein trong thủy tinh thể thoái hóa và vón cục, thấu kính trở nên mờ đục, hình ảnh bị nhòe như nhìn qua lớp sương.</p>
+<p>Nguyên nhân phổ biến nhất là lão hóa, phần lớn người bệnh trên 50 tuổi. Tiểu đường, chấn thương mắt, hút thuốc và tia UV cũng làm tăng nguy cơ. Dấu hiệu thường gặp: nhìn mờ tăng dần, chói khi gặp đèn pha, nhìn đôi, màu sắc kém tươi. Khi bệnh ảnh hưởng đến sinh hoạt, phẫu thuật thay thủy tinh thể nhân tạo là phương pháp điều trị hiệu quả.</p>
+<p>Xem thêm: <a href="/mat-bi-nhoe-mo-nguyen-nhan-do-dau-va-cach-dieu-tri.html">mắt bị nhòe mờ – nguyên nhân và cách điều trị</a>.</p>
+<p>Phân biệt với tình trạng <a href="/nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot.html">mờ mắt đột ngột cần cấp cứu</a>.</p>
+H2_2: Nhược thị (mắt lười) ở trẻ em
+NOI_DUNG_2: <p>Nhược thị là tình trạng một mắt, hiếm khi cả hai, kém phát triển thị lực do não không nhận được hình ảnh rõ nét trong những năm đầu đời. Bệnh thường hình thành từ sơ sinh đến khoảng 7 tuổi và gặp ở khoảng 3% trẻ dưới 6 tuổi.</p>
+<p>Nguyên nhân thường gặp gồm lác mắt, độ cận, viễn, loạn chênh lệch nhiều giữa hai mắt và các vật cản đường đi của ánh sáng như sụp mi, sẹo giác mạc hay <strong>đục thủy tinh thể bẩm sinh</strong>. Trẻ hiếm khi than phiền nên cha mẹ khó tự nhận ra.</p>
+H2_3: Phát hiện sớm và điều trị
+NOI_DUNG_3: <p>Nhược thị điều trị càng sớm càng hiệu quả. Bác sĩ xử lý nguyên nhân trước – <a href="/trong-kinh-can-vien-loan.html">đeo kính đúng độ</a> với <a href="/gong-kinh-can-hoc-sinh.html">gọng nhẹ, bền cho trẻ</a>, phẫu thuật đục thủy tinh thể hoặc sụp mi khi có chỉ định – sau đó bịt mắt lành để buộc mắt yếu làm việc. Trẻ nên được khám mắt lúc 6 tháng tuổi, 3 tuổi và trước khi vào lớp 1.</p>
+<p>Người lớn nên <a href="/bac-si-kham-mat-gioi-o-tphcm.html">khám mắt định kỳ</a>, đeo <a href="/kinh-mat-nam.html">kính râm chống tia UV</a> khi ra nắng và kiểm soát đường huyết để làm chậm đục thủy tinh thể.</p>
+LOI_KEU_GOI: Nhìn mờ, chói sáng hay thấy trẻ nheo mắt, nghiêng đầu khi nhìn? Hãy đến EYEMEDI để được đo thị lực và tư vấn hướng xử lý phù hợp.
+HOI_1: Đục thủy tinh thể có tự khỏi không?
+DAP_1: Không. Thuốc nhỏ mắt không làm tan khối đục. Khi thị lực giảm ảnh hưởng sinh hoạt, bác sĩ sẽ chỉ định phẫu thuật thay thủy tinh thể nhân tạo.
+HOI_2: Nhược thị có chữa được không?
+DAP_2: Có thể cải thiện tốt nếu phát hiện và điều trị sớm, tốt nhất trước 7 tuổi. Sau tuổi này hiệu quả giảm nhưng vẫn nên điều trị theo chỉ định của bác sĩ.
+HOI_3: Bao lâu nên kiểm tra mắt cho trẻ một lần?
+DAP_3: Lúc 6 tháng tuổi, 3 tuổi, trước khi vào lớp 1 và sau đó mỗi năm một lần, hoặc ngay khi thấy trẻ nheo mắt, nghiêng đầu khi nhìn hay lác mắt.
+SAN_PHAM: trong-perfect-uv-u6, trong-160-as-blue-control, trong-156-uv420-blue-cut, da-trong-156-hsmc, baby-2212, panda-tr90, vidic-luxury-sun-p28220, ventor-g
+LIEN_QUAN: top-11-bac-si-kham-mat-gioi-quan-tphcm | Top bác sĩ khám mắt giỏi tại TP.HCM; dia-chi-do-mat-cat-kinh-can | Cửa hàng kính mắt gần đây; bac-si-kham-mat-gioi-o-tphcm | Bác sĩ chuyên khoa mắt uy tín ở TP.HCM
+LINK_TRONG_BAI: đeo kính đúng độ → trong-kinh-can-vien-loan | gọng nhẹ, bền cho trẻ → gong-kinh-can-hoc-sinh | khám mắt định kỳ → bac-si-kham-mat-gioi-o-tphcm | kính râm chống tia UV → kinh-mat-nam
+LINK_VAO_TU: bac-si-kham-mat-gioi-o-tphcm, top-11-bac-si-kham-mat-gioi-quan-tphcm, dia-chi-do-mat-cat-kinh-can
+DOI_TAC: (không)
+KIEM_TRA_TRUNG: Không trùng. Độ giống tiêu đề cao nhất 0,08 (bac-si-ung-buou) < 0,4. Bộ 8 sản phẩm chưa trang nào dùng.
+NGUON_THAM_KHAO: vinmec.com (nhược thị, đục thủy tinh thể), nhathuoclongchau.com.vn, hellobacsi.com, vnexpress.net, tamanhhospital.vn – nội dung viết lại hoàn toàn.

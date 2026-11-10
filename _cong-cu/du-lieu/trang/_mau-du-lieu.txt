@@ -1,0 +1,31 @@
+TIEU_DE: 
+SLUG: 
+TU_KHOA_CHINH: 
+TU_KHOA_PHU: (3–6 từ, cách nhau dấu phẩy)
+DANH_MUC: 
+SLUG_DANH_MUC: 
+Y_KHOA: (có nếu là chủ đề bệnh lý/y khoa)
+MO_TA_SEO: (140–160 ký tự)
+NGAY_DANG: 
+NGAY_CAP_NHAT: 
+DOAN_MO_DAU: (2–3 câu, trả lời ngay câu hỏi chính, có từ khóa chính)
+ANH_KHO: (5 số ảnh chọn từ kho, vd 3,17,22,40,48)
+ANH_RIENG: (trang cũ: mỗi dòng "tên ảnh | mô tả")
+MO_TA_ANH_1..5: 
+H2_1: 
+NOI_DUNG_1: 
+H2_2: 
+NOI_DUNG_2: 
+H2_3: 
+NOI_DUNG_3: 
+LOI_KEU_GOI: 
+HOI_1 / DAP_1: 
+HOI_2 / DAP_2: 
+HOI_3 / DAP_3: 
+SAN_PHAM: (8 mã sản phẩm)
+LIEN_QUAN: (3 trang cùng danh mục, dạng: slug | chữ hiển thị; slug | chữ hiển thị; ...)
+LINK_TRONG_BAI: (2–4 dòng: chữ gắn link → slug)
+LINK_VAO_TU: (2–3 slug trang cũ sẽ thêm link tới trang này)
+DOI_TAC: (nếu có)
+KIEM_TRA_TRUNG: (kết quả mục 5)
+NGUON_THAM_KHAO: 

@@ -1,0 +1,114 @@
+TIEU_DE: Top 10 bác sĩ chuyên khoa thẩm mỹ uy tín tại TP.HCM
+TITLE: Top bác sĩ thẩm mỹ giỏi có phòng khám tại Quận 10 | EYEMEDI
+SLUG: bac-si-phau-thuat-tham-my-quan-10-tphcm
+TU_KHOA_CHINH: bác sĩ thẩm mỹ giỏi Quận 10
+TU_KHOA_PHU: phòng khám thẩm mỹ Quận 10, bác sĩ Trần Đắc Quang, nâng mũi, sửa mũi hỏng
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: Top bác sĩ thẩm mỹ giỏi có phòng khám tại Quận 10: BS CK2 Trần Đắc Quang, BS CK2 Nguyễn Hữu Hoạt, BS Đoàn Duy Dũng, Dr. Quân, Dr. Nguyên Giáp.
+NGAY_DANG: 2023-06-22
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Eyemedi là hệ thống nền tảng trực tuyến cung cấp các giải pháp chuyên khoa mắt chăm sóc thị lực và cung cấp các sản phẩm mắt kính cận viễn loạn chính xác. Eyemedi còn là nền tảng kết nối mạng lưới các phòng khám, bác sĩ đa khoa, chuyên khoa ung bướu, chuyên khoa nhi, bác sĩ chuyên khoa phẫu thuật thẩm mỹ. Nhập khẩu và phân phối các sản phẩm mỹ làm đẹp cho Spa, thẩm mỹ viện và cá nhân.
+ANH_RIENG:
+drdacquang1.jpg | Bác sĩ thẩm mỹ CK2 Trần Đắc Quang thăm khám cho khách hàng
+drhoat.webp | Bác sĩ thẩm mỹ CK2 Nguyễn Hữu Hoạt
+drduydung.jpg | Bác sĩ thẩm mỹ CKI Đoàn Duy Dũng
+drquan.jpg | Phòng khám chuyên khoa thẩm mỹ Dr. Quân
+drgiap.webp | Phòng khám chuyên khoa thẩm mỹ Dr. Nguyên Giáp
+H2_1: Bác sĩ phẫu thuật thẩm mỹ giỏi có phòng khám tại Quận 10
+NOI_DUNG_1: <ul>
+<li>✅</li>
+</ul>
+<p>Eyemedi giới thiệu các Bác sĩ phẫu thuật Thẩm giỏi có phòng khám tại Quận 10 uy tín, đầy đủ giấy phép.</p>
+<p>Khu vực Quận 10 tập trung rất nhiều các cơ sở thẩm mỹ viện, vậy nên lựa chọn cơ sở làm đẹp ở đâu có Bác sĩ giỏi, uy tín, đảm bảo về giấy phép để làm đẹp và an toàn.</p>
+<figure><img src="/images/drdacquang1.webp" alt="Bác sĩ thẩm mỹ Trần Đắc Quang" loading="lazy"></figure>
+<h3>1. Bác sĩ thẩm mỹ CK2 Trần Đắc Quang</h3>
+<p>Phòng khám 366 Cao Thắng, Phường 12, Quận 10, TPHCM</p>
+<p>Biệt danh "BÁC SĨ SỬA" Chuyên các dịch vụ phẫu thuật thẩm mỹ cắt mí, nâng mũi, nâng ngực, hút mỡ... Đặc biệt sửa mũi hỏng và sửa vùng hút mỡ thô hỏng... Xem chi tiết: <a href="/bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm.html">bác sĩ sửa mũi hỏng giỏi tại TPHCM</a>.</p>
+<figure><img src="/images/drhoat.webp" alt="Bác sĩ thẩm mỹ Dr Hoạt" loading="lazy"></figure>
+<h3>2. Bác sĩ thẩm mỹ CK2 Nguyễn Hữu Hoạt</h3>
+<p>Cơ sở 400 Lê Hồng Phong, Phường 10, Quận 10, TPHCM</p>
+<p>Biệt danh "BẬC THẦY NÂNG MŨI" chuyên các dịch vụ phẫu thuật thẩm mỹ mũi, mặt, mắt, môi, ngực, bụng...</p>
+<figure><img src="/images/drduydung.webp" alt="Dr Dũng" loading="lazy"></figure>
+<h3>3. Bác sĩ thẩm mỹ Đoàn Duy Dũng</h3>
+<p>Cơ sở 324/2-4 Lý Thường Kiệt, Phường 14, Quận 10, TP Hồ Chí Minh</p>
+<p>Bác sĩ CKI Đoàn Duy Dũng Chuyên khoa Tạo hình – Phẫu thuật thẩm mỹ Hơn 10 năm kinh nghiệm trong lĩnh vực phẫu thuật tạo hình thẩm mỹ</p>
+<figure><img src="/images/drquan.webp" alt="Dr Quân" loading="lazy"></figure>
+<h3>4. Phòng khám chuyên khoa thẩm mỹ Dr. Quân</h3>
+<p>Địa chỉ: 722 Sư Vạn Hạnh, P. Hòa Hưng, Quận 10, TP. HCM</p>
+<p>Trẻ Hóa - Xóa Nhăn - Không phẫu thuật. Không sưng đau - Đẹp ngay sau khi làm</p>
+<figure><img src="/images/drgiap.webp" alt="Dr Giáp" loading="lazy"></figure>
+<h3>5. Phòng khám chuyên khoa thẩm mỹ Dr. Nguyên Giáp</h3>
+<p>Cơ sở: 190 Huỳnh Văn Bánh, Phú Nhuận, Hồ Chí Minh</p>
+<p>Bác sĩ nâng mũi đẹp cho Việt Kiều tại TP.HCM - DR Nguyen Giap</p>
+<p>Ngoài Quận 10, xem thêm các <a href="/bac-si-phau-thuat-tham-my-gioi-tai-tphcm.html">bác sĩ phẫu thuật thẩm mỹ giỏi tại TP.HCM</a>.</p>
+<p>Xem thêm danh sách <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu điều trị sẹo uy tín tại TP.HCM</a>.</p>
+H2_2: Các bác sĩ chuyên khoa mắt giỏi, uy tín tại TP.HCM
+NOI_DUNG_2: <figure><img src="https://cdn.bookingcare.vn/fo/w1200/2026/04/14/114005-bac-si-kham-mat-nguyen-quang-tuan.png" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>1.Bác sĩ Bùi Quang Tuấn</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2021/06/01/110833-bac-si-trinh-bach-tuyet-1.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>2.BS Trịnh Bạch Tuyết</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/10/01/084257bs-vo-thi-hoang-lan.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>3.BS Võ Thị Hoàng Lan</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/10/01/084257bs-doan-hong-dung.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>4.BS Nguyễn Thị Mỹ Dung</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2019/09/25/165645bs-hong-van-hiep.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>5.BS Hồng Văn Hiệp</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2024/07/02/110650-bac-si-mat-jd-ferwerda.png" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>6.BS J.D. Ferwerda</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w256/2025/12/02/155005-bs-trinh-ngoc-thuy-an-1.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>7.BS Trịnh Ngọc Thùy An</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w1200/2025/05/21/105241-bac-si-mat-tphcm-nguyen-phuong-ha.png" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>8. BS Nguyễn Phương Hà</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://cdn.bookingcare.vn/fo/w256/2025/12/02/104302-bs-ha-nhu-quynh-1.jpg" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>9.BS Hà Như Quỳnh</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+<figure><img src="https://api.docosan.com/images/doctor/1209/thumb/img2021083110440898565800.png" alt="Bác sĩ chuyên khoa mắt tại TP.HCM" loading="lazy"></figure>
+<h3>10.BS Trần Anh Tuấn</h3>
+<p><a href="/dat-lich-do-mat.html">Đặt lịch</a></p>
+H2_3: Các dịch vụ khám chuyên khoa mắt
+NOI_DUNG_3: <p><strong>Các dịch vụ khám chuyên khoa mắt:</strong></p>
+<ul>
+<li>Khám và điều trị các bệnh nội khoa về mắt: Viêm kết giác mạc, Bệnh lý đáy mắt</li>
+<li>Đo khúc xạ mắt, cắt kính</li>
+<li>Bệnh lý về cườm nước – glaucoma</li>
+<li>Bệnh lý về cườm khô – đục thủy tinh thể.</li>
+<li>Lasik Cận thị – Viễn thị – Lão thị</li>
+</ul>
+H2_4: BS.CKII Nguyễn Duy Trì – chuyên gia ung bướu
+NOI_DUNG_4: <figure><img src="/images/bacsinguyenduytri.webp" alt="" loading="lazy"></figure>
+<p>Bác sĩ Nguyễn Duy Trì là chuyên gia có thâm niên trong lĩnh vực tầm soát, chẩn đoán và điều trị các bệnh lý khối u, đặc biệt chuyên sâu về các bệnh lý tuyến giáp, tuyến vú...</p>
+<h3>Các dịch vụ chuyên khoa thế mạnh</h3>
+<ul>
+<li>Bệnh lý tuyến giáp: Khám, tư vấn, siêu âm chẩn đoán chuyên sâu và lên phác đồ điều trị cho các bệnh lý bướu cổ, suy giáp, cường giáp, và ung thư tuyến giáp.</li>
+<li>Tầm soát ung bướu: Thực hiện khám lâm sàng, siêu âm định vị và phát hiện sớm các hạch, u vùng cổ, u vú, bướu phần mềm hoặc các khối u thông thường khác trên cơ thể</li>
+<li>Xét nghiệm tế bào (FNA): Chọc hút tế bào bằng kim nhỏ dưới hướng dẫn của siêu âm để chẩn đoán nhanh, chính xác bản chất khối u là lành tính hay ác tính.</li>
+<li>Theo dõi định kỳ: Quản lý bệnh án và tái khám định kỳ cho các bệnh nhân ung bướu đã hoặc đang trong quá trình điều trị</li>
+</ul>
+<figure><img src="/images/doingubsnguyenduytri.webp" alt="Phòng khám thẩm mỹ Dr Đắc Quang" loading="lazy"></figure>
+<p>Bác sĩ Nguyễn Duy Trì tại phòng khám Ung Bướu Medilabo Việt Nam.</p>
+<p>Ngoài vị trí Phó trưởng khoa Y Học Hạt Nhân tại Bệnh Viện Ung Bướu TPHCM. Bác Sĩ Nguyễn Duy Trì còn phụ trách Phòng Khám Chuyên Khoa Ung Bướu Medilabo Việt Nam - Tại đây, bệnh nhân được tư vấn và theo dõi các bệnh lý ung bướu tốt nhất. Phòng khám do BS.CKII Nguyễn Duy Trì trực tiếp phụ trách chuyên môn.</p>
+<figure><img src="/images/phongkhammedilabo.webp" alt="Hình ảnh 3" loading="lazy"></figure>
+H2_5: Phòng khám phẫu thuật thẩm mỹ Dr Đắc Quang
+NOI_DUNG_5: <p>Địa chỉ: 366 Cao Thắng, Phường Hòa Hưng (P12, Q10), TP. Hồ Chí Minh</p>
+<p><a href="https://www.google.com/maps/place/Ph%C3%B2ng+kh%C3%A1m+th%E1%BA%A9m+m%E1%BB%B9+Dr.+%C4%90%E1%BA%AFc+Quang/@10.7750335,106.6711474,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f0025fdb5f7:0x75c72362bba0a454!8m2!3d10.7750282!4d106.6737223!16s%2Fg%2F11w7hfnnnz?entry=ttu&amp;g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D">📍 Chỉ đường đến DR ĐẮC QUANG</a></p>
+LOI_KEU_GOI: Bên cạnh sức khỏe tổng quát, đừng quên kiểm tra mắt định kỳ. EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn kính phù hợp.
+HOI_1: Bác sĩ thẩm mỹ giỏi ở Quận 10 có những ai?
+DAP_1: BS CK2 Trần Đắc Quang (366 Cao Thắng), BS CK2 Nguyễn Hữu Hoạt (400 Lê Hồng Phong), BS CKI Đoàn Duy Dũng (324/2-4 Lý Thường Kiệt), Phòng khám Dr. Quân (722 Sư Vạn Hạnh) và Dr. Nguyên Giáp (190 Huỳnh Văn Bánh, Phú Nhuận).
+HOI_2: Bác sĩ Trần Đắc Quang chuyên về dịch vụ gì?
+DAP_2: Phẫu thuật thẩm mỹ cắt mí, nâng mũi, nâng ngực, hút mỡ; đặc biệt sửa mũi hỏng và sửa vùng hút mỡ hỏng.
+HOI_3: Nên chọn cơ sở thẩm mỹ như thế nào?
+DAP_3: Ưu tiên nơi có bác sĩ giỏi, uy tín và đảm bảo đầy đủ giấy phép để làm đẹp an toàn.
+SAN_PHAM: sun-luxury, kinh-mat-nu-350, kinh-mat-nam-350, kinh-xuyen-dem-night-view, vision-one, eye-coffret-rich-make, eye-coffret-sheer-make, eye-coffret-natural-make
+LIEN_QUAN: bac-si-tham-my | Bác sĩ, phòng khám thẩm mỹ khu vực Quận 10; bac-si-kham-mat-gioi-o-tphcm | Top 10 bác sĩ khám mắt giỏi ở TP.HCM; toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm | Toplist bác sĩ, phòng khám ung bướu
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

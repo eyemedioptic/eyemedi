@@ -1,0 +1,53 @@
+TIEU_DE: Chế độ bảo hành gọng kính và tròng kính
+SLUG: che-do-bao-hanh
+TU_KHOA_CHINH: chế độ bảo hành gọng kính
+TU_KHOA_PHU: bảo hành tròng kính, thay ve mũi kính, chỉnh form kính, thu cũ đổi mới kính, đo thị lực miễn phí
+DANH_MUC: Chính sách
+SLUG_DANH_MUC: chinh-sach
+MO_TA_SEO: Chế độ bảo hành gọng kính trọn thời gian sử dụng tại EYEMEDI: siết ốc, chỉnh form, thay ve mũi, đổi độ tròng, hỗ trợ rơi vỡ. Xem chi tiết quyền lợi.
+NGAY_DANG: 2026-06-27
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: An tâm sử dụng – đồng hành dài lâu cùng khách hàng. Tại EYEMEDI, chúng tôi không chỉ cung cấp những chiếc kính chất lượng mà còn xây dựng hệ thống bảo hành toàn diện, giúp bạn an tâm trong suốt quá trình sử dụng với chính sách hậu mãi rõ ràng, minh bạch và tận tâm.
+ANH_RIENG:
+baohanhgong.webp | Kỹ thuật viên EYEMEDI siết ốc, chỉnh form gọng kính cho khách
+thayvemui.jpg | Thay ve mũi kính – một quyền lợi trong chế độ bảo hành tại EYEMEDI
+domat.jpg | Khách hàng đo khúc xạ bằng máy tự động tại EYEMEDI
+H2_1: Quyền lợi bảo hành gọng kính và tròng kính
+NOI_DUNG_1: <p>Đội ngũ kỹ thuật viên EYEMEDI luôn kiểm tra và chăm sóc kính miễn phí cho khách hàng. Khi mua kính tại EYEMEDI, bạn được hỗ trợ:</p>
+<ul>
+<li>Bảo hành lỗi kỹ thuật của gọng kính.</li>
+<li>Siết ốc, chỉnh form kính khi bị lỏng, lệch.</li>
+<li><a href="/phu-kien-mat-kinh.html">Thay ve mũi</a> khi ve bị ố, cứng hoặc hư.</li>
+<li>Vệ sinh kính.</li>
+<li><a href="/trong-kinh-can-vien-loan.html">Đổi độ tròng kính</a> khi độ mắt thay đổi.</li>
+<li>Hỗ trợ khi kính bị rơi vỡ.</li>
+</ul>
+<p>Cùng nhiều quyền lợi khác, giúp chiếc kính luôn bền đẹp và đeo thoải mái trong thời gian dài.</p>
+<blockquote>“Không chỉ là một chiếc kính đẹp, mà còn là sự an tâm trong suốt quá trình sử dụng.”</blockquote>
+H2_2: Chương trình thu cũ đổi mới
+NOI_DUNG_2: <p>Ngoài các chính sách bảo hành tiêu chuẩn, EYEMEDI còn triển khai chương trình <strong>Thu cũ đổi mới</strong>, giúp khách hàng tiết kiệm chi phí khi nâng cấp lên gọng kính và tròng kính thế hệ mới.</p>
+H2_3: Mẹo giữ kính bền đẹp giữa các lần bảo hành
+NOI_DUNG_3: <ul>
+<li>Cầm kính bằng hai tay khi đeo và tháo để gọng không bị lệch form.</li>
+<li>Lau tròng bằng khăn chuyên dụng và nước vệ sinh tròng kính, tránh dùng áo hay khăn giấy.</li>
+<li>Cất kính vào hộp khi không dùng, không úp mặt tròng xuống bàn.</li>
+<li>Không để kính trên táp-lô ô tô hoặc nơi có nhiệt độ cao.</li>
+</ul>
+<p>Các phụ kiện như khăn lau, nước vệ sinh, hộp đựng, đệm mũi silicon có sẵn tại <a href="/phu-kien-mat-kinh.html">phụ kiện mắt kính EYEMEDI</a>.</p>
+H2_4: EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí
+NOI_DUNG_4: <p>Với đội ngũ chuyên viên giàu kinh nghiệm cùng hệ thống thiết bị hiện đại, EYEMEDI cam kết mang đến trải nghiệm chăm sóc thị lực chuyên nghiệp, tận tâm và lâu dài. Khách hàng được <a href="/dat-lich-do-mat.html">đo mắt, kiểm tra thị lực miễn phí</a> và tư vấn cắt kính phù hợp.</p>
+<p>Store: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh – <a href="https://www.google.com/maps/search/?api=1&amp;query=Eyemedi+Optic+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" target="_blank" rel="noopener">📍 Chỉ đường đến EYEMEDI</a></p>
+LOI_KEU_GOI: Kính bị lỏng, lệch form hay cần thay ve mũi? Mang kính đến EYEMEDI để được kiểm tra, chăm sóc và đo lại thị lực miễn phí.
+HOI_1: EYEMEDI hỗ trợ bảo hành những gì?
+DAP_1: Bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác.
+HOI_2: Kính cũ có được đổi lấy kính mới không?
+DAP_2: Có. EYEMEDI có chương trình Thu cũ đổi mới, giúp tiết kiệm chi phí khi nâng cấp gọng kính và tròng kính thế hệ mới.
+HOI_3: Kiểm tra thị lực tại EYEMEDI có mất phí không?
+DAP_3: Không. EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí cho khách hàng.
+SAN_PHAM: pk-dem-mui-silicon, pk-khan-lau-a03, pk-nuoc-xit-ao, pk-hop-kinh-eyemedi, pk-boc-cang-silicon, pk-combo-ve-sinh, trong-phu-vang-156, trong-trang-cung-156
+LIEN_QUAN: dat-lich-do-mat | Đặt lịch đo mắt, kiểm tra thị lực tại EYEMEDI; trong-kinh-can-vien-loan | Bảng giá tròng kính cận, viễn, loạn; phu-kien-mat-kinh | Phụ kiện bảo quản mắt kính
+LINK_TRONG_BAI: Thay ve mũi → phu-kien-mat-kinh | Đổi độ tròng kính → trong-kinh-can-vien-loan | phụ kiện mắt kính EYEMEDI → phu-kien-mat-kinh | đo mắt, kiểm tra thị lực miễn phí → dat-lich-do-mat
+LINK_VAO_TU: (đã có 15 trang trỏ tới)
+DOI_TAC: (không)
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL. Không trùng nội dung trang khác.
+NGUON_THAM_KHAO: Nội dung gốc của trang che-do-bao-hanh.html (giữ nguyên toàn bộ thông tin); bổ sung mục mẹo bảo quản kính (kiến thức chung).

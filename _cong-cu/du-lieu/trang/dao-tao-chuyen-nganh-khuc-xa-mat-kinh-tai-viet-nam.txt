@@ -1,0 +1,97 @@
+TIEU_DE: Đào tạo khúc xạ & nhãn kính chuyên sâu
+TITLE: Đào tạo khúc xạ, nhãn kính, kính áp tròng thực hành | EYEMEDI
+SLUG: dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam
+TU_KHOA_CHINH: đào tạo khúc xạ nhãn kính
+TU_KHOA_PHU: học đo khúc xạ, mài lắp tròng kính, đào tạo kính áp tròng, khóa học ngành mắt kính
+DANH_MUC: Đào tạo
+SLUG_DANH_MUC: dao-tao
+MO_TA_SEO: Đào tạo chuyên sâu đo khúc xạ thị lực, mài lắp và định tâm tròng kính, kỹ thuật kính áp tròng. 70% thực hành, sửa thao tác 1:1 tại TP.HCM.
+NGAY_DANG: 2026-11-02
+NGAY_CAP_NHAT: 2026-11-04
+DOAN_MO_DAU: Trang bị kiến thức nền tảng đến kỹ thuật thực hành chuyên sâu, hướng đến khả năng ứng dụng thực tế trong đo khúc xạ thị lực, mài lắp – định tâm tròng kính và kính áp tròng.
+ANH_RIENG:
+kho-anh/EYEMEDI-8.webp | Thực hành đo khúc xạ bằng máy đo tự động
+kho-anh/EYEMEDI-2.webp | Đo khúc xạ thị lực chuyên sâu tại EYEMEDI
+kho-anh/EYEMEDI-1.webp | Kiểm tra thị lực bằng tròng kính thử
+H2_1: Đào tạo thực hành chuyên sâu ngành khúc xạ – nhãn kính – kính áp tròng
+NOI_DUNG_1: <p>Đào tạo thực hành chuyên sâu ngành Khúc xạ – Nhãn kính – Kính áp tròng</p>
+<ul>
+<li>TP. Hồ Chí Minh • 📞 0967 190005</li>
+<li>Học lý thuyết + thực hành</li>
+<li>Quy trình chuẩn nghề</li>
+<li>Hướng dẫn trực tiếp</li>
+<li>Đo khúc xạ chuyên sâu</li>
+<li>Mài lắp &amp; định tâm chuẩn</li>
+<li>Kiến thức về Contact Lens</li>
+<li>3 nhóm kỹ năng trọng tâm</li>
+</ul>
+H2_2: Chương trình đào tạo thực hành toàn diện
+NOI_DUNG_2: <p>Tập trung vào năng lực nghề nghiệp có thể ứng dụng ngay trong môi trường cửa hàng kính, trung tâm thị lực và dịch vụ kính áp tròng.</p>
+<h3>Đo khúc xạ thị lực chuyên sâu</h3>
+<p>Hệ thống hóa quy trình khám – đo – phân tích để nâng cao độ chính xác và khả năng tư vấn.</p>
+<ul>
+<li>Khúc xạ khách quan &amp; chủ quan</li>
+<li>Đánh giá cận – viễn – loạn thị</li>
+<li>Cân bằng thị giác hai mắt</li>
+<li>Kiểm tra thị lực gần &amp; nhu cầu sử dụng</li>
+<li>Phân tích kết quả và tư vấn kính phù hợp</li>
+</ul>
+<h3>Mài lắp &amp; định tâm tròng kính</h3>
+<p>Rèn kỹ năng kỹ thuật từ đo thông số gọng đến hoàn thiện kính đạt yêu cầu thẩm mỹ và quang học.</p>
+<ul>
+<li>Đo PD, chiều cao lắp kính</li>
+<li>Đọc thông số gọng &amp; tròng</li>
+<li>Block – mài – lắp hoàn thiện</li>
+<li>Định tâm đơn tròng &amp; đa tròng</li>
+<li>Kiểm tra sai số, chỉnh kính sau lắp</li>
+</ul>
+<h3>Kỹ thuật kính áp tròng chuyên sâu</h3>
+<p>Nắm nguyên tắc lựa chọn, đánh giá độ phù hợp và hướng dẫn sử dụng kính áp tròng an toàn.</p>
+<ul>
+<li>Cấu trúc &amp; vật liệu kính áp tròng</li>
+<li>Thông số DIA, BC, Power</li>
+<li>Đánh giá độ ôm và di động kính</li>
+<li>Hướng dẫn đeo – tháo – vệ sinh</li>
+<li>Nhận diện tình huống cần chuyển khám chuyên khoa</li>
+</ul>
+H2_3: Từ nền tảng đến thực hành chuyên môn
+NOI_DUNG_3: <p>Nội dung có thể điều chỉnh theo trình độ đầu vào của học viên và mô hình lớp học.</p>
+<h3>Phù hợp với</h3>
+<p>Người đang làm trong ngành kính mắt, chủ cửa hàng kính, nhân viên kỹ thuật, người muốn bổ sung kỹ năng thực hành hoặc phát triển chuyên môn về thị lực và kính áp tròng.</p>
+<ul>
+<li><strong>03</strong> – Khối chuyên môn chính</li>
+<li><strong>70%</strong> – Định hướng thực hành</li>
+<li><strong>1:1</strong> – Sửa thao tác theo tình huống</li>
+<li><strong>Case</strong> – Học qua tình huống thực tế</li>
+</ul>
+<h3>Nội dung đào tạo đề xuất</h3>
+<p><strong>01. Nền tảng quang học &amp; thị giác:</strong> –  Khái niệm khúc xạ, nguyên lý tròng kính, thị lực và nhu cầu nhìn.</p>
+<p><strong>02. Quy trình đo khúc xạ thị lực:</strong> –  Thao tác thiết bị, chủ quan – khách quan, kiểm chứng và ghi đơn kính.</p>
+<p><strong>03. Kỹ thuật đo và định tâm:</strong> –  PD, chiều cao, khoảng cách đỉnh kính, thông số gọng và căn chỉnh.</p>
+<p><strong>04. Mài lắp tròng kính:</strong> –  Quy trình block, mài, lắp, kiểm tra và xử lý lỗi thường gặp.</p>
+<p><strong>05. Kính áp tròng:</strong> –  Lựa chọn thông số, fitting cơ bản, hướng dẫn sử dụng và chăm sóc.</p>
+H2_4: Học để làm được – không chỉ học lý thuyết
+NOI_DUNG_4: <h3>Chuẩn hóa thao tác</h3>
+<p>Thực hành theo quy trình rõ ràng, dễ áp dụng.</p>
+<h3>Thực hành thiết bị</h3>
+<p>Rèn kỹ năng đo, mài lắp và kiểm tra thành phẩm.</p>
+<h3>Phân tích tình huống</h3>
+<p>Hiểu nguyên nhân, sai số và cách xử lý phù hợp.</p>
+<h3>Nâng cao chuyên môn</h3>
+<p>Tạo nền tảng phát triển nghề nghiệp lâu dài.</p>
+H2_5: Sẵn sàng nâng cao kỹ năng ngành nhãn kính?
+NOI_DUNG_5: <p>Để lại thông tin để nhận tư vấn về lịch học, thời lượng chương trình, học phí và nội dung phù hợp với trình độ hiện tại.</p>
+<p><b>Hotline:</b> <a href="tel:0967190005">0967 190005</a></p>
+<p><b>Email:</b> <a href="mailto:daotao.khucxamatkinh@gmail.com">daotao.khucxamatkinh@gmail.com</a></p>
+<p><b>Khu vực:</b> TP. Hồ Chí Minh</p>
+LOI_KEU_GOI: Để lại thông tin hoặc gọi hotline 0967 190005 để được tư vấn lịch học, thời lượng, học phí và nội dung phù hợp với trình độ của bạn.
+HOI_1: Chương trình đào tạo gồm những nội dung gì?
+DAP_1: Ba khối chuyên môn chính: đo khúc xạ thị lực chuyên sâu, mài lắp và định tâm tròng kính, kỹ thuật kính áp tròng; học từ nền tảng quang học đến thực hành.
+HOI_2: Khóa học phù hợp với ai?
+DAP_2: Người đang làm trong ngành kính mắt, chủ cửa hàng kính, nhân viên kỹ thuật và người muốn bổ sung kỹ năng thực hành hoặc phát triển nghề.
+HOI_3: Đăng ký tư vấn khóa học bằng cách nào?
+DAP_3: Gọi hotline 0967 190005 hoặc gửi email daotao.khucxamatkinh@gmail.com; lớp học tại TP. Hồ Chí Minh.
+SAN_PHAM: vidic-8840, merriandy-29392, kingbraver-6413, swallow-m2027, trong-160-x-drive, da-trong-dat-theo-yeu-cau, lens-can-loan, pk-combo-ve-sinh
+LIEN_QUAN: dat-lich-do-mat | Dịch vụ đo thị lực chuẩn tại EYEMEDI; top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay | Top 10+ tròng kính cận tốt; kinh-ap-trong | Kính áp tròng tại EYEMEDI
+KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
+NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).
