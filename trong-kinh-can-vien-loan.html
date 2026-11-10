@@ -352,7 +352,7 @@ const selectedVariants = {};
 const detailGalleryIndex = {};
 const fmtVND = n => new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(n);
 const priceOf = (p,vi) => {const v=(p.variants||[])[vi];return v&&v.price>0?v.price:(Number(p.price)||0)};
-const money = (p,vi) => {if(vi==null){const ps=(p.variants||[]).map(v=>v.price).filter(x=>x>0);if(ps.length>1&&Math.min(...ps)!==Math.max(...ps))return 'Từ '+fmtVND(Math.min(...ps));}const n=priceOf(p,vi||0);return n>0?fmtVND(n):'Liên hệ'};
+const money = (p,vi) => {if(vi==null){const ps=(p.variants||[]).map(v=>v.price).filter(x=>x>0);if(ps.length>1&&Math.min(...ps)!==Math.max(...ps))return fmtVND(Math.min(...ps));}const n=priceOf(p,vi||0);return n>0?fmtVND(n):'Liên hệ'};
 const optLabel = p => (p.category==='Tròng kính mắt'?'khoảng độ':(p.variants||[]).some(v=>v.price>0)?'loại':'màu sắc');
 function renderProducts(){
  const bar=document.getElementById('categoryBar');if(bar)bar.innerHTML=NAV_CATEGORIES.map(c=>`<button class="${activeCategory===c?'active':''}" onclick="filterCategory('${c}')">${c}</button>`).join('');
