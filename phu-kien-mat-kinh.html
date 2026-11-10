@@ -417,6 +417,7 @@ async function submitOrder(e){if(e)e.preventDefault();const form=document.getEle
  if(orderLockLeft()>0){applyOrderLock();return false}
  if(!prepareOrder())return false;
  btn.disabled=true;btn.textContent='Đang gửi đơn…';
+ try{const _fd=new FormData(form);_fd.append('Loại','Đơn hàng');_fd.append('Trang',location.pathname);fetch('https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec',{method:'POST',mode:'no-cors',keepalive:true,body:_fd}).catch(function(){})}catch(_x){}
  try{const r=await fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{Accept:'application/json'},body:new FormData(form)});const j=await r.json().catch(()=>({}));
   if(!r.ok||!(j.success===true||j.success==='true'))throw new Error(j.message||('Lỗi '+r.status));
   orderLockMem=Date.now()+ORDER_LOCK_MS;try{localStorage.setItem(ORDER_LOCK_KEY,String(orderLockMem))}catch(err){}
@@ -556,5 +557,5 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(!(/^tel:|zalo\.me|m\.me|messenger/i.test(h)||/gửi đơn|đặt hàng|đặt lịch|xác nhận đặt|gửi đăng ký/.test(s)))return;
 var k='ltcc'+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
 try{fetch(A+'c'+t+'/up',{keepalive:true,cache:'no-store'})}catch(e){}},true);})();</script>
-</body>
+<script id="nhan-hang">(function(){function t(){document.querySelectorAll("li").forEach(function(l){var x=l.textContent.trim();if(x==="Hàng có sẵn"){l.style.color="#1e8449";l.style.fontWeight="700"}else if(x==="Hàng đặt trước 2 ngày"){l.style.color="#c0392b";l.style.fontWeight="700"}})}new MutationObserver(t).observe(document.documentElement,{childList:true,subtree:true});t()})();</script></body>
 </html>

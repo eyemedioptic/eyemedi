@@ -262,7 +262,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=trong-160-x-drive"><img src="https://eyemedi.vn/images/san-pham/trong-160-x-drive.webp" width="300" height="300" alt="Tròng 1.60 ASP X-DRIVE chống chói lái xe" loading="lazy"><b>Tròng 1.60 ASP X-DRIVE chống chói lái xe</b><span>900.000đ</span></a>
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=trong-156-uv420-blue-cut"><img src="https://eyemedi.vn/images/san-pham/trong-156-uv420-blue-cut.webp" width="300" height="300" alt="Tròng 1.56 UV420 Blue Cut lọc ánh sáng xanh" loading="lazy"><b>Tròng 1.56 UV420 Blue Cut lọc ánh sáng xanh</b><span>450.000đ</span></a>
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=da-trong-156-photo-gray"><img src="https://eyemedi.vn/images/san-pham/da-trong-156-photo-gray.webp" width="300" height="300" alt="Đa tròng 1.56 Progressive Photo Gray đổi màu khói" loading="lazy"><b>Đa tròng 1.56 Progressive Photo Gray đổi màu khói</b><span>1.350.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=lens-can-loan"><img src="https://eyemedi.vn/images/san-pham/lens-can-loan.webp?v=3" width="300" height="300" alt="Lens trong suốt" loading="lazy"><b>Lens trong suốt</b><span>80.000đ</span></a>
+      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=lens-can-loan"><img src="https://eyemedi.vn/images/san-pham/lens-can-loan.webp?v=3" width="300" height="300" alt="Lens trong suốt" loading="lazy"><b>Lens trong suốt</b><small style="color:#1e8449;font-weight:700">Hàng có sẵn</small><span>80.000đ</span></a>
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=swallow-m2027"><img src="https://eyemedi.vn/images/san-pham/swallow-m2027.webp" width="300" height="300" alt="SWALLOW M2027" loading="lazy"><b>SWALLOW M2027</b><span>1.350.000đ</span></a>
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=gold-optic-2231"><img src="https://eyemedi.vn/images/san-pham/gold-optic-2231.webp" width="300" height="300" alt="GOLD OPTIC 2231" loading="lazy"><b>GOLD OPTIC 2231</b><span>700.000đ</span></a>
       <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=gala-21061"><img src="https://eyemedi.vn/images/san-pham/gala-21061.webp" width="300" height="300" alt="GALA 21061" loading="lazy"><b>GALA 21061</b><span>700.000đ</span></a>
@@ -381,7 +381,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 (function(){var f=document.getElementById('eyForm'),b=document.getElementById('eyBtn'),ok=document.getElementById('eyOk'),t=b.textContent;
  f.addEventListener('submit',function(e){e.preventDefault();b.disabled=true;b.textContent='Đang gửi...';
   if(window.fbq)fbq('track','Lead');
-  fetch('https://script.google.com/macros/s/AKfycbwTMU5uBOF5NaOefIZNVhk6wfIxUwSF9K7Ic8fLSeOiowcAUXTd-HU6KFlMxfFMqcN2Ew/exec',{method:'POST',mode:'no-cors',body:new FormData(f)})
+  fetch('https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec',{method:'POST',mode:'no-cors',body:(function(){var d=new FormData(f);d.append('Loại','Đặt lịch đo mắt');d.append('Trang',location.pathname);return d})()})
   .then(function(){ok.style.display='block';f.reset();b.disabled=false;b.textContent=t;})
   .catch(function(){b.disabled=false;b.textContent='THỬ LẠI';});});})();
 </script>
