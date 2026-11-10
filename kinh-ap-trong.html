@@ -472,11 +472,11 @@ if(activeCategory!==HOME_CATEGORY&&!window.PAGE_CATEGORY)setTimeout(()=>document
   </div>
 </div>
 <style>
-.messenger-float{position:fixed;right:20px;bottom:25px;z-index:950;display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0084ff;color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;border-radius:30px;box-shadow:0 4px 15px rgba(0,0,0,.25);animation:messengerPulse 1.2s infinite}
-.messenger-float img{width:30px;height:30px}
-.messenger-float span{color:#fff}
-@keyframes messengerPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(0,132,255,.6)}50%{transform:scale(1.08);box-shadow:0 0 0 10px rgba(0,132,255,0)}}
-.messenger-float:hover{background:#0064d2}
+
+
+
+
+
 #promo-popup{display:none;position:fixed;left:20px;bottom:20px;width:280px;box-sizing:border-box;background:#fff;border:2px solid #0876c9;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.25);z-index:950;font-family:Arial,sans-serif;overflow:hidden;animation:promoBlink 1.4s infinite}
 .promo-title{background:#0876c9;color:#fff;text-align:center;padding:12px 30px;font-size:16px;font-weight:bold}
 .promo-content{padding:16px;text-align:center;color:#222}
@@ -485,9 +485,9 @@ if(activeCategory!==HOME_CATEGORY&&!window.PAGE_CATEGORY)setTimeout(()=>document
 .promo-btn{display:inline-block;background:#e53935;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold}
 .promo-close{position:absolute;top:4px;right:8px;border:none;background:transparent;color:#fff;font-size:25px;cursor:pointer;z-index:2}
 @keyframes promoBlink{0%,100%{transform:scale(1);box-shadow:0 5px 20px rgba(0,0,0,.2)}50%{transform:scale(1.03);box-shadow:0 0 14px rgba(8,118,201,.65)}}
-@media(max-width:600px){.messenger-float{right:12px;bottom:18px;padding:10px}.messenger-float span{display:none}#promo-popup{left:10px;bottom:12px;width:255px}}
+@media(max-width:600px){#promo-popup{left:10px;bottom:12px;width:255px}}
 /* Không che giỏ hàng / chi tiết sản phẩm khi đang mở */
-body:has(.overlay.show) .messenger-float,body:has(.overlay.show) #promo-popup{display:none !important}
+body:has(.overlay.show) 
 /* Ẩn khu vực quản lý nội dung trên trang chủ */
 #editorModal,#editModal,.editor-modal,.edit-modal,.admin-panel,#editorPanel,#managerOverlay,#editSiteBtn{display:none !important}
 </style>
@@ -507,5 +507,16 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(!(/^tel:|zalo\.me|m\.me|messenger/i.test(h)||/gửi đơn|đặt hàng|đặt lịch|xác nhận đặt|gửi đăng ký/.test(s)))return;
 var k='ltcc'+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
 try{fetch(A+'c'+t+'/up',{keepalive:true,cache:'no-store'})}catch(e){}},true);})();</script>
-<script id="nhan-hang">(function(){function t(){document.querySelectorAll("li").forEach(function(l){var x=l.textContent.trim();if(x==="Hàng có sẵn"){l.style.color="#1e8449";l.style.fontWeight="700"}else if(x==="Hàng đặt trước 2 ngày"){l.style.color="#c0392b";l.style.fontWeight="700"}})}new MutationObserver(t).observe(document.documentElement,{childList:true,subtree:true});t()})();</script></body>
+<script id="nhan-hang">(function(){function t(){document.querySelectorAll("li").forEach(function(l){var x=l.textContent.trim();if(x==="Hàng có sẵn"){l.style.color="#1e8449";l.style.fontWeight="700"}else if(x==="Hàng đặt trước 2 ngày"){l.style.color="#c0392b";l.style.fontWeight="700"}})}new MutationObserver(t).observe(document.documentElement,{childList:true,subtree:true});t()})();</script><style id="promo-glass">
+#promo-popup{width:220px!important;left:14px!important;bottom:14px!important;background:rgba(255,255,255,.55)!important;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.7)!important;border-radius:16px!important;box-shadow:0 8px 28px rgba(8,60,90,.22)!important;animation:promoFloat 3s ease-in-out infinite!important}
+#promo-popup .promo-title{background:transparent!important;color:#0a5c8f!important;font-size:12.5px!important;letter-spacing:.04em;padding:10px 28px 0 12px!important;text-align:left!important}
+#promo-popup .promo-content{padding:4px 12px 12px!important;text-align:left!important}
+#promo-popup .promo-content strong{display:block;font-size:15px!important;color:#063b5c!important;margin:2px 0}
+#promo-popup .promo-content p{font-size:12.5px!important;line-height:1.4!important;margin:4px 0 10px!important;color:#24414f!important}
+#promo-popup .promo-btn{padding:7px 12px!important;font-size:12px!important;border-radius:999px!important;background:linear-gradient(135deg,#ff5a4e,#e53935)!important;box-shadow:0 4px 12px rgba(229,57,53,.35)}
+#promo-popup .promo-close{color:#0a5c8f!important;font-size:20px!important;top:4px!important;right:8px!important}
+@keyframes promoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:600px){#promo-popup{width:205px!important;left:10px!important;bottom:10px!important}#promo-popup .promo-content strong{font-size:13.5px!important;white-space:nowrap}}
+</style>
+</body>
 </html>
