@@ -407,7 +407,7 @@ function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.te
 m.querySelector('.dl-dong').onclick=dong;m.addEventListener('click',function(e){if(e.target===m)dong()});document.addEventListener('keydown',function(e){if(e.key==='Escape')dong()});
 document.querySelectorAll('a.cta[href*="dat-lich-do-mat"],header a[href*="dat-lich-do-mat"],nav a[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var d=a.closest('details');if(d)d.removeAttribute('open');if(window.closeMainMenu)try{closeMainMenu()}catch(x){}mo()})});
 f.addEventListener('submit',function(e){e.preventDefault();
- var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,''),re=/^(0|\+84)\d{9,10}$/,bad=0;
+ var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,''),re=/^0\d{9}$/,bad=0;
  [['Họ và Tên',!!v('Họ và Tên')],['Số điện thoại',re.test(sdt)],['Ngày',!!v('Ngày')],['Giờ',!!v('Giờ')]].forEach(function(x){f.elements[x[0]].classList.toggle('loi',!x[1]);if(!x[1])bad++});
  if(bad)return;
  bt.disabled=true;bt.textContent='Đang gửi...';
@@ -419,6 +419,18 @@ f.addEventListener('submit',function(e){e.preventDefault();
   ok.innerHTML='<b>✅ Đặt lịch thành công!</b>'+esc(v('Họ và Tên'))+' – '+esc(sdt)+'<br>📅 '+esc(ngay)+', '+esc(v('Giờ'))+'<br>EYEMEDI sẽ gọi xác nhận lịch hẹn sớm nhất.<br>Hotline: 0967 190 005';
   f.style.display='none';ok.style.display='block';f.reset();
  }).catch(function(){bt.disabled=false;bt.textContent='THỬ LẠI'})});
+})();</script>
+<script id="sdt10">(function(){var SEL='input[name="Số điện thoại"],input[autocomplete="tel"]',MSG='Số điện thoại không đúng, vui lòng kiểm tra lại';
+function chuan(v){var d=String(v||'').replace(/\D/g,'');if(/^84\d{9}$/.test(d))d='0'+d.slice(2);return d}
+function loi(el,show){var n=el.nextElementSibling;if(!(n&&n.classList&&n.classList.contains('sdt-loi'))){n=null}
+ if(show){el.style.setProperty('border-color','#d9534f','important');el.style.setProperty('outline-color','#d9534f','important');el.style.setProperty('background-color','#fff5f5','important');el.setAttribute('aria-invalid','true');if(!n){n=document.createElement('small');n.className='sdt-loi';n.style.cssText='display:block;color:#d9534f;font-size:12.5px;margin-top:4px;font-weight:400;text-align:left';el.insertAdjacentElement('afterend',n)}n.textContent=MSG}
+ else{el.style.removeProperty('border-color');el.style.removeProperty('outline-color');el.style.removeProperty('background-color');el.removeAttribute('aria-invalid');if(n)n.remove()}}
+function prep(el){if(el.dataset.sdt10)return;el.dataset.sdt10='1';el.setAttribute('inputmode','numeric');el.setAttribute('pattern','0[0-9]{9}');el.setAttribute('maxlength','11');el.setAttribute('title',MSG)}
+document.addEventListener('focusin',function(e){if(e.target.matches&&e.target.matches(SEL))prep(e.target)},true);
+document.addEventListener('input',function(e){var el=e.target;if(!(el.matches&&el.matches(SEL)))return;prep(el);var d=chuan(el.value);if(!/^84/.test(d))d=d.slice(0,10);if(el.value!==d)el.value=d;if(/^0\d{9}$/.test(d))loi(el,false)},true);
+document.addEventListener('blur',function(e){var el=e.target;if(el.matches&&el.matches(SEL)&&el.value)loi(el,!/^0\d{9}$/.test(chuan(el.value)))},true);
+document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.querySelectorAll)return;f.querySelectorAll(SEL).forEach(function(el){var d=chuan(el.value);el.value=d;var ok=/^0\d{9}$/.test(d);loi(el,!ok);if(!ok&&!bad)bad=el});
+ if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
 </body>
 </html>
