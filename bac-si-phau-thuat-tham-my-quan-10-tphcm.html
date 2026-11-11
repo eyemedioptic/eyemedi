@@ -464,5 +464,34 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(!(/^tel:|zalo\.me|m\.me|messenger/i.test(h)||/gửi đơn|đặt hàng|đặt lịch|xác nhận đặt|gửi đăng ký/.test(s)))return;
 var k='ltcc'+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
 try{fetch(A+'c'+t+'/up',{keepalive:true,cache:'no-store'})}catch(e){}},true);})();</script>
+<style id="dl-nhanh-css">.dl-form{display:none;margin-top:14px;gap:10px;flex-direction:column}.dl-form.mo{display:flex}.dl-form input,.dl-form select,.dl-form textarea{width:100%;box-sizing:border-box;padding:11px 14px;border:1px solid #c9dfe3;border-radius:12px;font:inherit;font-size:15px;background:#fff;color:#1f2d33}.dl-form textarea{min-height:64px;resize:vertical}.dl-form .dl-hang{display:flex;gap:10px}.dl-form .dl-hang>*{flex:1;min-width:0}.dl-form button{padding:12px 20px;border:0;border-radius:999px;background:var(--accent,#2f6b70);color:#fff;font-weight:700;font-size:15px;cursor:pointer}.dl-form button:disabled{opacity:.6}.dl-ok{display:none;margin-top:14px;padding:14px 16px;border-radius:12px;background:#e3f4ef;color:#1d5b4a;line-height:1.55}.dl-ok b{display:block;margin-bottom:4px}@media(max-width:480px){.dl-form .dl-hang{flex-direction:column}}</style>
+<script id="dl-nhanh">(function(){var GAS="https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec";
+var CH=["63C Lạc Long Quân, P. Hòa Bình, TP.HCM","169 Nguyễn Đức Thiệu, P. Dĩ An, TP.HCM","19C Đường số 5D, P. Bình Hưng Hòa A, TP.HCM","486 Hoàng Hữu Nam, P. Long Bình, TP.HCM","634 Cách Mạng Tháng 8, P. Nhiêu Lộc, TP.HCM","169 Nghĩa Lộ, P. Yên Nghĩa, Hà Nội"];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function today(){var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)}
+document.querySelectorAll('a.cta[href*="dat-lich-do-mat"]').forEach(function(a){
+ var f=document.createElement('form');f.className='dl-form';f.setAttribute('novalidate','');
+ f.innerHTML='<input name="Họ và Tên" placeholder="Họ và tên *" required autocomplete="name">'+
+ '<input name="Số điện thoại" type="tel" placeholder="Số điện thoại *" required autocomplete="tel" inputmode="tel">'+
+ '<select name="Cửa hàng" required><option value="">Chọn cửa hàng *</option>'+CH.map(function(c){return '<option>'+esc(c)+'</option>'}).join('')+'</select>'+
+ '<div class="dl-hang"><input name="Ngày" type="date" min="'+today()+'" required aria-label="Ngày hẹn"><select name="Giờ" required><option value="">Khung giờ *</option><option>08:30 – 11:30</option><option>11:30 – 14:00</option><option>14:00 – 17:00</option><option>17:00 – 19:00</option><option>19:00 – 21:30</option></select></div>'+
+ '<textarea name="Ghi chú" placeholder="Ghi chú (không bắt buộc)"></textarea>'+
+ '<button type="submit">GỬI ĐẶT LỊCH</button>';
+ var ok=document.createElement('div');ok.className='dl-ok';
+ a.insertAdjacentElement('afterend',ok);a.insertAdjacentElement('afterend',f);
+ a.addEventListener('click',function(e){e.preventDefault();if(ok.style.display==='block')return;f.classList.toggle('mo');if(f.classList.contains('mo')){f.querySelector('input').focus();window.fbq&&fbq('track','InitiateCheckout')}});
+ f.addEventListener('submit',function(e){e.preventDefault();
+  var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,'');
+  if(!v('Họ và Tên')||!/^(0|\+84)\d{9,10}$/.test(sdt)||!v('Cửa hàng')||!v('Ngày')||!v('Giờ')){
+   [].forEach.call(f.elements,function(x){if(x.required)x.style.borderColor=(x.name==='Số điện thoại'?!/^(0|\+84)\d{9,10}$/.test(sdt):!x.value.trim())?'#d9534f':''});return}
+  var b=f.querySelector('button');b.disabled=true;b.textContent='Đang gửi...';
+  var ngay=v('Ngày').split('-').reverse().join('/');
+  var d=new FormData();d.append('Họ và Tên',v('Họ và Tên'));d.append('Số điện thoại',sdt);d.append('Địa chỉ',v('Cửa hàng'));d.append('Loại','Đặt lịch đo mắt');
+  d.append('Sản phẩm','Đặt lịch đo mắt | '+ngay+' | '+v('Giờ')+' | '+v('Cửa hàng'));d.append('Ghi chú',v('Ghi chú'));d.append('Trang',location.pathname);
+  fetch(GAS,{method:'POST',mode:'no-cors',body:d}).then(function(){
+   window.fbq&&fbq('track','Lead');f.style.display='none';a.style.display='none';
+   ok.innerHTML='<b>✅ Đặt lịch thành công!</b>'+esc(v('Họ và Tên'))+' – '+esc(sdt)+'<br>📅 '+esc(ngay)+', '+esc(v('Giờ'))+'<br>📍 '+esc(v('Cửa hàng'))+'<br>EYEMEDI sẽ gọi xác nhận lịch hẹn sớm nhất. Hotline: 0967 190 005';ok.style.display='block';
+  }).catch(function(){b.disabled=false;b.textContent='THỬ LẠI'})});
+});})();</script>
 </body>
 </html>
