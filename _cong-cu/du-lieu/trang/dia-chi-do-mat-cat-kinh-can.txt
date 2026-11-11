@@ -10,8 +10,8 @@ NGAY_DANG: 2026-11-02
 NGAY_CAP_NHAT: 2026-11-04
 DOAN_MO_DAU: EYEMEDI – trung tâm thị lực kính mắt chuyên sâu tại 63C Lạc Long Quân, Phường Hòa Bình (Quận 11 cũ), TP.HCM. Chúng tôi chuyên đo mắt, cắt tròng kính cận viễn loạn, cung cấp gọng kính thời trang và kính áp tròng chính hãng.
 ANH_RIENG:
-eyemedi2.jpg | Showroom mắt kính EYEMEDI tại 63C Lạc Long Quân
 trainghiemdomat.jpg | Khách hàng đo mắt và tư vấn thị lực tại EYEMEDI
+eyemedi2.jpg | Showroom mắt kính EYEMEDI tại 63C Lạc Long Quân
 tuvan.jpg | Chuyên viên EYEMEDI tư vấn lựa chọn kính
 thietbi.jpg | Thiết bị đo mắt hiện đại tại EYEMEDI
 khachhang.jpg | Khách hàng trải nghiệm dịch vụ tại EYEMEDI
