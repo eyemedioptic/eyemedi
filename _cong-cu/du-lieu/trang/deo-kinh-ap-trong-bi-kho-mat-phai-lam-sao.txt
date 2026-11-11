@@ -1,0 +1,48 @@
+TIEU_DE: Đeo kính áp tròng bị khô mắt phải làm sao?
+TITLE: Đeo kính áp tròng bị khô mắt phải làm sao? | EYEMEDI
+SLUG: deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao
+TU_KHOA_CHINH: đeo kính áp tròng bị khô mắt
+TU_KHOA_PHU: đeo lens bị khô mắt, nước nhỏ mắt cho người đeo lens, đeo lens bị cộm, lens silicone hydrogel, đeo lens nhìn máy tính
+DANH_MUC: Kính áp tròng
+SLUG_DANH_MUC: kinh-ap-trong
+Y_KHOA: có
+MO_TA_SEO: Đeo kính áp tròng bị khô mắt do đâu và xử lý thế nào: chọn nước nhỏ mắt phù hợp, giảm giờ đeo, đổi loại lens, và dấu hiệu cần tháo lens đi khám mắt ngay.
+NGAY_DANG: 2026-11-11
+ANH_RIENG:
+anh-rieng/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao-1.jpg | Bề mặt mắt cần đủ nước mắt khi đeo kính áp tròng
+anh-rieng/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao-2.jpg | Nhỏ nước mắt nhân tạo phù hợp khi đeo lens
+anh-rieng/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao-3.jpg | Đôi mắt thoải mái khi đeo lens đúng giờ khuyến cáo
+anh-rieng/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao-4.jpg | Ánh sáng màn hình và phòng máy lạnh làm mắt khô nhanh hơn
+anh-rieng/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao-5.jpg | Làm việc với máy tính lâu khiến mắt ít chớp
+DOAN_MO_DAU: Đeo kính áp tròng bị khô mắt là tình trạng rất thường gặp, nhất là khi ngồi máy lạnh và nhìn màn hình nhiều giờ. Phần lớn có thể cải thiện bằng cách nhỏ nước mắt nhân tạo dùng được với lens, giảm thời gian đeo và chọn loại lens phù hợp hơn.
+H2_1: Vì sao đeo lens dễ bị khô mắt?
+NOI_DUNG_1: <ul>
+<li><b>Lens hút nước mắt:</b> lens mềm cần nước để giữ độ mềm, làm lớp phim nước mắt mỏng đi.</li>
+<li><b>Ít chớp mắt:</b> khi tập trung nhìn điện thoại, máy tính, số lần chớp mắt giảm rõ.</li>
+<li><b>Môi trường:</b> máy lạnh, quạt, gió bụi khi đi xe máy.</li>
+<li><b>Lens cũ, bẩn hoặc đeo quá giờ:</b> cặn protein bám trên lens gây cộm, rát.</li>
+</ul>
+H2_2: Cách giảm khô mắt khi đeo kính áp tròng
+NOI_DUNG_2: <ol>
+<li>Dùng nước mắt nhân tạo ghi rõ dùng được khi đeo lens, ưu tiên loại không chất bảo quản; không tự ý dùng thuốc nhỏ mắt có kháng sinh, corticoid.</li>
+<li>Giảm giờ đeo, tháo lens khi về nhà và đeo kính gọng buổi tối.</li>
+<li>Áp dụng quy tắc 20-20-20: mỗi 20 phút nhìn xa khoảng 6 m trong 20 giây và chớp mắt chủ động.</li>
+<li>Cân nhắc lens 1 ngày hoặc chất liệu silicone hydrogel thấm oxy tốt.</li>
+<li>Vệ sinh lens bằng <a href="/nuoc-ngam-kinh-ap-trong.html">nước ngâm kính áp tròng</a> chuyên dụng, thay lens đúng hạn. Người mới đeo xem thêm <a href="/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau.html">cách đeo lens cho người mới</a>.</li>
+</ol>
+H2_3: Dấu hiệu cần tháo lens và đi khám ngay
+NOI_DUNG_3: <p>Tháo lens ngay nếu mắt đỏ, đau, chảy nước nhiều, sợ ánh sáng hoặc nhìn mờ, vì đây có thể là dấu hiệu viêm giác mạc. Khô mắt kéo dài dù đã đổi lens cũng cần bác sĩ nhãn khoa kiểm tra. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa. Bạn có thể <a href="/dat-lich-do-mat.html">đặt lịch đo mắt miễn phí</a> để kiểm tra lại độ và loại lens.</p>
+LOI_KEU_GOI: Đeo lens hay khô, cộm? Ghé EYEMEDI đo mắt miễn phí, tư vấn đổi loại lens phù hợp và chọn kính gọng thay thế, 08:30 – 21:30 hằng ngày.
+HOI_1: Đeo lens bị khô mắt có nên nhỏ nước muối sinh lý không?
+DAP_1: Nước muối sinh lý chỉ rửa tạm, không giữ ẩm lâu. Nên dùng nước mắt nhân tạo dùng được với lens, loại không chất bảo quản.
+HOI_2: Mỗi ngày nên đeo kính áp tròng bao lâu?
+DAP_2: Phần lớn khuyến cáo khoảng 8 tiếng mỗi ngày; nếu hay khô mắt nên giảm thêm và xen kẽ đeo kính gọng.
+HOI_3: Lens nào ít gây khô mắt?
+DAP_3: Lens dùng 1 ngày và lens chất liệu silicone hydrogel thường dễ chịu hơn với mắt khô, nhưng cần đo mắt để chọn đúng độ và thông số.
+SAN_PHAM: lens-can-loan, eye-coffret-sheer-make, eye-coffret-first-make, pk-combo-ve-sinh, pk-hop-kinh-eyemedi, trong-156-uv420-blue-cut, tomy-9555, vidic-8840
+LIEN_QUAN: cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau | Cách đeo kính áp tròng cho người mới; nuoc-ngam-kinh-ap-trong | Nước ngâm kính áp tròng; top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm | Địa chỉ mua lens uy tín TP.HCM
+LINK_TRONG_BAI: nước ngâm kính áp tròng → nuoc-ngam-kinh-ap-trong; cách đeo lens cho người mới → cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau; đặt lịch đo mắt → dat-lich-do-mat
+LINK_VAO_TU: cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau, nuoc-ngam-kinh-ap-trong
+NGUON_ANH: Unsplash (Unsplash License – miễn phí thương mại)
+KIEM_TRA_TRUNG: Không trùng; khác góc với trang cách đeo lens cho người mới và trang nước ngâm lens.
+NGUON_THAM_KHAO: tamanhhospital.vn (bệnh khô mắt); nhathuoclongchau.com.vn (khô mắt); allaboutvision.com (khô mắt và kính áp tròng); hellobacsi.com (khô mắt).
