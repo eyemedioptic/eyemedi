@@ -19,7 +19,7 @@ kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính trong ngày tại tiệm kín
 H2_1: 4 tiệm kính mắt EYEMEDI tại TP.HCM – chọn chi nhánh gần bạn
 NOI_DUNG_1: <ul>
 <li><b>Quận 11 (cũ):</b> 63C Lạc Long Quân, Phường Hòa Bình – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
-<li><b>Quận 3 (cũ):</b> 634 Cách Mạng Tháng 8, Phường Nhiêu Lộc – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+634+C%C3%A1ch+M%E1%BA%A1ng+Th%C3%A1ng+8" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
+<li><b>Thủ Đức (cũ):</b> 486 Hoàng Hữu Nam, Phường Long Bình – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+486+Ho%C3%A0ng+H%E1%BB%AFu+Nam" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
 <li><b>Bình Tân (cũ):</b> 19C Đường số 5D, Phường Bình Hưng Hòa A – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+19C+%C4%90%C6%B0%E1%BB%9Dng+s%E1%BB%91+5D" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
 <li><b>Dĩ An:</b> 169 Nguyễn Đức Thiệu, Phường Dĩ An – <a href="https://www.google.com/maps/search/?api=1&amp;query=EYEMEDI+169+Nguy%E1%BB%85n+%C4%90%E1%BB%A9c+Thi%E1%BB%87u" rel="nofollow noopener" target="_blank">chỉ đường</a></li>
 </ul>
@@ -42,7 +42,7 @@ NOI_DUNG_3: <ol>
 </ol>
 LOI_KEU_GOI: Ghé tiệm kính mắt EYEMEDI gần bạn nhất để đo mắt miễn phí và nhận kính trong ngày – mở cửa 08:30 – 21:30 hằng ngày.
 HOI_1: Tiệm kính mắt nào gần đây tại TP.HCM uy tín?
-DAP_1: EYEMEDI có 4 cửa hàng tại 63C Lạc Long Quân, 634 Cách Mạng Tháng 8, 19C Đường số 5D và 169 Nguyễn Đức Thiệu, đo mắt miễn phí, giá niêm yết rõ ràng.
+DAP_1: EYEMEDI có 4 cửa hàng tại 63C Lạc Long Quân, 486 Hoàng Hữu Nam, 19C Đường số 5D và 169 Nguyễn Đức Thiệu, đo mắt miễn phí, giá niêm yết rõ ràng.
 HOI_2: Cắt kính cận mất bao lâu?
 DAP_2: Với tròng có sẵn, EYEMEDI cắt lắp và giao kính trong ngày; tròng đặt theo độ đặc biệt cần thêm vài ngày.
 HOI_3: Làm kính cận trọn bộ hết bao nhiêu tiền?
