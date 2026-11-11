@@ -256,19 +256,6 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 
   <!-- SẢN PHẨM THAM KHẢO: 8 sản phẩm từ danh-sach-san-pham.csv, bộ sản phẩm không trùng giữa các trang.
        Thẻ cuộn ngang, tự lướt sang trái sau 3 giây, bấm vào mở trang sản phẩm -->
-  <section class="sp-tk" aria-label="Sản phẩm tham khảo">
-    <strong>Sản phẩm tham khảo</strong>
-    <div class="sp-row" id="spRow">
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=mayblass-24030"><img src="https://eyemedi.vn/images/san-pham/mayblass-24030.webp" width="300" height="300" alt="MAYBLASS 24030" loading="lazy"><b>MAYBLASS 24030</b><span>1.350.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=mayblass-s11890"><img src="https://eyemedi.vn/images/san-pham/mayblass-s11890.webp" width="300" height="300" alt="MAYBLASS S11890 – Titan" loading="lazy"><b>MAYBLASS S11890 – Titan</b><span>1.350.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=p-sufiar-2804"><img src="https://eyemedi.vn/images/san-pham/p-sufiar-2804.webp" width="300" height="300" alt="P-Sufiar 2804" loading="lazy"><b>P-Sufiar 2804</b><span>1.850.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=panda-tr90"><img src="https://eyemedi.vn/images/san-pham/panda-tr90.webp" width="300" height="300" alt="Panda TR90 – Gọng kính cận học sinh" loading="lazy"><b>Panda TR90 – Gọng kính cận học sinh</b><span>650.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=baby-2212"><img src="https://eyemedi.vn/images/san-pham/baby-2212.webp" width="300" height="300" alt="Baby 2212 – Gọng kính cận học sinh Korea" loading="lazy"><b>Baby 2212 – Gọng kính cận học sinh Korea</b><span>550.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=eyemedi-korea-metal-style"><img src="https://eyemedi.vn/images/san-pham/eyemedi-korea-metal-style.webp" width="300" height="300" alt="EYEMEDI Korea Metal Style" loading="lazy"><b>EYEMEDI Korea Metal Style</b><span>450.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=tommy-gold-titanium-ip"><img src="https://eyemedi.vn/images/san-pham/tommy-gold-titanium-ip.webp" width="300" height="300" alt="TOMMY GOLD Titanium IP" loading="lazy"><b>TOMMY GOLD Titanium IP</b><span>950.000đ</span></a>
-      <a class="sp-card" href="https://eyemedi.vn/san-pham.html?sp=vidic-p9602"><img src="https://eyemedi.vn/images/san-pham/vidic-p9602.webp" width="300" height="300" alt="VIDIC P9602" loading="lazy"><b>VIDIC P9602</b><span>800.000đ</span></a>
-    </div>
-  </section>
 
   <!-- THÂN BÀI: máy tự dựng từ các cặp H2_n / NOI_DUNG_n trong file .txt (số phần tùy bài) -->
   <h2>Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI</h2>
@@ -456,7 +443,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
  function run(){clearInterval(t);t=setInterval(function(){go(i+1)},3000)}
  go(0);run();})();
 /* Sản phẩm tham khảo: tự lướt sang trái 3 giây */
-(function(){var r=document.getElementById('spRow'),t;
+(function(){var r=document.getElementById('spRow'),t;if(!r)return;
  function step(){var c=r.querySelector('.sp-card');if(!c)return;var x=c.offsetWidth+12;
   if(r.scrollLeft+r.clientWidth>=r.scrollWidth-5)r.scrollLeft=0;else r.scrollLeft+=x}
  function run(){clearInterval(t);t=setInterval(step,3000)}
