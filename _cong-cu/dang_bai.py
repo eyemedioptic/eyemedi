@@ -6,7 +6,7 @@ Cách dùng (chạy từ gốc repo):
 
 cau-hinh.json:
 {
-  "noi_bat": ["slug-a", "slug-b"],          # 2 bài đưa lên khung "Bài viết nổi bật" (cạnh bài chính)
+  "noi_bat": ["slug-a", "slug-b"],          # 2 bài đưa lên khung "Bài viết nổi bật" (bỏ qua nếu có _cong-cu/du-lieu/noi-bat-co-dinh.txt)
   "bai": [
     {"slug": "...", "nhan": "Kính áp tròng", "nhom": "lens|kien-thuc|kinh-mat|bac-si|",  # nhóm trên chuyen-muc (để trống = không thêm vào nhóm)
      "link_vao": {"slug-trang-cu": "Câu <a href=\"/slug.html\">chữ gắn link</a>."}}
@@ -52,8 +52,16 @@ khung = c[moi_start:moi_end]
 arts = re.findall(r'<article class="tin">.*?</article>', khung, re.S)
 chinh, cu = arts[0], arts[1:]  # bài chính giữ nguyên
 nhan = {b["slug"]: b["nhan"] for b in cfg["bai"]}
-moi_noi_bat = [card(s, nhan[s]) for s in cfg["noi_bat"]]
-day_xuong = [card(b["slug"], b["nhan"]) for b in cfg["bai"] if b["slug"] not in cfg["noi_bat"]] + cu
+# Bài nổi bật CỐ ĐỊNH (nếu có file _cong-cu/du-lieu/noi-bat-co-dinh.txt): giữ nguyên 2 bài này, bài mới đều xuống "Bài viết tiếp theo"
+pf = "_cong-cu/du-lieu/noi-bat-co-dinh.txt"
+co_dinh = [l.strip() for l in open(pf, encoding="utf-8") if l.strip() and not l.startswith("#")] if os.path.exists(pf) else []
+if co_dinh:
+    the_cu = {re.search(r'href="/([^"]+)\.html"', a).group(1): a for a in re.findall(r'<article class="tin">.*?</article>', c, re.S)}
+    moi_noi_bat = [the_cu[s] for s in co_dinh]
+    day_xuong = [card(b["slug"], b["nhan"]) for b in cfg["bai"]] + [a for a in cu if not any(f'href="/{s}.html"' in a for s in co_dinh)]
+else:
+    moi_noi_bat = [card(s, nhan[s]) for s in cfg["noi_bat"]]
+    day_xuong = [card(b["slug"], b["nhan"]) for b in cfg["bai"] if b["slug"] not in cfg["noi_bat"]] + cu
 new_khung = khung
 for a in cu:
     new_khung = new_khung.replace("\n" + a, "").replace(a, "")

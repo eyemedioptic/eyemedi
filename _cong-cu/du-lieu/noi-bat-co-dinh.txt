@@ -1,0 +1,4 @@
+# 2 bài cố định ở khung "Bài viết nổi bật" (cạnh bài chính) trên chuyen-muc.html – mỗi dòng 1 slug.
+# Xóa file này (hoặc để trống) để dang_bai.py dùng lại cấu hình noi_bat hằng ngày.
+bac-si-phau-thuat-tham-my-quan-10-tphcm
+toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm

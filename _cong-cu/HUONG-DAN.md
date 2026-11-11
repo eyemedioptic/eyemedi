@@ -31,3 +31,8 @@ Có sẵn script: viết file cấu hình JSON (xem đầu `_cong-cu/dang_bai.py
 5. Cập nhật `_cong-cu/du-lieu/danh-sach-trang.csv` và lưu file .txt mới.
 6. Commit (user Eyemedi / lensviethan@gmail.com), `git push origin HEAD:eyemedi.vn`, kiểm tra `git log -1 origin/eyemedi.vn`.
 7. Search Console (tài khoản optic.eyemedi@gmail.com, property https://eyemedi.vn/): gửi lại sitemap.xml, yêu cầu lập chỉ mục URL mới (giới hạn ~10/ngày). Không tự nhập mật khẩu.
+
+
+## Bài viết nổi bật cố định (chuyen-muc.html)
+- 2 ô cạnh bài chính trong khung "Bài viết nổi bật" được GHIM CỐ ĐỊNH theo `_cong-cu/du-lieu/noi-bat-co-dinh.txt` (sếp yêu cầu 11/11/2026): bac-si-phau-thuat-tham-my-quan-10-tphcm, toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm.
+- `dang_bai.py` tự giữ nguyên 2 bài này; bài mới hằng ngày đều đưa vào đầu "Bài viết tiếp theo". Chỉ đổi khi sếp yêu cầu.
