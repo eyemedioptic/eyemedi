@@ -445,12 +445,14 @@ var m=document.createElement('div');m.id='dl-modal';m.setAttribute('role','dialo
 m.innerHTML='<div class="dl-hop"><button type="button" class="dl-dong" aria-label="Đóng">×</button><h3>👁 Đặt lịch đo mắt</h3><p class="dl-phu">Miễn phí · 08:30 – 21:30 hằng ngày · Hotline 0967 190 005</p>'+
 '<form novalidate><label>Họ và tên *<input name="Họ và Tên" autocomplete="name" placeholder="Nguyễn Văn A"></label>'+
 '<label>Số điện thoại *<input name="Số điện thoại" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"></label>'+
-'<div class="dl-hang"><label>Ngày hẹn *<input name="Ngày" type="date"></label><label>Khung giờ *<select name="Giờ"><option value="">Chọn giờ</option><option>08:30 – 11:30</option><option>11:30 – 14:00</option><option>14:00 – 17:00</option><option>17:00 – 19:00</option><option>19:00 – 21:30</option></select></label></div>'+
+'<div class="dl-hang"><label>Ngày hẹn *<input name="Ngày" type="date"></label><label>Khung giờ *<select name="Giờ"><option value="">Chọn giờ</option></select></label></div>'+
 '<label>Ghi chú<textarea name="Ghi chú" placeholder="Không bắt buộc"></textarea></label><button type="submit">GỬI ĐẶT LỊCH</button></form><div class="dl-ok"></div></div>';
 document.body.appendChild(m);
 var f=m.querySelector('form'),ok=m.querySelector('.dl-ok'),bt=f.querySelector('button');
+function gioRender(){var s=f.elements['Giờ'],cur=s.value,n=f.elements['Ngày'].value,now=new Date(),h='<option value="">Chọn giờ</option>',c=0;for(var t=510;t<=1260;t+=30){if(n===today()&&t<now.getHours()*60+now.getMinutes()+30)continue;var x=('0'+Math.floor(t/60)).slice(-2)+':'+('0'+t%60).slice(-2);h+='<option'+(x===cur?' selected':'')+'>'+x+'</option>';c++}if(!c)h='<option value="">Hôm nay đã hết giờ – chọn ngày khác</option>';s.innerHTML=h}
+f.elements['Ngày'].addEventListener('change',gioRender);
 function dong(){m.classList.remove('mo');document.body.classList.remove('dl-khoa')}
-function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value)n.value=today();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
+function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value||n.value<today())n.value=today();gioRender();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
 m.querySelector('.dl-dong').onclick=dong;m.addEventListener('click',function(e){if(e.target===m)dong()});document.addEventListener('keydown',function(e){if(e.key==='Escape')dong()});
 document.querySelectorAll('a.cta[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();mo()})});
 f.addEventListener('submit',function(e){e.preventDefault();
