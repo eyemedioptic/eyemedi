@@ -11,10 +11,8 @@ NGAY_DANG: 2026-11-04
 NGAY_CAP_NHAT: 2026-11-04
 DOAN_MO_DAU: Mờ mắt đột ngột là khi thị lực giảm rõ trong vài phút đến vài ngày. Nguyên nhân có thể đơn giản như khô mắt, đường huyết dao động, nhưng cũng có thể là cấp cứu nhãn khoa như bong võng mạc, glaucoma góc đóng cấp hay tắc mạch máu võng mạc – xử lý càng sớm càng giữ được thị lực.
 ANH_RIENG:
-anh-rieng/mo-phong-bong-den-che-tam-nhin.jpg | Mô phỏng bóng đen che tầm nhìn và chấm đen trôi – dấu hiệu bong võng mạc gây mờ mắt đột ngột
-anh-rieng/mo-phong-quang-sang-quanh-den.jpg | Mô phỏng quầng sáng quanh đèn – dấu hiệu glaucoma góc đóng cấp
-kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt EYEMEDI – kiểm tra thị lực khi mắt mờ đột ngột
 kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính sau khi đo thị lực tại EYEMEDI
+kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt EYEMEDI – kiểm tra thị lực khi mắt mờ đột ngột
 kho-anh/EYEMEDI-1.webp | Kiểm tra thị lực bằng tròng kính thử tại EYEMEDI
 H2_1: 6 nguyên nhân phổ biến gây mờ mắt đột ngột
 NOI_DUNG_1: <ol>
