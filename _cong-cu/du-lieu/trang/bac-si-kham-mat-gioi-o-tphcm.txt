@@ -103,7 +103,7 @@ NOI_DUNG_7: <p>Địa chỉ: 366 Cao Thắng, Phường Hòa Hưng (Phường 12
 <p>Chuyên dịch vụ phẫu thuật thẩm mỹ mắt, mũi, cẳm, ngực, và hút mỡ.</p>
 <p>Phòng khám CKPTTM Dr Đắc Quang do Bác Sĩ CKII Thẩm Mỹ Trần Đắc Quang</p>
 <p><a href="/">EYEMEDI - CHUYÊN KHÚC XẠ MẮT KÍNH Địa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</a></p>
-<p><a href="https://www.google.com/maps/place/Eyemedi+Optic/@10.7693622,106.6420949,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f1a47511c2f:0x2407f2dbd557f609!8m2!3d10.7693569!4d106.6446698!16s%2Fg%2F11njw532jn?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D">📍 Đến đo mắt trực tiếp tại EYEMEDI</a></p>
+<p><a class="dd-link" href="https://www.google.com/maps/place/Eyemedi+Optic/@10.7693622,106.6420949,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f1a47511c2f:0x2407f2dbd557f609!8m2!3d10.7693569!4d106.6446698!16s%2Fg%2F11njw532jn?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D"><span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#fff" d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg></span><span class="dd-tx">Đến đo mắt trực tiếp tại EYEMEDI</span></a></p>
 LOI_KEU_GOI: Cần kiểm tra mắt, đo độ hay cắt kính? EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn tròng, gọng phù hợp.
 HOI_1: Top bác sĩ khám mắt giỏi ở TP.HCM gồm những ai?
 DAP_1: Danh sách gồm Bác sĩ Bùi Quang Tuấn, BS Trịnh Bạch Tuyết, BS Võ Thị Hoàng Lan, BS Nguyễn Thị Mỹ Dung, BS Hồng Văn Hiệp, BS J.D. Ferwerda, BS Trịnh Ngọc Thùy An, BS Nguyễn Phương Hà, BS Hà Như Quỳnh và BS Trần Anh Tuấn.

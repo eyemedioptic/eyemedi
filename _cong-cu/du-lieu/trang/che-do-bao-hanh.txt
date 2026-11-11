@@ -36,7 +36,7 @@ NOI_DUNG_3: <ul>
 <p>Các phụ kiện như khăn lau, nước vệ sinh, hộp đựng, đệm mũi silicon có sẵn tại <a href="/phu-kien-mat-kinh.html">phụ kiện mắt kính EYEMEDI</a>.</p>
 H2_4: EYEMEDI hỗ trợ đo mắt, kiểm tra thị lực miễn phí
 NOI_DUNG_4: <p>Với đội ngũ chuyên viên giàu kinh nghiệm cùng hệ thống thiết bị hiện đại, EYEMEDI cam kết mang đến trải nghiệm chăm sóc thị lực chuyên nghiệp, tận tâm và lâu dài. Khách hàng được <a href="/dat-lich-do-mat.html">đo mắt, kiểm tra thị lực miễn phí</a> và tư vấn cắt kính phù hợp.</p>
-<p>Store: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh – <a href="https://www.google.com/maps/search/?api=1&amp;query=Eyemedi+Optic+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" target="_blank" rel="noopener">📍 Chỉ đường đến EYEMEDI</a></p>
+<p>Store: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh – <a class="dd-link" href="https://www.google.com/maps/search/?api=1&amp;query=Eyemedi+Optic+63C+L%E1%BA%A1c+Long+Qu%C3%A2n" target="_blank" rel="noopener"><span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#fff" d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg></span><span class="dd-tx">Chỉ đường đến EYEMEDI</span></a></p>
 LOI_KEU_GOI: Kính bị lỏng, lệch form hay cần thay ve mũi? Mang kính đến EYEMEDI để được kiểm tra, chăm sóc và đo lại thị lực miễn phí.
 HOI_1: EYEMEDI hỗ trợ bảo hành những gì?
 DAP_1: Bảo hành lỗi kỹ thuật, siết ốc, chỉnh form, thay ve mũi, vệ sinh kính, đổi độ tròng, hỗ trợ rơi vỡ và nhiều quyền lợi khác.
