@@ -166,7 +166,7 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
 .about-links{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}.about-links a{padding:7px 13px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--accent);text-decoration:none;font-size:14px}
 .home-about details{border-bottom:1px solid var(--line);padding:10px 0}.home-about summary{cursor:pointer;font-weight:600}
 #footerAddress{font-size:13px;margin:0;line-height:19.5px}
-.messenger-float svg{width:26px;height:26px;flex:none}
+
 @media(max-width:900px){.cr-track{grid-auto-columns:calc((100% - 2*12px)/2.6);gap:12px}}
 @media(max-width:600px){.cr-track{grid-auto-columns:44%;gap:10px}.cr-nav button{display:none}.cr-info h4{font-size:14px}}
 </style>
@@ -489,6 +489,46 @@ if(activeCategory!=='Tất cả'&&!window.PAGE_CATEGORY)setTimeout(()=>document.
 @keyframes mfPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 @media(max-width:600px){.messenger-float{right:12px;bottom:18px;width:52px;height:52px}}
 </style>
+<!-- POPUP KHUYẾN MÃI EYEMEDI -->
+<div id="promo-popup" role="dialog" aria-label="Ưu đãi EYEMEDI">
+  <button class="promo-close" type="button" onclick="closePromo()" aria-label="Đóng ưu đãi">×</button>
+  <div class="promo-title">🎉 ƯU ĐÃI ĐẶC BIỆT</div>
+  <div class="promo-content">
+    <strong>MUA GỌNG TẶNG TRÒNG</strong>
+    <p>Tặng tròng kính phủ siêu váng Hydrophobic – Hỗ trợ đo thị lực</p>
+    <a href="https://zalo.me/0967190005" class="promo-btn" target="_blank" rel="noopener">NHẬN ƯU ĐÃI</a>
+  </div>
+</div>
+<style>
+
+
+
+
+
+#promo-popup{display:none;position:fixed;left:20px;bottom:20px;width:280px;box-sizing:border-box;background:#fff;border:2px solid #0876c9;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.25);z-index:950;font-family:Arial,sans-serif;overflow:hidden;animation:promoBlink 1.4s infinite}
+.promo-title{background:#0876c9;color:#fff;text-align:center;padding:12px 30px;font-size:16px;font-weight:bold}
+.promo-content{padding:16px;text-align:center;color:#222}
+.promo-content strong{color:#0876c9;font-size:16px}
+.promo-content p{font-size:14px;line-height:1.5}
+.promo-btn{display:inline-block;background:#e53935;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold}
+.promo-close{position:absolute;top:4px;right:8px;border:none;background:transparent;color:#fff;font-size:25px;cursor:pointer;z-index:2}
+@keyframes promoBlink{0%,100%{transform:scale(1);box-shadow:0 5px 20px rgba(0,0,0,.2)}50%{transform:scale(1.03);box-shadow:0 0 14px rgba(8,118,201,.65)}}
+@media(max-width:600px){#promo-popup{left:10px;bottom:12px;width:255px}}
+/* Không che giỏ hàng / chi tiết sản phẩm khi đang mở */
+body:has(.overlay.show) 
+/* Ẩn khu vực quản lý nội dung trên trang chủ */
+#editorModal,#editModal,.editor-modal,.edit-modal,.admin-panel,#editorPanel,#managerOverlay,#editSiteBtn{display:none !important}
+.hero.pb-slider{display:block !important;position:relative;overflow:hidden;padding:0 !important;grid-template-columns:none !important;height:clamp(340px,46vw,620px);background:#0d2a2c}
+.pb-track{display:flex;height:100%;transition:transform .6s ease}
+.pb-slide{position:relative;flex:0 0 100%;height:100%;overflow:hidden;display:block;cursor:pointer}
+.pb-bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(28px) brightness(.8);transform:scale(1.1)}
+.hero.pb-slider .pb-slide img{position:relative;display:block;width:100%;height:100% !important;object-fit:contain;transition:transform .3s}
+.pb-slide:hover img{transform:scale(1.02)}
+.pb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.9);color:#073a3c;font-size:28px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.pb-prev{left:16px}.pb-next{right:16px}
+.pb-count{position:absolute;right:16px;bottom:14px;z-index:2;padding:5px 11px;border-radius:99px;background:rgba(0,0,0,.45);color:#fff;font-size:13px;font-weight:600}
+@media(max-width:600px){.hero.pb-slider{height:100vw;max-height:560px}.pb-arrow{width:36px;height:36px;font-size:22px}.pb-prev{left:8px}.pb-next{right:8px}}
+</style>
 <script>
 function closePromo(){var p=document.getElementById('promo-popup');if(p)p.style.display='none';try{sessionStorage.setItem('eyemedi_promo_closed','1')}catch(e){}}
 window.addEventListener('load',function(){var closed=false;try{closed=sessionStorage.getItem('eyemedi_promo_closed')==='1'}catch(e){}if(closed)return;setTimeout(function(){var p=document.getElementById('promo-popup');if(p)p.style.display='block'},3000)});
@@ -526,5 +566,16 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(!(/^tel:|zalo\.me|m\.me|messenger/i.test(h)||/gửi đơn|đặt hàng|đặt lịch|xác nhận đặt|gửi đăng ký/.test(s)))return;
 var k='ltcc'+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
 try{fetch(A+'c'+t+'/up',{keepalive:true,cache:'no-store'})}catch(e){}},true);})();</script>
-<script id="nhan-hang">(function(){function t(){document.querySelectorAll("li").forEach(function(l){var x=l.textContent.trim();if(x==="Hàng có sẵn"){l.style.color="#1e8449";l.style.fontWeight="700"}else if(x==="Hàng đặt trước 2 ngày"){l.style.color="#c0392b";l.style.fontWeight="700"}})}new MutationObserver(t).observe(document.documentElement,{childList:true,subtree:true});t()})();</script></body>
+<script id="nhan-hang">(function(){function t(){document.querySelectorAll("li").forEach(function(l){var x=l.textContent.trim();if(x==="Hàng có sẵn"){l.style.color="#1e8449";l.style.fontWeight="700"}else if(x==="Hàng đặt trước 2 ngày"){l.style.color="#c0392b";l.style.fontWeight="700"}})}new MutationObserver(t).observe(document.documentElement,{childList:true,subtree:true});t()})();</script><style id="promo-glass">
+#promo-popup{width:220px!important;left:14px!important;bottom:14px!important;background:rgba(255,255,255,.55)!important;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.7)!important;border-radius:16px!important;box-shadow:0 8px 28px rgba(8,60,90,.22)!important;animation:promoFloat 3s ease-in-out infinite!important}
+#promo-popup .promo-title{background:transparent!important;color:#0a5c8f!important;font-size:12.5px!important;letter-spacing:.04em;padding:10px 28px 0 12px!important;text-align:left!important}
+#promo-popup .promo-content{padding:4px 12px 12px!important;text-align:left!important}
+#promo-popup .promo-content strong{display:block;font-size:15px!important;color:#063b5c!important;margin:2px 0}
+#promo-popup .promo-content p{font-size:12.5px!important;line-height:1.4!important;margin:4px 0 10px!important;color:#24414f!important}
+#promo-popup .promo-btn{padding:7px 12px!important;font-size:12px!important;border-radius:999px!important;background:linear-gradient(135deg,#ff5a4e,#e53935)!important;box-shadow:0 4px 12px rgba(229,57,53,.35)}
+#promo-popup .promo-close{color:#0a5c8f!important;font-size:20px!important;top:4px!important;right:8px!important}
+@keyframes promoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:600px){#promo-popup{width:205px!important;left:10px!important;bottom:10px!important}#promo-popup .promo-content strong{font-size:13.5px!important;white-space:nowrap}}
+</style>
+</body>
 </html>
