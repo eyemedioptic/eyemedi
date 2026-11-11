@@ -8,7 +8,7 @@ cau-hinh.json:
 {
   "noi_bat": ["slug-a", "slug-b"],          # 2 bài đưa lên khung "Bài viết nổi bật" (bỏ qua nếu có _cong-cu/du-lieu/noi-bat-co-dinh.txt)
   "bai": [
-    {"slug": "...", "nhan": "Kính áp tròng", "nhom": "lens|kien-thuc|kinh-mat|bac-si|",  # nhóm trên chuyen-muc (để trống = không thêm vào nhóm)
+    {"slug": "...", "nhan": "Kính áp tròng", "nhom": "bac-si|lam-dep|kien-thuc|kinh-mat|lens|dich-vu|eyemedi",  # BẮT BUỘC: chuyên mục trên chuyen-muc
      "link_vao": {"slug-trang-cu": "Câu <a href=\"/slug.html\">chữ gắn link</a>."}}
   ]
 }
@@ -36,6 +36,12 @@ def card(slug, nhan, d=ngay):
             f'<div class="nd"><span class="nhan">{html.escape(nhan)}</span><h3><a href="/{slug}.html">{html.escape(h1)}</a></h3><p>{mo}</p>'
             f'<time datetime="{d}">{"/".join(reversed(d.split("-")))}</time></div></article>')
 
+
+# 0. mỗi bài BẮT BUỘC có "nhom" (chuyên mục hiển thị trên chuyen-muc.html)
+NHOM = ["bac-si", "lam-dep", "kien-thuc", "kinh-mat", "lens", "dich-vu", "eyemedi"]
+for b in cfg["bai"]:
+    if b.get("nhom") not in NHOM:
+        sys.exit(f'Bài {b["slug"]}: thiếu/sai "nhom" – chọn 1 trong {NHOM}')
 
 # 1. copy trang + ảnh
 for b in cfg["bai"]:

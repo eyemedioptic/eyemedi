@@ -36,3 +36,8 @@ Có sẵn script: viết file cấu hình JSON (xem đầu `_cong-cu/dang_bai.py
 ## Bài viết nổi bật cố định (chuyen-muc.html)
 - 2 ô cạnh bài chính trong khung "Bài viết nổi bật" được GHIM CỐ ĐỊNH theo `_cong-cu/du-lieu/noi-bat-co-dinh.txt` (sếp yêu cầu 11/11/2026): bac-si-phau-thuat-tham-my-quan-10-tphcm, toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm.
 - `dang_bai.py` tự giữ nguyên 2 bài này; bài mới hằng ngày đều đưa vào đầu "Bài viết tiếp theo". Chỉ đổi khi sếp yêu cầu.
+
+## Trang Chuyên mục hiển thị theo từng chuyên mục (11/11/2026)
+- Dưới khung "Bài viết nổi bật", bài viết hiển thị theo TỪNG CHUYÊN MỤC, dạng danh sách (ảnh trái, tiêu đề phải): điện thoại 1 cột, máy tính 2 cột; mỗi chuyên mục hiện 4 bài + nút "Xem thêm bài viết khác (n)" mở thêm 4 bài mỗi lần.
+- Khối "Bài viết tiếp theo" (#moi-nhat) được ẩn, chỉ giữ làm dữ liệu.
+- Vì vậy MỖI BÀI MỚI BẮT BUỘC có "nhom" trong cau-hinh.json, một trong: bac-si (Bác sĩ – phòng khám), lam-dep (Làm đẹp – spa – thẩm mỹ: mỹ phẩm, spa, thẩm mỹ viện, chăm sóc da), kien-thuc (Kiến thức mắt), kinh-mat (Tròng kính & gọng kính), lens (Kính áp tròng & phụ kiện), dich-vu (Dịch vụ & cửa hàng), eyemedi (Về EYEMEDI). dang_bai.py sẽ dừng nếu thiếu.
