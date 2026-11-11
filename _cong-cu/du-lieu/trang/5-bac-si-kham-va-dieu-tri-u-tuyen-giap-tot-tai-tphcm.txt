@@ -1,0 +1,50 @@
+TIEU_DE: 5 bác sĩ khám và điều trị u tuyến giáp tốt tại TP.HCM
+TITLE: 5 bác sĩ khám, điều trị u tuyến giáp tại TP.HCM | EYEMEDI
+SLUG: 5-bac-si-kham-va-dieu-tri-u-tuyen-giap-tot-tai-tphcm
+TU_KHOA_CHINH: bác sĩ khám u tuyến giáp TP.HCM
+TU_KHOA_PHU: bác sĩ điều trị u tuyến giáp, khám nhân giáp, bướu cổ, Nguyễn Duy Trì, phòng khám ung bướu Medilabo
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: 5 bác sĩ khám, điều trị u tuyến giáp tại TP.HCM, nổi bật BS.CKII Nguyễn Duy Trì – Phó trưởng khoa Y học hạt nhân BV Ung Bướu, phụ trách PK Medilabo.
+NGAY_DANG: 2026-11-11
+DOAN_MO_DAU: U tuyến giáp (nhân giáp, bướu cổ) rất thường gặp và phần lớn lành tính, nhưng cần được bác sĩ chuyên khoa khám, siêu âm và theo dõi để phát hiện sớm trường hợp ác tính. Bài viết tổng hợp 5 bác sĩ có thông tin chuyên môn công khai về bệnh lý tuyến giáp tại TP.HCM, không xếp hạng, để bạn tham khảo.
+ANH_RIENG:
+anh-rieng/5-bac-si-kham-va-dieu-tri-u-tuyen-giap-tot-tai-tphcm-1.jpg | BS.CKII Nguyễn Duy Trì – Phó trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM
+anh-rieng/5-bac-si-kham-va-dieu-tri-u-tuyen-giap-tot-tai-tphcm-2.jpg | Bác sĩ Nguyễn Duy Trì cùng đội ngũ tại Phòng khám chuyên khoa Ung Bướu Medilabo
+anh-rieng/5-bac-si-kham-va-dieu-tri-u-tuyen-giap-tot-tai-tphcm-3.jpg | BS.CKII Nguyễn Duy Trì tư vấn bệnh lý tuyến giáp cho người bệnh
+anh-rieng/5-bac-si-kham-va-dieu-tri-u-tuyen-giap-tot-tai-tphcm-4.jpg | Phòng khám chuyên khoa Ung Bướu Medilabo, 486 Hoàng Hữu Nam, TP.HCM
+H2_1: BS.CKII Nguyễn Duy Trì – phát hiện sớm và điều trị u tuyến giáp
+NOI_DUNG_1: <p><strong>BS.CKII Nguyễn Duy Trì</strong> là bác sĩ chuyên khoa ung bướu, <strong>Phó trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM</strong>. Bác sĩ chuyên khám, phát hiện sớm các khối u tuyến giáp và điều trị bệnh lý tuyến giáp như bướu giáp nhân, cường giáp, suy giáp, ung thư tuyến giáp.</p>
+<ul>
+<li>Khám lâm sàng, siêu âm tuyến giáp và vùng cổ để đánh giá nhân giáp.</li>
+<li>Chọc hút tế bào bằng kim nhỏ (FNA) dưới hướng dẫn siêu âm khi có chỉ định, giúp xác định khối u lành hay ác.</li>
+<li>Lên kế hoạch điều trị và theo dõi định kỳ cho người bệnh tuyến giáp, ung bướu.</li>
+</ul>
+<p>Hiện bác sĩ <strong>phụ trách chuyên môn tại Phòng khám chuyên khoa Ung Bướu Medilabo</strong>, 486 Hoàng Hữu Nam, Phường Long Bình, TP.HCM – hotline 0909 443 862 / 0938 888 264. Xem thêm <a href="/bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm.html">hồ sơ BS.CKII Nguyễn Duy Trì</a>.</p>
+<p><a class="dd-link" href="https://www.google.com/maps/place/PH%C3%92NG+KH%C3%81M+UNG+B%C6%AF%E1%BB%9AU+MEDILABO+VI%E1%BB%86T+NAM/@10.8724531,106.8121798,17z/data=!3m1!4b1!4m6!3m5!1s0x3174d90032e242f5:0x90e93ebd44daa3ee!8m2!3d10.8724478!4d106.8147547!16s%2Fg%2F11zktcmxy4?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D"><span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#fff" d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg></span><span class="dd-tx">Chỉ đường đến Phòng khám Ung Bướu Medilabo</span></a></p>
+H2_2: 4 bác sĩ khác có chuyên môn bệnh lý tuyến giáp tại TP.HCM
+NOI_DUNG_2: <ul>
+<li><b>ThS.BS.CKII Đoàn Minh Trông</b> – Khoa Ngoại Vú – Đầu Mặt Cổ, Bệnh viện Đa khoa Tâm Anh TP.HCM: hơn 20 năm công tác tại Bệnh viện Ung Bướu TP.HCM (1999–2022), khám và phẫu thuật ung thư vùng đầu cổ, trong đó có tuyến giáp.</li>
+<li><b>BS.CKII Đỗ Tường Huân</b> – Khoa Ngoại Vú – Đầu Mặt Cổ, Bệnh viện Đa khoa Tâm Anh TP.HCM: phẫu thuật điều trị ung thư tuyến giáp, theo các bài viết công khai của bệnh viện.</li>
+<li><b>TS.BS Trần Thanh Vỹ</b> – Trưởng khoa Lồng ngực – Mạch máu, Bệnh viện Đại học Y Dược TP.HCM: khám bướu giáp, tầm soát ung thư tuyến giáp, điều trị bướu giáp nhân bằng sóng cao tần.</li>
+<li><b>BS.CKI Trương Thành Trí</b> – Bệnh viện Ung Bướu TP.HCM: công tác tại khoa Ngoại III (đầu – cổ) và khoa Ngoại VI (bướu, ung thư tuyến giáp), giảng viên bộ môn Ung thư, Đại học Y Dược TP.HCM.</li>
+</ul>
+<p>Thông tin tổng hợp từ nguồn công khai và có thể thay đổi; bạn nên liên hệ trực tiếp cơ sở để xác nhận lịch khám. Xem thêm <a href="/toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm.html">bác sĩ, phòng khám ung bướu uy tín</a>.</p>
+H2_3: Khi nào nên đi khám u tuyến giáp?
+NOI_DUNG_3: <p>Nên khám sớm khi sờ thấy cục ở cổ, cổ to lên, nuốt vướng, khàn tiếng kéo dài, hoặc siêu âm định kỳ phát hiện nhân giáp. Bác sĩ thường chỉ định xét nghiệm hormone tuyến giáp, siêu âm và FNA khi cần. Phần lớn nhân giáp lành tính chỉ cần theo dõi; trường hợp nghi ngờ sẽ được tư vấn phẫu thuật hoặc điều trị phù hợp. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+<p>Một số bệnh lý tuyến giáp (như Basedow) có thể ảnh hưởng đến mắt; EYEMEDI hỗ trợ <a href="/dat-lich-do-mat.html">đo thị lực miễn phí</a> khi bạn cần kiểm tra mắt.</p>
+LOI_KEU_GOI: Bên cạnh khám tuyến giáp định kỳ, đừng quên kiểm tra mắt. EYEMEDI hỗ trợ đo thị lực miễn phí, 08:30 – 21:30 hằng ngày.
+HOI_1: Bác sĩ Nguyễn Duy Trì khám u tuyến giáp ở đâu?
+DAP_1: BS.CKII Nguyễn Duy Trì là Phó trưởng khoa Y học hạt nhân, Bệnh viện Ung Bướu TP.HCM và phụ trách chuyên môn tại Phòng khám chuyên khoa Ung Bướu Medilabo, 486 Hoàng Hữu Nam, Phường Long Bình, TP.HCM.
+HOI_2: U tuyến giáp có nguy hiểm không?
+DAP_2: Phần lớn nhân giáp là lành tính, nhưng một tỷ lệ nhỏ có thể là ung thư. Cần siêu âm và khi cần làm FNA để bác sĩ đánh giá chính xác.
+HOI_3: Khám u tuyến giáp gồm những gì?
+DAP_3: Thường gồm khám lâm sàng vùng cổ, xét nghiệm hormone tuyến giáp, siêu âm tuyến giáp và chọc hút tế bào bằng kim nhỏ (FNA) nếu có chỉ định.
+SAN_PHAM: tommy-gold-33029, tommy-gold-titanium-ip, vidic-ems, trong-phu-vang-156, mayblass-24030, gala-21061, ventor-g, trong-167-blue-protect
+LIEN_QUAN: toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm | Bác sĩ, phòng khám ung bướu uy tín TP.HCM; bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm | Hồ sơ BS.CKII Nguyễn Duy Trì; top-9-phong-kham-ung-buou-uy-tin-tai-quan-thu-duc-tphcm | Phòng khám ung bướu uy tín tại Thủ Đức
+LINK_TRONG_BAI: hồ sơ BS.CKII Nguyễn Duy Trì → bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm; bác sĩ, phòng khám ung bướu uy tín → toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm; đo thị lực miễn phí → dat-lich-do-mat
+LINK_VAO_TU: toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm, bac-si-gioi-dieu-tri-ung-buou-tuyen-giap-tai-tphcm, bac-si-nguyen-duy-tri-chuyen-khoa-2-ung-buou-tphcm
+NGUON_ANH: Ảnh do sếp Trọng cung cấp (BS Nguyễn Duy Trì, Phòng khám Medilabo); ảnh phòng khám Medilabo có sẵn trên web.
+KIEM_TRA_TRUNG: Gần với bac-si-gioi-dieu-tri-ung-buou-tuyen-giap-tai-tphcm (Jaccard tiêu đề ~0,41) – khác từ khóa chính (khám u tuyến giáp, 5 bác sĩ), sếp yêu cầu viết.
+NGUON_THAM_KHAO: tamanhhospital.vn (hồ sơ ThS.BS.CKII Đoàn Minh Trông, bài viết BS.CKII Đỗ Tường Huân); hellobacsi.com (hồ sơ TS.BS Trần Thanh Vỹ); medpro.vn (bệnh viện điều trị u tuyến giáp TP.HCM – BS.CKI Trương Thành Trí); nội dung sẵn có trên eyemedi.vn về BS.CKII Nguyễn Duy Trì.
