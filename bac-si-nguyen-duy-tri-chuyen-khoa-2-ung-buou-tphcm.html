@@ -413,34 +413,35 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
 if(!(/^tel:|zalo\.me|m\.me|messenger/i.test(h)||/gửi đơn|đặt hàng|đặt lịch|xác nhận đặt|gửi đăng ký/.test(s)))return;
 var k='ltcc'+t;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}
 try{fetch(A+'c'+t+'/up',{keepalive:true,cache:'no-store'})}catch(e){}},true);})();</script>
-<style id="dl-nhanh-css">.dl-form{display:none;margin-top:14px;gap:10px;flex-direction:column}.dl-form.mo{display:flex}.dl-form input,.dl-form select,.dl-form textarea{width:100%;box-sizing:border-box;padding:11px 14px;border:1px solid #c9dfe3;border-radius:12px;font:inherit;font-size:15px;background:#fff;color:#1f2d33}.dl-form textarea{min-height:64px;resize:vertical}.dl-form .dl-hang{display:flex;gap:10px}.dl-form .dl-hang>*{flex:1;min-width:0}.dl-form button{padding:12px 20px;border:0;border-radius:999px;background:var(--accent,#2f6b70);color:#fff;font-weight:700;font-size:15px;cursor:pointer}.dl-form button:disabled{opacity:.6}.dl-ok{display:none;margin-top:14px;padding:14px 16px;border-radius:12px;background:#e3f4ef;color:#1d5b4a;line-height:1.55}.dl-ok b{display:block;margin-bottom:4px}@media(max-width:480px){.dl-form .dl-hang{flex-direction:column}}</style>
-<script id="dl-nhanh">(function(){var GAS="https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec";
-var CH=["63C Lạc Long Quân, P. Hòa Bình, TP.HCM","169 Nguyễn Đức Thiệu, P. Dĩ An, TP.HCM","19C Đường số 5D, P. Bình Hưng Hòa A, TP.HCM","486 Hoàng Hữu Nam, P. Long Bình, TP.HCM","634 Cách Mạng Tháng 8, P. Nhiêu Lộc, TP.HCM","169 Nghĩa Lộ, P. Yên Nghĩa, Hà Nội"];
+<style id="dl-nhanh-css">#dl-modal{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(7,30,33,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}#dl-modal.mo{display:flex}#dl-modal .dl-hop{position:relative;width:100%;max-width:420px;max-height:calc(100vh - 32px);overflow:auto;background:#fff;border-radius:20px;padding:22px 20px 20px;box-shadow:0 20px 60px rgba(0,0,0,.25);font-family:inherit;color:#1f2d33;box-sizing:border-box}#dl-modal h3{margin:0 0 4px;font-size:20px;color:#0f3d40}#dl-modal .dl-phu{margin:0 0 14px;font-size:13.5px;color:#5b6d72;line-height:1.5}#dl-modal .dl-dong{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:#eef4f5;color:#33484d;font-size:20px;line-height:1;cursor:pointer}#dl-modal form{display:flex;flex-direction:column;gap:10px}#dl-modal label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:#33484d}#dl-modal input,#dl-modal select,#dl-modal textarea{width:100%;box-sizing:border-box;min-height:46px;padding:11px 14px;border:1px solid #c9dfe3;border-radius:12px;font:inherit;font-size:16px;font-weight:400;background:#fff;color:#1f2d33;-webkit-appearance:none;appearance:none}#dl-modal input[type=date]{display:block;line-height:22px}#dl-modal select{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2333484d' stroke-width='2'/%3E%3C/svg%3E") right 14px center no-repeat;padding-right:36px}#dl-modal textarea{min-height:70px;resize:vertical}#dl-modal .dl-hang{display:flex;gap:10px}#dl-modal .dl-hang>label{flex:1;min-width:0}#dl-modal .loi{border-color:#d9534f!important}#dl-modal button[type=submit]{margin-top:4px;padding:14px 20px;border:0;border-radius:999px;background:#2f6b70;color:#fff;font-weight:700;font-size:16px;cursor:pointer}#dl-modal button[type=submit]:disabled{opacity:.6}#dl-modal .dl-ok{display:none;text-align:center;padding:8px 4px;line-height:1.6}#dl-modal .dl-ok b{display:block;font-size:19px;color:#1d5b4a;margin-bottom:6px}body.dl-khoa{overflow:hidden}</style>
+<script id="dl-nhanh">(function(){var GAS="https://script.google.com/macros/s/AKfycbzH09BIb6hqDNC4rrf_dAWyANwMfC21IVy41EA3w9cqNdV43aNQfWpQtPZ3RB4Uqp8/exec";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function today(){var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)}
-document.querySelectorAll('a.cta[href*="dat-lich-do-mat"]').forEach(function(a){
- var f=document.createElement('form');f.className='dl-form';f.setAttribute('novalidate','');
- f.innerHTML='<input name="Họ và Tên" placeholder="Họ và tên *" required autocomplete="name">'+
- '<input name="Số điện thoại" type="tel" placeholder="Số điện thoại *" required autocomplete="tel" inputmode="tel">'+
- '<select name="Cửa hàng" required><option value="">Chọn cửa hàng *</option>'+CH.map(function(c){return '<option>'+esc(c)+'</option>'}).join('')+'</select>'+
- '<div class="dl-hang"><input name="Ngày" type="date" min="'+today()+'" required aria-label="Ngày hẹn"><select name="Giờ" required><option value="">Khung giờ *</option><option>08:30 – 11:30</option><option>11:30 – 14:00</option><option>14:00 – 17:00</option><option>17:00 – 19:00</option><option>19:00 – 21:30</option></select></div>'+
- '<textarea name="Ghi chú" placeholder="Ghi chú (không bắt buộc)"></textarea>'+
- '<button type="submit">GỬI ĐẶT LỊCH</button>';
- var ok=document.createElement('div');ok.className='dl-ok';
- a.insertAdjacentElement('afterend',ok);a.insertAdjacentElement('afterend',f);
- a.addEventListener('click',function(e){e.preventDefault();if(ok.style.display==='block')return;f.classList.toggle('mo');if(f.classList.contains('mo')){f.querySelector('input').focus();window.fbq&&fbq('track','InitiateCheckout')}});
- f.addEventListener('submit',function(e){e.preventDefault();
-  var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,'');
-  if(!v('Họ và Tên')||!/^(0|\+84)\d{9,10}$/.test(sdt)||!v('Cửa hàng')||!v('Ngày')||!v('Giờ')){
-   [].forEach.call(f.elements,function(x){if(x.required)x.style.borderColor=(x.name==='Số điện thoại'?!/^(0|\+84)\d{9,10}$/.test(sdt):!x.value.trim())?'#d9534f':''});return}
-  var b=f.querySelector('button');b.disabled=true;b.textContent='Đang gửi...';
-  var ngay=v('Ngày').split('-').reverse().join('/');
-  var d=new FormData();d.append('Họ và Tên',v('Họ và Tên'));d.append('Số điện thoại',sdt);d.append('Địa chỉ',v('Cửa hàng'));d.append('Loại','Đặt lịch đo mắt');
-  d.append('Sản phẩm','Đặt lịch đo mắt | '+ngay+' | '+v('Giờ')+' | '+v('Cửa hàng'));d.append('Ghi chú',v('Ghi chú'));d.append('Trang',location.pathname);
-  fetch(GAS,{method:'POST',mode:'no-cors',body:d}).then(function(){
-   window.fbq&&fbq('track','Lead');f.style.display='none';a.style.display='none';
-   ok.innerHTML='<b>✅ Đặt lịch thành công!</b>'+esc(v('Họ và Tên'))+' – '+esc(sdt)+'<br>📅 '+esc(ngay)+', '+esc(v('Giờ'))+'<br>📍 '+esc(v('Cửa hàng'))+'<br>EYEMEDI sẽ gọi xác nhận lịch hẹn sớm nhất. Hotline: 0967 190 005';ok.style.display='block';
-  }).catch(function(){b.disabled=false;b.textContent='THỬ LẠI'})});
-});})();</script>
+var m=document.createElement('div');m.id='dl-modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
+m.innerHTML='<div class="dl-hop"><button type="button" class="dl-dong" aria-label="Đóng">×</button><h3>👁 Đặt lịch đo mắt</h3><p class="dl-phu">Miễn phí · 08:30 – 21:30 hằng ngày · Hotline 0967 190 005</p>'+
+'<form novalidate><label>Họ và tên *<input name="Họ và Tên" autocomplete="name" placeholder="Nguyễn Văn A"></label>'+
+'<label>Số điện thoại *<input name="Số điện thoại" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"></label>'+
+'<div class="dl-hang"><label>Ngày hẹn *<input name="Ngày" type="date"></label><label>Khung giờ *<select name="Giờ"><option value="">Chọn giờ</option><option>08:30 – 11:30</option><option>11:30 – 14:00</option><option>14:00 – 17:00</option><option>17:00 – 19:00</option><option>19:00 – 21:30</option></select></label></div>'+
+'<label>Ghi chú<textarea name="Ghi chú" placeholder="Không bắt buộc"></textarea></label><button type="submit">GỬI ĐẶT LỊCH</button></form><div class="dl-ok"></div></div>';
+document.body.appendChild(m);
+var f=m.querySelector('form'),ok=m.querySelector('.dl-ok'),bt=f.querySelector('button');
+function dong(){m.classList.remove('mo');document.body.classList.remove('dl-khoa')}
+function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value)n.value=today();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
+m.querySelector('.dl-dong').onclick=dong;m.addEventListener('click',function(e){if(e.target===m)dong()});document.addEventListener('keydown',function(e){if(e.key==='Escape')dong()});
+document.querySelectorAll('a.cta[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();mo()})});
+f.addEventListener('submit',function(e){e.preventDefault();
+ var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,''),re=/^(0|\+84)\d{9,10}$/,bad=0;
+ [['Họ và Tên',!!v('Họ và Tên')],['Số điện thoại',re.test(sdt)],['Ngày',!!v('Ngày')],['Giờ',!!v('Giờ')]].forEach(function(x){f.elements[x[0]].classList.toggle('loi',!x[1]);if(!x[1])bad++});
+ if(bad)return;
+ bt.disabled=true;bt.textContent='Đang gửi...';
+ var ngay=v('Ngày').split('-').reverse().join('/');
+ var d=new FormData();d.append('Họ và Tên',v('Họ và Tên'));d.append('Số điện thoại',sdt);d.append('Loại','Đặt lịch đo mắt');
+ d.append('Sản phẩm','Đặt lịch đo mắt | '+ngay+' | '+v('Giờ'));d.append('Ngày hẹn',ngay);d.append('Khung giờ',v('Giờ'));d.append('Ghi chú',v('Ghi chú'));d.append('Trang',location.pathname);
+ fetch(GAS,{method:'POST',mode:'no-cors',body:d}).then(function(){
+  window.fbq&&fbq('track','Lead');
+  ok.innerHTML='<b>✅ Đặt lịch thành công!</b>'+esc(v('Họ và Tên'))+' – '+esc(sdt)+'<br>📅 '+esc(ngay)+', '+esc(v('Giờ'))+'<br>EYEMEDI sẽ gọi xác nhận lịch hẹn sớm nhất.<br>Hotline: 0967 190 005';
+  f.style.display='none';ok.style.display='block';f.reset();
+ }).catch(function(){bt.disabled=false;bt.textContent='THỬ LẠI'})});
+})();</script>
 </body>
 </html>
