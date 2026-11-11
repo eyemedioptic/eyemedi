@@ -47,7 +47,7 @@ NOI_DUNG_1: <ul>
 H2_2: Phòng khám chuyên khoa phẫu thuật thẩm mỹ Dr Đắc Quang
 NOI_DUNG_2: <p>Địa chỉ: 366 Cao Thắng, Phường Hòa Hưng (P12, Q10), TP. Hồ Chí Minh</p>
 <p><a href="https://www.google.com/maps/place/Ph%C3%B2ng+kh%C3%A1m+th%E1%BA%A9m+m%E1%BB%B9+Dr.+%C4%90%E1%BA%AFc+Quang/@10.7750335,106.6711474,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f0025fdb5f7:0x75c72362bba0a454!8m2!3d10.7750282!4d106.6737223!16s%2Fg%2F11w7hfnnnz?entry=ttu&amp;g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D">📍 Chỉ đường đến DR ĐẮC QUANG</a></p>
-LOI_KEU_GOI: Bên cạnh sức khỏe tổng quát, đừng quên kiểm tra mắt định kỳ. EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn kính phù hợp.
+LOI_KEU_GOI: EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn kính mát chống UV giúp bảo vệ mắt, kính áp tròng thay kính gọng giảm áp lực sống mũi trong thời gian hồi phục sau phẫu thuật thẩm mỹ.
 HOI_1: Bác sĩ thẩm mỹ giỏi ở Quận 10 có những ai?
 DAP_1: BS CK2 Trần Đắc Quang (366 Cao Thắng), BS CK2 Nguyễn Hữu Hoạt (400 Lê Hồng Phong), BS CKI Đoàn Duy Dũng (324/2-4 Lý Thường Kiệt), Phòng khám Dr. Quân (722 Sư Vạn Hạnh) và Dr. Nguyên Giáp (190 Huỳnh Văn Bánh, Phú Nhuận).
 HOI_2: Bác sĩ Trần Đắc Quang chuyên về dịch vụ gì?
