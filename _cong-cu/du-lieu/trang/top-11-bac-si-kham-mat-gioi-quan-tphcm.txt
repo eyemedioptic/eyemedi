@@ -92,7 +92,7 @@ NOI_DUNG_5: <ul>
 </ul>
 <p>Địa chỉ: Số 1 đường 3 Tháng 2, Phường 11, Quận 10</p>
 <p>Thế mạnh: Nổi tiếng với công nghệ điều trị và phẫu thuật mắt tiêu chuẩn châu Âu.</p>
-H2_6: Phòng khám phẫu thuật thẩm mỹ Dr Đắc Quang
+H2_6: Phòng khám chuyên khoa phẫu thuật thẩm mỹ Dr Đắc Quang
 NOI_DUNG_6: <figure><img src="/images/pkdrdacquang.webp" alt="Phòng khám thẩm mỹ Dr Đắc Quang" loading="lazy"></figure>
 <p>Phòng khám Chuyên Khoa Phẫu Thuật Thẩm Mỹ Dr Đắc Quang.</p>
 <p>Eyemedi giới thiệu tới các bạn một Phòng khám chuyên khoa Phẫu Thuật Thẩm Mỹ uy tín tại Quận 10 TPHCM.</p>
