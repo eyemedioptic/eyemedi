@@ -480,7 +480,7 @@ f.elements['Ngày'].addEventListener('change',gioRender);
 function dong(){m.classList.remove('mo');document.body.classList.remove('dl-khoa')}
 function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value||n.value<today())n.value=today();gioRender();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
 m.querySelector('.dl-dong').onclick=dong;m.addEventListener('click',function(e){if(e.target===m)dong()});document.addEventListener('keydown',function(e){if(e.key==='Escape')dong()});
-document.querySelectorAll('a.cta[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();mo()})});
+document.querySelectorAll('a.cta[href*="dat-lich-do-mat"],header a[href*="dat-lich-do-mat"],nav a[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var d=a.closest('details');if(d)d.removeAttribute('open');if(window.closeMainMenu)try{closeMainMenu()}catch(x){}mo()})});
 f.addEventListener('submit',function(e){e.preventDefault();
  var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.]/g,''),re=/^(0|\+84)\d{9,10}$/,bad=0;
  [['Họ và Tên',!!v('Họ và Tên')],['Số điện thoại',re.test(sdt)],['Ngày',!!v('Ngày')],['Giờ',!!v('Giờ')]].forEach(function(x){f.elements[x[0]].classList.toggle('loi',!x[1]);if(!x[1])bad++});
