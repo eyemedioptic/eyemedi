@@ -455,7 +455,7 @@ async function submitOrder(e){if(e)e.preventDefault();const form=document.getEle
  {const s=document.getElementById('orderSummary');if(s)s.value='Mã đơn: '+_code+' — '+s.value;let h=form.querySelector('input[name="Mã đơn"]');if(!h){h=document.createElement('input');h.type='hidden';h.name='Mã đơn';form.appendChild(h)}h.value=_code;}
  btn.disabled=true;btn.textContent='Đang gửi đơn…';
  try{const _fd=new FormData(form);['_subject','_template','_captcha','_next'].forEach(k=>_fd.delete(k));_fd.append('Loại','Đơn hàng');_fd.append('Trang',location.pathname);
-  await fetch('https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec',{method:'POST',mode:'no-cors',keepalive:true,body:_fd});
+  await fetch('https://script.google.com/macros/s/AKfycbxuFhXtqZHkSM2uzLb9c3ASCnFNzw_Fzl5_ecjTWOwLyc4FvxosoFGJUWsU2PijXWIW2Q/exec',{method:'POST',mode:'no-cors',keepalive:true,body:_fd});
   orderLockMem=Date.now()+ORDER_LOCK_MS;try{localStorage.setItem(ORDER_LOCK_KEY,String(orderLockMem))}catch(err){}
   Object.keys(cart).forEach(k=>delete cart[k]);updateCount();
   const ok=document.createElement('div');ok.className='order-success';ok.setAttribute('role','status');ok.innerHTML='<strong>✓ Đã gửi đơn hàng thành công!</strong><span>EYEMEDI sẽ liên hệ xác nhận sớm. Đơn đã khóa, không thể chỉnh sửa hoặc thu hồi. Cần hỗ trợ, gọi <a href="tel:0967190005">0967 190 005</a>.</span><span style="margin-top:8px">Mã đơn: <b>'+_code+'</b></span><ul style="margin:4px 0 4px 18px;padding:0">'+_items.map(t=>'<li>'+_esc(t)+'</li>').join('')+'</ul><span><b>Tạm tính: '+_esc(_tot)+'</b></span><span style="margin-top:6px">Người nhận: '+_esc(_nm)+' – '+_esc(_ph)+'<br>'+_esc(_ad)+'</span>';form.style.display='none';

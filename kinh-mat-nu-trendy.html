@@ -346,7 +346,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
 (function(){var f=document.getElementById('eyForm'),b=document.getElementById('eyBtn'),ok=document.getElementById('eyOk'),t=b.textContent;
  f.addEventListener('submit',function(e){e.preventDefault();b.disabled=true;b.textContent='Đang gửi...';
   if(window.fbq)fbq('track','Lead');
-  fetch('https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec',{method:'POST',mode:'no-cors',body:(function(){var d=new FormData(f);d.append('Loại','Đơn hàng');d.append('Trang',location.pathname);return d})()})
+  fetch('https://script.google.com/macros/s/AKfycbxuFhXtqZHkSM2uzLb9c3ASCnFNzw_Fzl5_ecjTWOwLyc4FvxosoFGJUWsU2PijXWIW2Q/exec',{method:'POST',mode:'no-cors',body:(function(){var d=new FormData(f);d.append('Loại','Đơn hàng');d.append('Trang',location.pathname);return d})()})
   .then(function(){ok.style.display='block';f.reset();b.disabled=false;b.textContent=t;})
   .catch(function(){b.disabled=false;b.textContent='THỬ LẠI';});});})();
 </script>
