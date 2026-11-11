@@ -10,8 +10,8 @@ NGAY_DANG: 2022-09-25
 NGAY_CAP_NHAT: 2026-11-04
 DOAN_MO_DAU: Eyemedi là hệ thống nền tảng trực tuyến cung cấp các giải pháp chuyên khoa mắt chăm sóc thị lực và cung cấp các sản phẩm mắt kính cận viễn loạn chính xác. Eyemedi còn là nền tảng kết nối mạng lưới các phòng khám, bác sĩ đa khoa, chuyên khoa ung bướu, chuyên khoa nhi, bác sĩ chuyên khoa phẫu thuật thẩm mỹ. Nhập khẩu và phân phối các sản phẩm mỹ làm đẹp cho Spa, thẩm mỹ viện và cá nhân.
 ANH_RIENG:
-anh-rieng/trong-kinh-blue-protect-uv400.jpg | Tròng kính đổi màu Blue Protect, UV400 giúp bảo vệ mắt mỗi ngày
 anh-rieng/trong-doi-mau-grey-amber-brown.jpg | Tròng kính đổi màu Grey và Amber Brown – chọn màu theo phong cách
+anh-rieng/trong-kinh-blue-protect-uv400.jpg | Tròng kính đổi màu Blue Protect, UV400 giúp bảo vệ mắt mỗi ngày
 anh-rieng/trong-chemi-u6-chong-bam-nuoc.jpg | So sánh tròng thường và tròng Chemi U6 chống bám nước khi đi mưa
 anh-rieng/trong-chemi-crystal-u2-doi-mau.jpg | Tròng kính đổi màu Chemi Crystal U2 1.56 lắp trên gọng kính
 anh-rieng/trong-doi-mau-ngan-uv-han-che-choi.jpg | Tròng kính đổi màu ngăn tia UV, hạn chế chói lóa
