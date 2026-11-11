@@ -416,13 +416,20 @@ function applyOrderLock(){const btn=document.querySelector('#orderForm .form-sub
 async function submitOrder(e){if(e)e.preventDefault();const form=document.getElementById('orderForm');const btn=form&&form.querySelector('.form-submit');if(!form||!btn||btn.disabled)return false;
  if(orderLockLeft()>0){applyOrderLock();return false}
  if(!prepareOrder())return false;
+ const _esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const _code='EM'+Date.now().toString(36).toUpperCase().slice(-6)+Math.random().toString(36).slice(2,4).toUpperCase();
+ const _items=Object.entries(cart).map(([k,q])=>{const[id,vi]=k.split('::');const p=PRODUCTS.find(x=>x.id===id);if(!p)return '';const v=(p.variants||[])[Number(vi)||0];return p.name+(v&&v.name?' ('+v.name+')':'')+' x'+q}).filter(Boolean);
+ const _fv=n=>((form.querySelector('[name="'+n+'"]')||{}).value||'').trim();
+ const _tot=(document.getElementById('orderTotal')||{}).value||'';
+ const _nm=_fv('Họ tên'),_ph=_fv('Số điện thoại'),_ad=_fv('Địa chỉ nhận hàng');
+ {const s=document.getElementById('orderSummary');if(s)s.value='Mã đơn: '+_code+' — '+s.value;let h=form.querySelector('input[name="Mã đơn"]');if(!h){h=document.createElement('input');h.type='hidden';h.name='Mã đơn';form.appendChild(h)}h.value=_code;}
  btn.disabled=true;btn.textContent='Đang gửi đơn…';
  try{const _fd=new FormData(form);_fd.append('Loại','Đơn hàng');_fd.append('Trang',location.pathname);fetch('https://script.google.com/macros/s/AKfycbxqXzGqWxyz2rv638muGEoKDXCAtJFDKtMIgxAJBOhhs1nBHsip2zlyVqC9b9QT-S3CgQ/exec',{method:'POST',mode:'no-cors',keepalive:true,body:_fd}).catch(function(){})}catch(_x){}
  try{const r=await fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{Accept:'application/json'},body:new FormData(form)});const j=await r.json().catch(()=>({}));
   if(!r.ok||!(j.success===true||j.success==='true'))throw new Error(j.message||('Lỗi '+r.status));
   orderLockMem=Date.now()+ORDER_LOCK_MS;try{localStorage.setItem(ORDER_LOCK_KEY,String(orderLockMem))}catch(err){}
   Object.keys(cart).forEach(k=>delete cart[k]);updateCount();
-  const ok=document.createElement('div');ok.className='order-success';ok.setAttribute('role','status');ok.innerHTML='<strong>✓ Đã gửi đơn hàng thành công!</strong><span>EYEMEDI sẽ liên hệ lại với bạn sớm để xác nhận đơn. Cảm ơn bạn đã đặt hàng.</span>';
+  const ok=document.createElement('div');ok.className='order-success';ok.setAttribute('role','status');ok.innerHTML='<strong>✓ Đã gửi đơn hàng thành công!</strong><span>EYEMEDI sẽ liên hệ xác nhận sớm. Đơn đã khóa, không thể chỉnh sửa hoặc thu hồi. Cần hỗ trợ, gọi <a href="tel:0967190005">0967 190 005</a>.</span><span style="margin-top:8px">Mã đơn: <b>'+_code+'</b></span><ul style="margin:4px 0 4px 18px;padding:0">'+_items.map(t=>'<li>'+_esc(t)+'</li>').join('')+'</ul><span><b>Tạm tính: '+_esc(_tot)+'</b></span><span style="margin-top:6px">Người nhận: '+_esc(_nm)+' – '+_esc(_ph)+'<br>'+_esc(_ad)+'</span>';form.style.display='none';
   renderCart();const box=document.getElementById('cartItems');if(box)box.innerHTML='';(box||form.parentNode).appendChild(ok);
  }catch(err){btn.disabled=false;btn.textContent='Gửi đơn hàng đến EYEMEDI';alert('Chưa gửi được đơn hàng: '+err.message+'\nVui lòng thử lại hoặc gọi EYEMEDI để đặt hàng.')}
  return false}
