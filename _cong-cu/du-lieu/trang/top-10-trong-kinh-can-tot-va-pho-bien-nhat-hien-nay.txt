@@ -28,39 +28,8 @@ NOI_DUNG_1: <p>Store: 63C Lạc Long Quân, Phường Hòa Bình (P5, Q11), TP H
 <figure><img src="/images/eyemedi1.webp" alt="" loading="lazy"></figure>
 <h3>Gọng kính cận học sinh</h3>
 <p>Tham khảo thêm <a href="/trong-kinh-chemi-sieu-mong-chinh-hang-han-quoc.html">tròng kính Chemi siêu mỏng chính hãng Hàn Quốc</a> với các dòng U2, U6, PhotoBlue, X-Drive.</p>
-H2_2: Sản phẩm và dịch vụ nổi bật tại EYEMEDI
-NOI_DUNG_2: <figure><img src="/images/panda.webp" alt="Gọng kính cận học sinh Panda" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/gong-kinh-can-hoc-sinh.html">Xem ngay</a></p>
-<h3>Gọng kính cận cho nữ CEO</h3>
-<figure><img src="/images/tommygold.webp" alt="Gọng kính cận nữ Tommy Gold" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/">Xem ngay</a></p>
-<h3>Gọng kính cận nam P-Style</h3>
-<figure><img src="/images/p-stylegold.webp" alt="Gọng kính cận nam P-Style" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/gong-kinh-can-nam.html">Xem ngay</a></p>
-<h3>Kính mát thời trang Nữ</h3>
-<figure><img src="/images/sunnu1.webp" alt="Kính mát thời trang nữ" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/kinh-mat-nu.html">Xem ngay</a></p>
-<h3>Kính mát thời trang Nam</h3>
-<figure><img src="/images/29037.webp" alt="Kính mát thời trang nam" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/kinh-mat-nam.html">Xem ngay</a></p>
-<h3>Kính nữ Night-View</h3>
-<figure><img src="/images/p8602.webp" alt="Kính nữ Night-View đi đêm" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/kinh-xuyen-dem.html">Xem ngay</a></p>
-<h3>Kính Night-View Nam</h3>
-<figure><img src="/images/8602.webp" alt="Kính Night-View nam" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/kinh-xuyen-dem.html">Xem ngay</a></p>
-<h3>Thay tròng kính giá ưu đãi</h3>
-<figure><img src="/images/thaytrongkinh.webp" alt="Thay tròng kính cận viễn loạn tại EYEMEDI" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/trong-kinh-can-vien-loan.html">Xem ngay</a></p>
-<h3>Đo kiểm tra thị lực miễn phí</h3>
-<figure><img src="/images/kiemtrathiluc.webp" alt="Đo kiểm tra thị lực miễn phí tại EYEMEDI" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/dat-lich-do-mat.html">Xem ngay</a></p>
-<h3>Kính áp tròng Lens cận loạn</h3>
-<figure><img src="/images/lenscanloan.webp" alt="Kính áp tròng lens cận loạn" loading="lazy"></figure>
-<p><a href="https://eyemedi.vn/">Xem ngay</a></p>
-<p>Eyemedi là địa chỉ uy tín về khúc xạ mắt kính tại TP Hồ Chí Minh. Đến Eyemedi quý khách được kiểm tra khúc xạ thị lực miễn phí, tư vấn giải pháp tròng kính cận viễn loạn và gọng kính phù hợp...</p>
-H2_3: Các cửa hàng mắt kính uy tín khác tại TP.HCM
-NOI_DUNG_3: <h3>2. Mắt kính Điện Biên Phủ</h3>
+H2_2: Các cửa hàng mắt kính uy tín khác tại TP.HCM
+NOI_DUNG_2: <h3>2. Mắt kính Điện Biên Phủ</h3>
 <p>Nói về cửa hàng mắt kính tại thành phố Hồ Chí Minh thì mắt kính Điện Biên Phủ là một trong những địa chỉ uy tín hàng đầu. Mắt kinh Điện Biên Phủ có rất nhiều chi nhánh tại Sài Gòn, tuy nhiên địa chỉ mắt kính nằm trên đường Điện Biên Phủ là một trong những cửa hàng được biết đến nhiều nhất.</p>
 <p>Tại đây có vô số mắt kính nhập khẩu từ các thương hiệu nổi tiếng, bao gồm: mắt kính nam, mắt kinh nữ, mắt kính trẻ em và người già,… Tất cả đều có tem chống hàng giã và và tem bảo hành, khi mua sản phẩm tại đây gặp sự cố sẽ được 1 đổi 1 cho khách hàng.</p>
 <p>Thông tin liên hệ:</p>
@@ -93,8 +62,8 @@ NOI_DUNG_3: <h3>2. Mắt kính Điện Biên Phủ</h3>
 <p>SĐT: 0903160669</p>
 <p>Website: https://matkinhshady.com/</p>
 <figure><img src="/images/matkinhshady.webp" alt="Mắt kính Shady" loading="lazy"></figure>
-H2_4: Danh sách các bệnh viện mắt tại TP.HCM
-NOI_DUNG_4: <h3>Bệnh viện Mắt TP.HCM</h3>
+H2_3: Danh sách các bệnh viện mắt tại TP.HCM
+NOI_DUNG_3: <h3>Bệnh viện Mắt TP.HCM</h3>
 <p>Địa chỉ: 280 Điện Biên Phủ, Phường Võ Thị Sáu, Quận 3</p>
 <p>Thế mạnh: Bệnh viện chuyên khoa mắt tuyến cuối của thành phố, quy tụ đội ngũ chuyên gia đầu ngành và máy móc hiện đại. Khám Bảo hiểm y tế (BHYT).</p>
 <h3>Khoa Mắt - Bệnh viện Đại học Y Dược TP.HCM</h3>
@@ -109,17 +78,17 @@ NOI_DUNG_4: <h3>Bệnh viện Mắt TP.HCM</h3>
 <h3>Bệnh viện Mắt Quốc tế Việt - Nga</h3>
 <p>Địa chỉ: Số 1 đường 3 Tháng 2, Phường 11, Quận 10</p>
 <p>Thế mạnh: Nổi tiếng với công nghệ điều trị và phẫu thuật mắt tiêu chuẩn châu Âu.</p>
-H2_5: Phòng khám chuyên khoa phẫu thuật thẩm mỹ Dr Đắc Quang
-NOI_DUNG_5: <p>Phòng khám Chuyên Khoa Phẫu Thuật Thẩm Mỹ Dr Đắc Quang.</p>
+H2_4: Phòng khám chuyên khoa phẫu thuật thẩm mỹ Dr Đắc Quang
+NOI_DUNG_4: <p>Phòng khám Chuyên Khoa Phẫu Thuật Thẩm Mỹ Dr Đắc Quang.</p>
 <p>Eyemedi giới thiệu tới các bạn một Phòng khám chuyên khoa Phẫu Thuật Thẩm Mỹ uy tín tại Quận 10 TPHCM.</p>
 <p>Địa chỉ: 366 Cao Thắng, Phường Hòa Hưng (Phường 12, Quận 10), TP Hồ Chí Minh</p>
 <p>Chuyên dịch vụ phẫu thuật thẩm mỹ mắt, mũi, cẳm, ngực, và hút mỡ.</p>
 <p>Phòng khám CKPTTM Dr Đắc Quang do Bác Sĩ CKII Thẩm Mỹ Trần Đắc Quang</p>
-H2_6: Phòng khám chuyên khoa Ung Bướu Medilabo Việt Nam
-NOI_DUNG_6: <p>Phòng khám Chuyên Ung Bướu Medilabo Việt Nam.</p>
+H2_5: Phòng khám chuyên khoa Ung Bướu Medilabo Việt Nam
+NOI_DUNG_5: <p>Phòng khám Chuyên Ung Bướu Medilabo Việt Nam.</p>
 <p>Eyemedi giới thiệu tới các bạn một Phòng khám chuyên khoa Ung Bướu tại TPHCM. Tại đây, bệnh nhân được tư vấn và theo dõi các bệnh lý ung bướu tốt nhất. Phòng Khám Chuyên Khoa Ung Bướu Medilabo Việt Nam do BS.CKII Nguyễn Duy Trì - Phó Khoa Y Học Hạt Nhân Bệnh Viện Ung Bướu TPHCM trực tiếp phụ trách chuyên môn.</p>
-H2_7: Liên hệ EYEMEDI
-NOI_DUNG_7: <p><a href="https://eyemedi.vn/">EYEMEDI - GOLD OPTIC Địa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</a></p>
+H2_6: Liên hệ EYEMEDI
+NOI_DUNG_6: <p><a href="https://eyemedi.vn/">EYEMEDI - GOLD OPTIC Địa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh</a></p>
 <p><a class="dd-link" href="https://www.google.com/maps/place/Eyemedi+Optic/@10.7693622,106.6420949,17z/data=!3m1!4b1!4m6!3m5!1s0x31752f1a47511c2f:0x2407f2dbd557f609!8m2!3d10.7693569!4d106.6446698!16s%2Fg%2F11njw532jn?entry=ttu&amp;g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D"><span class="dd-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#fff" d="M21.7 11.3l-9-9a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg></span><span class="dd-tx">Chỉ đường đến EYEMEDI</span></a></p>
 LOI_KEU_GOI: Đến EYEMEDI để được đo khúc xạ, kiểm tra thị lực miễn phí và tư vấn tròng kính phù hợp với độ mắt.
 HOI_1: Nên cắt tròng kính cận ở đâu uy tín tại TP.HCM?
