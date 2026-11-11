@@ -38,7 +38,7 @@ NOI_DUNG_2: <ol>
 <p>Nếu cần điều trị sẹo lồi, sẹo lõm, sẹo rỗ, xem thêm các <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu điều trị sẹo uy tín tại TP.HCM</a>.</p>
 H2_3: Chăm sóc đôi mắt sau phẫu thuật vùng mặt
 NOI_DUNG_3: <p>Sau cắt mí, nâng mũi hay căng da mặt, vùng mắt dễ sưng và nhạy cảm. Nên đeo kính mát chống UV, tránh dụi mắt, tái khám đúng hẹn. Nếu thấy nhìn mờ, đau nhức hay chảy máu bất thường, hãy liên hệ ngay bác sĩ phẫu thuật.</p>
-LOI_KEU_GOI: EYEMEDI đo thị lực miễn phí và tư vấn kính mát chống UV giúp bảo vệ mắt trong thời gian hồi phục sau phẫu thuật thẩm mỹ.
+LOI_KEU_GOI: EYEMEDI hỗ trợ đo thị lực miễn phí. Đối với khách hàng vừa phẫu thuật thẩm mỹ vùng mặt (nhấn mí – cắt mí, nâng mũi – sửa mũi), EYEMEDI có các sản phẩm kính thời trang, kính áp tròng phù hợp với từng nhu cầu cho khách hàng sau phẫu thuật thẩm mỹ.
 HOI_1: Làm sao biết bác sĩ phẫu thuật thẩm mỹ có chứng chỉ hành nghề?
 DAP_1: Hỏi số chứng chỉ hành nghề và tra cứu trên cổng thông tin của Sở Y tế TP.HCM; chứng chỉ phải ghi phạm vi chuyên khoa phẫu thuật thẩm mỹ.
 HOI_2: Nên chọn bệnh viện hay phòng khám thẩm mỹ?
