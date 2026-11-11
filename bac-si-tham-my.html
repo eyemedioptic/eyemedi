@@ -423,8 +423,8 @@ function renderCart(){
  const knownTotal=entries.reduce((sum,x)=>sum+priceOf(x.p,x.vi)*x.qty,0);
  box.innerHTML+=`<div class="total"><span>Tạm tính</span><span>${knownTotal>0?new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(knownTotal):'Chờ xác nhận giá'}</span></div>`;
  area.innerHTML=`<h3>Thông tin nhận hàng</h3><p class="hint">Họ tên, số điện thoại và địa chỉ là bắt buộc. Độ khúc xạ hai mắt không bắt buộc.</p>
- <form class="checkout-form" id="orderForm" action="https://formsubmit.co/optic.eyemedi@gmail.com" method="POST" onsubmit="return submitOrder(event)">
- <input type="hidden" name="_subject" value="Đơn hàng mới từ landing page EYEMEDI"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="Chi tiết đơn hàng" id="orderSummary"><input type="hidden" name="Tạm tính" id="orderTotal">
+ <form class="checkout-form" id="orderForm" method="POST" action="#" onsubmit="return submitOrder(event)">
+ <input type="hidden" name="Chi tiết đơn hàng" id="orderSummary"><input type="hidden" name="Tạm tính" id="orderTotal">
  <div class="field"><label for="customerName">Họ và tên *</label><input id="customerName" name="Họ tên" required autocomplete="name" placeholder="Tên người nhận"></div>
  <div class="field"><label for="customerPhone">Số điện thoại *</label><input id="customerPhone" name="Số điện thoại" required inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"></div>
  <div class="field full"><label for="customerEmail">Email khách hàng</label><input id="customerEmail" name="Email khách hàng" type="email" autocomplete="email" placeholder="email@example.com"></div>
