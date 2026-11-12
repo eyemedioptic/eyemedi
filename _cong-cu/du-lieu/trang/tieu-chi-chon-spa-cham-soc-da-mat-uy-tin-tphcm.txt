@@ -36,7 +36,7 @@ HOI_2: Bao lâu nên đi spa chăm sóc da mặt một lần?
 DAP_2: Thường 2–4 tuần một lần tùy loại da và mục đích. Quan trọng hơn là chăm sóc da đúng cách tại nhà mỗi ngày.
 HOI_3: Làm sao kiểm tra spa có giấy phép?
 DAP_3: Hỏi xem giấy đăng ký kinh doanh và giấy phép (nếu có dịch vụ y khoa), đối chiếu tên, địa chỉ, ngành nghề; có thể tra cứu thông tin cơ sở trên trang của Sở Y tế TP.HCM.
-SAN_PHAM: kinh-mat-nu-350, sun-luxury, vidic-luxury-sun-p28220, kinh-thoi-trang-mau-01, eye-coffret-rich-make, eye-coffret-first-make, merriandy-29392, pk-khan-lau-a03
+SAN_PHAM: kinh-mat-nu-350, sun-luxury, vidic-luxury-sun-p28220, kinh-mat-nam-oxfrd, eye-coffret-rich-make, eye-coffret-first-make, merriandy-29392, pk-khan-lau-a03
 LIEN_QUAN: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo uy tín; bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ giỏi TP.HCM; bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm | Bác sĩ thẩm mỹ, chuyên gia sửa mũi
 LINK_TRONG_BAI: bác sĩ da liễu điều trị sẹo uy tín → bac-si-da-lieu...; kính mát chống UV → kinh-mat-nu-trendy
 LINK_VAO_TU: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm, bac-si-phau-thuat-tham-my-gioi-tai-tphcm

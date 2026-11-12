@@ -41,7 +41,7 @@ HOI_2: Nên trị sẹo ở bệnh viện hay spa?
 DAP_2: Laser, tiêm thuốc, bóc tách đáy sẹo là thủ thuật y khoa, nên làm tại bệnh viện hoặc phòng khám da liễu được cấp phép.
 HOI_3: Sau trị sẹo bằng laser cần kiêng gì?
 DAP_3: Tránh nắng, không trang điểm vài ngày đầu, không cạy vảy, dưỡng ẩm và tái khám theo hướng dẫn của bác sĩ.
-SAN_PHAM: mayblass-s11890, swallow-s12019, kinh-thoi-trang-mau-01, kinh-thoi-trang-mau-02, eye-coffret-first-make, eye-coffret-base-make, pk-boc-cang-silicon, pk-dem-mui-silicon
+SAN_PHAM: mayblass-s11890, swallow-s12019, kinh-mat-nam-oxfrd, ventor-g, eye-coffret-first-make, eye-coffret-base-make, pk-boc-cang-silicon, pk-dem-mui-silicon
 LIEN_QUAN: bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ giỏi tại TP.HCM; bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm | Bác sĩ sửa mũi hỏng giỏi TP.HCM; bac-si-kham-mat-gioi-o-tphcm | Bác sĩ khám mắt giỏi TP.HCM
 LINK_TRONG_BAI: 
 LINK_VAO_TU: bac-si-phau-thuat-tham-my-gioi-tai-tphcm, bac-si-phau-thuat-tham-my-quan-10-tphcm, bac-si-kham-mat-gioi-o-tphcm

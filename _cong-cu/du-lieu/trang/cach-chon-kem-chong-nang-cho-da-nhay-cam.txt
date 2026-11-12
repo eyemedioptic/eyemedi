@@ -39,7 +39,7 @@ HOI_2: SPF bao nhiêu là đủ cho da nhạy cảm?
 DAP_2: SPF 30, phổ rộng là mức tối thiểu cho hằng ngày; hoạt động ngoài trời lâu nên chọn SPF 50 và thoa lại sau 2 giờ.
 HOI_3: Ở trong nhà có cần thoa kem chống nắng không?
 DAP_3: Nên thoa nếu ngồi gần cửa kính hoặc thường xuyên ra ngoài, vì tia UVA có thể xuyên qua kính và gây sạm, lão hóa da.
-SAN_PHAM: sun-luxury, vidic-luxury-sun-p28220, kinh-mat-nam-350, ventor-g, trong-perfect-uv-u6, kinh-thoi-trang-mau-01, eye-coffret-rich-make, pk-hop-kinh-eyemedi
+SAN_PHAM: sun-luxury, vidic-luxury-sun-p28220, kinh-mat-nu-350, ventor-g, trong-perfect-uv-u6, kinh-mat-nam-oxfrd, eye-coffret-rich-make, pk-hop-kinh-eyemedi
 LIEN_QUAN: cach-chon-my-pham-cho-da-dau-mun | Cách chọn mỹ phẩm cho da dầu mụn; kinh-mat-nu-trendy | Kính mát nữ trendy chống UV; bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo uy tín
 LINK_TRONG_BAI: mỹ phẩm cho da dầu mụn → cach-chon-my-pham-cho-da-dau-mun; kính mát chống UV → kinh-mat-nu-trendy; bác sĩ da liễu → bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
 LINK_VAO_TU: cach-chon-my-pham-cho-da-dau-mun, kinh-mat-nu-trendy

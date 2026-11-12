@@ -40,7 +40,7 @@ HOI_2: Spa có được tiêm filler, botox không?
 DAP_2: Không. Tiêm filler, botox là thủ thuật y khoa, phải do bác sĩ có chứng chỉ hành nghề thực hiện tại cơ sở y tế được cấp phép.
 HOI_3: Nên làm gì nếu có biến chứng sau làm đẹp?
 DAP_3: Đến ngay cơ sở y tế có chuyên khoa phù hợp, mang theo hợp đồng, hóa đơn, tên sản phẩm đã dùng để bác sĩ xử trí kịp thời.
-SAN_PHAM: kinh-mat-nu-350, kinh-thoi-trang-mau-03, eye-coffret-first-make, eye-coffret-sheer-make, pk-khan-lau-a03, pk-nuoc-xit-ao, p-sufiar-fc9885, gala-21061
+SAN_PHAM: kinh-mat-nu-350, kinh-mat-nam-oxfrd, eye-coffret-first-make, eye-coffret-sheer-make, pk-khan-lau-a03, pk-nuoc-xit-ao, p-sufiar-fc9885, gala-21061
 LIEN_QUAN: bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ giỏi TP.HCM; tieu-chi-chon-spa-cham-soc-da-mat-uy-tin-tphcm | Tiêu chí chọn spa uy tín; bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo uy tín
 LINK_TRONG_BAI: bác sĩ phẫu thuật thẩm mỹ → bac-si-phau-thuat-tham-my-gioi-tai-tphcm; tiêu chí chọn spa uy tín → tieu-chi-chon-spa-cham-soc-da-mat-uy-tin-tphcm
 LINK_VAO_TU: tieu-chi-chon-spa-cham-soc-da-mat-uy-tin-tphcm, bac-si-phau-thuat-tham-my-gioi-tai-tphcm

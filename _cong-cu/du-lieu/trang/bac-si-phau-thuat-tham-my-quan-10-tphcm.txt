@@ -54,7 +54,7 @@ HOI_2: Bác sĩ Trần Đắc Quang chuyên về dịch vụ gì?
 DAP_2: Phẫu thuật thẩm mỹ cắt mí, nâng mũi, nâng ngực, hút mỡ; đặc biệt sửa mũi hỏng và sửa vùng hút mỡ hỏng.
 HOI_3: Nên chọn cơ sở thẩm mỹ như thế nào?
 DAP_3: Ưu tiên nơi có bác sĩ giỏi, uy tín và đảm bảo đầy đủ giấy phép để làm đẹp an toàn.
-SAN_PHAM: sun-luxury, kinh-mat-nu-350, kinh-mat-nam-350, kinh-xuyen-dem-night-view, vision-one, eye-coffret-rich-make, eye-coffret-sheer-make, eye-coffret-natural-make
+SAN_PHAM: sun-luxury, kinh-mat-nu-350, kinh-mat-nam-oxfrd, kinh-xuyen-dem-night-view, vision-one, eye-coffret-rich-make, eye-coffret-sheer-make, eye-coffret-natural-make
 LIEN_QUAN: bac-si-tham-my | Bác sĩ, phòng khám thẩm mỹ khu vực Quận 10; bac-si-kham-mat-gioi-o-tphcm | Top 10 bác sĩ khám mắt giỏi ở TP.HCM; toplist-bac-si-phong-kham-ung-buou-uy-tin-dieu-tri-hieu-qua-tphcm | Toplist bác sĩ, phòng khám ung bướu
 KIEM_TRA_TRUNG: Trang cũ, giữ nguyên URL và nội dung.
 NGUON_THAM_KHAO: Nội dung gốc của trang (giữ nguyên thông tin).

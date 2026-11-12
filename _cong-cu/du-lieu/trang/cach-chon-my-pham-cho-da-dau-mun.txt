@@ -38,7 +38,7 @@ HOI_2: Dùng BHA bao lâu thì thấy hiệu quả?
 DAP_2: Thường sau 4–8 tuần dùng đều đặn. Nếu da đỏ rát, bong tróc nhiều, hãy giảm tần suất hoặc ngưng và hỏi bác sĩ da liễu.
 HOI_3: Có nên dùng chung BHA và niacinamide?
 DAP_3: Có thể kết hợp; nhiều người dùng BHA trước rồi niacinamide, hoặc dùng ở hai thời điểm khác nhau trong ngày để giảm kích ứng.
-SAN_PHAM: kinh-mat-nu-350, kinh-thoi-trang-mau-02, kinh-thoi-trang-mau-03, eye-coffret-sheer-make, eye-coffret-natural-make, p-sufiar-2804, swallow-s12019, pk-nuoc-xit-ao
+SAN_PHAM: kinh-mat-nu-350, kinh-mat-nam-oxfrd, ventor-g, eye-coffret-sheer-make, eye-coffret-natural-make, p-sufiar-2804, swallow-s12019, pk-nuoc-xit-ao
 LIEN_QUAN: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo uy tín; bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ giỏi TP.HCM; kinh-mat-nu-trendy | Kính mát nữ trendy chống UV
 LINK_TRONG_BAI: bác sĩ da liễu → bac-si-da-lieu...; kính mát nữ chống UV → kinh-mat-nu
 LINK_VAO_TU: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
