@@ -176,7 +176,7 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
       <details class="main-menu-dropdown" id="mainMenuDropdown">
         <summary aria-label="Mở menu"><span class="menu-icon">☰</span><span>MENU</span><span class="menu-chevron">▾</span></summary>
         <div class="main-menu-links">
-          <a href="san-pham.html">Trang chủ</a>
+          <a href="/">Trang chủ</a>
           <details class="service-menu">
             <summary>Sản phẩm <span>▾</span></summary>
             <div class="service-links">
@@ -587,5 +587,5 @@ document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.que
 })();</script>
 <style id="sale-gia-css">.sale-badge{position:absolute;top:8px;right:8px;z-index:3;color:#d0021b;font-weight:900;font-size:17px;line-height:1;background:rgba(255,255,255,.92);border-radius:6px;padding:4px 6px;pointer-events:none}.sale-old{color:#8a9a9e;font-weight:500;font-size:.78em;text-decoration:line-through;margin-right:6px}.sale-new{color:#d0021b;font-weight:800}.cr-price .sale-old{display:block;margin:0 0 2px}</style>
 <script id="sale-gia">(function(){function f(n){return Number(n).toLocaleString('vi-VN')+'₫'}function run(){if(typeof PRODUCTS==='undefined')return;PRODUCTS.forEach(function(p){if(!(p.oldPrice>p.price))return;var pc='-'+Math.round((1-p.price/p.oldPrice)*100)+'%';document.querySelectorAll('[onclick*="openDetail(\''+p.id+'\')"],a[href*="sp='+p.id+'"]').forEach(function(el){if(!el.querySelector('img')||el.querySelector('.sale-badge'))return;if(getComputedStyle(el).position==='static')el.style.position='relative';var b=document.createElement('span');b.className='sale-badge';b.textContent=pc;el.appendChild(b);var c=el.closest('article');var pr=c&&c.querySelector('.price,.cr-price');if(pr&&!pr.dataset.sale){pr.dataset.sale=1;pr.innerHTML='<span class="sale-old">'+f(p.oldPrice)+'</span><span class="sale-new">'+f(p.price)+'</span>'}});if(window.currentDetailId===p.id){var d=document.querySelector('#detailContent .price');if(d&&!d.dataset.sale){d.dataset.sale=1;d.innerHTML='<span class="sale-old">'+f(p.oldPrice)+'</span><span class="sale-new">'+f(p.price)+'</span> <span style="color:#d0021b;font-weight:900">'+pc+'</span>'}}})}var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(run,60)}).observe(document.documentElement,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',run);run()})();</script>
-</body>
+<script id="ve-trang-chu">window.showHome=function(){location.href="/"};document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href="san-pham.html"],a[href="/san-pham.html"]');if(a&&/^\s*Trang chủ\s*$/.test(a.textContent)){e.preventDefault();location.href="/"}},true);</script></body>
 </html>

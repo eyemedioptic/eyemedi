@@ -626,5 +626,5 @@ document.addEventListener('blur',function(e){var el=e.target;if(el.matches&&el.m
 document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.querySelectorAll)return;f.querySelectorAll(SEL).forEach(function(el){var d=chuan(el.value);el.value=d;var ok=/^0\d{9}$/.test(d);loi(el,!ok);if(!ok&&!bad)bad=el});
  if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
-</body>
+<script id="ve-trang-chu">window.showHome=function(){location.href="/"};document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href="san-pham.html"],a[href="/san-pham.html"]');if(a&&/^\s*Trang chủ\s*$/.test(a.textContent)){e.preventDefault();location.href="/"}},true);</script></body>
 </html>

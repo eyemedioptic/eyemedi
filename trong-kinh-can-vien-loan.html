@@ -176,7 +176,7 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
       <details class="main-menu-dropdown" id="mainMenuDropdown">
         <summary aria-label="Mở menu"><span class="menu-icon">☰</span><span>MENU</span><span class="menu-chevron">▾</span></summary>
         <div class="main-menu-links">
-          <a href="san-pham.html">Trang chủ</a>
+          <a href="/">Trang chủ</a>
           <details class="service-menu">
             <summary>Sản phẩm <span>▾</span></summary>
             <div class="service-links">
@@ -585,5 +585,5 @@ document.addEventListener('blur',function(e){var el=e.target;if(el.matches&&el.m
 document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.querySelectorAll)return;f.querySelectorAll(SEL).forEach(function(el){var d=chuan(el.value);el.value=d;var ok=/^0\d{9}$/.test(d);loi(el,!ok);if(!ok&&!bad)bad=el});
  if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
-</body>
+<script id="ve-trang-chu">window.showHome=function(){location.href="/"};document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href="san-pham.html"],a[href="/san-pham.html"]');if(a&&/^\s*Trang chủ\s*$/.test(a.textContent)){e.preventDefault();location.href="/"}},true);</script></body>
 </html>
