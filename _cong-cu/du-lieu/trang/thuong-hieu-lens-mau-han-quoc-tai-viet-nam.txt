@@ -1,0 +1,96 @@
+TIEU_DE: Thương hiệu lens màu tại Việt Nam: Qeye Lens, Sihy Lens, Olens, Angel Eyes, Vivimoon, Caras(e), Doll Eyes và nhiều tên khác
+TITLE: Thương hiệu lens màu: Qeye Lens, Sihy Lens, Olens | EYEMEDI
+SLUG: thuong-hieu-lens-mau-han-quoc-tai-viet-nam
+TU_KHOA_CHINH: thương hiệu lens màu Hàn Quốc
+TU_KHOA_PHU: Qeye Lens, Sihy Lens, Olens, Angel Eyes, Vivimoon, Caras, Doll Eyes, lens màu tự nhiên
+DANH_MUC: Kính áp tròng
+SLUG_DANH_MUC: kinh-ap-trong
+Y_KHOA: không
+MO_TA_SEO: Giới thiệu 19 thương hiệu lens màu tại Việt Nam: Qeye Lens, Sihy Lens, Olens, Angel Eyes, Vivimoon, Caras, Doll Eyes, Kilala, Hera và lưu ý chọn lens an toàn.
+NGAY_DANG: 2026-11-12
+DOAN_MO_DAU: Lens màu có rất nhiều tên: Qeye Lens, Sihy Lens, Olens, Angel Eyes, Vivimoon, Caras, Doll Eyes, Kilala, Hera... Bài viết giới thiệu sơ lược 19 thương hiệu lens màu được nhắc nhiều tại Việt Nam, mỗi thương hiệu có một hình minh họa, kèm lưu ý để chọn lens màu an toàn.
+ANH_RIENG:
+anh-rieng/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-eyemedi.jpg | EYEMEDI – khách hàng nhận lens màu tại cửa hàng
+anh-rieng/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h1.jpg | Qeye Lens – hình ảnh sản phẩm
+anh-rieng/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h2.jpg | SIHY Lens – hình ảnh sản phẩm
+anh-rieng/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h3.jpg | Olens – hình ảnh sản phẩm
+anh-rieng/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h4.jpg | Angel Eyes – hình ảnh sản phẩm
+H2_1: Qeye Lens – Mắt Việt Hàn (từ năm 2007)
+NOI_DUNG_1: <p>Qeye Lens, còn gọi là Mắt Việt Hàn, giới thiệu hoạt động từ năm 2007 trong lĩnh vực kính áp tròng và chăm sóc mắt, có lens màu, lens trong suốt và lens cận. Website: kinhaptrong.com.vn.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h1.webp" alt="Qeye Lens – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Qeye Lens.</figcaption></figure>
+H2_2: SIHY Lens – thương hiệu kính áp tròng cao cấp
+NOI_DUNG_2: <p>SIHY Lens định vị là thương hiệu kính áp tròng cao cấp (Luxury Contact Lens Brand), có các dòng lens màu thời trang. Website: sihylens.vn.</p>
+H2_3: Olens – lens màu Hàn Quốc nổi tiếng
+NOI_DUNG_3: <p>Olens là thương hiệu lens màu Hàn Quốc được nhiều bài tổng hợp nhắc tới, có lens dùng 1 ngày, 1 tháng và 6 tháng. Các dòng được nhắc tên gồm Glowy, Big Glowy, Vivi Ring, Ocean Velvet, Realish Brown, Realish Gray, Muse Brown.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h3.webp" alt="Olens – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Olens.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h3-2.webp" alt="Olens – hình ảnh sản phẩm" loading="lazy" width="399" height="501"><figcaption>Hình ảnh Olens.</figcaption></figure>
+H2_4: Angel Eyes – lens nhập khẩu từ Hàn Quốc
+NOI_DUNG_4: <p>Angel Eyes là thương hiệu lens nhập khẩu từ Hàn Quốc, có chất liệu Polyhema, Silicone Hydrogel và MPC, kèm dòng Silicone Hydrogel 24H, Classic 8H và lens 1 ngày. Thương hiệu cũng bán nước ngâm như Angel Eyes Care.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h4.webp" alt="Angel Eyes – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Angel Eyes.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h4-2.webp" alt="Angel Eyes – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Angel Eyes.</figcaption></figure>
+H2_5: Vivimoon – lens thiết kế độc quyền
+NOI_DUNG_5: <p>Vivimoon (còn gặp tên Vivomon) được giới thiệu với nhiều mẫu thiết kế độc quyền, chất liệu Silicone Hydrogel, có lens dùng theo tháng và theo năm. Một nguồn ghi mức giá khoảng 150.000 đến 250.000đ một đôi.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h5.webp" alt="Vivimoon – hình ảnh sản phẩm" loading="lazy" width="547" height="365"><figcaption>Hình ảnh Vivimoon.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h5-2.webp" alt="Vivimoon – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Vivimoon.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h5-3.webp" alt="Vivimoon – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Vivimoon.</figcaption></figure>
+H2_6: Caras Lens – lens cận, cận loạn và lens tone tự nhiên
+NOI_DUNG_6: <p>Caras (CARAS Lens) có lens cận, cận loạn, không độ và lens tone tự nhiên. Nguồn ghi xuất xứ là Hàn Quốc hoặc công nghệ Mỹ nên chưa thống nhất, bạn nên xem bao bì và hỏi nơi bán.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h6.webp" alt="Caras Lens – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Caras Lens.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h6-2.webp" alt="Caras Lens – hình ảnh sản phẩm" loading="lazy" width="515" height="388"><figcaption>Hình ảnh Caras Lens.</figcaption></figure>
+H2_7: Doll Eyes – lens màu thời trang
+NOI_DUNG_7: <p>Doll Eyes là thương hiệu lens màu thời trang, được ghi là sản phẩm chuẩn Hàn Quốc hoặc nhập chính ngạch từ Hàn Quốc tùy nguồn. Một bài tham khảo ghi mức giá khoảng 250.000 đến 350.000đ mỗi hộp, nên chỉ để tham khảo.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h7.webp" alt="Doll Eyes – hình ảnh sản phẩm" loading="lazy" width="447" height="447"><figcaption>Hình ảnh Doll Eyes.</figcaption></figure>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h7-2.webp" alt="Doll Eyes – hình ảnh sản phẩm" loading="lazy" width="225" height="225"><figcaption>Hình ảnh Doll Eyes.</figcaption></figure>
+H2_8: Hera Lens – sản xuất bởi Dreamcon
+NOI_DUNG_8: <p>Hera là thương hiệu lens được ghi là sản xuất bởi Dreamcon, Hàn Quốc, với nhiều tông màu pha trộn. Hera cũng xuất hiện trong nhóm sản phẩm contact lens trên sàn Shopee theo số liệu của metric.vn.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h8.webp" alt="Hera Lens – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_9: Kilala – lens màu bán nhiều trên kênh trực tuyến
+NOI_DUNG_9: <p>Kilala là thương hiệu lens màu bán nhiều trên kênh trực tuyến, tự công bố dẫn đầu lens màu tại Việt Nam theo thống kê doanh số TikTok. Chưa có số liệu độc lập để kiểm chứng. Các nguồn ghi xuất xứ không thống nhất, nên bạn cần hỏi nơi bán.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h9.webp" alt="Kilala – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_10: Moody Lenses – GlowyLock, Breathe+, Eden
+NOI_DUNG_10: <p>Moody là thương hiệu lens màu với các dòng được nhắc tên như GlowyLock, Breathe+ và Eden, có cả lens chuyển màu. Các nguồn ghi xuất xứ khác nhau (Hàn Quốc hoặc Trung Quốc), nên cần xác nhận khi mua.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h10.webp" alt="Moody Lenses – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_11: Clalen – lens tông tự nhiên
+NOI_DUNG_11: <p>Clalen được giới thiệu là thương hiệu Hàn Quốc với màu tông tự nhiên, trầm ấm và có dòng lens 1 Day. Phù hợp với người thích lens màu nhẹ nhàng khi đi làm, đi học.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h11.webp" alt="Clalen – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_12: Vassen – thương hiệu lens Hàn Quốc
+NOI_DUNG_12: <p>Vassen được giới thiệu là thương hiệu lâu năm của Hàn Quốc trong các danh sách lens màu. Nguồn chưa nêu dòng sản phẩm cụ thể.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h12.webp" alt="Vassen – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_13: Olola – Dearsome, Blurring, Mellow, Purity Shine
+NOI_DUNG_13: <p>Olola là thương hiệu Hàn Quốc được Lens Xoắn phân phối, có các bộ sưu tập Dearsome, Blurring, Mellow, Purity Shine và mẫu Mousse Taupe Beige.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h13.webp" alt="Olola – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_14: I-SHA – Oriana, Molton, Ariel, Polaris, Dekame
+NOI_DUNG_14: <p>I-SHA là thương hiệu Hàn Quốc có các dòng như Oriana Shade Collection, Oriana Mune, Molton, Ariel, Polaris, Dekame và các màu Carbon Black, Deep Choco, Blue Jean.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h14.webp" alt="I-SHA – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_15: Lens Me, I-dol Lens, Lens Town, ColorCL
+NOI_DUNG_15: <p>Lens Me, I-dol Lens, Lens Town và ColorCL là các thương hiệu hàng Hàn Quốc do Lens Xoắn phân phối theo nguồn tham khảo. Các nguồn chưa nêu rõ dòng sản phẩm của từng thương hiệu.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h15.webp" alt="Lens Me, I-dol Lens, Lens Town, ColorCL – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_16: Eyeiyagi – lens Silicone Hydrogel
+NOI_DUNG_16: <p>Eyeiyagi được giới thiệu là phát triển cùng chuyên gia của Korea Vision Science Institute, chất liệu Silicone Hydrogel, dùng tối đa 3 tháng theo một nguồn. Mức giá tham khảo khoảng 150.000 đến 230.000đ mỗi đôi.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h16.webp" alt="Eyeiyagi – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_17: Dabae – lens Hàn Quốc
+NOI_DUNG_17: <p>Dabae là thương hiệu lens Hàn Quốc, theo một nguồn nên thay sau khoảng 3 đến 4 tháng sử dụng. Nguồn không nêu giá.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h17.webp" alt="Dabae – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_18: Tint Eye Lens – Premium, Diamond, Flower, Nudie
+NOI_DUNG_18: <p>Tint Eye Lens có các dòng được nhắc tên như TintEye Premium, Diamond, Flower, Nudie, Hurricane, Elegance, Angel, Xtra và Japan. Nguồn chưa nêu rõ xuất xứ.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h18.webp" alt="Tint Eye Lens – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_19: Lens Nice – lens thẩm mỹ màu đậm
+NOI_DUNG_19: <p>Lens Nice được giới thiệu là thương hiệu Nhật Bản chuyên lens thẩm mỹ màu đậm, họa tiết và đường kính lớn.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-h19.webp" alt="Lens Nice – hình minh họa" loading="lazy" width="900" height="600"><figcaption>Hình minh họa, không phải logo hay ảnh sản phẩm của hãng.</figcaption></figure>
+H2_20: Cách chọn nơi mua kính áp tròng an toàn
+NOI_DUNG_20: <p>Dù chọn thương hiệu nào, bạn nên đo mắt, kiểm tra thông số trên bao bì (độ cận, đường kính, độ cong, hạn dùng) và mua ở nơi có địa chỉ, hotline rõ ràng. Lần đầu dùng lens, xem thêm <a href="/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau.html">cách đeo kính áp tròng cho người mới</a>; nếu đeo bị khô mắt, tham khảo <a href="/deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao.html">cách xử lý khô mắt khi đeo lens</a>.</p>
+<p>Nếu đeo lens thấy đỏ, đau, cộm hoặc nhìn mờ, hãy tháo lens và gặp bác sĩ nhãn khoa. EYEMEDI hỗ trợ <a href="/dat-lich-do-mat.html">đo thị lực miễn phí</a> trước khi chọn lens. Thông tin trong bài lấy từ giới thiệu công khai của từng đơn vị và các bài tổng hợp, mang tính tham khảo, không phải bảng xếp hạng.</p>
+<figure><img src="/images/thuong-hieu-lens-mau-han-quoc-tai-viet-nam-eyemedi.webp" alt="Khách hàng nhận lens màu và hộp đựng lens tại EYEMEDI" loading="lazy" width="802" height="711"><figcaption>Khách hàng nhận lens màu và hộp đựng lens tại EYEMEDI.</figcaption></figure>
+LOI_KEU_GOI: Chưa chắc độ mắt? EYEMEDI hỗ trợ đo thị lực miễn phí và tư vấn chọn kính áp tròng phù hợp, 08:30 – 21:30 hằng ngày.
+HOI_1: Thương hiệu lens màu nào được nhiều người biết?
+DAP_1: Olens, Angel Eyes, Doll Eyes, Vivimoon, Kilala, Hera thường được nhắc tên trong các bài tổng hợp. Chưa có số liệu thị phần độc lập để xếp hạng.
+HOI_2: Lens màu có an toàn không?
+DAP_2: Lens màu có thể dùng được khi đúng thông số, nguồn gốc rõ ràng và vệ sinh đúng cách. Không đeo lens khi mắt đỏ, đau hoặc nhìn mờ bất thường.
+HOI_3: Lens màu Hàn Quốc giá bao nhiêu?
+DAP_3: Theo một số nguồn tham khảo, lens màu phổ biến khoảng 60.000 đến 600.000đ tùy loại 1 ngày hay dài ngày. Giá chỉ để tham khảo.
+SAN_PHAM: eye-coffret-rich-make, eye-coffret-first-make, eye-coffret-base-make, eye-coffret-natural-make, eye-coffret-sheer-make, lens-can-loan, pk-combo-ve-sinh, pk-nuoc-xit-ao
+LIEN_QUAN: top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm | Top 10 địa chỉ shop lens uy tín TP.HCM; cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau | Cách đeo kính áp tròng cho người mới; deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao | Đeo kính áp tròng bị khô mắt phải làm sao
+LINK_TRONG_BAI: cách đeo kính áp tròng cho người mới → cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau; cách xử lý khô mắt khi đeo lens → deo-kinh-ap-trong-bi-kho-mat-phai-lam-sao; đo thị lực miễn phí → dat-lich-do-mat
+LINK_VAO_TU: top-10-dia-chi-shop-lens-mat-kinh-ap-trong-uy-tin-gia-tot-nhat-tai-tphcm, cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau, nuoc-ngam-kinh-ap-trong
+NGUON_ANH: Hình minh họa do sếp cung cấp (file xem-thu-hang), đã đổi chữ thành EYEMEDI.
+NGUON_THAM_KHAO: Nội dung chuyển từ bản xem thử VK Luxury Lens Store do sếp Trọng gửi (12/11/2026).
