@@ -1,0 +1,38 @@
+TIEU_DE: Cơ sở thực hành kỹ thuật mài lắp kính mắt chuẩn nghề ở TP.HCM
+TITLE: Cơ sở thực hành mài lắp kính mắt chuẩn nghề TP.HCM | EYEMEDI
+SLUG: co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm
+TU_KHOA_CHINH: thực hành mài lắp kính mắt TP.HCM
+TU_KHOA_PHU: học mài lắp kính, kỹ thuật định tâm tròng kính, đào tạo cắt kính, học nghề mắt kính TP.HCM
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: không
+MO_TA_SEO: Học mài lắp kính mắt ở đâu chuẩn nghề tại TP.HCM? Quy trình mài lắp, tiêu chí chọn cơ sở thực hành và chương trình thực hành mài lắp, định tâm tròng kính tại EYEMEDI.
+NGAY_DANG: 2026-11-15
+DOAN_MO_DAU: Một cặp kính đúng độ nhưng lắp lệch tâm vẫn khiến người đeo mỏi mắt, nhức đầu. Vì vậy mài lắp kính là kỹ năng cốt lõi của nghề mắt kính. Bài viết giới thiệu quy trình mài lắp chuẩn, tiêu chí chọn cơ sở thực hành và chương trình thực hành tại EYEMEDI, TP.HCM.
+ANH_RIENG:
+anh-rieng/co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm-card.jpg | Cơ sở thực hành mài lắp kính mắt chuẩn nghề TP.HCM – EYEMEDI
+kho-anh/EYEMEDI-5.webp | Quầy kính và khu đo mắt tại cửa hàng EYEMEDI
+kho-anh/EYEMEDI-9.webp | Khách hàng nhận kính tại cửa hàng EYEMEDI
+H2_1: Quy trình mài lắp kính mắt chuẩn nghề
+NOI_DUNG_1: <p>Mài lắp là bước biến đơn kính thành cặp kính hoàn chỉnh. Quy trình chuẩn gồm:</p>
+<ol><li><b>Đọc đơn kính:</b> độ cầu, độ loạn, trục loạn, độ cộng (nếu có).</li><li><b>Đo thông số khách:</b> khoảng cách đồng tử (PD) từng mắt, chiều cao lắp kính, đặc biệt quan trọng với tròng đa tròng.</li><li><b>Đọc thông số gọng và tròng:</b> kích thước tròng, cầu mũi, chiết suất, loại tròng.</li><li><b>Định tâm, chấm dấu:</b> xác định tâm quang học và trục loạn trên máy đo độ tròng.</li><li><b>Block – mài – vát cạnh:</b> mài theo khuôn gọng, khoan hoặc xẻ rãnh với gọng khoan, gọng cước.</li><li><b>Lắp kính và kiểm tra:</b> đo lại độ, kiểm tra lệch tâm, lệch trục, chỉnh gọng vừa mặt khách.</li></ol>
+<p>Kỹ thuật viên giỏi cũng biết nhận diện đơn kính bất thường để đề nghị khách đo lại hoặc <a href="/bac-si-mat-phong-kham-mat-tphcm.html">khám bác sĩ chuyên khoa mắt</a>.</p>
+H2_2: Tiêu chí chọn cơ sở thực hành mài lắp kính
+NOI_DUNG_2: <ul><li><b>Có xưởng mài lắp thật:</b> máy đo độ tròng, máy định tâm, máy mài, máy khoan; học viên được tự tay thao tác.</li><li><b>Có lượng đơn kính thực tế:</b> thực hành trên nhiều loại gọng (nhựa, kim loại, khoan, cước) và nhiều loại tròng (đơn tròng, đa tròng, đổi màu, chống ánh sáng xanh).</li><li><b>Người hướng dẫn có kinh nghiệm:</b> kèm trực tiếp, sửa lỗi lệch tâm, lệch trục ngay khi làm.</li><li><b>Kết hợp đo khúc xạ:</b> hiểu đơn kính từ khâu đo mắt giúp mài lắp chính xác hơn.</li><li><b>Có đánh giá kỹ năng:</b> kiểm tra sản phẩm theo sai số cho phép trước khi kết thúc khóa.</li></ul>
+<p>Nếu muốn làm việc trong bệnh viện, phòng khám, bạn nên tham khảo thêm <a href="/hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe.html">các hướng học khúc xạ mắt kính chính quy</a>.</p>
+H2_3: Thực hành mài lắp kính tại EYEMEDI
+NOI_DUNG_3: <p>EYEMEDI – trung tâm thị lực nhãn kính chuyên sâu – tổ chức <a href="/dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam.html">chương trình đào tạo thực hành khúc xạ – nhãn kính – kính áp tròng</a>, trong đó mài lắp và định tâm là một trong ba nhóm kỹ năng trọng tâm:</p>
+<ul><li>Đo PD, chiều cao lắp kính; đọc thông số gọng và tròng.</li><li>Block – mài – lắp hoàn thiện; định tâm đơn tròng và đa tròng.</li><li>Kiểm tra sai số, chỉnh kính sau lắp cho vừa mặt khách.</li><li>Học cùng quy trình đo khúc xạ để hiểu trọn vẹn một đơn kính.</li></ul>
+<p>Phù hợp với nhân viên cửa hàng kính, người mới vào nghề và chủ cửa hàng muốn chuẩn hóa quy trình. Nội dung điều chỉnh theo trình độ đầu vào. Liên hệ hotline <a href="tel:0967190005">0967 190 005</a> hoặc đến Store EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM (08:30 – 21:30 hằng ngày) để được tư vấn lịch thực hành.</p>
+LOI_KEU_GOI: Muốn thực hành mài lắp, định tâm tròng kính bài bản? Liên hệ EYEMEDI qua hotline 0967 190 005 để được tư vấn chương trình thực hành phù hợp.
+HOI_1: Học mài lắp kính có khó không?
+DAP_1: Không quá khó nếu được thực hành đều trên máy thật và có người kèm. Phần cần luyện nhiều nhất là định tâm, xác định trục loạn và mài vừa khít gọng.
+HOI_2: Có cần học đo khúc xạ trước khi học mài lắp?
+DAP_2: Không bắt buộc, nhưng nên học song song. Hiểu cách đo mắt và đọc đơn kính giúp bạn phát hiện sai sót và lắp kính chính xác hơn.
+HOI_3: Thực hành mài lắp tại EYEMEDI gồm những gì?
+DAP_3: Đo PD, chiều cao lắp kính, đọc thông số gọng – tròng, block – mài – lắp, định tâm đơn tròng và đa tròng, kiểm tra sai số và chỉnh kính sau lắp.
+SAN_PHAM: trong-trang-cung-156, trong-phu-vang-156, trong-167-blue-protect, da-trong-156-hsmc-asx, da-trong-158-kts-can, pk-boc-cang-silicon, pk-nuoc-xit-ao, pk-hop-kinh-eyemedi
+LIEN_QUAN: hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe | Học khúc xạ mắt kính ở đâu chuẩn nghề; dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam | Đào tạo khúc xạ, nhãn kính chuyên sâu; dia-chi-do-mat-cat-kinh-can | Địa chỉ đo mắt, cắt kính cận
+LINK_TRONG_BAI: đo mắt, cắt kính → dia-chi-do-mat-cat-kinh-can
+LINK_VAO_TU: hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe, dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam
+NGUON_THAM_KHAO: nội dung chương trình đào tạo thực hành trên eyemedi.vn; kiến thức nghề mắt kính tổng hợp.
