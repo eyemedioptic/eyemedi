@@ -1,0 +1,44 @@
+TIEU_DE: Học khúc xạ mắt kính ở đâu chuẩn nghề? Chương trình đào tạo khúc xạ, nhãn kính
+TITLE: Học khúc xạ mắt kính ở đâu chuẩn nghề? | EYEMEDI
+SLUG: hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe
+TU_KHOA_CHINH: học khúc xạ mắt kính ở đâu
+TU_KHOA_PHU: đào tạo khúc xạ nhãn kính, khóa học đo khúc xạ, cử nhân khúc xạ nhãn khoa, học mài lắp kính, kỹ thuật viên khúc xạ
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: không
+MO_TA_SEO: Học khúc xạ mắt kính ở đâu chuẩn nghề? Các hướng học chính quy, khóa ngắn hạn và chương trình đào tạo thực hành đo khúc xạ, mài lắp kính, kính áp tròng tại EYEMEDI.
+NGAY_DANG: 2026-11-15
+DOAN_MO_DAU: Muốn làm nghề đo mắt, cắt kính bài bản, người học cần nắm vững đo khúc xạ, mài lắp – định tâm tròng kính và kiến thức kính áp tròng. Bài viết giới thiệu các hướng học khúc xạ mắt kính hiện nay và chương trình đào tạo thực hành tại EYEMEDI.
+ANH_RIENG:
+anh-rieng/hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe-card.jpg | Học khúc xạ mắt kính ở đâu chuẩn nghề – EYEMEDI
+kho-anh/EYEMEDI-8.webp | Đo khúc xạ bằng máy đo tự động tại EYEMEDI
+kho-anh/EYEMEDI-4.webp | Khu trưng bày gọng kính và bàn tư vấn tại EYEMEDI
+H2_1: Học khúc xạ mắt kính "chuẩn nghề" là học những gì?
+NOI_DUNG_1: <p>Một người làm khúc xạ mắt kính vững nghề cần thành thạo 3 nhóm kỹ năng:</p>
+<ul><li><b>Đo khúc xạ:</b> đo khách quan bằng máy và đo chủ quan bằng hộp kính thử, đánh giá cận, viễn, loạn thị, cân bằng hai mắt, nhìn gần.</li><li><b>Mài lắp, định tâm tròng kính:</b> đo PD, chiều cao lắp kính, đọc thông số gọng và tròng, mài – lắp – kiểm tra sai số cho tròng đơn và đa tròng.</li><li><b>Kính áp tròng:</b> thông số BC, DIA, độ; đánh giá độ ôm, hướng dẫn đeo – tháo – vệ sinh an toàn.</li></ul>
+<p>Người học cũng cần biết khi nào phải chuyển khách đến bác sĩ chuyên khoa mắt. Theo Luật Khám bệnh, chữa bệnh 2023, kỹ thuật viên khúc xạ làm việc trong cơ sở y tế cần có giấy phép hành nghề phù hợp.</p>
+H2_2: Học khúc xạ mắt kính ở đâu?
+NOI_DUNG_2: <h3>1. Học chính quy (cao đẳng, đại học)</h3>
+<p>Ngành Khúc xạ nhãn khoa / Kỹ thuật khúc xạ được đào tạo ở bậc cao đẳng và đại học, thường 3–4 năm. Tại TP.HCM, Trường Đại học Y khoa Phạm Ngọc Thạch có Bộ môn Khúc xạ Nhãn khoa thuộc Khoa Điều dưỡng – Kỹ thuật Y học; Đại học Y Dược TP.HCM và một số trường y tế khác cũng có đào tạo liên quan. Đây là con đường phù hợp nếu bạn muốn làm việc lâu dài tại bệnh viện, phòng khám mắt.</p>
+<h3>2. Khóa ngắn hạn, cập nhật chuyên môn</h3>
+<p>Các trường, bệnh viện tổ chức khóa ngắn hạn và hội nghị chuyên đề, ví dụ khóa "Khúc xạ dành cho Bác sĩ chuyên khoa mắt" (3 tháng) và Hội nghị Khúc xạ Nhãn khoa Việt Nam lần thứ nhất của Trường ĐH Y khoa Phạm Ngọc Thạch. Mỗi khóa có đối tượng tuyển sinh riêng, bạn nên xem kỹ thông báo chiêu sinh.</p>
+<h3>3. Đào tạo thực hành tại trung tâm, cửa hàng kính</h3>
+<p>Phù hợp với người đang hoặc sắp làm tại cửa hàng mắt kính, cần học nhanh, học sát công việc: đo khúc xạ trên máy thật, mài lắp, định tâm và tư vấn kính áp tròng cho khách.</p>
+H2_3: Chương trình đào tạo khúc xạ – nhãn kính tại EYEMEDI
+NOI_DUNG_3: <p>EYEMEDI – trung tâm thị lực nhãn kính chuyên sâu tại TP.HCM – tổ chức <a href="/dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam.html">chương trình đào tạo thực hành chuyên sâu khúc xạ, nhãn kính, kính áp tròng</a>:</p>
+<ul><li>Học lý thuyết kết hợp thực hành trên thiết bị tại cửa hàng, theo quy trình chuẩn nghề.</li><li>Được hướng dẫn trực tiếp từ đo khúc xạ, phân tích kết quả đến tư vấn kính phù hợp.</li><li>Thực hành mài lắp, định tâm tròng đơn tròng và đa tròng, chỉnh kính sau lắp.</li><li>Nội dung điều chỉnh theo trình độ đầu vào của học viên.</li></ul>
+<p>Phù hợp với nhân viên cửa hàng kính, người mới vào nghề và chủ cửa hàng muốn chuẩn hóa quy trình. Liên hệ hotline <a href="tel:0967190005">0967 190 005</a> hoặc đến Store EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM để được tư vấn lịch học.</p>
+<h3>Tiêu chí chọn nơi học khúc xạ chuẩn nghề</h3>
+<ul><li>Có thời lượng thực hành thật trên máy đo, hộp kính thử, máy mài.</li><li>Người hướng dẫn có chuyên môn và kinh nghiệm thực tế.</li><li>Nội dung rõ ràng, có đánh giá kỹ năng cuối khóa.</li><li>Nói rõ giới hạn hành nghề và quy định của Bộ Y tế.</li></ul>
+LOI_KEU_GOI: Muốn học đo khúc xạ, mài lắp kính bài bản? Liên hệ EYEMEDI qua hotline 0967 190 005 để được tư vấn chương trình đào tạo thực hành phù hợp.
+HOI_1: Học khúc xạ mắt kính mất bao lâu?
+DAP_1: Hệ chính quy cao đẳng, đại học thường 3–4 năm. Khóa đào tạo thực hành tại trung tâm, cửa hàng ngắn hơn và tùy theo trình độ đầu vào của học viên.
+HOI_2: Chưa có nền tảng y khoa có học được không?
+DAP_2: Được với các khóa thực hành tại cửa hàng kính. Nếu muốn làm kỹ thuật viên khúc xạ trong bệnh viện, phòng khám, bạn nên học chính quy và có giấy phép hành nghề theo quy định.
+HOI_3: Học tại EYEMEDI được thực hành những gì?
+DAP_3: Đo khúc xạ khách quan và chủ quan, phân tích kết quả, đo PD, mài lắp và định tâm tròng kính, kiến thức kính áp tròng và cách tư vấn khách an toàn.
+SAN_PHAM: trong-160-x-drive, trong-160-as-blue-control, da-trong-dat-theo-yeu-cau, da-trong-158-kts-vien, lens-can-loan, pk-combo-ve-sinh, pk-khan-lau-a03, pk-dem-mui-silicon
+LIEN_QUAN: dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam | Đào tạo khúc xạ, nhãn kính chuyên sâu; dia-chi-do-mat-cat-kinh-can | Địa chỉ đo mắt, cắt kính cận; bac-si-mat-phong-kham-mat-tphcm | Bác sĩ mắt, phòng khám mắt TP.HCM
+LINK_TRONG_BAI: đo mắt, cắt kính → dia-chi-do-mat-cat-kinh-can
+LINK_VAO_TU: dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam, dia-chi-do-mat-cat-kinh-can
+NGUON_THAM_KHAO: pnt.edu.vn (thông báo chiêu sinh khóa Khúc xạ cho BS chuyên khoa mắt, Hội nghị Khúc xạ Nhãn khoa Việt Nam lần thứ nhất); vjol.info.vn (Bộ môn Khúc xạ Nhãn khoa, ĐH Y khoa Phạm Ngọc Thạch); careerlink.vn (nghề kỹ thuật viên khúc xạ); nội dung chương trình đào tạo trên eyemedi.vn.
