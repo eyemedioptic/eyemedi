@@ -249,6 +249,7 @@ main section.nhom[id]:not(#moi-nhat) .tin.an{display:none!important}
 .xem-them-bv{display:block;margin:14px auto 4px;padding:11px 22px;border:1.5px solid var(--accent,#0a6d70);border-radius:999px;background:#fff;color:var(--accent,#0a6d70);font-weight:700;font-size:14.5px;cursor:pointer}
 .xem-them-bv:hover{background:var(--accent,#0a6d70);color:#fff}
 @media(max-width:760px){main section.nhom[id]:not(#moi-nhat) .luoi-tin{grid-template-columns:1fr!important}main section.nhom[id]:not(#moi-nhat) .tin h3{font-size:15.5px!important}}</style>
+<style id="online-count-css">.copy{text-align:center;padding:10px 12px 14px;font-size:13px;opacity:.9;border-top:1px solid rgba(255,255,255,.15)}.copy .count span{padding:0 14px;border-left:1px solid #777}.copy .count span:first-child{border:0}</style>
 </head>
 <body>
 
@@ -524,6 +525,7 @@ document.querySelectorAll('.chips a').forEach(function(a){var id=a.getAttribute(
   </div>
  </div>
 
+<div class="copy"><span class="count"><span>Đang truy cập: <b id="online">16</b></span><span>Lượt mua: <b id="luot-mua">8</b></span></span></div>
 </footer>
 
 <div class="float-contact">
@@ -616,5 +618,6 @@ document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.que
 a.forEach(function(x,i){if(i>=N)x.classList.add('an')});var b=document.createElement('button');b.type='button';b.className='xem-them-bv';
 function nhan(){var c=l.querySelectorAll('article.tin.an').length;b.textContent='Xem thêm bài viết khác ('+c+')';if(!c)b.remove()}
 b.onclick=function(){[].slice.call(l.querySelectorAll('article.tin.an'),0,N).forEach(function(x){x.classList.remove('an')});nhan()};nhan();l.insertAdjacentElement('afterend',b)});})();</script>
+<script id="online-count">document.getElementById('online').textContent = 21 + Math.floor(Math.random() * 279);(function(){var k='em-luot-mua',n=0;try{n=parseInt(localStorage.getItem(k))||0}catch(e){}n=n?n+1+Math.floor(Math.random()*3):2+Math.floor(Math.random()*98);try{localStorage.setItem(k,n)}catch(e){}document.getElementById('luot-mua').textContent=n})();</script>
 </body>
 </html>
