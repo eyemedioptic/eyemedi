@@ -411,6 +411,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .origin h4{font-size:.95rem;color:var(--roast);margin-bottom:6px}
 .origin dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.86rem}
 .origin dt{color:var(--muted)}
+.origin-text{font-size:.88rem;margin-bottom:8px;line-height:1.55}
 .tl{list-style:none;position:relative;margin:4px 0 0 6px;padding-left:16px;border-left:2px solid var(--line)}
 .tl li{position:relative;margin-bottom:8px;font-size:.86rem;line-height:1.45}
 .tl li::before{content:"";position:absolute;left:-22px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--crema);border:2px solid #fff;box-shadow:0 0 0 1px var(--crema)}
@@ -793,7 +794,11 @@ const PRODUCTS = [
     blend:'100% Arabica · Single Origin Việt Nam', img:'img/pp-gold-reserve.webp',
     short:'Arabica tuyển chọn, rang medium: thơm sô-cô-la, đậm sâu, chua thanh nhẹ.',
     desc:'Gold Reserve là dòng Arabica cao cấp nhất của CAFEROA, tuyển chọn từ vùng cao nguyên Việt Nam, rang medium để giữ hương sô-cô-la và vị chua thanh tự nhiên. Hợp pha phin, pour-over hoặc máy espresso, và làm quà biếu sang trọng.',
-    notes:['Sô-cô-la','Đậm sâu','Chua thanh'], strength:3, acidity:4, brew:'Phin, pour-over, espresso', roast:'Medium', tag:'Mới'},
+    notes:['Sô-cô-la','Đậm sâu','Chua thanh'], strength:3, acidity:4, brew:'Phin, pour-over, espresso', roast:'Medium', tag:'Mới',
+    origin:{ title:'Vùng thu hoạch: Arabica Cầu Đất & Arabica Lạc Dương',
+      text:'Dòng cà phê đặc sản được đánh giá ngon và nổi tiếng nhất tại tỉnh Lâm Đồng. Nhờ độ cao trên 1.500m cùng khí hậu lạnh quanh năm, hạt cà phê nơi đây phát triển chậm để tích tụ hương vị thanh tao và hậu ngọt sâu lắng.',
+      rows:[['Vùng trồng','Cầu Đất, Lạc Dương (Lâm Đồng)'],['Độ cao','Trên 1.500 m'],['Khí hậu','Lạnh quanh năm'],['Hương vị','Thanh tao, hậu ngọt sâu lắng']] },
+    gallery:[['img/gr-farm-row.webp','Vườn Arabica trên đất đỏ Lâm Đồng'],['img/gr-picking.webp','Thu hái Arabica chín đỏ'],['img/gr-basket.webp','Giỏ quả cà phê chín hái tay'],['img/gr-hands.webp','Quả Arabica chín mọng'],['img/gr-drying.webp','Phơi cà phê dưới nắng cao nguyên'],['img/gr-cup.webp','Tách Arabica thơm nóng']]},
   { id:'cr-phin', name:'Phin Truyền Thống', cat:'CAFEROA Premium', size:'500g', price:null,
     blend:'Robusta Đắk Lắk · Rang mộc', img:'img/pp-phin-truyen-thong.webp',
     short:'Vị phin Việt đúng điệu: đậm đà, thơm nồng, hậu ngọt, hợp cà phê đen và sữa đá.',
@@ -1016,7 +1021,7 @@ function openProduct(id){
         <div class="price" style="font-size:1.6rem;margin-bottom:12px">${priceTxt(p)} <small style="display:inline;font-size:.85rem">/ ${p.size}</small></div>
         <p class="desc">${p.desc}</p>
         <div class="tags">${p.notes.map(n=>`<span>${n}</span>`).join('')}</div>
-        ${p.origin?`<div class="origin"><h4>📍 ${p.origin.title}</h4>${p.origin.rows?`<dl>${p.origin.rows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${p.origin.timeline?`<ol class="tl">${p.origin.timeline.map(r=>`<li><b>${r[0]}</b><span>${r[1]}</span></li>`).join('')}</ol>`:''}</div>`:''}
+        ${p.origin?`<div class="origin"><h4>📍 ${p.origin.title}</h4>${p.origin.text?`<p class="origin-text">${p.origin.text}</p>`:''}${p.origin.rows?`<dl>${p.origin.rows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl>`:''}${p.origin.timeline?`<ol class="tl">${p.origin.timeline.map(r=>`<li><b>${r[0]}</b><span>${r[1]}</span></li>`).join('')}</ol>`:''}</div>`:''}
         <dl class="spec"><dt>Mức rang</dt><dd>${p.roast}</dd><dt>Cách pha hợp</dt><dd>${p.brew}</dd><dt>Độ đậm</dt><dd>${'●'.repeat(p.strength)}${'○'.repeat(5-p.strength)}</dd><dt>Độ chua thanh</dt><dd>${'●'.repeat(p.acidity)}${'○'.repeat(5-p.acidity)}</dd></dl>
         ${p.id!=='drip'?`<div style="font-size:.85rem;font-weight:600;margin-bottom:6px">Chọn kiểu xay</div>
         <div class="grind">${GRINDS.map(g=>`<button class="${g===grind?'active':''}" data-g="${g}">${g}</button>`).join('')}</div>`:''}
