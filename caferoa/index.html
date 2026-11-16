@@ -130,22 +130,30 @@ nav.main a:hover{opacity:1;color:var(--gold)}
 .ar-labels a:hover{background:var(--crema)}
 .ar-labels a small{display:block;font-weight:400;font-size:.72rem;color:#e6d6bf}
 /* slide-specific placement */
-.s1 .photo.main{right:4%;top:20px;width:66%;height:340px;transform:rotate(3deg)}
-.s1 .mul.sack{left:-4%;bottom:0;width:62%}
-.s1 .mul.beans{right:-2%;bottom:6px;width:30%}
-.s1 .seal{left:2%;top:30px}
+.s1 .photo.main{right:0;top:30px;width:72%;height:330px;transform:rotate(3deg)}
+.bagx{position:absolute;z-index:3;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
+.bagx img,img.bagx{width:100%;height:auto;display:block}
+img.bagx{width:auto}
+.s1 .bagx.b1{left:2%;bottom:0;width:34%!important;height:auto}
+.s2 .photo.side{left:0;top:40px;width:62%;height:300px;transform:rotate(-3deg)}
+.s2 .bagx{width:30%;text-align:center;color:#fff;font-weight:700;font-size:.85rem;transition:transform .3s}
+.s2 .bagx:hover{transform:translateY(-6px)}
+.s2 .bagx span{display:inline-block;margin-top:6px;background:var(--crema);border-radius:999px;padding:.25rem .8rem}
+.s2 .bagx.b2{right:30%;bottom:-6px}
+.s2 .bagx.b3{right:0;bottom:14px}
+.s1 .seal{left:4%;top:0}
 .s1 .steam{right:34%;top:-30px}
-.s1 .tagline{right:6%;top:330px}
+.s1 .tagline{right:4%;top:380px}
 .s2 .bgx{filter:blur(4px) brightness(.55);transform:scale(1.06)}
 .s2 .shade{background:linear-gradient(90deg,rgba(20,12,8,.92) 0%,rgba(20,12,8,.75) 45%,rgba(20,12,8,.35) 100%)}
 .s2 .cream-card{left:0;top:30px;width:62%;z-index:2}
 .s2 .cream-card img{mix-blend-mode:multiply;width:100%;display:block;padding:16px 16px 6px}
 .s2 .photo.side{right:0;top:150px;width:52%;height:250px;transform:rotate(4deg)}
-.s2 .seal{right:6%;top:40px}
+.s2 .seal{right:2%;top:0}
 .s3 .bgx{filter:blur(4px) brightness(.5);transform:scale(1.06)}
 .s3 .shade{background:linear-gradient(90deg,rgba(14,22,16,.92) 0%,rgba(20,24,14,.7) 45%,rgba(20,12,8,.3) 100%)}
-.s3 .photo.a{left:0;top:10px;width:60%;height:300px;transform:rotate(-4deg)}
-.s3 .photo.b{right:0;top:170px;width:54%;height:260px;transform:rotate(5deg);z-index:2}
+.s3 .photo.a{left:0;top:20px;width:62%;height:330px;transform:rotate(-4deg)}
+.s3 .photo.b{right:0;top:150px;width:50%;height:320px;transform:rotate(5deg);z-index:2}
 .s3 .cream-card.beans3d{left:8%;bottom:6px;width:38%;z-index:3;padding:8px}
 .s3 .cream-card.beans3d img{mix-blend-mode:multiply;width:100%;display:block}
 .s3 .cream-card.beans3d span{display:block;text-align:center;color:var(--roast);font-weight:700;font-size:.8rem;padding-bottom:4px}
@@ -483,7 +491,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 @media (max-width:640px){
   .section{padding:60px 0}
   .stage{height:330px}
-  .s1 .photo.main{height:230px}.s2 .photo.side{height:170px;top:120px}.s3 .photo.a{height:200px}.s3 .photo.b{height:180px;top:120px}
+  .s1 .photo.main{height:220px}.s2 .photo.side{height:180px;top:30px}.s3 .photo.a{height:210px}.s3 .photo.b{height:200px;top:110px}.s2 .bagx{width:32%}.s2 .bagx span{font-size:.7rem}
   .tagline{display:none}
   .hero-stats{display:none}
   .topbar .hide-sm{display:none}
@@ -559,10 +567,9 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
           </div>
         </div>
         <div class="stage">
-          <figure class="photo main"><img src="img/black-coffee.webp" alt="Ly cà phê đen nguyên chất CAFEROA bên hạt cà phê rang"></figure>
+          <figure class="photo main"><img src="img/hb-wood-cup.webp" alt="Cà phê hạt rang thuần mộc CAFEROA" width="713" height="429"></figure>
           <div class="steam"><i></i><i></i><i></i></div>
-          <img class="mul sack float slow" src="img/bowl-sack.webp" alt="Cà phê bột và cà phê hạt rang mộc">
-          <img class="mul beans float" src="img/beans-cluster.webp" alt="Hạt cà phê rang thuần mộc">
+          <img class="bagx b1 float slow" src="img/hb-bag-roasted-beans.webp" alt="Túi cà phê CAFEROA Signature Roasted Beans" width="700" height="1059">
           <div class="seal"><div><small>Giá lẻ chỉ từ</small><b data-minprice-short>150K</b></div></div>
           <div class="tagline"><i></i>Rang mới theo đơn</div>
         </div>
@@ -570,7 +577,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
     </div>
 
     <div class="slide s2" aria-label="2 / 3">
-      <div class="bgx" style="background-image:url('img/scoops-bg.webp')"></div><div class="shade"></div>
+      <div class="bgx" style="background-image:url('img/hb-espresso-bg.webp')"></div><div class="shade"></div>
       <div class="container">
         <div>
           <div class="eyebrow anim">Dành cho quán & văn phòng</div>
@@ -578,18 +585,16 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
           <p class="lead anim d3">Robusta Đắk Lắk đậm vị, Arabica Cầu Đất thơm thanh. Lấy từ 5kg/tháng đã có giá sỉ, giao định kỳ tận nơi, được pha thử miễn phí trước khi nhập.</p>
         </div>
         <div class="stage">
-          <div class="cream-card">
-            <img src="img/arabica-robusta.webp" alt="So sánh hạt cà phê Arabica và Robusta giá sỉ">
-            <div class="ar-labels"><a href="#gia-si">Arabica giá sỉ<small>Thơm, chua thanh</small></a><a href="#gia-si">Robusta giá sỉ<small>Đậm, nhiều caffeine</small></a></div>
-          </div>
-          <figure class="photo side"><img src="img/scoops.webp" alt="Cà phê hạt rang các loại cho quán"><figcaption>Đủ loại hạt cho quán</figcaption></figure>
+          <figure class="photo side"><img src="img/hb-milk-coffee.webp" alt="Cà phê sữa pha phin cho quán và văn phòng" width="654" height="468"><figcaption>Cà phê cho quán & văn phòng</figcaption></figure>
+          <a href="#gia-si" class="bagx b2"><img src="img/hb-bag-specialty-robusta.webp" alt="Cà phê Robusta giá sỉ CAFEROA" width="700" height="1059"><span>Robusta giá sỉ</span></a>
+          <a href="#gia-si" class="bagx b3"><img src="img/hb-bag-gold-reserve.webp" alt="Cà phê Arabica giá sỉ CAFEROA" width="700" height="1059"><span>Arabica giá sỉ</span></a>
           <div class="seal dark"><div><small>Chiết khấu đến</small><b data-maxdisc>20%</b></div></div>
         </div>
       </div>
     </div>
 
     <div class="slide s3" aria-label="3 / 3">
-      <div class="bgx" style="background-image:url('img/farm-cup-bg.webp')"></div><div class="shade"></div>
+      <div class="bgx" style="background-image:url('img/hb-cherries-bg.webp')"></div><div class="shade"></div>
       <div class="container">
         <div>
           <div class="eyebrow anim" style="color:#e9cf9a">Từ nông trại đến tách cà phê</div>
@@ -597,9 +602,8 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
           <p class="lead anim d3">Cà phê hái chín, rang mộc, không tẩm ướp. Nhận đóng hộp quà tặng cho khách hàng, đối tác và nhân viên dịp lễ, Tết, có thiệp và gói nơ theo yêu cầu.</p>
         </div>
         <div class="stage">
-          <figure class="photo a"><img src="img/farm-cup.webp" alt="Cà phê chín đỏ trên cây và tách cà phê"><figcaption>Hái chín từ nông trại</figcaption></figure>
-          <figure class="photo b"><img src="img/cup-gift.webp" alt="Quà tặng cà phê hạt rang gói nơ"><figcaption>Quà tặng cà phê</figcaption></figure>
-          <div class="cream-card beans3d float"><img src="img/beans-3d.webp" alt="Hạt cà phê rang nguyên hạt"><span>100% hạt rang nguyên chất</span></div>
+          <figure class="photo a"><img src="img/hb-cherries.webp" alt="Cà phê chín đỏ hái từ nông trại Tây Nguyên" width="547" height="365"><figcaption>Hái chín từ nông trại</figcaption></figure>
+          <figure class="photo b"><img src="img/hb-bag-premium.webp" alt="Quà tặng cà phê hạt cao cấp" width="1024" height="1024"><figcaption>Quà tặng cà phê cao cấp</figcaption></figure>
         </div>
       </div>
     </div>
