@@ -919,13 +919,16 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 
 /* ---------- Products ---------- */
 let currentFilter = 'Tất cả';
+const PAGE_SIZE = 4; let shownCount = PAGE_SIZE;
 function renderFilters(){
   const cats = ['Tất cả', ...new Set(PRODUCTS.map(p => p.cat))];
   $('#filters').innerHTML = cats.map(c => `<button class="chip ${c===currentFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
 }
-function setFilter(c){ currentFilter = c; renderFilters(); renderProducts(); }
-function renderProducts(){
-  const list = PRODUCTS.filter(p => currentFilter === 'Tất cả' || p.cat === currentFilter);
+function setFilter(c){ currentFilter = c; shownCount = PAGE_SIZE; renderFilters(); renderProducts(); }
+function showMore(){ shownCount += PAGE_SIZE; renderProducts(true); }
+function renderProducts(more){
+  const all = PRODUCTS.filter(p => currentFilter === 'Tất cả' || p.cat === currentFilter);
+  const list = all.slice(0, shownCount);
   $('#productGrid').innerHTML = list.map(p => `
     <article class="card">
       <div class="thumb" onclick="openProduct('${p.id}')">
@@ -943,6 +946,11 @@ function renderProducts(){
         </div>
       </div>
     </article>`).join('');
+  const mb = document.getElementById('moreWrap'); if(mb){
+    const left = all.length - list.length;
+    mb.innerHTML = left > 0 ? `<button class="btn btn-line" onclick="showMore()">Xem thêm sản phẩm khác (${left}) ↓</button>` : (all.length > PAGE_SIZE ? `<span style="color:var(--muted);font-size:.9rem">Đã hiển thị tất cả ${all.length} sản phẩm</span>` : '');
+  }
+  if(more){ const cards = document.querySelectorAll('#productGrid .card'); const first = cards[shownCount-PAGE_SIZE]; if(first) first.scrollIntoView({behavior:'smooth', block:'center'}); }
 }
 function openProduct(id){
   const p = byId(id); if(!p) return;
