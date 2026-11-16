@@ -1035,7 +1035,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 <div class="chat" id="chat" role="dialog" aria-label="Trợ lý CAFEROA">
   <div class="chat-head">
     <div class="av" style="background:var(--espresso);overflow:hidden;border:1px solid rgba(216,173,95,.4)"><img src="img/favicon-r.webp" alt="" style="width:100%;height:100%"></div>
-    <div><b>Trợ lý CAFEROA</b><span>● Đang trực tuyến</span></div>
+    <div><b class="notranslate">Trợ lý CAFEROA</b><span>● Đang trực tuyến</span></div>
     <button class="chat-clear" onclick="clearChat()" title="Xóa lịch sử trò chuyện" aria-label="Xóa lịch sử trò chuyện">↺</button>
     <button class="close" onclick="toggleChat(false)" aria-label="Đóng">×</button>
   </div>
@@ -1821,5 +1821,6 @@ document.querySelectorAll('img[data-fbkey]').forEach(im=>{ if(im.complete && im.
 bindShop(); if($('#heroTrack')) initHero(); renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
 setTimeout(groupFromHash, 50);
 </script>
+<script src="lang.js" defer></script>
 </body>
 </html>
