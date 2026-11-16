@@ -46,10 +46,11 @@ var TRS={trong:1,kinh:1,dat:1,theo:1,don:1,'new':1,va:1,'(dat':1,'don)':1};
 function prepTr(){(D.tr||[]).forEach(function(t){t._n=nm(t.n);t._t=t._n.split(' ').filter(function(w){return w.length>=2&&!TRS[w]});t._b=nm(t.b)})}
 function trFind(q){var best=[],bs=0;(D.tr||[]).forEach(function(t){var s=0,hb=has(q,t._b),hc=has(q,t.cs);t._t.forEach(function(w){if(has(q,w))s++});if(hc)s+=0.5;if(!(hb||hc))s=0;if(s>bs){bs=s;best=[t]}else if(s>0&&s===bs)best.push(t)});return bs>=2?best:[];}
 function parseDo(raw){var s=raw.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/,/g,'.');
- var o={},m,re=/(can|vien|loan|lao|add|cong)\s*(?:thi|do|la|:)?\s*(\d+(?:\.\d+)?)/g;
- while(m=re.exec(s)){var x=parseFloat(m[2]);if(x>30)continue;if(m[1]==='can')o.s=-x;else if(m[1]==='vien')o.s=x;else if(m[1]==='loan')o.c=x;else o.a=x;}
- var sg=s.match(/(^|[\s(\/])([+-]\d{1,2}(?:\.\d{1,2})?)(?=$|[\s)\/])/g);
- if(sg){sg=sg.map(function(x){return parseFloat(x.replace(/[\s(\/]/g,''))});if(o.s==null)o.s=sg[0];if(o.c==null&&sg.length>1)o.c=Math.abs(sg[1]);}
+ var o={},m,re=/(can|vien|loan|lao|add|cong)\s*(?:thi|do|la|:)?\s*[+-]?\s*(\d+(?:\.\d+)?)/g;
+ function cv(x){return (x>=50&&x<=3000&&x===Math.round(x))?x/100:x}
+ while(m=re.exec(s)){var x=cv(parseFloat(m[2]));if(x>30)continue;if(m[1]==='can')o.s=-x;else if(m[1]==='vien')o.s=x;else if(m[1]==='loan')o.c=x;else o.a=x;}
+ var sg=s.replace(/(can|vien|loan|lao|add|cong)\s*(?:thi|do|la|:)?\s*[+-]?\s*\d+(?:\.\d+)?/g,' ').match(/(^|[\s(\/,])([+-]\d{1,4}(?:\.\d{1,2})?)(?=$|[\s)\/,])/g);
+ if(sg){sg=sg.map(function(x){var v=parseFloat(x.replace(/[\s(\/,]/g,''));return v<0?-cv(-v):cv(v)}).filter(function(v){return Math.abs(v)<=30});if(!sg.length)sg=null;if(o.s==null)o.s=sg[0];if(o.c==null&&sg.length>1)o.c=Math.abs(sg[1]);}
  if(o.s==null&&o.c==null&&o.a==null)return null;if(o.s==null)o.s=0;if(o.c==null)o.c=0;return o;}
 function inR(x,r){return r&&x>=r[0]-1e-6&&x<=r[1]+1e-6}
 function trByDo(q,d,force){var wantDa=/da trong|lao|progressive/.test(q)||d.a!=null,wantHai=/hai trong|2 trong|flat/.test(q),dm=/doi mau|photo|ra nang/.test(q),asx=/anh sang xanh|blue|asx/.test(q),be=/chong be|chong vo|poly|duramax/.test(q),dat=force||/dat theo don|rx/.test(q);
@@ -156,7 +157,7 @@ function add(t,who,chips,pg){if(t){var m=el('div',{'class':'emb-m '+(who?'emb-u'
  ms.scrollTop=ms.scrollHeight;}
 function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Gọi/Zalo tư vấn'){window.open(ZALO,'_blank');return;}
- if(t==='Tròng kính mắt'){setTimeout(function(){add('EYEMEDI có tròng Chemi, Zinmy, Hoga: đơn tròng, chống ánh sáng xanh, đổi màu, đa tròng, hai tròng, chống bể, tròng đặt theo đơn.\nAnh/chị gõ độ để em lọc tròng phù hợp, ví dụ: "cận 3 loạn 1", "viễn 2", "cận 5 đổi màu", "lão 2 đa tròng". Hoặc chọn nhanh:',0,['Tròng chống ánh sáng xanh','Tròng đổi màu','Đa tròng','Hai tròng','Tròng chống bể'])},250);return;}
+ if(t==='Tròng kính mắt'){setTimeout(function(){add('EYEMEDI có đơn tròng, chống ánh sáng xanh, đổi màu, và đa tròng, hai tròng, chống bể, chống ánh sáng xanh, đổi màu tròng đặt theo đơn.\nAnh/chị gửi độ mắt của mình, ví dụ: "cận -125 loạn -150", "viễn +200", "cận -500 đổi màu", "lão +200, đa tròng" để Eyemedi tư vấn ạ.',0,['Tròng chống ánh sáng xanh','Tròng đổi màu','Đa tròng','Hai tròng','Tròng chống bể'])},250);return;}
  if(t==='Đặt mua'&&last&&last.id){setTimeout(function(){openOrder(last)},200);return;}
  var map={'Thông số':'thong so','Chất liệu':'chat lieu','Màu / phân loại':'mau','Đặt mua':'dat mua'};
  setTimeout(function(){if(!D){add('Dữ liệu đang tải, anh/chị thử lại sau vài giây ạ.');return;}
