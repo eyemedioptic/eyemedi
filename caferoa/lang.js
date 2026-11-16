@@ -48,6 +48,49 @@
     if (inp && PH[window.CAFEROA_LANG]) inp.placeholder = PH[window.CAFEROA_LANG];
   });
 
+  /* Tự dịch các phần do JavaScript tạo ra (chatbot, giỏ hàng, popup…) */
+  if (window.CAFEROA_LANG !== 'vi') {
+    var TL = window.CAFEROA_LANG, CK = 'caferoa_tr_' + TL, cache = {};
+    try { cache = JSON.parse(sessionStorage.getItem(CK) || '{}'); } catch (e) {}
+    var pending = {};
+    function tr(text) {
+      if (cache[text] !== undefined) return Promise.resolve(cache[text]);
+      if (pending[text]) return pending[text];
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl=' + TL + '&dt=t&q=' + encodeURIComponent(text);
+      pending[text] = fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+        var out = (j[0] || []).map(function (x) { return x[0]; }).join('') || text;
+        cache[text] = out; try { sessionStorage.setItem(CK, JSON.stringify(cache)); } catch (e) {}
+        return out;
+      }).catch(function () { return text; });
+      return pending[text];
+    }
+    var HAS_VI = /[A-Za-zÀ-ỹ]/;
+    function walk(root) {
+      if (!root || root.nodeType === 8) return;
+      if (root.nodeType === 3) {
+        var t = root.nodeValue, k = t.trim();
+        if (!k || !HAS_VI.test(k) || root.__tr === k) return;
+        var lead = t.match(/^\s*/)[0], tail = t.match(/\s*$/)[0];
+        tr(k).then(function (v) { if (root.nodeValue === t) { root.nodeValue = lead + v + tail; root.__tr = v; } });
+        return;
+      }
+      if (root.nodeType !== 1 || /^(SCRIPT|STYLE|TEXTAREA|SVG)$/i.test(root.tagName) || (root.classList && root.classList.contains('lang-sw'))) return;
+      if (root.placeholder && !root.__ph) { root.__ph = 1; var ph = root.placeholder; if (HAS_VI.test(ph) && root.id !== 'chatInput') tr(ph).then(function (v) { root.placeholder = v; }); }
+      for (var c = root.firstChild; c; c = c.nextSibling) walk(c);
+    }
+    var ZONES = ['#chat', '#chatHello', '#toast', '#cart', '#modal', '#productGrid', '#moreWrap', '#newsList', '#filters', '#ticker', '#chartTip', '#mbar'];
+    document.addEventListener('DOMContentLoaded', function () {
+      ZONES.forEach(function (sel) {
+        var z = document.querySelector(sel); if (!z) return;
+        z.classList.add('notranslate'); z.setAttribute('translate', 'no');
+        walk(z);
+        new MutationObserver(function (ms) {
+          ms.forEach(function (m) { m.addedNodes.forEach(walk); });
+        }).observe(z, { childList: true, subtree: true });
+      });
+    });
+  }
+
   /* CSS */
   var css = '' +
     '.lang-sw{position:relative;margin-right:2px}' +
