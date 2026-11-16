@@ -958,6 +958,7 @@ const SHOP = {
   // Link Web App của Google Apps Script (ghi đơn vào Google Sheet "Đơn hàng" + gửi email).
   // Để trống thì đơn chỉ gửi email qua FormSubmit.
   sheetEndpoint: '',
+  ccEmails: 'eyemedi.group@gmail.com,optic.eyemedi@gmail.com', // nhận bản sao đơn hàng (dự phòng FormSubmit)
   address: '63C Lô C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh',
   freeShipFrom: 500000,
   shipFee: 25000,
@@ -1311,7 +1312,7 @@ async function submitData(type, subject, data){
   return sendEmail(subject, data);
 }
 async function sendEmail(subject, fields){
-  const body = Object.assign({_subject: subject, _template: 'table', _captcha: 'false'}, fields);
+  const body = Object.assign({_subject: subject, _template: 'table', _captcha: 'false', _cc: SHOP.ccEmails}, fields);
   const ctrl = new AbortController(); const tm = setTimeout(()=>ctrl.abort(), 15000);
   try{
     const r = await fetch(SHOP.formEndpoint, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(body), signal: ctrl.signal});
