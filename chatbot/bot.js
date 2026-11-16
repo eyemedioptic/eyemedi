@@ -22,7 +22,8 @@ function general(q){var b=null,bl=0;D.chung.forEach(function(g){g._k.forEach(fun
 function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ trợ gì ạ?'};
  if(/^(hi|hello|chao|alo|xin chao|shop oi|ad oi)\b/.test(q)&&q.split(' ').length<=3)return {t:'Dạ EYEMEDI xin chào anh/chị! Em có thể báo giá, thông số, chất liệu sản phẩm, địa chỉ cửa hàng, đo mắt miễn phí, giao hàng và bảo hành ạ.',c:CHIPS};
  if(/dat lich|do mat|kiem tra thi luc|do khuc xa|do thi luc/.test(q))return {t:'EYEMEDI đo mắt, kiểm tra thị lực miễn phí (08:30 – 21:30 hằng ngày). Anh/chị nhập thông tin để đặt lịch nhé:',book:1};
- if(/uu dai|chuong trinh|khuyen mai|qua tang|tang qua|tang gi|co tang|\bkm\b/.test(q))return {t:'Eyemedi đang có chương trình:\n1. Tặng tròng kính phủ siêu váng Hydrophobic khi mua gọng mới\n2. Tặng gọng nhựa hoặc gọng kim loại trị giá 650k khi thay tròng kính mới\n3. Đổi gọng mới, thu gọng cũ -500k trên bill',c:['Kính gọng','Tròng kính mắt','Sản phẩm đang giảm giá']};
+ if(/chi tiet chuong trinh|dieu kien|ap dung|thu gong|doi gong|thu cu|tang gong|tang trong|hydrophobic|500k|650k|chuong trinh (1|2|3|mot|hai|ba)|ct ?[123]\b/.test(q)||(window.__embProg&&/chi tiet|the nao|nhu nao|bao lau|het han|duoc khong|ra sao|cu the/.test(q))){window.__embProg=0;return {t:'Dạ để nắm rõ chi tiết và điều kiện áp dụng chương trình, anh/chị nhắn Zalo '+HL+', nhân viên EYEMEDI tư vấn ngay ạ.',staff:1};}
+ if(/uu dai|chuong trinh|khuyen mai|qua tang|tang qua|tang gi|co tang|\bkm\b/.test(q)){window.__embProg=1;return {t:'Eyemedi đang có chương trình:\n1. Tặng tròng kính phủ siêu váng Hydrophobic khi mua gọng mới\n2. Tặng gọng nhựa hoặc gọng kim loại trị giá 650k khi thay tròng kính mới\n3. Đổi gọng mới, thu gọng cũ -500k trên bill',c:['Tặng gọng kính','Tặng tròng kính','Thu gọng cũ 500k']};}
  var dd=parseDo(raw);if(dd&&(/trong|kinh|can|vien|loan|lao|do/.test(q)||/[+-]\d/.test(raw))&&!/ap trong|lens/.test(q))return trByDo(q,dd);
  var TF=trFind(q);if(TF.length===1)return trInfo(TF[0]);if(TF.length>1&&TF.length<=8)return {t:'Anh/chị chọn loại tròng:',c:TF.map(function(t){return {l:trShort(t.n),tr:t}}),pg:1};
  var TL=trList(q);if(TL)return TL;
@@ -94,7 +95,7 @@ function trPart(k){var t=lastTr;if(!t)return 'Anh/chị chọn loại tròng tr�
  if(k==='Giá theo độ')return t.gia.replace(/^Giá tròng [^\n]*\n/,'');
  if(k==='Đặc điểm tròng')return t.mt;
  return 'Chiết suất: '+t.cs+(t.cl?'\nChất liệu: '+t.cl:'');}
-var CHIPS=['Kính mát','Kính gọng','Tròng kính mắt','Đặt lịch đo mắt','Địa chỉ cửa hàng','Bảo hành'];
+var CHIPS=['Kính mát','Kính gọng','Tròng kính mắt','Đặt lịch đo mắt','Địa chỉ cửa hàng','Bảo hành','Ưu đãi'];
 var css='#emb-btn{position:fixed;right:20px;bottom:96px;z-index:100000;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#0b8f8c,#073a3c);color:#fff;box-shadow:0 6px 18px rgba(7,58,60,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}'+
 '#emb-btn svg{width:28px;height:28px;fill:#fff}#emb-btn .emb-dot{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#e8262f;border:2px solid #fff}'+
 '.float-contact #emb-btn{position:relative;right:auto;bottom:auto;width:52px;height:52px}'+
@@ -245,7 +246,7 @@ function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Đặt mua'&&last&&last.id){setTimeout(function(){openOrder(last)},200);return;}
  var map={'Thông số':'thong so','Chất liệu':'chat lieu','Màu / phân loại':'mau','Đặt mua':'dat mua'};
  setTimeout(function(){if(!D){load(function(){send(t)});return;}
-  var r=map[t]&&last?{t:spPart(last,{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau'}[t]),c:SPCH.filter(function(x){return x!==t})}:answer(t);if(r.order){openOrder(r.order);return;}if(r.book){add(r.t);openBooking();return;}add(r.t,0,r.c,r.pg,r.im)},250);}
+  var r=map[t]&&last?{t:spPart(last,{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau'}[t]),c:SPCH.filter(function(x){return x!==t})}:answer(t);if(r.order){openOrder(r.order);return;}if(r.staff){add(r.t);handoff();return;}if(r.book){add(r.t);openBooking();return;}add(r.t,0,r.c,r.pg,r.im)},250);}
 function load(cb){if(D)return cb();fetch('/chatbot/du-lieu.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(j){D=j;prep();cb()}).catch(function(){})}
 function ui(){var st=el('style',{id:'emb-css'},css);document.head.appendChild(st);
  var btn=el('button',{id:'emb-btn',type:'button','aria-label':'Chat với EYEMEDI'},'<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.9 2 11.7c0 2.6 1.3 4.9 3.4 6.5L4.6 22l4.2-2.2c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 3 12 3zm-4 9.9a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg><span class="emb-dot"></span>');
