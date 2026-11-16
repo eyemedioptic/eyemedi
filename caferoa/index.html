@@ -325,6 +325,15 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .note-sm{font-size:.8rem;color:var(--muted);margin-top:10px}
 @media (max-width:980px){.where,.ws-grid,.lead-form,.roast,.franchise{grid-template-columns:1fr}}
 
+/* QR chuyển khoản */
+.qr-box{background:#fff;border:1.5px solid var(--crema);border-radius:14px;padding:14px;margin-top:12px;text-align:left}
+.qr-title{font-weight:700;color:var(--roast);text-align:center;margin-bottom:8px}
+.qr-img{width:100%;max-width:260px;margin:0 auto 10px;display:block;border-radius:8px}
+.qr-info{font-size:.85rem;display:grid;gap:5px}
+.qr-info div{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.qr-info span{color:var(--muted);min-width:92px}
+.qr-info button{font-size:.72rem;border:1px solid var(--crema);color:var(--bean);border-radius:999px;padding:.1rem .5rem}
+.qr-note{font-size:.8rem;color:var(--muted);margin-top:8px}
 /* Overlay / drawers / modal */
 .overlay{position:fixed;inset:0;background:rgba(20,12,8,.55);opacity:0;pointer-events:none;transition:.25s;z-index:80}
 .overlay.show{opacity:1;pointer-events:auto}
@@ -947,6 +956,8 @@ const SHOP = {
   freeShipFrom: 500000,
   shipFee: 25000,
   bank: '(Ngân hàng) – STK: (số TK) – Chủ TK: (tên chủ TK CAFEROA)',
+  // Mã QR chuyển khoản (VietQR). bankId: mã ngân hàng, vd 'VCB' (Vietcombank), 'TCB', 'MB', 'ACB', 'BIDV', 'ICB' (VietinBank)...
+  qr: { bankId: '', bankName: '', accountNo: '', accountName: '' },
   priceUpdated: '16/11/2026'
 };
 /* Bậc giá sỉ (chiết khấu trên giá lẻ) — GIÁ TRỊ TẠM, chỉnh theo chính sách thật */
@@ -1276,8 +1287,8 @@ function placeOrder(){
     <h3 class="serif" style="font-size:1.5rem;color:var(--roast)">Cảm ơn ${esc(d.name)}!</h3>
     <p style="color:var(--muted);font-size:.92rem">Mã đơn <b>${code}</b>. CAFEROA sẽ gọi hoặc nhắn Zalo cho bạn để xác nhận đơn.</p>
     <p id="sendStatus" style="font-size:.88rem;font-weight:600;color:var(--muted);margin-top:8px">⏳ Đang gửi đơn tới CAFEROA…</p>
-    <pre id="orderText">${esc(text)}</pre>
-    ${d.pay==='Chuyển khoản'?`<p style="font-size:.85rem;background:#fffaf1;border:1px solid var(--line);border-radius:10px;padding:10px">Chuyển khoản: ${esc(SHOP.bank)}<br>Nội dung: <b>${code} ${esc(phone)}</b></p>`:''}</div>`;
+    ${d.pay==='Chuyển khoản' ? qrBlock(code, other ? t.sub : t.total, other) : ''}
+    <pre id="orderText">${esc(text)}</pre></div>`;
   $('#cartFoot').innerHTML = `<div class="two"><a class="btn btn-line btn-sm" href="tel:${SHOP.phone}">Gọi CAFEROA</a><button class="btn btn-line btn-sm" onclick="sendZalo()">Nhắn Zalo</button></div>`;
   submitData('order', subject, emailFields).then(ok => {
     const st = $('#sendStatus'); if(!st) return;
@@ -1305,6 +1316,25 @@ async function sendEmail(subject, fields){
   }catch(e){ return false; } finally{ clearTimeout(tm); }
 }
 function mailtoLink(subject, text){ return `mailto:${SHOP.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`; }
+function qrBlock(code, amount, shipLater){
+  const q = SHOP.qr || {};
+  if(!q.bankId || !q.accountNo) return `<p style="font-size:.85rem;background:#fffaf1;border:1px solid var(--line);border-radius:10px;padding:10px">CAFEROA sẽ gửi thông tin chuyển khoản khi xác nhận đơn.<br>Nội dung chuyển khoản: <b>${code}</b></p>`;
+  const url = `https://img.vietqr.io/image/${encodeURIComponent(q.bankId)}-${encodeURIComponent(q.accountNo)}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(code)}&accountName=${encodeURIComponent(q.accountName||'')}`;
+  return `<div class="qr-box">
+    <div class="qr-title">Quét mã QR để chuyển khoản</div>
+    <img src="${url}" alt="Mã QR chuyển khoản đơn ${code}" class="qr-img" onerror="this.outerHTML='<p style=\'color:var(--red)\'>Không tải được mã QR, vui lòng chuyển khoản theo thông tin bên dưới.</p>'">
+    <div class="qr-info">
+      <div><span>Ngân hàng</span><b>${esc(q.bankName||q.bankId)}</b></div>
+      <div><span>Số tài khoản</span><b>${esc(q.accountNo)}</b> <button type="button" onclick="copyText('${esc(q.accountNo)}')">Sao chép</button></div>
+      <div><span>Chủ tài khoản</span><b>${esc(q.accountName||'')}</b></div>
+      <div><span>Số tiền</span><b>${vnd(amount)}</b>${shipLater?' <small>(chưa gồm phí ship tỉnh)</small>':''}</div>
+      <div><span>Nội dung</span><b>${code}</b> <button type="button" onclick="copyText('${code}')">Sao chép</button></div>
+    </div>
+    <a class="btn btn-dark btn-sm" href="${url}" download="QR-${code}.png" target="_blank" rel="noopener" style="width:100%;margin-top:10px">Tải ảnh mã QR</a>
+    <p class="qr-note">📸 Chụp màn hình hoặc tải ảnh mã QR, mở app ngân hàng → Quét QR. Số tiền và nội dung <b>${code}</b> đã điền sẵn.</p>
+  </div>`;
+}
+function copyText(t){ const done=()=>toast('Đã sao chép: '+t, true); if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(done).catch(()=>{}); else { const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');done();}catch(e){} ta.remove(); } }
 function copyOrder(silent){
   const txt = $('#orderText')?.textContent || '';
   const done = () => { if(!silent) toast('Đã sao chép nội dung đơn hàng', true); };
