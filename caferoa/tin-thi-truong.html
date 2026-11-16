@@ -68,6 +68,14 @@ header.site .container{display:flex;align-items:center;justify-content:space-bet
 nav.main{display:flex;gap:2rem;font-size:.95rem}
 nav.main a{opacity:.85;position:relative;padding:.3rem 0}
 nav.main a:hover{opacity:1;color:var(--gold)}
+.nav-dd{position:relative;display:flex;align-items:center}
+.nav-dd .caret{font-size:.7rem;opacity:.7}
+.dd-menu{position:absolute;top:100%;left:-14px;min-width:230px;background:var(--espresso);border:1px solid rgba(216,173,95,.25);border-radius:12px;padding:8px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(8px);transition:.2s;box-shadow:0 16px 30px rgba(0,0,0,.35);z-index:60}
+.dd-menu a{padding:.6rem .8rem!important;border-radius:8px;border:0!important;white-space:nowrap}
+.dd-menu a:hover{background:rgba(216,173,95,.12)}
+.nav-dd:hover .dd-menu,.nav-dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:none}
+@media (max-width:980px){.nav-dd{flex-direction:column;align-items:stretch}.nav-dd .caret{display:none}.dd-menu{position:static;opacity:1;visibility:visible;transform:none;background:none;border:0;box-shadow:none;padding:0 0 0 14px;min-width:0}.dd-menu a{font-size:.9rem;opacity:.75}}
+
 .header-actions{display:flex;align-items:center;gap:.6rem}
 .icon-btn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;position:relative;transition:.2s}
 .icon-btn:hover{background:rgba(255,255,255,.08)}
@@ -528,7 +536,13 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   <div class="container">
     <a href="#top" class="logo" aria-label="CAFEROA Premium Coffee"><img src="img/logo-r-header.webp" alt="CAFEROA Premium Coffee" width="273" height="46"></a>
     <nav class="main" id="nav">
-      <a href="./#san-pham">Sản phẩm</a>
+      <div class="nav-dd">
+        <a href="./#san-pham" class="dd-top">Sản phẩm <span class="caret">▾</span></a>
+        <div class="dd-menu">
+          <a href="./#ban-le" onclick="return pickGroup('Sản phẩm bán lẻ')">Sản phẩm bán lẻ</a>
+          <a href="./#ban-si" onclick="return pickGroup('Bán sỉ & nhượng quyền')">Bán sỉ & nhượng quyền</a>
+        </div>
+      </div>
       <a href="./#bang-gia">Giá bán lẻ</a>
       <a href="./#gia-si">Giá sỉ cho quán</a>
       <a href="./#nhuong-quyen">Nhượng quyền</a>
@@ -1350,10 +1364,18 @@ function initHero(){
   heroAuto();
 }
 
+function pickGroup(g){
+  if(!document.getElementById('filters')){ location.href = './#' + (g==='Sản phẩm bán lẻ'?'ban-le':'ban-si'); return false; }
+  setFilter(g); document.getElementById('nav').classList.remove('open');
+  document.getElementById('san-pham').scrollIntoView({behavior:'smooth'}); return false;
+}
+function groupFromHash(){ const h=location.hash; if(h==='#ban-le') pickGroup('Sản phẩm bán lẻ'); else if(h==='#ban-si') pickGroup('Bán sỉ & nhượng quyền'); }
+window.addEventListener('hashchange', groupFromHash);
 /* ---------- Init ---------- */
 document.querySelectorAll('img[data-key]').forEach(im=>im.src=IMGS[im.dataset.key]);
 document.querySelectorAll('img[data-fbkey]').forEach(im=>{ if(im.complete && im.naturalWidth===0) imgFallback(im); });
 bindShop(); if($('#heroTrack')) initHero(); if($('#priceTable')) renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
+setTimeout(groupFromHash, 50);
 </script>
 </body>
 </html>
