@@ -6,7 +6,7 @@ var STOP={kinh:1,mat:1,nam:1,nu:1,gong:1,can:1,trong:1,mau:1,lens:1,cho:1,the:1,
 function nm(s){return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/Đ/g,'d').toLowerCase().replace(/[^a-z0-9.]+/g,' ').trim();}
 function has(q,w){return (' '+q+' ').indexOf(' '+w+' ')>=0;}
 var DF={};
-function prep(){D.sp.forEach(function(p){p._n=nm(p.n);p._c=nm(p.c);var t={};nm(p.n+' '+p.kw).split(' ').forEach(function(w){if(w.length>=3&&!STOP[w])t[w]=1});p._t=Object.keys(t);p._t.forEach(function(w){DF[w]=(DF[w]||0)+1})});
+function prep(){D.sp.forEach(function(p){p._n=nm(p.n);p._c=nm(p.c);var t={};nm(p.n+' '+p.kw).split(' ').forEach(function(w){if(w.length>=3&&!STOP[w])t[w]=1});p._t=Object.keys(t);p._t.forEach(function(w){DF[w]=(DF[w]||0)+1})});prepTr();
 D.chung.forEach(function(g){g._k=String(g.kw).split(';').map(nm).filter(function(x){return x&&x!=='(mac dinh)'})});}
 function findSp(q){var best=[],bs=0;D.sp.forEach(function(p){var s=0;
  if(p._c.length>=3&&(has(q,p._c)||(/\d/.test(p._c)&&q.replace(/ /g,'').indexOf(p._c.replace(/ /g,''))>=0)))s+=5;
@@ -21,6 +21,9 @@ function vnd(n){return n.toLocaleString('vi-VN')+'đ';}
 function general(q){var b=null,bl=0;D.chung.forEach(function(g){g._k.forEach(function(k){if(k&&k.length>=4&&(has(q,k)||q.indexOf(k)>=0)&&k.length>bl){bl=k.length;b=g}})});return b;}
 function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ trợ gì ạ?'};
  if(/^(hi|hello|chao|alo|xin chao|shop oi|ad oi)\b/.test(q)&&q.split(' ').length<=3)return {t:'Dạ EYEMEDI xin chào anh/chị! Em có thể báo giá, thông số, chất liệu sản phẩm, địa chỉ cửa hàng, đo mắt miễn phí, giao hàng và bảo hành ạ.',c:CHIPS};
+ var dd=parseDo(raw);if(dd&&(/trong|kinh|can|vien|loan|lao|do/.test(q)||/[+-]\d/.test(raw))&&!/ap trong|lens/.test(q))return trByDo(q,dd);
+ var TF=trFind(q);if(TF.length===1)return trInfo(TF[0]);if(TF.length>1&&TF.length<=6)return {t:'Em tìm thấy '+TF.length+' loại tròng phù hợp, anh/chị chọn giúp em:',c:TF.map(function(t){return t.n})};
+ var g0=general(q);if(g0&&g0.g==='Tròng kính')return {t:g0.a};
  var F=findSp(q),sp=F.l,it=intent(q),g=general(q),cg=cat(q);
  if(F.s<5&&F.s<1&&(g||cg))sp=[];
  if(sp.length===1){last=sp[0];var p=sp[0];
@@ -36,7 +39,34 @@ function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ tr�
  if(g)return {t:g.a};
  var fb=D.chung.filter(function(x){return x.g==='Ngoài phạm vi'})[0];
  return {t:fb?fb.a:'Anh/chị vui lòng gọi/Zalo '+HL+' để được tư vấn ạ.',c:['Gọi/Zalo tư vấn']};}
-var CHIPS=['Giá kính mát','Gọng kính cận','Đo mắt miễn phí','Địa chỉ cửa hàng','Giao hàng','Bảo hành'];
+
+/* ---- Tròng kính ---- */
+var TRS={trong:1,kinh:1,dat:1,theo:1,don:1,'new':1,va:1,'(dat':1,'don)':1};
+function prepTr(){(D.tr||[]).forEach(function(t){t._n=nm(t.n);t._t=t._n.split(' ').filter(function(w){return w.length>=2&&!TRS[w]});t._b=nm(t.b)})}
+function trFind(q){var best=[],bs=0;(D.tr||[]).forEach(function(t){var s=0,hb=has(q,t._b),hc=has(q,t.cs);t._t.forEach(function(w){if(has(q,w))s++});if(hc)s+=0.5;if(!(hb||hc))s=0;if(s>bs){bs=s;best=[t]}else if(s>0&&s===bs)best.push(t)});return bs>=2?best:[];}
+function parseDo(raw){var s=raw.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/đ/g,'d').replace(/,/g,'.');
+ var o={},m,re=/(can|vien|loan|lao|add|cong)\s*(?:thi|do|la|:)?\s*(\d+(?:\.\d+)?)/g;
+ while(m=re.exec(s)){var x=parseFloat(m[2]);if(x>30)continue;if(m[1]==='can')o.s=-x;else if(m[1]==='vien')o.s=x;else if(m[1]==='loan')o.c=x;else o.a=x;}
+ var sg=s.match(/(^|[\s(\/])([+-]\d{1,2}(?:\.\d{1,2})?)(?=$|[\s)\/])/g);
+ if(sg){sg=sg.map(function(x){return parseFloat(x.replace(/[\s(\/]/g,''))});if(o.s==null)o.s=sg[0];if(o.c==null&&sg.length>1)o.c=Math.abs(sg[1]);}
+ if(o.s==null&&o.c==null&&o.a==null)return null;if(o.s==null)o.s=0;if(o.c==null)o.c=0;return o;}
+function inR(x,r){return r&&x>=r[0]-1e-6&&x<=r[1]+1e-6}
+function trByDo(q,d,force){var wantDa=/da trong|lao|progressive/.test(q)||d.a!=null,wantHai=/hai trong|2 trong|flat/.test(q),dm=/doi mau|photo|ra nang/.test(q),asx=/anh sang xanh|blue|asx/.test(q),be=/chong be|chong vo|poly|duramax/.test(q),dat=force||/dat theo don|rx/.test(q);
+ var br=['chemi','zinmy','hoga'].filter(function(b){return has(q,b)})[0];
+ var out=[];(D.tr||[]).forEach(function(t){if(br&&t._b!==br)return;
+  if(t.g==='Đặt theo đơn'&&!dat)return;if(dat&&t.g!=='Đặt theo đơn')return;
+  var isDa=t.g==='Đa tròng',isHai=t.g==='Hai tròng';
+  if(wantHai?!isHai:(wantDa?!isDa:(isDa||isHai)))return;
+  var txt=nm(t.n+' '+t.mt);if(dm&&!/doi mau|photo/.test(txt))return;if(asx&&!/anh sang xanh|blue/.test(txt))return;if(be&&!/poly|duramax|chong be/.test(nm(t.n+' '+t.cl+' '+t.mt)))return;
+  var bp=null;t.r.forEach(function(r){if(!r[3])return;if(!inR(d.s,r[0]))return;if(!(isDa||isHai||t.g==='Đặt theo đơn')&&!inR(d.c,r[1]))return;if((isDa||isHai)&&d.a!=null&&r[2]&&!inR(d.a,r[2]))return;if(bp==null||r[3]<bp)bp=r[3]});
+  if(bp!=null)out.push([t,bp])});
+ var ds='S '+(d.s>0?'+':'')+d.s.toFixed(2)+(d.c?' / C -'+d.c.toFixed(2):'')+(d.a!=null?' / Add +'+d.a.toFixed(2):'');
+ if(!out.length&&!dat)return trByDo(q,d,1);
+ if(!out.length)return {t:'Với độ '+ds+', em chưa tìm thấy tròng có sẵn phù hợp'+(dm||asx||br?' theo yêu cầu':'')+'. Độ cao/đặc biệt có thể đặt tròng theo đơn (Zinmy RX, giao 10 ngày). Anh/chị gọi/Zalo '+HL+' để được tư vấn ạ.',c:['Gọi/Zalo tư vấn']};
+ out.sort(function(a,b){return a[1]-b[1]});
+ return {t:'Với độ '+ds+(dat&&!/dat theo don|rx/.test(q)?', tròng có sẵn không làm được – có thể đặt tròng theo đơn Zinmy (giao 10 ngày)':', các tròng làm được')+' (giá/cặp):\n'+out.slice(0,8).map(function(x){return '• '+x[0].n+' – '+vnd(x[1])}).join('\n')+(out.length>8?'\n… và '+(out.length-8)+' loại khác.':'')+'\nGiá tham khảo theo bảng giá hãng, nhân viên sẽ xác nhận lại theo toa kính. EYEMEDI đo mắt miễn phí.',c:out.slice(0,3).map(function(x){return x[0].n})};}
+function trInfo(t){return {t:t.mt+'\n'+t.gia};}
+var CHIPS=['Giá kính mát','Gọng kính cận','Tròng theo độ cận','Đo mắt miễn phí','Địa chỉ cửa hàng','Giao hàng','Bảo hành'];
 var css='#emb-btn{position:fixed;right:20px;bottom:96px;z-index:100000;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#0b8f8c,#073a3c);color:#fff;box-shadow:0 6px 18px rgba(7,58,60,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}'+
 '#emb-btn svg{width:28px;height:28px;fill:#fff}#emb-btn .emb-dot{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#e8262f;border:2px solid #fff}'+
 '.float-contact #emb-btn{position:relative;right:auto;bottom:auto;width:52px;height:52px}'+
@@ -56,6 +86,7 @@ function add(t,who,chips){var m=el('div',{'class':'emb-m '+(who?'emb-u':'emb-b')
  ms.scrollTop=ms.scrollHeight;}
 function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Gọi/Zalo tư vấn'){window.open(ZALO,'_blank');return;}
+ if(t==='Tròng theo độ cận'){add('Anh/chị gõ độ theo mẫu: "cận 3 loạn 1", "viễn 2", "cận 5 đổi màu", "lão 2 đa tròng" để em lọc tròng phù hợp ạ.');return;}
  var map={'Thông số':'thong so','Chất liệu':'chat lieu','Màu / phân loại':'mau','Đặt mua':'dat mua'};
  setTimeout(function(){if(!D){add('Dữ liệu đang tải, anh/chị thử lại sau vài giây ạ.');return;}
   var r=map[t]&&last?{t:last.a[{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau','Đặt mua':'mua'}[t]]}:answer(t);add(r.t,0,r.c)},250);}
