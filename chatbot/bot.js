@@ -113,7 +113,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 function link(s){return esc(s).replace(/(https?:\/\/[^\s)]+)/g,function(u){var v=u.replace(/[.,;]+$/,''),r=u.slice(v.length);return '<a href="'+v+'"'+(v.indexOf('eyemedi.vn')<0?' target="_blank" rel="noopener"':'')+'>'+v.replace('https://','')+'</a>'+r})}
 var box,ms,inp;
 /* ---- Ghi lịch sử chat về Google Sheet + gặp nhân viên ---- */
-var LOG_URL='https://script.google.com/macros/s/AKfycbxLzIUoIeGKlDNcARVndD_3stwX8sQvPcdmREcfISgrUj3E7vWvC4uRmgHaXxqC2Tl9yg/exec';
+var LOG_URL='https://script.google.com/macros/s/AKfycbxqL5E3Z8XCF7SjgHg1KvnpBVipAMl3YZ0plmUPi-X8eSD_17tyUShLU5raTwPpXYNk-w/exec';
 var UID='';try{UID=localStorage.getItem('emb-uid')||'';if(!UID){UID='KH-'+Date.now().toString(36).toUpperCase().slice(-5)+Math.random().toString(36).slice(2,4).toUpperCase();localStorage.setItem('emb-uid',UID)}}catch(e){UID='KH-'+Math.random().toString(36).slice(2,8).toUpperCase()}
 var pendQ=null,logT=null,logA=[];
 function chipTxt(c){return (c||[]).map(function(x){return typeof x==='string'?x:x.l}).join(' | ')}
