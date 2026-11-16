@@ -28,10 +28,10 @@ function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ tr�
  var g0=general(q);if(g0&&g0.g==='Tròng kính')return {t:g0.a};
  var F=findSp(q),sp=F.l,it=intent(q),g=general(q),cg=cat(q);
  if(F.s<5&&F.s<1&&(g||cg))sp=[];
- if(sp.length===1){if(it==='mua'&&sp[0].id){last=sp[0];return {order:sp[0]};}if(it){last=sp[0];return {t:sp[0].a[it]};}return spAns(sp[0]);}
+ if(sp.length===1){if(it==='mua'&&sp[0].id){last=sp[0];return {order:sp[0]};}if(it){last=sp[0];return {t:spPart(sp[0],it),c:SPCH};}return spAns(sp[0]);}
  if(sp.length>1&&sp.length<=6){return {t:'Em tìm thấy '+sp.length+' sản phẩm phù hợp, anh/chị chọn giúp em nhé:',c:sp.map(function(p){return p.n})};}
  if(g&&!(cg&&it==='gia'))return {t:g.a};
- if(!cg&&last&&it){return {t:last.a[it]};}
+ if(!cg&&last&&it){return {t:spPart(last,it),c:SPCH};}
  if(cg){var l=D.sp.filter(function(p){return p.cat===cg});var tk=q.split(' ').filter(function(w){return w.length>=3&&!STOP[w]&&['kinh','xem','muon','tim','can'].indexOf(w)<0});var f=l.filter(function(p){return tk.some(function(w){return has(p._n,w)})});if(f.length)l=f;
   if(/re nhat|gia re|thap nhat/.test(q))l=l.slice().sort(function(a,b){return a.p-b.p});
   var cnt={};D.sp.forEach(function(p){cnt[p.c]=(cnt[p.c]||0)+1});
@@ -67,7 +67,13 @@ function trByDo(q,d,force){var wantDa=/da trong|lao|progressive/.test(q)||d.a!=n
  if(!out.length)return {t:'Với độ '+ds+', em chưa tìm thấy tròng có sẵn phù hợp'+(dm||asx||br?' theo yêu cầu':'')+'. Độ cao/đặc biệt có thể đặt tròng theo đơn (Zinmy RX, giao 10 ngày). Anh/chị gọi/Zalo '+HL+' để được tư vấn ạ.',c:['Gọi/Zalo tư vấn']};
  out.sort(function(a,b){return a[1]-b[1]});
  return {t:'Với độ '+ds+(dat&&!/dat theo don|rx/.test(q)?', tròng có sẵn không làm được – có thể đặt tròng theo đơn Zinmy (giao 10 ngày)':', có '+out.length+' loại tròng làm được')+' (giá/cặp, nhân viên xác nhận lại theo toa):',c:out.map(function(x){return {l:trShort(x[0].n)+' · '+(x[1]>=1e6?(x[1]/1e6).toLocaleString('vi-VN')+'tr':(x[1]/1e3)+'k'),tr:x[0]}}),pg:1};}
-function spAns(p){last=p;return {t:p.a.gia+'\n'+p.a.mt,c:['Thông số','Chất liệu','Màu / phân loại','Đặt mua']};}
+function ok2(v){return v&&v!=='—'&&v!=='-'}
+function spGia(p){return p.n+'\nMã: '+p.c+'\nGiá: '+vnd(p.p)+(p.op>p.p?' (giá gốc '+vnd(p.op)+')':'');}
+function spPart(p,k){if(k==='gia')return spGia(p);if(k==='ts')return ok2(p.sz)?'Kích thước: '+p.sz:'Thông số: liên hệ '+HL+'.';if(k==='cl')return ok2(p.mat)?'Chất liệu: '+p.mat:'Chất liệu: liên hệ '+HL+'.';
+ if(k==='mau'){var v=(p.vr||[]).map(function(x){return '• '+x[0]+(x[1]>0?' – '+vnd(x[1]):'')});return v.length?'Phân loại:\n'+v.join('\n'):(ok2(p.col)?'Màu sắc: '+p.col:'Màu sắc: liên hệ '+HL+'.');}
+ if(k==='mt')return p.a.mt;return p.a[k];}
+var SPCH=['Thông số','Chất liệu','Màu / phân loại','Đặt mua'];
+function spAns(p){last=p;setTimeout(histSave,0);var im=p.imgs||[];return {t:spGia(p),c:(im.length>1?['Hình ảnh']:[]).concat(SPCH),im:im.slice(0,1)};}
 
 function trShort(n){return n.replace(/(Coated|\(NEW\)|\(đặt theo đơn\))\s*/g,'').replace(/ SHMC\b/,'').replace(/\s+/g,' ').trim();}
 function trMin(t){var m=null;t.r.forEach(function(r){if(r[3]&&(m==null||r[3]<m))m=r[3]});return m||0;}
@@ -79,7 +85,12 @@ var TRQ=[[/anh sang xanh|blue cut|asx/,function(t){return t.g!=='Đa tròng'&&t.
 [/re nhat|gia re|binh dan/,function(t){return t.g==='Đơn tròng'||t.g==='Lọc ánh sáng xanh'}],
 [/can nang|sieu mong|mong nhat|1\.74|tren 10/,function(t){return (t.cs==='1.67'||t.cs==='1.74')&&t.g!=='Đa tròng'&&t.g!=='Đặt theo đơn'}]];
 function trList(q){if(!/trong|lens|kinh|asx|blue|photo|progressive|flat|poly|duramax|doi mau|chong be/.test(q))return null;for(var i=0;i<TRQ.length;i++)if(TRQ[i][0].test(q)){var l=(D.tr||[]).filter(TRQ[i][1]).sort(function(a,b){return trMin(a)-trMin(b)});if(l.length)return {t:'',c:l.map(function(t){return {l:trShort(t.n),tr:t}}),pg:1};}return null;}
-function trInfo(t){return {t:t.mt+'\n'+t.gia};}
+var lastTr=null;
+function trInfo(t){lastTr=t;return {t:t.n+'\nGiá: từ '+vnd(trMin(t))+'/cặp',c:['Giá theo độ','Đặc điểm tròng','Chiết suất']};}
+function trPart(k){var t=lastTr;if(!t)return 'Anh/chị chọn loại tròng trước ạ.';
+ if(k==='Giá theo độ')return t.gia.replace(/^Giá tròng [^\n]*\n/,'');
+ if(k==='Đặc điểm tròng')return t.mt;
+ return 'Chiết suất: '+t.cs+(t.cl?'\nChất liệu: '+t.cl:'');}
 var CHIPS=['Kính mát','Kính gọng','Tròng kính mắt','Đặt lịch đo mắt','Địa chỉ cửa hàng','Bảo hành'];
 var css='#emb-btn{position:fixed;right:20px;bottom:96px;z-index:100000;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#0b8f8c,#073a3c);color:#fff;box-shadow:0 6px 18px rgba(7,58,60,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}'+
 '#emb-btn svg{width:28px;height:28px;fill:#fff}#emb-btn .emb-dot{position:absolute;top:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#e8262f;border:2px solid #fff}'+
@@ -91,11 +102,20 @@ var css='#emb-btn{position:fixed;right:20px;bottom:96px;z-index:100000;width:56p
 '#emb-f{display:flex;gap:6px;padding:10px;border-top:1px solid #e3eded;background:#fff}#emb-in{flex:1;border:1px solid #cfdede;border-radius:999px;padding:10px 14px;font-size:14px;outline:none;min-width:0}#emb-go{border:0;background:#0b8f8c;color:#fff;border-radius:999px;padding:0 16px;font-weight:700;cursor:pointer}'+
 'body.emb-open .float-contact,body.emb-open .messenger-float{visibility:hidden}@media(max-width:480px){#emb-box{right:8px;bottom:8px;width:calc(100vw - 16px);height:calc(100vh - 16px);height:calc(100dvh - 16px)}}'+
 '.emb-order{max-width:100%!important;width:100%;box-sizing:border-box}.emb-oh{display:block;margin-bottom:6px}.emb-it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed #dfe9e9}.emb-it img{width:46px;height:46px;object-fit:cover;border-radius:8px;flex:0 0 auto}.emb-itx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:13px}.emb-itx b{font-size:13px;line-height:1.3}.emb-vr{font-size:12px;padding:3px;border:1px solid #cfdede;border-radius:6px;max-width:100%}.emb-q{display:flex;align-items:center;gap:6px}.emb-q button{width:24px;height:24px;border-radius:50%;border:1px solid #0b8f8c;background:#fff;color:#0b6e6c;cursor:pointer;line-height:1;padding:0}.emb-q i{font-style:normal;min-width:16px;text-align:center}.emb-q em{margin-left:auto;font-style:normal;font-weight:700;color:#c0392b}.emb-rm{border:0;background:none;color:#999;font-size:20px;cursor:pointer;padding:0 2px}.emb-tot{text-align:right;margin:8px 0;font-size:14px}.emb-tot b{color:#c0392b}.emb-more{margin-bottom:8px}.emb-of{display:flex;flex-direction:column;gap:6px}.emb-of input,.emb-of textarea,.emb-of select{border:1px solid #cfdede;border-radius:10px;padding:9px 10px;font-size:14px;font-family:inherit;width:100%;box-sizing:border-box}.emb-2{display:flex;gap:6px}.emb-2>*{flex:1;min-width:0}.emb-of select{background:#fff;color:#1f2d33}.emb-of input[type=date]{min-height:40px;background:#fff}.emb-err{color:#c0392b;font-size:12.5px;min-height:0}.emb-send{border:0;border-radius:999px;background:#e8262f;color:#fff;font-weight:700;padding:11px;font-size:14px;cursor:pointer}.emb-send:disabled{background:#8aa;cursor:default}'+
+'.emb-imgs{display:flex;gap:6px;overflow-x:auto;max-width:100%;padding-bottom:2px;-webkit-overflow-scrolling:touch}.emb-imgs img{width:120px;height:120px;object-fit:cover;border-radius:12px;flex:0 0 auto;cursor:zoom-in;background:#fff;border:1px solid #dfe9e9}.emb-imgs.one img{width:200px;height:200px}.emb-zoom{position:absolute;inset:0;background:rgba(0,0,0,.88);z-index:5;display:flex;align-items:center;justify-content:center}.emb-zoom img{max-width:100%;max-height:85%;object-fit:contain}.emb-zx{position:absolute;top:10px;right:12px;border:0;background:rgba(255,255,255,.2);color:#fff;font-size:26px;width:40px;height:40px;border-radius:50%;cursor:pointer}.emb-zp,.emb-zn{position:absolute;top:50%;transform:translateY(-50%);border:0;background:rgba(0,0,0,.45);color:#fff;font-size:28px;width:40px;height:40px;border-radius:50%;cursor:pointer}.emb-zp{left:8px}.emb-zn{right:8px}.emb-zc{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#fff;font-size:13px}'+
 '#emb-ft{font-size:11px;color:#6a8584;text-align:center;padding:0 0 8px;background:#fff}#emb-ft a{color:#0b6e6c}';
 function el(t,a,h){var e=document.createElement(t);for(var k in a)e.setAttribute(k,a[k]);if(h!=null)e.innerHTML=h;return e;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function link(s){return esc(s).replace(/(https?:\/\/[^\s)]+)/g,function(u){var v=u.replace(/[.,;]+$/,''),r=u.slice(v.length);return '<a href="'+v+'"'+(v.indexOf('eyemedi.vn')<0?' target="_blank" rel="noopener"':'')+'>'+v.replace('https://','')+'</a>'+r})}
 var box,ms,inp;
+/* ---- Lưu lịch sử chat trên thiết bị ---- */
+var HK='emb-hist-v1',HIST=[],RESTORING=0;
+function chipSer(x){if(typeof x==='string')return x;var o={l:x.l};if(x.p)o.pid=x.p.id||x.p.c;if(x.tr)o.trn=x.tr.n;if(x.bh)o.bh=x.bh;if(x.u)o.u=x.u;return o;}
+function chipDe(o){if(typeof o==='string')return o;var x={l:o.l};if(o.pid){x.p=(D.sp||[]).filter(function(p){return p.id===o.pid||p.c===o.pid})[0];if(!x.p)return null;}if(o.trn){x.tr=(D.tr||[]).filter(function(t){return t.n===o.trn})[0];if(!x.tr)return null;}if(o.bh)x.bh=o.bh;if(o.u)x.u=o.u;return x;}
+function histSave(){try{localStorage.setItem(HK,JSON.stringify({ts:Date.now(),last:last&&(last.id||last.c),h:HIST.slice(-80)}))}catch(e){}}
+function histLoad(){try{var o=JSON.parse(localStorage.getItem(HK)||'null');if(o&&Date.now()-o.ts<30*864e5)return o;}catch(e){}return null;}
+function histClear(){HIST=[];try{localStorage.removeItem(HK)}catch(e){}}
+
 /* ---- Bảo hành trong chat ---- */
 var BH={'Bảo hành gọng':['Gãy gọng','Bung ốc','Hư đệm mũi','Hư nhựa đuôi gọng','Gọng xước, oxy hoá'],'Bảo hành tròng':['Tròng xước','Tròng ngả màu','Tròng mờ','Tròng bể vỡ']};
 function openWarranty(loai,van){[].slice.call(ms.querySelectorAll('.emb-bh')).forEach(function(n){n.parentNode.removeChild(n)});
@@ -172,7 +192,13 @@ function drawOrder(w){CART=CART.filter(function(it){return spById(it.id)});
    add('✓ Đã gửi đơn hàng thành công!\nMã đơn: '+code+'\n'+items+'\nTạm tính: '+vnd(tot)+'\nNgười nhận: '+v('Họ tên')+' – '+v('Số điện thoại')+'\n'+v('Địa chỉ nhận hàng')+'\nEYEMEDI sẽ liên hệ xác nhận sớm. Cần hỗ trợ gọi/Zalo '+HL+'.');
   }).catch(function(){btn.disabled=false;btn.textContent='Gửi đơn hàng đến EYEMEDI';er.textContent='Chưa gửi được đơn, vui lòng thử lại hoặc gọi/Zalo '+HL+'.'});};}
 
-function chipBtn(x){var lb=typeof x==='string'?x:x.l,b=el('button',{type:'button','class':'emb-c'},esc(lb));b.onclick=function(){if(x.u){window.open(x.u,'_self');return;}if(x.bh){add(lb,1);setTimeout(function(){openWarranty(x.bh,lb)},200);return;}if(x.tr){add(lb,1);setTimeout(function(){var r=trInfo(x.tr);add(r.t,0,r.c)},250);return;}if(x.p){add(lb,1);setTimeout(function(){var r=spAns(x.p);add(r.t,0,r.c)},250);return;}send(x)};return b;}
+
+function imgRow(im){var r=el('div',{'class':'emb-imgs'+(im.length===1?' one':'')});im.forEach(function(u,i){var g=el('img',{src:u,alt:'Hình sản phẩm '+(i+1),loading:'lazy'});g.onclick=function(){zoom(im,i)};r.appendChild(g)});ms.appendChild(r);}
+function zoom(im,i){var z=el('div',{'class':'emb-zoom'},'<img alt=""><button type="button" class="emb-zx" aria-label="Đóng">×</button>'+(im.length>1?'<button type="button" class="emb-zp">‹</button><button type="button" class="emb-zn">›</button><span class="emb-zc"></span>':''));box.appendChild(z);
+ function sh(k){i=(k+im.length)%im.length;z.querySelector('img').src=im[i];var c=z.querySelector('.emb-zc');if(c)c.textContent=(i+1)+'/'+im.length}sh(i);
+ z.querySelector('.emb-zx').onclick=function(){box.removeChild(z)};z.onclick=function(e){if(e.target===z)box.removeChild(z)};
+ if(im.length>1){z.querySelector('.emb-zp').onclick=function(){sh(i-1)};z.querySelector('.emb-zn').onclick=function(){sh(i+1)};var x0=null;z.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});z.addEventListener('touchend',function(e){if(x0==null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)sh(i+(dx<0?1:-1));x0=null});}}
+function chipBtn(x){var lb=typeof x==='string'?x:x.l,b=el('button',{type:'button','class':'emb-c'},esc(lb));b.onclick=function(){if(x.u){window.open(x.u,'_self');return;}if(x.bh){add(lb,1);setTimeout(function(){openWarranty(x.bh,lb)},200);return;}if(x.tr){add(lb,1);setTimeout(function(){var r=trInfo(x.tr);add(r.t,0,r.c)},250);return;}if(x.p){add(lb,1);setTimeout(function(){var r=spAns(x.p);add(r.t,0,r.c,0,r.im)},250);return;}send(x)};return b;}
 function pager(items){var c=el('div',{'class':'emb-cs emb-pg'});ms.appendChild(c);
  var W=c.clientWidth||300,G=6,ws=items.map(function(x){var b=chipBtn(x);c.appendChild(b);var w=b.offsetWidth+G;c.removeChild(b);return w});
  var nb=el('button',{type:'button','class':'emb-c emb-nav'},'Thêm ›');c.appendChild(nb);var NW=nb.offsetWidth+G;c.removeChild(nb);
@@ -185,29 +211,37 @@ function pager(items){var c=el('div',{'class':'emb-cs emb-pg'});ms.appendChild(c
   if(k<pages.length-1){var n=el('button',{type:'button','class':'emb-c emb-nav'},'Thêm ›');n.onclick=function(){show(k+1)};c.appendChild(n);}}
  show(0);}
 
-function add(t,who,chips,pg){if(t){var m=el('div',{'class':'emb-m '+(who?'emb-u':'emb-b')},who?esc(t):link(t));ms.appendChild(m);}
+function add(t,who,chips,pg,im){if(!RESTORING&&(t||chips||im)){HIST.push({t:t||'',w:who?1:0,c:(chips||[]).map(chipSer),pg:pg?1:0,im:im||0});histSave();}if(im&&im.length)imgRow(im);if(t){var m=el('div',{'class':'emb-m '+(who?'emb-u':'emb-b')},who?esc(t):link(t));ms.appendChild(m);}
  if(chips&&chips.length&&pg){pager(chips);ms.scrollTop=ms.scrollHeight;return;}
  if(chips&&chips.length){var c=el('div',{'class':'emb-cs'});chips.forEach(function(x){c.appendChild(chipBtn(x))});ms.appendChild(c)}
  ms.scrollTop=ms.scrollHeight;}
 function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Gọi/Zalo tư vấn'){window.open(ZALO,'_blank');return;}
  if(t==='Tròng kính mắt'){setTimeout(function(){add('EYEMEDI có đơn tròng, chống ánh sáng xanh, đổi màu, và đa tròng, hai tròng, chống bể, chống ánh sáng xanh, đổi màu tròng đặt theo đơn.\nAnh/chị gửi độ mắt của mình, ví dụ: "cận -125 loạn -150", "viễn +200", "cận -500 đổi màu", "lão +200, đa tròng" để Eyemedi tư vấn ạ.',0,['Tròng chống ánh sáng xanh','Tròng đổi màu','Đa tròng','Hai tròng','Tròng chống bể'])},250);return;}
+ if((t==='Hình ảnh'||/^(xem )?(hinh|anh|hinh anh)( san pham)?$/.test(nm(t)))&&last){setTimeout(function(){var im=last.imgs||[];if(im.length){add('Hình ảnh '+last.n+' ('+im.length+' ảnh) – bấm vào ảnh để phóng to:');add('',0,SPCH,0,im);}else add('Sản phẩm này chưa có thêm hình ảnh ạ.')},200);return;}
+ if((t==='Giá theo độ'||t==='Đặc điểm tròng'||t==='Chiết suất')&&lastTr){setTimeout(function(){add(trPart(t),0,['Giá theo độ','Đặc điểm tròng','Chiết suất'].filter(function(x){return x!==t}))},200);return;}
  if(t==='Bảo hành'){setTimeout(function(){add('Eyemedi xin nhận thông tin bảo hành từ anh chị:',0,['Bảo hành gọng','Bảo hành tròng'])},250);return;}
  if(BH[t]){setTimeout(function(){add('',0,BH[t].map(function(v){return {l:v,bh:t}}),1)},250);return;}
  if(t==='Đặt mua'&&last&&last.id){setTimeout(function(){openOrder(last)},200);return;}
  var map={'Thông số':'thong so','Chất liệu':'chat lieu','Màu / phân loại':'mau','Đặt mua':'dat mua'};
  setTimeout(function(){if(!D){add('Dữ liệu đang tải, anh/chị thử lại sau vài giây ạ.');return;}
-  var r=map[t]&&last?{t:last.a[{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau','Đặt mua':'mua'}[t]]}:answer(t);if(r.order){openOrder(r.order);return;}if(r.book){add(r.t);openBooking();return;}add(r.t,0,r.c,r.pg)},250);}
+  var r=map[t]&&last?{t:spPart(last,{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau'}[t]),c:SPCH.filter(function(x){return x!==t})}:answer(t);if(r.order){openOrder(r.order);return;}if(r.book){add(r.t);openBooking();return;}add(r.t,0,r.c,r.pg,r.im)},250);}
 function load(cb){if(D)return cb();fetch('/chatbot/du-lieu.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(j){D=j;prep();cb()}).catch(function(){})}
 function ui(){var st=el('style',{id:'emb-css'},css);document.head.appendChild(st);
  var btn=el('button',{id:'emb-btn',type:'button','aria-label':'Chat với EYEMEDI'},'<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.9 2 11.7c0 2.6 1.3 4.9 3.4 6.5L4.6 22l4.2-2.2c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 3 12 3zm-4 9.9a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg><span class="emb-dot"></span>');
  var fc=document.querySelector('.float-contact');if(fc)fc.insertBefore(btn,fc.firstChild);else document.body.appendChild(btn);
  var mf=document.querySelector('.messenger-float');if(!fc&&!mf)btn.style.bottom='20px';
  if(!fc&&mf){var al=function(){var cs=getComputedStyle(mf),z=mf.offsetWidth||58;btn.style.width=btn.style.height=z+'px';btn.style.right=cs.right;btn.style.bottom=(parseFloat(cs.bottom)+(mf.offsetHeight||z)+12)+'px'};al();window.addEventListener('resize',al);}
- box=el('div',{id:'emb-box',role:'dialog','aria-label':'Chatbot EYEMEDI'},'<div id="emb-hd"><svg viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="12" fill="#0b8f8c"/><path fill="#fff" d="M12 7c-3.6 0-6.5 2.4-6.5 5s2.9 5 6.5 5 6.5-2.4 6.5-5-2.9-5-6.5-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg><div><b>EYEMEDI tư vấn</b><small>Trực tuyến 24/7</small></div><button id="emb-x" type="button" aria-label="Đóng">×</button></div><div id="emb-ms"></div><form id="emb-f"><input id="emb-in" autocomplete="off" placeholder="Nhập câu hỏi, tên hoặc mã sản phẩm…"><button id="emb-go" type="submit">Gửi</button></form><div id="emb-ft">Cần gặp nhân viên? <a href="'+ZALO+'" target="_blank" rel="noopener">Zalo '+HL+'</a></div>');
+ box=el('div',{id:'emb-box',role:'dialog','aria-label':'Chatbot EYEMEDI'},'<div id="emb-hd"><svg viewBox="0 0 24 24" width="30" height="30"><circle cx="12" cy="12" r="12" fill="#0b8f8c"/><path fill="#fff" d="M12 7c-3.6 0-6.5 2.4-6.5 5s2.9 5 6.5 5 6.5-2.4 6.5-5-2.9-5-6.5-5zm0 8a3 3 0 110-6 3 3 0 010 6z"/></svg><div><b>EYEMEDI tư vấn</b><small>Trực tuyến 24/7</small></div><button id="emb-x" type="button" aria-label="Đóng">×</button></div><div id="emb-ms"></div><form id="emb-f"><input id="emb-in" autocomplete="off" placeholder="Nhập câu hỏi, tên hoặc mã sản phẩm…"><button id="emb-go" type="submit">Gửi</button></form><div id="emb-ft">Cần gặp nhân viên? <a href="'+ZALO+'" target="_blank" rel="noopener">Zalo '+HL+'</a> · <a href="#" id="emb-new">Làm mới</a></div>');
  document.body.appendChild(box);ms=box.querySelector('#emb-ms');inp=box.querySelector('#emb-in');var started=0;
- btn.onclick=function(){box.classList.add('on');document.body.classList.add('emb-open');btn.querySelector('.emb-dot').style.display='none';load(function(){});if(!started){started=1;add('Dạ EYEMEDI xin chào anh/chị! Anh/chị có thể hỏi giá, thông số, chất liệu, màu của sản phẩm (gõ tên hoặc mã), hoặc chọn nhanh bên dưới:',0,CHIPS)}setTimeout(function(){inp.focus()},50)};
- box.querySelector('#emb-x').onclick=function(){box.classList.remove('on');document.body.classList.remove('emb-open')};
+ btn.onclick=function(){box.classList.add('on');document.body.classList.add('emb-open');btn.querySelector('.emb-dot').style.display='none';load(function(){});if(!started){started=1;greet()}setTimeout(function(){inp.focus()},50)};
+ function greet(){add('Dạ EYEMEDI xin chào anh/chị! Anh/chị có thể hỏi giá, thông số, chất liệu, màu của sản phẩm (gõ tên hoặc mã), hoặc chọn nhanh bên dưới:',0,CHIPS)}
+ box.querySelector('#emb-x').onclick=function(){box.classList.remove('on');document.body.classList.remove('emb-open');try{localStorage.setItem('emb-isopen','0')}catch(e){}};
+ var _oc=btn.onclick;btn.onclick=function(){_oc();try{localStorage.setItem('emb-isopen','1')}catch(e){}};
+ box.querySelector('#emb-new').onclick=function(e){e.preventDefault();histClear();last=null;ms.innerHTML='';greet()};
+ var H=histLoad();if(H&&H.h&&H.h.length){load(function(){RESTORING=1;HIST=H.h;H.h.forEach(function(m){var ch=(m.c||[]).map(chipDe).filter(Boolean);add(m.t,m.w,ch,m.pg,m.im)});RESTORING=0;started=1;
+  if(H.last)last=(D.sp||[]).filter(function(p){return p.id===H.last||p.c===H.last})[0]||null;
+  var op=0;try{op=localStorage.getItem('emb-isopen')==='1'}catch(e){}if(op){box.classList.add('on');document.body.classList.add('emb-open');btn.querySelector('.emb-dot').style.display='none';}ms.scrollTop=ms.scrollHeight;});}
  box.querySelector('#emb-f').onsubmit=function(e){e.preventDefault();var v=inp.value;inp.value='';load(function(){});send(v)};}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ui);else ui();
 window.emBotAnswer=function(q,cb){load(function(){cb(answer(q))})};
