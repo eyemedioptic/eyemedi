@@ -1106,7 +1106,7 @@ const PRODUCTS = [
     desc:'Túi lọc treo miệng ly (drip bag): xé túi, treo lên ly, rót nước 90–95°C thành 2–3 lần, đợi nhỏ giọt xong là có ly cà phê nguyên chất. Không cần phin hay máy. Hợp làm quà và mang đi làm, du lịch.',
     notes:['Tiện lợi','3 phút','Quà tặng'], strength:3, acidity:3, brew:'Treo ly, rót nước nóng', roast:'Medium', tag:'Tiện lợi'}
 ];
-const priceTxt = p => p.price ? vnd(p.price) : 'Giá cập nhật sau';
+const priceTxt = p => p.price ? vnd(p.price) : 'Nhận báo giá';
 const GRINDS = ['Hạt nguyên','Xay pha phin','Xay pha máy','Xay pour-over'];
 
 /* ---------- Market data (nguồn: báo chí 11/2026) ---------- */
@@ -1289,7 +1289,7 @@ function openProduct(id){
 /* ---------- Cart ---------- */
 let cart = store.get('tubat_cart', []);
 let cartView = 'cart';
-function askPrice(id){ const p = byId(id); toast(`${p.name}: giá đang cập nhật – mở Zalo để nhận báo giá`, true); window.open(SHOP.zalo,'_blank','noopener'); }
+function askPrice(id){ const p = byId(id); toast(`${p.name}: mở Zalo để nhận báo giá`, true); window.open(SHOP.zalo,'_blank','noopener'); }
 function cartKey(id, grind){ return id + '|' + (grind||''); }
 function addToCart(id, qty=1, grind, silent){
   const p = byId(id); if(!p) return;
