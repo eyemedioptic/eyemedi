@@ -461,5 +461,6 @@ document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.que
  if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
 <script id="online-count">document.getElementById('online').textContent = 21 + Math.floor(Math.random() * 279);(function(){var k='em-luot-mua',n=0;try{n=parseInt(localStorage.getItem(k))||0}catch(e){}n=n?n+1+Math.floor(Math.random()*3):2+Math.floor(Math.random()*98);try{localStorage.setItem(k,n)}catch(e){}document.getElementById('luot-mua').textContent=n})();</script>
+<script src="/chatbot/bot.js" defer></script>
 </body>
 </html>

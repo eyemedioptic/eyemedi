@@ -480,5 +480,6 @@ document.addEventListener('blur',function(e){var el=e.target;if(el.matches&&el.m
 document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.querySelectorAll)return;f.querySelectorAll(SEL).forEach(function(el){var d=chuan(el.value);el.value=d;var ok=/^0\d{9}$/.test(d);loi(el,!ok);if(!ok&&!bad)bad=el});
  if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
+<script src="/chatbot/bot.js" defer></script>
 </body>
 </html>
