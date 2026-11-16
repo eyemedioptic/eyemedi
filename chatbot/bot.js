@@ -21,7 +21,7 @@ function vnd(n){return n.toLocaleString('vi-VN')+'đ';}
 function general(q){var b=null,bl=0;D.chung.forEach(function(g){g._k.forEach(function(k){if(k&&k.length>=4&&(has(q,k)||q.indexOf(k)>=0)&&k.length>bl){bl=k.length;b=g}})});return b;}
 function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ trợ gì ạ?'};
  if(/^(hi|hello|chao|alo|xin chao|shop oi|ad oi)\b/.test(q)&&q.split(' ').length<=3)return {t:'Dạ EYEMEDI xin chào anh/chị! Em có thể báo giá, thông số, chất liệu sản phẩm, địa chỉ cửa hàng, đo mắt miễn phí, giao hàng và bảo hành ạ.',c:CHIPS};
- if(/dat lich|do mat|kiem tra thi luc|do khuc xa|do thi luc/.test(q)){var gd=D.chung.filter(function(x){return x.g==='Dịch vụ'})[0];if(gd)return {t:gd.a};}
+ if(/dat lich|do mat|kiem tra thi luc|do khuc xa|do thi luc/.test(q))return {t:'EYEMEDI đo mắt, kiểm tra thị lực miễn phí (08:30 – 21:30 hằng ngày). Anh/chị nhập thông tin để đặt lịch nhé:',book:1};
  var dd=parseDo(raw);if(dd&&(/trong|kinh|can|vien|loan|lao|do/.test(q)||/[+-]\d/.test(raw))&&!/ap trong|lens/.test(q))return trByDo(q,dd);
  var TF=trFind(q);if(TF.length===1)return trInfo(TF[0]);if(TF.length>1&&TF.length<=6)return {t:'Em tìm thấy '+TF.length+' loại tròng phù hợp, anh/chị chọn giúp em:',c:TF.map(function(t){return t.n})};
  var TL=trList(q);if(TL)return TL;
@@ -90,12 +90,46 @@ var css='#emb-btn{position:fixed;right:20px;bottom:96px;z-index:100000;width:56p
 '#emb-ms>*{flex-shrink:0}.emb-cs{display:flex;flex-wrap:wrap;gap:6px}.emb-pg{flex-wrap:nowrap;overflow:hidden}.emb-pg .emb-c{flex:0 0 auto;white-space:nowrap;padding:6px 9px;max-width:calc(100% - 104px);overflow:hidden;text-overflow:ellipsis}.emb-pg .emb-nav{max-width:none}.emb-nav{background:#0b8f8c!important;color:#fff!important;font-weight:700}.emb-c{border:1px solid #0b8f8c;background:#fff;color:#0b6e6c;border-radius:999px;padding:6px 11px;font-size:13px;cursor:pointer}'+
 '#emb-f{display:flex;gap:6px;padding:10px;border-top:1px solid #e3eded;background:#fff}#emb-in{flex:1;border:1px solid #cfdede;border-radius:999px;padding:10px 14px;font-size:14px;outline:none;min-width:0}#emb-go{border:0;background:#0b8f8c;color:#fff;border-radius:999px;padding:0 16px;font-weight:700;cursor:pointer}'+
 'body.emb-open .float-contact,body.emb-open .messenger-float{visibility:hidden}@media(max-width:480px){#emb-box{right:8px;bottom:8px;width:calc(100vw - 16px);height:calc(100vh - 16px);height:calc(100dvh - 16px)}}'+
-'.emb-order{max-width:100%!important;width:100%;box-sizing:border-box}.emb-oh{display:block;margin-bottom:6px}.emb-it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed #dfe9e9}.emb-it img{width:46px;height:46px;object-fit:cover;border-radius:8px;flex:0 0 auto}.emb-itx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:13px}.emb-itx b{font-size:13px;line-height:1.3}.emb-vr{font-size:12px;padding:3px;border:1px solid #cfdede;border-radius:6px;max-width:100%}.emb-q{display:flex;align-items:center;gap:6px}.emb-q button{width:24px;height:24px;border-radius:50%;border:1px solid #0b8f8c;background:#fff;color:#0b6e6c;cursor:pointer;line-height:1;padding:0}.emb-q i{font-style:normal;min-width:16px;text-align:center}.emb-q em{margin-left:auto;font-style:normal;font-weight:700;color:#c0392b}.emb-rm{border:0;background:none;color:#999;font-size:20px;cursor:pointer;padding:0 2px}.emb-tot{text-align:right;margin:8px 0;font-size:14px}.emb-tot b{color:#c0392b}.emb-more{margin-bottom:8px}.emb-of{display:flex;flex-direction:column;gap:6px}.emb-of input,.emb-of textarea{border:1px solid #cfdede;border-radius:10px;padding:9px 10px;font-size:14px;font-family:inherit;width:100%;box-sizing:border-box}.emb-2{display:flex;gap:6px}.emb-err{color:#c0392b;font-size:12.5px;min-height:0}.emb-send{border:0;border-radius:999px;background:#e8262f;color:#fff;font-weight:700;padding:11px;font-size:14px;cursor:pointer}.emb-send:disabled{background:#8aa;cursor:default}'+
+'.emb-order{max-width:100%!important;width:100%;box-sizing:border-box}.emb-oh{display:block;margin-bottom:6px}.emb-it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed #dfe9e9}.emb-it img{width:46px;height:46px;object-fit:cover;border-radius:8px;flex:0 0 auto}.emb-itx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font-size:13px}.emb-itx b{font-size:13px;line-height:1.3}.emb-vr{font-size:12px;padding:3px;border:1px solid #cfdede;border-radius:6px;max-width:100%}.emb-q{display:flex;align-items:center;gap:6px}.emb-q button{width:24px;height:24px;border-radius:50%;border:1px solid #0b8f8c;background:#fff;color:#0b6e6c;cursor:pointer;line-height:1;padding:0}.emb-q i{font-style:normal;min-width:16px;text-align:center}.emb-q em{margin-left:auto;font-style:normal;font-weight:700;color:#c0392b}.emb-rm{border:0;background:none;color:#999;font-size:20px;cursor:pointer;padding:0 2px}.emb-tot{text-align:right;margin:8px 0;font-size:14px}.emb-tot b{color:#c0392b}.emb-more{margin-bottom:8px}.emb-of{display:flex;flex-direction:column;gap:6px}.emb-of input,.emb-of textarea,.emb-of select{border:1px solid #cfdede;border-radius:10px;padding:9px 10px;font-size:14px;font-family:inherit;width:100%;box-sizing:border-box}.emb-2{display:flex;gap:6px}.emb-2>*{flex:1;min-width:0}.emb-of select{background:#fff;color:#1f2d33}.emb-of input[type=date]{min-height:40px;background:#fff}.emb-err{color:#c0392b;font-size:12.5px;min-height:0}.emb-send{border:0;border-radius:999px;background:#e8262f;color:#fff;font-weight:700;padding:11px;font-size:14px;cursor:pointer}.emb-send:disabled{background:#8aa;cursor:default}'+
 '#emb-ft{font-size:11px;color:#6a8584;text-align:center;padding:0 0 8px;background:#fff}#emb-ft a{color:#0b6e6c}';
 function el(t,a,h){var e=document.createElement(t);for(var k in a)e.setAttribute(k,a[k]);if(h!=null)e.innerHTML=h;return e;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function link(s){return esc(s).replace(/(https?:\/\/[^\s)]+)/g,function(u){var v=u.replace(/[.,;]+$/,''),r=u.slice(v.length);return '<a href="'+v+'"'+(v.indexOf('eyemedi.vn')<0?' target="_blank" rel="noopener"':'')+'>'+v.replace('https://','')+'</a>'+r})}
 var box,ms,inp;
+/* ---- Bảo hành trong chat ---- */
+var BH={'Bảo hành gọng':['Gãy gọng','Bung ốc','Hư đệm mũi','Hư nhựa đuôi gọng','Gọng xước, oxy hoá'],'Bảo hành tròng':['Tròng xước','Tròng ngả màu','Tròng mờ','Tròng bể vỡ']};
+function openWarranty(loai,van){[].slice.call(ms.querySelectorAll('.emb-bh')).forEach(function(n){n.parentNode.removeChild(n)});
+ var w=el('div',{'class':'emb-m emb-b emb-order emb-bh'});
+ w.innerHTML='<b class="emb-oh">🛠 '+esc(loai)+': '+esc(van)+'</b><form class="emb-of" novalidate><input name="Họ và Tên" placeholder="Họ và tên *" autocomplete="name"><input name="Số điện thoại" placeholder="Số điện thoại *" inputmode="tel" autocomplete="tel"><textarea name="Ghi chú" rows="2" placeholder="Mô tả thêm: mẫu kính, thời gian mua… (không bắt buộc)"></textarea><div class="emb-err"></div><button type="submit" class="emb-send">GỬI THÔNG TIN BẢO HÀNH</button></form>';
+ ms.appendChild(w);var f=w.querySelector('form'),er=w.querySelector('.emb-err'),bt=w.querySelector('.emb-send');
+ f.onsubmit=function(e){e.preventDefault();if(bt.disabled)return;var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.\-]/g,'');
+  if(!v('Họ và Tên')){er.textContent='Vui lòng nhập họ tên.';return;}if(!/^0\d{9}$/.test(sdt)){er.textContent='Số điện thoại chưa đúng (10 số, bắt đầu bằng 0).';return;}
+  er.textContent='';bt.disabled=true;bt.textContent='Đang gửi…';
+  var d=new FormData();d.append('Họ và Tên',v('Họ và Tên'));d.append('Số điện thoại',sdt);d.append('Loại','Bảo hành');d.append('Sản phẩm',loai+' | '+van);d.append('Ghi chú',v('Ghi chú'));d.append('Trang',location.pathname+' (chatbot)');
+  fetch(GAS_DL,{method:'POST',mode:'no-cors',body:d}).then(function(){w.parentNode.removeChild(w);
+   add('✅ EYEMEDI đã nhận thông tin bảo hành!\n'+v('Họ và Tên')+' – '+sdt+'\n🛠 '+loai+': '+van+'\nNhân viên sẽ gọi lại hướng dẫn sớm nhất. Anh/chị có thể mang kính đến Store 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM (08:30 – 21:30) – chỉ đường: https://maps.app.goo.gl/khkbnHeoP4D3iYoq6\nHotline: '+HL);
+  }).catch(function(){bt.disabled=false;bt.textContent='THỬ LẠI';er.textContent='Chưa gửi được, vui lòng thử lại hoặc gọi '+HL+'.'})};
+ ms.scrollTop=ms.scrollHeight;setTimeout(function(){f.elements['Họ và Tên'].focus()},50);}
+
+/* ---- Đặt lịch đo mắt trong chat ---- */
+var GAS_DL='https://script.google.com/macros/s/AKfycbzH09BIb6hqDNC4rrf_dAWyANwMfC21IVy41EA3w9cqNdV43aNQfWpQtPZ3RB4Uqp8/exec';
+function dToday(){var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)}
+function openBooking(){[].slice.call(ms.querySelectorAll('.emb-book')).forEach(function(n){n.parentNode.removeChild(n)});
+ var w=el('div',{'class':'emb-m emb-b emb-order emb-book'});
+ w.innerHTML='<b class="emb-oh">👁 Đặt lịch đo mắt miễn phí</b><form class="emb-of" novalidate><input name="Họ và Tên" placeholder="Họ và tên *" autocomplete="name"><input name="Số điện thoại" placeholder="Số điện thoại *" inputmode="tel" autocomplete="tel"><div class="emb-2"><input name="Ngày" type="date"><select name="Giờ"></select></div><textarea name="Ghi chú" rows="2" placeholder="Ghi chú (không bắt buộc)"></textarea><div class="emb-err"></div><button type="submit" class="emb-send">GỬI ĐẶT LỊCH</button></form>';
+ ms.appendChild(w);var f=w.querySelector('form'),ng=f.elements['Ngày'],gs=f.elements['Giờ'],er=w.querySelector('.emb-err'),bt=w.querySelector('.emb-send');
+ ng.min=dToday();ng.value=dToday();
+ function gio(){var cur=gs.value,n=ng.value,now=new Date(),h='<option value="">Chọn giờ *</option>',c=0;for(var t=510;t<=1260;t+=30){if(n===dToday()&&t<now.getHours()*60+now.getMinutes()+30)continue;var x=('0'+Math.floor(t/60)).slice(-2)+':'+('0'+t%60).slice(-2);h+='<option'+(x===cur?' selected':'')+'>'+x+'</option>';c++}if(!c)h='<option value="">Hôm nay hết giờ – chọn ngày khác</option>';gs.innerHTML=h}
+ gio();ng.onchange=gio;
+ f.onsubmit=function(e){e.preventDefault();if(bt.disabled)return;var v=function(n){return (f.elements[n].value||'').trim()},sdt=v('Số điện thoại').replace(/[\s.\-]/g,'');
+  if(!v('Họ và Tên')){er.textContent='Vui lòng nhập họ tên.';return;}if(!/^0\d{9}$/.test(sdt)){er.textContent='Số điện thoại chưa đúng (10 số, bắt đầu bằng 0).';return;}if(!v('Ngày')||!v('Giờ')){er.textContent='Vui lòng chọn ngày và giờ hẹn.';return;}
+  er.textContent='';bt.disabled=true;bt.textContent='Đang gửi…';var ngay=v('Ngày').split('-').reverse().join('/');
+  var d=new FormData();d.append('Họ và Tên',v('Họ và Tên'));d.append('Số điện thoại',sdt);d.append('Loại','Đặt lịch đo mắt');d.append('Sản phẩm','Đặt lịch đo mắt | '+ngay+' | '+v('Giờ'));d.append('Ngày hẹn',ngay);d.append('Khung giờ',v('Giờ'));d.append('Ghi chú',v('Ghi chú'));d.append('Trang',location.pathname+' (chatbot)');
+  fetch(GAS_DL,{method:'POST',mode:'no-cors',body:d}).then(function(){try{window.fbq&&fbq('track','Lead')}catch(x){}
+   w.parentNode.removeChild(w);add('✅ Đặt lịch thành công!\n'+v('Họ và Tên')+' – '+sdt+'\n📅 '+ngay+', '+v('Giờ')+'\nEYEMEDI sẽ gọi xác nhận lịch hẹn sớm nhất. Hotline: '+HL+'\nĐịa chỉ: 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM – chỉ đường: https://maps.app.goo.gl/khkbnHeoP4D3iYoq6');
+  }).catch(function(){bt.disabled=false;bt.textContent='THỬ LẠI';er.textContent='Chưa gửi được, vui lòng thử lại hoặc gọi '+HL+'.'})};
+ ms.scrollTop=ms.scrollHeight;setTimeout(function(){f.elements['Họ và Tên'].focus()},50);}
+
 /* ---- Đặt hàng trong chat ---- */
 var GAS='https://script.google.com/macros/s/AKfycbxuFhXtqZHkSM2uzLb9c3ASCnFNzw_Fzl5_ecjTWOwLyc4FvxosoFGJUWsU2PijXWIW2Q/exec',LOCK_KEY='eyemedi_order_lock_until',LOCK_MS=180000;
 var CART=[];try{CART=JSON.parse(sessionStorage.getItem('emb-cart')||'[]')||[]}catch(e){CART=[]}
@@ -138,7 +172,7 @@ function drawOrder(w){CART=CART.filter(function(it){return spById(it.id)});
    add('✓ Đã gửi đơn hàng thành công!\nMã đơn: '+code+'\n'+items+'\nTạm tính: '+vnd(tot)+'\nNgười nhận: '+v('Họ tên')+' – '+v('Số điện thoại')+'\n'+v('Địa chỉ nhận hàng')+'\nEYEMEDI sẽ liên hệ xác nhận sớm. Cần hỗ trợ gọi/Zalo '+HL+'.');
   }).catch(function(){btn.disabled=false;btn.textContent='Gửi đơn hàng đến EYEMEDI';er.textContent='Chưa gửi được đơn, vui lòng thử lại hoặc gọi/Zalo '+HL+'.'});};}
 
-function chipBtn(x){var lb=typeof x==='string'?x:x.l,b=el('button',{type:'button','class':'emb-c'},esc(lb));b.onclick=function(){if(x.u){window.open(x.u,'_self');return;}if(x.tr){add(lb,1);setTimeout(function(){var r=trInfo(x.tr);add(r.t,0,r.c)},250);return;}if(x.p){add(lb,1);setTimeout(function(){var r=spAns(x.p);add(r.t,0,r.c)},250);return;}send(x)};return b;}
+function chipBtn(x){var lb=typeof x==='string'?x:x.l,b=el('button',{type:'button','class':'emb-c'},esc(lb));b.onclick=function(){if(x.u){window.open(x.u,'_self');return;}if(x.bh){add(lb,1);setTimeout(function(){openWarranty(x.bh,lb)},200);return;}if(x.tr){add(lb,1);setTimeout(function(){var r=trInfo(x.tr);add(r.t,0,r.c)},250);return;}if(x.p){add(lb,1);setTimeout(function(){var r=spAns(x.p);add(r.t,0,r.c)},250);return;}send(x)};return b;}
 function pager(items){var c=el('div',{'class':'emb-cs emb-pg'});ms.appendChild(c);
  var W=c.clientWidth||300,G=6,ws=items.map(function(x){var b=chipBtn(x);c.appendChild(b);var w=b.offsetWidth+G;c.removeChild(b);return w});
  var nb=el('button',{type:'button','class':'emb-c emb-nav'},'Thêm ›');c.appendChild(nb);var NW=nb.offsetWidth+G;c.removeChild(nb);
@@ -158,10 +192,12 @@ function add(t,who,chips,pg){if(t){var m=el('div',{'class':'emb-m '+(who?'emb-u'
 function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Gọi/Zalo tư vấn'){window.open(ZALO,'_blank');return;}
  if(t==='Tròng kính mắt'){setTimeout(function(){add('EYEMEDI có đơn tròng, chống ánh sáng xanh, đổi màu, và đa tròng, hai tròng, chống bể, chống ánh sáng xanh, đổi màu tròng đặt theo đơn.\nAnh/chị gửi độ mắt của mình, ví dụ: "cận -125 loạn -150", "viễn +200", "cận -500 đổi màu", "lão +200, đa tròng" để Eyemedi tư vấn ạ.',0,['Tròng chống ánh sáng xanh','Tròng đổi màu','Đa tròng','Hai tròng','Tròng chống bể'])},250);return;}
+ if(t==='Bảo hành'){setTimeout(function(){add('Eyemedi xin nhận thông tin bảo hành từ anh chị:',0,['Bảo hành gọng','Bảo hành tròng'])},250);return;}
+ if(BH[t]){setTimeout(function(){add('',0,BH[t].map(function(v){return {l:v,bh:t}}),1)},250);return;}
  if(t==='Đặt mua'&&last&&last.id){setTimeout(function(){openOrder(last)},200);return;}
  var map={'Thông số':'thong so','Chất liệu':'chat lieu','Màu / phân loại':'mau','Đặt mua':'dat mua'};
  setTimeout(function(){if(!D){add('Dữ liệu đang tải, anh/chị thử lại sau vài giây ạ.');return;}
-  var r=map[t]&&last?{t:last.a[{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau','Đặt mua':'mua'}[t]]}:answer(t);if(r.order){openOrder(r.order);return;}add(r.t,0,r.c,r.pg)},250);}
+  var r=map[t]&&last?{t:last.a[{'Thông số':'ts','Chất liệu':'cl','Màu / phân loại':'mau','Đặt mua':'mua'}[t]]}:answer(t);if(r.order){openOrder(r.order);return;}if(r.book){add(r.t);openBooking();return;}add(r.t,0,r.c,r.pg)},250);}
 function load(cb){if(D)return cb();fetch('/chatbot/du-lieu.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(j){D=j;prep();cb()}).catch(function(){})}
 function ui(){var st=el('style',{id:'emb-css'},css);document.head.appendChild(st);
  var btn=el('button',{id:'emb-btn',type:'button','aria-label':'Chat với EYEMEDI'},'<svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.9 2 11.7c0 2.6 1.3 4.9 3.4 6.5L4.6 22l4.2-2.2c1 .3 2.1.4 3.2.4 5.5 0 10-3.9 10-8.6S17.5 3 12 3zm-4 9.9a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6zm4 0a1.3 1.3 0 110-2.6 1.3 1.3 0 010 2.6z"/></svg><span class="emb-dot"></span>');
