@@ -188,16 +188,18 @@ nav.main a:hover{opacity:1;color:var(--gold)}
 .card .thumb{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);cursor:pointer}
 .card .thumb img{width:100%;height:100%;object-fit:cover;transition:.5s}
 .card:hover .thumb img{transform:scale(1.05)}
-.card .ribbon{position:absolute;top:12px;left:12px;background:var(--espresso);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px}
-.card .ribbon.hot{background:var(--red);color:#fff;left:auto;right:12px}
+.card .ribbon{position:absolute;top:12px;left:12px;max-width:calc(100% - 90px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--espresso);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px}
+.card .ribbon.hot{background:var(--red);color:#fff;left:auto;right:12px;max-width:none}
 .card .body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
-.card h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--roast);cursor:pointer}
-.card .blend{font-size:.85rem;color:var(--crema);font-weight:600;margin:.2rem 0 .5rem}
-.card .notes{font-size:.88rem;color:var(--muted);flex:1}
+.card h3{font-family:'Playfair Display',serif;font-size:1.3rem;line-height:1.25;color:var(--roast);cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
+.card .blend{font-size:.85rem;line-height:1.4;color:var(--crema);font-weight:600;margin:.2rem 0 .5rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
+.card .notes{font-size:.88rem;line-height:1.5;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.5em}
 .meter{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted);margin:.8rem 0}
 .meter .bar{flex:1;height:5px;background:var(--paper-2);border-radius:5px;overflow:hidden}
 .meter .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--crema),var(--bean))}
-.card .foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.4rem}
+.card .foot{display:flex;flex-direction:column;align-items:stretch;gap:.6rem;margin-top:auto;padding-top:.4rem}
+.card .foot .price{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:2.6em}
+.card .foot .add-btn{justify-content:center;width:100%}
 .price{font-weight:700;font-size:1.2rem;color:var(--red)}
 .price small{display:block;font-size:.75rem;color:var(--muted);font-weight:400}
 .add-btn{background:var(--roast);color:#fff;border-radius:999px;padding:.6rem .9rem;font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:.3rem;transition:.2s;white-space:nowrap}
@@ -524,6 +526,11 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   .grid{grid-template-columns:1fr 1fr;gap:12px}
   .card .body{padding:12px}
   .card h3{font-size:1.05rem}
+  .card .ribbon{top:8px;left:8px;font-size:.62rem;padding:.25rem .55rem;letter-spacing:.04em;max-width:calc(100% - 64px)}
+  .card .ribbon.hot{right:8px}
+  .card .blend{font-size:.78rem}
+  .card .foot .price{font-size:.98rem}
+  .add-btn{padding:.6rem .5rem;font-size:.8rem}
   .card .notes,.meter{display:none}
   .card .foot{flex-direction:column;align-items:stretch}
   .add-btn{justify-content:center}
@@ -997,7 +1004,7 @@ function renderProducts(more){
     <article class="card">
       <div class="thumb" onclick="openProduct('${p.id}')">
         <img src="${p.img}" alt="${esc(p.name)}" loading="lazy">
-        <span class="ribbon">${p.cat==='CAFEROA Premium'?'Sỉ & nhượng quyền':p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
+        <span class="ribbon">${p.cat==='CAFEROA Premium'?'Bán sỉ':p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
       </div>
       <div class="body">
         <h3 onclick="openProduct('${p.id}')">${p.name}</h3>
