@@ -302,6 +302,14 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .price-table th{background:var(--roast);color:#fff;font-weight:600;font-size:.88rem}
 .price-table td.p{font-weight:700;color:var(--red);white-space:nowrap}
 .price-table tr:last-child td{border-bottom:0}
+#tierTable{table-layout:fixed}
+#tierTable th:nth-child(1),#tierTable td:nth-child(1){width:34%}
+#tierTable th:nth-child(2),#tierTable td:nth-child(2){width:24%;text-align:center}
+#tierTable th:nth-child(3),#tierTable td:nth-child(3){width:42%}
+#tierTable td{vertical-align:middle}
+#tierTable td:nth-child(1) b{white-space:nowrap}
+#tierTable td.p{font-size:1.05rem}
+@media (max-width:640px){#tierTable th,#tierTable td{padding:11px 10px;font-size:.88rem}#tierTable th{font-size:.8rem;line-height:1.3}}
 .price-table tr.grp td{background:var(--paper-2);color:var(--bean);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px}
 .price-table .mini{padding:.4rem .8rem;font-size:.8rem}
 .table-wrap{overflow-x:auto;border-radius:var(--radius)}
@@ -350,6 +358,23 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .qr-info span{color:var(--muted);min-width:92px}
 .qr-info button{font-size:.72rem;border:1px solid var(--crema);color:var(--bean);border-radius:999px;padding:.1rem .5rem}
 .qr-note{font-size:.8rem;color:var(--muted);margin-top:8px}
+/* Chat order form */
+.msg.form,.msg.qr{max-width:100%;width:100%;padding:0;background:none;border:0}
+.co-form{background:#fff;border:1.5px solid var(--crema);border-radius:14px;padding:12px;display:grid;gap:8px;font-size:.88rem}
+.co-h{font-weight:700;color:var(--roast)}
+.co-form input,.co-form select{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:.5rem .6rem;font-size:.86rem;background:#fff;outline:none;min-width:0}
+.co-form input:focus,.co-form select:focus{border-color:var(--crema)}
+.co-line{display:grid;grid-template-columns:1fr 54px 28px;gap:6px;align-items:center}
+.co-x{width:28px;height:28px;border-radius:50%;background:var(--paper-2);color:var(--red);font-size:1rem}
+.co-add{justify-self:start;color:var(--bean);font-weight:600;font-size:.82rem}
+.co-pay{display:grid;gap:4px;font-size:.84rem}.co-pay label{display:flex;gap:6px;align-items:center}.co-pay input{width:auto}
+.co-sum{background:var(--paper);border-radius:9px;padding:8px 10px;font-size:.84rem;line-height:1.6}
+.co-tot{color:var(--red)}
+.co-err{color:var(--red);font-size:.8rem;min-height:0}
+.co-send{background:var(--crema);color:#fff;border-radius:999px;padding:.6rem;font-weight:700}
+.co-send:disabled{opacity:.6}
+.co-done{font-size:.85rem;line-height:1.6}
+.msg.qr .qr-box{margin-top:0}
 /* Overlay / drawers / modal */
 .overlay{position:fixed;inset:0;background:rgba(20,12,8,.55);opacity:0;pointer-events:none;transition:.25s;z-index:80}
 .overlay.show{opacity:1;pointer-events:auto}
@@ -569,7 +594,6 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
           <a href="./#ban-si" onclick="return pickGroup('Bán sỉ & nhượng quyền')">Bán sỉ & nhượng quyền</a>
         </div>
       </div>
-      <a href="./#bang-gia">Giá bán lẻ</a>
       <a href="./#gia-si">Giá sỉ cho quán</a>
       <a href="./#nhuong-quyen">Nhượng quyền</a>
       <a href="tin-thi-truong.html">Tin thị trường</a>
@@ -627,8 +651,8 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
     <div class="news-tabs" id="newsTabs">
       <button class="chip active" data-cat="all">Tất cả</button>
       <button class="chip" data-cat="market">Giá & thị trường</button>
+      <button class="chip" data-cat="kienthuc">Kiến thức</button>
       <button class="chip" data-cat="quan">Cho chủ quán</button>
-      <button class="chip" data-cat="tubat">Tin Tubat</button>
     </div>
     <div class="news-list" id="newsList"></div>
     <p class="disclaimer">Số liệu cập nhật lần cuối: 13/11/2026. Giá nội địa và giá sàn tổng hợp từ chocaphe.vn và báo chí; điểm ngày 13/11 lấy theo chocaphe.vn. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
@@ -640,7 +664,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   <div class="container faq">
     <div class="section-head"><div class="eyebrow">Hỏi đáp</div><h2 class="section-title">Câu hỏi thường gặp về CAFEROA</h2></div>
     <details><summary>Mua cà phê CAFEROA ở đâu?</summary><p>Bạn đặt ngay trên trang web, nhắn Zalo 0931 877 833 hoặc mua trực tiếp tại cửa hàng 63C Lô C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh (mở cửa 8:00 – 21:00). Bán lẻ từ 1 gói, giao tận nơi toàn quốc.</p></details>
-    <details><summary>Giá bán lẻ cà phê tại CAFEROA bao nhiêu?</summary><p>Giá bán lẻ tại CAFEROA từ <span data-minprice>150.000đ</span> đến <span data-maxprice>450.000đ</span> mỗi sản phẩm, tùy dòng. Xem đầy đủ trong <a href="./#bang-gia" style="color:var(--red);text-decoration:underline">bảng giá bán lẻ</a>.</p></details>
+    <details><summary>Giá bán lẻ cà phê tại CAFEROA bao nhiêu?</summary><p>Giá bán lẻ tại CAFEROA từ <span data-minprice>150.000đ</span> đến <span data-maxprice>450.000đ</span> mỗi sản phẩm, tùy dòng. Xem đầy đủ trong <a href="./#ban-le" style="color:var(--red);text-decoration:underline">bảng giá bán lẻ</a>.</p></details>
     <details><summary>CAFEROA là gì?</summary><p>CAFEROA Premium Coffee là đại lý bán lẻ cà phê sạch chất lượng cao: bán lẻ cà phê hạt và cà phê xay, cung cấp giá sỉ cho quán và văn phòng, hỗ trợ nhượng quyền và mở quán. Liên hệ hotline/Zalo 0931 877 833 hoặc email caferoa.vina@gmail.com.</p></details>
     <details><summary>Đăng ký nhượng quyền CAFEROA như thế nào?</summary><p>Bạn điền form trong mục <a href="./#nhuong-quyen" style="color:var(--red);text-decoration:underline">Đăng ký nhượng quyền</a>. CAFEROA gọi tư vấn trực tiếp tận nơi, khảo sát mặt bằng, lên phương án quán, đào tạo pha chế và cung cấp nguồn cà phê sạch. Điều kiện và chi phí 2 bên thỏa thuận theo nhu cầu.</p></details>
     <details><summary>Giá sỉ cà phê sạch cho quán &amp; văn phòng tính thế nào?</summary><p>Giá sỉ tính theo sản lượng mỗi tháng, bắt đầu từ 5kg. Robusta và Arabica đều có giá sỉ; gửi form báo giá để nhận giá chính xác cho quán của bạn.</p></details>
@@ -667,7 +691,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
       <div>
         <h5>Sản phẩm</h5>
         <ul>
-          <li><a href="./#bang-gia">Giá bán lẻ cà phê</a></li>
+          <li><a href="./#ban-le">Giá bán lẻ cà phê</a></li>
           <li><a href="./#gia-si">Giá sỉ cà phê cho quán</a></li>
           <li><a href="./#gia-si">Cà phê Robusta giá sỉ</a></li>
           <li><a href="./#gia-si">Cà phê Arabica giá sỉ</a></li>
@@ -770,10 +794,13 @@ const SHOP = {
 };
 /* Bậc giá sỉ (chiết khấu trên giá lẻ) — GIÁ TRỊ TẠM, chỉnh theo chính sách thật */
 const WHOLESALE_TIERS = [
-  ['5 – 10 kg/tháng', 10, 'Quán nhỏ, xe cà phê mang đi'],
-  ['10 – 30 kg/tháng', 15, 'Quán vừa, giao định kỳ hằng tuần'],
-  ['30 – 100 kg/tháng', 20, 'Chuỗi nhỏ, quán đông khách'],
-  ['Trên 100 kg/tháng', null, 'Báo giá riêng theo hợp đồng']
+  ['1 – 4 kg', 0, 'Khách mua lẻ'],
+  ['5 – 9 kg', 5, 'Quán nhỏ, xe cà phê'],
+  ['10 – 19 kg', 8, 'Quán mới hoạt động'],
+  ['20 – 49 kg', 12, 'Quán kinh doanh ổn định'],
+  ['50 – 99 kg', 15, 'Quán có sản lượng khá'],
+  ['100 – 199 kg', 18, 'Đối tác đại lý'],
+  ['Từ 200 kg', 20, 'Đại lý chiến lược']
 ];
 const IMG = 'https://tubatcoffee.com/wp-content/uploads/2026/07/';
 const PIMG = {
@@ -916,6 +943,9 @@ const IMGS = {
   espresso_machine:'img/n-espresso-machine.webp'
 };
 const NEWS = [
+  {cat:'kienthuc', date:'16/11/2026', title:'Các mức độ rang cà phê: nhiệt độ, màu hạt và hương vị',
+   sum:'Light, Medium, Dark roast khác nhau thế nào? Crack 1 – crack 2, nhiệt độ từng mốc và cách chọn mức rang cho phin, espresso, pour-over.',
+   img:'img/rang-8-muc.webp', page:'muc-do-rang-ca-phe.html'},
   {cat:'market', date:'13/11/2026', title:'Giá cà phê hôm nay 13/11: nội địa 83.700đ/kg, giảm nhẹ 400đ',
    sum:'Giá nhân trong nước lùi 0,48%; Robusta London quanh 3.260 USD/tấn, Arabica New York xuống 269 cent/lb.',
    img:IMGS.wood_cup,
@@ -965,16 +995,6 @@ const NEWS = [
    body:`<p>Khách đông chưa chắc có lãi; doanh thu tăng nhờ bán nhiều đơn hơn hoặc nâng giá trị mỗi đơn. Bước đầu là tinh gọn menu, tập trung món chủ lực và thiết kế combo.</p>
    <p>Tiếp theo là chương trình khách thân thiết, mạng xã hội, cân nhắc chi phí khi bán qua app giao hàng, nâng chất lượng phục vụ, kiểm soát giá vốn và dùng phần mềm quản lý. Quán nhỏ nên làm tốt menu, khách cũ và phục vụ trước khi mở rộng.</p>`,
    src:'Chợ Cà Phê (chocaphe.vn)', url:'https://chocaphe.vn/cach-tang-doanh-thu-quan-ca-phe-9-chien-luoc-hieu-qua-chu-quan-nen-ap-dung.n179'},
-  {cat:'tubat', date:'26/10/2026', title:'TUBAT xuất khẩu chính ngạch 100kg Trust Chân Phương qua tuyến liên vận quốc tế mới',
-   sum:'Cột mốc đưa định vị "Modern Vietnamese Cultural Specialty Coffee" ra thị trường quốc tế.',
-   img:'img/n-bag-gourmet.webp',
-   body:`<p>Tubat Coffee xuất khẩu chính ngạch lô 100kg dòng Trust – Chân Phương qua tuyến liên vận đường sắt quốc tế mới, đưa định vị "Modern Vietnamese Cultural Specialty Coffee" ra thế giới.</p>`,
-   src:'Tubat Coffee', url:'https://tubatcoffee.com/elementor-605/'},
-  {cat:'tubat', date:'14/08/2026', title:'Thế nào là "Modern Vietnamese Cultural Specialty Coffee"?',
-   sum:'Giải mã định vị mới của TUBAT và cách nó thể hiện trên website, bao bì sản phẩm.',
-   img:'img/n-bag-blank.webp',
-   body:`<p>Định vị mới của Tubat: cà phê đặc sản mang bản sắc văn hóa Việt, kể bằng tinh thần hiện đại, hiện diện từ website đến bao bì.</p>`,
-   src:'Tubat Coffee', url:'https://tubatcoffee.com/the-nao-la-modern-vietnamese-cultural-specialty-coffee-loi-giai-ma-cho-dinh-vi-moi-cua-tubat/'}
 ];
 /* ---------- Helpers ---------- */
 function imgFallback(el){ if(el.dataset.fbkey && !el.dataset.fb && !el.dataset.used){ el.dataset.used=1; el.src = IMGS[el.dataset.fbkey]; return; }
@@ -1269,19 +1289,20 @@ function renderChart(){
   tip.textContent = `${s.label} · ${last[0]}: ${s.fmt(last[1])} ${s.unit}`;
   $('#chart').querySelectorAll('.pt').forEach(el => { const show = () => { const p = pts[+el.dataset.i]; tip.textContent = `${s.label} · ${p[0]}: ${s.fmt(p[1])} ${s.unit}`; }; el.addEventListener('mouseenter', show); el.addEventListener('click', show); });
 }
-const CATS = {market:'Giá & thị trường', quan:'Cho chủ quán', tubat:'Tin Tubat'};
+const CATS = {kienthuc:'Kiến thức cà phê', market:'Giá & thị trường', quan:'Cho chủ quán'};
 let newsCat = 'all';
 function goTo(id){ if(document.getElementById(id)) location.hash = id; else location.href = './#' + id; }
 const PAGE = document.body.dataset.page || 'home';
 function renderNews(){
   let list = NEWS.filter(n => newsCat==='all' || n.cat===newsCat);
-  if(PAGE==='home') list = NEWS.filter(n=>n.cat!=='tubat').slice(0,3);
+  if(PAGE==='home') list = NEWS.slice(0,3);
   $('#newsList').innerHTML = list.map(n => { const i = NEWS.indexOf(n); return `<article class="news" onclick="openNews(${i})">
     <div class="nimg">${n.img?`<div class="ph">☕ ${CATS[n.cat]}</div><img src="${n.img}" ${n.fb?`data-fb="${n.fb}"`:''} alt="${esc(n.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="imgFallback(this)" style="position:absolute;inset:0">`:`<div class="ph">☕ ${CATS[n.cat]}<br><small style="font-size:.85rem;font-family:'Be Vietnam Pro';color:#cbbba5">${n.date}</small></div>`}</div>
     <div class="nb"><div class="meta">${CATS[n.cat]} · ${n.date}</div><h3>${n.title}</h3><p>${n.sum}</p><span class="more">Đọc tiếp →</span></div></article>`; }).join('');
 }
 document.querySelectorAll('#newsTabs .chip').forEach(b => b.onclick = () => { newsCat = b.dataset.cat; document.querySelectorAll('#newsTabs .chip').forEach(x=>x.classList.toggle('active', x===b)); renderNews(); });
 function openNews(i){
+  if(NEWS[i].page){ location.href = NEWS[i].page; return; }
   const n = NEWS[i];
   $('#modalBox').innerHTML = `<button class="close" onclick="closeAll()">×</button><div class="article"><div class="eyebrow">${CATS[n.cat]} · ${n.date}</div><h3>${n.title}</h3>${n.img?`<img src="${n.img}" ${n.fb?`data-fb="${n.fb}"`:''} alt="${esc(n.title)}" referrerpolicy="no-referrer" onerror="imgFallback(this)" style="border-radius:12px;margin-bottom:16px;max-height:360px;width:100%;object-fit:cover">`:''}${n.body}<div class="src">Nguồn: <a href="${n.url}" target="_blank" rel="noopener">${n.src}</a>. Nội dung được tóm tắt lại.</div></div>`;
   openModal();
@@ -1317,8 +1338,72 @@ function botSay(html, quick, delay=550){
   const t = document.createElement('div'); t.className='msg bot typing'; t.innerHTML='<i></i><i></i><i></i>'; chatBody().appendChild(t); chatBody().scrollTop = chatBody().scrollHeight;
   setTimeout(()=>{ t.remove(); addMsg(html); if(quick) setQuick(quick); }, delay);
 }
+
+/* ---------- Đặt hàng ngay trong khung chat ---------- */
+let coSeq = 0;
+function coRow(fid, pid, qty){
+  const opts = PRODUCTS.filter(p=>p.price).map(p=>`<option value="${p.id}" ${p.id===pid?'selected':''}>${p.name} (${p.size}) – ${vnd(p.price)}</option>`).join('');
+  return `<div class="co-line"><select name="pid" onchange="coTotal('${fid}')">${opts}</select><input name="qty" type="number" min="1" value="${qty||1}" inputmode="numeric" oninput="coTotal('${fid}')"><button type="button" class="co-x" onclick="this.parentNode.remove();coTotal('${fid}')" aria-label="Xóa">×</button></div>`;
+}
+function chatOrder(){
+  const fid = 'co' + (++coSeq) + Date.now().toString(36);
+  const c = store.get('tubat_customer', {});
+  const lines = cart.length ? cart.filter(l=>byId(l.id).price).map(l=>coRow(fid,l.id,l.qty)).join('') : coRow(fid, PRODUCTS.find(p=>p.price).id, 1);
+  const html = `<div class="co-form" id="${fid}"><div class="co-h">🛒 Đặt hàng nhanh</div>
+    <div class="co-lines">${lines}</div>
+    <button type="button" class="co-add" onclick="coAdd('${fid}')">+ Thêm sản phẩm</button>
+    <input name="name" placeholder="Họ và tên *" value="${esc(c.name||'')}" autocomplete="name">
+    <input name="phone" placeholder="Số điện thoại *" inputmode="tel" value="${esc(c.phone||'')}" autocomplete="tel">
+    <input name="address" placeholder="Địa chỉ nhận hàng *" value="${esc(c.address||'')}" autocomplete="street-address">
+    <select name="city" onchange="coTotal('${fid}')">${['TP. Hồ Chí Minh','Hà Nội','Đà Nẵng','Tỉnh/thành khác'].map(x=>`<option ${c.city===x?'selected':''}>${x}</option>`).join('')}</select>
+    <div class="co-pay"><label><input type="radio" name="pay_${fid}" value="COD" checked> Thanh toán khi nhận (COD)</label><label><input type="radio" name="pay_${fid}" value="Chuyển khoản"> Chuyển khoản (QR)</label></div>
+    <input name="note" placeholder="Ghi chú (giờ nhận, xay sẵn…)">
+    <div class="co-sum" id="${fid}-sum"></div>
+    <div class="co-err" id="${fid}-err"></div>
+    <button type="button" class="co-send" onclick="coSend('${fid}')">Gửi đơn</button></div>`;
+  const t = document.createElement('div'); t.className='msg bot typing'; t.innerHTML='<i></i><i></i><i></i>'; chatBody().appendChild(t); chatBody().scrollTop = chatBody().scrollHeight;
+  setTimeout(()=>{ t.remove(); addMsg('Bạn điền thông tin bên dưới, bấm <b>Gửi đơn</b> là xong nhé 👇', 'bot'); addMsg(html, 'bot form', true); saveMsg('bot', '<i>📝 Form đặt hàng</i>'); coTotal(fid); setQuick(['Tư vấn chọn cà phê','Phí ship & giao hàng','Giá sỉ cho quán']); }, 450);
+}
+function coAdd(fid){ const box=document.querySelector('#'+fid+' .co-lines'); box.insertAdjacentHTML('beforeend', coRow(fid, PRODUCTS.find(p=>p.price).id, 1)); coTotal(fid); }
+function coRead(fid){
+  const f = document.getElementById(fid);
+  const items = [...f.querySelectorAll('.co-line')].map(r=>({p:byId(r.querySelector('[name=pid]').value), q:Math.max(1,parseInt(r.querySelector('[name=qty]').value)||1)}));
+  const sub = items.reduce((a,i)=>a+i.p.price*i.q,0), other = f.querySelector('[name=city]').value!=='TP. Hồ Chí Minh';
+  const ship = other ? 0 : (sub>=SHOP.freeShipFrom ? 0 : SHOP.shipFee);
+  return {f, items, sub, other, ship, total: sub+ship};
+}
+function coTotal(fid){ const o = coRead(fid); const el = document.getElementById(fid+'-sum'); if(!el) return;
+  el.innerHTML = `Tạm tính: <b>${vnd(o.sub)}</b><br>Phí giao: ${o.other?'theo đơn vị vận chuyển':(o.ship?vnd(o.ship):'Miễn phí')}<br>Tổng: <b class="co-tot">${vnd(o.total)}${o.other?' + ship':''}</b>`; }
+function coSend(fid){
+  const o = coRead(fid), f = o.f, v = n => (f.querySelector(`[name=${n}]`).value||'').trim();
+  const phone = v('phone').replace(/[\s.\-]/g,''), err = document.getElementById(fid+'-err');
+  const pay = f.querySelector(`[name=pay_${fid}]:checked`).value;
+  let msg = '';
+  if(!o.items.length) msg = 'Vui lòng chọn ít nhất 1 sản phẩm.';
+  else if(v('name').length < 2) msg = 'Vui lòng nhập họ tên.';
+  else if(!/^(0|\+84)(3|5|7|8|9)\d{8}$/.test(phone)) msg = 'Số điện thoại chưa đúng (10 số).';
+  else if(v('address').length < 5) msg = 'Vui lòng nhập địa chỉ nhận hàng.';
+  if(msg){ err.textContent = msg; return; }
+  err.textContent = '';
+  const btn = f.querySelector('.co-send'); btn.disabled = true; btn.textContent = 'Đang gửi…';
+  const city = v('city'), name = v('name'), address = v('address'), note = v('note'); store.set('tubat_customer', {name, phone, address, city});
+  const code = 'TB' + Date.now().toString().slice(-7);
+  const lines = o.items.map(i=>`- ${i.p.name} ${i.p.size} x${i.q} = ${vnd(i.p.price*i.q)}`).join('\n');
+  const totalTxt = vnd(o.other?o.sub:o.total) + (o.other?' + phí ship':'');
+  const fields = {'Mã đơn':code,'Khách hàng':name,'SĐT':phone,'Địa chỉ':address,'Tỉnh/TP':city,'Thanh toán':pay,'Sản phẩm':lines,'Tạm tính':vnd(o.sub),'Phí giao':o.other?'Theo ĐVVC':(o.ship?vnd(o.ship):'Miễn phí'),'Tổng cộng':totalTxt,'Ghi chú':(note||'—')+' (đặt qua chatbot)'};
+  submitData('order', `Đơn hàng ${code} – ${name} – ${totalTxt}`, fields).then(ok => {
+    f.innerHTML = `<div class="co-h">✅ Đã gửi đơn ${code}</div><div class="co-done">${o.items.map(i=>`${i.p.name} x${i.q}`).join('<br>')}<br>Tổng: <b>${totalTxt}</b></div>`;
+    const orders = store.get('tubat_orders', []); orders.unshift({code, text:lines, at:new Date().toISOString()}); store.set('tubat_orders', orders.slice(0,20));
+    if(o.items.every(i=>cart.some(l=>l.id===i.p.id))){ cart = []; saveCart(); }
+    const summary = `<b>Cảm ơn ${esc(name)}! Đơn ${code} đã được ${ok?'gửi tới CAFEROA':'ghi nhận'}</b> 🎉\n${lines}\nTổng: <b>${totalTxt}</b>\nThanh toán: ${pay}\nCAFEROA sẽ gọi/nhắn Zalo ${phone} để xác nhận và giao hàng.${ok?'':`\n⚠️ Hệ thống gửi tự động đang bận, bạn bấm <a href="${SHOP.zalo}" target="_blank" style="color:#0068ff;font-weight:600">Zalo ${SHOP.phoneDisplay}</a> gửi mã ${code} giúp mình nhé.`}`;
+    addMsg(summary, 'bot');
+    if(pay==='Chuyển khoản'){ const q = qrBlock(code, o.other?o.sub:o.total, o.other); addMsg(q, 'bot qr', true); saveMsg('bot', `<i>Chuyển khoản đơn ${code}: ${SHOP.qr.bankId} ${SHOP.qr.accountNo} – ${SHOP.qr.accountName} – ${totalTxt} – Nội dung: ${code}</i>`); }
+    setQuick(MAIN_Q);
+  });
+}
+
 const pcard = p => `<div class="pcard"><img src="${p.img}" alt=""><div><b>${p.name}</b><small>${priceTxt(p)}</small></div><button onclick="addToCart('${p.id}')">${p.price?'+ Giỏ':'Hỏi giá'}</button></div>`;
-const MAIN_Q = ['Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
+const MAIN_Q = ['🛒 Mua hàng','Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
 function greet(){ botSay(`Xin chào! Mình là trợ lý của <b>CAFEROA – Đại lý bán lẻ cà phê sạch chất lượng cao</b> ☕\nMình có thể báo giá bán lẻ, giá sỉ cho quán & văn phòng, tư vấn chọn cà phê, nhượng quyền mở quán hoặc cập nhật giá cà phê hôm nay.`, MAIN_Q, 400); }
 function userSay(text){ if(!text.trim()) return; addMsg(esc(text),'me'); reply(text); }
 function sendChat(e){ e.preventDefault(); const i=$('#chatInput'); const v=i.value; i.value=''; userSay(v); }
@@ -1348,7 +1433,7 @@ function reply(raw){
   if(has('nhuong quyen','franchise','mo quan tubat')){ setTimeout(()=>{closeChatOnMobile();goTo('nhuong-quyen');},1600); return botSay('Bạn đăng ký <b>nhượng quyền CAFEROA</b> qua form ở mục <b>"Đăng ký nhượng quyền"</b> (mình đang chuyển bạn tới đó). CAFEROA tư vấn trực tiếp tận nơi, khảo sát mặt bằng, lên phương án quán, đào tạo pha chế và cung cấp nguồn cà phê sạch. Điều kiện và chi phí 2 bên thỏa thuận theo nhu cầu.', MAIN_Q); }
   if(has('o dau','cho nao','noi nao','dai ly','mua le')) return botSay(`CAFEROA là <b>đại lý bán lẻ cà phê sạch chất lượng cao</b>, bán lẻ từ 1 gói:\n• Đặt ngay trên trang này (thanh toán khi nhận)\n• Nhắn Zalo <a href="${SHOP.zalo}" target="_blank" style="color:#0068ff;font-weight:600">${SHOP.phoneDisplay}</a>\n• Mua tại cửa hàng: ${SHOP.address}`, MAIN_Q);
   if(has('xuong rang','rang gia re','xuong')) return botSay('Cà phê tại CAFEROA được rang bằng công nghệ Hot Air, rang theo đơn, 100% cà phê không độn. CAFEROA phân phối trực tiếp nên giá sỉ cạnh tranh mà vẫn sạch.', ['Giá sỉ cho quán','Giá bán lẻ']);
-  if(has('gia si','mua si','quan nho','cho quan','so luong lon','qua tang','doanh nghiep','in logo','robusta si','arabica si','lay si','van phong')) { const tiers = WHOLESALE_TIERS.map(r=>`• ${r[0]}: ${r[1]?'giảm '+r[1]+'% giá lẻ':'báo giá riêng'}`).join('\n'); return botSay(`<b>Giá sỉ cà phê sạch cho quán &amp; văn phòng</b> (Robusta & Arabica):\n${tiers}\nQuán nhỏ nên dùng <b>Trust – Thanh Tao</b> hoặc <b>Hồn Hậu</b>.${pcard(byId('trust-tt'))}\n<a href="./#baogia" style="color:var(--red);text-decoration:underline" onclick="closeChatOnMobile()">Gửi form nhận báo giá sỉ →</a>`, MAIN_Q); }
+  if(has('gia si','mua si','quan nho','cho quan','so luong lon','qua tang','doanh nghiep','in logo','robusta si','arabica si','lay si','van phong')) { const tiers = WHOLESALE_TIERS.map(r=>`• ${r[0]}/tháng: ${r[1]?'chiết khấu '+r[1]+'%':'giá lẻ'} – ${r[2]}`).join('\n'); return botSay(`<b>Giá sỉ cà phê sạch cho quán &amp; văn phòng</b> (Robusta & Arabica):\n${tiers}\nQuán nhỏ nên dùng <b>Trust – Thanh Tao</b> hoặc <b>Hồn Hậu</b>.${pcard(byId('trust-tt'))}\n<a href="./#baogia" style="color:var(--red);text-decoration:underline" onclick="closeChatOnMobile()">Gửi form nhận báo giá sỉ →</a>`, MAIN_Q); }
   // specific products
   const found = PRODUCTS.filter(p => { const n = norm(p.name); return t.includes(n) || (p.id.startsWith('heritage') && t.includes(n.split(' ')[1]) && t.includes('heritage')) || (n.includes('–') && t.includes(norm(p.name.split('– ')[1]))); });
   if(found.length && !has('gia ca phe','thi truong')) { const p = found[0]; return botSay(`<b>${p.name}</b> – ${p.blend}\n${p.short}\nGiá: <b>${priceTxt(p)}</b> / ${p.size}\nHợp pha: ${p.brew}.${pcard(p)}`, ['Tư vấn chọn cà phê','Bảng giá','Cách đặt hàng']); }
@@ -1359,7 +1444,7 @@ function reply(raw){
   if(has('ship','giao','van chuyen','bao lau','may ngay','nhan hang')) return botSay(`🚚 <b>Giao hàng</b>\n• Nội thành TP.HCM: miễn phí cho đơn từ ${vnd(SHOP.freeShipFrom)}, dưới mức này phí ${vnd(SHOP.shipFee)}.\n• Đi tỉnh: phí theo đơn vị vận chuyển.\n• Thời gian: 1–2 ngày nội thành, 2–4 ngày đi tỉnh (cà phê rang mới theo đơn).`, MAIN_Q);
   if(has('eyemedi','chu tai khoan','tai khoan nao','ten tai khoan','so tai khoan','stk')) return botSay(`Tài khoản nhận chuyển khoản của CAFEROA:\n• Ngân hàng: ${SHOP.qr.bankName}\n• Số tài khoản: <b>${SHOP.qr.accountNo}</b>\n• Chủ tài khoản: <b>${SHOP.qr.accountName}</b>\n<b>EYEMEDI GROUP</b> là chủ sở hữu thương hiệu CAFEROA, nên tài khoản đứng tên hộ kinh doanh EYEMEDI. Nội dung chuyển khoản ghi mã đơn hàng của bạn nhé.`, MAIN_Q);
   if(has('thanh toan','chuyen khoan','cod','tra tien','momo','the')) return botSay('💳 Bạn có thể <b>thanh toán khi nhận hàng (COD)</b> hoặc <b>chuyển khoản ngân hàng</b>. Thông tin tài khoản được gửi khi CAFEROA xác nhận đơn.', MAIN_Q);
-  if(has('dat hang','mua','order','cach mua','dat mua')) return botSay('🛒 <b>Đặt hàng 3 bước:</b>\n1. Bấm "Thêm vào giỏ" ở sản phẩm bạn thích\n2. Mở giỏ hàng → "Tiến hành đặt hàng", điền tên, SĐT, địa chỉ\n3. Bấm "Đặt hàng": đơn được gửi thẳng tới CAFEROA, nhân viên sẽ gọi/nhắn Zalo xác nhận\nKhông cần tạo tài khoản!', ['Xem giỏ hàng','Tư vấn chọn cà phê','Bảng giá']);
+  if(has('mua hang','dat hang','order','cach mua','dat mua','mua ngay','muon mua')) return chatOrder();
   if(has('nguyen chat','sach','hoa chat','huong lieu','bap','dau nanh','pha tron','3 khong','an toan')) return botSay('✅ Cà phê tại CAFEROA theo chuẩn <b>"3 Không"</b>: không hóa chất, không hương liệu, không chất bảo quản. 100% hạt cà phê rang Hot Air, truy xuất lô bằng mã QR trên bao bì.', MAIN_Q);
   if(has('xay','phin','espresso','pour','cach pha','pha the nao','huong dan pha')) return botSay('☕ <b>Chọn kiểu xay theo cách pha:</b>\n• Phin: xay thô vừa, 20–25g cà phê, ủ 30 giây rồi rót nước 92–96°C\n• Máy espresso: xay mịn, 18–20g cho shot đôi\n• Pour-over: xay vừa (như muối hạt)\n• Có máy xay ở nhà: chọn hạt nguyên để giữ hương lâu nhất.', MAIN_Q);
   if(has('bao quan','han su dung','de duoc bao lau')) return botSay('Đóng kín túi sau khi mở, để nơi khô mát, tránh nắng; không cần tủ lạnh. Ngon nhất trong 4–6 tuần sau ngày rang.', MAIN_Q);
@@ -1375,11 +1460,11 @@ setTimeout(()=>$('#chatHello').classList.add('hide'), 9000);
 
 /* ---------- SEO blocks: price tables, shop info, JSON-LD ---------- */
 function renderPriceTables(){
-  $('#priceTable').innerHTML = `<thead><tr><th>Sản phẩm</th><th>Thành phần</th><th>Quy cách</th><th>Giá</th><th></th></tr></thead><tbody>` +
+  if($('#priceTable')) $('#priceTable').innerHTML = `<thead><tr><th>Sản phẩm</th><th>Thành phần</th><th>Quy cách</th><th>Giá</th><th></th></tr></thead><tbody>` +
     ['Sản phẩm bán lẻ','Bán sỉ & nhượng quyền'].map(g=>`<tr class="grp"><td colspan="5">${g}</td></tr>`+PRODUCTS.filter(p=>groupOf(p)===g).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.blend}</td><td>${p.size}</td><td class="p">${priceTxt(p)}</td><td><button class="btn btn-dark mini" onclick="addToCart('${p.id}')">${p.price?'Mua':'Báo giá sỉ'}</button></td></tr>`).join('')).join('') + '</tbody>';
-  $('#priceUpdated').textContent = `Giá bán lẻ Tubat Coffee cập nhật ngày ${SHOP.priceUpdated}.`;
-  $('#tierTable').innerHTML = `<thead><tr><th>Sản lượng</th><th>Chiết khấu trên giá lẻ</th><th>Phù hợp</th></tr></thead><tbody>` +
-    WHOLESALE_TIERS.map(r=>`<tr><td><b>${r[0]}</b></td><td class="p">${r[1]?'Giảm '+r[1]+'%':'Báo giá riêng'}</td><td>${r[2]}</td></tr>`).join('') + '</tbody>';
+  if($('#priceUpdated')) $('#priceUpdated').textContent = `Giá bán lẻ Tubat Coffee cập nhật ngày ${SHOP.priceUpdated}.`;
+  if($('#tierTable')) $('#tierTable').innerHTML = `<thead><tr><th>Sản lượng/tháng</th><th>Chiết khấu đề xuất</th><th>Đối tượng</th></tr></thead><tbody>` +
+    WHOLESALE_TIERS.map(r=>`<tr><td><b>${r[0]}</b></td><td class="p">${r[1]?r[1]+'%':'0%'}</td><td>${r[2]}</td></tr>`).join('') + '</tbody>';
   const ps = PRODUCTS.filter(p=>p.price).map(p=>p.price);
   document.querySelectorAll('[data-minprice]').forEach(e=>e.textContent=vnd(Math.min(...ps)));
   document.querySelectorAll('[data-maxprice]').forEach(e=>e.textContent=vnd(Math.max(...ps)));
@@ -1447,7 +1532,7 @@ window.addEventListener('hashchange', groupFromHash);
 /* ---------- Init ---------- */
 document.querySelectorAll('img[data-key]').forEach(im=>im.src=IMGS[im.dataset.key]);
 document.querySelectorAll('img[data-fbkey]').forEach(im=>{ if(im.complete && im.naturalWidth===0) imgFallback(im); });
-bindShop(); if($('#heroTrack')) initHero(); if($('#priceTable')) renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
+bindShop(); if($('#heroTrack')) initHero(); renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
 setTimeout(groupFromHash, 50);
 </script>
 </body>
