@@ -955,6 +955,9 @@ const SHOP = {
   // sẽ gửi 1 email kích hoạt tới địa chỉ trên — bấm "Activate Form" là xong.
   // Sau khi kích hoạt có thể thay email bằng mã bí danh FormSubmit cấp để ẩn email khỏi mã nguồn.
   formEndpoint: 'https://formsubmit.co/ajax/caferoa.vina@gmail.com',
+  // Link Web App của Google Apps Script (ghi đơn vào Google Sheet "Đơn hàng" + gửi email).
+  // Để trống thì đơn chỉ gửi email qua FormSubmit.
+  sheetEndpoint: '',
   address: '63C Lô C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh',
   freeShipFrom: 500000,
   shipFee: 25000,
@@ -1279,7 +1282,7 @@ function placeOrder(){
   const lines = cart.map(l => { const p = byId(l.id); return `- ${p.name} ${p.size}${l.grind?' ('+l.grind+')':''} x${l.qty} = ${vnd(p.price*l.qty)}`; }).join('\n');
   const text = `ĐƠN HÀNG ${code} – CAFEROA (Tubat Coffee)\n${lines}\nTạm tính: ${vnd(t.sub)}\nPhí giao: ${other?'theo ĐVVC':(t.ship?vnd(t.ship):'Miễn phí')}\nTỔNG: ${vnd(other?t.sub:t.total)}${other?' + phí ship':''}\n---\nKhách: ${d.name}\nSĐT: ${phone}\nĐịa chỉ: ${d.address}, ${d.city}\nThanh toán: ${d.pay}${d.note?'\nGhi chú: '+d.note:''}`;
   const subject = `Đơn hàng ${code} – ${d.name} – ${vnd(other?t.sub:t.total)}`;
-  const emailFields = {'Mã đơn':code, 'Khách hàng':d.name, 'Số điện thoại':phone, 'Địa chỉ':`${d.address}, ${d.city}`, 'Thanh toán':d.pay, 'Sản phẩm':lines, 'Tạm tính':vnd(t.sub), 'Phí giao':other?'Theo ĐVVC':(t.ship?vnd(t.ship):'Miễn phí'), 'Tổng cộng':vnd(other?t.sub:t.total)+(other?' + phí ship':''), 'Ghi chú':d.note||'—'};
+  const emailFields = {'Mã đơn':code, 'Khách hàng':d.name, 'SĐT':phone, 'Địa chỉ':d.address, 'Tỉnh/TP':d.city, 'Thanh toán':d.pay, 'Sản phẩm':lines, 'Tạm tính':vnd(t.sub), 'Phí giao':other?'Theo ĐVVC':(t.ship?vnd(t.ship):'Miễn phí'), 'Tổng cộng':vnd(other?t.sub:t.total)+(other?' + phí ship':''), 'Ghi chú':d.note||'—'};
   const orders = store.get('tubat_orders', []); orders.unshift({code, text, at:new Date().toISOString()}); store.set('tubat_orders', orders.slice(0,20));
   cart = []; saveCart();
   cartView = 'done';
@@ -1291,11 +1294,21 @@ function placeOrder(){
     <pre id="orderText">${esc(text)}</pre>
     ${d.pay==='Chuyển khoản'?`<p style="font-size:.85rem;background:#fffaf1;border:1px solid var(--line);border-radius:10px;padding:10px">Chuyển khoản: ${esc(SHOP.bank)}<br>Nội dung: <b>${code} ${esc(phone)}</b></p>`:''}</div>`;
   $('#cartFoot').innerHTML = `<div class="two"><a class="btn btn-line btn-sm" href="tel:${SHOP.phone}">Gọi CAFEROA</a><button class="btn btn-line btn-sm" onclick="sendZalo()">Nhắn Zalo</button></div>`;
-  sendEmail(subject, emailFields).then(ok => {
+  submitData('order', subject, emailFields).then(ok => {
     const st = $('#sendStatus'); if(!st) return;
     if(ok){ st.style.color = 'var(--ok)'; st.textContent = '✓ Đơn hàng đã được gửi tới CAFEROA.'; }
     else { st.style.color = 'var(--red)'; st.innerHTML = `Chưa gửi được đơn tự động. Vui lòng <a href="${mailtoLink(subject, text)}" style="text-decoration:underline">gửi email</a> hoặc bấm "Nhắn Zalo" (nội dung đơn đã được sao chép sẵn).`; copyOrder(true); }
   });
+}
+async function submitData(type, subject, data){
+  if(SHOP.sheetEndpoint){
+    try{
+      const r = await fetch(SHOP.sheetEndpoint, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({type, subject, data})});
+      const j = await r.json();
+      if(j && j.ok) return true;
+    }catch(e){}
+  }
+  return sendEmail(subject, data);
 }
 async function sendEmail(subject, fields){
   const body = Object.assign({_subject: subject, _template: 'table', _captcha: 'false'}, fields);
@@ -1472,13 +1485,13 @@ function submitLead(formId, title){
   const chk = (n,c)=>{ const r=f.querySelector(`[name=${n}]`).closest('.form-row'); r.classList.toggle('invalid',!c); if(!c) ok=false; };
   chk('name',(d.name||'').trim().length>=2); chk('phone',/^(0|\+84)(3|5|7|8|9)\d{8}$/.test(phone));
   if(!ok) return;
-  const labels={type:'Loại cà phê',vol:'Sản lượng/tháng',shop:'Quán, khu vực',area:'Khu vực',space:'Mặt bằng',budget:'Ngân sách'};
+  const labels={type:'Loại cà phê',vol:'Sản lượng/tháng',shop:'Quán, khu vực',area:'Khu vực mở quán',space:'Mặt bằng',budget:'Ngân sách'};
   const text = `${title} – CAFEROA\nHọ tên: ${d.name}\nSĐT: ${phone}\n` + Object.keys(labels).filter(k=>d[k]).map(k=>`${labels[k]}: ${d[k]}`).join('\n');
-  const fields = {'Loại yêu cầu':title, 'Họ tên':d.name, 'Số điện thoại':phone};
+  const fields = {'Loại yêu cầu':title, 'Họ tên':d.name, 'SĐT':phone};
   Object.keys(labels).filter(k=>d[k]).forEach(k=>fields[labels[k]]=d[k]);
   const btn = f.querySelector('button'); const label = btn.textContent;
   btn.disabled = true; btn.textContent = 'Đang gửi…';
-  sendEmail(`${title} – ${d.name} – ${phone}`, fields).then(ok => {
+  submitData('lead', `${title} – ${d.name} – ${phone}`, fields).then(ok => {
     btn.disabled = false; btn.textContent = label;
     if(ok){ toast('✓ Đã gửi! CAFEROA sẽ liên hệ bạn sớm.', true); f.reset(); }
     else { toast('Chưa gửi được tự động – đang mở email để bạn gửi', true); location.href = mailtoLink(`${title} – ${d.name}`, text); }
