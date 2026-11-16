@@ -1144,20 +1144,21 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 /* ---------- Products ---------- */
 let currentFilter = 'Tất cả';
 const PAGE_SIZE = 4; let shownCount = PAGE_SIZE;
+const groupOf = p => p.cat === 'CAFEROA Premium' ? 'Bán sỉ & nhượng quyền' : 'Sản phẩm bán lẻ';
 function renderFilters(){
-  const cats = ['Tất cả', ...new Set(PRODUCTS.map(p => p.cat))];
+  const cats = ['Tất cả', 'Sản phẩm bán lẻ', 'Bán sỉ & nhượng quyền'];
   $('#filters').innerHTML = cats.map(c => `<button class="chip ${c===currentFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
 }
 function setFilter(c){ currentFilter = c; shownCount = PAGE_SIZE; renderFilters(); renderProducts(); }
 function showMore(){ shownCount += PAGE_SIZE; renderProducts(true); }
 function renderProducts(more){
-  const all = PRODUCTS.filter(p => currentFilter === 'Tất cả' || p.cat === currentFilter);
+  const all = PRODUCTS.filter(p => currentFilter === 'Tất cả' || groupOf(p) === currentFilter).sort((a,b)=> (groupOf(a)===groupOf(b)?0:(groupOf(a)==='Sản phẩm bán lẻ'?-1:1)));
   const list = all.slice(0, shownCount);
   $('#productGrid').innerHTML = list.map(p => `
     <article class="card">
       <div class="thumb" onclick="openProduct('${p.id}')">
         <img src="${p.img}" alt="${esc(p.name)}" loading="lazy">
-        <span class="ribbon">${p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
+        <span class="ribbon">${p.cat==='CAFEROA Premium'?'Sỉ & nhượng quyền':p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
       </div>
       <div class="body">
         <h3 onclick="openProduct('${p.id}')">${p.name}</h3>
@@ -1166,7 +1167,7 @@ function renderProducts(more){
         <div class="meter">Độ đậm <span class="bar"><i style="width:${p.strength*20}%"></i></span></div>
         <div class="foot">
           <div class="price" ${p.price?'':'style="font-size:.95rem"'}>${priceTxt(p)}<small>${p.size}</small></div>
-          <button class="add-btn" onclick="${p.price?`addToCart('${p.id}')`:`askPrice('${p.id}')`}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${p.price?'Thêm vào giỏ':'Hỏi giá'}</button>
+          <button class="add-btn" onclick="${p.price?`addToCart('${p.id}')`:`askPrice('${p.id}')`}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${p.price?'Thêm vào giỏ':(groupOf(p)==='Bán sỉ & nhượng quyền'?'Báo giá sỉ':'Hỏi giá')}</button>
         </div>
       </div>
     </article>`).join('');
