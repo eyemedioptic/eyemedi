@@ -500,7 +500,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 }
 </style>
 </head>
-<body>
+<body data-page="home">
 
 <div class="topbar">
   <div class="container">
@@ -517,7 +517,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
       <a href="#bang-gia">Giá bán lẻ</a>
       <a href="#gia-si">Giá sỉ cho quán</a>
       <a href="#nhuong-quyen">Nhượng quyền</a>
-      <a href="#tin-thi-truong">Giá cà phê hôm nay</a>
+      <a href="tin-thi-truong.html">Tin thị trường</a>
       <a href="#lien-he">Liên hệ</a>
     </nav>
     <div class="header-actions">
@@ -727,13 +727,14 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
         </ul>
       </div>
     </div>
-    <div class="news-tabs" id="newsTabs">
+    <div class="news-tabs" id="newsTabs" style="display:none">
       <button class="chip active" data-cat="all">Tất cả</button>
       <button class="chip" data-cat="market">Giá & thị trường</button>
       <button class="chip" data-cat="quan">Cho chủ quán</button>
       <button class="chip" data-cat="tubat">Tin Tubat</button>
     </div>
-    <div class="news-list" id="newsList"></div>
+    <div class="news-list" id="newsList" style="margin-top:34px"></div>
+    <div style="text-align:center;margin-top:28px"><a href="tin-thi-truong.html" class="btn btn-gold">Xem tất cả tin thị trường & hỏi đáp →</a></div>
     <p class="disclaimer">Số liệu cập nhật lần cuối: 13/11/2026. Giá nội địa và giá sàn tổng hợp từ chocaphe.vn và báo chí; điểm ngày 13/11 lấy theo chocaphe.vn. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
   </div>
 </section>
@@ -835,23 +836,6 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="section">
-  <div class="container faq">
-    <div class="section-head"><div class="eyebrow">Hỏi đáp</div><h2 class="section-title">Câu hỏi thường gặp về cà phê Tubat</h2></div>
-    <details><summary>Mua lẻ cà phê Tubat ở đâu?</summary><p>Bạn mua lẻ cà phê Tubat tại CAFEROA, đại lý bán lẻ Tubat Coffee: đặt trên trang web này, nhắn Zalo hoặc đến cửa hàng. Bán lẻ từ 1 gói, giao tận nơi toàn quốc.</p></details>
-    <details><summary>Giá bán lẻ Tubat Coffee bao nhiêu?</summary><p>Giá bán lẻ cà phê Tubat tại CAFEROA từ <span data-minprice>180.000đ</span> đến <span data-maxprice>450.000đ</span> mỗi sản phẩm, tùy dòng. Xem đầy đủ trong bảng giá bán lẻ phía trên.</p></details>
-    <details><summary>Đây có phải trang web bán lẻ tubatcoffee chính thức không?</summary><p>Đây là trang web của CAFEROA, đại lý bán lẻ Tubat Coffee. Trang thương hiệu của Tubat là tubatcoffee.com, nơi giới thiệu sản phẩm và tiếp nhận hợp tác; mua lẻ online bạn đặt tại CAFEROA.</p></details>
-    <details><summary>Đăng ký nhượng quyền Tubat Coffee ở đâu?</summary><p>Bạn điền form trong mục "Đăng ký nhượng quyền" trên trang này. CAFEROA tư vấn ban đầu và chuyển hồ sơ tới Công ty TNHH Tubat để xét duyệt; điều kiện và chi phí do Tubat quyết định.</p></details>
-    <details><summary>Giá sỉ cà phê sạch cho quán &amp; văn phòng tính thế nào?</summary><p>Giá sỉ tính theo sản lượng mỗi tháng, bắt đầu từ 5kg. Robusta và Arabica đều có giá sỉ; gửi form báo giá để nhận giá chính xác cho quán của bạn.</p></details>
-    <details><summary>Quán nhỏ nên chọn loại cà phê nào cho tiết kiệm?</summary><p>Quán nhỏ bán cà phê phin, cà phê sữa nên dùng Trust – Hồn Hậu hoặc Trust – Thanh Tao: đậm vị, chi phí mỗi ly thấp. Quán có máy pha có thể thêm Zen cho món đặc biệt.</p></details>
-    <details><summary>Cà phê Tubat có pha trộn bắp, đậu hay hương liệu không?</summary><p>Không. Tubat theo nguyên tắc "3 Không": không hóa chất, không hương liệu, không chất bảo quản. Sản phẩm là 100% hạt cà phê rang.</p></details>
-    <details><summary>Nên chọn hạt nguyên hay xay sẵn?</summary><p>Nếu có máy xay, chọn hạt nguyên để giữ hương lâu nhất. Nếu không, chọn kiểu xay theo cách pha: xay thô vừa cho phin, xay mịn cho máy espresso, xay vừa cho pour-over.</p></details>
-    <details><summary>Phí giao hàng và thời gian nhận hàng?</summary><p>Miễn phí nội thành TP.HCM cho đơn từ 500.000đ; dưới mức này phí 25.000đ. Đơn đi tỉnh tính theo đơn vị vận chuyển. Vì cà phê được rang theo đơn, thời gian nhận thường 1–2 ngày nội thành, 2–4 ngày đi tỉnh.</p></details>
-    <details><summary>Bảo quản cà phê thế nào?</summary><p>Đóng kín túi sau khi mở, để nơi khô mát, tránh nắng. Không cần để tủ lạnh. Ngon nhất trong 4–6 tuần sau ngày rang.</p></details>
-    <details><summary>Tôi có thể đổi trả không?</summary><p>Nếu sản phẩm lỗi, rách bao bì hoặc giao sai, CAFEROA đổi mới miễn phí. Vui lòng quay video khi mở hàng và báo qua Zalo 0931 877 833 trong 48 giờ.</p></details>
-  </div>
-</section>
 </main>
 
 <footer id="lien-he">
@@ -879,7 +863,8 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
         <h5>Hỗ trợ</h5>
         <ul>
           <li><a href="#dat-hang">Hướng dẫn đặt hàng</a></li>
-          <li><a href="#tin-thi-truong">Giá cà phê hôm nay</a></li>
+          <li><a href="tin-thi-truong.html">Giá cà phê hôm nay</a></li>
+          <li><a href="tin-thi-truong.html#hoi-dap">Câu hỏi thường gặp</a></li>
           <li><a href="#" onclick="openPolicy('ship');return false">Chính sách giao hàng</a></li>
           <li><a href="#" onclick="openPolicy('return');return false">Chính sách đổi trả</a></li>
           <li><a href="#" onclick="openPolicy('privacy');return false">Chính sách bảo mật</a></li>
@@ -1220,7 +1205,7 @@ function renderCart(){
   $('#cartTitle').textContent = 'Giỏ hàng';
   const t = cartTotals();
   if(!cart.length){
-    $('#cartBody').innerHTML = `<div class="empty"><div class="cup">☕</div><p>Giỏ hàng đang trống.</p><button class="btn btn-dark btn-sm" style="margin-top:14px" onclick="closeAll();location.hash='san-pham'">Xem sản phẩm</button></div>`;
+    $('#cartBody').innerHTML = `<div class="empty"><div class="cup">☕</div><p>Giỏ hàng đang trống.</p><button class="btn btn-dark btn-sm" style="margin-top:14px" onclick="closeAll();goTo('san-pham')">Xem sản phẩm</button></div>`;
     $('#cartFoot').innerHTML = ''; return;
   }
   const remain = Math.max(0, SHOP.freeShipFrom - t.sub);
@@ -1371,8 +1356,11 @@ function renderChart(){
 }
 const CATS = {market:'Giá & thị trường', quan:'Cho chủ quán', tubat:'Tin Tubat'};
 let newsCat = 'all';
+function goTo(id){ if(document.getElementById(id)) location.hash = id; else location.href = './#' + id; }
+const PAGE = document.body.dataset.page || 'home';
 function renderNews(){
-  const list = NEWS.filter(n => newsCat==='all' || n.cat===newsCat);
+  let list = NEWS.filter(n => newsCat==='all' || n.cat===newsCat);
+  if(PAGE==='home') list = NEWS.filter(n=>n.cat!=='tubat').slice(0,3);
   $('#newsList').innerHTML = list.map(n => { const i = NEWS.indexOf(n); return `<article class="news" onclick="openNews(${i})">
     <div class="nimg">${n.img?`<div class="ph">☕ ${CATS[n.cat]}</div><img src="${n.img}" ${n.fb?`data-fb="${n.fb}"`:''} alt="${esc(n.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="imgFallback(this)" style="position:absolute;inset:0">`:`<div class="ph">☕ ${CATS[n.cat]}<br><small style="font-size:.85rem;font-family:'Be Vietnam Pro';color:#cbbba5">${n.date}</small></div>`}</div>
     <div class="nb"><div class="meta">${CATS[n.cat]} · ${n.date}</div><h3>${n.title}</h3><p>${n.sum}</p><span class="more">Đọc tiếp →</span></div></article>`; }).join('');
@@ -1430,7 +1418,7 @@ function reply(raw){
   }
   if(has('tu van','chon','goi y','hop gu','nen mua','loai nao','recommend')){ quiz = {step:1}; return botSay('Bạn thích vị cà phê thế nào?', ['Đậm, mạnh, đắng','Cân bằng đắng – ngọt','Thanh nhẹ, thơm, chua nhẹ']); }
   if(has('xem gio','gio hang','cart')){ openCart(); return botSay('Mình đã mở giỏ hàng cho bạn ở bên phải 👉', MAIN_Q); }
-  if(has('nhuong quyen','franchise','mo quan tubat')){ setTimeout(()=>{closeChatOnMobile();location.hash='nhuong-quyen';},1600); return botSay('Bạn đăng ký nhượng quyền Tubat Coffee qua form ở mục <b>"Đăng ký nhượng quyền"</b> (mình đang chuyển bạn tới đó). CAFEROA tư vấn ban đầu và chuyển hồ sơ tới Công ty TNHH Tubat; điều kiện và chi phí do Tubat quyết định.', MAIN_Q); }
+  if(has('nhuong quyen','franchise','mo quan tubat')){ setTimeout(()=>{closeChatOnMobile();goTo('nhuong-quyen');},1600); return botSay('Bạn đăng ký nhượng quyền Tubat Coffee qua form ở mục <b>"Đăng ký nhượng quyền"</b> (mình đang chuyển bạn tới đó). CAFEROA tư vấn ban đầu và chuyển hồ sơ tới Công ty TNHH Tubat; điều kiện và chi phí do Tubat quyết định.', MAIN_Q); }
   if(has('o dau','cho nao','noi nao','dai ly','mua le')) return botSay(`CAFEROA là <b>đại lý bán lẻ Tubat Coffee</b>, bán lẻ từ 1 gói:\n• Đặt ngay trên trang này (thanh toán khi nhận)\n• Nhắn Zalo <a href="${SHOP.zalo}" target="_blank" style="color:#0068ff;font-weight:600">${SHOP.phoneDisplay}</a>\n• Mua tại cửa hàng: ${SHOP.address}`, MAIN_Q);
   if(has('xuong rang','rang gia re','xuong')) return botSay('Cà phê Tubat rang tại xưởng của Tubat bằng công nghệ Hot Air, rang theo đơn, 100% cà phê không độn. CAFEROA phân phối trực tiếp nên giá sỉ cạnh tranh mà vẫn sạch.', ['Giá sỉ cho quán','Giá bán lẻ']);
   if(has('gia si','mua si','quan nho','cho quan','so luong lon','qua tang','doanh nghiep','in logo','robusta si','arabica si','lay si','van phong')) { const tiers = WHOLESALE_TIERS.map(r=>`• ${r[0]}: ${r[1]?'giảm '+r[1]+'% giá lẻ':'báo giá riêng'}`).join('\n'); return botSay(`<b>Giá sỉ cà phê sạch cho quán &amp; văn phòng</b> (Robusta & Arabica):\n${tiers}\nQuán nhỏ nên dùng <b>Trust – Thanh Tao</b> hoặc <b>Hồn Hậu</b>.${pcard(byId('trust-tt'))}\n<a href="#baogia" style="color:var(--red);text-decoration:underline" onclick="closeChatOnMobile()">Gửi form nhận báo giá sỉ →</a>`, MAIN_Q); }
@@ -1477,8 +1465,8 @@ function bindShop(){
 }
 function injectJsonLd(){
   const add = o => { const sc=document.createElement('script'); sc.type='application/ld+json'; sc.textContent=JSON.stringify(o); document.head.appendChild(sc); };
-  add({'@context':'https://schema.org','@type':'ItemList','name':'Giá bán lẻ Tubat Coffee tại CAFEROA','itemListElement':PRODUCTS.map((p,i)=>({'@type':'ListItem','position':i+1,'item':{'@type':'Product','name':'Cà phê Tubat '+p.name+' '+p.size,'image':p.schemaImg||p.img,'description':p.short,'brand':{'@type':'Brand','name':'Tubat Coffee'},'offers':{'@type':'Offer','price':p.price,'priceCurrency':'VND','availability':'https://schema.org/InStock','seller':{'@type':'Organization','name':'CAFEROA'}}}}))});
-  add({'@context':'https://schema.org','@type':'FAQPage','mainEntity':[...document.querySelectorAll('.faq details')].map(d=>({'@type':'Question','name':d.querySelector('summary').textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':d.querySelector('p').textContent.trim()}}))});
+  if(PAGE==='home') add({'@context':'https://schema.org','@type':'ItemList','name':'Giá bán lẻ Tubat Coffee tại CAFEROA','itemListElement':PRODUCTS.map((p,i)=>({'@type':'ListItem','position':i+1,'item':{'@type':'Product','name':'Cà phê Tubat '+p.name+' '+p.size,'image':p.schemaImg||p.img,'description':p.short,'brand':{'@type':'Brand','name':'Tubat Coffee'},'offers':{'@type':'Offer','price':p.price,'priceCurrency':'VND','availability':'https://schema.org/InStock','seller':{'@type':'Organization','name':'CAFEROA'}}}}))});
+  if(document.querySelector('.faq details')) add({'@context':'https://schema.org','@type':'FAQPage','mainEntity':[...document.querySelectorAll('.faq details')].map(d=>({'@type':'Question','name':d.querySelector('summary').textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':d.querySelector('p').textContent.trim()}}))});
 }
 function submitLead(formId, title){
   const f = document.getElementById(formId); const d = Object.fromEntries(new FormData(f)); let ok = true;
@@ -1524,7 +1512,7 @@ function initHero(){
 /* ---------- Init ---------- */
 document.querySelectorAll('img[data-key]').forEach(im=>im.src=IMGS[im.dataset.key]);
 document.querySelectorAll('img[data-fbkey]').forEach(im=>{ if(im.complete && im.naturalWidth===0) imgFallback(im); });
-bindShop(); initHero(); renderPriceTables(); injectJsonLd(); renderFilters(); renderProducts(); updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
+bindShop(); if($('#heroTrack')) initHero(); if($('#priceTable')) renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
 </script>
 </body>
 </html>
