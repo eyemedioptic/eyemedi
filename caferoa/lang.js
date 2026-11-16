@@ -50,19 +50,44 @@
 
   /* Tự dịch các phần do JavaScript tạo ra (chatbot, giỏ hàng, popup…) */
   if (window.CAFEROA_LANG !== 'vi') {
-    var TL = window.CAFEROA_LANG, CK = 'caferoa_tr_' + TL, cache = {};
+    var TL = window.CAFEROA_LANG, CK = 'caferoa_tr2_' + TL, cache = {};
     try { cache = JSON.parse(sessionStorage.getItem(CK) || '{}'); } catch (e) {}
-    var pending = {};
+    /* Gom nhiều đoạn vào 1 yêu cầu, tối đa 2 yêu cầu chạy cùng lúc */
+    var queue = [], waiters = {}, active = 0, timer = null, alone = {};
+    function save() { try { sessionStorage.setItem(CK, JSON.stringify(cache)); } catch (e) {} }
+    function api(q) {
+      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl=' + TL + '&dt=t&q=' + encodeURIComponent(q);
+      return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (j) { return (j[0] || []).map(function (x) { return x[0]; }).join(''); });
+    }
+    function done(text, out) { cache[text] = out; (waiters[text] || []).forEach(function (f) { f(out); }); delete waiters[text]; }
+    function fail(text) { (waiters[text] || []).forEach(function (f) { f(text); }); delete waiters[text]; }
+    function pump() {
+      while (active < 2 && queue.length) {
+        var batch = [], len = 0;
+        while (queue.length && !alone[queue[0]] && batch.length < 40 && len + queue[0].length < 1500) { var t = queue.shift(); batch.push(t); len += t.length + 1; }
+        if (!batch.length) batch.push(queue.shift());
+        active++;
+        (function (batch) {
+          var go = batch.length === 1 ? api(batch[0]).then(function (o) { return [o]; })
+            : api(batch.join('\n')).then(function (o) { var p = o.split('\n'); if (p.length !== batch.length) throw new Error('split'); return p; });
+          go.then(function (outs) { batch.forEach(function (t, i) { done(t, (outs[i] || t).trim() || t); }); save(); })
+            .catch(function (e) {
+              if (batch.length > 1 && String(e.message) === 'split') { batch.forEach(function (t) { alone[t] = 1; queue.unshift(t); }); }
+              else batch.forEach(fail);
+            })
+            .then(function () { active--; setTimeout(pump, 120); });
+        })(batch);
+      }
+    }
     function tr(text) {
       if (cache[text] !== undefined) return Promise.resolve(cache[text]);
-      if (pending[text]) return pending[text];
-      var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl=' + TL + '&dt=t&q=' + encodeURIComponent(text);
-      pending[text] = fetch(url).then(function (r) { return r.json(); }).then(function (j) {
-        var out = (j[0] || []).map(function (x) { return x[0]; }).join('') || text;
-        cache[text] = out; try { sessionStorage.setItem(CK, JSON.stringify(cache)); } catch (e) {}
-        return out;
-      }).catch(function () { return text; });
-      return pending[text];
+      return new Promise(function (res) {
+        if (waiters[text]) { waiters[text].push(res); return; }
+        waiters[text] = [res];
+        if (text.indexOf('\n') > -1) { alone[text] = 1; queue.unshift(text); } else queue.push(text);
+        clearTimeout(timer); timer = setTimeout(pump, 30);
+      });
     }
     var HAS_VI = /[A-Za-zÀ-ỹ]/;
     function walk(root) {
