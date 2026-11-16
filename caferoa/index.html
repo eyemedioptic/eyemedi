@@ -453,7 +453,9 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .chat-head .av{width:40px;height:40px;border-radius:50%;background:var(--crema);display:grid;place-items:center;font-weight:700;font-family:'Playfair Display',serif}
 .chat-head b{display:block;font-size:.95rem}
 .chat-head span{font-size:.75rem;color:#9fd4b0}
-.chat-head .close{color:#fff;margin-left:auto}
+.chat-head .close{color:#fff}
+.chat-clear{margin-left:auto;width:34px;height:34px;border-radius:50%;color:#d9c8ae;font-size:1.1rem}.chat-clear:hover{background:rgba(255,255,255,.1);color:#fff}
+.msg-sep{align-self:center;font-size:.72rem;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:.2rem .7rem}
 .chat-head .close:hover{background:rgba(255,255,255,.1)}
 .chat-body{flex:1;overflow:auto;padding:14px;background:var(--paper);display:flex;flex-direction:column;gap:10px}
 .msg{max-width:86%;padding:.6rem .85rem;border-radius:14px;font-size:.9rem;line-height:1.5;white-space:pre-line}
@@ -925,6 +927,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   <div class="chat-head">
     <div class="av" style="background:var(--espresso);overflow:hidden;border:1px solid rgba(216,173,95,.4)"><img src="img/favicon-r.webp" alt="" style="width:100%;height:100%"></div>
     <div><b>Trợ lý CAFEROA</b><span>● Đang trực tuyến</span></div>
+    <button class="chat-clear" onclick="clearChat()" title="Xóa lịch sử trò chuyện" aria-label="Xóa lịch sử trò chuyện">↺</button>
     <button class="close" onclick="toggleChat(false)" aria-label="Đóng">×</button>
   </div>
   <div class="chat-body" id="chatBody"></div>
@@ -1404,7 +1407,7 @@ function toast(msg, noBtn){ $('#toastMsg').textContent = msg; $('#toast button')
 const POLICIES = {
   ship:['Chính sách giao hàng',`<p>Miễn phí giao hàng nội thành TP.HCM cho đơn từ ${vnd(SHOP.freeShipFrom)}; đơn nhỏ hơn phí ${vnd(SHOP.shipFee)}.</p><p>Đơn đi tỉnh tính phí theo đơn vị vận chuyển, báo khi xác nhận đơn.</p><p>Cà phê được rang theo đơn: nội thành nhận trong 1–2 ngày, đi tỉnh 2–4 ngày.</p>`],
   return:['Chính sách đổi trả',`<p>Đổi mới miễn phí khi sản phẩm lỗi, rách bao bì, giao sai sản phẩm hoặc kiểu xay.</p><p>Vui lòng quay video khi mở hàng và liên hệ Zalo ${SHOP.phoneDisplay} trong vòng 48 giờ kể từ khi nhận.</p><p>Không áp dụng đổi trả với sản phẩm đã mở dùng vì lý do khẩu vị cá nhân.</p>`],
-  privacy:['Chính sách bảo mật',`<p>Thông tin bạn cung cấp (họ tên, số điện thoại, địa chỉ) chỉ dùng để xác nhận và giao đơn hàng, không chia sẻ cho bên thứ ba ngoài đơn vị vận chuyển.</p><p>Trang web lưu giỏ hàng và thông tin giao hàng ngay trên trình duyệt của bạn để lần sau đặt nhanh hơn.</p>`]
+  privacy:['Chính sách bảo mật',`<p>Thông tin bạn cung cấp (họ tên, số điện thoại, địa chỉ) chỉ dùng để xác nhận và giao đơn hàng, không chia sẻ cho bên thứ ba ngoài đơn vị vận chuyển.</p><p>Trang web lưu giỏ hàng, thông tin giao hàng và nội dung trò chuyện với trợ lý ngay trên trình duyệt của bạn để lần sau đặt hàng và được tư vấn tiếp nhanh hơn. Bạn có thể xóa lịch sử trò chuyện bằng nút ↺ trong khung chat.</p>`]
 };
 function openPolicy(k){ const [t,b]=POLICIES[k]; $('#modalBox').innerHTML = `<button class="close" onclick="closeAll()">×</button><div class="article"><h3>${t}</h3>${b}</div>`; openModal(); }
 
@@ -1457,12 +1460,24 @@ const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replac
 function toggleChat(force){
   const c = $('#chat'); const open = force === undefined ? !c.classList.contains('open') : force;
   c.classList.toggle('open', open); $('#chatHello').classList.add('hide'); $('#chatFab .dot')?.remove();
-  if(open && !chatStarted){ chatStarted = true; greet(); }
+  if(open && !chatStarted){ chatStarted = true; if(restoreChat()) botSay('Chào mừng bạn quay lại CAFEROA 👋 Mình vẫn giữ nội dung lần trước, bạn cần tư vấn tiếp gì nhé?', MAIN_Q, 400); else greet(); }
   if(open) setTimeout(()=>$('#chatInput').focus(), 200);
 }
 function closeChatOnMobile(){ if(window.innerWidth < 640) toggleChat(false); }
 function openChat(q){ toggleChat(true); if(q) setTimeout(()=>userSay(q), chatStarted?100:700); }
-function addMsg(html, who='bot'){ const d=document.createElement('div'); d.className='msg '+who; d.innerHTML=html; chatBody().appendChild(d); chatBody().scrollTop = chatBody().scrollHeight; return d; }
+const CHAT_KEY = 'caferoa_chat_v1', CHAT_MAX = 150;
+function loadChat(){ return store.get(CHAT_KEY, {msgs:[], last:0}); }
+function saveMsg(who, html){ const c = loadChat(); c.msgs.push({w:who, h:html, t:Date.now()}); if(c.msgs.length > CHAT_MAX) c.msgs = c.msgs.slice(-CHAT_MAX); c.last = Date.now(); store.set(CHAT_KEY, c); }
+function addMsg(html, who='bot', noSave){ const d=document.createElement('div'); d.className='msg '+who; d.innerHTML=html; chatBody().appendChild(d); chatBody().scrollTop = chatBody().scrollHeight; if(!noSave) saveMsg(who, html); return d; }
+function restoreChat(){
+  const c = loadChat(); if(!c.msgs.length) return false;
+  const fmt = t => new Date(t).toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});
+  const sep = document.createElement('div'); sep.className='msg-sep'; sep.textContent = 'Cuộc trò chuyện trước · ' + fmt(c.msgs[0].t); chatBody().appendChild(sep);
+  c.msgs.forEach(m => addMsg(m.h, m.w, true));
+  const sep2 = document.createElement('div'); sep2.className='msg-sep'; sep2.textContent = 'Hôm nay · ' + fmt(Date.now()); chatBody().appendChild(sep2);
+  return true;
+}
+function clearChat(){ try{ localStorage.removeItem(CHAT_KEY); }catch(e){} chatBody().innerHTML=''; quiz=null; greet(); }
 function setQuick(arr){ $('#quick').innerHTML = arr.map(q=>`<button type="button">${q}</button>`).join(''); $('#quick').querySelectorAll('button').forEach(b=>b.onclick=()=>userSay(b.textContent)); }
 function botSay(html, quick, delay=550){
   const t = document.createElement('div'); t.className='msg bot typing'; t.innerHTML='<i></i><i></i><i></i>'; chatBody().appendChild(t); chatBody().scrollTop = chatBody().scrollHeight;
