@@ -1,0 +1,37 @@
+TIEU_DE: Cách vệ sinh kính mắt đúng cách để tròng bền, không trầy
+TITLE: Cách vệ sinh kính mắt đúng cách, tròng không trầy | EYEMEDI
+SLUG: cach-ve-sinh-kinh-mat-dung-cach
+TU_KHOA_CHINH: cách vệ sinh kính mắt
+TU_KHOA_PHU: lau kính mắt đúng cách, rửa kính cận, khăn lau kính, nước xịt lau kính, bảo quản kính mắt
+DANH_MUC: Tròng kính mắt
+SLUG_DANH_MUC: trong-kinh
+Y_KHOA: không
+MO_TA_SEO: Cách vệ sinh kính mắt đúng cách: rửa bằng nước, lau bằng khăn microfiber, dùng nước xịt chuyên dụng và thói quen làm trầy, bong lớp phủ tròng kính cần tránh.
+NGAY_DANG: 2026-11-16
+DOAN_MO_DAU: Vệ sinh kính mắt sai cách là nguyên nhân hàng đầu khiến tròng kính trầy xước, bong lớp phủ và nhìn mờ. Chỉ với nước sạch, khăn microfiber và vài thao tác đúng, bạn có thể giữ tròng trong và bền lâu hơn.
+ANH_RIENG:
+anh-rieng/cach-ve-sinh-kinh-mat-dung-cach-1.jpg | Lau kính mắt bằng khăn microfiber đúng cách
+anh-rieng/cach-ve-sinh-kinh-mat-dung-cach-2.jpg | Chỉnh và vệ sinh gọng kính cho khách tại EYEMEDI
+anh-rieng/cach-ve-sinh-kinh-mat-dung-cach-3.jpg | Khu đo mắt và bảo hành kính tại EYEMEDI
+H2_1: Các bước vệ sinh kính mắt đúng cách
+NOI_DUNG_1: <ol><li><b>Rửa tay sạch</b> để không bám dầu, bụi lên tròng.</li><li><b>Xả kính dưới vòi nước</b> mát hoặc ấm nhẹ để trôi bụi, cát trước khi lau.</li><li><b>Làm sạch:</b> xịt <a href="/phu-kien-mat-kinh.html">nước xịt lau kính chuyên dụng</a> hoặc 1 giọt nước rửa chén pha loãng, xoa nhẹ hai mặt tròng, đệm mũi và càng kính.</li><li><b>Xả lại</b> bằng nước sạch.</li><li><b>Thấm khô</b> bằng khăn microfiber sạch, lau theo chiều xoắn ốc từ giữa ra mép.</li></ol>
+H2_2: Những thói quen làm hỏng tròng kính
+NOI_DUNG_2: <ul><li>Lau bằng vạt áo, khăn giấy, khăn mặt: sợi vải thô làm trầy lớp phủ.</li><li>Lau khô khi tròng còn bám bụi, cát.</li><li>Dùng cồn, nước rửa kính ô tô, xăng thơm: làm bong lớp phủ chống chói, chống ánh sáng xanh.</li><li>Rửa kính bằng nước nóng, để kính trên táp-lô ô tô hoặc phơi nắng.</li><li>Đặt kính úp tròng xuống mặt bàn, bỏ kính vào túi không có hộp.</li></ul>
+<p>Tròng đã trầy nhiều hoặc bong lớp phủ sẽ gây mờ, chói và mỏi mắt; khi đó nên tham khảo <a href="/gia-thay-trong-kinh-can-vien-loan-chinh-hang.html">giá thay tròng kính cận chính hãng</a>.</p>
+H2_3: Bảo quản kính và khi nào cần mang kính đi bảo dưỡng
+NOI_DUNG_3: <ul><li>Giặt khăn microfiber định kỳ, không dùng nước xả vải.</li><li>Tháo kính bằng hai tay để gọng không bị lệch.</li><li>Luôn cất kính vào hộp khi không đeo.</li><li>Mang kính đi siết ốc, chỉnh gọng, thay đệm mũi khoảng 3–6 tháng một lần.</li></ul>
+<p>EYEMEDI hỗ trợ vệ sinh siêu âm, chỉnh gọng, thay đệm mũi theo <a href="/che-do-bao-hanh.html">chế độ bảo hành</a> tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM.</p>
+LOI_KEU_GOI: Kính bị mờ, lỏng gọng hay đệm mũi ố vàng? Ghé EYEMEDI để được vệ sinh, chỉnh gọng và kiểm tra tròng kính, 08:30 – 21:30 hằng ngày.
+HOI_1: Có nên lau kính bằng khăn giấy ướt không?
+DAP_1: Không nên dùng khăn ướt có cồn hoặc hương liệu vì có thể làm bong lớp phủ. Chỉ dùng loại khăn ướt chuyên dụng cho tròng kính.
+HOI_2: Bao lâu nên vệ sinh kính một lần?
+DAP_2: Nên rửa kính bằng nước và lau khô mỗi ngày, nhất là sau khi ra đường, đổ mồ hôi hoặc trang điểm.
+HOI_3: Tròng kính bị trầy có đánh bóng được không?
+DAP_3: Không. Vết trầy trên tròng kính không thể đánh bóng hết mà còn làm hỏng thêm lớp phủ. Nếu trầy ảnh hưởng tầm nhìn, nên thay tròng mới.
+SAN_PHAM: pk-khan-lau-a03, pk-nuoc-xit-ao, pk-combo-ve-sinh, santino-one-0124, shengdluo-62203, vidic-luxury-sun-p28220, trong-160-as-blue-control, tommy-gold-titanium-ip
+LIEN_QUAN: phu-kien-mat-kinh | Phụ kiện mắt kính; che-do-bao-hanh | Chế độ bảo hành kính tại EYEMEDI; gia-thay-trong-kinh-can-vien-loan-chinh-hang | Giá thay tròng kính cận chính hãng
+LINK_TRONG_BAI: nước xịt lau kính chuyên dụng → phu-kien-mat-kinh; giá thay tròng kính cận → gia-thay-trong-kinh-can-vien-loan-chinh-hang; chế độ bảo hành → che-do-bao-hanh
+LINK_VAO_TU: che-do-bao-hanh, gia-thay-trong-kinh-can-vien-loan-chinh-hang
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_8421, IMG_9101, IMG_5853)
+NGUON_THAM_KHAO: All About Vision – How to clean glasses the right way; Healthline – How to clean glasses; hướng dẫn bảo quản tròng kính của các hãng.
