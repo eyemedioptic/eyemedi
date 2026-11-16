@@ -17,7 +17,7 @@ var INT=[['mau',['mau','phan loai','loai nao']],['gia',['gia','bao nhieu','bn','
 function intent(q){for(var i=0;i<INT.length;i++)for(var j=0;j<INT[i][1].length;j++)if(has(q,INT[i][1][j])||q.indexOf(INT[i][1][j]+' ')===0)return INT[i][0];return null;}
 var CAT=[['Kính áp tròng',['lens','ap trong','kinh ap']],['Tròng kính mắt',['trong kinh','da trong','trong 1.','chiet suat','doi mau']],['Phụ kiện mắt kính',['phu kien','hop dung','khan lau','nuoc ve sinh','dem mui','boc duoi']],['Kính thời trang',['kinh mat','kinh ram','kinh thoi trang','xuyen dem','di nang','kinh rb','phan cuc']],['Gọng kính cận',['gong','kinh can']]];
 function cat(q){for(var i=0;i<CAT.length;i++)for(var j=0;j<CAT[i][1].length;j++)if(q.indexOf(CAT[i][1][j])>=0)return CAT[i][0];return null;}
-function vnd(n){return n.toLocaleString('vi-VN')+'đ';}
+function vnd(n){n=Number(n)||0;if(n<1000)return n.toLocaleString('vi-VN')+'đ';var v=n/1000;return v.toLocaleString('vi-VN',{maximumFractionDigits:2})+'K';}
 function general(q){var b=null,bl=0;D.chung.forEach(function(g){g._k.forEach(function(k){if(k&&k.length>=4&&(has(q,k)||q.indexOf(k)>=0)&&k.length>bl){bl=k.length;b=g}})});return b;}
 function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ trợ gì ạ?'};
  if(/^(hi|hello|chao|alo|xin chao|shop oi|ad oi)\b/.test(q)&&q.split(' ').length<=3)return {t:'Dạ EYEMEDI xin chào anh/chị! Em có thể báo giá, thông số, chất liệu sản phẩm, địa chỉ cửa hàng, đo mắt miễn phí, giao hàng và bảo hành ạ.',c:CHIPS};
@@ -70,7 +70,7 @@ function trByDo(q,d,force){var wantDa=/da trong|lao|progressive/.test(q)||d.a!=n
  if(!out.length&&!dat)return trByDo(q,d,1);
  if(!out.length)return {t:'Với độ '+ds+', EYEMEDI nhận đặt tròng theo đơn riêng cho anh/chị. Anh/chị gọi/Zalo '+HL+' để được báo giá nhanh ạ.',c:['Gọi/Zalo tư vấn','Đặt lịch đo mắt']};
  out.sort(function(a,b){return a[1]-b[1]});
- return {t:'Với độ '+ds+(dat&&!/dat theo don|rx/.test(q)?', tròng có sẵn không làm được – có thể đặt tròng theo đơn Zinmy (giao 10 ngày)':', có '+out.length+' loại tròng làm được')+' (giá/cặp, nhân viên xác nhận lại theo toa):',c:out.map(function(x){return {l:trShort(x[0].n)+' · '+(x[1]>=1e6?(x[1]/1e6).toLocaleString('vi-VN')+'tr':(x[1]/1e3)+'k'),tr:x[0]}}),pg:1};}
+ return {t:'Với độ '+ds+(dat&&!/dat theo don|rx/.test(q)?', tròng có sẵn không làm được – có thể đặt tròng theo đơn Zinmy (giao 10 ngày)':', có '+out.length+' loại tròng làm được')+' (giá/cặp, nhân viên xác nhận lại theo toa):',c:out.map(function(x){return {l:trShort(x[0].n)+' · '+vnd(x[1]),tr:x[0]}}),pg:1};}
 function ok2(v){return v&&v!=='—'&&v!=='-'}
 function spGia(p){return p.n+'\nMã: '+p.c+'\nGiá: '+vnd(p.p)+(p.op>p.p?' (giá gốc '+vnd(p.op)+')':'');}
 function spPart(p,k){if(k==='gia')return spGia(p);if(k==='ts')return ok2(p.sz)?'Kích thước: '+p.sz:'Thông số: liên hệ '+HL+'.';if(k==='cl')return ok2(p.mat)?'Chất liệu: '+p.mat:'Chất liệu: liên hệ '+HL+'.';

@@ -474,5 +474,11 @@ document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.que
 })();</script>
 <script id="online-count">document.getElementById('online').textContent = 21 + Math.floor(Math.random() * 279);(function(){var k='em-luot-mua',n=0;try{n=parseInt(localStorage.getItem(k))||0}catch(e){}n=n?n+1+Math.floor(Math.random()*3):2+Math.floor(Math.random()*98);try{localStorage.setItem(k,n)}catch(e){}document.getElementById('luot-mua').textContent=n})();</script>
 <script src="/chatbot/bot.js" defer></script>
+<script id="gia-k">(function(){var R=/(\d{1,3}(?:\.\d{3})+)\s*(?:₫|đ|VNĐ|VND)(?![A-Za-zÀ-ỹ])/g;
+function k(m,d){var n=parseInt(d.replace(/\./g,''),10);if(n<1000)return m;var v=n/1000;return (v%1===0?v.toLocaleString('vi-VN'):v.toLocaleString('vi-VN',{maximumFractionDigits:2}))+'K'}
+function cv(t){if(!t||!t.nodeValue||t.nodeValue.search(/[₫đV]/)<0)return;var p=t.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT|NOSCRIPT)$/.test(p.nodeName))return;R.lastIndex=0;if(!R.test(t.nodeValue))return;R.lastIndex=0;var nv=t.nodeValue.replace(R,k);if(nv!==t.nodeValue)t.nodeValue=nv}
+function walk(n){if(!n)return;if(n.nodeType===3)return cv(n);if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.nodeName))return;var w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),x;while(x=w.nextNode())cv(x)}
+function go(){walk(document.body);new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='characterData')cv(m.target);else m.addedNodes.forEach(walk)})}).observe(document.body,{childList:true,subtree:true,characterData:true})}
+if(document.body)go();else document.addEventListener('DOMContentLoaded',go)})();</script>
 </body>
 </html>
