@@ -1333,7 +1333,7 @@ function restoreChat(){
   return true;
 }
 function clearChat(){ try{ localStorage.removeItem(CHAT_KEY); }catch(e){} chatBody().innerHTML=''; quiz=null; greet(); }
-function setQuick(arr){ $('#quick').innerHTML = arr.map(q=>`<button type="button">${q}</button>`).join(''); $('#quick').querySelectorAll('button').forEach(b=>b.onclick=()=>userSay(b.textContent)); }
+function setQuick(arr){ $('#quick').innerHTML = arr.map(q=>`<button type="button" data-q="${q}">${q}</button>`).join(''); $('#quick').querySelectorAll('button').forEach(b=>b.onclick=()=>{ addMsg(esc(b.textContent),'me'); reply(b.dataset.q); }); }
 function botSay(html, quick, delay=550){
   const t = document.createElement('div'); t.className='msg bot typing'; t.innerHTML='<i></i><i></i><i></i>'; chatBody().appendChild(t); chatBody().scrollTop = chatBody().scrollHeight;
   setTimeout(()=>{ t.remove(); addMsg(html); if(quick) setQuick(quick); }, delay);
@@ -1405,7 +1405,11 @@ function coSend(fid){
 const pcard = p => `<div class="pcard"><img src="${p.img}" alt=""><div><b>${p.name}</b><small>${priceTxt(p)}</small></div><button onclick="addToCart('${p.id}')">${p.price?'+ Giỏ':'Hỏi giá'}</button></div>`;
 const MAIN_Q = ['🛒 Mua hàng','Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
 function greet(){ botSay(`Xin chào! Mình là trợ lý của <b>CAFEROA – Đại lý bán lẻ cà phê sạch chất lượng cao</b> ☕\nMình có thể báo giá bán lẻ, giá sỉ cho quán & văn phòng, tư vấn chọn cà phê, nhượng quyền mở quán hoặc cập nhật giá cà phê hôm nay.`, MAIN_Q, 400); }
-function userSay(text){ if(!text.trim()) return; addMsg(esc(text),'me'); reply(text); }
+function userSay(text){
+  if(!text.trim()) return; addMsg(esc(text),'me');
+  if(window.caferoaToVi && window.CAFEROA_LANG && window.CAFEROA_LANG!=='vi') window.caferoaToVi(text).then(vi => reply(vi));
+  else reply(text);
+}
 function sendChat(e){ e.preventDefault(); const i=$('#chatInput'); const v=i.value; i.value=''; userSay(v); }
 
 function reply(raw){

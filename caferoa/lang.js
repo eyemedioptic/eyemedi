@@ -33,6 +33,21 @@
     location.reload();
   }
 
+  window.CAFEROA_LANG = current();
+  /* Dịch câu khách gõ sang tiếng Việt cho chatbot hiểu */
+  window.caferoaToVi = function (text) {
+    if (window.CAFEROA_LANG === 'vi' || !text) return Promise.resolve(text);
+    var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=vi&dt=t&q=' + encodeURIComponent(text);
+    return fetch(url).then(function (r) { return r.json(); })
+      .then(function (j) { return (j[0] || []).map(function (x) { return x[0]; }).join('') || text; })
+      .catch(function () { return text; });
+  };
+  var PH = { en:'Type your question… (e.g. which coffee is strong?)', 'zh-CN':'请输入您的问题…（例如：哪种咖啡浓？）', fr:'Posez votre question… (ex : quel café est corsé ?)', it:'Scrivi la tua domanda… (es. quale caffè è forte?)', ja:'質問を入力…（例：濃いコーヒーは？）', ko:'질문을 입력하세요… (예: 진한 커피는?)', hi:'अपना प्रश्न लिखें… (जैसे: कौन सी कॉफ़ी स्ट्रॉन्ग है?)', th:'พิมพ์คำถาม… (เช่น กาแฟตัวไหนเข้ม?)', ar:'اكتب سؤالك… (مثال: أي قهوة قوية؟)', lo:'ພິມຄຳຖາມ… (ເຊັ່ນ: ກາເຟໃດເຂັ້ມ?)', km:'វាយសំណួររបស់អ្នក… (ឧ. កាហ្វេណាខ្លាំង?)' };
+  document.addEventListener('DOMContentLoaded', function () {
+    var inp = document.getElementById('chatInput');
+    if (inp && PH[window.CAFEROA_LANG]) inp.placeholder = PH[window.CAFEROA_LANG];
+  });
+
   /* CSS */
   var css = '' +
     '.lang-sw{position:relative;margin-right:2px}' +
