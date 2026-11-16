@@ -22,6 +22,7 @@ function general(q){var b=null,bl=0;D.chung.forEach(function(g){g._k.forEach(fun
 function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ trợ gì ạ?'};
  if(/^(hi|hello|chao|alo|xin chao|shop oi|ad oi)\b/.test(q)&&q.split(' ').length<=3)return {t:'Dạ EYEMEDI xin chào anh/chị! Em có thể báo giá, thông số, chất liệu sản phẩm, địa chỉ cửa hàng, đo mắt miễn phí, giao hàng và bảo hành ạ.',c:CHIPS};
  if(/dat lich|do mat|kiem tra thi luc|do khuc xa|do thi luc/.test(q))return {t:'EYEMEDI đo mắt, kiểm tra thị lực miễn phí (08:30 – 21:30 hằng ngày). Anh/chị nhập thông tin để đặt lịch nhé:',book:1};
+ if(/uu dai|chuong trinh|khuyen mai|qua tang|tang qua|tang gi|co tang|\bkm\b/.test(q))return {t:'Eyemedi đang có chương trình:\n1. Tặng tròng kính phủ siêu váng Hydrophobic khi mua gọng mới\n2. Tặng gọng nhựa hoặc gọng kim loại trị giá 650k khi thay tròng kính mới\n3. Đổi gọng mới, thu gọng cũ -500k trên bill',c:['Kính gọng','Tròng kính mắt','Sản phẩm đang giảm giá']};
  var dd=parseDo(raw);if(dd&&(/trong|kinh|can|vien|loan|lao|do/.test(q)||/[+-]\d/.test(raw))&&!/ap trong|lens/.test(q))return trByDo(q,dd);
  var TF=trFind(q);if(TF.length===1)return trInfo(TF[0]);if(TF.length>1&&TF.length<=8)return {t:'Anh/chị chọn loại tròng:',c:TF.map(function(t){return {l:trShort(t.n),tr:t}}),pg:1};
  var TL=trList(q);if(TL)return TL;
@@ -38,7 +39,7 @@ function answer(raw){var q=nm(raw);if(!q)return {t:'Anh/chị cần em hỗ tr�
   var ch=l.map(function(p){var lb=p.c;if(/^(KAT|TMK|PK)-/.test(p.c)||!p.c||p.c==='—')lb=p.n;else if(cnt[p.c]>1){var o=D.sp.filter(function(q){return q!==p&&q.c===p.c}).map(function(q){return q.n}).join(' ').split(' ');var w=p.n.split(' ').filter(function(x){return o.indexOf(x)<0&&x!==p.c})[0];lb=p.c+(w?' '+w:'');}return {l:lb,p:p}});
   return {t:'',c:ch,pg:1};}
  if(g)return {t:g.a};
- if(/khuyen mai|sale|giam gia|uu dai|dang giam/.test(q)){var sl=D.sp.filter(function(p){return p.op>p.p}).sort(function(a,b){return (b.op-b.p)/b.op-(a.op-a.p)/a.op});if(sl.length)return {t:'Sản phẩm đang giảm giá:',c:sl.map(function(p){return {l:p.c+' -'+Math.round((p.op-p.p)/p.op*100)+'%',p:p}}),pg:1};}
+ if(/sale|giam gia|dang giam/.test(q)){var sl=D.sp.filter(function(p){return p.op>p.p}).sort(function(a,b){return (b.op-b.p)/b.op-(a.op-a.p)/a.op});if(sl.length)return {t:'Sản phẩm đang giảm giá:',c:sl.map(function(p){return {l:p.c+' -'+Math.round((p.op-p.p)/p.op*100)+'%',p:p}}),pg:1};}
  if(/\bgia\b|bao nhieu|bang gia|bn tien/.test(q))return {t:'Anh/chị muốn xem giá loại nào ạ?',c:['Kính mát','Kính gọng','Tròng kính mắt']};
  var fb=D.chung.filter(function(x){return x.g==='Ngoài phạm vi'})[0];
  return {t:fb?fb.a:'Dạ EYEMEDI hỗ trợ anh/chị ngay ạ. Anh/chị chọn nhu cầu bên dưới, hoặc gọi/Zalo '+HL+':',c:CHIPS.concat(['Gọi/Zalo tư vấn'])};}
