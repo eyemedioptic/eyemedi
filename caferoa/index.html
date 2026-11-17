@@ -251,6 +251,19 @@ img.bagx{width:auto}
 .tick .chg{font-size:.85rem;font-weight:600}
 .up{color:#6fcf8f}.down{color:#f08a7e}.flat{color:#d9c8ae}
 .tick .sub{font-size:.75rem;color:#9f8e78;margin-top:.3rem}
+.tick.lv{border-top:3px solid var(--lv)}
+.tick.lv .label{display:flex;align-items:center;gap:.45rem;font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.tick.lv .label i{width:10px;height:10px;border-radius:50%;background:var(--lv)}
+.tick.lv .label span{font-weight:400;font-size:.78rem;color:#9f8e78}
+.lv-row{display:flex;align-items:baseline;gap:.5rem;padding:.45rem 0;border-top:1px solid rgba(216,173,95,.14)}
+.lv-row span{font-size:.85rem;color:#bfae96;min-width:70px}
+.lv-row b{font-family:'Playfair Display',serif;font-size:1.55rem;color:#fff;margin-left:auto}
+.lv-row small{font-size:.78rem;color:#9f8e78;min-width:52px}
+.chart-legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.8rem;color:#d9c8ae;margin-top:8px}
+.chart-legend span{display:inline-flex;align-items:center;gap:.35rem}
+.chart-legend i{width:18px;border-top:2px dashed}
+.chart-legend b{color:#fff}
+.chart-legend .u{color:#9f8e78;width:100%}
 .market-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
 .panel{background:rgba(255,255,255,.04);border:1px solid rgba(216,173,95,.22);border-radius:var(--radius);padding:22px}
 .panel h4{font-size:1rem;color:#fff;margin-bottom:.2rem}
@@ -807,8 +820,10 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
     <div class="market-grid">
       <div class="panel">
         <h4>Diễn biến giá cà phê tháng 11/2026</h4>
+        <div class="hint">Giá trần, giá sàn, giá tham chiếu trong tháng · cập nhật 13/11/2026</div>
         <div class="chart-tabs" id="chartTabs"></div>
         <svg id="chart" viewBox="0 0 560 240" preserveAspectRatio="none" role="img" aria-label="Biểu đồ giá cà phê"></svg>
+        <div class="chart-legend" id="chartLegend"></div>
       </div>
       <div class="panel">
         <h4>Nhận định nhanh</h4>
@@ -1216,20 +1231,20 @@ const GRINDS = ['Hạt nguyên','Xay pha phin','Xay pha máy','Xay pour-over'];
 /* ---------- Market data (nguồn: báo chí 11/2026) ---------- */
 const MARKET = {
   updated:'13/11/2026',
+  /* Giá trần = cao nhất tháng, giá sàn = thấp nhất tháng, giá tham chiếu = trung bình tháng (tự tính từ pts) */
   series:{
-    vn:{label:'Cà phê nhân nội địa (đ/kg)', unit:'đ/kg', fmt:v=>v.toLocaleString('vi-VN'),
-        pts:[['01/11',87000],['03/11',86000],['06/11',84100],['09/11',84700],['11/11',85000],['13/11',83700]]},
-    rb:{label:'Robusta London kỳ hạn gần (USD/tấn)', unit:'USD/tấn', fmt:v=>v.toLocaleString('en-US'),
-        pts:[['31/10',3219],['04/11',3265],['07/11',3285],['10/11',3256],['13/11',3260]]},
-    ar:{label:'Arabica New York kỳ hạn gần (cent/lb)', unit:'cent/lb', fmt:v=>v.toFixed(2),
-        pts:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00]]}
-  },
-  ticker:[
-    {label:'Cà phê nhân nội địa', val:'83.700', unit:'đ/kg', chg:'-400đ (-0,48%)', dir:'down'},
-    {label:'Robusta London', val:'3.260', unit:'USD/tấn', chg:'Đi ngang quanh 3.250–3.290', dir:'flat'},
-    {label:'Arabica New York', val:'269,00', unit:'cent/lb', chg:'Tiếp tục giảm', dir:'down'}
-  ]
+    ar:{name:'Arabica', label:'Arabica New York kỳ hạn gần', unit:'cent/lb', fmt:v=>v.toLocaleString('vi-VN',{minimumFractionDigits:2,maximumFractionDigits:2}),
+        pts:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00]]},
+    rb:{name:'Robusta', label:'Robusta London kỳ hạn gần', unit:'USD/tấn', fmt:v=>Math.round(v).toLocaleString('vi-VN'),
+        pts:[['31/10',3219],['04/11',3265],['07/11',3285],['10/11',3256],['13/11',3260]]}
+  }
 };
+const LEVELS = [
+  {k:'tran', name:'Giá trần', note:'Cao nhất tháng', color:'#6fcf8f'},
+  {k:'san', name:'Giá sàn', note:'Thấp nhất tháng', color:'#f08a7e'},
+  {k:'tc', name:'Giá tham chiếu', note:'Trung bình tháng', color:'#e9c98a'}
+];
+function priceLevels(key){ const v = MARKET.series[key].pts.map(p=>p[1]); return {tran:Math.max(...v), san:Math.min(...v), tc:v.reduce((a,b)=>a+b,0)/v.length}; }
 const IMGS = {
   wood_cup:'img/n-wood-cup.webp',
   drying_man:'img/n-drying-man.webp',
@@ -1571,24 +1586,27 @@ function openPolicy(k){ const [t,b]=POLICIES[k]; $('#modalBox').innerHTML = `<bu
 
 /* ---------- Market ---------- */
 function renderTicker(){
-  $('#ticker').innerHTML = MARKET.ticker.map(x => `<div class="tick"><div class="label">${x.label}</div><div class="val">${x.val} <small style="font-size:.9rem;font-family:'Be Vietnam Pro'">${x.unit}</small></div><div class="chg ${x.dir}">${x.dir==='up'?'▲':x.dir==='down'?'▼':'•'} ${x.chg}</div>${x.sub?`<div class="sub">${x.sub}</div>`:''}</div>`).join('');
+  const L = {ar:priceLevels('ar'), rb:priceLevels('rb')};
+  $('#ticker').innerHTML = LEVELS.map(l => `<div class="tick lv" style="--lv:${l.color}"><div class="label"><i></i>${l.name} <span>· ${l.note}</span></div>${['ar','rb'].map(k => { const s = MARKET.series[k]; return `<div class="lv-row"><span>${s.name}</span><b>${s.fmt(L[k][l.k])}</b><small>${s.unit}</small></div>`; }).join('')}</div>`).join('');
 }
-let chartKey = 'vn';
+let chartKey = 'ar';
 function renderChartTabs(){
-  const names = {vn:'Nội địa',rb:'Robusta',ar:'Arabica'};
+  const names = {ar:'Arabica',rb:'Robusta'};
   $('#chartTabs').innerHTML = Object.keys(MARKET.series).map(k => `<button class="${k===chartKey?'active':''}" onclick="chartKey='${k}';renderChartTabs();renderChart()">${names[k]}</button>`).join('');
 }
 function renderChart(){
-  const s = MARKET.series[chartKey], pts = s.pts, W=560, H=240, pl=58, pr=16, pt=16, pb=30;
+  const s = MARKET.series[chartKey], pts = s.pts, W=560, H=240, pl=58, pr=16, pt=16, pb=30, lv = priceLevels(chartKey);
   const vals = pts.map(p=>p[1]); let mn = Math.min(...vals), mx = Math.max(...vals); const pad = (mx-mn)*.25 || mx*.01; mn -= pad; mx += pad;
   const x = i => pl + (pts.length===1?0:i*(W-pl-pr)/(pts.length-1));
   const y = v => pt + (mx - v) * (H-pt-pb) / (mx - mn);
   let g = '';
-  for(let i=0;i<=4;i++){ const v = mn + (mx-mn)*i/4, yy = y(v); g += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="rgba(216,173,95,.12)"/><text x="${pl-8}" y="${yy+4}" fill="#9f8e78" font-size="11" text-anchor="end">${s.fmt(chartKey==='ar'?v:Math.round(v))}</text>`; }
+  for(let i=0;i<=4;i++){ const v = mn + (mx-mn)*i/4, yy = y(v); g += `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="rgba(216,173,95,.12)"/><text x="${pl-8}" y="${yy+4}" fill="#9f8e78" font-size="11" text-anchor="end">${s.fmt(v)}</text>`; }
   const path = pts.map((p,i)=>`${i?'L':'M'}${x(i)},${y(p[1])}`).join(' ');
+  const lines = LEVELS.map(l => { const yy = y(lv[l.k]); return `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="${l.color}" stroke-width="1.5" stroke-dasharray="6 5" opacity=".9"/>`; }).join('');
   const area = path + ` L${x(pts.length-1)},${H-pb} L${x(0)},${H-pb} Z`;
   const dots = pts.map((p,i)=>`<g class="pt" data-i="${i}" style="cursor:pointer"><circle cx="${x(i)}" cy="${y(p[1])}" r="14" fill="transparent"/><circle cx="${x(i)}" cy="${y(p[1])}" r="4.5" fill="#d8ad5f" stroke="#1f140e" stroke-width="2"/></g><text x="${x(i)}" y="${H-10}" fill="#9f8e78" font-size="11" text-anchor="middle">${p[0]}</text>`).join('');
-  $('#chart').innerHTML = `<defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8964f" stop-opacity=".35"/><stop offset="1" stop-color="#c8964f" stop-opacity="0"/></linearGradient></defs>${g}<path d="${area}" fill="url(#ga)"/><path d="${path}" fill="none" stroke="#d8ad5f" stroke-width="2.5" stroke-linejoin="round"/>${dots}`;
+  $('#chart').innerHTML = `<defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8964f" stop-opacity=".35"/><stop offset="1" stop-color="#c8964f" stop-opacity="0"/></linearGradient></defs>${g}<path d="${area}" fill="url(#ga)"/>${lines}<path d="${path}" fill="none" stroke="#d8ad5f" stroke-width="2.5" stroke-linejoin="round"/>${dots}`;
+  $('#chartLegend').innerHTML = LEVELS.map(l => `<span><i style="border-color:${l.color}"></i>${l.name}: <b>${s.fmt(lv[l.k])}</b></span>`).join('') + `<span class="u">${s.label} · ${s.unit}</span>`;
   const tip = $('#chartTip'); const last = pts[pts.length-1];
   if(tip) tip.textContent = `${s.label} · ${last[0]}: ${s.fmt(last[1])} ${s.unit}`;
   $('#chart').querySelectorAll('.pt').forEach(el => { const show = () => { if(!tip) return; const p = pts[+el.dataset.i]; tip.textContent = `${s.label} · ${p[0]}: ${s.fmt(p[1])} ${s.unit}`; }; el.addEventListener('mouseenter', show); el.addEventListener('click', show); });
@@ -1747,7 +1765,7 @@ function reply(raw){
   if(found.length && !has('gia ca phe','thi truong')) { const p = found[0]; return botSay(`<b>${p.name}</b> – ${p.blend}\n${p.short}\nGiá: <b>${priceTxt(p)}</b> / ${p.size}\nHợp pha: ${p.brew}.${pcard(p)}`, ['Tư vấn chọn cà phê','Bảng giá','Cách đặt hàng']); }
   if(has('arabica')) return botSay(`Dòng 100% Arabica Cầu Đất tại CAFEROA là <b>Heritage Gold</b>: hương sô-cô-la đen, caramel, hậu ngọt, chua thanh nhẹ.${pcard(byId('heritage-gold'))}\nNếu muốn vừa có Arabica vừa đậm, thử <b>Zen</b> (30% Arabica).`, MAIN_Q);
   if(has('robusta')) return botSay(`Thích Robusta đậm chất Việt? Chọn <b>Heritage Red</b> (100% Robusta) hoặc <b>Trust – Hồn Hậu</b> (Robusta + Culi), giá mềm hơn.${pcard(byId('heritage-red'))}${pcard(byId('trust-hh'))}`, MAIN_Q);
-  if(has('gia ca phe','thi truong','san london','san new york','gia nhan','hom nay')){ const k = MARKET.ticker; return botSay(`Giá cà phê mới nhất (cập nhật ${MARKET.updated}):\n• ${k[0].label}: <b>${k[0].val} ${k[0].unit}</b> (${k[0].chg})\n• ${k[1].label}: <b>${k[1].val} ${k[1].unit}</b> (${k[1].chg})\n• ${k[2].label}: <b>${k[2].val} ${k[2].unit}</b> (${k[2].chg})\n<a href="#tin-thi-truong" style="color:var(--red);text-decoration:underline" onclick="closeChatOnMobile()">Xem chuyên mục Tin thị trường →</a>`, MAIN_Q); }
+  if(has('gia ca phe','thi truong','san london','san new york','gia nhan','hom nay')){ const A = priceLevels('ar'), R = priceLevels('rb'), sa = MARKET.series.ar, sr = MARKET.series.rb; return botSay(`Giá cà phê tháng 11 (cập nhật ${MARKET.updated}):\n${LEVELS.map(l => `• ${l.name}: Arabica <b>${sa.fmt(A[l.k])} ${sa.unit}</b> · Robusta <b>${sr.fmt(R[l.k])} ${sr.unit}</b>`).join('\n')}\n<a href="#tin-thi-truong" style="color:var(--red);text-decoration:underline" onclick="closeChatOnMobile()">Xem chuyên mục Tin thị trường →</a>`, MAIN_Q); }
   if(has('bang gia','gia ban le','gia le','gia','bao nhieu','tien')) return botSay(`<b>Bảng giá bán lẻ:</b>\n${PRODUCTS.map(p=>`• ${p.name} (${p.size}): <b>${priceTxt(p)}</b>`).join('\n')}\n\nMiễn phí giao nội thành TP.HCM cho đơn từ ${vnd(SHOP.freeShipFrom)}.`, ['Tư vấn chọn cà phê','Phí ship & giao hàng','Mua sỉ cho quán']);
   if(has('ship','giao','van chuyen','bao lau','may ngay','nhan hang')) return botSay(`🚚 <b>Giao hàng</b>\n• Nội thành TP.HCM: miễn phí cho đơn từ ${vnd(SHOP.freeShipFrom)}, dưới mức này phí ${vnd(SHOP.shipFee)}.\n• Đi tỉnh: phí theo đơn vị vận chuyển.\n• Thời gian: 1–2 ngày nội thành, 2–4 ngày đi tỉnh (cà phê rang mới theo đơn).`, MAIN_Q);
   if(has('eyemedi','chu tai khoan','tai khoan nao','ten tai khoan','so tai khoan','stk')) return botSay(`Tài khoản nhận chuyển khoản của CAFEROA:\n• Ngân hàng: ${SHOP.qr.bankName}\n• Số tài khoản: <b>${SHOP.qr.accountNo}</b>\n• Chủ tài khoản: <b>${SHOP.qr.accountName}</b>\n<b>EYEMEDI GROUP</b> là chủ sở hữu thương hiệu CAFEROA, nên tài khoản đứng tên hộ kinh doanh EYEMEDI. Nội dung chuyển khoản ghi mã đơn hàng của bạn nhé.`, MAIN_Q);
