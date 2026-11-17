@@ -615,5 +615,21 @@ function hook(){var f=document.getElementById('orderForm');if(f&&!f.querySelecto
  var ok=document.querySelector('.order-success');if(ok&&!ok.__qr&&lastPay==='Chuyển khoản'){ok.__qr=1;var m=ok.textContent.match(/Mã đơn:\s*(EM[A-Z0-9]{8})/);lastAmt=window.__emAmt||0;if(m)ok.appendChild(window.emQrBox(m[1],lastAmt));}}
 new MutationObserver(hook).observe(document.body,{childList:true,subtree:true});hook();
 })();</script>
+<script id="phi-ship">(function(){
+var SHIP=25000,FREE=500000;
+function sub(){try{return Object.entries(cart).reduce(function(a,e){var k=e[0].split('::'),p=PRODUCTS.find(function(x){return x.id===k[0]});return a+(p?priceOf(p,Number(k[1])||0)*e[1]:0)},0)}catch(x){return 0}}
+function ship(s){return s>=FREE||s<=0?0:SHIP}
+function f(n){return new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND',maximumFractionDigits:0}).format(n)}
+window.emShip=function(s){var sh=ship(s);return {sub:s,ship:sh,total:s+sh}};
+function rows(){var t=document.querySelector('#cartItems .total');if(!t||t.nextElementSibling&&t.nextElementSibling.classList.contains('ship-row'))return;var s=sub();if(!s)return;var c=window.emShip(s);
+ var a=document.createElement('div');a.className='total ship-row';a.innerHTML='<span>Phí giao hàng</span><span>'+(c.ship?f(c.ship):'Miễn phí')+'</span>';
+ var b=document.createElement('div');b.className='total ship-row ship-sum';b.innerHTML='<span><b>Tổng thanh toán</b></span><span><b>'+f(c.total)+'</b></span>';
+ var n=document.createElement('div');n.className='ship-row ship-note';n.textContent=c.ship?'Mua thêm '+f(FREE-s)+' để được miễn phí giao hàng (đơn từ '+f(FREE)+').':'🎉 Đơn từ '+f(FREE)+' được miễn phí giao hàng.';
+ t.after(a,b,n);}
+var st=document.createElement('style');st.textContent='.ship-row.total{border-top:0!important;padding-top:4px}.ship-sum{font-size:1.05em}.ship-note{font-size:12.5px;color:#0b6e6c;margin:4px 0 8px;text-align:right}';document.head.appendChild(st);
+if(typeof window.prepareOrder==='function'&&!window.prepareOrder.__ship){var po=window.prepareOrder;window.prepareOrder=function(){var r=po.apply(this,arguments);try{var s=sub(),c=window.emShip(s),sm=document.getElementById('orderSummary');if(r&&sm&&sm.value.indexOf('Phí giao hàng:')<0){sm.value+='\nPhí giao hàng: '+(c.ship?f(c.ship):'Miễn phí')+'\nTổng thanh toán: '+f(c.total);}window.__emAmt=c.total;}catch(e){}return r};window.prepareOrder.__ship=1;}
+new MutationObserver(rows).observe(document.body,{childList:true,subtree:true});rows();
+})();</script>
+
 </body>
 </html>
