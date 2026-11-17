@@ -1571,7 +1571,7 @@ function promoShow(){
 }
 function promoOpen(){ const id = $('#promoPop').dataset.id; if(id) openProduct(id); }
 function promoClose(e){ e.stopPropagation(); ppStop = true; clearInterval(ppTimer); $('#promoPop').classList.remove('show'); try{ sessionStorage.setItem('caferoa_pp_off','1'); }catch(err){} }
-function promoStart(){ if(ppStop || !$('#promoPop')) return; setTimeout(()=>{ promoShow(); ppTimer = setInterval(promoShow, 3000); }, 4000); }
+function promoStart(){ if(ppStop || !$('#promoPop')) return; setTimeout(()=>{ promoShow(); ppTimer = setInterval(promoShow, 5000); }, 4000); }
 
 /* ---------- Init ---------- */
 document.querySelectorAll('img[data-key]').forEach(im=>im.src=IMGS[im.dataset.key]);
