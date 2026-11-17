@@ -103,7 +103,7 @@
       if (root.placeholder && !root.__ph) { root.__ph = 1; var ph = root.placeholder; if (HAS_VI.test(ph) && root.id !== 'chatInput') tr(ph).then(function (v) { root.placeholder = v; }); }
       for (var c = root.firstChild; c; c = c.nextSibling) walk(c);
     }
-    var ZONES = ['#chat', '#chatHello', '#toast', '#cart', '#modal', '#productGrid', '#moreWrap', '#newsList', '#filters', '#ticker', '#chartTip', '#mbar'];
+    var ZONES = ['#promoPop', '#chat', '#chatHello', '#toast', '#cart', '#modal', '#productGrid', '#moreWrap', '#newsList', '#filters', '#ticker', '#chartTip', '#mbar'];
     document.addEventListener('DOMContentLoaded', function () {
       ZONES.forEach(function (sel) {
         var z = document.querySelector(sel); if (!z) return;

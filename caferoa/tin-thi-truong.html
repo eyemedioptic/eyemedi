@@ -375,6 +375,18 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .co-send:disabled{opacity:.6}
 .co-done{font-size:.85rem;line-height:1.6}
 .msg.qr .qr-box{margin-top:0}
+/* Popup giới thiệu sản phẩm */
+.promo-pop{position:fixed;left:18px;bottom:82px;z-index:64;width:min(300px,calc(100% - 110px));background:#fff;border:1px solid var(--line);border-left:4px solid var(--crema);border-radius:14px;box-shadow:0 14px 30px rgba(31,20,14,.22);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s,transform .3s,visibility .3s}
+.promo-pop.show{opacity:1;visibility:visible;transform:none}
+.pp-in{display:flex;gap:10px;align-items:center;padding:9px 30px 9px 9px;cursor:pointer}
+.pp-in img{width:46px;height:56px;object-fit:cover;border-radius:8px;flex:0 0 46px;background:var(--paper-2)}
+.pp-in small{display:block;font-size:.7rem;font-weight:700;color:var(--crema);text-transform:uppercase;letter-spacing:.05em}
+.pp-in b{display:block;font-size:.9rem;color:var(--roast);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-in span{display:block;font-size:.78rem;color:var(--red);font-weight:600}
+.pp-x{position:absolute;top:4px;right:6px;width:22px;height:22px;border-radius:50%;color:var(--muted);font-size:1rem;line-height:1}
+.pp-x:hover{background:var(--paper-2)}
+body.has-mbar .promo-pop{bottom:140px}
+@media (max-width:640px){.promo-pop{left:14px;bottom:76px}}
 /* Overlay / drawers / modal */
 .overlay{position:fixed;inset:0;background:rgba(20,12,8,.55);opacity:0;pointer-events:none;transition:.25s;z-index:80}
 .overlay.show{opacity:1;pointer-events:auto}
@@ -571,6 +583,10 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   body.has-mbar .chat-hello{bottom:162px}
   .chat{bottom:0;right:0;width:100%;height:100%;border-radius:0}
 }
+/* Căn đều 2 bên */
+p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.step p,.ws-card p,.ws-card li,.w p,.jstep small,details p{text-align:justify;text-justify:inter-word;hyphens:manual}
+[style*="text-align:center"] p,.packs .section-head p,.success p,.empty p,.hero-stats,.hero-stats *,.seal *,.tagline,.chips-row *,.note-sm[style*="center"],.jstep,.jstep *,.pillar *,.ticker *,.price-table *,.qr-title,.msg.me,.chat-hello,.toast,.mbar *,footer .copy *,.code,.btns,.links *,.ar-labels *{text-align:inherit}
+.msg.me{text-align:left}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"CAFEROA","item":"https://eyemedi.vn/caferoa/"},{"@type":"ListItem","position":2,"name":"Tin thị trường","item":"https://eyemedi.vn/caferoa/tin-thi-truong.html"}]}</script>
 </head>
@@ -762,6 +778,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
   </form>
 </div>
 
+<div class="promo-pop" id="promoPop" role="status" aria-live="polite"><button class="pp-x" type="button" aria-label="Đóng" onclick="promoClose(event)">×</button><div class="pp-in" onclick="promoOpen()"><img id="ppImg" alt=""><div><small id="ppTag"></small><b id="ppName"></b><span id="ppSub"></span></div></div></div>
 <div class="toast" id="toast"><span id="toastMsg"></span><button onclick="openCart()">Xem giỏ</button></div>
 
 <script>
@@ -943,6 +960,9 @@ const IMGS = {
   espresso_machine:'img/n-espresso-machine.webp'
 };
 const NEWS = [
+  {cat:'quan', date:'17/11/2026', title:'Cà phê máy cho văn phòng, phòng khám, Trung tâm CSKH: chỉ khoảng 5.500đ/ly “Ngon - Bổ - Rẻ - Tiện - Ích”',
+   sum:'So sánh 3 dòng máy pha 11–27 triệu, bảng tính chi phí theo số người và thời gian hoàn vốn cho văn phòng, phòng khám, quầy CSKH.',
+   img:'img/may-auto-12.webp', page:'ca-phe-may-cho-van-phong.html'},
   {cat:'kienthuc', date:'16/11/2026', title:'Các mức độ rang cà phê: nhiệt độ, màu hạt và hương vị',
    sum:'Light, Medium, Dark roast khác nhau thế nào? Crack 1 – crack 2, nhiệt độ từng mốc và cách chọn mức rang cho phin, espresso, pour-over.',
    img:'img/rang-8-muc.webp', page:'muc-do-rang-ca-phe.html'},
@@ -1533,10 +1553,31 @@ function pickGroup(g){
 }
 function groupFromHash(){ const h=location.hash; if(h==='#ban-le') pickGroup('Sản phẩm bán lẻ'); else if(h==='#ban-si') pickGroup('Bán sỉ & nhượng quyền'); }
 window.addEventListener('hashchange', groupFromHash);
+/* ---------- Popup giới thiệu sản phẩm (quay vòng 3 giây) ---------- */
+let ppIdx = 0, ppTimer = null, ppStop = false;
+try { ppStop = sessionStorage.getItem('caferoa_pp_off') === '1'; } catch(e){}
+function promoShow(){
+  const pop = $('#promoPop'); if(!pop || ppStop) return;
+  const list = PRODUCTS; const p = list[ppIdx++ % list.length];
+  pop.classList.remove('show');
+  setTimeout(()=>{
+    if(ppStop) return;
+    $('#ppImg').src = p.img; $('#ppImg').alt = p.name;
+    $('#ppTag').textContent = groupOf(p)==='Bán sỉ & nhượng quyền' ? 'Sản phẩm mới · Bán sỉ' : (p.tag ? p.tag : 'Gợi ý cho bạn');
+    $('#ppName').textContent = p.name + ' · ' + p.size;
+    $('#ppSub').textContent = p.price ? vnd(p.price) : 'Nhận báo giá';
+    pop.dataset.id = p.id; pop.classList.add('show');
+  }, 300);
+}
+function promoOpen(){ const id = $('#promoPop').dataset.id; if(id) openProduct(id); }
+function promoClose(e){ e.stopPropagation(); ppStop = true; clearInterval(ppTimer); $('#promoPop').classList.remove('show'); try{ sessionStorage.setItem('caferoa_pp_off','1'); }catch(err){} }
+function promoStart(){ if(ppStop || !$('#promoPop')) return; setTimeout(()=>{ promoShow(); ppTimer = setInterval(promoShow, 3000); }, 4000); }
+
 /* ---------- Init ---------- */
 document.querySelectorAll('img[data-key]').forEach(im=>im.src=IMGS[im.dataset.key]);
 document.querySelectorAll('img[data-fbkey]').forEach(im=>{ if(im.complete && im.naturalWidth===0) imgFallback(im); });
 bindShop(); if($('#heroTrack')) initHero(); renderPriceTables(); injectJsonLd(); if($('#filters')){ renderFilters(); renderProducts(); } updateBadges(); renderTicker(); renderChartTabs(); renderChart(); renderNews(); setQuick(MAIN_Q);
+promoStart();
 setTimeout(groupFromHash, 50);
 </script>
 <script src="lang.js" defer></script>
