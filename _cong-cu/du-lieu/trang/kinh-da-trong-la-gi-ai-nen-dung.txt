@@ -1,0 +1,37 @@
+TIEU_DE: Kính đa tròng là gì? Ai nên dùng và cách làm quen nhanh
+TITLE: Kính đa tròng là gì? Ai nên dùng, cách làm quen | EYEMEDI
+SLUG: kinh-da-trong-la-gi-ai-nen-dung
+TU_KHOA_CHINH: kính đa tròng là gì
+TU_KHOA_PHU: kính đa tròng cho người lão thị, tròng kính progressive, cách làm quen kính đa tròng, giá kính đa tròng, kính đa tròng có tốt không
+DANH_MUC: Tròng kính mắt
+SLUG_DANH_MUC: trong-kinh
+Y_KHOA: có
+MO_TA_SEO: Kính đa tròng là gì, khác kính hai tròng ra sao? Ai nên dùng kính đa tròng, cách đo cắt đúng chuẩn và mẹo làm quen nhanh trong 1–2 tuần đầu cho người lão thị.
+NGAY_DANG: 2026-11-17
+DOAN_MO_DAU: Kính đa tròng (progressive) là loại tròng giúp nhìn rõ cả xa, trung gian và gần trên cùng một mắt kính, không có đường ranh giới như kính hai tròng. Đây là lựa chọn phổ biến của người từ khoảng 40 tuổi bắt đầu lão thị nhưng vẫn cần nhìn xa rõ.
+ANH_RIENG:
+anh-rieng/kinh-da-trong-la-gi-ai-nen-dung-1.jpg | Không gian trưng bày gọng và tròng kính tại EYEMEDI
+anh-rieng/kinh-da-trong-la-gi-ai-nen-dung-2.jpg | Đo khúc xạ bằng máy trước khi cắt kính đa tròng tại EYEMEDI
+anh-rieng/kinh-da-trong-la-gi-ai-nen-dung-3.jpg | Cửa hàng kính mắt EYEMEDI tại TP.HCM
+H2_1: Kính đa tròng là gì, khác gì kính hai tròng?
+NOI_DUNG_1: <p>Tròng đa tròng có độ thay đổi liên tục từ trên xuống dưới: <b>vùng trên</b> để nhìn xa, <b>vùng giữa</b> để nhìn màn hình, bảng giá, và <b>vùng dưới</b> để đọc sách, xem điện thoại. Nhờ chuyển độ mượt, mắt không bị "nhảy hình" như kính hai tròng và nhìn bên ngoài giống kính thường.</p>
+<p>Đổi lại, hai bên rìa tròng có vùng hơi nhòe do thiết kế quang học. Tròng càng cao cấp thì vùng nhìn rõ càng rộng, cảm giác chao nghiêng càng ít.</p>
+H2_2: Ai nên dùng kính đa tròng?
+NOI_DUNG_2: <ul><li><b>Người lão thị</b> (khó nhìn gần sau tuổi 40) mà vẫn cận, viễn hoặc loạn khi nhìn xa.</li><li><b>Người phải đổi kính liên tục</b> giữa kính đọc sách và kính đi đường.</li><li><b>Người làm việc nhiều khoảng cách</b>: lái xe, họp, xem máy tính, đọc tài liệu.</li></ul><p>Người bị chóng mặt, rối loạn tiền đình hoặc cần nhìn gần rất rộng (vẽ kỹ thuật, may vá) nên trao đổi kỹ trước; đôi khi kính văn phòng hoặc kính đọc riêng sẽ phù hợp hơn. Tham khảo thêm các <a href="/top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay.html">loại tròng kính phổ biến hiện nay</a>.</p>
+H2_3: Đo cắt đúng chuẩn và cách làm quen nhanh
+NOI_DUNG_3: <p>Kính đa tròng cần đo khúc xạ chính xác, đo khoảng cách đồng tử từng mắt và chiều cao điểm nhìn trên gọng đã chọn. Gọng nên có chiều cao tròng đủ lớn (thường từ khoảng 30 mm) để chứa đủ các vùng nhìn. Bạn có thể <a href="/dat-lich-do-mat.html">đặt lịch đo mắt</a> trước khi chọn tròng.</p>
+<p>Tuần đầu, nên đeo liên tục, xoay đầu thay vì liếc mắt sang hai bên, hạ mắt khi xuống cầu thang. Phần lớn người dùng quen sau 1–2 tuần. Nếu vẫn chóng mặt, nhức đầu, cần kiểm tra lại số đo. Bài viết mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Cần đo mắt, tư vấn tròng đa tròng phù hợp: ghé EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM, mở cửa 08:30 – 21:30 hằng ngày.
+HOI_1: Kính đa tròng mất bao lâu để quen?
+DAP_1: Thông thường 1–2 tuần nếu đeo liên tục. Người lần đầu dùng hoặc độ chênh lớn có thể cần lâu hơn một chút.
+HOI_2: Kính đa tròng có dùng được khi lái xe không?
+DAP_2: Có. Vùng trên dùng nhìn đường, vùng giữa nhìn bảng đồng hồ. Tuần đầu nên làm quen ở nơi an toàn trước khi đi đường dài.
+HOI_3: Có cần thay gọng khi làm kính đa tròng?
+DAP_3: Không bắt buộc, nhưng gọng cần đủ chiều cao tròng và vừa khuôn mặt để vị trí các vùng nhìn đúng với mắt.
+SAN_PHAM: da-trong-156-hsmc, da-trong-156-hsmc-asx, da-trong-156-photo-gray, da-trong-dat-theo-yeu-cau, tommy-gold-titanium-ip, mayblass-s11890, kingbraver-6413, pk-hop-kinh-eyemedi
+LIEN_QUAN: top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay | Top 10 tròng kính cận tốt và phổ biến; dat-lich-do-mat | Đặt lịch đo mắt tại EYEMEDI; gia-thay-trong-kinh-can-vien-loan-chinh-hang | Giá thay tròng kính cận chính hãng
+LINK_TRONG_BAI: loại tròng kính phổ biến hiện nay → top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay; đặt lịch đo mắt → dat-lich-do-mat
+LINK_VAO_TU: top-10-trong-kinh-can-tot-va-pho-bien-nhat-hien-nay, gia-thay-trong-kinh-can-vien-loan-chinh-hang
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5855, IMG_6020, IMG_5857)
+NGUON_THAM_KHAO: WebMD – What to know about progressive lenses; All About Vision – Progressive lenses; hướng dẫn tư vấn tròng đa tròng của các hãng tròng kính.

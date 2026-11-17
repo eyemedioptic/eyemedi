@@ -1,0 +1,37 @@
+TIEU_DE: Lẹo mắt: nguyên nhân, dấu hiệu và cách xử lý đúng
+TITLE: Lẹo mắt: nguyên nhân, dấu hiệu và cách xử lý | EYEMEDI
+SLUG: leo-mat-nguyen-nhan-va-cach-xu-ly
+TU_KHOA_CHINH: lẹo mắt
+TU_KHOA_PHU: lẹo mắt bao lâu thì khỏi, chắp mắt, cách chữa lẹo mắt tại nhà, chườm ấm lẹo mắt, lẹo mắt có lây không
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: có
+MO_TA_SEO: Lẹo mắt là gì, vì sao bị lẹo và khác chắp mắt thế nào? Cách chườm ấm, giữ vệ sinh mi mắt đúng, những việc không nên làm và khi nào cần đi khám bác sĩ mắt.
+NGAY_DANG: 2026-11-17
+DOAN_MO_DAU: Lẹo mắt là một nốt sưng đỏ, đau ở bờ mi, thường do nhiễm khuẩn tuyến ở chân lông mi. Phần lớn lẹo mắt tự xẹp sau khoảng 1–2 tuần nếu chăm sóc đúng, nhưng nặn hoặc dụi mắt có thể khiến tình trạng nặng hơn.
+ANH_RIENG:
+anh-rieng/leo-mat-nguyen-nhan-va-cach-xu-ly-1.jpg | Kiểm tra mắt bằng máy đo khúc xạ tại EYEMEDI
+anh-rieng/leo-mat-nguyen-nhan-va-cach-xu-ly-2.jpg | Nhân viên EYEMEDI hướng dẫn kiểm tra thị lực
+anh-rieng/leo-mat-nguyen-nhan-va-cach-xu-ly-3.jpg | Cửa hàng EYEMEDI nằm trong hẻm Lạc Long Quân, TP.HCM
+H2_1: Lẹo mắt là gì, khác chắp mắt ra sao?
+NOI_DUNG_1: <p><b>Lẹo mắt</b> (chắp lẹo cấp) là tình trạng nhiễm khuẩn, thường do tụ cầu, ở tuyến bã hoặc nang lông mi. Mi mắt sưng, đỏ, đau, có thể có đầu mủ vàng nhỏ ở bờ mi.</p>
+<p><b>Chắp mắt</b> là cục cứng do tuyến dầu Meibomius bị tắc, thường ít đau, nằm sâu trong mi và có thể tồn tại nhiều tuần. Hai tình trạng dễ nhầm lẫn nên khi không chắc, bạn nên đi khám để được phân biệt đúng. Lẹo có thể ở mặt ngoài bờ mi hoặc mặt trong mi mắt.</p>
+H2_2: Nguyên nhân thường gặp
+NOI_DUNG_2: <ul><li><b>Dụi mắt bằng tay bẩn</b>, đặc biệt khi bụi, mồ hôi nhiều.</li><li><b>Viêm bờ mi</b>, da dầu, gàu da đầu.</li><li><b>Trang điểm mắt để qua đêm</b> hoặc dùng mỹ phẩm mắt cũ.</li><li><b>Vệ sinh kính áp tròng kém</b>, đeo lens khi tay chưa rửa sạch.</li><li><b>Thiếu ngủ, căng thẳng</b> làm sức đề kháng giảm.</li></ul><p>Người đeo lens nên xem lại <a href="/cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau.html">cách đeo kính áp tròng đúng</a> để hạn chế nhiễm khuẩn.</p>
+H2_3: Xử lý lẹo mắt đúng cách và khi nào cần đi khám
+NOI_DUNG_3: <p>Chườm ấm bằng khăn sạch 10–15 phút, 3–4 lần mỗi ngày giúp lẹo nhanh xẹp. Giữ sạch bờ mi, tạm ngưng trang điểm mắt và ngưng đeo kính áp tròng cho đến khi khỏi. <b>Không nặn, chích</b> lẹo tại nhà.</p>
+<p>Nên đi khám nếu sau 1–2 tuần không đỡ, sưng lan ra cả mi hoặc má, sốt, nhìn mờ, hoặc lẹo tái phát nhiều lần. Có thể tham khảo <a href="/bac-si-mat-phong-kham-mat-tphcm.html">bác sĩ và phòng khám mắt tại TP.HCM</a>. Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Muốn kiểm tra thị lực, tư vấn kính và lens an toàn cho mắt: ghé EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM, 08:30 – 21:30 hằng ngày.
+HOI_1: Lẹo mắt bao lâu thì khỏi?
+DAP_1: Đa số tự khỏi sau khoảng 1–2 tuần nếu chườm ấm và giữ vệ sinh. Nếu kéo dài hơn hoặc nặng lên, nên đi khám bác sĩ mắt.
+HOI_2: Lẹo mắt có lây không?
+DAP_2: Lẹo mắt hầu như không lây như đau mắt đỏ, nhưng vi khuẩn có thể lan qua tay, khăn. Không dùng chung khăn, mỹ phẩm mắt.
+HOI_3: Bị lẹo có được đeo kính áp tròng không?
+DAP_3: Không nên. Hãy tạm dùng kính gọng đến khi khỏi hẳn và thay lens mới nếu nghi ngờ lens đã nhiễm khuẩn.
+SAN_PHAM: pk-khan-lau-a03, pk-combo-ve-sinh, swallow-m2027, merriandy-29392, trong-156-uv420-blue-cut, kinh-mat-nam-rb-tam, kinh-mat-nam-oxfrd, vision-one
+LIEN_QUAN: viem-ket-mac-dau-mat-do-dau-hieu-va-cach-phong | Viêm kết mạc (đau mắt đỏ): dấu hiệu và cách phòng; cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau | Cách đeo kính áp tròng cho người mới; bac-si-mat-phong-kham-mat-tphcm | Bác sĩ mắt, phòng khám mắt tại TP.HCM
+LINK_TRONG_BAI: cách đeo kính áp tròng đúng → cach-deo-kinh-ap-trong-cho-nguoi-moi-bat-dau; bác sĩ và phòng khám mắt tại TP.HCM → bac-si-mat-phong-kham-mat-tphcm
+LINK_VAO_TU: viem-ket-mac-dau-mat-do-dau-hieu-va-cach-phong, nhung-nguyen-nhan-pho-bien-gay-mo-mat-dot-ngot
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_6637, IMG_9100, IMG_5859)
+NGUON_THAM_KHAO: Merck Manual (Professional) – Chalazion and Hordeolum (Stye); Harvard Health Publishing – Styes and chalazions.
