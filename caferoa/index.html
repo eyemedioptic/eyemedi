@@ -1227,9 +1227,9 @@ const MARKET = {
         pts:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00]]}
   },
   ticker:[
-    {label:'Cà phê nhân nội địa', val:'83.700', unit:'đ/kg', chg:'-400đ (-0,48%)', dir:'down', sub:'Ngày 13/11/2026 · chocaphe.vn'},
-    {label:'Robusta London', val:'3.260', unit:'USD/tấn', chg:'Đi ngang quanh 3.250–3.290', dir:'flat', sub:'Ngày 13/11/2026 · chocaphe.vn'},
-    {label:'Arabica New York', val:'269,00', unit:'cent/lb', chg:'Tiếp tục giảm', dir:'down', sub:'Ngày 13/11/2026 · chocaphe.vn'}
+    {label:'Cà phê nhân nội địa', val:'83.700', unit:'đ/kg', chg:'-400đ (-0,48%)', dir:'down'},
+    {label:'Robusta London', val:'3.260', unit:'USD/tấn', chg:'Đi ngang quanh 3.250–3.290', dir:'flat'},
+    {label:'Arabica New York', val:'269,00', unit:'cent/lb', chg:'Tiếp tục giảm', dir:'down'}
   ]
 };
 const IMGS = {
@@ -1573,7 +1573,7 @@ function openPolicy(k){ const [t,b]=POLICIES[k]; $('#modalBox').innerHTML = `<bu
 
 /* ---------- Market ---------- */
 function renderTicker(){
-  $('#ticker').innerHTML = MARKET.ticker.map(x => `<div class="tick"><div class="label">${x.label}</div><div class="val">${x.val} <small style="font-size:.9rem;font-family:'Be Vietnam Pro'">${x.unit}</small></div><div class="chg ${x.dir}">${x.dir==='up'?'▲':x.dir==='down'?'▼':'•'} ${x.chg}</div><div class="sub">${x.sub}</div></div>`).join('');
+  $('#ticker').innerHTML = MARKET.ticker.map(x => `<div class="tick"><div class="label">${x.label}</div><div class="val">${x.val} <small style="font-size:.9rem;font-family:'Be Vietnam Pro'">${x.unit}</small></div><div class="chg ${x.dir}">${x.dir==='up'?'▲':x.dir==='down'?'▼':'•'} ${x.chg}</div>${x.sub?`<div class="sub">${x.sub}</div>`:''}</div>`).join('');
 }
 let chartKey = 'vn';
 function renderChartTabs(){
