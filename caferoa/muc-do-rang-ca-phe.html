@@ -54,7 +54,8 @@ header.site nav a{color:#e9dcc6;text-decoration:none}header.site nav a:hover{col
 .crumbs{font-size:.85rem;color:#cbbba5;margin-bottom:12px}.crumbs a{color:var(--gold);text-decoration:none}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.18;max-width:860px}
 .hero .meta{margin-top:12px;font-size:.88rem;color:#cbbba5}
-.layout{display:grid;grid-template-columns:1fr 300px;gap:44px;padding:44px 0 70px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:44px;padding:44px 0 70px}
+.layout article{min-width:0}
 article h2{font-family:'Playfair Display',serif;font-size:1.65rem;color:var(--roast);margin:42px 0 12px;line-height:1.25;scroll-margin-top:90px}
 article h3{font-size:1.15rem;color:var(--bean);margin:26px 0 8px}
 article p{margin-bottom:14px}
@@ -93,9 +94,13 @@ details p{padding-bottom:14px;margin:0}
 .src{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:30px}
 footer{background:var(--espresso);color:#cbbba5;text-align:center;padding:26px 0;font-size:.85rem}
 footer a{color:var(--gold);text-decoration:none}
-.zalo{position:fixed;right:20px;bottom:22px;width:56px;height:56px;border-radius:50%;background:#0068ff;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.8rem;text-decoration:none;box-shadow:0 8px 22px rgba(0,104,255,.45);z-index:60}
-@media (max-width:900px){.layout{grid-template-columns:1fr}aside{display:none}header.site nav{display:none}}
+.zalo{position:fixed;right:20px;bottom:84px;width:56px;height:56px;border-radius:50%;background:#0068ff;color:#fff;display:grid;place-items:center;font-weight:700;font-size:.8rem;text-decoration:none;box-shadow:0 8px 22px rgba(0,104,255,.45);z-index:60}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}aside{display:none}header.site nav{display:none}}
 @media (max-width:560px){body{font-size:16px}.two-fig{grid-template-columns:1fr}header.site img{height:34px}}
+/* Căn đều 2 bên */
+p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.step p,.ws-card p,.ws-card li,.w p,.jstep small,details p{text-align:justify;text-justify:inter-word;hyphens:manual}
+[style*="text-align:center"] p,.packs .section-head p,.success p,.empty p,.hero-stats,.hero-stats *,.seal *,.tagline,.chips-row *,.note-sm[style*="center"],.jstep,.jstep *,.pillar *,.ticker *,.price-table *,.qr-title,.msg.me,.chat-hello,.toast,.mbar *,footer .copy *,.code,.btns,.links *,.ar-labels *{text-align:inherit}
+.msg.me{text-align:left}
 </style>
 </head>
 <body>

@@ -177,12 +177,12 @@
 
 /* CAFEROA – nút trở lại đầu trang */
 (function () {
-  var css = '.to-top{position:fixed;left:18px;bottom:22px;z-index:66;width:48px;height:48px;border-radius:50%;border:1px solid rgba(216,173,95,.5);background:#1f140e;color:#d8ad5f;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .25s,transform .25s,visibility .25s,background .2s}' +
+  var css = '.to-top{position:fixed;right:27px;bottom:22px;z-index:66;width:48px;height:48px;border-radius:50%;border:1px solid rgba(216,173,95,.5);background:#1f140e;color:#d8ad5f;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .25s,transform .25s,visibility .25s,background .2s}' +
     '.to-top.show{opacity:1;visibility:visible;transform:none}' +
     '.to-top:hover{background:#c8964f;color:#fff}' +
     '.to-top svg{width:22px;height:22px}' +
     'body.has-mbar .to-top{bottom:80px}' +
-    '@media (max-width:640px){.to-top{width:44px;height:44px;left:14px}}';
+    '@media (max-width:640px){.to-top{width:44px;height:44px;right:29px}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   function init() {
     var b = document.createElement('button');
