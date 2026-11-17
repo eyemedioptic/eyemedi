@@ -495,5 +495,59 @@ function cv(t){if(!t||!t.nodeValue||t.nodeValue.search(/[₫đV]/)<0)return;var 
 function walk(n){if(!n)return;if(n.nodeType===3)return cv(n);if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA)$/.test(n.nodeName))return;var w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT),x;while(x=w.nextNode())cv(x)}
 function go(){walk(document.body);new MutationObserver(function(ms){ms.forEach(function(m){if(m.type==='characterData')cv(m.target);else m.addedNodes.forEach(walk)})}).observe(document.body,{childList:true,subtree:true,characterData:true})}
 if(document.body)go();else document.addEventListener('DOMContentLoaded',go)})();</script>
+
+<!-- POPUP KHUYẾN MÃI EYEMEDI -->
+<div id="promo-popup" role="dialog" aria-label="Ưu đãi EYEMEDI">
+  <button class="promo-close" type="button" onclick="closePromo()" aria-label="Đóng ưu đãi">×</button>
+  <div class="promo-title">🎉 ƯU ĐÃI ĐẶC BIỆT</div>
+  <div class="promo-content">
+    <strong>MUA GỌNG TẶNG TRÒNG</strong>
+    <p>Tặng tròng kính phủ siêu váng Hydrophobic – Hỗ trợ đo thị lực</p>
+    <a href="https://zalo.me/0967190005" class="promo-btn" target="_blank" rel="noopener">NHẬN ƯU ĐÃI</a>
+  </div>
+</div>
+<style id="promo-base">#promo-popup{display:none;position:fixed;left:20px;bottom:20px;width:280px;box-sizing:border-box;background:#fff;border:2px solid #0876c9;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,.25);z-index:950;font-family:Arial,sans-serif;overflow:hidden;animation:promoBlink 1.4s infinite}
+.promo-title{background:#0876c9;color:#fff;text-align:center;padding:12px 30px;font-size:16px;font-weight:bold}
+.promo-content{padding:16px;text-align:center;color:#222}
+.promo-content strong{color:#0876c9;font-size:16px}
+.promo-content p{font-size:14px;line-height:1.5}
+.promo-btn{display:inline-block;background:#e53935;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:bold}
+.promo-close{position:absolute;top:4px;right:8px;border:none;background:transparent;color:#fff;font-size:25px;cursor:pointer;z-index:2}
+@keyframes promoBlink{0%,100%{transform:scale(1);box-shadow:0 5px 20px rgba(0,0,0,.2)}50%{transform:scale(1.03);box-shadow:0 0 14px rgba(8,118,201,.65)}}
+@media(max-width:600px){#promo-popup{left:10px;bottom:12px;width:255px}}</style><style id="promo-glass">
+#promo-popup{width:220px!important;left:14px!important;bottom:14px!important;background:rgba(255,255,255,.55)!important;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border:1px solid rgba(255,255,255,.7)!important;border-radius:16px!important;box-shadow:0 8px 28px rgba(8,60,90,.22)!important;animation:promoFloat 3s ease-in-out infinite!important}
+#promo-popup .promo-title{background:transparent!important;color:#0a5c8f!important;font-size:12.5px!important;letter-spacing:.04em;padding:10px 28px 0 12px!important;text-align:left!important}
+#promo-popup .promo-content{padding:4px 12px 12px!important;text-align:left!important}
+#promo-popup .promo-content strong{display:block;font-size:15px!important;color:#063b5c!important;margin:2px 0}
+#promo-popup .promo-content p{font-size:12.5px!important;line-height:1.4!important;margin:4px 0 10px!important;color:#24414f!important}
+#promo-popup .promo-btn{padding:7px 12px!important;font-size:12px!important;border-radius:999px!important;background:linear-gradient(135deg,#ff5a4e,#e53935)!important;box-shadow:0 4px 12px rgba(229,57,53,.35)}
+#promo-popup .promo-close{color:#0a5c8f!important;font-size:20px!important;top:4px!important;right:8px!important}
+@keyframes promoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:600px){#promo-popup{width:205px!important;left:10px!important;bottom:10px!important}#promo-popup .promo-content strong{font-size:13.5px!important;white-space:nowrap}}
+</style><style id="promo-phone">
+#promo-popup{width:134px!important;height:256px!important;left:14px!important;bottom:14px!important;border:5px solid #12232b!important;border-radius:26px!important;background:linear-gradient(170deg,rgba(255,255,255,.72),rgba(225,240,248,.55))!important;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:0 14px 34px rgba(4,30,45,.35),inset 0 0 0 1px rgba(255,255,255,.6)!important;padding:18px 8px 10px!important;display:none;flex-direction:column;justify-content:center}
+#promo-popup[style*="block"]{display:flex!important}
+#promo-popup::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:40px;height:10px;border-radius:0 0 9px 9px;background:#12232b}
+#promo-popup::after{content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:44px;height:4px;border-radius:4px;background:rgba(18,35,43,.45)}
+#promo-popup .promo-title{text-align:center!important;padding:12px 0 0!important;font-size:9.5px!important;letter-spacing:.04em;white-space:nowrap;color:#0a5c8f!important}
+#promo-popup .promo-content{text-align:center!important;padding:6px 2px 0!important}
+#promo-popup .promo-content strong{font-size:13.5px!important;line-height:1.25!important;margin:5px 0 6px!important;color:#063b5c!important}
+#promo-popup .promo-content p{font-size:10.5px!important;line-height:1.4!important;margin:0 0 10px!important}
+#promo-popup .promo-btn{display:block!important;padding:7px 4px!important;font-size:10.5px!important}
+#promo-popup .promo-close{top:12px!important;right:8px!important;font-size:15px!important;width:18px;height:18px;line-height:17px;border-radius:50%!important;background:rgba(255,255,255,.7)!important}
+@media(max-width:600px){#promo-popup{width:120px!important;height:232px!important;left:10px!important;bottom:10px!important}#promo-popup .promo-content strong{font-size:12.5px!important;white-space:normal!important}#promo-popup .promo-title{font-size:8.5px!important}#promo-popup .promo-content p{font-size:10px!important}}
+</style><style id="promo-rot-css">#promo-popup{height:248px!important;padding:12px 8px 12px!important;justify-content:flex-start!important}#promo-popup::before{display:none!important}#promo-popup .promo-title{padding:14px 0 0!important}#promo-popup .promo-close{top:5px!important;right:7px!important;width:17px!important;height:17px!important;font-size:13px!important;line-height:16px!important}#promo-popup .promo-content{flex:1;display:flex;flex-direction:column;padding:4px 0 0!important}#promo-popup .promo-content strong{min-height:3.6em;margin:4px 0 4px!important;font-size:13px!important;line-height:1.2!important;display:flex!important;align-items:center;justify-content:center}#promo-popup .promo-content p{flex:1;margin:0 0 8px!important;display:flex;align-items:center;justify-content:center}#promo-popup .promo-btn{margin-top:auto}@media(max-width:600px){#promo-popup{height:232px!important}#promo-popup .promo-content strong{font-size:12px!important}}</style><style id="promo-mini">html body #promo-popup{width:min(250px,68vw)!important;height:auto!important;min-height:0!important;left:10px!important;bottom:10px!important;padding:8px 26px 8px 10px!important;border:1px solid #cfe3e3!important;border-left:4px solid #e53935!important;border-radius:12px!important;background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 6px 18px rgba(0,0,0,.15)!important;animation:none!important;justify-content:flex-start!important}
+html body #promo-popup[style*="block"]{display:block!important}
+html body #promo-popup::before,html body #promo-popup::after{display:none!important;content:none!important}
+html body #promo-popup .promo-title{display:none!important}
+html body #promo-popup .promo-content{display:block!important;padding:0!important;text-align:left!important}
+html body #promo-popup .promo-content strong{display:block!important;min-height:0!important;margin:0 0 2px!important;font-size:12.5px!important;line-height:1.3!important;color:#073a3c!important;white-space:normal!important}
+html body #promo-popup .promo-content strong::before{content:"🎁 "}
+html body #promo-popup .promo-content p{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0 0 4px!important;font-size:11.5px!important;line-height:1.35!important;color:#3d5656!important}
+html body #promo-popup .promo-btn{display:inline!important;margin:0!important;padding:0!important;background:none!important;box-shadow:none!important;color:#e53935!important;font-size:11.5px!important;font-weight:700!important;text-decoration:underline!important;border-radius:0!important}
+html body #promo-popup .promo-btn::after{content:" ›"}
+html body #promo-popup .promo-close{top:4px!important;right:4px!important;width:18px!important;height:18px!important;line-height:17px!important;font-size:14px!important;color:#7a8f8f!important;background:#f1f5f5!important;border-radius:50%!important;padding:0!important}
+</style>
+<script>function closePromo(){var p=document.getElementById('promo-popup');if(p)p.style.display='none';try{sessionStorage.setItem('eyemedi_promo_closed','1')}catch(e){}}window.addEventListener('load',function(){var closed=false;try{closed=sessionStorage.getItem('eyemedi_promo_closed')==='1'}catch(e){}if(closed)return;setTimeout(function(){var p=document.getElementById('promo-popup');if(p)p.style.display='block'},3000)});</script><script id="promo-rot">(function(){var S=[["MUA GỌNG TẶNG TRÒNG","Tặng tròng kính phủ siêu váng Hydrophobic – Hỗ trợ đo thị lực"],["COMBO TRÒNG + GỌNG 650K","Tròng kính UV & Blue Protect 1.60 & Gọng nhựa Ultem, Acetate"],["THU GỌNG CŨ 500K","Đổi gọng kính cũ sang gọng kính mới -500k khi mua tròng kính tại Eyemedi"],["THAY TRÒNG TẶNG GỌNG","Thay tròng kính từ 650k được tặng gọng kính TR90 siêu bền nhẹ"]];var p=document.getElementById('promo-popup');if(!p)return;var c=p.querySelector('.promo-content'),st=c&&c.querySelector('strong'),tx=c&&c.querySelector('p');if(!st||!tx)return;st.style.transition=tx.style.transition='opacity .35s';var i=0,n=0;var tm=setInterval(function(){if(getComputedStyle(p).display==='none')return;if(++n>=S.length){clearInterval(tm);p.style.transition='opacity .5s';p.style.opacity=0;setTimeout(function(){p.style.display='none';p.style.opacity=''},500);return;}st.style.opacity=tx.style.opacity=0;setTimeout(function(){i=(i+1)%S.length;st.textContent=S[i][0];tx.textContent=S[i][1];st.style.opacity=tx.style.opacity=1},350)},3000)})();</script>
 </body>
 </html>
