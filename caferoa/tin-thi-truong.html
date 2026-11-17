@@ -649,10 +649,8 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
     <div class="market-grid">
       <div class="panel">
         <h4>Diễn biến giá cà phê tháng 11/2026</h4>
-        <div class="hint">Rê chuột / chạm vào điểm để xem số liệu</div>
         <div class="chart-tabs" id="chartTabs"></div>
         <svg id="chart" viewBox="0 0 560 240" preserveAspectRatio="none" role="img" aria-label="Biểu đồ giá cà phê"></svg>
-        <div class="chart-tip" id="chartTip"></div>
       </div>
       <div class="panel">
         <h4>Nhận định nhanh</h4>
@@ -1307,8 +1305,8 @@ function renderChart(){
   const dots = pts.map((p,i)=>`<g class="pt" data-i="${i}" style="cursor:pointer"><circle cx="${x(i)}" cy="${y(p[1])}" r="14" fill="transparent"/><circle cx="${x(i)}" cy="${y(p[1])}" r="4.5" fill="#d8ad5f" stroke="#1f140e" stroke-width="2"/></g><text x="${x(i)}" y="${H-10}" fill="#9f8e78" font-size="11" text-anchor="middle">${p[0]}</text>`).join('');
   $('#chart').innerHTML = `<defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8964f" stop-opacity=".35"/><stop offset="1" stop-color="#c8964f" stop-opacity="0"/></linearGradient></defs>${g}<path d="${area}" fill="url(#ga)"/><path d="${path}" fill="none" stroke="#d8ad5f" stroke-width="2.5" stroke-linejoin="round"/>${dots}`;
   const tip = $('#chartTip'); const last = pts[pts.length-1];
-  tip.textContent = `${s.label} · ${last[0]}: ${s.fmt(last[1])} ${s.unit}`;
-  $('#chart').querySelectorAll('.pt').forEach(el => { const show = () => { const p = pts[+el.dataset.i]; tip.textContent = `${s.label} · ${p[0]}: ${s.fmt(p[1])} ${s.unit}`; }; el.addEventListener('mouseenter', show); el.addEventListener('click', show); });
+  if(tip) tip.textContent = `${s.label} · ${last[0]}: ${s.fmt(last[1])} ${s.unit}`;
+  $('#chart').querySelectorAll('.pt').forEach(el => { const show = () => { if(!tip) return; const p = pts[+el.dataset.i]; tip.textContent = `${s.label} · ${p[0]}: ${s.fmt(p[1])} ${s.unit}`; }; el.addEventListener('mouseenter', show); el.addEventListener('click', show); });
 }
 const CATS = {kienthuc:'Kiến thức cà phê', market:'Giá & thị trường', quan:'Cho chủ quán'};
 let newsCat = 'all';
