@@ -1,4 +1,4 @@
-TIEU_DE: Gọng kính tại EYEMEDI có những loại nào?
+TIEU_DE: Tặng gọng kính khi thay tròng kính mới tại EYEMEDI
 TITLE: Gọng kính cận các loại – tặng gọng 0đ khi cắt tròng | EYEMEDI
 SLUG: gong-kinh-can-hoc-sinh
 TU_KHOA_CHINH: gọng kính cận
