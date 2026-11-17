@@ -10,14 +10,6 @@ NGAY_DANG: 2026-11-02
 NGAY_CAP_NHAT: 2026-11-04
 DOAN_MO_DAU: Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI! Đây là cơ hội để bạn thay diện mạo mới cho chiếc kính với chi phí tiết kiệm, kèm đo thị lực miễn phí và tư vấn gọng phù hợp khuôn mặt.
 PIXEL: 1020078554329275
-FORM_URL: https://script.google.com/macros/s/AKfycbwTMU5uBOF5NaOefIZNVhk6wfIxUwSF9K7Ic8fLSeOiowcAUXTd-HU6KFlMxfFMqcN2Ew/exec
-FORM_TIEU_DE: Đặt lịch nhận ưu đãi tặng gọng 0đ
-FORM_TRUONG: Họ và Tên | Họ và tên
-Số điện thoại | Số điện thoại | tel
-Địa chỉ | Địa chỉ hoặc Email
-FORM_NUT: HOÀN TẤT ĐẶT LỊCH
-FORM_CAM_ON: Gửi thành công! EYEMEDI sẽ liên hệ xác nhận lịch hẹn.
-FORM_GHI_CHU: 🚚 Miễn ship trên toàn quốc
 ANH_RIENG:
 gong0d.png | Tặng gọng kính 0đ khi cắt tròng kính cận tại EYEMEDI
 kho-anh/EYEMEDI-4.webp | Khu trưng bày gọng kính tại EYEMEDI

@@ -355,25 +355,7 @@ footer .slogan{color:#fff;font-weight:600;letter-spacing:.02em}
     <a class="cta" href="/dat-lich-do-mat.html">👁 Đặt lịch đo mắt</a>
   </div>
 
-<section class="form-box" id="dat-lich">
-  <h2>Đặt lịch nhận ưu đãi tặng gọng 0đ</h2>
-  <form id="eyForm">
-<input type="text" name="Họ và Tên" placeholder="Họ và tên" required>
-<input type="tel" name="Số điện thoại" placeholder="Số điện thoại" required onfocus="window.fbq&&fbq('track','InitiateCheckout')">
-<input type="text" name="Địa chỉ" placeholder="Địa chỉ hoặc Email" required>
-  <p class="ghi-chu">🚚 Miễn ship trên toàn quốc</p>
-  <button type="submit" id="eyBtn">HOÀN TẤT ĐẶT LỊCH</button>
-  </form>
-  <p class="ok" id="eyOk">Gửi thành công! EYEMEDI sẽ liên hệ xác nhận lịch hẹn.</p>
-</section>
-<script>
-(function(){var f=document.getElementById('eyForm'),b=document.getElementById('eyBtn'),ok=document.getElementById('eyOk'),t=b.textContent;
- f.addEventListener('submit',function(e){e.preventDefault();b.disabled=true;b.textContent='Đang gửi...';
-  if(window.fbq)fbq('track','Lead');
-  fetch('https://script.google.com/macros/s/AKfycbzH09BIb6hqDNC4rrf_dAWyANwMfC21IVy41EA3w9cqNdV43aNQfWpQtPZ3RB4Uqp8/exec',{method:'POST',mode:'no-cors',body:(function(){var d=new FormData(f);d.append('Loại','Đặt lịch đo mắt');d.append('Ghi chú','Địa chỉ/Email: '+(d.get('Địa chỉ')||''));d.append('Trang',location.pathname);return d})()})
-  .then(function(){ok.style.display='block';f.reset();b.disabled=false;b.textContent=t;})
-  .catch(function(){b.disabled=false;b.textContent='THỬ LẠI';});});})();
-</script>
+
   
 
   <section class="faq">
