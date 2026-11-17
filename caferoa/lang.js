@@ -174,3 +174,26 @@
     document.body.appendChild(s);
   }
 })();
+
+/* CAFEROA – nút trở lại đầu trang */
+(function () {
+  var css = '.to-top{position:fixed;left:18px;bottom:22px;z-index:66;width:48px;height:48px;border-radius:50%;border:1px solid rgba(216,173,95,.5);background:#1f140e;color:#d8ad5f;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .25s,transform .25s,visibility .25s,background .2s}' +
+    '.to-top.show{opacity:1;visibility:visible;transform:none}' +
+    '.to-top:hover{background:#c8964f;color:#fff}' +
+    '.to-top svg{width:22px;height:22px}' +
+    'body.has-mbar .to-top{bottom:80px}' +
+    '@media (max-width:640px){.to-top{width:44px;height:44px;left:14px}}';
+  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  function init() {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'to-top'; b.setAttribute('aria-label', 'Trở lại đầu trang'); b.title = 'Lên đầu trang';
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    document.body.appendChild(b);
+    var tick = false;
+    function upd() { b.classList.toggle('show', window.scrollY > Math.max(500, window.innerHeight * 0.8)); tick = false; }
+    window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
