@@ -244,7 +244,8 @@ img.bagx{width:auto}
 .market{background:var(--espresso);color:#efe4d2}
 .market h2.section-title{color:#fff}
 .market .section-head p{color:#bfae96}
-.ticker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+.ticker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:10px}
+.ticker-note{font-size:.78rem;color:#9f8e78;margin-bottom:28px}
 .tick{background:rgba(255,255,255,.04);border:1px solid rgba(216,173,95,.22);border-radius:var(--radius);padding:22px}
 .tick .label{font-size:.82rem;color:#bfae96}
 .tick .val{font-family:'Playfair Display',serif;font-size:2rem;color:#fff;margin:.2rem 0}
@@ -395,6 +396,7 @@ footer .copy{border-top:1px solid rgba(216,173,95,.18);margin-top:40px;padding-t
 .pk li::before{content:"✓";position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:50%;background:var(--ok);color:#fff;font-size:.68rem;font-weight:700;display:grid;place-items:center}
 .pk-btn{width:100%;text-align:center}
 .pk-premium{border-color:var(--gold)}
+.fresh-roast{display:inline-block;font-size:.78rem;font-weight:600;color:#8a4b12;background:#fbecd3;border:1px solid #ecc98f;border-radius:999px;padding:.2rem .65rem;margin:.35rem 0 .15rem}
 .pk-premium .pk-body{background:linear-gradient(180deg,#fffaf1,#fff)}
 @media (max-width:980px){.pk-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
 /* Chat order form */
@@ -817,10 +819,11 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
       <p>Giá cà phê nhân trong nước, Robusta London và Arabica New York, cập nhật từ báo chí chính thống. Tổng hợp để tham khảo, không phải khuyến nghị giao dịch.</p>
     </div>
     <div class="ticker" id="ticker"></div>
+    <p class="ticker-note">Đơn vị: đồng/kg. Giá trần = cao nhất, giá sàn = thấp nhất, giá tham chiếu = trung bình từ đầu tháng 11/2026. Robusta: giá nhân xô Tây Nguyên. Arabica: quy đổi từ giá Arabica New York kỳ hạn gần theo tỷ giá 25.600 đ/USD.</p>
     <div class="market-grid">
       <div class="panel">
-        <h4>Diễn biến giá cà phê tháng 11/2026</h4>
-        <div class="hint">Giá trần, giá sàn, giá tham chiếu trong tháng · cập nhật 13/11/2026</div>
+        <h4>Diễn biến giá cà phê tháng 11/2026 (đ/kg)</h4>
+        <div class="hint">Giá trần, giá sàn, giá tham chiếu trong tháng · cập nhật 22/11/2026</div>
         <div class="chart-tabs" id="chartTabs"></div>
         <svg id="chart" viewBox="0 0 560 240" preserveAspectRatio="none" role="img" aria-label="Biểu đồ giá cà phê"></svg>
         <div class="chart-legend" id="chartLegend"></div>
@@ -830,8 +833,8 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
         <div class="hint">Tổng hợp từ các nguồn tin bên dưới</div>
         <ul style="margin-left:1.1rem;font-size:.92rem;line-height:1.75">
           <li>Vụ thu hoạch mới ở Tây Nguyên vào cao điểm cuối tháng 11, nguồn cung tăng tạo áp lực lên giá thu mua.</li>
-          <li>Giá nội địa đã lùi về vùng 83.700–85.000đ/kg, thấp hơn rõ so với mức trên 94.000đ/kg hồi tháng 10.</li>
-          <li>Robusta London giằng co quanh 3.200–3.300 USD/tấn; Arabica New York giảm mạnh hơn do kỳ vọng nguồn cung Brazil.</li>
+          <li>Giá nhân xô Tây Nguyên ngày 22/11 còn 71.200–72.000đ/kg, mức thấp nhất kể từ tháng 1/2024 và giảm khoảng 15.000đ/kg so với đầu tháng.</li>
+          <li>Robusta London rơi xuống dưới 2.900 USD/tấn sau chuỗi phiên giảm; Arabica New York dao động 269–287 cent/lb trong tháng.</li>
           <li>Với người uống cà phê: giá nhân giảm không làm giá cà phê rang đặc sản giảm ngay, vì chi phí chế biến, rang và đóng gói chiếm phần lớn.</li>
         </ul>
       </div>
@@ -844,7 +847,7 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
     </div>
     <div class="news-list" id="newsList" style="margin-top:34px"></div>
     <div style="text-align:center;margin-top:28px"><a href="tin-thi-truong.html" class="btn btn-gold">Xem tất cả tin thị trường & hỏi đáp →</a></div>
-    <p class="disclaimer">Số liệu cập nhật lần cuối: 13/11/2026. Giá nội địa và giá sàn tổng hợp từ chocaphe.vn và báo chí; điểm ngày 13/11 lấy theo chocaphe.vn. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
+    <p class="disclaimer">Số liệu cập nhật lần cuối: 22/11/2026. Giá nhân xô Tây Nguyên và giá sàn quốc tế tổng hợp từ giacaphe.com, chocaphe.vn và báo chí; tỷ giá theo Vietcombank. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
   </div>
 </section>
 
@@ -1230,15 +1233,19 @@ const GRINDS = ['Hạt nguyên','Xay pha phin','Xay pha máy','Xay pour-over'];
 
 /* ---------- Market data (nguồn: báo chí 11/2026) ---------- */
 const MARKET = {
-  updated:'13/11/2026',
-  /* Giá trần = cao nhất tháng, giá sàn = thấp nhất tháng, giá tham chiếu = trung bình tháng (tự tính từ pts) */
+  updated:'22/11/2026',
+  usdvnd:25600, /* Vietcombank mua chuyển khoản 22/11/2026 */
+  /* Giá trần = cao nhất tháng, giá sàn = thấp nhất tháng, giá tham chiếu = trung bình tháng (tự tính từ pts, đơn vị đ/kg) */
   series:{
-    ar:{name:'Arabica', label:'Arabica New York kỳ hạn gần', unit:'cent/lb', fmt:v=>v.toLocaleString('vi-VN',{minimumFractionDigits:2,maximumFractionDigits:2}),
-        pts:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00]]},
-    rb:{name:'Robusta', label:'Robusta London kỳ hạn gần', unit:'USD/tấn', fmt:v=>Math.round(v).toLocaleString('vi-VN'),
-        pts:[['31/10',3219],['04/11',3265],['07/11',3285],['10/11',3256],['13/11',3260]]}
+    ar:{name:'Arabica', label:'Arabica · quy đổi từ giá New York', unit:'đ/kg',
+        src:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00],['15/11',279.65],['17/11',278.65],['18/11',287.30],['20/11',282.05],['22/11',274.85]]},
+    rb:{name:'Robusta', label:'Robusta · nhân xô Tây Nguyên', unit:'đ/kg',
+        pts:[['01/11',87000],['03/11',86000],['06/11',84100],['09/11',84700],['11/11',85000],['13/11',83700],['16/11',82700],['17/11',81700],['18/11',79700],['19/11',76900],['20/11',74700],['21/11',73900],['22/11',71900]]}
   }
 };
+/* Arabica New York (cent/lb) → đ/kg: cent/100 × tỷ giá ÷ 0,45359237 kg/lb, làm tròn 100đ */
+MARKET.series.ar.pts = MARKET.series.ar.src.map(([d,c]) => [d, Math.round(c/100*MARKET.usdvnd/0.45359237/100)*100]);
+Object.values(MARKET.series).forEach(s => s.fmt = v => (Math.round(v/100)*100).toLocaleString('vi-VN'));
 const LEVELS = [
   {k:'tran', name:'Giá trần', note:'Cao nhất tháng', color:'#6fcf8f'},
   {k:'san', name:'Giá sàn', note:'Thấp nhất tháng', color:'#f08a7e'},
@@ -1349,6 +1356,7 @@ function renderProducts(more){
       <div class="body">
         <h3 onclick="openProduct('${p.id}')">${p.name}</h3>
         <div class="blend">${p.blend}</div>
+        ${groupOf(p)==='Bán sỉ & nhượng quyền'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
         <p class="notes">${p.short}</p>
         <div class="meter">Độ đậm <span class="bar"><i style="width:${p.strength*20}%"></i></span></div>
         <div class="foot">
@@ -1377,6 +1385,7 @@ function openProduct(id){
         <div class="eyebrow">${p.cat}</div>
         <h3>${p.name}</h3>
         <div class="blend">${p.blend}</div>
+        ${groupOf(p)==='Bán sỉ & nhượng quyền'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
         <div class="price" style="font-size:1.6rem;margin-bottom:12px">${priceTxt(p)} <small style="display:inline;font-size:.85rem">/ ${p.size}</small></div>
         <p class="desc">${p.desc}</p>
         <div class="tags">${p.notes.map(n=>`<span>${n}</span>`).join('')}</div>
