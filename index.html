@@ -714,5 +714,21 @@ html body #promo-popup .promo-btn{display:inline!important;margin:0!important;pa
 html body #promo-popup .promo-btn::after{content:" ›"}
 html body #promo-popup .promo-close{top:4px!important;right:4px!important;width:18px!important;height:18px!important;line-height:17px!important;font-size:14px!important;color:#7a8f8f!important;background:#f1f5f5!important;border-radius:50%!important;padding:0!important}
 </style>
+<script id="dat-coc">(function(){
+var RATE={'Gọng kính cận':0.1,'Kính thời trang':0.1,'Phụ kiện mắt kính':0.1,'Tròng kính mắt':0.5,'Kính áp tròng':0.5};
+function coc(){try{var s=Object.entries(cart).reduce(function(a,e){var k=e[0].split('::'),p=PRODUCTS.find(function(x){return x.id===k[0]});var r=p&&RATE[p.category]||0;return a+(r?Math.ceil(priceOf(p,Number(k[1])||0)*e[1]*r/1000)*1000:0)},0);return s}catch(x){return 0}}
+function f(n){return Number(n||0).toLocaleString('vi-VN')+'đ'}
+window.emCoc=coc;
+var st=document.createElement('style');st.textContent='.coc-note{font-size:13px;line-height:1.45;color:#7a4a00;background:#fff7e6;border:1px solid #f3d9a4;border-radius:10px;padding:8px 10px}.coc-left{font-size:13px;margin-top:8px;text-align:center;color:#163}';document.head.appendChild(st);
+function isCod(fm){var c=fm&&fm.querySelector('input[name="Thanh toán"]:checked');return !!c&&/COD/.test(c.value)}
+function note(){var fm=document.getElementById('orderForm');if(!fm)return;var po=fm.querySelector('.pay-opt');if(!po)return;var n=po.querySelector('.coc-note');if(!n){n=document.createElement('div');n.className='coc-note';po.appendChild(n);[].forEach.call(po.querySelectorAll('input[type=radio]'),function(r){r.addEventListener('change',note)})}
+ var c=coc();if(isCod(fm)&&c>0){var t='💰 Vui lòng đặt cọc <b>'+f(c)+'</b> qua mã QR hiện sau khi gửi đơn (gọng, kính thời trang, phụ kiện cọc 10%; tròng kính, kính áp tròng cọc 50%). Phần còn lại thanh toán khi nhận hàng.';if(n.__t!==t){n.__t=t;n.innerHTML=t}if(n.style.display)n.style.display=''}else if(n.style.display!=='none')n.style.display='none';}
+if(typeof window.prepareOrder==='function'&&!window.prepareOrder.__coc){var po=window.prepareOrder;window.prepareOrder=function(){var r=po.apply(this,arguments);try{var fm=document.getElementById('orderForm'),sm=document.getElementById('orderSummary'),c=coc();if(r&&sm&&isCod(fm)&&c>0&&sm.value.indexOf('Đặt cọc')<0)sm.value+='\nĐặt cọc: '+f(c)+' (chuyển khoản)\nCòn lại khi nhận hàng: '+f(Math.max(0,(window.__emAmt||0)-c));}catch(e){}return r};window.prepareOrder.__coc=1;}
+var last=null;
+document.addEventListener('submit',function(e){var fm=e.target;if(fm&&fm.id==='orderForm'){last=isCod(fm)&&coc()>0?{c:coc()}:null}},true);
+function done(){var ok=document.querySelector('.order-success');if(!ok||ok.__coc||!last||!window.emQrBox)return;var m=ok.textContent.match(/Mã đơn:\s*(EM[A-Z0-9]{8})/);if(!m)return;ok.__coc=1;
+ var b=window.emQrBox(m[1]+' COC',last.c),t=b.querySelector('.qr-title');if(t)t.textContent='Quét mã QR để đặt cọc đơn hàng';var tot=window.__emAmt||0;if(tot>last.c){var l=document.createElement('div');l.className='coc-left';l.innerHTML='Còn lại <b>'+f(tot-last.c)+'</b> thanh toán khi nhận hàng (COD).';b.insertBefore(l,b.querySelector('.qr-dl'))}ok.appendChild(b);}
+var tm=0;new MutationObserver(function(){if(tm)return;tm=setTimeout(function(){tm=0;note();done()},60)}).observe(document.body,{childList:true,subtree:true});note();
+})();</script>
 </body>
 </html>
