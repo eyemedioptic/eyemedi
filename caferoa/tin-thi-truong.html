@@ -626,7 +626,7 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
         <a href="./#san-pham" class="dd-top">Sản phẩm <span class="caret">▾</span></a>
         <div class="dd-menu">
           <a href="./#ban-le" onclick="return pickGroup('Sản phẩm bán lẻ')">Sản phẩm bán lẻ</a>
-          <a href="./#ban-si" onclick="return pickGroup('Bán sỉ & nhượng quyền')">Bán sỉ & nhượng quyền</a>
+          <a href="./#ban-si" onclick="return pickGroup('Đặt hàng mới rang')">Đặt hàng mới rang</a>
         </div>
       </div>
       <a href="./#gia-si">Giá sỉ cho quán</a>
@@ -1055,9 +1055,9 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 /* ---------- Products ---------- */
 let currentFilter = 'Tất cả';
 const PAGE_SIZE = 4; let shownCount = PAGE_SIZE;
-const groupOf = p => p.cat === 'CAFEROA Premium' ? 'Bán sỉ & nhượng quyền' : 'Sản phẩm bán lẻ';
+const groupOf = p => p.cat === 'CAFEROA Premium' ? 'Đặt hàng mới rang' : 'Sản phẩm bán lẻ';
 function renderFilters(){
-  const cats = ['Tất cả', 'Sản phẩm bán lẻ', 'Bán sỉ & nhượng quyền'];
+  const cats = ['Tất cả', 'Sản phẩm bán lẻ', 'Đặt hàng mới rang'];
   $('#filters').innerHTML = cats.map(c => `<button class="chip ${c===currentFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
 }
 function setFilter(c){ currentFilter = c; shownCount = PAGE_SIZE; renderFilters(); renderProducts(); }
@@ -1069,12 +1069,12 @@ function renderProducts(more){
     <article class="card">
       <div class="thumb" onclick="openProduct('${p.id}')">
         <img src="${p.img}" alt="${esc(p.name)}" loading="lazy">
-        <span class="ribbon">${p.cat==='CAFEROA Premium'?'Bán sỉ':p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
+        <span class="ribbon">${p.cat==='CAFEROA Premium'?'Mới rang':p.cat}</span>${p.tag?`<span class="ribbon hot">${p.tag}</span>`:''}
       </div>
       <div class="body">
         <h3 onclick="openProduct('${p.id}')">${p.name}</h3>
         <div class="blend">${p.blend}</div>
-        ${groupOf(p)==='Bán sỉ & nhượng quyền'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
+        ${groupOf(p)==='Đặt hàng mới rang'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
         <p class="notes">${p.short}</p>
         <div class="meter">Độ đậm <span class="bar"><i style="width:${p.strength*20}%"></i></span></div>
         <div class="foot">
@@ -1103,7 +1103,7 @@ function openProduct(id){
         <div class="eyebrow">${p.cat}</div>
         <h3>${p.name}</h3>
         <div class="blend">${p.blend}</div>
-        ${groupOf(p)==='Bán sỉ & nhượng quyền'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
+        ${groupOf(p)==='Đặt hàng mới rang'?'<div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div>':''}
         <div class="price" style="font-size:1.6rem;margin-bottom:12px">${priceTxt(p)} <small style="display:inline;font-size:.85rem">/ ${p.size}</small></div>
         <p class="desc">${p.desc}</p>
         <div class="tags">${p.notes.map(n=>`<span>${n}</span>`).join('')}</div>
@@ -1134,7 +1134,7 @@ let cartView = 'cart';
 function askPrice(id){ const p = byId(id); toast(`${p.name}: mở Zalo để nhận báo giá`, true); window.open(SHOP.zalo,'_blank','noopener'); }
 /* ---------- Đặt cọc: sản phẩm rang mới theo đơn ---------- */
 const DEPOSIT = 200000;
-const isMadeToOrder = p => !p.price && groupOf(p) === 'Bán sỉ & nhượng quyền';
+const isMadeToOrder = p => !p.price && groupOf(p) === 'Đặt hàng mới rang';
 function depositOrder(id, qty=1){
   const p = byId(id); if(!p) return;
   closeChatOnMobile(); $('#modal').classList.remove('open');
@@ -1577,7 +1577,7 @@ setTimeout(()=>$('#chatHello').classList.add('hide'), 9000);
 /* ---------- SEO blocks: price tables, shop info, JSON-LD ---------- */
 function renderPriceTables(){
   if($('#priceTable')) $('#priceTable').innerHTML = `<thead><tr><th>Sản phẩm</th><th>Thành phần</th><th>Quy cách</th><th>Giá</th><th></th></tr></thead><tbody>` +
-    ['Sản phẩm bán lẻ','Bán sỉ & nhượng quyền'].map(g=>`<tr class="grp"><td colspan="5">${g}</td></tr>`+PRODUCTS.filter(p=>groupOf(p)===g).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.blend}</td><td>${p.size}</td><td class="p">${priceTxt(p)}</td><td><button class="btn btn-dark mini" onclick="addToCart('${p.id}')">${p.price?'Mua':'Đặt cọc'}</button></td></tr>`).join('')).join('') + '</tbody>';
+    ['Sản phẩm bán lẻ','Đặt hàng mới rang'].map(g=>`<tr class="grp"><td colspan="5">${g}</td></tr>`+PRODUCTS.filter(p=>groupOf(p)===g).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.blend}</td><td>${p.size}</td><td class="p">${priceTxt(p)}</td><td><button class="btn btn-dark mini" onclick="addToCart('${p.id}')">${p.price?'Mua':'Đặt cọc'}</button></td></tr>`).join('')).join('') + '</tbody>';
   if($('#priceUpdated')) $('#priceUpdated').textContent = `Giá bán lẻ Tubat Coffee cập nhật ngày ${SHOP.priceUpdated}.`;
   if($('#tierTable')) $('#tierTable').innerHTML = `<thead><tr><th>Sản lượng/tháng</th><th>Chiết khấu đề xuất</th><th>Đối tượng</th></tr></thead><tbody>` +
     WHOLESALE_TIERS.map(r=>`<tr><td><b>${r[0]}</b></td><td class="p">${r[1]?r[1]+'%':'0%'}</td><td>${r[2]}</td></tr>`).join('') + '</tbody>';
@@ -1643,7 +1643,7 @@ function pickGroup(g){
   setFilter(g); document.getElementById('nav').classList.remove('open');
   document.getElementById('san-pham').scrollIntoView({behavior:'smooth'}); return false;
 }
-function groupFromHash(){ const h=location.hash; if(h==='#ban-le') pickGroup('Sản phẩm bán lẻ'); else if(h==='#ban-si') pickGroup('Bán sỉ & nhượng quyền'); }
+function groupFromHash(){ const h=location.hash; if(h==='#ban-le') pickGroup('Sản phẩm bán lẻ'); else if(h==='#ban-si') pickGroup('Đặt hàng mới rang'); }
 window.addEventListener('hashchange', groupFromHash);
 /* ---------- Popup giới thiệu sản phẩm (quay vòng 5 giây) ---------- */
 let ppIdx = 0, ppTimer = null, ppStop = false;
@@ -1655,7 +1655,7 @@ function promoShow(){
   setTimeout(()=>{
     if(ppStop) return;
     $('#ppImg').src = p.img; $('#ppImg').alt = p.name;
-    $('#ppTag').textContent = groupOf(p)==='Bán sỉ & nhượng quyền' ? 'Sản phẩm mới · Bán sỉ' : (p.tag ? p.tag : 'Gợi ý cho bạn');
+    $('#ppTag').textContent = groupOf(p)==='Đặt hàng mới rang' ? 'Sản phẩm mới · Đặt hàng mới rang' : (p.tag ? p.tag : 'Gợi ý cho bạn');
     $('#ppName').textContent = p.name + ' · ' + p.size;
     $('#ppSub').textContent = p.price ? vnd(p.price) : 'Nhận báo giá';
     pop.dataset.id = p.id; pop.classList.add('show');
