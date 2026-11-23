@@ -466,6 +466,9 @@ body.has-mbar .promo-pop{bottom:80px}
 .form-row.invalid .err{display:block}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pay-opts{display:grid;gap:8px}
+.dep-item{border-bottom:1px solid var(--line);margin-bottom:12px}
+.dep-note{font-size:.8rem;color:var(--muted);background:#fffaf1;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+#depForm .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .pay-opt{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;cursor:pointer}
 .pay-opt input{margin-top:4px;accent-color:var(--crema)}
 .pay-opt b{display:block;font-size:.9rem}
@@ -1361,7 +1364,7 @@ function renderProducts(more){
         <div class="meter">Độ đậm <span class="bar"><i style="width:${p.strength*20}%"></i></span></div>
         <div class="foot">
           <div class="price" ${p.price?'':'style="font-size:.95rem"'}>${priceTxt(p)}<small>${p.size}</small></div>
-          <button class="add-btn" onclick="${p.price?`addToCart('${p.id}')`:`askPrice('${p.id}')`}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${p.price?'Thêm vào giỏ':(groupOf(p)==='Bán sỉ & nhượng quyền'?'Báo giá sỉ':'Hỏi giá')}</button>
+          <button class="add-btn" onclick="${p.price?`addToCart('${p.id}')`:(isMadeToOrder(p)?`depositOrder('${p.id}')`:`askPrice('${p.id}')`)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>${p.price?'Thêm vào giỏ':(isMadeToOrder(p)?'Đặt cọc '+vnd(DEPOSIT):'Hỏi giá')}</button>
         </div>
       </div>
     </article>`).join('');
@@ -1396,7 +1399,7 @@ function openProduct(id){
         <div class="buy">
           <div class="qty"><button data-q="-1">−</button><span>${qty}</span><button data-q="1">+</button></div>
           ${p.price?`<button class="btn btn-dark" id="pdAdd">Thêm vào giỏ · ${vnd(p.price*qty)}</button>
-          <button class="btn btn-gold" id="pdBuy">Mua ngay</button>`:`<button class="btn btn-gold" onclick="askPrice('${p.id}')">Nhận báo giá qua Zalo</button>`}
+          <button class="btn btn-gold" id="pdBuy">Mua ngay</button>`:(isMadeToOrder(p)?`<button class="btn btn-gold" onclick="depositOrder('${p.id}',${qty})">Đặt cọc ${vnd(DEPOSIT)}</button><button class="btn btn-line" onclick="askPrice('${p.id}')">Hỏi giá qua Zalo</button>`:`<button class="btn btn-gold" onclick="askPrice('${p.id}')">Nhận báo giá qua Zalo</button>`)}
         </div>
       </div>
     </div>`;
@@ -1414,10 +1417,73 @@ function openProduct(id){
 let cart = store.get('tubat_cart', []);
 let cartView = 'cart';
 function askPrice(id){ const p = byId(id); toast(`${p.name}: mở Zalo để nhận báo giá`, true); window.open(SHOP.zalo,'_blank','noopener'); }
+/* ---------- Đặt cọc: sản phẩm rang mới theo đơn ---------- */
+const DEPOSIT = 200000;
+const isMadeToOrder = p => !p.price && groupOf(p) === 'Bán sỉ & nhượng quyền';
+function depositOrder(id, qty=1){
+  const p = byId(id); if(!p) return;
+  closeChatOnMobile(); $('#modal').classList.remove('open');
+  cartView = 'deposit';
+  $('#cartTitle').textContent = 'Đặt cọc – rang theo đơn';
+  const saved = store.get('tubat_customer', {});
+  $('#cartBody').innerHTML = `
+    <div class="ci dep-item"><img src="${p.img}" alt=""><div><b>${p.name}</b><div class="sm">${p.blend} · túi ${p.size}</div><div class="fresh-roast">🔥 Rang mới theo đơn đặt hàng</div></div></div>
+    <form id="depForm" novalidate>
+      <div class="two">
+        <div class="form-row"><label>Số lượng (túi ${p.size}) *</label><input name="qty" type="number" min="1" step="1" value="${Math.max(1,qty|0)}" inputmode="numeric"><div class="err">Tối thiểu 1 túi</div></div>
+        <div class="form-row"><label>Dạng cà phê</label><select name="grind">${GRINDS.map(g=>`<option>${g}</option>`).join('')}</select></div>
+      </div>
+      <div class="form-row"><label>Họ và tên *</label><input name="name" value="${esc(saved.name||'')}" autocomplete="name"><div class="err">Vui lòng nhập họ tên</div></div>
+      <div class="form-row"><label>Số điện thoại *</label><input name="phone" inputmode="tel" value="${esc(saved.phone||'')}" autocomplete="tel" placeholder="09xx xxx xxx"><div class="err">Số điện thoại chưa đúng (10 số)</div></div>
+      <div class="form-row"><label>Địa chỉ nhận hàng *</label><input name="address" value="${esc(saved.address||'')}" autocomplete="street-address" placeholder="Số nhà, đường, phường/xã"><div class="err">Vui lòng nhập địa chỉ</div></div>
+      <div class="form-row"><label>Tỉnh / Thành phố</label>
+        <select name="city">${['TP. Hồ Chí Minh','Hà Nội','Đà Nẵng','Tỉnh/thành khác'].map(c=>`<option ${saved.city===c?'selected':''}>${c}</option>`).join('')}</select></div>
+      <div class="form-row"><label>Ghi chú</label><textarea name="note" rows="2" placeholder="Mức rang mong muốn, giờ nhận hàng, xuất hóa đơn…"></textarea></div>
+      <div class="form-row"><label>Thanh toán</label>
+        <div class="pay-opts"><label class="pay-opt"><input type="radio" name="pay" value="Chuyển khoản QR" checked><div><b>Chuyển khoản qua mã QR</b><span>Đặt cọc ${vnd(DEPOSIT)} để CAFEROA rang theo đơn</span></div></label></div></div>
+      <p class="dep-note">Sau khi nhận cọc, CAFEROA gọi xác nhận và báo giá. Phần còn lại thanh toán bằng mã QR trước khi giao hàng.</p>
+    </form>`;
+  $('#cartFoot').innerHTML = `
+    <div class="sumrow total"><span>Tiền đặt cọc</span><span>${vnd(DEPOSIT)}</span></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:12px" onclick="placeDeposit('${p.id}')">Gửi đơn & lấy mã QR đặt cọc</button>`;
+  $('#cart').classList.add('open'); $('#overlay').classList.add('show'); $('#toast').classList.remove('show');
+}
+function placeDeposit(id){
+  const p = byId(id), f = $('#depForm'), d = Object.fromEntries(new FormData(f));
+  let ok = true;
+  const check = (n, cond) => { const r = f.querySelector(`[name=${n}]`).closest('.form-row'); r.classList.toggle('invalid', !cond); if(!cond) ok = false; };
+  const phone = (d.phone||'').replace(/[\s.\-]/g,''), qty = parseInt(d.qty)||0;
+  check('qty', qty >= 1);
+  check('name', (d.name||'').trim().length >= 2);
+  check('phone', /^(0|\+84)(3|5|7|8|9)\d{8}$/.test(phone));
+  check('address', (d.address||'').trim().length >= 5);
+  if(!ok) return;
+  store.set('tubat_customer', {name:d.name, phone, address:d.address, city:d.city});
+  const code = 'CR' + Date.now().toString().slice(-7);
+  const line = `- ${p.name} ${p.size} (${d.grind}) x${qty} – rang mới theo đơn`;
+  const text = `ĐƠN ĐẶT CỌC ${code} – CAFEROA\n${line}\nĐặt cọc: ${vnd(DEPOSIT)} (chuyển khoản QR)\nGiá & phần còn lại: CAFEROA báo khi xác nhận\n---\nKhách: ${d.name}\nSĐT: ${phone}\nĐịa chỉ: ${d.address}, ${d.city}${d.note?'\nGhi chú: '+d.note:''}`;
+  const subject = `Đơn đặt cọc ${code} – ${d.name} – cọc ${vnd(DEPOSIT)}`;
+  const fields = {'Mã đơn':code, 'Khách hàng':d.name, 'SĐT':phone, 'Địa chỉ':d.address, 'Tỉnh/TP':d.city, 'Thanh toán':`Chuyển khoản QR – đặt cọc ${vnd(DEPOSIT)}`, 'Sản phẩm':line, 'Tạm tính':'Báo giá khi xác nhận', 'Phí giao':'Báo khi xác nhận', 'Tổng cộng':`Đặt cọc ${vnd(DEPOSIT)}`, 'Ghi chú':d.note||'—'};
+  const orders = store.get('tubat_orders', []); orders.unshift({code, text, at:new Date().toISOString()}); store.set('tubat_orders', orders.slice(0,20));
+  cartView = 'done';
+  $('#cartTitle').textContent = 'Đặt cọc đơn hàng';
+  $('#cartBody').innerHTML = `<div class="success"><div class="tick-ic">✓</div>
+    <h3 class="serif" style="font-size:1.5rem;color:var(--roast)">Cảm ơn ${esc(d.name)}!</h3>
+    <p style="color:var(--muted);font-size:.92rem">Mã đơn <b>${code}</b>. Vui lòng quét mã QR bên dưới để đặt cọc <b>${vnd(DEPOSIT)}</b>. CAFEROA rang mới và gọi xác nhận sau khi nhận cọc.</p>
+    <p id="sendStatus" style="font-size:.88rem;font-weight:600;color:var(--muted);margin-top:8px">⏳ Đang gửi đơn tới CAFEROA…</p>
+    ${qrBlock(code, DEPOSIT, false)}
+    <pre id="orderText">${esc(text)}</pre></div>`;
+  $('#cartFoot').innerHTML = `<div class="two"><a class="btn btn-line btn-sm" href="tel:${SHOP.phone}">Gọi CAFEROA</a><button class="btn btn-line btn-sm" onclick="sendZalo()">Nhắn Zalo</button></div>`;
+  submitData('order', subject, fields).then(ok => {
+    const st = $('#sendStatus'); if(!st) return;
+    if(ok){ st.style.color = 'var(--ok)'; st.textContent = '✓ Đơn đặt cọc đã được gửi tới CAFEROA.'; }
+    else { st.style.color = 'var(--red)'; st.innerHTML = `Chưa gửi được đơn tự động. Vui lòng <a href="${mailtoLink(subject, text)}" style="text-decoration:underline">gửi email</a> hoặc bấm "Nhắn Zalo" (nội dung đơn đã được sao chép sẵn).`; copyOrder(true); }
+  });
+}
 function cartKey(id, grind){ return id + '|' + (grind||''); }
 function addToCart(id, qty=1, grind, silent){
   const p = byId(id); if(!p) return;
-  if(!p.price){ askPrice(id); return; }
+  if(!p.price){ if(isMadeToOrder(p)) depositOrder(id, qty); else askPrice(id); return; }
   if(grind === undefined) grind = id === 'drip' ? '' : GRINDS[0];
   const k = cartKey(id, grind);
   const line = cart.find(l => l.key === k);
@@ -1555,7 +1621,7 @@ function qrBlock(code, amount, shipLater){
   const url = `https://img.vietqr.io/image/${encodeURIComponent(q.bankId)}-${encodeURIComponent(q.accountNo)}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(code)}&accountName=${encodeURIComponent(q.accountName||'')}`;
   return `<div class="qr-box">
     <div class="qr-title">Quét mã QR để chuyển khoản</div>
-    <img src="${url}" alt="Mã QR chuyển khoản đơn ${code}" class="qr-img" onerror="this.outerHTML='<p style=\'color:var(--red)\'>Không tải được mã QR, vui lòng chuyển khoản theo thông tin bên dưới.</p>'">
+    <img src="${url}" alt="Mã QR chuyển khoản đơn ${code}" class="qr-img" onerror="this.outerHTML='<p style=&quot;color:var(--red)&quot;>Không tải được mã QR, vui lòng chuyển khoản theo thông tin bên dưới.</p>'">
     <div class="qr-info">
       <div><span>Ngân hàng</span><b>${esc(q.bankName||q.bankId)}</b></div>
       <div><span>Số tài khoản</span><b>${esc(q.accountNo)}</b> <button type="button" onclick="copyText('${esc(q.accountNo)}')">Sao chép</button></div>
@@ -1733,7 +1799,7 @@ function coSend(fid){
   });
 }
 
-const pcard = p => `<div class="pcard"><img src="${p.img}" alt=""><div><b>${p.name}</b><small>${priceTxt(p)}</small></div><button onclick="addToCart('${p.id}')">${p.price?'+ Giỏ':'Hỏi giá'}</button></div>`;
+const pcard = p => `<div class="pcard"><img src="${p.img}" alt=""><div><b>${p.name}</b><small>${priceTxt(p)}</small></div><button onclick="addToCart('${p.id}')">${p.price?'+ Giỏ':(isMadeToOrder(p)?'Đặt cọc':'Hỏi giá')}</button></div>`;
 const MAIN_Q = ['🛒 Mua hàng','Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
 function greet(){ botSay(`Xin chào! Mình là trợ lý của <b>CAFEROA – Đại lý bán lẻ cà phê sạch chất lượng cao</b> ☕\nMình có thể báo giá bán lẻ, giá sỉ cho quán & văn phòng, tư vấn chọn cà phê, nhượng quyền mở quán hoặc cập nhật giá cà phê hôm nay.`, MAIN_Q, 400); }
 function userSay(text){
@@ -1796,7 +1862,7 @@ setTimeout(()=>$('#chatHello').classList.add('hide'), 9000);
 /* ---------- SEO blocks: price tables, shop info, JSON-LD ---------- */
 function renderPriceTables(){
   if($('#priceTable')) $('#priceTable').innerHTML = `<thead><tr><th>Sản phẩm</th><th>Thành phần</th><th>Quy cách</th><th>Giá</th><th></th></tr></thead><tbody>` +
-    ['Sản phẩm bán lẻ','Bán sỉ & nhượng quyền'].map(g=>`<tr class="grp"><td colspan="5">${g}</td></tr>`+PRODUCTS.filter(p=>groupOf(p)===g).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.blend}</td><td>${p.size}</td><td class="p">${priceTxt(p)}</td><td><button class="btn btn-dark mini" onclick="addToCart('${p.id}')">${p.price?'Mua':'Báo giá sỉ'}</button></td></tr>`).join('')).join('') + '</tbody>';
+    ['Sản phẩm bán lẻ','Bán sỉ & nhượng quyền'].map(g=>`<tr class="grp"><td colspan="5">${g}</td></tr>`+PRODUCTS.filter(p=>groupOf(p)===g).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.blend}</td><td>${p.size}</td><td class="p">${priceTxt(p)}</td><td><button class="btn btn-dark mini" onclick="addToCart('${p.id}')">${p.price?'Mua':'Đặt cọc'}</button></td></tr>`).join('')).join('') + '</tbody>';
   if($('#priceUpdated')) $('#priceUpdated').textContent = `Giá bán lẻ Tubat Coffee cập nhật ngày ${SHOP.priceUpdated}.`;
   if($('#tierTable')) $('#tierTable').innerHTML = `<thead><tr><th>Sản lượng/tháng</th><th>Chiết khấu đề xuất</th><th>Đối tượng</th></tr></thead><tbody>` +
     WHOLESALE_TIERS.map(r=>`<tr><td><b>${r[0]}</b></td><td class="p">${r[1]?r[1]+'%':'0%'}</td><td>${r[2]}</td></tr>`).join('') + '</tbody>';
