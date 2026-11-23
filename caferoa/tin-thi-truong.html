@@ -536,9 +536,9 @@ body.has-mbar .promo-pop{bottom:80px}
 .msg.me{background:var(--roast);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
 .msg .pcard{display:flex;gap:10px;align-items:center;margin-top:8px;padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
 .msg .pcard img{width:46px;height:56px;object-fit:cover;border-radius:6px}
-.msg .pcard b{display:block;font-size:.85rem}
+.msg .pcard b{display:block;font-size:.85rem;text-align:left}
 .msg .pcard small{color:var(--red);font-weight:700}
-.msg .pcard button{margin-left:auto;background:var(--crema);color:#fff;border-radius:999px;padding:.35rem .7rem;font-size:.78rem;font-weight:600}
+.msg .pcard button{margin-left:auto;white-space:nowrap;flex-shrink:0;background:var(--crema);color:#fff;border-radius:999px;padding:.35rem .7rem;font-size:.78rem;font-weight:600}
 .typing{display:flex;gap:4px;padding:.75rem .9rem}
 .typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:ty 1s infinite}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
@@ -1517,7 +1517,7 @@ function coSend(fid){
 }
 
 const pcard = p => `<div class="pcard"><img src="${p.img}" alt=""><div><b>${p.name}</b><small>${priceTxt(p)}</small></div><button onclick="addToCart('${p.id}')">${p.price?'+ Giỏ':(isMadeToOrder(p)?'Đặt cọc':'Hỏi giá')}</button></div>`;
-const MAIN_Q = ['🛒 Mua hàng','Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
+const MAIN_Q = ['🛒 Mua hàng','Sản phẩm có sẵn','Đặt rang mới','Tư vấn chọn cà phê','Giá bán lẻ','Giá sỉ cho quán','Mua ở đâu?','Giá cà phê hôm nay','Nhượng quyền'];
 function greet(){ botSay(`Xin chào! Mình là trợ lý của <b>CAFEROA – Đại lý bán lẻ cà phê sạch chất lượng cao</b> ☕\nMình có thể báo giá bán lẻ, giá sỉ cho quán & văn phòng, tư vấn chọn cà phê, nhượng quyền mở quán hoặc cập nhật giá cà phê hôm nay.`, MAIN_Q, 400); }
 function userSay(text){
   if(!text.trim()) return; addMsg(esc(text),'me');
@@ -1546,6 +1546,8 @@ function reply(raw){
       return botSay(`Gợi ý hợp gu của bạn:${picks.map(id=>pcard(byId(id))).join('')}\nBấm "+ Giỏ" để thêm nhanh. Mặc định là hạt nguyên, bạn có thể đổi kiểu xay ở trang sản phẩm.`, ['Xem giỏ hàng','Tư vấn lại','Cách đặt hàng']);
     }
   }
+  if(has('co san','san pham san','hang san')){ const L = PRODUCTS.filter(p=>groupOf(p)==='Sản phẩm có sẵn'); return botSay(`<b>Sản phẩm có sẵn</b> – giao ngay, đặt online và thanh toán khi nhận hàng hoặc chuyển khoản:${L.map(pcard).join('')}\nBấm "+ Giỏ" để thêm nhanh, rồi bấm "🛒 Mua hàng" để đặt.`, ['🛒 Mua hàng','Đặt rang mới','Tư vấn chọn cà phê','Phí ship & giao hàng']); }
+  if(has('rang moi','dat rang','moi rang','rang theo don')){ const L = PRODUCTS.filter(isMadeToOrder); return botSay(`🔥 <b>Đặt hàng mới rang</b> – cà phê rang mới theo đơn, túi 1kg:\n• Đặt cọc <b>${vnd(DEPOSIT)}</b>/đơn, thanh toán bằng mã QR\n• CAFEROA gọi xác nhận và báo giá sau khi nhận cọc\n• Phần tiền còn lại thanh toán khi nhận sản phẩm${L.map(pcard).join('')}\nBấm "Đặt cọc" ở sản phẩm bạn chọn để điền thông tin.`, ['Sản phẩm có sẵn','Giá sỉ cho quán','Phí ship & giao hàng']); }
   if(has('tu van','chon','goi y','hop gu','nen mua','loai nao','recommend')){ quiz = {step:1}; return botSay('Bạn thích vị cà phê thế nào?', ['Đậm, mạnh, đắng','Cân bằng đắng – ngọt','Thanh nhẹ, thơm, chua nhẹ']); }
   if(has('xem gio','gio hang','cart')){ openCart(); return botSay('Mình đã mở giỏ hàng cho bạn ở bên phải 👉', MAIN_Q); }
   if(has('nhuong quyen','franchise','mo quan tubat')){ setTimeout(()=>{closeChatOnMobile();goTo('nhuong-quyen');},1600); return botSay('Bạn đăng ký <b>nhượng quyền CAFEROA</b> qua form ở mục <b>"Đăng ký nhượng quyền"</b> (mình đang chuyển bạn tới đó). CAFEROA tư vấn trực tiếp tận nơi, khảo sát mặt bằng, lên phương án quán, đào tạo pha chế và cung cấp nguồn cà phê sạch. Điều kiện và chi phí 2 bên thỏa thuận theo nhu cầu.', MAIN_Q); }
