@@ -59,7 +59,7 @@ function parseDo(raw){var s=raw.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/
  if(sg){sg=sg.map(function(x){var v=parseFloat(x.replace(/[\s(\/,]/g,''));return v<0?-cv(-v):cv(v)}).filter(function(v){return Math.abs(v)<=30});if(!sg.length)sg=null;if(o.s==null)o.s=sg[0];if(o.c==null&&sg.length>1)o.c=Math.abs(sg[1]);}
  if(o.s==null&&o.c==null&&o.a==null)return null;if(o.s==null)o.s=0;if(o.c==null)o.c=0;return o;}
 function inR(x,r){return r&&x>=r[0]-1e-6&&x<=r[1]+1e-6}
-function trByDo(q,d,force){var wantDa=/da trong|lao|progressive/.test(q)||d.a!=null,wantHai=/hai trong|2 trong|flat/.test(q),dm=/doi mau|photo|ra nang/.test(q),asx=/anh sang xanh|blue|asx/.test(q),be=/chong be|chong vo|poly|duramax/.test(q),dat=force||/dat theo don|rx/.test(q);
+function trByDo(q,d,force){lastDo=d;var wantDa=/da trong|lao|progressive/.test(q)||d.a!=null,wantHai=/hai trong|2 trong|flat/.test(q),dm=/doi mau|photo|ra nang/.test(q),asx=/anh sang xanh|blue|asx/.test(q),be=/chong be|chong vo|poly|duramax/.test(q),dat=force||/dat theo don|rx/.test(q);
  var br=['chemi','zinmy','hoga'].filter(function(b){return has(q,b)})[0];
  var out=[];(D.tr||[]).forEach(function(t){if(br&&t._b!==br)return;
   if(t.g==='Đặt theo đơn'&&!dat)return;if(dat&&t.g!=='Đặt theo đơn')return;
@@ -92,7 +92,10 @@ var TRQ=[[/anh sang xanh|blue cut|asx/,function(t){return t.g!=='Đa tròng'&&t.
 [/can nang|sieu mong|mong nhat|1\.74|tren 10/,function(t){return (t.cs==='1.67'||t.cs==='1.74')&&t.g!=='Đa tròng'&&t.g!=='Đặt theo đơn'}]];
 function trList(q){if(!/trong|lens|kinh|asx|blue|photo|progressive|flat|poly|duramax|doi mau|chong be/.test(q))return null;for(var i=0;i<TRQ.length;i++)if(TRQ[i][0].test(q)){var l=(D.tr||[]).filter(TRQ[i][1]).sort(function(a,b){return trMin(a)-trMin(b)});if(l.length)return {t:'',c:l.map(function(t){return {l:trShort(t.n),tr:t}}),pg:1};}return null;}
 var lastTr=null;
-function trInfo(t){lastTr=t;return {t:t.n+'\nGiá: từ '+vnd(trMin(t))+'/cặp',c:['Giá theo độ','Đặc điểm tròng','Chiết suất']};}
+var TRCH=['Giá theo độ','Đặc điểm tròng','Chiết suất','Đặt mua tròng'],lastDo=null;
+function trInfo(t){lastTr=t;return {t:t.n+'\nGiá: từ '+vnd(trMin(t))+'/cặp',c:TRCH};}
+function orderTr(){var i=D.tr.indexOf(lastTr),p=trSp(i);if(!p)return;var vi=0,d=lastDo;if(d){lastTr.r.filter(function(r){return r[3]}).some(function(r,k){if(inR(d.s,r[0])&&(!r[1]||inR(d.c,r[1])||lastTr.g!=='Đơn tròng')&&(!r[2]||d.a==null||inR(d.a,r[2]))){vi=k;return true}})}
+ var f=CART.filter(function(x){return x.id===p.id&&x.vi===vi})[0];if(f)f.q++;else CART.push({id:p.id,vi:vi,q:1});saveCart();openOrder();}
 function trPart(k){var t=lastTr;if(!t)return 'Anh/chị chọn loại tròng trước ạ.';
  if(k==='Giá theo độ')return t.gia.replace(/^Giá tròng [^\n]*\n/,'');
  if(k==='Đặc điểm tròng')return t.mt;
@@ -191,7 +194,9 @@ function openBooking(){[].slice.call(ms.querySelectorAll('.emb-book')).forEach(f
 var GAS='https://script.google.com/macros/s/AKfycbxuFhXtqZHkSM2uzLb9c3ASCnFNzw_Fzl5_ecjTWOwLyc4FvxosoFGJUWsU2PijXWIW2Q/exec',LOCK_KEY='eyemedi_order_lock_until',LOCK_MS=180000;
 var CART=[];try{CART=JSON.parse(sessionStorage.getItem('emb-cart')||'[]')||[]}catch(e){CART=[]}
 function saveCart(){try{sessionStorage.setItem('emb-cart',JSON.stringify(CART))}catch(e){}}
-function spById(id){return (D.sp||[]).filter(function(x){return x.id===id})[0]}
+function f2(x){return (x>0?'+':'')+x.toFixed(2)}
+function trSp(i){var t=(D&&D.tr||[])[i];if(!t)return null;var vr=[];t.r.forEach(function(r){if(!r[3])return;vr.push(['S '+f2(r[0][0])+' ~ '+f2(r[0][1])+(r[1]?' / C '+(r[1][0]?'-'+r[1][0].toFixed(2):'0.00')+' ~ -'+r[1][1].toFixed(2):'')+(r[2]?' / Add +'+r[2][0].toFixed(2)+' ~ +'+r[2][1].toFixed(2):''),r[3]])});return {id:'TR'+i,n:'Tròng '+t.n.replace(/^Tròng\s+/i,''),c:'Tròng',cat:'Tròng kính mắt',p:trMin(t),vr:vr,img:''}}
+function spById(id){if(/^TR\d+$/.test(id))return trSp(+id.slice(2));return (D.sp||[]).filter(function(x){return x.id===id})[0]}
 function itemPrice(it){var p=spById(it.id);if(!p)return 0;var v=(p.vr||[])[it.vi];return v&&v[1]>0?v[1]:p.p}
 var COCR={'Gọng kính cận':0.1,'Kính thời trang':0.1,'Phụ kiện mắt kính':0.1,'Tròng kính mắt':0.5,'Kính áp tròng':0.5};
 function cocAmt(){return CART.reduce(function(a,it){var p=spById(it.id),r=p&&COCR[p.cat]||0;return a+(r?Math.ceil(itemPrice(it)*it.q*r/1000)*1000:0)},0)}
@@ -209,7 +214,7 @@ function drawOrder(w){CART=CART.filter(function(it){return spById(it.id)});
  var shp=(tot>=500000||tot<=0)?0:25000;h+='</div><div class="emb-tot">Tạm tính: <b>'+vnd(tot)+'</b><br>Phí giao hàng: <b>'+(shp?vnd(shp):'Miễn phí')+'</b><br>Tổng thanh toán: <b>'+vnd(tot+shp)+'</b><div class="emb-shn">'+(shp?'Mua thêm '+vnd(500000-tot)+' để được miễn phí giao hàng.':'🎉 Đơn từ 500K được miễn phí giao hàng.')+'</div></div><button type="button" class="emb-c emb-more">＋ Thêm sản phẩm khác</button>'+
  '<form class="emb-of" novalidate><input name="Họ tên" placeholder="Họ và tên *" autocomplete="name" required><input name="Số điện thoại" placeholder="Số điện thoại *" inputmode="tel" autocomplete="tel" required><input name="Địa chỉ nhận hàng" placeholder="Địa chỉ nhận hàng *" autocomplete="street-address" required><input name="Email khách hàng" type="email" placeholder="Email (không bắt buộc)" autocomplete="email"><div class="emb-2"><input name="Độ mắt phải OD" placeholder="Độ mắt phải (OD)"><input name="Độ mắt trái OS" placeholder="Độ mắt trái (OS)"></div><textarea name="Ghi chú" rows="2" placeholder="Ghi chú: màu, nhu cầu lắp tròng, thời gian nhận…"></textarea><div class="emb-pay"></div><div class="emb-err"></div><button type="submit" class="emb-send">Gửi đơn hàng đến EYEMEDI</button></form>';
  var keep={};[].slice.call(w.querySelectorAll('.emb-of [name]')).forEach(function(x){if(x.type==='radio'){if(x.checked)keep[x.name]=x.value}else keep[x.name]=x.value});
- w.innerHTML=h;[].slice.call(w.querySelectorAll('.emb-of [name]')).forEach(function(x){if(x.type!=='radio'&&keep[x.name])x.value=keep[x.name]});
+ w.innerHTML=h;[].slice.call(w.querySelectorAll('.emb-of [name]')).forEach(function(x){if(x.type!=='radio'&&keep[x.name])x.value=keep[x.name]});if(lastDo&&CART.some(function(it){return /^TR/.test(it.id)})){var dz='S '+f2(lastDo.s)+(lastDo.c?' C -'+lastDo.c.toFixed(2):'')+(lastDo.a!=null?' Add +'+lastDo.a.toFixed(2):'');['Độ mắt phải OD','Độ mắt trái OS'].forEach(function(n){var x=w.querySelector('.emb-of [name="'+n+'"]');if(x&&!x.value)x.value=dz})}
  [].slice.call(w.querySelectorAll('.emb-q button')).forEach(function(b){b.onclick=function(){var it=CART[+b.dataset.i];it.q+=+b.dataset.d;if(it.q<=0)CART.splice(+b.dataset.i,1);saveCart();drawOrder(w)}});
  [].slice.call(w.querySelectorAll('.emb-rm')).forEach(function(b){b.onclick=function(){CART.splice(+b.dataset.i,1);saveCart();drawOrder(w)}});
  [].slice.call(w.querySelectorAll('.emb-vr')).forEach(function(sl){sl.onchange=function(){CART[+sl.dataset.i].vi=+sl.value;saveCart();drawOrder(w)}});
@@ -259,7 +264,8 @@ function send(t){t=String(t).trim();if(!t)return;add(t,1);
  if(t==='Tròng kính mắt'){setTimeout(function(){add('EYEMEDI có đơn tròng, chống ánh sáng xanh, đổi màu, và đa tròng, hai tròng, chống bể, chống ánh sáng xanh, đổi màu tròng đặt theo đơn.\nAnh/chị gửi độ mắt của mình, ví dụ: "cận -125 loạn -150", "viễn +200", "cận -500 đổi màu", "lão +200, đa tròng" để Eyemedi tư vấn ạ.',0,['Tròng chống ánh sáng xanh','Tròng đổi màu','Đa tròng','Hai tròng','Tròng chống bể'])},250);return;}
  if((t==='Hình ảnh'||/\bhinh\b|xem anh|gui anh|cho xem anh|anh that|anh san pham/.test(nm(t)))&&!last){setTimeout(function(){add('Anh/chị muốn xem hình mẫu nào ạ?',0,['Kính mát','Kính gọng','Kính áp tròng','Tròng kính mắt'])},200);return;}
  if((t==='Hình ảnh'||/\bhinh\b|xem anh|gui anh|cho xem anh|anh that|anh san pham/.test(nm(t)))&&last){setTimeout(function(){var im=last.imgs||[];if(im.length){add('Hình ảnh '+last.n+' ('+im.length+' ảnh) – bấm vào ảnh để phóng to:');add('',0,SPCH,0,im);}else add('',0,SPCH,0,(last.imgs||[]).slice(0,1))},200);return;}
- if((t==='Giá theo độ'||t==='Đặc điểm tròng'||t==='Chiết suất')&&lastTr){setTimeout(function(){add(trPart(t),0,['Giá theo độ','Đặc điểm tròng','Chiết suất'].filter(function(x){return x!==t}))},200);return;}
+ if(t==='Đặt mua tròng'&&lastTr){setTimeout(function(){load(orderTr)},200);return;}
+ if((t==='Giá theo độ'||t==='Đặc điểm tròng'||t==='Chiết suất')&&lastTr){setTimeout(function(){add(trPart(t),0,TRCH.filter(function(x){return x!==t}))},200);return;}
  if(t==='Bảo hành'){setTimeout(function(){add('Eyemedi xin nhận thông tin bảo hành từ anh chị:',0,['Bảo hành gọng','Bảo hành tròng'])},250);return;}
  if(BH[t]){setTimeout(function(){add('',0,BH[t].map(function(v){return {l:v,bh:t}}),1)},250);return;}
  if(t==='Đặt mua'&&last&&last.id){setTimeout(function(){openOrder(last)},200);return;}
