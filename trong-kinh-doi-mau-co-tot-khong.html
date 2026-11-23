@@ -468,6 +468,7 @@ document.addEventListener('submit',function(e){var f=e.target,bad=null;if(!f.que
  if(bad){e.preventDefault();e.stopImmediatePropagation();bad.focus();try{bad.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}}},true);
 })();</script>
 <script id="online-count">document.getElementById('online').textContent = 21 + Math.floor(Math.random() * 279);(function(){var k='em-luot-mua',n=0;try{n=parseInt(localStorage.getItem(k))||0}catch(e){}n=n?n+1+Math.floor(Math.random()*3):2+Math.floor(Math.random()*98);try{localStorage.setItem(k,n)}catch(e){}document.getElementById('luot-mua').textContent=n})();</script>
+<script src="/ctv/ref.js" defer></script>
 <script src="/chatbot/bot.js" defer></script>
 <script id="gia-k">(function(){var R=/(\d{1,3}(?:\.\d{3})+)\s*(?:₫|đ|VNĐ|VND)(?![A-Za-zÀ-ỹ])/g;
 function k(m,d){var n=parseInt(d.replace(/\./g,''),10);if(n<1000)return m;var v=n/1000;return (v%1===0?v.toLocaleString('vi-VN'):v.toLocaleString('vi-VN',{maximumFractionDigits:2}))+'K'}
