@@ -1,0 +1,38 @@
+TIEU_DE: TS.BS.CKII Đặng Thị Ngọc Bích – da liễu, thẩm mỹ da tại Tâm Anh TP.HCM
+TITLE: Bác sĩ Đặng Thị Ngọc Bích – da liễu Tâm Anh | EYEMEDI
+SLUG: bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh
+TU_KHOA_CHINH: bác sĩ Đặng Thị Ngọc Bích da liễu Tâm Anh
+TU_KHOA_PHU: da liễu thẩm mỹ Tâm Anh TP.HCM, bác sĩ da liễu laser, thẩm mỹ da Tân Bình, khám da liễu Phổ Quang
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: TS.BS.CKII Đặng Thị Ngọc Bích, Trung tâm Da liễu – Thẩm mỹ da BVĐK Tâm Anh TP.HCM: chuyên môn laser, thẩm mỹ da, địa chỉ, hotline và lưu ý khi đi khám.
+NGAY_DANG: 2026-11-23
+DOAN_MO_DAU: Khi da gặp vấn đề như mụn, nám, sẹo hay cần thủ thuật thẩm mỹ da, nhiều người tìm đến bác sĩ da liễu tại bệnh viện. Bài viết giới thiệu TS.BS.CKII Đặng Thị Ngọc Bích tại Bệnh viện Đa khoa Tâm Anh TP.HCM, dựa trên thông tin bệnh viện công bố.
+ANH_RIENG:
+anh-rieng/bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh-1.jpg | Khách hàng tại cửa hàng EYEMEDI
+anh-rieng/bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh-2.jpg | Chuyên viên EYEMEDI tư vấn chăm sóc mắt và da vùng quanh mắt
+anh-rieng/bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh-3.jpg | Không gian cửa hàng EYEMEDI
+H2_1: TS.BS.CKII Đặng Thị Ngọc Bích là ai?
+NOI_DUNG_1: <p>Theo trang chuyên gia của Bệnh viện Đa khoa Tâm Anh, <b>TS.BS.CKII Đặng Thị Ngọc Bích</b> là bác sĩ thuộc chuyên khoa Da liễu – Thẩm mỹ da tại Bệnh viện Đa khoa Tâm Anh TP.HCM. Học vị tiến sĩ và bằng chuyên khoa II cho thấy quá trình đào tạo chuyên sâu trong ngành da liễu.</p>
+H2_2: Các vấn đề da bác sĩ thăm khám
+NOI_DUNG_2: <p>Theo thông tin công bố, lĩnh vực của bác sĩ gồm khám và điều trị bệnh da liễu, ứng dụng laser và các thủ thuật thẩm mỹ da. Khi đến chuyên khoa da liễu, người bệnh thường trao đổi về:</p>
+<ul><li>Các bệnh da liễu cần khám và điều trị nội khoa.</li><li>Vấn đề thẩm mỹ da có thể can thiệp bằng laser.</li><li>Thủ thuật thẩm mỹ da theo chỉ định sau thăm khám.</li></ul>
+<p>Phác đồ cụ thể do bác sĩ quyết định theo tình trạng từng người. Tham khảo thêm <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu điều trị sẹo tại TP.HCM</a> và lưu ý khi <a href="/spa-tri-mun-can-luu-y-gi.html">đi spa trị mụn</a>.</p>
+H2_3: Địa chỉ khám và cách đặt hẹn
+NOI_DUNG_3: <ul><li><b>Bệnh viện Đa khoa Tâm Anh TP.HCM</b>: 2B Phổ Quang, phường Tân Sơn Hòa, TP.HCM.</li><li><b>Hotline</b>: 0287 102 6789.</li></ul>
+<p>Trước khi khám, nên mang theo danh sách mỹ phẩm, thuốc bôi đang dùng và ảnh chụp tình trạng da theo thời gian. Sau laser hoặc thủ thuật, cần chống nắng kỹ, đeo kính mát và mũ rộng vành khi ra ngoài, tái khám đúng hẹn để bác sĩ đánh giá đáp ứng. Tránh tự ý dùng kem trộn hoặc thuốc chứa corticoid khi chưa có chỉ định. Bài viết chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Da vùng mắt mỏng và dễ tổn thương sau laser, peel: ghé EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM để chọn kính mát chống UV bảo vệ mắt và vùng da quanh mắt.
+HOI_1: Bác sĩ Đặng Thị Ngọc Bích khám ở cơ sở nào?
+DAP_1: Theo website Tâm Anh, bác sĩ thuộc chuyên khoa Da liễu – Thẩm mỹ da, Bệnh viện Đa khoa Tâm Anh TP.HCM, 2B Phổ Quang, phường Tân Sơn Hòa.
+HOI_2: Có cần đặt lịch trước khi khám da liễu tại Tâm Anh không?
+DAP_2: Nên gọi hotline 0287 102 6789 hoặc đặt hẹn trên website bệnh viện để chủ động thời gian và chọn bác sĩ.
+HOI_3: Điều trị laser da có phải nghỉ dưỡng không?
+DAP_3: Tùy loại laser và cơ địa; bác sĩ sẽ hướng dẫn thời gian chăm sóc, chống nắng và tái khám sau thủ thuật.
+SAN_PHAM: kinh-mat-nu-g-style, kinh-mat-retro-y2k, trong-perfect-uv-u6, eye-coffret-natural-make, pk-nuoc-xit-ao, miusen-tr88095, mayblass-s11890, kinh-mat-nam-rb-deo
+LIEN_QUAN: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu điều trị sẹo tại TP.HCM; spa-tri-mun-can-luu-y-gi | Spa trị mụn cần lưu ý gì?; retinol-la-gi-cach-dung-cho-nguoi-moi | Retinol là gì? Cách dùng cho người mới
+LINK_TRONG_BAI: bác sĩ da liễu điều trị sẹo tại TP.HCM → bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm; đi spa trị mụn → spa-tri-mun-can-luu-y-gi
+LINK_VAO_TU: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm, spa-tri-mun-can-luu-y-gi
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_9086, IMG_9070, IMG_6022)
+NGUON_THAM_KHAO: Bệnh viện Đa khoa Tâm Anh – TS.BS.CKII Đặng Thị Ngọc Bích (https://tamanhhospital.vn/chuyen-gia/dang-thi-ngoc-bich/); Tâm Anh – Chuyên khoa Da liễu (https://tamanhhospital.vn/chuyen-khoa/da-lieu/)

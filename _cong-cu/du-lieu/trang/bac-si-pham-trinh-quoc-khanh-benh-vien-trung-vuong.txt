@@ -1,0 +1,39 @@
+TIEU_DE: PGS.TS.BS Phạm Trịnh Quốc Khanh – Khoa Thẩm mỹ Bệnh viện Trưng Vương
+TITLE: Bác sĩ Phạm Trịnh Quốc Khanh – BV Trưng Vương | EYEMEDI
+SLUG: bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong
+TU_KHOA_CHINH: bác sĩ Phạm Trịnh Quốc Khanh Trưng Vương
+TU_KHOA_PHU: khoa thẩm mỹ bệnh viện Trưng Vương, phẫu thuật thẩm mỹ bệnh viện công TP.HCM, 266 Lý Thường Kiệt
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: PGS.TS.BS Phạm Trịnh Quốc Khanh, Khoa Thẩm mỹ Bệnh viện Trưng Vương TP.HCM: dịch vụ thẩm mỹ, hoạt động chuyên môn, địa chỉ 266 Lý Thường Kiệt và lưu ý khi khám.
+NGAY_DANG: 2026-11-23
+DOAN_MO_DAU: Bệnh viện Trưng Vương là bệnh viện công tại TP.HCM có khoa thực hiện phẫu thuật thẩm mỹ. Bài viết giới thiệu PGS.TS.BS Phạm Trịnh Quốc Khanh dựa trên thông tin đã được báo chí và các trang y tế công bố, giúp người đọc có thêm dữ kiện khi tìm hiểu.
+ANH_RIENG:
+anh-rieng/bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong-1.jpg | Buổi gặp gỡ, trao đổi chuyên môn tại EYEMEDI
+anh-rieng/bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong-2.jpg | Chuyên viên EYEMEDI chỉnh gọng thử khi đo mắt
+anh-rieng/bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong-3.jpg | Quầy kính tại cửa hàng EYEMEDI
+H2_1: Hoạt động chuyên môn được công bố
+NOI_DUNG_1: <p><b>PGS.TS.BS Phạm Trịnh Quốc Khanh</b> có trang chuyên gia trên báo Sức khỏe & Đời sống (cơ quan ngôn luận của Bộ Y tế) và có tên trong danh sách Ban Chấp hành đăng trên website hoithammy.org.</p>
+<p>Năm 2026, báo Thanh Niên có bài viết về bác sĩ cùng phương pháp lành thương thế hệ mới tại sự kiện HALMeS 2026.</p>
+H2_2: Dịch vụ tại Khoa Thẩm mỹ Bệnh viện Trưng Vương
+NOI_DUNG_2: <p>Theo thông tin công bố trên trang đặt khám Medpro, bác sĩ thuộc Khoa Thẩm mỹ Bệnh viện Trưng Vương; các dịch vụ được liệt kê gồm:</p>
+<ul><li>Nâng mũi, phẫu thuật mí mắt.</li><li>Phẫu thuật ngực; hút mỡ và cấy mỡ.</li><li>Căng da mặt, gọt hàm.</li><li>Tiêm filler, botox.</li></ul>
+<p>Lịch làm việc có thể thay đổi, nên gọi bệnh viện xác nhận trước khi đến. Tìm hiểu thêm <a href="/bac-si-phau-thuat-tham-my-quan-10-tphcm.html">bác sĩ thẩm mỹ khu vực Quận 10</a>.</p>
+H2_3: Địa chỉ và kinh nghiệm khi đi khám
+NOI_DUNG_3: <ul><li><b>Bệnh viện Trưng Vương</b>: 266 Lý Thường Kiệt, phường Diên Hồng (Quận 10 cũ), TP.HCM.</li></ul>
+<p>Ở bệnh viện công, người bệnh nên đến sớm để làm thủ tục, mang giấy tờ tùy thân, thẻ bảo hiểm (nếu có) và hồ sơ khám trước đây. Sau phẫu thuật, tuân thủ lịch thay băng, dùng thuốc theo toa, tránh nắng và không tự ý xoa bóp vùng can thiệp; nếu đau tăng, sốt hay sưng đỏ bất thường cần quay lại bệnh viện ngay. Hãy hỏi rõ chi phí, giấy cam kết và lịch tái khám. Tham khảo thêm <a href="/cach-chon-tham-my-vien-uy-tin-tai-tphcm.html">tiêu chí chọn nơi làm thẩm mỹ</a>. Bài viết không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Bảo vệ đôi mắt trong thời gian hồi phục sau thẩm mỹ: EYEMEDI có kính mát chống UV, gọng nhẹ và tư vấn đo mắt tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM, 08:30 – 21:30 hằng ngày.
+HOI_1: PGS.TS.BS Phạm Trịnh Quốc Khanh làm việc ở đâu?
+DAP_1: Theo trang Medpro, bác sĩ thuộc Khoa Thẩm mỹ Bệnh viện Trưng Vương, 266 Lý Thường Kiệt, phường Diên Hồng, TP.HCM.
+HOI_2: Khoa Thẩm mỹ Bệnh viện Trưng Vương thực hiện những gì?
+DAP_2: Theo thông tin công bố, gồm nâng mũi, mí mắt, ngực, hút – cấy mỡ, căng da mặt, gọt hàm và tiêm filler, botox.
+HOI_3: Làm thẩm mỹ ở bệnh viện công có cần đặt lịch không?
+DAP_3: Nên liên hệ trước với bệnh viện hoặc kênh đặt khám chính thức để biết lịch khám của bác sĩ và thủ tục cần chuẩn bị.
+SAN_PHAM: razza-sports, vidic-8840, gold-optic-2231, eyemedi-korea-metal-style, kinh-mat-nu-350, eye-coffret-sheer-make, pk-khan-lau-a03, da-trong-158-kts-can
+LIEN_QUAN: bac-si-phau-thuat-tham-my-quan-10-tphcm | Bác sĩ thẩm mỹ khu vực Quận 10; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín; tiem-filler-co-an-toan-khong | Tiêm filler có an toàn không?
+LINK_TRONG_BAI: bác sĩ thẩm mỹ khu vực Quận 10 → bac-si-phau-thuat-tham-my-quan-10-tphcm; tiêu chí chọn nơi làm thẩm mỹ → cach-chon-tham-my-vien-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-phau-thuat-tham-my-quan-10-tphcm, tiem-filler-co-an-toan-khong
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5975, IMG_9102, IMG_8057)
+NGUON_THAM_KHAO: Medpro – Khoa thẩm mỹ Bệnh viện Trưng Vương (https://medpro.vn/tin-tuc/khoa-tham-my-benh-vien-trung-vuong); Sức khỏe & Đời sống – PGS.TS.BS Phạm Trịnh Quốc Khanh (https://suckhoedoisong.vn/chuyen-gia/pgstsbs-pham-trinh-quoc-khanh-286.htm); hoithammy.org – Ban Chấp hành (https://hoithammy.org/index.php?id=241&m=ban-chap-hanh); Thanh Niên – PGS-TS-BS Phạm Trịnh Quốc Khanh cùng phương pháp lành thương thế hệ mới tại HALMeS 2026 (https://thanhnien.vn/pgs-ts-bs-pham-trinh-quoc-khanh-cung-phuong-phap-lanh-thuong-the-he-moi-tai-halmes-2026-185260730093930014.htm)

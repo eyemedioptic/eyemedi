@@ -1,0 +1,39 @@
+TIEU_DE: PGS.TS Nguyễn Hồng Hà – phẫu thuật hàm mặt, tạo hình thẩm mỹ Việt Đức
+TITLE: PGS.TS Nguyễn Hồng Hà – tạo hình thẩm mỹ Việt Đức | EYEMEDI
+SLUG: bac-si-nguyen-hong-ha-benh-vien-viet-duc
+TU_KHOA_CHINH: bác sĩ Nguyễn Hồng Hà Việt Đức
+TU_KHOA_PHU: khoa phẫu thuật hàm mặt tạo hình thẩm mỹ Việt Đức, tạo hình xương mặt, phẫu thuật thẩm mỹ bệnh viện công Hà Nội
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: PGS.TS Nguyễn Hồng Hà, Khoa Phẫu thuật Hàm mặt, Tạo hình và Thẩm mỹ Bệnh viện Hữu nghị Việt Đức: lĩnh vực phẫu thuật, địa chỉ, tổng đài và lưu ý trước khi khám.
+NGAY_DANG: 2026-11-23
+DOAN_MO_DAU: Phẫu thuật hàm mặt và tạo hình không chỉ phục vụ làm đẹp mà còn giúp phục hồi chức năng, hình dáng khuôn mặt. Bài viết giới thiệu PGS.TS Nguyễn Hồng Hà, bác sĩ trong đội ngũ Khoa Phẫu thuật Hàm mặt, Tạo hình và Thẩm mỹ của Bệnh viện Hữu nghị Việt Đức.
+ANH_RIENG:
+anh-rieng/bac-si-nguyen-hong-ha-benh-vien-viet-duc-1.jpg | Khách hàng được đo mắt tại EYEMEDI
+anh-rieng/bac-si-nguyen-hong-ha-benh-vien-viet-duc-2.jpg | Máy đo khúc xạ tự động tại EYEMEDI
+anh-rieng/bac-si-nguyen-hong-ha-benh-vien-viet-duc-3.jpg | Quầy kính và khu vực đo mắt EYEMEDI
+H2_1: Đôi nét về khoa và bác sĩ
+NOI_DUNG_1: <p>Theo danh sách đội ngũ bác sĩ trên website Bệnh viện Hữu nghị Việt Đức, <b>PGS.TS Nguyễn Hồng Hà</b> công tác tại Khoa Phẫu thuật Hàm mặt, Tạo hình và Thẩm mỹ – đơn vị phẫu thuật vùng hàm mặt và tạo hình của một bệnh viện ngoại khoa tuyến trung ương.</p>
+<p>Học hàm Phó giáo sư, học vị Tiến sĩ được ghi trên hồ sơ của bệnh viện.</p>
+H2_2: Các nhóm phẫu thuật liên quan
+NOI_DUNG_2: <p>Theo thông tin tổng hợp từ website bệnh viện, các kỹ thuật gắn với bác sĩ và khoa gồm:</p>
+<ul><li>Tạo hình xương vùng mặt.</li><li>Nâng mũi, cắt mí mắt.</li><li>Nâng ngực nội soi, tạo hình thành bụng.</li></ul>
+<p>Với can thiệp liên quan đến xương hàm, xương mặt, quá trình thường cần nhiều bước đánh giá và thời gian theo dõi sau mổ dài hơn so với thẩm mỹ phần mềm. Chỉ định phẫu thuật được đưa ra sau thăm khám, chụp phim và đánh giá sức khỏe tổng quát. Người ở phía Nam có thể tham khảo <a href="/bac-si-phau-thuat-tham-my-gioi-tai-tphcm.html">bác sĩ phẫu thuật thẩm mỹ tại TP.HCM</a> hoặc <a href="/bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm.html">bác sĩ chuyên sửa mũi</a>.</p>
+H2_3: Địa chỉ và lưu ý khi đến khám
+NOI_DUNG_3: <ul><li><b>Bệnh viện Hữu nghị Việt Đức</b>: 40 Tràng Thi, Hoàn Kiếm, Hà Nội (website bệnh viện còn ghi cổng 16 Phủ Doãn).</li><li><b>Tổng đài</b>: 1900 1902.</li></ul>
+<p>Nên mang theo kết quả khám, phim chụp cũ (nếu có) và danh sách thuốc đang dùng. Với phẫu thuật vùng mặt, cần hỏi kỹ về thời gian sưng nề, ảnh hưởng đến ăn nhai và lịch tái khám. Thông tin trên không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Sau phẫu thuật vùng mặt, sống mũi thường cần nghỉ ngơi khỏi gọng kính nặng: EYEMEDI tư vấn gọng siêu nhẹ, kính áp tròng phù hợp tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM.
+HOI_1: PGS.TS Nguyễn Hồng Hà làm việc ở khoa nào?
+DAP_1: Theo website Bệnh viện Hữu nghị Việt Đức, bác sĩ thuộc đội ngũ Khoa Phẫu thuật Hàm mặt, Tạo hình và Thẩm mỹ.
+HOI_2: Bệnh viện Việt Đức ở địa chỉ nào?
+DAP_2: Bệnh viện ở 40 Tràng Thi, Hoàn Kiếm, Hà Nội; website bệnh viện cũng ghi cổng 16 Phủ Doãn. Tổng đài 1900 1902.
+HOI_3: Phẫu thuật hàm mặt có ảnh hưởng đến việc đeo kính không?
+DAP_3: Trong thời gian vùng mũi, gò má còn sưng, nhiều người được khuyên hạn chế đeo kính gọng nặng; hãy hỏi bác sĩ phẫu thuật về thời điểm phù hợp.
+SAN_PHAM: p-rrolexr, p-ormegar-2207, king-braver-61006-9670, shengdluo-62203, vidic-ems, kinh-mat-nam-oxfrd, pk-hop-kinh-eyemedi, trong-160-x-drive
+LIEN_QUAN: bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ tại TP.HCM; bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm | Bác sĩ chuyên sửa mũi tại TP.HCM; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín
+LINK_TRONG_BAI: bác sĩ phẫu thuật thẩm mỹ tại TP.HCM → bac-si-phau-thuat-tham-my-gioi-tai-tphcm; bác sĩ chuyên sửa mũi → bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm
+LINK_VAO_TU: bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm, bac-si-phau-thuat-tham-my-quan-10-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_6013, IMG_9099, IMG_9080)
+NGUON_THAM_KHAO: Bệnh viện Hữu nghị Việt Đức – Đội ngũ bác sĩ Khoa Phẫu thuật Hàm mặt, Tạo hình và Thẩm mỹ (https://benhvienvietduc.org/khoa/khoa-phau-thuat-ham-mat-tao-hinh-va-tham-my/doi-ngu-bac-si); Viet Duc Hospital – Nguyen Hong Ha, PhD – Maxillofacial, Plastic and Aesthetic Surgery (https://eng.benhvienvietduc.org/bac-si/nguyen-hong-ha-phd.)
