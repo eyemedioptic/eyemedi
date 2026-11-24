@@ -319,6 +319,7 @@ var API = {
     };
     t.insert(row);
     table_('CTV').update(u, { status: 'sample_ordered' });
+    mailSample_(u, row);
     return row;
   },
 
@@ -643,6 +644,49 @@ function taoAdmin() {
       pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU), username: user });
   }
   Logger.log('Xong. Đăng nhập tại eyemedi.vn/ctv/ bằng "' + user + '"' + (email ? ' hoặc ' + email : '') + ' rồi mở trang Quản trị.');
+}
+
+/** Email nhận thông báo: email của các tài khoản quản trị (cột is_admin = TRUE), nếu không có thì gửi về chủ Apps Script. */
+function adminEmails_() {
+  var list = table_('CTV').all().filter(function (u) {
+    return (u.is_admin === 'TRUE' || u.is_admin === 'true') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(u.email).trim());
+  }).map(function (u) { return String(u.email).trim().toLowerCase(); });
+  list = list.filter(function (e, i) { return list.indexOf(e) === i; });
+  if (!list.length) { try { list = [Session.getEffectiveUser().getEmail()]; } catch (e) {} }
+  return list.filter(String);
+}
+
+/** Gửi email khi CTV đặt đơn mẫu: 1 email cho quản trị, 1 email xác nhận cho CTV (nếu có email). Lỗi gửi mail không làm hỏng đơn. */
+function mailSample_(u, s) {
+  var money = function (n) { return String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'; };
+  var rows = [['Mã đơn mẫu', s.id], ['Thời gian', s.created_at], ['CTV', u.full_name + ' – ' + u.phone + ' – Mã ' + u.ref_code],
+    ['Sản phẩm', s.product_name + (s.variant ? ' – ' + s.variant : '')], ['Giá web', money(s.web_price)],
+    ['Giá mẫu (-' + Math.round(SAMPLE_DISCOUNT * 100) + '%)', money(s.sample_price)], ['Người nhận', s.receiver],
+    ['SĐT nhận', s.phone], ['Địa chỉ', s.address], ['Ghi chú', s.note || '']];
+  var table = '<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">' + rows.map(function (r) {
+    return '<tr><td style="padding:6px 12px 6px 0;color:#666;vertical-align:top">' + esc_(r[0]) + '</td><td style="padding:6px 0"><b>' + esc_(r[1]) + '</b></td></tr>';
+  }).join('') + '</table>';
+  var text = rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+  try {
+    var to = adminEmails_();
+    if (to.length) MailApp.sendEmail({
+      to: to.join(','), name: 'EYEMEDI Cộng tác viên', replyTo: /@/.test(u.email) ? u.email : undefined,
+      subject: '[Đơn mẫu CTV] ' + s.id + ' – ' + u.full_name + ' – ' + money(s.sample_price),
+      body: 'Có đơn hàng mẫu mới từ CTV:\n\n' + text + '\n\nXử lý tại ' + SITE + '/ctv/admin.html',
+      htmlBody: '<div style="font-family:Arial,sans-serif;color:#222"><p>Có <b>đơn hàng mẫu mới</b> từ CTV:</p>' + table +
+        '<p style="margin-top:18px"><a href="' + SITE + '/ctv/admin.html" style="background:#0b5558;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none">Mở trang quản trị</a></p></div>'
+    });
+  } catch (e) { Logger.log('Không gửi được email đơn mẫu cho quản trị: ' + e); }
+  try {
+    var em = String(u.email || '').trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) MailApp.sendEmail({
+      to: em, name: 'EYEMEDI Cộng tác viên',
+      subject: 'EYEMEDI đã nhận đơn hàng mẫu ' + s.id,
+      body: 'Chào ' + u.full_name + ',\n\nEYEMEDI đã nhận đơn hàng mẫu của bạn:\n\n' + text + '\n\nEYEMEDI sẽ liên hệ xác nhận và giao hàng sớm.\nEYEMEDI',
+      htmlBody: '<div style="font-family:Arial,sans-serif;color:#222"><p>Chào <b>' + esc_(u.full_name) + '</b>,</p><p>EYEMEDI đã nhận đơn hàng mẫu của bạn:</p>' + table +
+        '<p>EYEMEDI sẽ liên hệ xác nhận và giao hàng sớm. Theo dõi tại <a href="' + SITE + '/ctv/app.html">trang cộng tác viên</a>.</p><p>EYEMEDI</p></div>'
+    });
+  } catch (e) { Logger.log('Không gửi được email xác nhận cho CTV: ' + e); }
 }
 
 /** Tìm tài khoản theo SĐT, email hoặc tên đăng nhập. */
