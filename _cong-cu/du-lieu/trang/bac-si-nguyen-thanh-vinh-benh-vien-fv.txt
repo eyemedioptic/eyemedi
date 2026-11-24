@@ -1,0 +1,38 @@
+TIEU_DE: BSCKII Nguyễn Thanh Vinh – bác sĩ thẩm mỹ & tạo hình tại Bệnh viện FV
+TITLE: Bác sĩ Nguyễn Thanh Vinh – thẩm mỹ Bệnh viện FV | EYEMEDI
+SLUG: bac-si-nguyen-thanh-vinh-benh-vien-fv
+TU_KHOA_CHINH: bác sĩ Nguyễn Thanh Vinh Bệnh viện FV
+TU_KHOA_PHU: BSCKII Nguyễn Thanh Vinh, nâng mũi Bệnh viện FV, nâng ngực FV, kỹ thuật MD Codes
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BSCKII Nguyễn Thanh Vinh, bác sĩ điều trị cấp cao khoa Phẫu thuật thẩm mỹ & tạo hình Bệnh viện FV: lĩnh vực chuyên sâu, lịch khám, quá trình đào tạo.
+NGAY_DANG: 2026-11-24
+DOAN_MO_DAU: Người tìm hiểu phẫu thuật thẩm mỹ tại khu Nam TP.HCM thường quan tâm đến hồ sơ chuyên môn của bác sĩ trước khi đặt hẹn. Bài viết tóm tắt thông tin mà Bệnh viện FV công bố về BSCKII Nguyễn Thanh Vinh, chỉ nhằm mục đích tham khảo, không so sánh hay xếp hạng.
+ANH_RIENG:
+anh-rieng/bac-si-nguyen-thanh-vinh-benh-vien-fv-1.jpg | Không gian tư vấn và đo mắt tại cửa hàng EYEMEDI
+anh-rieng/bac-si-nguyen-thanh-vinh-benh-vien-fv-2.jpg | Khách hàng nhận kính sau buổi tư vấn tại EYEMEDI
+anh-rieng/bac-si-nguyen-thanh-vinh-benh-vien-fv-3.jpg | Đội ngũ EYEMEDI tại cửa hàng 63C Lạc Long Quân
+H2_1: Bác sĩ Nguyễn Thanh Vinh đảm nhận lĩnh vực nào tại FV?
+NOI_DUNG_1: <p>Theo trang hồ sơ trên website Bệnh viện FV, <b>BSCKII Nguyễn Thanh Vinh</b> là bác sĩ điều trị cấp cao của khoa Phẫu thuật thẩm mỹ & tạo hình, làm việc tại FV giai đoạn 2012–2017 và trở lại từ năm 2020. Bốn lĩnh vực chuyên sâu được bệnh viện liệt kê gồm:</p>
+<ul><li>Nâng ngực bằng túi gel giải phẫu, đường mổ qua nếp dưới ngực.</li><li>Nâng mũi bằng sụn hoặc vật liệu Gore-Tex (e-PTFE).</li><li>Nâng cơ vùng mặt và cổ.</li><li>Tiêm filler, Botox theo kỹ thuật MD Codes™.</li></ul>
+H2_2: Quá trình đào tạo và làm việc được công bố
+NOI_DUNG_2: <p>Hồ sơ ghi bác sĩ tốt nghiệp Đại học Y TP.HCM năm 2002, hoàn thành chuyên khoa cấp I (2011) và cấp II (2014) chuyên ngành Ngoại khoa. Bác sĩ tham gia nhiều khóa đào tạo về tạo hình khuôn mặt, nâng ngực và nâng mũi ở Việt Nam, Hàn Quốc, Singapore, Úc và Nhật Bản. Trước khi về FV, bác sĩ từng công tác tại khoa phẫu thuật thẩm mỹ Bệnh viện Chợ Rẫy và Bệnh viện Sài Gòn ITO.</p>
+<p>Lịch khám đăng trên website: thứ Ba và thứ Năm, tại tầng 2 tòa nhà V, Bệnh viện FV, 6 Nguyễn Lương Bằng, phường Tân Mỹ, TP.HCM. Hotline bệnh viện: (028) 35 11 33 33. Cùng khoa còn có <a href="/bac-si-daniel-bialeoko-benh-vien-fv.html">bác sĩ Daniel Bialeoko tại Bệnh viện FV</a>.</p>
+H2_3: Gợi ý câu hỏi khi đi tư vấn nâng mũi, filler
+NOI_DUNG_3: <p>Trước buổi hẹn, nên chuẩn bị danh sách câu hỏi: vật liệu dự kiến dùng, thời gian sưng nề, lịch tái khám và dấu hiệu bất thường cần quay lại ngay. Tham khảo thêm bài <a href="/tiem-filler-co-an-toan-khong.html">tiêm filler có an toàn không</a> để hiểu các rủi ro thường gặp.</p>
+<p>Sau phẫu thuật mũi, nhiều người được dặn tránh để gọng kính đè lên sống mũi trong một thời gian. Mọi chỉ định cụ thể do bác sĩ điều trị quyết định; nội dung bài chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Sau nâng mũi cần chọn gọng nhẹ, đệm mũi êm? EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM hỗ trợ đo mắt và tư vấn gọng phù hợp.
+HOI_1: Bác sĩ Nguyễn Thanh Vinh khám vào ngày nào?
+DAP_1: Theo website Bệnh viện FV, bác sĩ khám thứ Ba và thứ Năm, buổi sáng và buổi chiều; lịch có thể thay đổi nên cần gọi (028) 35 11 33 33 để xác nhận.
+HOI_2: Bác sĩ có thực hiện tiêm filler, Botox không?
+DAP_2: Hồ sơ FV ghi bác sĩ có chuyên môn tiêm filler và Botox theo kỹ thuật MD Codes™; việc có phù hợp hay không cần bác sĩ thăm khám trực tiếp.
+HOI_3: Bác sĩ sử dụng ngôn ngữ nào khi tư vấn?
+DAP_3: Trang hồ sơ của bệnh viện ghi bác sĩ tư vấn bằng tiếng Việt và tiếng Anh.
+SAN_PHAM: swallow-m2027, kinh-mat-retro-y2k, trong-phu-vang-156, pk-khan-lau-a03, kinh-bao-ho-victor, vidic-luxury-sun-p28220, merriandy-29392, eye-coffret-natural-make
+LIEN_QUAN: bac-si-daniel-bialeoko-benh-vien-fv | Bác sĩ Daniel Bialeoko tại Bệnh viện FV; tiem-filler-co-an-toan-khong | Tiêm filler có an toàn không?; bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm | Bác sĩ thẩm mỹ, chuyên gia sửa mũi tại TP.HCM
+LINK_TRONG_BAI: bác sĩ Daniel Bialeoko tại Bệnh viện FV → bac-si-daniel-bialeoko-benh-vien-fv; tiêm filler có an toàn không → tiem-filler-co-an-toan-khong
+LINK_VAO_TU: bac-si-daniel-bialeoko-benh-vien-fv, bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_9079, IMG_9085, IMG_6107)
+NGUON_THAM_KHAO: Bệnh viện FV – Hồ sơ BSCKII Nguyễn Thanh Vinh (https://fvhospital.com/bac-si/bs-nguyen-thanh-vinh); FV Hospital – Dr. Nguyen Thanh Vinh (https://www.fvhospital.com/en/doctors/nguyen-thanh-vinh/)

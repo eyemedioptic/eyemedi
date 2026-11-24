@@ -1,0 +1,39 @@
+TIEU_DE: PGS.TS Phạm Thị Việt Dung – Trưởng khoa Tạo hình Thẩm mỹ Bạch Mai
+TITLE: Bác sĩ Phạm Thị Việt Dung – tạo hình Bạch Mai | EYEMEDI
+SLUG: bac-si-pham-thi-viet-dung-benh-vien-bach-mai
+TU_KHOA_CHINH: bác sĩ Phạm Thị Việt Dung Bạch Mai
+TU_KHOA_PHU: khoa Phẫu thuật Tạo hình Thẩm mỹ Bạch Mai, phẫu thuật tạo hình Hà Nội, vi phẫu tạo hình, PGS.TS Phạm Thị Việt Dung
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: PGS.TS Phạm Thị Việt Dung, Trưởng khoa Phẫu thuật Tạo hình Thẩm mỹ Bệnh viện Bạch Mai: chuyên môn, dịch vụ của khoa, vị trí khám và quan điểm nghề nghiệp.
+NGAY_DANG: 2026-11-24
+DOAN_MO_DAU: Phẫu thuật tạo hình không chỉ là làm đẹp mà còn là tái tạo hình dáng, chức năng sau chấn thương hay dị tật. Bài viết giới thiệu PGS.TS Phạm Thị Việt Dung và khoa Phẫu thuật Tạo hình Thẩm mỹ Bệnh viện Bạch Mai dựa trên thông tin công khai, để bạn đọc tham khảo, không nhằm xếp hạng.
+ANH_RIENG:
+anh-rieng/bac-si-pham-thi-viet-dung-benh-vien-bach-mai-1.jpg | Buổi trao đổi, tư vấn tại không gian EYEMEDI
+anh-rieng/bac-si-pham-thi-viet-dung-benh-vien-bach-mai-2.jpg | Kỹ thuật viên EYEMEDI đo khúc xạ cho khách hàng
+anh-rieng/bac-si-pham-thi-viet-dung-benh-vien-bach-mai-3.jpg | Khách hàng thử kính tại cửa hàng EYEMEDI
+H2_1: Vai trò của PGS.TS Phạm Thị Việt Dung
+NOI_DUNG_1: <p>Trang giới thiệu khoa trên website Bệnh viện Bạch Mai ghi <b>PGS.TS Phạm Thị Việt Dung</b> là Trưởng khoa Phẫu thuật Tạo hình Thẩm mỹ. Theo bài phỏng vấn trên Báo Đại biểu Nhân dân (02/2024), bà đồng thời là Trưởng Bộ môn Phẫu thuật tạo hình, Trường Đại học Y Hà Nội.</p>
+<p>Trong bài phỏng vấn, bà chia sẻ nghề tạo hình không hào nhoáng như nhiều người nghĩ: có ca vi phẫu kéo dài 6–10 giờ, còn mảng thẩm mỹ lại nặng áp lực về kỳ vọng của người bệnh.</p>
+H2_2: Khoa Phẫu thuật Tạo hình Thẩm mỹ Bạch Mai làm gì?
+NOI_DUNG_2: <p>Theo website bệnh viện, khoa thành lập ngày 21/10/2020, là cơ sở đào tạo chính của chuyên ngành phẫu thuật tạo hình, Trường Đại học Y Hà Nội. Phạm vi hoạt động gồm:</p>
+<ul><li><b>Tạo hình bệnh lý</b>: vết thương vùng hàm mặt, vi phẫu, dị tật bẩm sinh, tái tạo sau cắt bỏ khối u, sẹo di chứng bỏng.</li><li><b>Thẩm mỹ vùng mặt</b>: mũi, mắt, tai, cằm, căng da mặt, làm đầy.</li><li><b>Thẩm mỹ vùng thân</b>: phẫu thuật vùng ngực và một số thủ thuật khác.</li></ul>
+<p>Vị trí: tầng 8, tòa nhà Q, Bệnh viện Bạch Mai, 78 Giải Phóng, phường Kim Liên, Hà Nội. Tổng đài bệnh viện: 1900 888 866. Ở Hà Nội, bạn đọc cũng có thể tham khảo <a href="/bac-si-nguyen-hong-ha-benh-vien-viet-duc.html">PGS.TS Nguyễn Hồng Hà tại Bệnh viện Việt Đức</a>.</p>
+H2_3: Khi nào nên tìm đến bác sĩ tạo hình tại bệnh viện công?
+NOI_DUNG_3: <p>Các trường hợp sẹo co kéo, khuyết hổng sau chấn thương, dị tật hoặc biến chứng sau làm đẹp thường cần đánh giá tại cơ sở có chuyên khoa tạo hình. Xem thêm <a href="/cach-chon-tham-my-vien-uy-tin-tai-tphcm.html">cách chọn cơ sở thẩm mỹ uy tín</a> trước khi quyết định.</p>
+<p>Thông tin trong bài chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Phẫu thuật vùng mắt, mũi có thể ảnh hưởng thói quen đeo kính. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM hỗ trợ đo mắt và chọn kính phù hợp sau hồi phục.
+HOI_1: Khoa Phẫu thuật Tạo hình Thẩm mỹ Bạch Mai nằm ở đâu?
+DAP_1: Theo website bệnh viện, khoa ở tầng 8, tòa nhà Q, Bệnh viện Bạch Mai, 78 Giải Phóng, phường Kim Liên, Hà Nội.
+HOI_2: Khoa có điều trị sẹo và dị tật bẩm sinh không?
+DAP_2: Có. Trang giới thiệu khoa liệt kê điều trị sẹo di chứng, dị tật bẩm sinh và tái tạo sau cắt bỏ khối u bên cạnh các dịch vụ thẩm mỹ.
+HOI_3: Đặt lịch khám tại Bạch Mai thế nào?
+DAP_3: Có thể gọi tổng đài 1900 888 866 hoặc đặt hẹn qua website chính thức của Bệnh viện Bạch Mai; giờ khám nên xác nhận trước khi đến.
+SAN_PHAM: trong-trang-cung-156, da-trong-156-photo-gray, kinh-mat-nam-rb-deo, tomy-9555, pk-nuoc-xit-ao, vision-one, shengdluo-62203, kinh-mat-nu-g-style
+LIEN_QUAN: bac-si-nguyen-hong-ha-benh-vien-viet-duc | PGS.TS Nguyễn Hồng Hà – Bệnh viện Việt Đức; bac-si-hoang-thi-phuong-lan-vinmec-smart-city | TS.BS Hoàng Thị Phương Lan – Vinmec Smart City; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín
+LINK_TRONG_BAI: PGS.TS Nguyễn Hồng Hà tại Bệnh viện Việt Đức → bac-si-nguyen-hong-ha-benh-vien-viet-duc; cách chọn cơ sở thẩm mỹ uy tín → cach-chon-tham-my-vien-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-nguyen-hong-ha-benh-vien-viet-duc, cach-chon-tham-my-vien-uy-tin-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5970, IMG_9095, IMG_7366)
+NGUON_THAM_KHAO: Bệnh viện Bạch Mai – Khoa Phẫu thuật Tạo hình Thẩm mỹ (https://bachmai.gov.vn/en/department/khoa-phau-thuat-tao-hinh-tham-my/f9c1fb0b-da7c-0dad-cfe9-1b09b28d514a); Báo Đại biểu Nhân dân – PGS.TS Phạm Thị Việt Dung: “Nghề bác sĩ phẫu thuật tạo hình thẩm mỹ không hào nhoáng như mọi người nghĩ” (https://daibieunhandan.vn/pgs-ts-pham-thi-viet-dung-nghe-bac-si-phau-thuat-tao-hinh-tham-my-khong-hao-nhoang-nhu-moi-nguoi-nghi-10331548.html)
