@@ -55,7 +55,17 @@
       <label>Mật khẩu</label><input name="password" type="password" required autocomplete="current-password">
       <div id="mLog" class="msg"></div>
       <button class="btn" style="width:100%;margin-top:10px">Đăng nhập</button>
-      <p class="small muted">Quên mật khẩu? Nhắn Zalo <a href="https://zalo.me/0967190005" rel="nofollow">0967 190 005</a> để EYEMEDI cấp lại.</p>
+      <p class="small"><a href="#quen-mat-khau" id="lForgot">Quên mật khẩu?</a></p>
+    </form>
+
+    <form id="fForgot" class="hide">
+      <h2 style="margin:0 0 6px;font-size:18px">Quên mật khẩu</h2>
+      <p class="small muted" style="margin-top:0">Nhập số điện thoại, email hoặc tên đăng nhập. EYEMEDI sẽ gửi link đặt mật khẩu mới tới email bạn đã đăng ký.</p>
+      <label>Số điện thoại, email hoặc tên đăng nhập</label><input name="phone" required autocomplete="username" autocapitalize="off">
+      <div id="mForgot" class="msg"></div>
+      <button class="btn" style="width:100%;margin-top:10px">Gửi link qua email</button>
+      <p class="small"><a href="#dang-nhap" id="lBack">← Quay lại đăng nhập</a></p>
+      <p class="small muted">Tài khoản chưa có email? Nhắn Zalo <a href="https://zalo.me/0967190005" rel="nofollow">0967 190 005</a> để EYEMEDI cấp lại.</p>
     </form>
   </div>
 </main>
@@ -64,11 +74,17 @@
 <script src="/ctv/pwa.js"></script>
 <script>
 if(CTV.token())location.replace('app.html');
-var fReg=document.getElementById('fReg'),fLog=document.getElementById('fLog');
-function tab(r){fReg.classList.toggle('hide',!r);fLog.classList.toggle('hide',r);document.getElementById('tReg').classList.toggle('on',r);document.getElementById('tLog').classList.toggle('on',!r)}
+var fReg=document.getElementById('fReg'),fLog=document.getElementById('fLog'),fForgot=document.getElementById('fForgot');
+function tab(r,forgot){fReg.classList.toggle('hide',!r);fLog.classList.toggle('hide',r||!!forgot);fForgot.classList.toggle('hide',!forgot);document.getElementById('tReg').classList.toggle('on',r);document.getElementById('tLog').classList.toggle('on',!r)}
+document.getElementById('lForgot').onclick=function(e){e.preventDefault();var v=fLog.elements.phone.value;if(v)fForgot.elements.phone.value=v;tab(false,true)};
+document.getElementById('lBack').onclick=function(e){e.preventDefault();tab(false)};
+fForgot.onsubmit=function(e){e.preventDefault();var b=fForgot.querySelector('button.btn'),m=document.getElementById('mForgot');CTV.msg(m,'');CTV.busy(b,true);
+  CTV.call('forgotPassword',{phone:fForgot.elements.phone.value}).then(function(r){CTV.msg(m,r.message,true)})
+    .catch(function(err){CTV.msg(m,err.message)}).finally(function(){CTV.busy(b,false)})};
 document.getElementById('tReg').onclick=function(){tab(true)};
 document.getElementById('tLog').onclick=function(){tab(false)};
 if(location.hash==='#dang-nhap')tab(false);
+if(location.hash==='#quen-mat-khau')tab(false,true);
 function go(form,action,m){
   form.onsubmit=function(e){e.preventDefault();var b=form.querySelector('button.btn'),d={};
     new FormData(form).forEach(function(v,k){d[k]=v});CTV.msg(m,'');CTV.busy(b,true);

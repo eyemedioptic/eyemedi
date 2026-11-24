@@ -14,6 +14,7 @@ Trang CTV: https://eyemedi.vn/ctv/ · Trang quản trị: https://eyemedi.vn/ctv
 1. Tạo Google Sheet mới, tên "EYEMEDI - Cong tac vien".
 2. **Tiện ích mở rộng → Apps Script**, xóa code mẫu, dán toàn bộ `_cong-cu/ctv/Code.gs`, bấm Lưu.
 3. Chọn hàm **caiDat** → **Chạy** → cấp quyền (Sheet, Drive, kết nối ngoài).
+   Sau đó chọn hàm **capQuyenGuiMail** → **Chạy** → cấp quyền gửi email (cho nút "Quên mật khẩu"; sẽ có 1 email thử gửi về tài khoản Google của anh).
 4. **Triển khai → Tác vụ triển khai mới → Ứng dụng web**: Thực thi dưới dạng **Tôi**, Quyền truy cập **Bất kỳ ai** → Triển khai → chép URL `…/exec`.
 5. Dán URL vào `ctv/config.js` (thay `DAN_URL_APPS_SCRIPT_VAO_DAY`) và đẩy lên GitHub.
 6. Vào eyemedi.vn/ctv/ đăng ký bằng SĐT của anh. Trong Sheet tab **CTV**, dòng của anh: cột `is_admin` = `TRUE`, cột `status` = `active`.

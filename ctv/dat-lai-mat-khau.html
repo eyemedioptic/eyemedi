@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đặt lại mật khẩu – Cộng tác viên EYEMEDI</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/ctv/manifest.webmanifest">
+<meta name="theme-color" content="#0b5558">
+<link rel="apple-touch-icon" href="/ctv/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="ctv.css">
+</head>
+<body>
+<header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><span class="sp"></span><b>Cộng tác viên</b></header>
+<main>
+  <div class="card center">
+    <h1 style="font-size:22px">Đặt mật khẩu mới</h1>
+    <form id="fReset">
+      <label>Mật khẩu mới *</label><input name="password" type="password" required minlength="6" autocomplete="new-password">
+      <label>Nhập lại mật khẩu mới *</label><input name="password2" type="password" required minlength="6" autocomplete="new-password">
+      <div id="mReset" class="msg"></div>
+      <button class="btn" style="width:100%;margin-top:10px">Lưu mật khẩu và đăng nhập</button>
+    </form>
+    <p class="small"><a href="/ctv/#quen-mat-khau">Gửi lại link qua email</a> · <a href="/ctv/#dang-nhap">Đăng nhập</a></p>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script>
+var tk=(location.hash.match(/[#&]t=([A-Za-z0-9]+)/)||[])[1]||'';
+if(tk)history.replaceState(null,'',location.pathname);
+var f=document.getElementById('fReset'),m=document.getElementById('mReset');
+if(!tk)CTV.msg(m,'Link không đúng. Vui lòng mở lại link trong email hoặc bấm "Gửi lại link qua email".');
+f.onsubmit=function(e){e.preventDefault();var b=f.querySelector('button.btn');
+  if(f.elements.password.value!==f.elements.password2.value){CTV.msg(m,'Hai mật khẩu chưa giống nhau');return}
+  CTV.msg(m,'');CTV.busy(b,true);CTV.setToken('');
+  CTV.call('resetPassword',{reset_token:tk,password:f.elements.password.value})
+    .then(function(r){CTV.setToken(r.token);CTV.msg(m,'Đã đổi mật khẩu, đang vào tài khoản…',true);setTimeout(function(){location.replace('app.html')},800)})
+    .catch(function(err){CTV.msg(m,err.message)}).finally(function(){CTV.busy(b,false)})};
+</script>
+</body>
+</html>

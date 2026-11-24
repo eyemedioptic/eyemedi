@@ -10,6 +10,7 @@
  *     → Triển khai → chép "URL ứng dụng web" (…/exec) dán vào ctv/config.js.
  *  5. Đăng ký 1 tài khoản tại eyemedi.vn/ctv/ bằng SĐT của anh, rồi trong Sheet tab "CTV"
  *     ghi TRUE vào cột is_admin và "active" vào cột status của dòng đó → tài khoản quản trị.
+ *  6. Chọn hàm "capQuyenGuiMail" → Chạy → cấp quyền gửi email (dùng cho "Quên mật khẩu").
  *  Khi sửa code: Triển khai → Quản lý triển khai → Sửa (bút chì) → Phiên bản mới → Triển khai.
  */
 
@@ -40,8 +41,10 @@ var SHEETS = {
   Video: ['id', 'created_at', 'ctv_id', 'ref_code', 'url', 'note', 'status', 'admin_note'],
   DonHang: ['order_code', 'created_at', 'ref_code', 'ctv_id', 'customer_name', 'customer_phone',
             'items', 'total', 'commission_rate', 'commission', 'status', 'paid', 'paid_at', 'page'],
-  PhienDangNhap: ['token', 'ctv_id', 'expires']
+  PhienDangNhap: ['token', 'ctv_id', 'expires'],
+  DatLaiMK: ['token_hash', 'ctv_id', 'expires', 'used_at']
 };
+var RESET_MINUTES = 60;             // link đặt lại mật khẩu có hiệu lực 60 phút
 
 // Trạng thái CTV theo quy trình
 // pending → approved → signed → sample_ordered → sample_received → video_submitted → active
@@ -129,10 +132,7 @@ var API = {
   },
 
   login: function (r) {
-    var id = String(r.phone || '').trim(), t = table_('CTV'), u = null;
-    if (id.indexOf('@') > 0) u = t.find('email', id.toLowerCase());
-    else if (normPhone_(id)) u = t.find('phone', normPhone_(id));
-    else if (id) u = t.find('username', id.toLowerCase());
+    var u = findLogin_(r.phone);
     if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai thông tin đăng nhập hoặc mật khẩu');
     if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
     return { token: newSession_(u.id), me: publicMe_(u) };
@@ -187,6 +187,57 @@ var API = {
     var salt = Utilities.getUuid();
     table_('CTV').update(u, { pw_salt: salt, pw_hash: hash_(salt, r.new_password) });
     return true;
+  },
+
+  /* Quên mật khẩu: gửi link đặt lại tới email đã đăng ký. Luôn trả cùng 1 câu để không lộ tài khoản. */
+  forgotPassword: function (r) {
+    var DONE = 'Nếu tài khoản có email, link đặt lại mật khẩu đã được gửi tới email đó (hiệu lực ' + RESET_MINUTES +
+      ' phút). Hãy kiểm tra cả thư mục Spam/Quảng cáo.';
+    var u = findLogin_(r.phone);
+    if (!u || u.status === 'locked') return { message: DONE };
+    var email = String(u.email || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { message: DONE };
+    var cache = CacheService.getScriptCache();
+    if (cache.get('rs_' + u.id)) return { message: DONE };   // chống gửi liên tục: 2 phút / lần
+    if (MailApp.getRemainingDailyQuota() < 1) throw new Error('Hôm nay đã hết lượt gửi email, vui lòng nhắn Zalo EYEMEDI');
+    var token = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
+    var t = resetTable_();
+    t.all().forEach(function (x) { if (x.ctv_id === u.id && !x.used_at) t.update(x, { used_at: 'thay thế ' + now_() }); });
+    t.insert({ token_hash: sha_(token), ctv_id: u.id, expires: Date.now() + RESET_MINUTES * 6e4, used_at: '' });
+    var link = SITE + '/ctv/dat-lai-mat-khau.html#t=' + token;
+    var name = esc_(u.full_name || u.username || 'bạn');
+    MailApp.sendEmail({
+      to: email, name: 'EYEMEDI Cộng tác viên',
+      subject: 'Đặt lại mật khẩu tài khoản cộng tác viên EYEMEDI',
+      body: 'Chào ' + (u.full_name || 'bạn') + ',\n\nBấm link sau để đặt mật khẩu mới (hiệu lực ' + RESET_MINUTES + ' phút):\n' + link +
+        '\n\nNếu bạn không yêu cầu, hãy bỏ qua email này.\nEYEMEDI',
+      htmlBody: '<div style="font-family:Arial,sans-serif;font-size:15px;color:#222;max-width:520px">' +
+        '<p>Chào <b>' + name + '</b>,</p><p>EYEMEDI nhận được yêu cầu đặt lại mật khẩu tài khoản cộng tác viên của bạn.</p>' +
+        '<p style="margin:22px 0"><a href="' + link + '" style="background:#0b5558;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:bold">Đặt mật khẩu mới</a></p>' +
+        '<p style="color:#666;font-size:13px">Link có hiệu lực ' + RESET_MINUTES + ' phút và chỉ dùng được 1 lần. Nếu bạn không yêu cầu, hãy bỏ qua email này, mật khẩu cũ vẫn giữ nguyên.</p>' +
+        '<p>EYEMEDI</p></div>'
+    });
+    cache.put('rs_' + u.id, '1', 120);
+    return { message: DONE };
+  },
+
+  resetPassword: function (r) {
+    var bad = 'Link đặt lại mật khẩu không đúng hoặc đã hết hạn, vui lòng bấm "Quên mật khẩu" để nhận link mới';
+    var token = String(r.reset_token || '');
+    if (token.length < 40) throw new Error(bad);
+    if (String(r.password || '').length < 6) throw new Error('Mật khẩu mới tối thiểu 6 ký tự');
+    var t = resetTable_(), x = t.find('token_hash', sha_(token));
+    if (!x || x.used_at || Number(x.expires) < Date.now()) throw new Error(bad);
+    var ct = table_('CTV'), u = ct.find('id', x.ctv_id);
+    if (!u) throw new Error(bad);
+    if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
+    var salt = Utilities.getUuid();
+    ct.update(u, { pw_salt: salt, pw_hash: hash_(salt, r.password) });
+    t.update(x, { used_at: now_() });
+    // đăng xuất mọi thiết bị cũ
+    var ss = table_('PhienDangNhap'), cache = CacheService.getScriptCache();
+    ss.all().slice().reverse().forEach(function (s) { if (s.ctv_id === u.id) { cache.remove('s_' + s.token); ss.remove(s); } });
+    return { token: newSession_(u.id), me: publicMe_(u) };
   },
 
   /* ---------- Bước 2: hợp đồng online ---------- */
@@ -592,6 +643,41 @@ function taoAdmin() {
       pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU), username: user });
   }
   Logger.log('Xong. Đăng nhập tại eyemedi.vn/ctv/ bằng "' + user + '"' + (email ? ' hoặc ' + email : '') + ' rồi mở trang Quản trị.');
+}
+
+/** Tìm tài khoản theo SĐT, email hoặc tên đăng nhập. */
+function findLogin_(v) {
+  var id = String(v || '').trim(), t = table_('CTV');
+  if (id.indexOf('@') > 0) return t.find('email', id.toLowerCase());
+  if (normPhone_(id)) return t.find('phone', normPhone_(id));
+  return id ? t.find('username', id.toLowerCase()) : null;
+}
+
+function sha_(s) {
+  return Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(s), Utilities.Charset.UTF_8));
+}
+
+/** Bảng lưu link đặt lại mật khẩu (tự tạo nếu chưa có). */
+function resetTable_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss.getSheetByName('DatLaiMK')) {
+    var sh = ss.insertSheet('DatLaiMK'), head = SHEETS.DatLaiMK;
+    sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold');
+    sh.setFrozenRows(1); sh.getRange('A:Z').setNumberFormat('@');
+  }
+  return table_('DatLaiMK');
+}
+
+/**
+ * Chạy 1 lần sau khi dán code: cấp quyền gửi email cho chức năng "Quên mật khẩu"
+ * và gửi 1 email thử về chính tài khoản Google đang chạy.
+ */
+function capQuyenGuiMail() {
+  var me = Session.getEffectiveUser().getEmail();
+  MailApp.sendEmail(me, 'EYEMEDI CTV – thử gửi email', 'Chức năng Quên mật khẩu đã gửi được email. Còn ' +
+    MailApp.getRemainingDailyQuota() + ' lượt gửi hôm nay.');
+  resetTable_();
+  Logger.log('Đã gửi email thử tới ' + me + '. Nhớ Triển khai → Quản lý triển khai → Phiên bản mới.');
 }
 
 /** Chạy tay định kỳ (hoặc đặt trình kích hoạt hằng ngày) để xóa phiên hết hạn. */
