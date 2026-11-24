@@ -1,0 +1,48 @@
+TIEU_DE: Tìm hiểu các điểm tham chiếu chính trên tròng kính đa tròng
+TITLE: Các điểm tham chiếu trên tròng kính đa tròng | EYEMEDI
+SLUG: diem-tham-chieu-tren-trong-kinh-da-trong
+TU_KHOA_CHINH: điểm tham chiếu tròng kính đa tròng
+TU_KHOA_PHU: dấu chữ thập định tâm, fitting cross, điểm tham chiếu nhìn xa DRP, điểm tham chiếu nhìn gần NRP, độ ADD đa tròng, lắp kính đa tròng
+DANH_MUC: Tròng kính mắt
+SLUG_DANH_MUC: trong-kinh
+MO_TA_SEO: Điểm tham chiếu trên tròng kính đa tròng: Fitting Cross, DRP, NRP, PRP, dấu khắc, ADD và cách kiểm tra bằng máy đo tiêu cự. Tìm hiểu ngay cùng EYEMEDI.
+NGAY_DANG: 2026-11-24
+DOAN_MO_DAU: Mỗi tròng kính đa tròng (PAL – Progressive Addition Lenses) đều có hệ thống điểm tham chiếu riêng: dấu chữ thập định tâm, điểm nhìn xa, điểm nhìn gần, điểm lăng kính và các dấu khắc định vị. Hiểu đúng từng điểm giúp kỹ thuật viên lắp kính chính xác, kiểm tra đúng thông số và xử lý lỗi hiệu quả. Hình minh họa bên dưới thể hiện vị trí các điểm này; mỗi điểm có một chức năng riêng biệt.
+ANH_RIENG:
+anh-rieng/diem-tham-chieu-tren-trong-kinh-da-trong-1.jpg | Sơ đồ các điểm tham chiếu chính trên tròng kính đa tròng: Fitting Point, DRP, NRP, PRP, ADD và LOGO
+kho-anh/EYEMEDI-7.webp | Chuyên viên EYEMEDI tư vấn lắp tròng kính đa tròng cho khách hàng
+kho-anh/EYEMEDI-2.webp | Đo khúc xạ trước khi lắp tròng kính đa tròng tại EYEMEDI
+H2_1: Dấu chữ thập định tâm và điểm tham chiếu nhìn xa
+NOI_DUNG_1: <h3>1. Fitting Point – Dấu chữ thập định tâm (Fitting Cross)</h3>
+<p>Đây là vị trí trên tròng cần đặt <b>đối diện đồng tử</b> khi người đeo nhìn thẳng về phía trước trong tư thế tự nhiên. Dấu chữ thập giúp định vị tròng chính xác trong gọng và được dùng khi đo lắp, cấp phát kính. Đặt lệch dấu này có thể làm người đeo khó chịu, nhất là khi nhìn xa và nhìn trung gian, vì vậy dấu phải được căn đúng với đồng tử theo thông số lắp kính.</p>
+<h3>2. Distance Reference Point (DRP) – Điểm tham chiếu nhìn xa</h3>
+<p>DRP là vòng tròn phía trên, dùng để <b>kiểm tra công suất nhìn xa</b> bằng máy đo tiêu cự (lensometer), xác nhận độ nhìn xa của tròng có khớp đơn kính hay không. Cần ghi nhớ: dấu chữ thập định tâm và điểm tham chiếu nhìn xa <b>không phải là cùng một vị trí</b>.</p>
+H2_2: Điểm nhìn gần, điểm lăng kính và độ cộng ADD
+NOI_DUNG_2: <h3>3. Near Reference Point (NRP) – Điểm tham chiếu nhìn gần</h3>
+<p>NRP là vòng tròn phía dưới, dùng để <b>kiểm tra công suất nhìn gần</b>. Tại đây độ cộng thêm (ADD) đã được tích hợp vào công suất tròng, nên điểm này giúp xác nhận giá trị ADD theo đơn và kiểm tra vùng nhìn gần có được sản xuất đúng thông số. Ví dụ đơn kính SPH +1.00, ADD +2.00 thì độ cầu đo tại NRP xấp xỉ +3.00 D (giả sử không có độ trụ và đo đúng điểm).</p>
+<h3>4. Prism Reference Point (PRP) – Điểm tham chiếu lăng kính</h3>
+<p>PRP là chấm nhỏ nằm dưới dấu chữ thập, dùng để <b>đo độ lăng kính</b> trong tròng: lăng kính theo đơn hoặc lăng kính do thiết kế, sản xuất. Điểm này đặc biệt quan trọng với tròng đa tròng có chỉ định lăng kính và không được nhầm với dấu chữ thập định tâm.</p>
+<h3>5. ADD – Độ cộng thêm nhìn gần</h3>
+<p>ADD là độ dương cộng thêm cho vùng nhìn gần, bằng chênh lệch độ cầu giữa đơn nhìn xa và nhìn gần (độ trụ, trục giữ nguyên). Ví dụ: nhìn xa +1.00 DS, ADD +2.00 D thì nhìn gần +3.00 DS. Công suất tròng tăng liên tục, từ từ từ vùng nhìn xa xuống vùng nhìn gần. Xem thêm <a href="/kinh-da-trong-la-gi-ai-nen-dung.html">kính đa tròng là gì và ai nên dùng</a>.</p>
+H2_3: Dấu khắc định vị, logo và những điểm cần ghi nhớ
+NOI_DUNG_3: <h3>6. Alignment Reference Markings – Dấu khắc định vị</h3>
+<p>Đây là các dấu khắc <b>vĩnh viễn</b>, thường là hai vòng nhỏ ở hai bên tròng. Chúng giúp nhận diện dòng tròng, xác định lại vị trí dấu chữ thập, điểm nhìn xa và nhìn gần, hỗ trợ kiểm tra, xử lý lỗi và nhận biết thông tin nhà sản xuất. Dấu khắc đặc biệt hữu ích khi các dấu mực tạm thời đã bị xóa sau khi lắp kính.</p>
+<h3>7. LOGO – Ký hiệu nhà sản xuất</h3>
+<p>Logo nằm trong hệ thống dấu khắc vĩnh viễn, cho biết nhà sản xuất hoặc thiết kế tròng, giúp kỹ thuật viên tra cứu đúng dòng tròng đa tròng theo tài liệu của hãng.</p>
+<h3>Những điểm quan trọng cần ghi nhớ</h3>
+<ul><li><b>Fitting Cross</b>: định vị tròng tương ứng với đồng tử người đeo.</li><li><b>DRP</b>: kiểm tra công suất nhìn xa.</li><li><b>NRP</b>: kiểm tra công suất nhìn gần.</li><li><b>PRP</b>: kiểm tra độ lăng kính.</li><li><b>Dấu khắc định vị</b>: nhận diện và căn chỉnh hệ thống dấu tham chiếu.</li></ul>
+<p>Không nhầm lẫn các điểm này là kiến thức thiết yếu khi cấp phát, kiểm tra và xử lý lỗi tròng đa tròng. Câu hỏi dành cho đồng nghiệp ngành kính: khi kiểm tra tròng đa tròng bằng máy đo tiêu cự, bạn dùng điểm nào để đo độ nhìn xa và điểm nào để đo độ nhìn gần? Tìm hiểu thêm <a href="/trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong.html">tròng kính đa tròng chính hãng</a> và <a href="/co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm.html">thực hành mài lắp kính chuẩn nghề</a>.</p>
+LOI_KEU_GOI: Cần đo mắt, lắp tròng đa tròng đúng tâm và kiểm tra đủ thông số? Ghé EYEMEDI, 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM – EYEMEDI luôn đồng hành cùng bạn với vai trò người hướng dẫn chuyên môn thị lực.
+HOI_1: Dấu chữ thập định tâm có phải là điểm đo độ nhìn xa không?
+DAP_1: Không. Dấu chữ thập dùng để đặt tròng đối diện đồng tử; độ nhìn xa được kiểm tra tại điểm tham chiếu nhìn xa (DRP), vòng tròn nằm phía trên dấu chữ thập.
+HOI_2: Đo độ nhìn gần của tròng đa tròng ở đâu?
+DAP_2: Đo tại điểm tham chiếu nhìn gần (NRP), vòng tròn phía dưới tròng. Giá trị đo được bằng độ nhìn xa cộng ADD, ví dụ +1.00 cộng ADD +2.00 xấp xỉ +3.00 D.
+HOI_3: Dấu mực trên tròng bị xóa thì làm sao tìm lại các điểm tham chiếu?
+DAP_3: Dựa vào hai dấu khắc vĩnh viễn ở hai bên tròng và thông tin dòng tròng của nhà sản xuất để xác định lại dấu chữ thập, DRP và NRP.
+SAN_PHAM: da-trong-158-kts-vien, da-trong-158-kts-can, da-trong-156-hsmc, da-trong-156-photo-gray, tb-may-dinh-tam-trong-kinh, tb-may-mai-trong-kinh-tu-dong, pk-khan-lau-a03, pk-nuoc-xit-ao
+LIEN_QUAN: kinh-da-trong-la-gi-ai-nen-dung | Kính đa tròng là gì? Ai nên dùng; trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong | Tròng kính cận viễn loạn, đa tròng chính hãng; co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm | Cơ sở thực hành mài lắp kính chuẩn nghề
+LINK_TRONG_BAI: kính đa tròng là gì và ai nên dùng → kinh-da-trong-la-gi-ai-nen-dung; tròng kính đa tròng chính hãng → trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong; thực hành mài lắp kính chuẩn nghề → co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm
+LINK_VAO_TU: kinh-da-trong-la-gi-ai-nen-dung, trong-kinh-can-vien-loan-da-trong-chinh-hang-tot-nhat-hien-nay-tren-thi-truong
+KIEM_TRA_TRUNG: không trùng slug; tiêu đề gần nhất "Kính đa tròng là gì? Ai nên dùng" Jaccard < 0,4; từ khóa chính mới
+NGUON_ANH: Hình sơ đồ do sếp gửi; ảnh kho EYEMEDI-7, EYEMEDI-2
+NGUON_THAM_KHAO: Tài liệu tiếng Pháp "Comprendre les principaux points de référence d'un verre progressif" do sếp cung cấp (bản dịch tiếng Việt)
