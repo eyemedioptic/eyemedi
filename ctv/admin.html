@@ -150,7 +150,7 @@ function tOrders(keep){
   $('tb').innerHTML='<tr><th>Ngày / Mã đơn</th><th>CTV</th><th>Khách</th><th>Sản phẩm</th><th>Giá trị</th><th>HH</th><th>Trạng thái</th><th>Đã trả HH</th></tr>'+
   rev(D.orders).filter(keep).map(function(o){return '<tr data-id="'+E(o.order_code)+'"><td class="small">'+E(o.created_at)+'<br><b>'+E(o.order_code)+'</b></td><td>'+name(o.ctv_id)+'</td>'+
     '<td class="small">'+E(o.customer_name)+'<br>'+E(o.customer_phone)+'</td><td class="small">'+E(o.items).replace(/\n/g,'<br>')+'</td>'+
-    '<td><input data-a="total" type="number" style="width:110px" value="'+E(o.total)+'" title="Sửa giá trị thực thu"></td><td>'+CTV.money(o.commission)+'<br><span class="small muted">'+E(o.commission_rate)+'%</span></td>'+
+    '<td><input data-a="total" type="number" style="width:110px" value="'+E(o.total)+'" title="Sửa giá trị thực thu"></td><td>'+(o.eligible==='FALSE'?'<span class="small muted" title="Đơn bán trước khi CTV được duyệt video">Chưa mở HH</span>':CTV.money(o.commission)+'<br><span class="small muted">'+E(o.commission_rate)+'%</span>')+'</td>'+
     '<td><select data-a="os">'+Object.keys(CTV.ORDER).map(function(k){return '<option value="'+k+'"'+(k===o.status?' selected':'')+'>'+CTV.ORDER[k][0]+'</option>'}).join('')+'</select></td>'+
     '<td><input type="checkbox" data-a="paid" style="width:auto"'+(o.paid==='TRUE'?' checked':'')+(o.status!=='delivered'?' disabled':'')+'></td></tr>'}).join('');
   bind(null,function(tr,el){var c=tr.dataset.id,a=el.dataset.a;

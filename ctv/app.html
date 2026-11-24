@@ -88,7 +88,8 @@ function render(){
   var f=$('fProf');['bank_name','bank_account','bank_holder','email','channels'].forEach(function(k){f[k].value=me[k]||''});
   ({pending:vPending,approved:vContract,signed:vSample,sample_ordered:vSampleWait,sample_received:vVideo,
     video_submitted:vVideoWait,active:vActive,rejected:vRejected,locked:vRejected}[me.status]||vPending)();
-  renderOrders();
+  if(me.status!=='active'&&me.status!=='rejected'&&me.status!=='locked')$('box').insertAdjacentHTML('beforeend',linkCard(false));
+  bindCopy();renderOrders();
 }
 
 function card(h){$('box').innerHTML='<div class="card">'+h+'</div>'}
@@ -167,7 +168,7 @@ function vSampleWait(){card('<h2>Đơn mẫu đang được xử lý</h2><p clas
 function vVideo(){
   var last=(S.videos||[]).slice(-1)[0];
   card('<h2>Gửi video trải nghiệm sản phẩm</h2>'+(last&&last.status==='rejected'?'<div class="msg err show">Video trước chưa đạt: '+E(last.admin_note||'')+'. Vui lòng gửi lại.</div>':'')+
-  '<p class="muted small">Quay video giới thiệu/trải nghiệm sản phẩm mẫu, đăng lên kênh của bạn (TikTok, Facebook, Instagram, YouTube) rồi dán link vào đây. EYEMEDI duyệt video xong sẽ mở hoa hồng và link bán hàng cho bạn.</p>'+
+  '<p class="muted small">Quay video giới thiệu/trải nghiệm sản phẩm mẫu, đăng lên kênh của bạn (TikTok, Facebook, Instagram, YouTube) rồi dán link vào đây. EYEMEDI duyệt video xong sẽ mở hoa hồng cho bạn.</p>'+
   '<form id="fVd"><label>Link video *</label><input name="url" type="url" required placeholder="https://www.tiktok.com/@…/video/…">'+
   '<label>Ghi chú</label><input name="note"><div id="mVd" class="msg"></div><button class="btn" style="margin-top:10px">Gửi video</button></form>');
   $('fVd').onsubmit=function(e){e.preventDefault();var f=e.target,b=f.querySelector('button.btn'),m=$('mVd');
@@ -176,14 +177,17 @@ function vVideo(){
 function vVideoWait(){var v=(S.videos||[]).slice(-1)[0];card('<h2>Video đang chờ duyệt</h2><p>Video: <a href="'+E(v&&v.url)+'" target="_blank" rel="nofollow noopener">'+E(v&&v.url)+'</a></p><p class="muted small">EYEMEDI sẽ duyệt trong 1–2 ngày làm việc.</p>')}
 
 /* ---------- Đang hoạt động ---------- */
-function vActive(){
+function linkCard(on){
   var base='https://eyemedi.vn/san-pham.html?ref='+encodeURIComponent(S.me.ref_code);
-  card('<h2>Link bán hàng của bạn</h2><p class="muted small">Gửi link này cho khách. Khách bấm vào và đặt hàng trong vòng 30 ngày, đơn sẽ tự ghi nhận cho bạn. Hoa hồng tháng này: <b>'+E(S.month.rate)+'%</b>.</p>'+
+  return '<div class="card"><h2>Link bán hàng của bạn</h2><p class="muted small">Gửi link này cho khách. Khách bấm vào và đặt hàng trong vòng 30 ngày, đơn sẽ tự ghi nhận cho bạn.'+
+  (on?' Hoa hồng tháng này: <b>'+E(S.month.rate)+'%</b>.':'')+'</p>'+
+  (on?'':'<div class="msg show err" style="margin-bottom:10px">Bạn đã có thể bán hàng ngay. <b>Hoa hồng chỉ được mở sau khi video review sản phẩm mẫu được EYEMEDI duyệt.</b> Đơn bán trước đó vẫn ghi nhận cho bạn nhưng '+(S.retro?'chỉ được tính hoa hồng khi video được duyệt.':'không được tính hoa hồng.')+'</div>')+
   '<div class="copy"><input id="lnk" readonly value="'+E(base)+'"><button class="btn" id="cp">Sao chép</button></div>'+
   '<p class="small muted" style="margin-top:10px">Có thể gắn mã vào bất kỳ trang nào của eyemedi.vn bằng cách thêm <b>?ref='+E(S.me.ref_code)+'</b> vào cuối link.</p>'+
-  (S.contract&&S.contract.pdf_url?'<p class="small">Hợp đồng đã ký ngày '+E(S.contract.signed_at)+'.</p>':''));
-  $('cp').onclick=function(){var i=$('lnk');i.select();(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.resolve(document.execCommand('copy'))).then(function(){$('cp').textContent='Đã chép'})};
+  (on&&S.contract&&S.contract.pdf_url?'<p class="small">Hợp đồng đã ký ngày '+E(S.contract.signed_at)+'.</p>':'')+'</div>';
 }
+function bindCopy(){var b=$('cp');if(b)b.onclick=function(){var i=$('lnk');i.select();(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.resolve(document.execCommand('copy'))).then(function(){b.textContent='Đã chép'})}}
+function vActive(){$('box').innerHTML=linkCard(true)}
 
 function renderTier(){
   var m=S.month,el=$('tier');if(!m){el.innerHTML='';return}
@@ -200,14 +204,14 @@ function renderTier(){
 }
 function renderOrders(){
   renderTier();
-  var o=S.orders||[];$('cOrders').classList.toggle('hide',S.me.status!=='active'&&!o.length);
+  var o=S.orders||[];$('cOrders').classList.toggle('hide',(S.me.status==='rejected'||S.me.status==='locked')&&!o.length);
   var ok=o.filter(function(x){return x.status==='delivered'}),pend=o.filter(function(x){return x.status==='new'||x.status==='confirmed'});
   var sum=function(a,k){return a.reduce(function(s,x){return s+(Number(x[k])||0)},0)};
   var paid=sum(ok.filter(function(x){return x.paid}),'commission');
   $('stats').innerHTML=[['Tổng đơn',o.length],['Đơn thành công',ok.length],['Hoa hồng chờ duyệt',CTV.money(sum(pend,'commission'))],['Hoa hồng được nhận',CTV.money(sum(ok,'commission'))+'<div class="k">Đã trả: '+CTV.money(paid)+'</div>']]
     .map(function(s){return '<div class="stat"><div class="k">'+s[0]+'</div><div class="v">'+s[1]+'</div></div>'}).join('');
   $('tOrders').innerHTML='<tr><th>Ngày</th><th>Mã đơn</th><th>Khách</th><th>Sản phẩm</th><th>Giá trị</th><th>Hoa hồng</th><th>Trạng thái</th></tr>'+
-    (o.length?o.map(function(x){return '<tr><td>'+E(String(x.created_at).slice(0,10))+'</td><td>'+E(x.order_code)+'</td><td>'+E(x.customer_name)+'<br><span class="small muted">'+E(x.customer_phone)+'</span></td><td class="small">'+E(x.items).replace(/\n/g,'<br>')+'</td><td>'+CTV.money(x.total)+'</td><td>'+CTV.money(x.commission)+'</td><td>'+CTV.pill(CTV.ORDER,x.status)+(x.paid?' <span class="pill ok">Đã trả</span>':'')+'</td></tr>'}).join('')
+    (o.length?o.map(function(x){return '<tr><td>'+E(String(x.created_at).slice(0,10))+'</td><td>'+E(x.order_code)+'</td><td>'+E(x.customer_name)+'<br><span class="small muted">'+E(x.customer_phone)+'</span></td><td class="small">'+E(x.items).replace(/\n/g,'<br>')+'</td><td>'+CTV.money(x.total)+'</td><td>'+(x.eligible===false?'<span class="small muted">Chưa mở HH</span>':CTV.money(x.commission))+'</td><td>'+CTV.pill(CTV.ORDER,x.status)+(x.paid?' <span class="pill ok">Đã trả</span>':'')+'</td></tr>'}).join('')
      :'<tr><td colspan="7" class="muted">Chưa có đơn hàng nào.</td></tr>');
 }
 

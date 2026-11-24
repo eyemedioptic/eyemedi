@@ -40,10 +40,13 @@ var SHEETS = {
            'web_price', 'sample_price', 'receiver', 'phone', 'address', 'note', 'status'],
   Video: ['id', 'created_at', 'ctv_id', 'ref_code', 'url', 'note', 'status', 'admin_note'],
   DonHang: ['order_code', 'created_at', 'ref_code', 'ctv_id', 'customer_name', 'customer_phone',
-            'items', 'total', 'commission_rate', 'commission', 'status', 'paid', 'paid_at', 'page'],
+            'items', 'total', 'commission_rate', 'commission', 'status', 'paid', 'paid_at', 'page', 'eligible'],
   PhienDangNhap: ['token', 'ctv_id', 'expires'],
   DatLaiMK: ['token_hash', 'ctv_id', 'expires', 'used_at']
 };
+// CTV có link bán hàng ngay sau khi đăng ký. Hoa hồng chỉ mở khi video review được duyệt (trạng thái active).
+// Đơn bán TRƯỚC khi mở hoa hồng: false = không tính hoa hồng; true = được tính lại khi video được duyệt.
+var RETRO_COMMISSION = false;
 var RESET_MINUTES = 60;             // link đặt lại mật khẩu có hiệu lực 60 phút
 
 // Trạng thái CTV theo quy trình
@@ -156,7 +159,7 @@ var API = {
       return {
         order_code: o.order_code, created_at: o.created_at, items: o.items, total: num_(o.total),
         commission_rate: num_(o.commission_rate), commission: num_(o.commission), status: o.status,
-        paid: o.paid === 'TRUE', paid_at: o.paid_at,
+        paid: o.paid === 'TRUE', paid_at: o.paid_at, eligible: eligible_(o),
         customer_name: String(o.customer_name || '').slice(0, 1) + '***',
         customer_phone: '*******' + String(o.customer_phone || '').slice(-3)
       };
@@ -164,6 +167,7 @@ var API = {
     out.orders = orders;
     out.month = monthSummary_(u);
     out.tiers = TIERS;
+    out.retro = RETRO_COMMISSION;
     return out;
   },
 
@@ -342,7 +346,7 @@ var API = {
     var code = String(r.order_code || '');
     if (!/^EM[A-Z0-9]{4,12}$/.test(code)) return false;
     var u = table_('CTV').find('ref_code', String(r.ref || '').toUpperCase());
-    if (!u || u.status !== 'active') return false;
+    if (!u || u.status === 'rejected' || u.status === 'locked') return false;
     var t = table_('DonHang');
     if (t.find('order_code', code)) return false;
     var total = Math.max(0, Math.round(num_(r.total)));
@@ -353,7 +357,7 @@ var API = {
       customer_name: clean_(r.name, 120), customer_phone: clean_(r.phone, 20),
       items: clean_(r.items, 3000), total: total, commission_rate: rate,
       commission: Math.round(total * rate / 100), status: 'new', paid: 'FALSE',
-      page: clean_(r.page, 200)
+      page: clean_(r.page, 200), eligible: u.status === 'active' ? 'TRUE' : 'FALSE'
     });
     recalc_(u.id, month_(now_()));
     return true;
@@ -388,7 +392,9 @@ var API = {
       if (String(r.new_password).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
       ch.pw_salt = Utilities.getUuid(); ch.pw_hash = hash_(ch.pw_salt, r.new_password);
     }
+    var wasActive = u.status === 'active';
     t.update(u, ch);
+    if (ch.status === 'active' && !wasActive) openCommission_(u.id);
     if (ch.commission_rate !== undefined) recalc_(u.id, month_(now_()));
     return true;
   },
@@ -413,7 +419,7 @@ var API = {
     if (!v) throw new Error('Không tìm thấy video');
     t.update(v, { status: r.ok ? 'approved' : 'rejected', admin_note: clean_(r.note, 300) });
     var c = table_('CTV'); var u = c.find('id', v.ctv_id);
-    if (u && u.status === 'video_submitted') c.update(u, { status: r.ok ? 'active' : 'sample_received' });
+    if (u && u.status === 'video_submitted') { c.update(u, { status: r.ok ? 'active' : 'sample_received' }); if (r.ok) openCommission_(u.id); }
     return true;
   },
 
@@ -473,7 +479,7 @@ function contractHtml_(u, info, signed) {
     '<br>Địa chỉ: ' + e(info.address) + ' – Điện thoại: ' + e(info.phone || u.phone) + ' – Email: ' + e(info.email) + ' – Mã CTV: <b>' + e(u.ref_code) + '</b>' +
     '<br>Tài khoản nhận hoa hồng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
     '<p><b>Điều 1. Nội dung.</b> Bên B giới thiệu, quảng bá sản phẩm của Bên A đến khách hàng bằng đường link/mã CTV riêng; khách đặt hàng và thanh toán trực tiếp với Bên A. Bên B tự chủ thời gian, phương tiện làm việc. Hợp đồng này là hợp đồng dịch vụ, <b>không phải hợp đồng lao động</b>; Bên A không đóng bảo hiểm xã hội cho Bên B.</p>' +
-    '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video. Bên B đồng ý cho Bên A chia sẻ lại video này trên các kênh của Bên A, có ghi nguồn.</p>' +
+    '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video' + (RETRO_COMMISSION ? ' (khi đó các đơn đã giao trước đó, chưa thanh toán, cũng được tính hoa hồng). ' : '; đơn hàng phát sinh trước thời điểm duyệt video không được tính hoa hồng. ') + 'Bên B đồng ý cho Bên A chia sẻ lại video này trên các kênh của Bên A, có ghi nguồn.</p>' +
     '<p><b>Điều 3. Hoa hồng và thanh toán.</b> Hoa hồng tính trên giá trị thực thu (sau giảm giá, không gồm phí vận chuyển) của đơn hàng phát sinh từ link/mã của Bên B và <b>đã giao thành công</b>; đơn hủy, hoàn trả không tính. Mức hoa hồng: ' + hh + '. Hai bên đối soát trên trang CTV trước ngày 10 hằng tháng; Bên A chuyển khoản hoa hồng tháng trước vào tài khoản nêu trên trước ngày 15.</p>' +
     '<p><b>Điều 4. Thuế.</b> Hoa hồng là thu nhập của Bên B. <b>Bên B tự kê khai và nộp thuế thu nhập cá nhân (và các khoản thuế khác nếu có) theo đúng quy định của pháp luật</b>, tự chịu trách nhiệm về nghĩa vụ thuế của mình. Trường hợp pháp luật bắt buộc Bên A khấu trừ thuế tại nguồn, Bên A sẽ khấu trừ trước khi chi trả và cấp chứng từ khấu trừ thuế cho Bên B; Bên B cung cấp mã số thuế cá nhân khi Bên A yêu cầu.</p>' +
     '<p><b>Điều 5. Trách nhiệm Bên B.</b> Cung cấp thông tin trung thực theo tài liệu Bên A công bố; không quảng cáo sai sự thật, không tự hứa giá, khuyến mãi hay công dụng chữa bệnh; tuân thủ Luật Quảng cáo và quy định ghi rõ nội dung quảng cáo trên mạng xã hội; không spam, không gian lận, không tự đặt hàng qua mã của mình để hưởng hoa hồng; bảo mật thông tin khách hàng; giữ uy tín thương hiệu EYEMEDI.</p>' +
@@ -499,7 +505,7 @@ function monthSummary_(u, m) {
   m = m || month_(now_());
   var rev = 0, cnt = 0;
   table_('DonHang').all().forEach(function (o) {
-    if (o.ctv_id === u.id && o.status === 'delivered' && month_(o.created_at) === m) { rev += num_(o.total); cnt++; }
+    if (o.ctv_id === u.id && o.status === 'delivered' && eligible_(o) && month_(o.created_at) === m) { rev += num_(o.total); cnt++; }
   });
   var fixed = fixedRate_(u), k = tierIndex_(rev), next = TIERS[k + 1];
   return {
@@ -507,6 +513,17 @@ function monthSummary_(u, m) {
     rate: fixed !== null ? fixed : TIERS[k].rate, tier: k,
     next: fixed !== null || !next ? null : { rate: next.rate, need: Math.max(0, next.from - rev + (next.above ? 1 : 0)) }
   };
+}
+/** Đơn có được tính hoa hồng không (đơn cũ không có cột eligible = được tính). */
+function eligible_(o) { return o.eligible !== 'FALSE'; }
+/** Gọi khi CTV được mở hoa hồng: nếu RETRO_COMMISSION thì tính hoa hồng cho đơn chưa trả bán trước đó. */
+function openCommission_(ctvId) {
+  if (!RETRO_COMMISSION) return;
+  var t = table_('DonHang'), months = {};
+  t.all().forEach(function (o) {
+    if (o.ctv_id === ctvId && o.eligible === 'FALSE' && o.paid !== 'TRUE') { t.update(o, { eligible: 'TRUE' }); months[month_(o.created_at)] = 1; }
+  });
+  Object.keys(months).forEach(function (m) { recalc_(ctvId, m); });
 }
 /** Tính lại % và hoa hồng cho mọi đơn CHƯA TRẢ của CTV trong tháng m. */
 function recalc_(ctvId, m) {
@@ -516,8 +533,8 @@ function recalc_(ctvId, m) {
   var t = table_('DonHang');
   t.all().forEach(function (o) {
     if (o.ctv_id !== ctvId || month_(o.created_at) !== m || o.paid === 'TRUE') return;
-    var c = Math.round(num_(o.total) * rate / 100);
-    if (num_(o.commission_rate) !== rate || num_(o.commission) !== c) t.update(o, { commission_rate: rate, commission: c });
+    var rt = eligible_(o) ? rate : 0, c = Math.round(num_(o.total) * rt / 100);
+    if (num_(o.commission_rate) !== rt || num_(o.commission) !== c) t.update(o, { commission_rate: rt, commission: c });
   });
 }
 
@@ -526,6 +543,7 @@ function table_(name) {
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name);
   if (!sh) throw new Error('Chưa chạy hàm caiDat');
   var head = SHEETS[name];
+  if (sh.getLastColumn() < head.length) sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold'); // thêm cột mới
   var vals = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, head.length).getValues() : [];
   var rows = vals.map(function (v, i) {
     var o = { _row: i + 2 }; head.forEach(function (h, j) { o[h] = v[j] === null ? '' : String(v[j]); }); return o;
