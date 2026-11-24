@@ -14,7 +14,7 @@
  */
 
 var SITE = 'https://eyemedi.vn';
-var CONTRACT_VERSION = 'HD-CTV-2026.1';
+var CONTRACT_VERSION = 'HD-CTV-2026.2';
 var SAMPLE_DISCOUNT = 0.5;          // đơn mẫu = 50% giá web
 // Hoa hồng theo DOANH THU THÁNG (tổng giá trị đơn ĐÃ GIAO trong tháng của CTV).
 // Bậc đạt được áp dụng cho TẤT CẢ đơn trong tháng đó. Mỗi bậc kéo dài tới ngưỡng bậc sau.
@@ -202,6 +202,9 @@ var API = {
     var sig = String(r.signature || '');
     if (sig.indexOf('data:image/png;base64,') !== 0 || sig.length < 2000) throw new Error('Vui lòng ký tên');
     if (sig.length > 400000) throw new Error('Chữ ký quá lớn');
+    var bank = { bank_name: clean_(r.bank_name, 80), bank_account: clean_(r.bank_account, 40), bank_holder: clean_(r.bank_holder, 80) };
+    if (!bank.bank_name || !/^\d{6,20}$/.test(bank.bank_account.replace(/\s/g, '')) || !bank.bank_holder) throw new Error('Vui lòng nhập đủ tài khoản ngân hàng nhận hoa hồng');
+    table_('CTV').update(u, bank);
     var signedAt = now_();
     var html = contractHtml_(u, info, { sig: sig, at: signedAt });
     var pdf = Utilities.newBlob(html, 'text/html', 'hd.html').getAs('application/pdf')
@@ -362,27 +365,54 @@ var API = {
 };
 
 /* ====================== HỢP ĐỒNG ====================== */
-// BẢN NHÁP – Giám đốc cần duyệt / sửa nội dung trước khi dùng chính thức.
+// Thông tin pháp lý Bên A – Giám đốc điền đúng theo Giấy chứng nhận đăng ký kinh doanh.
+// Ô để trống sẽ in "…………" trên hợp đồng.
+var BEN_A = {
+  ten: 'EYEMEDI',                     // tên công ty / hộ kinh doanh đúng theo giấy phép
+  mst: '',                            // mã số thuế
+  dia_chi: '63C Lạc Long Quân, P. Hòa Bình, TP. Hồ Chí Minh',
+  dai_dien: 'Bùi Đình Trọng',
+  chuc_vu: 'Giám đốc',
+  dien_thoai: '0967 190 005'
+};
+var VIDEO_DAYS = 15;                  // số ngày phải gửi video sau khi nhận mẫu
+
 function contractHtml_(u, info, signed) {
-  var e = esc_;
-  var date = signed ? signed.at : now_();
-  return '<html><head><meta charset="utf-8"><style>body{font-family:"Times New Roman",serif;font-size:13pt;line-height:1.5;margin:30px}h1,h2{text-align:center;margin:4px 0}h1{font-size:15pt}h2{font-size:13pt}.c{text-align:center}td{vertical-align:top;padding:4px}</style></head><body>' +
+  var e = function (s) { var v = String(s == null ? '' : s).trim(); return v ? esc_(v) : '…………'; };
+  var d = signed ? signed.at : now_();
+  var ngay = 'ngày ' + d.slice(8, 10) + ' tháng ' + d.slice(5, 7) + ' năm ' + d.slice(0, 4);
+  var f = fixedRate_(u);
+  var hh = f !== null ? 'tỷ lệ cố định <b>' + f + '%</b>' :
+    'tỷ lệ theo doanh thu tháng (tổng giá trị đơn đã giao trong tháng): ' +
+    TIERS.map(function (t) { return t.label.replace(/\.000\.000đ/g, ' triệu').replace(/đ$/, '') + ': <b>' + t.rate + '%</b>'; }).join('; ') +
+    '. Tỷ lệ của bậc đạt được áp dụng cho toàn bộ đơn đã giao trong tháng đó';
+  var A = BEN_A;
+  return '<html><head><meta charset="utf-8"><style>' +
+    '@page{size:A4;margin:11mm 14mm}' +
+    'body{font-family:"Times New Roman",Times,serif;font-size:11pt;line-height:1.33;margin:0;color:#000}' +
+    'p{margin:0 0 3pt;text-align:justify}.c{text-align:center}h1{font-size:13pt;text-align:center;margin:5pt 0 1pt}' +
+    'table{width:100%;border-collapse:collapse}td{vertical-align:top;padding:0}b.d{display:inline}' +
+    '</style></head><body>' +
     '<p class="c"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập – Tự do – Hạnh phúc</b></p>' +
-    '<h1>HỢP ĐỒNG CỘNG TÁC VIÊN BÁN HÀNG</h1><p class="c">Số: ' + e(CONTRACT_VERSION + '/' + u.ref_code) + '</p>' +
-    '<p>Hôm nay, ngày ' + e(date) + ', hai bên gồm:</p>' +
-    '<p><b>BÊN A: EYEMEDI</b> (hệ thống mắt kính EYEMEDI – eyemedi.vn)<br>Địa chỉ: 63C Lạc Long Quân, P. Hòa Bình, TP. HCM<br>Hotline: 0967 190 005</p>' +
-    '<p><b>BÊN B (Cộng tác viên – ' + e(u.kind) + ')</b><br>Họ tên: ' + e(info.full_name) +
-    '<br>Số CCCD: ' + e(info.id_number) + ' – Nơi cấp/ngày cấp: ' + e(info.id_issued) +
-    '<br>Địa chỉ: ' + e(info.address) + '<br>Số điện thoại: ' + e(u.phone) + '<br>Mã cộng tác viên: <b>' + e(u.ref_code) + '</b></p>' +
-    '<p><b>Điều 1. Nội dung</b><br>Bên B giới thiệu, quảng bá và bán sản phẩm của Bên A trên eyemedi.vn thông qua đường link/mã giới thiệu riêng. Bên A chịu trách nhiệm về sản phẩm, giao hàng, bảo hành và chăm sóc khách hàng.</p>' +
-    '<p><b>Điều 2. Sản phẩm mẫu</b><br>Sau khi ký hợp đồng, Bên B được đặt <b>một (01) lần duy nhất</b> sản phẩm mẫu với giá bằng 50% giá niêm yết trên eyemedi.vn. Sau khi nhận sản phẩm mẫu, Bên B phải đăng tải video giới thiệu/trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Hoa hồng chỉ được kích hoạt khi Bên A duyệt video.</p>' +
-    '<p><b>Điều 3. Hoa hồng</b><br>Bên B hưởng hoa hồng trên giá trị đơn hàng thực thu (không gồm phí vận chuyển) của các đơn hàng phát sinh từ link/mã của Bên B và đã giao thành công, ' + rateText_(u) + '. Đơn hủy, hoàn trả không được tính hoa hồng. Hoa hồng được đối soát và thanh toán vào tài khoản ngân hàng Bên B đã đăng ký theo kỳ hằng tháng. Bên A khấu trừ thuế thu nhập cá nhân theo quy định của pháp luật (nếu có).</p>' +
-    '<p><b>Điều 4. Trách nhiệm Bên B</b><br>Cung cấp thông tin trung thực về sản phẩm; không tự ý hứa hẹn giá, khuyến mãi, công dụng y khoa ngoài thông tin Bên A công bố; không dùng hình thức spam, gian lận đơn hàng, tự mua hàng qua mã của mình để hưởng hoa hồng; giữ uy tín thương hiệu EYEMEDI.</p>' +
-    '<p><b>Điều 5. Chấm dứt hợp đồng</b><br>Mỗi bên có quyền chấm dứt hợp đồng bằng thông báo trước 07 ngày. Bên A được khóa tài khoản và không thanh toán hoa hồng cho các đơn gian lận nếu Bên B vi phạm Điều 4.</p>' +
-    '<p><b>Điều 6. Hiệu lực</b><br>Hợp đồng được ký bằng phương thức điện tử theo Luật Giao dịch điện tử, có hiệu lực từ ngày ký và có giá trị 12 tháng, tự động gia hạn nếu không bên nào có ý kiến khác.</p>' +
-    '<table width="100%"><tr><td width="50%" class="c"><b>ĐẠI DIỆN BÊN A</b><br><br>EYEMEDI<br><i>(đã xác nhận điện tử)</i></td>' +
-    '<td class="c"><b>BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:90px"><br>' : '<br><br><br>') +
-    e(info.full_name) + (signed ? '<br><i>Ký điện tử lúc ' + e(signed.at) + '</i>' : '') + '</td></tr></table>' +
+    '<h1>HỢP ĐỒNG CỘNG TÁC VIÊN BÁN HÀNG</h1>' +
+    '<p class="c">Số: ' + e(CONTRACT_VERSION + '/' + u.ref_code) + '</p>' +
+    '<p><i>Căn cứ Bộ luật Dân sự 2015, Luật Thương mại 2005, Luật Giao dịch điện tử 2023 và nhu cầu của hai bên. Hôm nay, ' + ngay + ', chúng tôi gồm:</i></p>' +
+    '<p><b>BÊN A: ' + e(A.ten) + '</b> – MST: ' + e(A.mst) + ' – Địa chỉ: ' + e(A.dia_chi) +
+    '<br>Đại diện: ' + e(A.dai_dien) + ' – Chức vụ: ' + e(A.chuc_vu) + ' – Điện thoại: ' + e(A.dien_thoai) + '</p>' +
+    '<p><b>BÊN B (' + e(u.kind) + '): ' + e(info.full_name) + '</b> – CCCD số: ' + e(info.id_number) + ', cấp ngày/nơi cấp: ' + e(info.id_issued) +
+    '<br>Địa chỉ: ' + e(info.address) + ' – Điện thoại: ' + e(u.phone) + ' – Mã CTV: <b>' + e(u.ref_code) + '</b>' +
+    '<br>Tài khoản nhận hoa hồng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
+    '<p><b>Điều 1. Nội dung.</b> Bên B giới thiệu, quảng bá sản phẩm của Bên A đến khách hàng bằng đường link/mã CTV riêng; khách đặt hàng và thanh toán trực tiếp với Bên A. Bên B tự chủ thời gian, phương tiện làm việc. Hợp đồng này là hợp đồng dịch vụ, <b>không phải hợp đồng lao động</b>; Bên A không đóng bảo hiểm xã hội cho Bên B.</p>' +
+    '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video. Bên B đồng ý cho Bên A chia sẻ lại video này trên các kênh của Bên A, có ghi nguồn.</p>' +
+    '<p><b>Điều 3. Hoa hồng và thanh toán.</b> Hoa hồng tính trên giá trị thực thu (sau giảm giá, không gồm phí vận chuyển) của đơn hàng phát sinh từ link/mã của Bên B và <b>đã giao thành công</b>; đơn hủy, hoàn trả không tính. Mức hoa hồng: ' + hh + '. Hai bên đối soát trên trang CTV trước ngày 10 hằng tháng; Bên A chuyển khoản hoa hồng tháng trước vào tài khoản nêu trên trước ngày 15.</p>' +
+    '<p><b>Điều 4. Thuế.</b> Hoa hồng là thu nhập của Bên B. <b>Bên B tự kê khai và nộp thuế thu nhập cá nhân (và các khoản thuế khác nếu có) theo đúng quy định của pháp luật</b>, tự chịu trách nhiệm về nghĩa vụ thuế của mình. Trường hợp pháp luật bắt buộc Bên A khấu trừ thuế tại nguồn, Bên A sẽ khấu trừ trước khi chi trả và cấp chứng từ khấu trừ thuế cho Bên B; Bên B cung cấp mã số thuế cá nhân khi Bên A yêu cầu.</p>' +
+    '<p><b>Điều 5. Trách nhiệm Bên B.</b> Cung cấp thông tin trung thực theo tài liệu Bên A công bố; không quảng cáo sai sự thật, không tự hứa giá, khuyến mãi hay công dụng chữa bệnh; tuân thủ Luật Quảng cáo và quy định ghi rõ nội dung quảng cáo trên mạng xã hội; không spam, không gian lận, không tự đặt hàng qua mã của mình để hưởng hoa hồng; bảo mật thông tin khách hàng; giữ uy tín thương hiệu EYEMEDI.</p>' +
+    '<p><b>Điều 6. Trách nhiệm Bên A.</b> Cung cấp thông tin, hình ảnh sản phẩm; chịu trách nhiệm về chất lượng, giao hàng, bảo hành và chăm sóc khách hàng; cập nhật đơn hàng, hoa hồng minh bạch trên trang CTV; chi trả hoa hồng đúng hạn.</p>' +
+    '<p><b>Điều 7. Chấm dứt.</b> Mỗi bên được đơn phương chấm dứt hợp đồng bằng thông báo trước 07 ngày; hoa hồng của đơn đã giao trước ngày chấm dứt vẫn được thanh toán. Nếu Bên B vi phạm Điều 5, Bên A được chấm dứt ngay, khóa tài khoản và không chi trả hoa hồng cho các đơn vi phạm.</p>' +
+    '<p><b>Điều 8. Hiệu lực.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy, hiệu lực 12 tháng kể từ ngày ký và tự động gia hạn nếu không bên nào có ý kiến khác. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đặt trụ sở. Mỗi bên lưu 01 bản điện tử.</p>' +
+    '<table style="margin-top:6pt"><tr><td class="c" style="width:50%"><b>ĐẠI DIỆN BÊN A</b><br><i style="font-size:9pt">' + (signed ? 'Đã chấp thuận điện tử lúc ' + esc_(signed.at) : '') + '</i><br><br>' + e(A.dai_dien) + '</td>' +
+    '<td class="c"><b>BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:56px"><br>' : '<br><br>') + e(info.full_name) +
+    (signed ? '<br><i style="font-size:9pt">Ký điện tử lúc ' + esc_(signed.at) + '</i>' : '') + '</td></tr></table>' +
     '</body></html>';
 }
 
@@ -419,13 +449,6 @@ function recalc_(ctvId, m) {
     var c = Math.round(num_(o.total) * rate / 100);
     if (num_(o.commission_rate) !== rate || num_(o.commission) !== c) t.update(o, { commission_rate: rate, commission: c });
   });
-}
-function rateText_(u) {
-  var f = fixedRate_(u);
-  if (f !== null) return 'theo tỷ lệ cố định ' + f + '%';
-  return 'theo bậc doanh thu tháng (tổng giá trị đơn đã giao thành công trong tháng) như sau: ' +
-    TIERS.map(function (t) { return t.label + ': ' + t.rate + '%'; }).join('; ') +
-    '. Tỷ lệ của bậc đạt được áp dụng cho toàn bộ đơn hàng đã giao trong tháng đó';
 }
 
 /* ====================== DỮ LIỆU ====================== */

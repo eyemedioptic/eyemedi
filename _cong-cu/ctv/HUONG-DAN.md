@@ -23,7 +23,8 @@ Sửa Code.gs sau này: **Triển khai → Quản lý triển khai → bút chì
 ## Thay đổi thường gặp
 - Bậc hoa hồng theo doanh thu tháng: bảng `TIERS` trong Code.gs (10% → 35%). Doanh thu tháng = tổng đơn **đã giao** trong tháng; bậc đạt được áp dụng cho mọi đơn chưa trả trong tháng đó và tự tính lại khi đổi trạng thái đơn.
 - % cố định riêng cho 1 CTV: nhập số ở cột "% HH riêng" trong trang quản trị; để trống = theo bậc.
-- Nội dung hợp đồng: hàm `contractHtml_` trong Code.gs (hiện là **bản nháp**, cần Giám đốc duyệt). Đổi nội dung thì tăng `CONTRACT_VERSION`.
+- Hợp đồng (1 mặt A4): hàm `contractHtml_` trong Code.gs. **Điền thông tin Bên A trong `BEN_A`** (tên theo giấy phép, mã số thuế, người đại diện) trước khi dùng. Đổi nội dung thì tăng `CONTRACT_VERSION`.
+- Thuế TNCN: hợp đồng ghi CTV tự kê khai, nộp; nhưng theo TT 111/2013 bên trả có thể phải khấu trừ 10% khi chi từ 2 triệu/lần cho cá nhân không có HĐLĐ. Hỏi kế toán trước khi chi trả lần đầu.
 - Danh sách sản phẩm mẫu = các sản phẩm trên **trang chủ** (index.html). Đổi giá / thêm sản phẩm trên trang chủ: chạy `python _cong-cu/ctv/tao-ds-san-pham.py` để cập nhật `ctv/san-pham.json` rồi đẩy lên (máy chủ dùng file này để tính giá mẫu, lưu đệm 10 phút).
 - Trang mới phải có dòng `<script src="/ctv/ref.js" defer></script>` (đã thêm vào trang mẫu SEO) để nhận link `?ref=`.
 - CTV quên mật khẩu: trang quản trị → **Cấp lại MK**.
