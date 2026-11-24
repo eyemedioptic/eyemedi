@@ -472,15 +472,22 @@ function table_(name) {
   });
   return {
     all: function () { return rows; },
-    find: function (k, val) { for (var i = 0; i < rows.length; i++) if (rows[i][k] === String(val)) return rows[i]; return null; },
+    find: function (k, val) {
+      var want = String(val);
+      for (var i = 0; i < rows.length; i++) {
+        var v = rows[i][k];
+        if (v === want || (k === 'phone' && want && normPhone_(v) === want)) return rows[i];
+      }
+      return null;
+    },
     filterBy: function (k, val) { return rows.filter(function (r) { return r[k] === String(val); }).map(strip_); },
     insert: function (o) {
-      sh.appendRow(head.map(function (h) { return o[h] === undefined ? '' : String(o[h]); }));
+      sh.appendRow(head.map(function (h) { return o[h] === undefined ? '' : cell_(o[h]); }));
     },
     update: function (row, ch) {
       Object.keys(ch).forEach(function (k) {
         var j = head.indexOf(k); if (j < 0) return;
-        sh.getRange(row._row, j + 1).setValue(String(ch[k])); row[k] = String(ch[k]);
+        sh.getRange(row._row, j + 1).setValue(cell_(ch[k])); row[k] = String(ch[k]);
       });
     },
     remove: function (row) { sh.deleteRow(row._row); }
@@ -534,6 +541,22 @@ function admin_(r) {
   return u;
 }
 
+/**
+ * ĐẶT LẠI MẬT KHẨU khi CTV / admin quên: sửa 2 dòng dưới rồi chọn hàm datLaiMatKhau → Chạy.
+ * Không cần triển khai lại.
+ */
+function datLaiMatKhau() {
+  var SO_DIEN_THOAI = '';   // VD: '0901234567'
+  var MAT_KHAU_MOI = '';    // mật khẩu mới, tối thiểu 6 ký tự
+  if (MAT_KHAU_MOI.length < 6) { Logger.log('Nhập mật khẩu mới tối thiểu 6 ký tự'); return; }
+  var phone = normPhone_(SO_DIEN_THOAI);
+  var t = table_('CTV'), u = t.find('phone', phone);
+  if (!u) { Logger.log('Không tìm thấy SĐT ' + phone + ' trong tab CTV'); return; }
+  var salt = Utilities.getUuid();
+  t.update(u, { phone: phone, pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU_MOI) });
+  Logger.log('Đã đặt lại mật khẩu cho ' + u.full_name + ' (' + phone + ').');
+}
+
 /** Chạy tay định kỳ (hoặc đặt trình kích hoạt hằng ngày) để xóa phiên hết hạn. */
 function donPhienHetHan() {
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PhienDangNhap');
@@ -551,9 +574,15 @@ function strip_(o) { var r = {}; Object.keys(o).forEach(function (k) { if (k[0] 
 function clean_(s, n) { return String(s == null ? '' : s).replace(/[\u0000-\u001f]/g, ' ').replace(/^[=+\-@]+/, '').trim().slice(0, n); }
 function num_(x) { var n = Number(String(x).replace(/[^\d.\-]/g, '')); return isFinite(n) ? n : 0; }
 function now_() { return Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd HH:mm:ss'); }
+// Giữ giá trị ở dạng chữ: SĐT không mất số 0 đầu, chuỗi bắt đầu bằng = + - @ không bị hiểu là công thức.
+function cell_(v) {
+  var s = String(v);
+  return /^[=+\-@]/.test(s) || /^0\d+$/.test(s) ? "'" + s : s;
+}
 function normPhone_(p) {
   var s = String(p || '').replace(/\D/g, '');
   if (s.indexOf('84') === 0 && s.length === 11) s = '0' + s.slice(2);
+  if (/^[1-9]\d{8}$/.test(s)) s = '0' + s;   // ô Sheet đã mất số 0 đầu
   return /^0\d{9}$/.test(s) ? s : '';
 }
 function esc_(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
