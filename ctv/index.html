@@ -51,7 +51,7 @@
     </form>
 
     <form id="fLog" class="hide">
-      <label>Số điện thoại, email hoặc tên đăng nhập</label><input name="phone" required autocomplete="username" autocapitalize="off">
+      <label>Số điện thoại, email hoặc tên đăng nhập</label><input name="phone" required autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false">
       <label>Mật khẩu</label><input name="password" type="password" required autocomplete="current-password">
       <div id="mLog" class="msg"></div>
       <button class="btn" style="width:100%;margin-top:10px">Đăng nhập</button>
@@ -87,7 +87,7 @@ if(location.hash==='#dang-nhap')tab(false);
 if(location.hash==='#quen-mat-khau')tab(false,true);
 function go(form,action,m){
   form.onsubmit=function(e){e.preventDefault();var b=form.querySelector('button.btn'),d={};
-    new FormData(form).forEach(function(v,k){d[k]=v});CTV.msg(m,'');CTV.busy(b,true);
+    new FormData(form).forEach(function(v,k){d[k]=k==='phone'||k==='email'?String(v).trim():v});CTV.msg(m,'');CTV.busy(b,true);
     CTV.call(action,d).then(function(r){CTV.setToken(r.token);location.href='app.html'})
       .catch(function(err){CTV.msg(m,err.message)}).finally(function(){CTV.busy(b,false)})}
 }

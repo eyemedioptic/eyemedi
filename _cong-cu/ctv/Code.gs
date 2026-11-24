@@ -136,11 +136,11 @@ var API = {
 
   login: function (r) {
     // chống dò mật khẩu: sai 8 lần trong 15 phút thì tạm khóa đăng nhập tài khoản đó 15 phút
-    var cache = CacheService.getScriptCache(), key = 'lf_' + sha_(String(r.phone || '').trim().toLowerCase()).slice(0, 40);
+    var cache = CacheService.getScriptCache(), key = loginKey_(r.phone);
     var fails = Number(cache.get(key) || 0);
     if (fails >= 8) throw new Error('Bạn nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút hoặc bấm "Quên mật khẩu"');
     var u = findLogin_(r.phone);
-    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) { cache.put(key, String(fails + 1), 900); throw new Error('Sai thông tin đăng nhập hoặc mật khẩu'); }
+    if (!u || !pwOk_(u, r.password)) { cache.put(key, String(fails + 1), 900); throw new Error('Sai thông tin đăng nhập hoặc mật khẩu'); }
     cache.remove(key);
     if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
     return { token: newSession_(u.id), me: publicMe_(u) };
@@ -634,15 +634,55 @@ function admin_(r) {
  * Không cần triển khai lại.
  */
 function datLaiMatKhau() {
-  var SO_DIEN_THOAI = '';   // VD: '0901234567'
+  var SO_DIEN_THOAI = '';   // SĐT, email hoặc tên đăng nhập. VD: '0901234567'
   var MAT_KHAU_MOI = '';    // mật khẩu mới, tối thiểu 6 ký tự
   if (MAT_KHAU_MOI.length < 6) { Logger.log('Nhập mật khẩu mới tối thiểu 6 ký tự'); return; }
-  var phone = normPhone_(SO_DIEN_THOAI);
-  var t = table_('CTV'), u = t.find('phone', phone);
-  if (!u) { Logger.log('Không tìm thấy SĐT ' + phone + ' trong tab CTV'); return; }
+  var t = table_('CTV'), u = findLogin_(SO_DIEN_THOAI);
+  if (!u) { Logger.log('Không tìm thấy "' + SO_DIEN_THOAI + '" trong tab CTV. Chạy hàm kiemTraTaiKhoan để xem chi tiết.'); return; }
   var salt = Utilities.getUuid();
-  t.update(u, { phone: phone, pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU_MOI) });
-  Logger.log('Đã đặt lại mật khẩu cho ' + u.full_name + ' (' + phone + ').');
+  t.update(u, { pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU_MOI) });
+  moKhoaDangNhap_(SO_DIEN_THOAI);
+  Logger.log('Đã đặt lại mật khẩu cho ' + u.full_name + ' (SĐT ' + u.phone + ', email ' + (u.email || 'trống') + ').');
+}
+
+/**
+ * KIỂM TRA TÀI KHOẢN khi ai đó báo không đăng nhập được: điền dòng TIM (và MAT_KHAU_THU nếu muốn thử mật khẩu)
+ * rồi chọn hàm kiemTraTaiKhoan → Chạy → xem "Nhật ký thực thi". Hàm cũng gỡ tạm khóa do nhập sai nhiều lần.
+ */
+function kiemTraTaiKhoan() {
+  var TIM = '';             // SĐT, email hoặc tên đăng nhập đã nhập ở ô đăng nhập
+  var MAT_KHAU_THU = '';    // (không bắt buộc) mật khẩu muốn thử. Xóa sau khi chạy.
+  var t = table_('CTV'), rows = t.all(), q = String(TIM).trim();
+  Logger.log('Tab CTV có ' + rows.length + ' tài khoản. Đang tìm: "' + q + '"');
+  var u = findLogin_(q);
+  if (!u) {
+    var frag = q.toLowerCase().replace(/@.*/, '').replace(/^0/, '').slice(0, 8);
+    var near = rows.filter(function (x) {
+      return frag && (String(x.email).toLowerCase().indexOf(frag) >= 0 || String(x.phone).indexOf(frag) >= 0 ||
+        String(x.username).toLowerCase().indexOf(frag) >= 0 || String(x.full_name).toLowerCase().indexOf(frag) >= 0);
+    });
+    Logger.log('KHÔNG tìm thấy tài khoản khớp. ' + (q.indexOf('@') > 0 ? 'Đăng nhập bằng email chỉ được khi email nằm trong cột "email" của tab CTV (email nhập lúc đăng ký, ký hợp đồng hoặc lưu ở trang CTV).' : ''));
+    near.forEach(function (x) { Logger.log('  Gần giống – dòng ' + x._row + ': ' + x.full_name + ' | SĐT ' + x.phone + ' | email "' + x.email + '" | user "' + x.username + '"'); });
+    if (!near.length) Logger.log('  Không có dòng nào gần giống. Tài khoản có thể chưa đăng ký.');
+  } else {
+    Logger.log('Tìm thấy dòng ' + u._row + ': ' + u.full_name + ' | SĐT ' + u.phone + ' | email "' + u.email + '" | user "' + u.username +
+      '" | trạng thái ' + u.status + ' | admin ' + u.is_admin);
+    if (!u.pw_hash || !u.pw_salt) Logger.log('  Tài khoản CHƯA có mật khẩu (cột pw_salt/pw_hash trống) → chạy datLaiMatKhau.');
+    if (u.status === 'locked') Logger.log('  Tài khoản đang bị KHÓA (status = locked).');
+    if (MAT_KHAU_THU) Logger.log('  Mật khẩu thử: ' + (pwOk_(u, MAT_KHAU_THU) ? 'ĐÚNG' : 'SAI (' + MAT_KHAU_THU.length + ' ký tự) → chạy datLaiMatKhau để đặt lại'));
+  }
+  Logger.log(moKhoaDangNhap_(q) ? 'Đã gỡ tạm khóa do nhập sai nhiều lần.' : 'Không bị tạm khóa do nhập sai.');
+}
+
+function pwOk_(u, pw) {
+  if (!u.pw_salt || !u.pw_hash) return false;
+  pw = String(pw == null ? '' : pw);
+  return hash_(u.pw_salt, pw) === u.pw_hash || (pw.trim() !== pw && hash_(u.pw_salt, pw.trim()) === u.pw_hash);
+}
+function loginKey_(id) { return 'lf_' + sha_(String(id || '').trim().toLowerCase()).slice(0, 40); }
+function moKhoaDangNhap_(id) {
+  var c = CacheService.getScriptCache(), k = loginKey_(id), had = Number(c.get(k) || 0) >= 8;
+  c.remove(k); return had;
 }
 
 /**
