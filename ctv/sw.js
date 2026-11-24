@@ -1,6 +1,6 @@
 /* EYEMEDI CTV – service worker: cho phép cài lên màn hình chính, mở nhanh khi mạng yếu.
    Trang HTML luôn lấy bản mới nhất từ mạng (chỉ dùng bản lưu khi mất mạng). */
-var CACHE = 'eyemedi-ctv-v3';
+var CACHE = 'eyemedi-ctv-v4';
 var CORE = ['/ctv/', '/ctv/index.html', '/ctv/app.html', '/ctv/admin.html', '/ctv/ctv.css', '/ctv/api.js',
   '/ctv/pwa.js', '/ctv/config.js', '/ctv/icons/icon-192.png', '/images/logo-eyemedi.png'];
 self.addEventListener('install', function (e) {

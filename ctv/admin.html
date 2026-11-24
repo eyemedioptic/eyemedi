@@ -14,11 +14,26 @@
 <meta name="apple-mobile-web-app-title" content="EYEMEDI CTV">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="ctv.css">
-<style>main{max-width:1200px}.tbl td .btn{margin:2px 2px 2px 0}.tbl select,.tbl input{padding:6px 8px;font-size:13px;width:auto}</style>
+<style>main{max-width:1200px}.tbl td .btn{margin:2px 2px 2px 0}.tbl select,.tbl input{padding:6px 8px;font-size:13px;width:auto}
+.bell{position:relative;background:none;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#0b5558;padding:0}
+.bell svg{width:21px;height:21px}.bell.ring svg{animation:ring 1.2s ease 2}
+@keyframes ring{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}30%{transform:rotate(-14deg)}45%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}}
+.bell .bd{position:absolute;top:-5px;right:-6px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#e0322f;color:#fff;font:700 11px/19px Arial,sans-serif;text-align:center;box-shadow:0 0 0 2px #fff}
+.np{position:fixed;top:60px;right:12px;width:min(380px,calc(100vw - 24px));max-height:calc(100vh - 80px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:20}
+.np h3{margin:0;padding:14px 16px 8px;font-size:16px;display:flex;align-items:center}.np h3 span{flex:1}.np h3 a{font-size:12px;font-weight:400;cursor:pointer}
+.np .todo{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;border-bottom:1px solid var(--line)}
+.np .todo button{border:0;border-radius:16px;padding:5px 10px;font-size:12px;background:#fff4e0;color:#8a5300;cursor:pointer}.np .todo button.z{background:#f1f5f5;color:#678}
+.np .it{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid #eef3f3;cursor:pointer;font-size:14px;line-height:1.35}.np .it:hover{background:#f5fafa}
+.np .it.un{background:#eef8f8}.np .it.un .ic{position:relative}.np .it.un .ic::after{content:'';position:absolute;top:0;right:-1px;width:9px;height:9px;border-radius:50%;background:#e0322f;box-shadow:0 0 0 2px #eef8f8}
+.np .ic{flex:0 0 32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:#e6f2f2}
+.np .t{flex:1}.np .t small{display:block;color:#789;margin-top:2px}.np .empty{padding:20px 16px;color:#789;font-size:14px}
+#tabs button .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:5px;border-radius:9px;background:#e0322f;color:#fff;font-size:11px;line-height:18px}</style>
 </head>
 <body>
 <header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><b>Quản trị CTV</b><span class="sp"></span>
+  <button class="bell" id="bell" title="Thông báo" aria-label="Thông báo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bd hide" id="bd"></span></button>
   <a class="btn ghost sm" href="app.html">Trang CTV</a><button class="btn ghost sm" id="rf">Tải lại</button></header>
+<div class="np hide" id="np"></div>
 <main>
   <div id="load" class="card muted">Đang tải…</div>
   <div id="ad" class="hide">
@@ -39,8 +54,41 @@ var TABS={ctv:'Cộng tác viên',samples:'Đơn mẫu',videos:'Video',orders:'�
 var SAMPLE={new:['Mới','warn'],confirmed:['Đã xác nhận','warn'],shipping:['Đang giao','warn'],delivered:['Đã nhận','ok'],cancelled:['Hủy','bad']};
 var VID={pending:['Chờ duyệt','warn'],approved:['Đạt','ok'],rejected:['Không đạt','bad']};
 
-function load(){return CTV.call('adminData').then(function(d){D=d;$('load').classList.add('hide');$('ad').classList.remove('hide');render()})
-  .catch(function(e){$('load').textContent=e.message})}
+function load(quiet){return CTV.call('adminData').then(function(d){D=d;$('load').classList.add('hide');$('ad').classList.remove('hide');
+    var busy=quiet&&document.activeElement&&$('tb').contains(document.activeElement);if(!busy)render();notify(quiet)})
+  .catch(function(e){if(!quiet)$('load').textContent=e.message})}
+/* ===== Thông báo ===== */
+var SEEN_KEY='eyemedi_admin_seen',PREV=-1;
+function seen(){try{return localStorage.getItem(SEEN_KEY)||''}catch(e){return ''}}
+function events(){var ev=[],u;
+  D.ctv.forEach(function(x){if(x.is_admin!=='TRUE')ev.push({t:x.created_at,ic:'👤',tab:'ctv',q:x.phone,h:'<b>'+E(x.full_name)+'</b> đăng ký làm '+E(x.kind||'CTV'),s:x.status==='pending'?'Chờ duyệt':''})});
+  D.contracts.forEach(function(c){ev.push({t:c.signed_at,ic:'✍️',tab:'contracts',q:c.ref_code,h:'<b>'+E(byId(c.ctv_id).full_name||c.full_name)+'</b> đã ký hợp đồng'})});
+  D.samples.forEach(function(x){ev.push({t:x.created_at,ic:'🎁',tab:'samples',q:x.id,h:'<b>'+E(byId(x.ctv_id).full_name)+'</b> đặt mẫu: '+E(x.product_name),s:x.status==='new'?'Cần xác nhận':''})});
+  D.videos.forEach(function(x){ev.push({t:x.created_at,ic:'🎬',tab:'videos',q:x.ref_code,h:'<b>'+E(byId(x.ctv_id).full_name)+'</b> gửi video chờ duyệt',s:x.status==='pending'?'Chờ duyệt':''})});
+  D.orders.forEach(function(x){ev.push({t:x.created_at,ic:'🛒',tab:'orders',q:x.order_code,h:'Đơn <b>'+E(x.order_code)+'</b> từ CTV <b>'+E((byId(x.ctv_id).full_name)||x.ref_code)+'</b> · '+CTV.money(x.total),s:x.status==='new'?'Đơn mới':''})});
+  return ev.filter(function(e){return e.t}).sort(function(a,b){return a.t<b.t?1:-1})}
+function todo(){var c=function(a,f){return a.filter(f).length};
+  return [['ctv','pending','CTV chờ duyệt',c(D.ctv,function(u){return u.status==='pending'})],['samples','new','Đơn mẫu mới',c(D.samples,function(s){return s.status==='new'})],
+    ['videos','pending','Video chờ duyệt',c(D.videos,function(v){return v.status==='pending'})],['orders','new','Đơn hàng mới',c(D.orders,function(o){return o.status==='new'})]]}
+function notify(quiet){var s=seen(),ev=events(),un=ev.filter(function(e){return e.t>s}).length;
+  $('bd').textContent=un>99?'99+':un;$('bd').classList.toggle('hide',!un);
+  document.title=(un?'('+un+') ':'')+'Quản trị cộng tác viên | EYEMEDI';
+  if(quiet&&PREV>=0&&un>PREV){$('bell').classList.remove('ring');void $('bell').offsetWidth;$('bell').classList.add('ring')}
+  PREV=un;if(!$('np').classList.contains('hide'))panel()}
+function panel(){var s=seen(),ev=events().slice(0,40);
+  $('np').innerHTML='<h3><span>Thông báo</span><a id="nAll">Đánh dấu đã xem</a></h3><div class="todo">'+
+    todo().map(function(t){return '<button data-t="'+t[0]+'" data-f="'+t[1]+'"'+(t[3]?'':' class="z"')+'>'+t[2]+': <b>'+t[3]+'</b></button>'}).join('')+'</div>'+
+    (ev.length?ev.map(function(e,i){return '<div class="it'+(e.t>s?' un':'')+'" data-i="'+i+'"><div class="ic">'+e.ic+'</div><div class="t">'+e.h+'<small>'+E(e.t)+(e.s?' · <b style="color:#b26a00">'+e.s+'</b>':'')+'</small></div></div>'}).join(''):'<div class="empty">Chưa có thông báo.</div>');
+  $('nAll').onclick=markSeen;
+  $('np').querySelectorAll('.todo button').forEach(function(b){b.onclick=function(){go(b.dataset.t,'',b.dataset.f)}});
+  $('np').querySelectorAll('.it').forEach(function(d){d.onclick=function(){var e=ev[+d.dataset.i];go(e.tab,e.q||'','')}})}
+function markSeen(){var ev=events();try{localStorage.setItem(SEEN_KEY,ev.length?ev[0].t:'')}catch(e){}PREV=0;notify();panel()}
+function go(tab,q,f){TAB=tab;$('fs').dataset.t='';$('q').value=q;render();$('fs').value=f;render();closeNp()}
+function closeNp(){if($('np').classList.contains('hide'))return;$('np').classList.add('hide');markSeen()}
+$('bell').onclick=function(e){e.stopPropagation();if(!D)return;var h=$('np').classList.contains('hide');if(h){panel();$('np').classList.remove('hide')}else closeNp()};
+document.addEventListener('click',function(e){if(!$('np').contains(e.target)&&e.target!==$('bell'))closeNp()});
+setInterval(function(){if(!document.hidden&&D)load(true)},60000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&D)load(true)});
 $('rf').onclick=load;$('q').oninput=render;$('fs').onchange=render;
 function byId(id){return D.ctv.filter(function(u){return u.id===id})[0]||{}}
 function name(id){var u=byId(id);return '<b>'+E(u.full_name||'?')+'</b><br><span class="small muted">'+E(u.ref_code||'')+' · '+E(u.phone||'')+'</span>'}
@@ -51,7 +99,8 @@ function render(){
   $('stats').innerHTML=[['Chờ duyệt CTV',c(D.ctv,function(u){return u.status==='pending'})],['Đơn mẫu mới',c(D.samples,function(s){return s.status==='new'})],
     ['Video chờ duyệt',c(D.videos,function(v){return v.status==='pending'})],['CTV hoạt động',c(D.ctv,function(u){return u.status==='active'})]]
     .map(function(s){return '<div class="stat"><div class="k">'+s[0]+'</div><div class="v">'+s[1]+'</div></div>'}).join('');
-  $('tabs').innerHTML=Object.keys(TABS).map(function(k){return '<button data-t="'+k+'" class="'+(k===TAB?'on':'')+'">'+TABS[k]+'</button>'}).join('');
+  var TD={};todo().forEach(function(t){TD[t[0]]=t[3]});
+  $('tabs').innerHTML=Object.keys(TABS).map(function(k){return '<button data-t="'+k+'" class="'+(k===TAB?'on':'')+'">'+TABS[k]+(TD[k]?'<span class="n">'+TD[k]+'</span>':'')+'</button>'}).join('');
   $('tabs').querySelectorAll('button').forEach(function(b){b.onclick=function(){TAB=b.dataset.t;$('fs').dataset.t='';render()}});
   var opts={ctv:CTV.STATUS,samples:SAMPLE,videos:VID,orders:CTV.ORDER}[TAB];
   if($('fs').dataset.t!==TAB){$('fs').dataset.t=TAB;$('fs').innerHTML='<option value="">Tất cả trạng thái</option>'+(opts?Object.keys(opts).map(function(k){return '<option value="'+k+'">'+opts[k][0]+'</option>'}).join(''):'');$('fs').classList.toggle('hide',!opts)}
