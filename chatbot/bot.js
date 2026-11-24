@@ -198,7 +198,7 @@ function f2(x){return (x>0?'+':'')+x.toFixed(2)}
 function trSp(i){var t=(D&&D.tr||[])[i];if(!t)return null;var vr=[];t.r.forEach(function(r){if(!r[3])return;vr.push(['S '+f2(r[0][0])+' ~ '+f2(r[0][1])+(r[1]?' / C '+(r[1][0]?'-'+r[1][0].toFixed(2):'0.00')+' ~ -'+r[1][1].toFixed(2):'')+(r[2]?' / Add +'+r[2][0].toFixed(2)+' ~ +'+r[2][1].toFixed(2):''),r[3]])});return {id:'TR'+i,n:'Tròng '+t.n.replace(/^Tròng\s+/i,''),c:'Tròng',cat:'Tròng kính mắt',p:trMin(t),vr:vr,img:''}}
 function spById(id){if(/^TR\d+$/.test(id))return trSp(+id.slice(2));return (D.sp||[]).filter(function(x){return x.id===id})[0]}
 function itemPrice(it){var p=spById(it.id);if(!p)return 0;var v=(p.vr||[])[it.vi];return v&&v[1]>0?v[1]:p.p}
-var COCR={'Gọng kính cận':0.1,'Kính thời trang':0.1,'Phụ kiện mắt kính':0.1,'Tròng kính mắt':0.5,'Kính áp tròng':0.5,'Thiết bị ngành mắt & mắt kính':0.5};
+var COCR={'Gọng kính cận':0.1,'Kính thời trang':0.1,'Phụ kiện mắt kính':0.1,'Tròng kính mắt':0.5,'Kính áp tròng':0.5,'Thiết bị ngành mắt kính':0.5};
 function cocAmt(){return CART.reduce(function(a,it){var p=spById(it.id),r=p&&COCR[p.cat]||0;return a+(r?Math.ceil(itemPrice(it)*it.q*r/1000)*1000:0)},0)}
 function lockLeft(){var v=0;try{v=Number(localStorage.getItem(LOCK_KEY))||0}catch(e){}return Math.max(0,v-Date.now())}
 function addCart(p){var f=CART.filter(function(x){return x.id===p.id&&x.vi===0})[0];if(f)f.q++;else CART.push({id:p.id,vi:0,q:1});saveCart();}
