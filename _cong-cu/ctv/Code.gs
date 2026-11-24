@@ -110,6 +110,8 @@ var API = {
     if (name.length < 2) throw new Error('Vui lòng nhập họ tên');
     var t = table_('CTV');
     if (t.find('phone', phone)) throw new Error('Số điện thoại này đã đăng ký, vui lòng đăng nhập');
+    var email = clean_(r.email, 120).toLowerCase();
+    if (email && t.find('email', email)) throw new Error('Email này đã được dùng cho tài khoản khác');
     var code = String(r.ref_code || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
     if (code.length < 4 || t.find('ref_code', code)) {
       do { code = 'EM' + Math.random().toString(36).slice(2, 7).toUpperCase(); } while (t.find('ref_code', code));
@@ -118,7 +120,7 @@ var API = {
     var kind = ['CTV', 'KOL', 'KOC'].indexOf(r.kind) >= 0 ? r.kind : 'CTV';
     var row = {
       id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone,
-      email: clean_(r.email, 120), kind: kind, channels: clean_(r.channels, 500), ref_code: code,
+      email: email, kind: kind, channels: clean_(r.channels, 500), ref_code: code,
       status: 'pending', commission_rate: '', is_admin: 'FALSE',
       pw_salt: salt, pw_hash: hash_(salt, r.password)
     };
@@ -127,9 +129,10 @@ var API = {
   },
 
   login: function (r) {
-    var phone = normPhone_(r.phone);
-    var u = phone && table_('CTV').find('phone', phone);
-    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai số điện thoại hoặc mật khẩu');
+    var id = String(r.phone || '').trim(), t = table_('CTV'), u = null;
+    if (id.indexOf('@') > 0) u = t.find('email', id.toLowerCase());
+    else { var phone = normPhone_(id); u = phone && t.find('phone', phone); }
+    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai số điện thoại/email hoặc mật khẩu');
     if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
     return { token: newSession_(u.id), me: publicMe_(u) };
   },
@@ -166,8 +169,10 @@ var API = {
   updateProfile: function (r) {
     var u = auth_(r);
     var t = table_('CTV');
+    var em = clean_(r.email, 120).toLowerCase();
+    emailTaken_(em, u.id);
     t.update(u, {
-      email: clean_(r.email, 120), channels: clean_(r.channels, 500),
+      email: em, channels: clean_(r.channels, 500),
       bank_name: clean_(r.bank_name, 80), bank_account: clean_(r.bank_account, 40),
       bank_holder: clean_(r.bank_holder, 80)
     });
@@ -212,6 +217,8 @@ var API = {
     if (sig.length > 400000) throw new Error('Chữ ký quá lớn');
     var bank = { bank_name: clean_(r.bank_name, 80), bank_account: clean_(r.bank_account, 40), bank_holder: clean_(r.bank_holder, 80) };
     if (!bank.bank_name || !/^\d{6,20}$/.test(bank.bank_account.replace(/\s/g, '')) || !bank.bank_holder) throw new Error('Vui lòng nhập đủ tài khoản ngân hàng nhận hoa hồng');
+    info.email = info.email.toLowerCase();
+    emailTaken_(info.email, u.id);
     bank.email = info.email;
     table_('CTV').update(u, bank);
     var signedAt = now_();
@@ -476,7 +483,8 @@ function table_(name) {
       var want = String(val);
       for (var i = 0; i < rows.length; i++) {
         var v = rows[i][k];
-        if (v === want || (k === 'phone' && want && normPhone_(v) === want)) return rows[i];
+        if (v === want || (k === 'phone' && want && normPhone_(v) === want) ||
+            (k === 'email' && want && v.trim().toLowerCase() === want.toLowerCase())) return rows[i];
       }
       return null;
     },
@@ -557,6 +565,30 @@ function datLaiMatKhau() {
   Logger.log('Đã đặt lại mật khẩu cho ' + u.full_name + ' (' + phone + ').');
 }
 
+/**
+ * TẠO TÀI KHOẢN QUẢN TRỊ đăng nhập bằng email: sửa 3 dòng dưới rồi chọn hàm taoAdmin → Chạy.
+ * Email đã có tài khoản thì chỉ cấp quyền admin và đặt lại mật khẩu. Không cần triển khai lại.
+ */
+function taoAdmin() {
+  var EMAIL = '';          // VD: 'quanly@gmail.com'
+  var MAT_KHAU = '';       // tối thiểu 6 ký tự
+  var HO_TEN = 'Quản trị EYEMEDI';
+  var email = String(EMAIL).trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Logger.log('Email không hợp lệ'); return; }
+  if (MAT_KHAU.length < 6) { Logger.log('Mật khẩu tối thiểu 6 ký tự'); return; }
+  var t = table_('CTV'), u = t.find('email', email), salt = Utilities.getUuid();
+  if (u) {
+    t.update(u, { is_admin: 'TRUE', status: 'active', pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU) });
+  } else {
+    var code;
+    do { code = 'AD' + Math.random().toString(36).slice(2, 7).toUpperCase(); } while (t.find('ref_code', code));
+    t.insert({ id: Utilities.getUuid(), created_at: now_(), full_name: HO_TEN, phone: '', email: email,
+      kind: 'CTV', channels: '', ref_code: code, status: 'active', commission_rate: '', is_admin: 'TRUE',
+      pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU) });
+  }
+  Logger.log('Xong. Đăng nhập tại eyemedi.vn/ctv/ bằng ' + email + ' rồi mở trang Quản trị.');
+}
+
 /** Chạy tay định kỳ (hoặc đặt trình kích hoạt hằng ngày) để xóa phiên hết hạn. */
 function donPhienHetHan() {
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PhienDangNhap');
@@ -578,6 +610,10 @@ function now_() { return Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'y
 function cell_(v) {
   var s = String(v);
   return /^[=+\-@]/.test(s) || /^0\d+$/.test(s) ? "'" + s : s;
+}
+function emailTaken_(email, myId) {
+  var o = email && table_('CTV').find('email', email);
+  if (o && o.id !== myId) throw new Error('Email này đã được dùng cho tài khoản khác');
 }
 function normPhone_(p) {
   var s = String(p || '').replace(/\D/g, '');
