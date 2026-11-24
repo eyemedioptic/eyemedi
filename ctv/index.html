@@ -8,6 +8,13 @@
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://eyemedi.vn/ctv/">
 <link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/ctv/manifest.webmanifest">
+<meta name="theme-color" content="#0b5558">
+<link rel="apple-touch-icon" href="/ctv/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="EYEMEDI CTV">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="ctv.css">
 </head>
 <body>
@@ -44,7 +51,7 @@
     </form>
 
     <form id="fLog" class="hide">
-      <label>Số điện thoại hoặc email</label><input name="phone" required autocomplete="username" autocapitalize="off">
+      <label>Số điện thoại, email hoặc tên đăng nhập</label><input name="phone" required autocomplete="username" autocapitalize="off">
       <label>Mật khẩu</label><input name="password" type="password" required autocomplete="current-password">
       <div id="mLog" class="msg"></div>
       <button class="btn" style="width:100%;margin-top:10px">Đăng nhập</button>
@@ -54,6 +61,7 @@
 </main>
 <script src="config.js"></script>
 <script src="api.js"></script>
+<script src="/ctv/pwa.js"></script>
 <script>
 if(CTV.token())location.replace('app.html');
 var fReg=document.getElementById('fReg'),fLog=document.getElementById('fLog');

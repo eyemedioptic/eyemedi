@@ -6,6 +6,13 @@
 <title>Trang cộng tác viên | EYEMEDI</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/ctv/manifest.webmanifest">
+<meta name="theme-color" content="#0b5558">
+<link rel="apple-touch-icon" href="/ctv/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="EYEMEDI CTV">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" href="ctv.css">
 </head>
 <body>
@@ -57,6 +64,7 @@
 </main>
 <script src="config.js"></script>
 <script src="api.js"></script>
+<script src="/ctv/pwa.js"></script>
 <script>
 if(!CTV.token())location.replace('index.html#dang-nhap');
 var E=CTV.esc,$=function(id){return document.getElementById(id)},S=null;

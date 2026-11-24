@@ -1,0 +1,16 @@
+{
+  "name": "EYEMEDI Cộng tác viên",
+  "short_name": "EYEMEDI CTV",
+  "description": "Theo dõi đơn hàng, hoa hồng và quản lý cộng tác viên EYEMEDI",
+  "lang": "vi",
+  "start_url": "/ctv/app.html?source=pwa",
+  "scope": "/ctv/",
+  "display": "standalone",
+  "background_color": "#f5fafb",
+  "theme_color": "#0b5558",
+  "icons": [
+    { "src": "/ctv/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/ctv/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/ctv/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

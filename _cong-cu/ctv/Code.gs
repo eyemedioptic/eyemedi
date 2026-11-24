@@ -32,7 +32,7 @@ var SESSION_DAYS = 30;
 var SHEETS = {
   CTV: ['id', 'created_at', 'full_name', 'phone', 'email', 'kind', 'channels', 'ref_code', 'status',
         'commission_rate', 'bank_name', 'bank_account', 'bank_holder', 'admin_note', 'is_admin',
-        'pw_salt', 'pw_hash'],
+        'pw_salt', 'pw_hash', 'username'],
   HopDong: ['ctv_id', 'ref_code', 'signed_at', 'version', 'full_name', 'id_number', 'id_issued',
             'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email'],
   DonMau: ['id', 'created_at', 'ctv_id', 'ref_code', 'product_id', 'product_name', 'variant',
@@ -131,8 +131,9 @@ var API = {
   login: function (r) {
     var id = String(r.phone || '').trim(), t = table_('CTV'), u = null;
     if (id.indexOf('@') > 0) u = t.find('email', id.toLowerCase());
-    else { var phone = normPhone_(id); u = phone && t.find('phone', phone); }
-    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai số điện thoại/email hoặc mật khẩu');
+    else if (normPhone_(id)) u = t.find('phone', normPhone_(id));
+    else if (id) u = t.find('username', id.toLowerCase());
+    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai thông tin đăng nhập hoặc mật khẩu');
     if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
     return { token: newSession_(u.id), me: publicMe_(u) };
   },
@@ -484,7 +485,7 @@ function table_(name) {
       for (var i = 0; i < rows.length; i++) {
         var v = rows[i][k];
         if (v === want || (k === 'phone' && want && normPhone_(v) === want) ||
-            (k === 'email' && want && v.trim().toLowerCase() === want.toLowerCase())) return rows[i];
+            ((k === 'email' || k === 'username') && want && v.trim().toLowerCase() === want.toLowerCase())) return rows[i];
       }
       return null;
     },
@@ -566,27 +567,31 @@ function datLaiMatKhau() {
 }
 
 /**
- * TẠO TÀI KHOẢN QUẢN TRỊ đăng nhập bằng email: sửa 3 dòng dưới rồi chọn hàm taoAdmin → Chạy.
- * Email đã có tài khoản thì chỉ cấp quyền admin và đặt lại mật khẩu. Không cần triển khai lại.
+ * TẠO TÀI KHOẢN QUẢN TRỊ: sửa các dòng dưới rồi chọn hàm taoAdmin → Chạy.
+ * Đăng nhập bằng TEN_DANG_NHAP hoặc EMAIL. Tài khoản đã có thì chỉ cấp quyền admin và đặt lại mật khẩu.
  */
 function taoAdmin() {
-  var EMAIL = '';          // VD: 'quanly@gmail.com'
+  var TEN_DANG_NHAP = 'admin';
+  var EMAIL = '';          // VD: 'quanly@gmail.com' (có thể để trống)
   var MAT_KHAU = '';       // tối thiểu 6 ký tự
   var HO_TEN = 'Quản trị EYEMEDI';
+  caiDat();                // bổ sung cột mới nếu Sheet tạo từ bản cũ
+  var user = String(TEN_DANG_NHAP).trim().toLowerCase();
   var email = String(EMAIL).trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Logger.log('Email không hợp lệ'); return; }
+  if (!/^[a-z][a-z0-9._]{2,30}$/.test(user)) { Logger.log('Tên đăng nhập chỉ gồm chữ không dấu, số, dấu chấm, gạch dưới'); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { Logger.log('Email không hợp lệ'); return; }
   if (MAT_KHAU.length < 6) { Logger.log('Mật khẩu tối thiểu 6 ký tự'); return; }
-  var t = table_('CTV'), u = t.find('email', email), salt = Utilities.getUuid();
+  var t = table_('CTV'), u = t.find('username', user) || (email && t.find('email', email)), salt = Utilities.getUuid();
   if (u) {
-    t.update(u, { is_admin: 'TRUE', status: 'active', pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU) });
+    t.update(u, { username: user, email: email || u.email, is_admin: 'TRUE', status: 'active', pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU) });
   } else {
     var code;
     do { code = 'AD' + Math.random().toString(36).slice(2, 7).toUpperCase(); } while (t.find('ref_code', code));
     t.insert({ id: Utilities.getUuid(), created_at: now_(), full_name: HO_TEN, phone: '', email: email,
       kind: 'CTV', channels: '', ref_code: code, status: 'active', commission_rate: '', is_admin: 'TRUE',
-      pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU) });
+      pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU), username: user });
   }
-  Logger.log('Xong. Đăng nhập tại eyemedi.vn/ctv/ bằng ' + email + ' rồi mở trang Quản trị.');
+  Logger.log('Xong. Đăng nhập tại eyemedi.vn/ctv/ bằng "' + user + '"' + (email ? ' hoặc ' + email : '') + ' rồi mở trang Quản trị.');
 }
 
 /** Chạy tay định kỳ (hoặc đặt trình kích hoạt hằng ngày) để xóa phiên hết hạn. */
