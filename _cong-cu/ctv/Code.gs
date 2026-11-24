@@ -135,8 +135,13 @@ var API = {
   },
 
   login: function (r) {
+    // chống dò mật khẩu: sai 8 lần trong 15 phút thì tạm khóa đăng nhập tài khoản đó 15 phút
+    var cache = CacheService.getScriptCache(), key = 'lf_' + sha_(String(r.phone || '').trim().toLowerCase()).slice(0, 40);
+    var fails = Number(cache.get(key) || 0);
+    if (fails >= 8) throw new Error('Bạn nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút hoặc bấm "Quên mật khẩu"');
     var u = findLogin_(r.phone);
-    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) throw new Error('Sai thông tin đăng nhập hoặc mật khẩu');
+    if (!u || hash_(u.pw_salt, r.password) !== u.pw_hash) { cache.put(key, String(fails + 1), 900); throw new Error('Sai thông tin đăng nhập hoặc mật khẩu'); }
+    cache.remove(key);
     if (u.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ EYEMEDI');
     return { token: newSession_(u.id), me: publicMe_(u) };
   },
@@ -345,6 +350,10 @@ var API = {
   recordOrder: function (r) {
     var code = String(r.order_code || '');
     if (!/^EM[A-Z0-9]{4,12}$/.test(code)) return false;
+    // giới hạn ghi nhận đơn: tối đa 30 đơn / giờ cho mỗi mã CTV (chống gửi đơn giả hàng loạt)
+    var rc = CacheService.getScriptCache(), rk = 'ro_' + String(r.ref || '').toUpperCase().slice(0, 12), n = Number(rc.get(rk) || 0);
+    if (n >= 30) return false;
+    rc.put(rk, String(n + 1), 3600);
     var u = table_('CTV').find('ref_code', String(r.ref || '').toUpperCase());
     if (!u || u.status === 'rejected' || u.status === 'locked') return false;
     var t = table_('DonHang');
