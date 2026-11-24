@@ -93,8 +93,11 @@ function vContract(){
   card('<h2>Ký hợp đồng cộng tác viên online</h2><p class="muted small">Hồ sơ của bạn đã được duyệt. Đọc hợp đồng, điền thông tin và ký tên bên dưới.</p>'+
   '<div class="contract" id="ctText">Đang tải hợp đồng…</div>'+
   '<form id="fCt"><div class="row"><div><label>Họ và tên (đúng CCCD) *</label><input name="full_name" required value="'+E(S.me.full_name)+'"></div>'+
-  '<div><label>Số CCCD *</label><input name="id_number" required inputmode="numeric" pattern="\\d{9,12}"></div></div>'+
-  '<label>Ngày cấp, nơi cấp *</label><input name="id_issued" required placeholder="VD: 12/05/2021, Cục CS QLHC về TTXH">'+
+  '<div><label>Ngày sinh *</label><input name="dob" type="date" required></div></div>'+
+  '<div class="row"><div><label>Điện thoại *</label><input name="phone" required inputmode="tel" value="'+E(S.me.phone)+'"></div>'+
+  '<div><label>Email *</label><input name="email" type="email" required value="'+E(S.me.email)+'"></div></div>'+
+  '<div class="row"><div><label>Số CCCD *</label><input name="id_number" required inputmode="numeric" pattern="\\d{9,12}"></div>'+
+  '<div><label>Ngày cấp, nơi cấp *</label><input name="id_issued" required placeholder="VD: 12/05/2021, Cục CS QLHC về TTXH"></div></div>'+
   '<label>Địa chỉ thường trú *</label><input name="address" required>'+
   '<div class="row"><div><label>Ngân hàng nhận hoa hồng *</label><input name="bank_name" required value="'+E(S.me.bank_name)+'"></div><div><label>Số tài khoản *</label><input name="bank_account" required inputmode="numeric" value="'+E(S.me.bank_account)+'"></div></div>'+
   '<label>Chủ tài khoản *</label><input name="bank_holder" required value="'+E(S.me.bank_holder||S.me.full_name)+'">'+
@@ -106,7 +109,7 @@ function vContract(){
   var pad=sigPad($('sig'));$('sigClr').onclick=pad.clear;
   $('fCt').onsubmit=function(e){e.preventDefault();var f=e.target,b=$('ctBtn'),m=$('mCt');
     if(pad.empty())return CTV.msg(m,'Vui lòng ký tên vào ô chữ ký');
-    var d={full_name:f.full_name.value,id_number:f.id_number.value,id_issued:f.id_issued.value,address:f.address.value,bank_name:f.bank_name.value,bank_account:f.bank_account.value,bank_holder:f.bank_holder.value,signature:pad.data(),user_agent:navigator.userAgent};
+    var d={full_name:f.full_name.value,dob:f.dob.value,phone:f.phone.value,email:f.email.value,id_number:f.id_number.value,id_issued:f.id_issued.value,address:f.address.value,bank_name:f.bank_name.value,bank_account:f.bank_account.value,bank_holder:f.bank_holder.value,signature:pad.data(),user_agent:navigator.userAgent};
     CTV.busy(b,true,'Đang ký…');CTV.call('signContract',d).then(load).catch(function(err){CTV.msg(m,err.message);CTV.busy(b,false)})};
 }
 function sigPad(c){

@@ -109,9 +109,9 @@ function tPay(){
   '<tr><td colspan="5" class="small muted">Sau khi chuyển khoản, vào tab "Đơn hàng" tích ô "Đã trả HH" cho từng đơn.</td></tr>';
 }
 function tContracts(){
-  $('tb').innerHTML='<tr><th>Ngày ký</th><th>CTV</th><th>Họ tên / CCCD</th><th>Địa chỉ</th><th>File</th></tr>'+
+  $('tb').innerHTML='<tr><th>Ngày ký</th><th>CTV</th><th>Bên B</th><th>Địa chỉ</th><th>File</th></tr>'+
   rev(D.contracts).filter(function(c){return hit(c)}).map(function(c){return '<tr><td class="small">'+E(c.signed_at)+'<br>'+E(c.version)+'</td><td>'+name(c.ctv_id)+'</td>'+
-    '<td>'+E(c.full_name)+'<br><span class="small">'+E(c.id_number)+' · '+E(c.id_issued)+'</span></td><td class="small">'+E(c.address)+'</td><td><a href="'+E(c.pdf_url)+'" target="_blank" rel="noopener">Mở PDF</a></td></tr>'}).join('');
+    '<td>'+E(c.full_name)+(c.dob?' · '+E(c.dob):'')+'<br><span class="small">CCCD '+E(c.id_number)+' · '+E(c.id_issued)+'<br>'+E(c.phone)+(c.email?' · '+E(c.email):'')+'</span></td><td class="small">'+E(c.address)+'</td><td><a href="'+E(c.pdf_url)+'" target="_blank" rel="noopener">Mở PDF</a></td></tr>'}).join('');
 }
 function linkify(s){return E(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener nofollow">$1</a>')}
 function bind(onClick,onChange){$('tb').querySelectorAll('[data-a]').forEach(function(el){var tr=el.closest('tr');

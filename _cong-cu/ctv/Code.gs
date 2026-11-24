@@ -34,7 +34,7 @@ var SHEETS = {
         'commission_rate', 'bank_name', 'bank_account', 'bank_holder', 'admin_note', 'is_admin',
         'pw_salt', 'pw_hash'],
   HopDong: ['ctv_id', 'ref_code', 'signed_at', 'version', 'full_name', 'id_number', 'id_issued',
-            'address', 'pdf_url', 'user_agent'],
+            'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email'],
   DonMau: ['id', 'created_at', 'ctv_id', 'ref_code', 'product_id', 'product_name', 'variant',
            'web_price', 'sample_price', 'receiver', 'phone', 'address', 'note', 'status'],
   Video: ['id', 'created_at', 'ctv_id', 'ref_code', 'url', 'note', 'status', 'admin_note'],
@@ -195,8 +195,16 @@ var API = {
     if (u.status !== 'approved') throw new Error('Tài khoản chưa được duyệt hoặc đã ký hợp đồng');
     var info = {
       full_name: clean_(r.full_name, 80), id_number: clean_(r.id_number, 20),
-      id_issued: clean_(r.id_issued, 120), address: clean_(r.address, 200)
+      id_issued: clean_(r.id_issued, 120), address: clean_(r.address, 200),
+      dob: clean_(r.dob, 10), phone: normPhone_(r.phone), email: clean_(r.email, 120)
     };
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(info.dob);
+    if (!m) throw new Error('Vui lòng nhập ngày sinh');
+    var age = (Date.now() - new Date(+m[1], +m[2] - 1, +m[3]).getTime()) / (365.25 * 864e5);
+    if (!(age >= 18 && age < 100)) throw new Error('Người ký hợp đồng phải từ đủ 18 tuổi');
+    info.dob = m[3] + '/' + m[2] + '/' + m[1];
+    if (!info.phone) throw new Error('Số điện thoại không hợp lệ');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(info.email)) throw new Error('Email không hợp lệ');
     if (!/^\d{9,12}$/.test(info.id_number)) throw new Error('Số CCCD không hợp lệ');
     if (!info.full_name || !info.address) throw new Error('Vui lòng điền đủ thông tin');
     var sig = String(r.signature || '');
@@ -204,6 +212,7 @@ var API = {
     if (sig.length > 400000) throw new Error('Chữ ký quá lớn');
     var bank = { bank_name: clean_(r.bank_name, 80), bank_account: clean_(r.bank_account, 40), bank_holder: clean_(r.bank_holder, 80) };
     if (!bank.bank_name || !/^\d{6,20}$/.test(bank.bank_account.replace(/\s/g, '')) || !bank.bank_holder) throw new Error('Vui lòng nhập đủ tài khoản ngân hàng nhận hoa hồng');
+    bank.email = info.email;
     table_('CTV').update(u, bank);
     var signedAt = now_();
     var html = contractHtml_(u, info, { sig: sig, at: signedAt });
@@ -215,7 +224,8 @@ var API = {
     table_('HopDong').insert({
       ctv_id: u.id, ref_code: u.ref_code, signed_at: signedAt, version: CONTRACT_VERSION,
       full_name: info.full_name, id_number: info.id_number, id_issued: info.id_issued,
-      address: info.address, pdf_url: file.getUrl(), user_agent: clean_(r.user_agent, 300)
+      address: info.address, pdf_url: file.getUrl(), user_agent: clean_(r.user_agent, 300),
+      dob: info.dob, phone: info.phone, email: info.email
     });
     table_('CTV').update(u, { status: 'signed' });
     return true;
@@ -399,8 +409,8 @@ function contractHtml_(u, info, signed) {
     '<p><i>Căn cứ Bộ luật Dân sự 2015, Luật Thương mại 2005, Luật Giao dịch điện tử 2023 và nhu cầu của hai bên. Hôm nay, ' + ngay + ', chúng tôi gồm:</i></p>' +
     '<p><b>BÊN A: ' + e(A.ten) + '</b> – MST: ' + e(A.mst) + ' – Địa chỉ: ' + e(A.dia_chi) +
     '<br>Đại diện: ' + e(A.dai_dien) + ' – Chức vụ: ' + e(A.chuc_vu) + ' – Điện thoại: ' + e(A.dien_thoai) + '</p>' +
-    '<p><b>BÊN B (' + e(u.kind) + '): ' + e(info.full_name) + '</b> – CCCD số: ' + e(info.id_number) + ', cấp ngày/nơi cấp: ' + e(info.id_issued) +
-    '<br>Địa chỉ: ' + e(info.address) + ' – Điện thoại: ' + e(u.phone) + ' – Mã CTV: <b>' + e(u.ref_code) + '</b>' +
+    '<p><b>BÊN B (' + e(u.kind) + '): ' + e(info.full_name) + '</b> – Ngày sinh: ' + e(info.dob) + ' – CCCD số: ' + e(info.id_number) + ', cấp ngày/nơi cấp: ' + e(info.id_issued) +
+    '<br>Địa chỉ: ' + e(info.address) + ' – Điện thoại: ' + e(info.phone || u.phone) + ' – Email: ' + e(info.email) + ' – Mã CTV: <b>' + e(u.ref_code) + '</b>' +
     '<br>Tài khoản nhận hoa hồng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
     '<p><b>Điều 1. Nội dung.</b> Bên B giới thiệu, quảng bá sản phẩm của Bên A đến khách hàng bằng đường link/mã CTV riêng; khách đặt hàng và thanh toán trực tiếp với Bên A. Bên B tự chủ thời gian, phương tiện làm việc. Hợp đồng này là hợp đồng dịch vụ, <b>không phải hợp đồng lao động</b>; Bên A không đóng bảo hiểm xã hội cho Bên B.</p>' +
     '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video. Bên B đồng ý cho Bên A chia sẻ lại video này trên các kênh của Bên A, có ghi nguồn.</p>' +
