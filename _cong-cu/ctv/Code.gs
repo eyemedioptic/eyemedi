@@ -46,7 +46,7 @@ var SHEETS = {
 };
 // CTV có link bán hàng ngay sau khi đăng ký. Hoa hồng chỉ mở khi video review được duyệt (trạng thái active).
 // Đơn bán TRƯỚC khi mở hoa hồng: false = không tính hoa hồng; true = được tính lại khi video được duyệt.
-var RETRO_COMMISSION = false;
+var RETRO_COMMISSION = true;
 var RESET_MINUTES = 60;             // link đặt lại mật khẩu có hiệu lực 60 phút
 
 // Trạng thái CTV theo quy trình
