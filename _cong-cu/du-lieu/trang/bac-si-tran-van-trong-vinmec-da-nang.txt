@@ -10,7 +10,6 @@ MO_TA_SEO: BS.CKII Trần Văn Trọng, bác sĩ ngoại nhi và phẫu thuật 
 NGAY_DANG: 2026-11-24
 DOAN_MO_DAU: Ở miền Trung, nhu cầu phẫu thuật tạo hình, từ dị tật bàn tay ở trẻ đến chỉnh sửa mí mắt, sẹo xấu ở người lớn, ngày càng nhiều. Bài viết tổng hợp thông tin Vinmec công bố về BS.CKII Trần Văn Trọng tại Bệnh viện Đa khoa Quốc tế Vinmec Đà Nẵng, chỉ để tham khảo.
 ANH_RIENG:
-anh-rieng/bac-si-tran-van-trong-vinmec-da-nang-1.jpg | Gia đình khách hàng ghé thăm cửa hàng EYEMEDI
 anh-rieng/bac-si-tran-van-trong-vinmec-da-nang-2.jpg | Kiểm tra thị lực bằng gọng thử tại EYEMEDI
 anh-rieng/bac-si-tran-van-trong-vinmec-da-nang-3.jpg | Khách hàng chọn gọng kính tại EYEMEDI
 H2_1: Bác sĩ hai chuyên ngành: ngoại nhi và tạo hình

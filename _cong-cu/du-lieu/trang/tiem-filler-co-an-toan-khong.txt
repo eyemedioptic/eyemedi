@@ -10,7 +10,6 @@ MO_TA_SEO: Tiêm filler có an toàn không? Filler là gì, các biến chứng
 NGAY_DANG: 2026-11-17
 DOAN_MO_DAU: Tiêm filler có thể an toàn khi dùng sản phẩm được cấp phép và do bác sĩ có chuyên môn thực hiện tại cơ sở hợp pháp. Ngược lại, filler không rõ nguồn gốc hoặc tiêm sai kỹ thuật có thể gây biến chứng nghiêm trọng, kể cả ảnh hưởng đến mắt.
 ANH_RIENG:
-anh-rieng/tiem-filler-co-an-toan-khong-1.jpg | Chuyên gia mặc áo blouse tại EYEMEDI
 anh-rieng/tiem-filler-co-an-toan-khong-2.jpg | Buổi tư vấn tại EYEMEDI trước khi chọn giải pháp làm đẹp
 anh-rieng/tiem-filler-co-an-toan-khong-3.jpg | Khách hàng tại cửa hàng EYEMEDI
 H2_1: Filler là gì, thường dùng để làm gì?
