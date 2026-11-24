@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quản trị cộng tác viên | EYEMEDI</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="ctv.css">
+<style>main{max-width:1200px}.tbl td .btn{margin:2px 2px 2px 0}.tbl select,.tbl input{padding:6px 8px;font-size:13px;width:auto}</style>
+</head>
+<body>
+<header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><b>Quản trị CTV</b><span class="sp"></span>
+  <a class="btn ghost sm" href="app.html">Trang CTV</a><button class="btn ghost sm" id="rf">Tải lại</button></header>
+<main>
+  <div id="load" class="card muted">Đang tải…</div>
+  <div id="ad" class="hide">
+    <div class="stats card" id="stats"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="mAd" class="msg"></div>
+    <div class="card"><div class="copy" style="margin-bottom:12px"><input id="q" placeholder="Tìm theo tên, SĐT, mã CTV, mã đơn…"><select id="fs" style="width:auto"></select></div>
+      <div class="scroll"><table class="tbl" id="tb"></table></div></div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script>
+if(!CTV.token())location.replace('index.html#dang-nhap');
+var E=CTV.esc,$=function(id){return document.getElementById(id)},D=null,TAB='ctv';
+var TABS={ctv:'Cộng tác viên',samples:'Đơn mẫu',videos:'Video',orders:'Đơn hàng',pay:'Đối soát hoa hồng',contracts:'Hợp đồng'};
+var SAMPLE={new:['Mới','warn'],confirmed:['Đã xác nhận','warn'],shipping:['Đang giao','warn'],delivered:['Đã nhận','ok'],cancelled:['Hủy','bad']};
+var VID={pending:['Chờ duyệt','warn'],approved:['Đạt','ok'],rejected:['Không đạt','bad']};
+
+function load(){return CTV.call('adminData').then(function(d){D=d;$('load').classList.add('hide');$('ad').classList.remove('hide');render()})
+  .catch(function(e){$('load').textContent=e.message})}
+$('rf').onclick=load;$('q').oninput=render;$('fs').onchange=render;
+function byId(id){return D.ctv.filter(function(u){return u.id===id})[0]||{}}
+function name(id){var u=byId(id);return '<b>'+E(u.full_name||'?')+'</b><br><span class="small muted">'+E(u.ref_code||'')+' · '+E(u.phone||'')+'</span>'}
+function hit(o){var q=$('q').value.trim().toLowerCase();if(!q)return true;var u=byId(o.ctv_id||o.id);return JSON.stringify(o).toLowerCase().indexOf(q)>=0||JSON.stringify(u).toLowerCase().indexOf(q)>=0}
+
+function render(){
+  var c=function(a,f){return a.filter(f).length};
+  $('stats').innerHTML=[['Chờ duyệt CTV',c(D.ctv,function(u){return u.status==='pending'})],['Đơn mẫu mới',c(D.samples,function(s){return s.status==='new'})],
+    ['Video chờ duyệt',c(D.videos,function(v){return v.status==='pending'})],['CTV hoạt động',c(D.ctv,function(u){return u.status==='active'})]]
+    .map(function(s){return '<div class="stat"><div class="k">'+s[0]+'</div><div class="v">'+s[1]+'</div></div>'}).join('');
+  $('tabs').innerHTML=Object.keys(TABS).map(function(k){return '<button data-t="'+k+'" class="'+(k===TAB?'on':'')+'">'+TABS[k]+'</button>'}).join('');
+  $('tabs').querySelectorAll('button').forEach(function(b){b.onclick=function(){TAB=b.dataset.t;$('fs').dataset.t='';render()}});
+  var opts={ctv:CTV.STATUS,samples:SAMPLE,videos:VID,orders:CTV.ORDER}[TAB];
+  if($('fs').dataset.t!==TAB){$('fs').dataset.t=TAB;$('fs').innerHTML='<option value="">Tất cả trạng thái</option>'+(opts?Object.keys(opts).map(function(k){return '<option value="'+k+'">'+opts[k][0]+'</option>'}).join(''):'');$('fs').classList.toggle('hide',!opts)}
+  var fs=$('fs').value;var keep=function(o){return hit(o)&&(!fs||o.status===fs)};
+  ({ctv:tCtv,samples:tSamples,videos:tVideos,orders:tOrders,pay:tPay,contracts:tContracts})[TAB](keep);
+}
+function rev(a){return a.slice().reverse()}
+
+function tCtv(keep){
+  $('tb').innerHTML='<tr><th>Ngày ĐK</th><th>CTV</th><th>Loại / Kênh</th><th>Trạng thái</th><th>% HH riêng</th><th>Ghi chú</th><th>Thao tác</th></tr>'+
+  rev(D.ctv).filter(keep).map(function(u){
+    var a='';
+    if(u.status==='pending')a+='<button class="btn ok sm" data-a="st" data-v="approved">Duyệt</button><button class="btn bad sm" data-a="st" data-v="rejected">Từ chối</button>';
+    if(u.status==='rejected')a+='<button class="btn sm" data-a="st" data-v="approved">Duyệt lại</button>';
+    a+=u.status==='locked'?'<button class="btn sm" data-a="st" data-v="active">Mở khóa</button>':'<button class="btn ghost sm" data-a="st" data-v="locked">Khóa</button>';
+    a+='<button class="btn ghost sm" data-a="pw">Cấp lại MK</button><select data-a="force"><option value="">Đổi trạng thái…</option>'+Object.keys(CTV.STATUS).map(function(k){return '<option value="'+k+'">'+CTV.STATUS[k][0]+'</option>'}).join('')+'</select>';
+    return '<tr data-id="'+E(u.id)+'"><td class="small">'+E(String(u.created_at).slice(0,10))+'</td><td>'+name(u.id)+(u.is_admin==='TRUE'?' <span class="pill">Admin</span>':'')+'</td>'+
+      '<td class="small">'+E(u.kind)+'<br>'+linkify(u.channels)+'</td><td>'+CTV.pill(CTV.STATUS,u.status)+'</td>'+
+      '<td><input data-a="rate" type="number" min="0" max="100" step="0.5" style="width:70px" value="'+E(u.commission_rate)+'" placeholder="Bậc" title="Để trống = hoa hồng theo bậc doanh thu tháng; nhập số = % cố định cho CTV này"></td>'+
+      '<td><input data-a="note" style="width:160px" value="'+E(u.admin_note)+'" placeholder="Ghi chú cho CTV"></td><td>'+a+'</td></tr>'}).join('');
+  bind(function(tr,el){var id=tr.dataset.id,a=el.dataset.a;
+    if(a==='st'){var note=tr.querySelector('[data-a=note]').value;if(el.dataset.v==='rejected'&&!note){note=prompt('Lý do từ chối (CTV sẽ thấy):')||''}return act('adminSetCtv',{id:id,status:el.dataset.v,admin_note:note})}
+    if(a==='pw'){var p=prompt('Mật khẩu mới cho CTV (tối thiểu 6 ký tự):');if(p)return act('adminSetCtv',{id:id,new_password:p},'Đã đổi mật khẩu. Gửi mật khẩu mới cho CTV qua Zalo.')}
+  },function(tr,el){var id=tr.dataset.id,a=el.dataset.a;
+    if(a==='rate')return act('adminSetCtv',{id:id,commission_rate:el.value},(el.value===''?'CTV này hưởng hoa hồng theo bậc doanh thu tháng':'Đã đặt % cố định cho CTV này')+' (tính lại đơn chưa trả của tháng này)');
+    if(a==='note')return act('adminSetCtv',{id:id,admin_note:el.value},'Đã lưu ghi chú');
+    if(a==='force'&&el.value&&confirm('Đổi trạng thái CTV này thành "'+CTV.STATUS[el.value][0]+'"?'))return act('adminSetCtv',{id:id,status:el.value});
+  });
+}
+function tSamples(keep){
+  $('tb').innerHTML='<tr><th>Ngày</th><th>CTV</th><th>Sản phẩm</th><th>Giá web → mẫu</th><th>Giao tới</th><th>Trạng thái</th></tr>'+
+  rev(D.samples).filter(keep).map(function(s){return '<tr data-id="'+E(s.id)+'"><td class="small">'+E(s.created_at)+'<br>'+E(s.id)+'</td><td>'+name(s.ctv_id)+'</td>'+
+    '<td>'+E(s.product_name)+(s.variant?'<br><span class="small">'+E(s.variant)+'</span>':'')+(s.note?'<br><span class="small muted">Ghi chú: '+E(s.note)+'</span>':'')+'</td>'+
+    '<td><span class="old">'+CTV.money(s.web_price)+'</span><br><b>'+CTV.money(s.sample_price)+'</b></td><td class="small">'+E(s.receiver)+' – '+E(s.phone)+'<br>'+E(s.address)+'</td>'+
+    '<td><select data-a="ss">'+Object.keys(SAMPLE).map(function(k){return '<option value="'+k+'"'+(k===s.status?' selected':'')+'>'+SAMPLE[k][0]+'</option>'}).join('')+'</select></td></tr>'}).join('');
+  bind(null,function(tr,el){if(el.value==='delivered'&&!confirm('Xác nhận CTV đã nhận hàng mẫu? CTV sẽ được mở bước gửi video.'))return render();act('adminSampleStatus',{id:tr.dataset.id,status:el.value})});
+}
+function tVideos(keep){
+  $('tb').innerHTML='<tr><th>Ngày</th><th>CTV</th><th>Video</th><th>Trạng thái</th><th>Thao tác</th></tr>'+
+  rev(D.videos).filter(keep).map(function(v){return '<tr data-id="'+E(v.id)+'"><td class="small">'+E(v.created_at)+'</td><td>'+name(v.ctv_id)+'</td>'+
+    '<td><a href="'+E(v.url)+'" target="_blank" rel="noopener nofollow">Xem video</a>'+(v.note?'<br><span class="small muted">'+E(v.note)+'</span>':'')+(v.admin_note?'<br><span class="small">Nhận xét: '+E(v.admin_note)+'</span>':'')+'</td>'+
+    '<td>'+CTV.pill(VID,v.status)+'</td><td>'+(v.status==='pending'?'<button class="btn ok sm" data-a="ok">Duyệt – mở hoa hồng</button><button class="btn bad sm" data-a="no">Chưa đạt</button>':'')+'</td></tr>'}).join('');
+  bind(function(tr,el){if(el.dataset.a==='ok'&&confirm('Duyệt video và mở hoa hồng cho CTV này?'))return act('adminReviewVideo',{id:tr.dataset.id,ok:true,note:''});
+    if(el.dataset.a==='no'){var n=prompt('Lý do chưa đạt (CTV sẽ thấy và gửi lại):');if(n!==null)return act('adminReviewVideo',{id:tr.dataset.id,ok:false,note:n})}});
+}
+function tOrders(keep){
+  $('tb').innerHTML='<tr><th>Ngày / Mã đơn</th><th>CTV</th><th>Khách</th><th>Sản phẩm</th><th>Giá trị</th><th>HH</th><th>Trạng thái</th><th>Đã trả HH</th></tr>'+
+  rev(D.orders).filter(keep).map(function(o){return '<tr data-id="'+E(o.order_code)+'"><td class="small">'+E(o.created_at)+'<br><b>'+E(o.order_code)+'</b></td><td>'+name(o.ctv_id)+'</td>'+
+    '<td class="small">'+E(o.customer_name)+'<br>'+E(o.customer_phone)+'</td><td class="small">'+E(o.items).replace(/\n/g,'<br>')+'</td>'+
+    '<td><input data-a="total" type="number" style="width:110px" value="'+E(o.total)+'" title="Sửa giá trị thực thu"></td><td>'+CTV.money(o.commission)+'<br><span class="small muted">'+E(o.commission_rate)+'%</span></td>'+
+    '<td><select data-a="os">'+Object.keys(CTV.ORDER).map(function(k){return '<option value="'+k+'"'+(k===o.status?' selected':'')+'>'+CTV.ORDER[k][0]+'</option>'}).join('')+'</select></td>'+
+    '<td><input type="checkbox" data-a="paid" style="width:auto"'+(o.paid==='TRUE'?' checked':'')+(o.status!=='delivered'?' disabled':'')+'></td></tr>'}).join('');
+  bind(null,function(tr,el){var c=tr.dataset.id,a=el.dataset.a;
+    if(a==='os')return act('adminOrder',{order_code:c,status:el.value});
+    if(a==='total')return act('adminOrder',{order_code:c,total:el.value},'Đã cập nhật giá trị và hoa hồng');
+    if(a==='paid')return act('adminOrder',{order_code:c,paid:el.checked});});
+}
+function tPay(){
+  var rows={};D.orders.forEach(function(o){if(o.status!=='delivered')return;var r=rows[o.ctv_id]=rows[o.ctv_id]||{n:0,due:0,paid:0};r.n++;if(o.paid==='TRUE')r.paid+=+o.commission;else r.due+=+o.commission});
+  $('tb').innerHTML='<tr><th>CTV</th><th>Đơn đã giao</th><th>Hoa hồng chưa trả</th><th>Đã trả</th><th>Tài khoản nhận</th></tr>'+
+  Object.keys(rows).filter(function(id){return hit({ctv_id:id})}).sort(function(a,b){return rows[b].due-rows[a].due}).map(function(id){var r=rows[id],u=byId(id);
+    return '<tr><td>'+name(id)+'</td><td>'+r.n+'</td><td><b>'+CTV.money(r.due)+'</b></td><td>'+CTV.money(r.paid)+'</td><td class="small">'+E(u.bank_name)+'<br>'+E(u.bank_account)+'<br>'+E(u.bank_holder)+'</td></tr>'}).join('')+
+  '<tr><td colspan="5" class="small muted">Sau khi chuyển khoản, vào tab "Đơn hàng" tích ô "Đã trả HH" cho từng đơn.</td></tr>';
+}
+function tContracts(){
+  $('tb').innerHTML='<tr><th>Ngày ký</th><th>CTV</th><th>Bên B</th><th>Địa chỉ</th><th>File</th></tr>'+
+  rev(D.contracts).filter(function(c){return hit(c)}).map(function(c){return '<tr><td class="small">'+E(c.signed_at)+'<br>'+E(c.version)+'</td><td>'+name(c.ctv_id)+'</td>'+
+    '<td>'+E(c.full_name)+(c.dob?' · '+E(c.dob):'')+'<br><span class="small">CCCD '+E(c.id_number)+' · '+E(c.id_issued)+'<br>'+E(c.phone)+(c.email?' · '+E(c.email):'')+'</span></td><td class="small">'+E(c.address)+'</td><td><a href="'+E(c.pdf_url)+'" target="_blank" rel="noopener">Mở PDF</a></td></tr>'}).join('');
+}
+function linkify(s){return E(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener nofollow">$1</a>')}
+function bind(onClick,onChange){$('tb').querySelectorAll('[data-a]').forEach(function(el){var tr=el.closest('tr');
+  if(el.tagName==='BUTTON'&&onClick)el.onclick=function(){onClick(tr,el)};
+  if(el.tagName!=='BUTTON'&&onChange)el.onchange=function(){onChange(tr,el)}})}
+function act(action,data,okText){CTV.msg($('mAd'),'Đang lưu…',true);
+  return CTV.call(action,data).then(function(){CTV.msg($('mAd'),okText||'Đã cập nhật',true);return load()}).catch(function(e){CTV.msg($('mAd'),e.message);render()})}
+load();
+</script>
+</body>
+</html>

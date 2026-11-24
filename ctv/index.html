@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cộng tác viên EYEMEDI – Đăng ký bán hàng nhận hoa hồng</title>
+<meta name="description" content="Đăng ký làm cộng tác viên, KOL, KOC bán mắt kính, kính áp tròng EYEMEDI. Nhận sản phẩm mẫu giảm 50% và hoa hồng trên mỗi đơn hàng thành công.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://eyemedi.vn/ctv/">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="ctv.css">
+</head>
+<body>
+<header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><span class="sp"></span><b>Cộng tác viên</b></header>
+<main>
+  <div class="card">
+    <h1>Bán hàng cùng EYEMEDI, nhận hoa hồng</h1>
+    <p class="muted">Dành cho cộng tác viên, KOL, KOC. Đăng ký xong bạn có ngay tài khoản để theo dõi đơn hàng và hoa hồng của mình.</p>
+    <div class="steps">
+      <div class="step"><b>1</b>Đăng ký</div>
+      <div class="step"><b>2</b>Được duyệt</div>
+      <div class="step"><b>3</b>Ký hợp đồng online</div>
+      <div class="step"><b>4</b>Đặt mẫu -50%</div>
+      <div class="step"><b>5</b>Gửi video, mở hoa hồng</div>
+    </div>
+  </div>
+
+  <div class="card center">
+    <div class="tabs"><button id="tReg" class="on">Đăng ký</button><button id="tLog">Đăng nhập</button></div>
+
+    <form id="fReg">
+      <label>Họ và tên *</label><input name="full_name" required maxlength="80" autocomplete="name">
+      <div class="row">
+        <div><label>Số điện thoại (dùng để đăng nhập) *</label><input name="phone" required inputmode="tel" autocomplete="tel"></div>
+        <div><label>Bạn là *</label><select name="kind"><option>CTV</option><option>KOC</option><option>KOL</option></select></div>
+      </div>
+      <label>Email</label><input name="email" type="email" autocomplete="email">
+      <label>Kênh bán hàng / mạng xã hội</label><textarea name="channels" rows="2" placeholder="Link TikTok, Facebook, Instagram, số người theo dõi…"></textarea>
+      <label>Mã giới thiệu mong muốn</label><input name="ref_code" maxlength="12" placeholder="VD: LINHKOC (4–12 chữ/số, để trống sẽ tự tạo)">
+      <label>Mật khẩu *</label><input name="password" type="password" required minlength="6" autocomplete="new-password">
+      <label class="small" style="font-weight:400"><input type="checkbox" required style="width:auto"> Tôi đồng ý để EYEMEDI lưu thông tin trên nhằm xét duyệt và quản lý cộng tác viên.</label>
+      <div id="mReg" class="msg"></div>
+      <button class="btn" style="width:100%;margin-top:10px">Đăng ký và tạo tài khoản</button>
+    </form>
+
+    <form id="fLog" class="hide">
+      <label>Số điện thoại</label><input name="phone" required inputmode="tel" autocomplete="tel">
+      <label>Mật khẩu</label><input name="password" type="password" required autocomplete="current-password">
+      <div id="mLog" class="msg"></div>
+      <button class="btn" style="width:100%;margin-top:10px">Đăng nhập</button>
+      <p class="small muted">Quên mật khẩu? Nhắn Zalo <a href="https://zalo.me/0967190005" rel="nofollow">0967 190 005</a> để EYEMEDI cấp lại.</p>
+    </form>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script>
+if(CTV.token())location.replace('app.html');
+var fReg=document.getElementById('fReg'),fLog=document.getElementById('fLog');
+function tab(r){fReg.classList.toggle('hide',!r);fLog.classList.toggle('hide',r);document.getElementById('tReg').classList.toggle('on',r);document.getElementById('tLog').classList.toggle('on',!r)}
+document.getElementById('tReg').onclick=function(){tab(true)};
+document.getElementById('tLog').onclick=function(){tab(false)};
+if(location.hash==='#dang-nhap')tab(false);
+function go(form,action,m){
+  form.onsubmit=function(e){e.preventDefault();var b=form.querySelector('button.btn'),d={};
+    new FormData(form).forEach(function(v,k){d[k]=v});CTV.msg(m,'');CTV.busy(b,true);
+    CTV.call(action,d).then(function(r){CTV.setToken(r.token);location.href='app.html'})
+      .catch(function(err){CTV.msg(m,err.message)}).finally(function(){CTV.busy(b,false)})}
+}
+go(fReg,'register',document.getElementById('mReg'));
+go(fLog,'login',document.getElementById('mLog'));
+</script>
+</body>
+</html>

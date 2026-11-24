@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trang cộng tác viên | EYEMEDI</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="ctv.css">
+</head>
+<body>
+<header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><span class="sp"></span>
+  <a id="lnAdmin" class="btn ghost sm hide" href="admin.html">Quản trị</a>
+  <button id="btnOut" class="btn ghost sm">Đăng xuất</button></header>
+<main>
+  <div id="load" class="card muted">Đang tải…</div>
+  <div id="app" class="hide">
+    <div class="card">
+      <h1 id="hi"></h1>
+      <div class="muted small" id="sub"></div>
+      <div class="steps" id="steps" style="margin-top:14px"></div>
+    </div>
+
+    <div id="box"></div>
+
+    <div class="card" id="cOrders">
+      <h2>Đơn hàng của bạn</h2>
+      <div id="tier"></div>
+      <div class="stats" id="stats"></div>
+      <div class="scroll" style="margin-top:14px"><table class="tbl" id="tOrders"></table></div>
+      <p class="small muted">Hoa hồng chỉ được tính cho đơn <b>đã giao thành công</b>, % theo bậc doanh thu tháng nên hoa hồng của đơn có thể tăng khi bạn lên bậc. Đơn hủy, hoàn trả không tính hoa hồng. Thông tin khách hàng được ẩn bớt để bảo mật.</p>
+    </div>
+
+    <div class="card">
+      <h2>Thông tin nhận hoa hồng</h2>
+      <form id="fProf">
+        <div class="row">
+          <div><label>Ngân hàng</label><input name="bank_name"></div>
+          <div><label>Số tài khoản</label><input name="bank_account" inputmode="numeric"></div>
+        </div>
+        <label>Chủ tài khoản</label><input name="bank_holder">
+        <div class="row">
+          <div><label>Email</label><input name="email" type="email"></div>
+          <div><label>Kênh mạng xã hội</label><input name="channels"></div>
+        </div>
+        <div id="mProf" class="msg"></div>
+        <button class="btn" style="margin-top:12px">Lưu thông tin</button>
+      </form>
+      <details style="margin-top:16px"><summary>Đổi mật khẩu</summary>
+        <form id="fPw"><div class="row">
+          <div><label>Mật khẩu cũ</label><input name="old_password" type="password" required></div>
+          <div><label>Mật khẩu mới</label><input name="new_password" type="password" minlength="6" required></div></div>
+          <div id="mPw" class="msg"></div><button class="btn ghost" style="margin-top:12px">Đổi mật khẩu</button></form>
+      </details>
+    </div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script>
+if(!CTV.token())location.replace('index.html#dang-nhap');
+var E=CTV.esc,$=function(id){return document.getElementById(id)},S=null;
+var STEP_UI=['Đăng ký','Được duyệt','Ký hợp đồng','Đặt mẫu -50%','Gửi video'];
+
+$('btnOut').onclick=function(){CTV.call('logout').finally(function(){CTV.setToken('');location.href='index.html#dang-nhap'})};
+
+function load(){
+  return CTV.call('me').then(function(d){S=d;render()}).catch(function(e){
+    if(!CTV.token())location.replace('index.html#dang-nhap');else $('load').textContent=e.message});
+}
+
+function render(){
+  var me=S.me;$('load').classList.add('hide');$('app').classList.remove('hide');
+  $('hi').textContent='Xin chào, '+me.full_name;
+  $('sub').innerHTML=E(me.kind)+' · Mã của bạn: <b>'+E(me.ref_code)+'</b> · '+CTV.pill(CTV.STATUS,me.status);
+  if(me.is_admin==='TRUE'||me.is_admin==='true')$('lnAdmin').classList.remove('hide');
+  var cur={pending:1,approved:2,signed:3,sample_ordered:3,sample_received:4,video_submitted:4,active:5}[me.status];if(cur==null)cur=1;
+  $('steps').innerHTML=STEP_UI.map(function(s,i){var cls=i<cur?'done':(i===cur?'cur':'');
+    return '<div class="step '+cls+'"><b>'+(cls==='done'?'✓':i+1)+'</b>'+s+'</div>'}).join('');
+  var f=$('fProf');['bank_name','bank_account','bank_holder','email','channels'].forEach(function(k){f[k].value=me[k]||''});
+  ({pending:vPending,approved:vContract,signed:vSample,sample_ordered:vSampleWait,sample_received:vVideo,
+    video_submitted:vVideoWait,active:vActive,rejected:vRejected,locked:vRejected}[me.status]||vPending)();
+  renderOrders();
+}
+
+function card(h){$('box').innerHTML='<div class="card">'+h+'</div>'}
+
+function vPending(){card('<h2>Hồ sơ đang chờ duyệt</h2><p>Cảm ơn bạn đã đăng ký. EYEMEDI sẽ xem kênh của bạn và duyệt trong 1–2 ngày làm việc. Khi được duyệt, bạn đăng nhập lại trang này để ký hợp đồng online.</p><p class="small muted">Cần hỗ trợ nhanh: Zalo <a href="https://zalo.me/0967190005" rel="nofollow">0967 190 005</a></p>')}
+function vRejected(){card('<h2>'+(S.me.status==='locked'?'Tài khoản đã bị khóa':'Hồ sơ chưa được duyệt')+'</h2><p>'+E(S.me.admin_note||'Vui lòng liên hệ EYEMEDI để biết thêm.')+'</p><p class="small muted">Zalo <a href="https://zalo.me/0967190005" rel="nofollow">0967 190 005</a></p>')}
+
+/* ---------- Bước 2: hợp đồng ---------- */
+function vContract(){
+  card('<h2>Ký hợp đồng cộng tác viên online</h2><p class="muted small">Hồ sơ của bạn đã được duyệt. Đọc hợp đồng, điền thông tin và ký tên bên dưới.</p>'+
+  '<div class="contract" id="ctText">Đang tải hợp đồng…</div>'+
+  '<form id="fCt"><div class="row"><div><label>Họ và tên (đúng CCCD) *</label><input name="full_name" required value="'+E(S.me.full_name)+'"></div>'+
+  '<div><label>Ngày sinh *</label><input name="dob" type="date" required></div></div>'+
+  '<div class="row"><div><label>Điện thoại *</label><input name="phone" required inputmode="tel" value="'+E(S.me.phone)+'"></div>'+
+  '<div><label>Email *</label><input name="email" type="email" required value="'+E(S.me.email)+'"></div></div>'+
+  '<div class="row"><div><label>Số CCCD *</label><input name="id_number" required inputmode="numeric" pattern="\\d{9,12}"></div>'+
+  '<div><label>Ngày cấp, nơi cấp *</label><input name="id_issued" required placeholder="VD: 12/05/2021, Cục CS QLHC về TTXH"></div></div>'+
+  '<label>Địa chỉ thường trú *</label><input name="address" required>'+
+  '<div class="row"><div><label>Ngân hàng nhận hoa hồng *</label><input name="bank_name" required value="'+E(S.me.bank_name)+'"></div><div><label>Số tài khoản *</label><input name="bank_account" required inputmode="numeric" value="'+E(S.me.bank_account)+'"></div></div>'+
+  '<label>Chủ tài khoản *</label><input name="bank_holder" required value="'+E(S.me.bank_holder||S.me.full_name)+'">'+
+  '<label>Chữ ký của bạn * <button type="button" class="btn ghost sm" id="sigClr">Ký lại</button></label><canvas class="sig" id="sig"></canvas>'+
+  '<label class="small" style="font-weight:400"><input type="checkbox" required style="width:auto"> Tôi đã đọc, hiểu và đồng ý toàn bộ nội dung hợp đồng.</label>'+
+  '<div id="mCt" class="msg"></div><button class="btn" id="ctBtn" style="margin-top:10px">Ký hợp đồng</button></form>');
+  CTV.call('contractPreview').then(function(r){
+    $('ctText').innerHTML=r.html.replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<\/?(html|head|body|meta)[^>]*>/gi,'')}).catch(function(e){$('ctText').textContent=e.message});
+  var pad=sigPad($('sig'));$('sigClr').onclick=pad.clear;
+  $('fCt').onsubmit=function(e){e.preventDefault();var f=e.target,b=$('ctBtn'),m=$('mCt');
+    if(pad.empty())return CTV.msg(m,'Vui lòng ký tên vào ô chữ ký');
+    var d={full_name:f.full_name.value,dob:f.dob.value,phone:f.phone.value,email:f.email.value,id_number:f.id_number.value,id_issued:f.id_issued.value,address:f.address.value,bank_name:f.bank_name.value,bank_account:f.bank_account.value,bank_holder:f.bank_holder.value,signature:pad.data(),user_agent:navigator.userAgent};
+    CTV.busy(b,true,'Đang ký…');CTV.call('signContract',d).then(load).catch(function(err){CTV.msg(m,err.message);CTV.busy(b,false)})};
+}
+function sigPad(c){
+  var ctx,drawn=false,down=false;
+  function fit(){var r=c.getBoundingClientRect(),k=window.devicePixelRatio||1;c.width=r.width*k;c.height=r.height*k;ctx=c.getContext('2d');ctx.scale(k,k);ctx.lineWidth=2.2;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0a2a6b';drawn=false}
+  fit();
+  function p(e){var r=c.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]}
+  c.addEventListener('pointerdown',function(e){down=true;c.setPointerCapture(e.pointerId);var q=p(e);ctx.beginPath();ctx.moveTo(q[0],q[1])});
+  c.addEventListener('pointermove',function(e){if(!down)return;var q=p(e);ctx.lineTo(q[0],q[1]);ctx.stroke();drawn=true});
+  c.addEventListener('pointerup',function(){down=false});
+  return{clear:fit,empty:function(){return!drawn},data:function(){return c.toDataURL('image/png')}};
+}
+
+/* ---------- Bước 3: đặt hàng mẫu ---------- */
+function vSample(){
+  card('<h2>Đặt sản phẩm mẫu giá -50%</h2><p class="muted small">Bạn được đặt <b>1 lần duy nhất</b> 1 sản phẩm mẫu với giá bằng 50% giá trên web. Chọn kỹ trước khi đặt.</p>'+
+  '<form id="fSp"><div class="row"><div><label>Danh mục</label><select id="spCat"></select></div><div><label>Sản phẩm *</label><select name="product_id" id="spId" required></select></div></div>'+
+  '<div id="spVarBox"><label>Phân loại / màu</label><select name="variant" id="spVar"></select></div>'+
+  '<p id="spPrice" style="margin:14px 0"></p>'+
+  '<div class="row"><div><label>Người nhận *</label><input name="receiver" required value="'+E(S.me.full_name)+'"></div><div><label>SĐT nhận hàng *</label><input name="phone" required value="'+E(S.me.phone)+'"></div></div>'+
+  '<label>Địa chỉ nhận hàng *</label><input name="address" required placeholder="Số nhà, đường, phường/xã, tỉnh/thành">'+
+  '<label>Ghi chú (độ cận nếu cần cắt kính…)</label><input name="note">'+
+  '<div id="mSp" class="msg"></div><button class="btn" style="margin-top:10px">Đặt hàng mẫu</button></form>');
+  CTV.call('products').then(function(list){
+    list=list.filter(function(p){return p.price>0});
+    var cats=[];list.forEach(function(p){if(cats.indexOf(p.category)<0)cats.push(p.category)});
+    $('spCat').innerHTML=cats.map(function(c){return '<option>'+E(c)+'</option>'}).join('');
+    function fillP(){var c=$('spCat').value;$('spId').innerHTML=list.filter(function(p){return p.category===c}).map(function(p){return '<option value="'+E(p.id)+'">'+E(p.name)+'</option>'}).join('');fillV()}
+    function cur(){var id=$('spId').value;return list.filter(function(p){return p.id===id})[0]}
+    function fillV(){var p=cur();var v=(p&&p.variants)||[];$('spVarBox').classList.toggle('hide',!v.length);
+      $('spVar').innerHTML=v.map(function(x){return '<option>'+E(x.name)+'</option>'}).join('');price()}
+    function price(){var p=cur();if(!p)return;var g=p.price,v=(p.variants||[]).filter(function(x){return x.name===$('spVar').value})[0];if(v&&v.price>0)g=v.price;
+      $('spPrice').innerHTML='Giá web: <span class="old">'+CTV.money(g)+'</span> → Giá mẫu: <span class="price">'+CTV.money(Math.round(g*0.5))+'</span>'}
+    $('spCat').onchange=fillP;$('spId').onchange=fillV;$('spVar').onchange=price;fillP();
+  }).catch(function(e){CTV.msg($('mSp'),e.message)});
+  $('fSp').onsubmit=function(e){e.preventDefault();var f=e.target,b=f.querySelector('button.btn'),m=$('mSp'),d={};
+    new FormData(f).forEach(function(v,k){d[k]=v});
+    if(!confirm('Xác nhận đặt mẫu? Bạn chỉ được đặt 1 lần duy nhất.'))return;
+    CTV.busy(b,true);CTV.call('placeSample',d).then(load).catch(function(err){CTV.msg(m,err.message);CTV.busy(b,false)})};
+}
+function sampleInfo(){var s=S.sample;if(!s)return '';
+  return '<table class="tbl"><tr><th>Mã đơn mẫu</th><td>'+E(s.id)+'</td></tr><tr><th>Sản phẩm</th><td>'+E(s.product_name)+(s.variant?' – '+E(s.variant):'')+'</td></tr>'+
+  '<tr><th>Giá mẫu</th><td><span class="old">'+CTV.money(s.web_price)+'</span> <b>'+CTV.money(s.sample_price)+'</b></td></tr><tr><th>Giao tới</th><td>'+E(s.receiver)+' – '+E(s.phone)+'<br>'+E(s.address)+'</td></tr></table>'}
+function vSampleWait(){card('<h2>Đơn mẫu đang được xử lý</h2><p class="muted small">EYEMEDI sẽ liên hệ xác nhận, thanh toán và giao hàng. Sau khi bạn nhận hàng, trang này sẽ mở bước gửi video.</p>'+sampleInfo())}
+
+/* ---------- Bước 4: video ---------- */
+function vVideo(){
+  var last=(S.videos||[]).slice(-1)[0];
+  card('<h2>Gửi video trải nghiệm sản phẩm</h2>'+(last&&last.status==='rejected'?'<div class="msg err show">Video trước chưa đạt: '+E(last.admin_note||'')+'. Vui lòng gửi lại.</div>':'')+
+  '<p class="muted small">Quay video giới thiệu/trải nghiệm sản phẩm mẫu, đăng lên kênh của bạn (TikTok, Facebook, Instagram, YouTube) rồi dán link vào đây. EYEMEDI duyệt video xong sẽ mở hoa hồng và link bán hàng cho bạn.</p>'+
+  '<form id="fVd"><label>Link video *</label><input name="url" type="url" required placeholder="https://www.tiktok.com/@…/video/…">'+
+  '<label>Ghi chú</label><input name="note"><div id="mVd" class="msg"></div><button class="btn" style="margin-top:10px">Gửi video</button></form>');
+  $('fVd').onsubmit=function(e){e.preventDefault();var f=e.target,b=f.querySelector('button.btn'),m=$('mVd');
+    CTV.busy(b,true);CTV.call('submitVideo',{url:f.url.value,note:f.note.value}).then(load).catch(function(err){CTV.msg(m,err.message);CTV.busy(b,false)})};
+}
+function vVideoWait(){var v=(S.videos||[]).slice(-1)[0];card('<h2>Video đang chờ duyệt</h2><p>Video: <a href="'+E(v&&v.url)+'" target="_blank" rel="nofollow noopener">'+E(v&&v.url)+'</a></p><p class="muted small">EYEMEDI sẽ duyệt trong 1–2 ngày làm việc.</p>')}
+
+/* ---------- Đang hoạt động ---------- */
+function vActive(){
+  var base='https://eyemedi.vn/san-pham.html?ref='+encodeURIComponent(S.me.ref_code);
+  card('<h2>Link bán hàng của bạn</h2><p class="muted small">Gửi link này cho khách. Khách bấm vào và đặt hàng trong vòng 30 ngày, đơn sẽ tự ghi nhận cho bạn. Hoa hồng tháng này: <b>'+E(S.month.rate)+'%</b>.</p>'+
+  '<div class="copy"><input id="lnk" readonly value="'+E(base)+'"><button class="btn" id="cp">Sao chép</button></div>'+
+  '<p class="small muted" style="margin-top:10px">Có thể gắn mã vào bất kỳ trang nào của eyemedi.vn bằng cách thêm <b>?ref='+E(S.me.ref_code)+'</b> vào cuối link.</p>'+
+  (S.contract&&S.contract.pdf_url?'<p class="small">Hợp đồng đã ký ngày '+E(S.contract.signed_at)+'.</p>':''));
+  $('cp').onclick=function(){var i=$('lnk');i.select();(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.resolve(document.execCommand('copy'))).then(function(){$('cp').textContent='Đã chép'})};
+}
+
+function renderTier(){
+  var m=S.month,el=$('tier');if(!m){el.innerHTML='';return}
+  var mm=m.month.slice(5)+'/'+m.month.slice(0,4);
+  var h='<div class="stat" style="margin-bottom:12px"><div class="k">Doanh thu đơn đã giao tháng '+E(mm)+'</div><div class="v">'+CTV.money(m.revenue)+' · '+E(m.rate)+'%</div>';
+  if(m.fixed)h+='<div class="small muted">Bạn đang hưởng tỷ lệ cố định '+E(m.rate)+'% theo thỏa thuận riêng.</div>';
+  else if(m.next)h+='<div class="small">Bán thêm <b>'+CTV.money(m.next.need)+'</b> để lên bậc <b>'+E(m.next.rate)+'%</b> cho toàn bộ đơn trong tháng.</div>';
+  else h+='<div class="small">Bạn đang ở bậc cao nhất.</div>';
+  h+='</div>';
+  if(!m.fixed&&S.tiers)h+='<details style="margin-bottom:12px"><summary class="small">Bảng bậc hoa hồng theo doanh thu tháng</summary><table class="tbl" style="margin-top:6px">'+
+    S.tiers.map(function(t,i){return '<tr'+(i===m.tier?' style="background:var(--pale);font-weight:700"':'')+'><td>'+E(t.label)+'</td><td>'+t.rate+'%</td></tr>'}).join('')+
+    '</table><p class="small muted">Bậc đạt được áp dụng cho tất cả đơn đã giao trong tháng. Tháng mới tính lại từ đầu.</p></details>';
+  el.innerHTML=h;
+}
+function renderOrders(){
+  renderTier();
+  var o=S.orders||[];$('cOrders').classList.toggle('hide',S.me.status!=='active'&&!o.length);
+  var ok=o.filter(function(x){return x.status==='delivered'}),pend=o.filter(function(x){return x.status==='new'||x.status==='confirmed'});
+  var sum=function(a,k){return a.reduce(function(s,x){return s+(Number(x[k])||0)},0)};
+  var paid=sum(ok.filter(function(x){return x.paid}),'commission');
+  $('stats').innerHTML=[['Tổng đơn',o.length],['Đơn thành công',ok.length],['Hoa hồng chờ duyệt',CTV.money(sum(pend,'commission'))],['Hoa hồng được nhận',CTV.money(sum(ok,'commission'))+'<div class="k">Đã trả: '+CTV.money(paid)+'</div>']]
+    .map(function(s){return '<div class="stat"><div class="k">'+s[0]+'</div><div class="v">'+s[1]+'</div></div>'}).join('');
+  $('tOrders').innerHTML='<tr><th>Ngày</th><th>Mã đơn</th><th>Khách</th><th>Sản phẩm</th><th>Giá trị</th><th>Hoa hồng</th><th>Trạng thái</th></tr>'+
+    (o.length?o.map(function(x){return '<tr><td>'+E(String(x.created_at).slice(0,10))+'</td><td>'+E(x.order_code)+'</td><td>'+E(x.customer_name)+'<br><span class="small muted">'+E(x.customer_phone)+'</span></td><td class="small">'+E(x.items).replace(/\n/g,'<br>')+'</td><td>'+CTV.money(x.total)+'</td><td>'+CTV.money(x.commission)+'</td><td>'+CTV.pill(CTV.ORDER,x.status)+(x.paid?' <span class="pill ok">Đã trả</span>':'')+'</td></tr>'}).join('')
+     :'<tr><td colspan="7" class="muted">Chưa có đơn hàng nào.</td></tr>');
+}
+
+function formCall(id,action,mid,after){$(id).onsubmit=function(e){e.preventDefault();var f=e.target,b=f.querySelector('button.btn'),d={};new FormData(f).forEach(function(v,k){d[k]=v});
+  CTV.busy(b,true);CTV.call(action,d).then(function(){CTV.msg($(mid),'Đã lưu',true);if(after)after(f)}).catch(function(err){CTV.msg($(mid),err.message)}).finally(function(){CTV.busy(b,false)})}}
+formCall('fProf','updateProfile','mProf');
+formCall('fPw','changePassword','mPw',function(f){f.reset()});
+load();
+</script>
+</body>
+</html>
