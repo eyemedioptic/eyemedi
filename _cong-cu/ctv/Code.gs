@@ -368,11 +368,11 @@ var API = {
 // Thông tin pháp lý Bên A – Giám đốc điền đúng theo Giấy chứng nhận đăng ký kinh doanh.
 // Ô để trống sẽ in "…………" trên hợp đồng.
 var BEN_A = {
-  ten: 'EYEMEDI',                     // tên công ty / hộ kinh doanh đúng theo giấy phép
-  mst: '',                            // mã số thuế
-  dia_chi: '63C Lạc Long Quân, P. Hòa Bình, TP. Hồ Chí Minh',
-  dai_dien: 'Bùi Đình Trọng',
-  chuc_vu: 'Giám đốc',
+  ten: 'HỘ KINH DOANH EYEMEDI',       // tên đúng theo giấy chứng nhận đăng ký
+  mst: '035193007533',                // mã số thuế
+  dia_chi: '63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh',
+  dai_dien: 'Trần Thị Huế',
+  chuc_vu: 'Chủ hộ kinh doanh',
   dien_thoai: '0967 190 005'
 };
 var VIDEO_DAYS = 15;                  // số ngày phải gửi video sau khi nhận mẫu
@@ -409,7 +409,7 @@ function contractHtml_(u, info, signed) {
     '<p><b>Điều 5. Trách nhiệm Bên B.</b> Cung cấp thông tin trung thực theo tài liệu Bên A công bố; không quảng cáo sai sự thật, không tự hứa giá, khuyến mãi hay công dụng chữa bệnh; tuân thủ Luật Quảng cáo và quy định ghi rõ nội dung quảng cáo trên mạng xã hội; không spam, không gian lận, không tự đặt hàng qua mã của mình để hưởng hoa hồng; bảo mật thông tin khách hàng; giữ uy tín thương hiệu EYEMEDI.</p>' +
     '<p><b>Điều 6. Trách nhiệm Bên A.</b> Cung cấp thông tin, hình ảnh sản phẩm; chịu trách nhiệm về chất lượng, giao hàng, bảo hành và chăm sóc khách hàng; cập nhật đơn hàng, hoa hồng minh bạch trên trang CTV; chi trả hoa hồng đúng hạn.</p>' +
     '<p><b>Điều 7. Chấm dứt.</b> Mỗi bên được đơn phương chấm dứt hợp đồng bằng thông báo trước 07 ngày; hoa hồng của đơn đã giao trước ngày chấm dứt vẫn được thanh toán. Nếu Bên B vi phạm Điều 5, Bên A được chấm dứt ngay, khóa tài khoản và không chi trả hoa hồng cho các đơn vi phạm.</p>' +
-    '<p><b>Điều 8. Hiệu lực.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy, hiệu lực 12 tháng kể từ ngày ký và tự động gia hạn nếu không bên nào có ý kiến khác. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đặt trụ sở. Mỗi bên lưu 01 bản điện tử.</p>' +
+    '<p><b>Điều 8. Hiệu lực.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy, hiệu lực 12 tháng kể từ ngày ký và tự động gia hạn nếu không bên nào có ý kiến khác. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh. Mỗi bên lưu 01 bản điện tử.</p>' +
     '<table style="margin-top:6pt"><tr><td class="c" style="width:50%"><b>ĐẠI DIỆN BÊN A</b><br><i style="font-size:9pt">' + (signed ? 'Đã chấp thuận điện tử lúc ' + esc_(signed.at) : '') + '</i><br><br>' + e(A.dai_dien) + '</td>' +
     '<td class="c"><b>BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:56px"><br>' : '<br><br>') + e(info.full_name) +
     (signed ? '<br><i style="font-size:9pt">Ký điện tử lúc ' + esc_(signed.at) + '</i>' : '') + '</td></tr></table>' +
