@@ -16,7 +16,17 @@
 var SITE = 'https://eyemedi.vn';
 var CONTRACT_VERSION = 'HD-CTV-2026.1';
 var SAMPLE_DISCOUNT = 0.5;          // đơn mẫu = 50% giá web
-var DEFAULT_RATE = 10;              // % hoa hồng mặc định
+// Hoa hồng theo DOANH THU THÁNG (tổng giá trị đơn ĐÃ GIAO trong tháng của CTV).
+// Bậc đạt được áp dụng cho TẤT CẢ đơn trong tháng đó. Mỗi bậc kéo dài tới ngưỡng bậc sau.
+// from = doanh thu tối thiểu, above = true nghĩa là phải VƯỢT mức from.
+var TIERS = [
+  { from: 0,         rate: 10, label: 'Dưới 5.000.000đ' },
+  { from: 5000000,   rate: 15, label: '5.000.000đ – dưới 10.000.000đ' },
+  { from: 10000000,  rate: 20, label: '10.000.000đ – 30.000.000đ' },
+  { from: 30000000,  rate: 25, label: 'Trên 30.000.000đ – 50.000.000đ', above: true },
+  { from: 50000000,  rate: 30, label: 'Trên 50.000.000đ – 100.000.000đ', above: true },
+  { from: 100000000, rate: 35, label: 'Trên 100.000.000đ', above: true }
+];
 var SESSION_DAYS = 30;
 
 var SHEETS = {
@@ -109,7 +119,7 @@ var API = {
     var row = {
       id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone,
       email: clean_(r.email, 120), kind: kind, channels: clean_(r.channels, 500), ref_code: code,
-      status: 'pending', commission_rate: DEFAULT_RATE, is_admin: 'FALSE',
+      status: 'pending', commission_rate: '', is_admin: 'FALSE',
       pw_salt: salt, pw_hash: hash_(salt, r.password)
     };
     t.insert(row);
@@ -148,6 +158,8 @@ var API = {
       };
     }).reverse();
     out.orders = orders;
+    out.month = monthSummary_(u);
+    out.tiers = TIERS;
     return out;
   },
 
@@ -261,7 +273,8 @@ var API = {
     var t = table_('DonHang');
     if (t.find('order_code', code)) return false;
     var total = Math.max(0, Math.round(num_(r.total)));
-    var rate = num_(u.commission_rate);
+    var rate = fixedRate_(u);
+    if (rate === null) rate = monthSummary_(u, month_(now_())).rate;
     t.insert({
       order_code: code, created_at: now_(), ref_code: u.ref_code, ctv_id: u.id,
       customer_name: clean_(r.name, 120), customer_phone: clean_(r.phone, 20),
@@ -269,6 +282,7 @@ var API = {
       commission: Math.round(total * rate / 100), status: 'new', paid: 'FALSE',
       page: clean_(r.page, 200)
     });
+    recalc_(u.id, month_(now_()));
     return true;
   },
 
@@ -295,13 +309,14 @@ var API = {
     if (!u) throw new Error('Không tìm thấy CTV');
     var ch = {};
     if (r.status) { if (STATUSES.indexOf(r.status) < 0) throw new Error('Trạng thái sai'); ch.status = r.status; }
-    if (r.commission_rate !== undefined && r.commission_rate !== '') ch.commission_rate = num_(r.commission_rate);
+    if (r.commission_rate !== undefined) ch.commission_rate = String(r.commission_rate).trim() === '' ? '' : num_(r.commission_rate);
     if (r.admin_note !== undefined) ch.admin_note = clean_(r.admin_note, 500);
     if (r.new_password) {
       if (String(r.new_password).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
       ch.pw_salt = Utilities.getUuid(); ch.pw_hash = hash_(ch.pw_salt, r.new_password);
     }
     t.update(u, ch);
+    if (ch.commission_rate !== undefined) recalc_(u.id, month_(now_()));
     return true;
   },
 
@@ -338,10 +353,10 @@ var API = {
     if (r.status) ch.status = r.status;
     if (r.total !== undefined && r.total !== '') {
       ch.total = Math.round(num_(r.total));
-      ch.commission = Math.round(ch.total * num_(o.commission_rate) / 100);
     }
     if (r.paid !== undefined) { ch.paid = r.paid ? 'TRUE' : 'FALSE'; ch.paid_at = r.paid ? now_() : ''; }
     t.update(o, ch);
+    recalc_(o.ctv_id, month_(o.created_at));
     return true;
   }
 };
@@ -361,7 +376,7 @@ function contractHtml_(u, info, signed) {
     '<br>Địa chỉ: ' + e(info.address) + '<br>Số điện thoại: ' + e(u.phone) + '<br>Mã cộng tác viên: <b>' + e(u.ref_code) + '</b></p>' +
     '<p><b>Điều 1. Nội dung</b><br>Bên B giới thiệu, quảng bá và bán sản phẩm của Bên A trên eyemedi.vn thông qua đường link/mã giới thiệu riêng. Bên A chịu trách nhiệm về sản phẩm, giao hàng, bảo hành và chăm sóc khách hàng.</p>' +
     '<p><b>Điều 2. Sản phẩm mẫu</b><br>Sau khi ký hợp đồng, Bên B được đặt <b>một (01) lần duy nhất</b> sản phẩm mẫu với giá bằng 50% giá niêm yết trên eyemedi.vn. Sau khi nhận sản phẩm mẫu, Bên B phải đăng tải video giới thiệu/trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Hoa hồng chỉ được kích hoạt khi Bên A duyệt video.</p>' +
-    '<p><b>Điều 3. Hoa hồng</b><br>Bên B hưởng hoa hồng theo tỷ lệ ' + e(u.commission_rate) + '% trên giá trị đơn hàng thực thu (không gồm phí vận chuyển) của các đơn hàng phát sinh từ link/mã của Bên B và đã giao thành công. Đơn hủy, hoàn trả không được tính hoa hồng. Hoa hồng được đối soát và thanh toán vào tài khoản ngân hàng Bên B đã đăng ký theo kỳ hằng tháng. Bên A khấu trừ thuế thu nhập cá nhân theo quy định của pháp luật (nếu có).</p>' +
+    '<p><b>Điều 3. Hoa hồng</b><br>Bên B hưởng hoa hồng trên giá trị đơn hàng thực thu (không gồm phí vận chuyển) của các đơn hàng phát sinh từ link/mã của Bên B và đã giao thành công, ' + rateText_(u) + '. Đơn hủy, hoàn trả không được tính hoa hồng. Hoa hồng được đối soát và thanh toán vào tài khoản ngân hàng Bên B đã đăng ký theo kỳ hằng tháng. Bên A khấu trừ thuế thu nhập cá nhân theo quy định của pháp luật (nếu có).</p>' +
     '<p><b>Điều 4. Trách nhiệm Bên B</b><br>Cung cấp thông tin trung thực về sản phẩm; không tự ý hứa hẹn giá, khuyến mãi, công dụng y khoa ngoài thông tin Bên A công bố; không dùng hình thức spam, gian lận đơn hàng, tự mua hàng qua mã của mình để hưởng hoa hồng; giữ uy tín thương hiệu EYEMEDI.</p>' +
     '<p><b>Điều 5. Chấm dứt hợp đồng</b><br>Mỗi bên có quyền chấm dứt hợp đồng bằng thông báo trước 07 ngày. Bên A được khóa tài khoản và không thanh toán hoa hồng cho các đơn gian lận nếu Bên B vi phạm Điều 4.</p>' +
     '<p><b>Điều 6. Hiệu lực</b><br>Hợp đồng được ký bằng phương thức điện tử theo Luật Giao dịch điện tử, có hiệu lực từ ngày ký và có giá trị 12 tháng, tự động gia hạn nếu không bên nào có ý kiến khác.</p>' +
@@ -369,6 +384,48 @@ function contractHtml_(u, info, signed) {
     '<td class="c"><b>BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:90px"><br>' : '<br><br><br>') +
     e(info.full_name) + (signed ? '<br><i>Ký điện tử lúc ' + e(signed.at) + '</i>' : '') + '</td></tr></table>' +
     '</body></html>';
+}
+
+/* ====================== HOA HỒNG THEO BẬC ====================== */
+function month_(d) { return String(d || '').slice(0, 7); }      // 'yyyy-MM'
+function fixedRate_(u) { var v = String(u.commission_rate == null ? '' : u.commission_rate).trim(); return v === '' ? null : num_(v); }
+function tierIndex_(rev) {
+  var k = 0;
+  for (var i = 0; i < TIERS.length; i++) if (TIERS[i].above ? rev > TIERS[i].from : rev >= TIERS[i].from) k = i;
+  return k;
+}
+/** Doanh thu đơn đã giao trong tháng + bậc hiện tại + bậc kế tiếp. */
+function monthSummary_(u, m) {
+  m = m || month_(now_());
+  var rev = 0, cnt = 0;
+  table_('DonHang').all().forEach(function (o) {
+    if (o.ctv_id === u.id && o.status === 'delivered' && month_(o.created_at) === m) { rev += num_(o.total); cnt++; }
+  });
+  var fixed = fixedRate_(u), k = tierIndex_(rev), next = TIERS[k + 1];
+  return {
+    month: m, revenue: rev, delivered: cnt, fixed: fixed !== null,
+    rate: fixed !== null ? fixed : TIERS[k].rate, tier: k,
+    next: fixed !== null || !next ? null : { rate: next.rate, need: Math.max(0, next.from - rev + (next.above ? 1 : 0)) }
+  };
+}
+/** Tính lại % và hoa hồng cho mọi đơn CHƯA TRẢ của CTV trong tháng m. */
+function recalc_(ctvId, m) {
+  var u = table_('CTV').find('id', ctvId);
+  if (!u || !m) return;
+  var rate = monthSummary_(u, m).rate;
+  var t = table_('DonHang');
+  t.all().forEach(function (o) {
+    if (o.ctv_id !== ctvId || month_(o.created_at) !== m || o.paid === 'TRUE') return;
+    var c = Math.round(num_(o.total) * rate / 100);
+    if (num_(o.commission_rate) !== rate || num_(o.commission) !== c) t.update(o, { commission_rate: rate, commission: c });
+  });
+}
+function rateText_(u) {
+  var f = fixedRate_(u);
+  if (f !== null) return 'theo tỷ lệ cố định ' + f + '%';
+  return 'theo bậc doanh thu tháng (tổng giá trị đơn đã giao thành công trong tháng) như sau: ' +
+    TIERS.map(function (t) { return t.label + ': ' + t.rate + '%'; }).join('; ') +
+    '. Tỷ lệ của bậc đạt được áp dụng cho toàn bộ đơn hàng đã giao trong tháng đó';
 }
 
 /* ====================== DỮ LIỆU ====================== */

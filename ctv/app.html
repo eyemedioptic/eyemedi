@@ -25,9 +25,10 @@
 
     <div class="card" id="cOrders">
       <h2>Đơn hàng của bạn</h2>
+      <div id="tier"></div>
       <div class="stats" id="stats"></div>
       <div class="scroll" style="margin-top:14px"><table class="tbl" id="tOrders"></table></div>
-      <p class="small muted">Hoa hồng chỉ được tính cho đơn <b>đã giao thành công</b>. Đơn hủy, hoàn trả không tính hoa hồng. Thông tin khách hàng được ẩn bớt để bảo mật.</p>
+      <p class="small muted">Hoa hồng chỉ được tính cho đơn <b>đã giao thành công</b>, % theo bậc doanh thu tháng nên hoa hồng của đơn có thể tăng khi bạn lên bậc. Đơn hủy, hoàn trả không tính hoa hồng. Thông tin khách hàng được ẩn bớt để bảo mật.</p>
     </div>
 
     <div class="card">
@@ -164,14 +165,28 @@ function vVideoWait(){var v=(S.videos||[]).slice(-1)[0];card('<h2>Video đang ch
 /* ---------- Đang hoạt động ---------- */
 function vActive(){
   var base='https://eyemedi.vn/san-pham.html?ref='+encodeURIComponent(S.me.ref_code);
-  card('<h2>Link bán hàng của bạn</h2><p class="muted small">Gửi link này cho khách. Khách bấm vào và đặt hàng trong vòng 30 ngày, đơn sẽ tự ghi nhận cho bạn. Hoa hồng hiện tại: <b>'+E(S.me.commission_rate)+'%</b>.</p>'+
+  card('<h2>Link bán hàng của bạn</h2><p class="muted small">Gửi link này cho khách. Khách bấm vào và đặt hàng trong vòng 30 ngày, đơn sẽ tự ghi nhận cho bạn. Hoa hồng tháng này: <b>'+E(S.month.rate)+'%</b>.</p>'+
   '<div class="copy"><input id="lnk" readonly value="'+E(base)+'"><button class="btn" id="cp">Sao chép</button></div>'+
   '<p class="small muted" style="margin-top:10px">Có thể gắn mã vào bất kỳ trang nào của eyemedi.vn bằng cách thêm <b>?ref='+E(S.me.ref_code)+'</b> vào cuối link.</p>'+
   (S.contract&&S.contract.pdf_url?'<p class="small">Hợp đồng đã ký ngày '+E(S.contract.signed_at)+'.</p>':''));
   $('cp').onclick=function(){var i=$('lnk');i.select();(navigator.clipboard?navigator.clipboard.writeText(i.value):Promise.resolve(document.execCommand('copy'))).then(function(){$('cp').textContent='Đã chép'})};
 }
 
+function renderTier(){
+  var m=S.month,el=$('tier');if(!m){el.innerHTML='';return}
+  var mm=m.month.slice(5)+'/'+m.month.slice(0,4);
+  var h='<div class="stat" style="margin-bottom:12px"><div class="k">Doanh thu đơn đã giao tháng '+E(mm)+'</div><div class="v">'+CTV.money(m.revenue)+' · '+E(m.rate)+'%</div>';
+  if(m.fixed)h+='<div class="small muted">Bạn đang hưởng tỷ lệ cố định '+E(m.rate)+'% theo thỏa thuận riêng.</div>';
+  else if(m.next)h+='<div class="small">Bán thêm <b>'+CTV.money(m.next.need)+'</b> để lên bậc <b>'+E(m.next.rate)+'%</b> cho toàn bộ đơn trong tháng.</div>';
+  else h+='<div class="small">Bạn đang ở bậc cao nhất.</div>';
+  h+='</div>';
+  if(!m.fixed&&S.tiers)h+='<details style="margin-bottom:12px"><summary class="small">Bảng bậc hoa hồng theo doanh thu tháng</summary><table class="tbl" style="margin-top:6px">'+
+    S.tiers.map(function(t,i){return '<tr'+(i===m.tier?' style="background:var(--pale);font-weight:700"':'')+'><td>'+E(t.label)+'</td><td>'+t.rate+'%</td></tr>'}).join('')+
+    '</table><p class="small muted">Bậc đạt được áp dụng cho tất cả đơn đã giao trong tháng. Tháng mới tính lại từ đầu.</p></details>';
+  el.innerHTML=h;
+}
 function renderOrders(){
+  renderTier();
   var o=S.orders||[];$('cOrders').classList.toggle('hide',S.me.status!=='active'&&!o.length);
   var ok=o.filter(function(x){return x.status==='delivered'}),pend=o.filter(function(x){return x.status==='new'||x.status==='confirmed'});
   var sum=function(a,k){return a.reduce(function(s,x){return s+(Number(x[k])||0)},0)};
