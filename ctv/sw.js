@@ -1,8 +1,7 @@
 /* EYEMEDI CTV – service worker: cho phép cài lên màn hình chính, mở nhanh khi mạng yếu.
    Trang HTML luôn lấy bản mới nhất từ mạng (chỉ dùng bản lưu khi mất mạng). */
-// Thông báo đẩy OneSignal (không lỗi nếu chưa bật hoặc mất mạng)
-try { importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js'); } catch (e) {}
-var CACHE = 'eyemedi-ctv-v7';
+// Muốn bật thông báo đẩy OneSignal sau này: thêm dòng importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');
+var CACHE = 'eyemedi-ctv-v8';
 var CORE = ['/ctv/', '/ctv/index.html', '/ctv/app.html', '/ctv/admin.html', '/ctv/ctv.css', '/ctv/api.js',
   '/ctv/pwa.js', '/ctv/push.js', '/ctv/config.js', '/ctv/icons/icon-192.png', '/images/logo-eyemedi.png'];
 self.addEventListener('install', function (e) {
