@@ -17,8 +17,10 @@
 </head>
 <body>
 <header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><span class="sp"></span>
+  <button class="bell" id="bell" title="Thông báo" aria-label="Thông báo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bd hide" id="bd"></span></button>
   <a id="lnAdmin" class="btn ghost sm hide" href="admin.html">Quản trị</a>
   <button id="btnOut" class="btn ghost sm">Đăng xuất</button></header>
+<div class="np hide" id="np"></div>
 <main>
   <div id="load" class="card muted">Đang tải…</div>
   <div id="app" class="hide">
@@ -65,17 +67,39 @@
 <script src="config.js"></script>
 <script src="api.js"></script>
 <script src="/ctv/pwa.js"></script>
+<script src="/ctv/push.js"></script>
 <script>
 if(!CTV.token())location.replace('index.html#dang-nhap');
 var E=CTV.esc,$=function(id){return document.getElementById(id)},S=null;
 var STEP_UI=['Đăng ký','Được duyệt','Ký hợp đồng','Đặt mẫu -50%','Gửi video'];
 
-$('btnOut').onclick=function(){CTV.call('logout').finally(function(){CTV.setToken('');location.href='index.html#dang-nhap'})};
+$('btnOut').onclick=function(){try{CTVPush.logout()}catch(e){}CTV.call('logout').finally(function(){CTV.setToken('');location.href='index.html#dang-nhap'})};
 
 function load(){
-  return CTV.call('me').then(function(d){S=d;render()}).catch(function(e){
+  return CTV.call('me').then(function(d){S=d;render();nstart()}).catch(function(e){
     if(!CTV.token())location.replace('index.html#dang-nhap');else $('load').textContent=e.message});
 }
+
+/* ===== Thông báo của tài khoản ===== */
+var NS={items:[],push:false},NSK='',NT=0;
+function nstart(){if(NSK)return;NSK='eyemedi_ctv_seen_'+S.me.id;try{CTVPush.init(S.me.id)}catch(e){}nload();
+  setInterval(function(){if(!document.hidden)nload()},60000);document.addEventListener('visibilitychange',function(){if(!document.hidden)nload()})}
+function nload(){CTV.call('notifications').then(function(d){var first=!NS.loaded;NS=d;NS.loaded=1;nbadge(!first);if(!$('np').classList.contains('hide'))npanel()}).catch(function(){})}
+function nseen(){try{return localStorage.getItem(NSK)||''}catch(e){return ''}}
+function nbadge(ring){var s=nseen(),un=NS.items.filter(function(x){return x.t>s}).length;
+  $('bd').textContent=un>99?'99+':un;$('bd').classList.toggle('hide',!un);
+  document.title=(un?'('+un+') ':'')+'Tài khoản cộng tác viên | EYEMEDI';
+  if(ring&&un>NT){$('bell').classList.remove('ring');void $('bell').offsetWidth;$('bell').classList.add('ring')}NT=un}
+function npanel(){var s=nseen(),st=window.CTVPush?CTVPush.state():'na';
+  var push=NS.push&&st!=='on'&&st!=='na'?'<div class="push"><span>📲 '+(st==='off'?'Nhận thông báo ngay trên điện thoại, kể cả khi đóng app.':E(CTVPush.hint(st)))+'</span>'+(st==='off'?'<button class="btn sm" id="pOn">Bật</button>':'')+'</div>':'';
+  $('np').innerHTML='<h3><span>Thông báo</span><a id="nAll">Đánh dấu đã xem</a></h3>'+push+
+    (NS.items.length?NS.items.map(function(x){return '<div class="it'+(x.t>s?' un':'')+'"><div class="ic">'+icon(x.title)+'</div><div class="t"><b>'+E(x.title)+'</b><br>'+E(x.body)+'<small>'+E(x.t)+'</small></div></div>'}).join(''):'<div class="empty">Chưa có thông báo nào.</div>');
+  $('nAll').onclick=nmark;var b=$('pOn');if(b)b.onclick=function(){b.disabled=true;CTVPush.enable().then(function(){npanel()})}}
+function icon(t){return /đơn hàng|Đơn EM/i.test(t)?'🛒':/mẫu/i.test(t)?'🎁':/video/i.test(t)?'🎬':/hợp đồng/i.test(t)?'✍️':/hoa hồng|thanh toán/i.test(t)?'💰':/mật khẩu|khóa/i.test(t)?'🔒':'🔔'}
+function nmark(){try{localStorage.setItem(NSK,NS.items.length?NS.items[0].t:'')}catch(e){}nbadge();npanel()}
+function nclose(){if($('np').classList.contains('hide'))return;$('np').classList.add('hide');nmark()}
+$('bell').onclick=function(e){e.stopPropagation();if(!NS.loaded)return;if($('np').classList.contains('hide')){npanel();$('np').classList.remove('hide')}else nclose()};
+document.addEventListener('click',function(e){if(!$('np').contains(e.target)&&!$('bell').contains(e.target))nclose()});
 
 function render(){
   var me=S.me;$('load').classList.add('hide');$('app').classList.remove('hide');

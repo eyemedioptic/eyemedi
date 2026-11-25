@@ -42,7 +42,8 @@ var SHEETS = {
   DonHang: ['order_code', 'created_at', 'ref_code', 'ctv_id', 'customer_name', 'customer_phone',
             'items', 'total', 'commission_rate', 'commission', 'status', 'paid', 'paid_at', 'page', 'eligible'],
   PhienDangNhap: ['token', 'ctv_id', 'expires'],
-  DatLaiMK: ['token_hash', 'ctv_id', 'expires', 'used_at']
+  DatLaiMK: ['token_hash', 'ctv_id', 'expires', 'used_at'],
+  ThongBao: ['id', 'created_at', 'to', 'title', 'body', 'url']
 };
 // CTV có link bán hàng ngay sau khi đăng ký. Hoa hồng chỉ mở khi video review được duyệt (trạng thái active).
 // Đơn bán TRƯỚC khi mở hoa hồng: false = không tính hoa hồng; true = được tính lại khi video được duyệt.
@@ -131,6 +132,8 @@ var API = {
       pw_salt: salt, pw_hash: hash_(salt, r.password)
     };
     t.insert(row);
+    notify_('admin', 'CTV mới đăng ký', name + ' – ' + phone + ' (' + kind + ')', '/ctv/admin.html');
+    notify_(row.id, 'Chào mừng bạn đến với EYEMEDI', 'Hồ sơ đang chờ duyệt. Link bán hàng của bạn đã sẵn sàng, chia sẻ ngay nhé!', '/ctv/app.html');
     return { token: newSession_(row.id), me: publicMe_(row) };
   },
 
@@ -195,6 +198,7 @@ var API = {
     if (String(r.new_password || '').length < 6) throw new Error('Mật khẩu mới tối thiểu 6 ký tự');
     var salt = Utilities.getUuid();
     table_('CTV').update(u, { pw_salt: salt, pw_hash: hash_(salt, r.new_password) });
+    notify_(u.id, 'Mật khẩu vừa được đổi', 'Nếu không phải bạn đổi, hãy liên hệ EYEMEDI ngay.', '/ctv/app.html');
     return true;
   },
 
@@ -246,6 +250,7 @@ var API = {
     // đăng xuất mọi thiết bị cũ
     var ss = table_('PhienDangNhap'), cache = CacheService.getScriptCache();
     ss.all().slice().reverse().forEach(function (s) { if (s.ctv_id === u.id) { cache.remove('s_' + s.token); ss.remove(s); } });
+    notify_(u.id, 'Mật khẩu vừa được đặt lại', 'Bạn đã đặt lại mật khẩu qua email. Các thiết bị cũ đã được đăng xuất.', '/ctv/app.html');
     return { token: newSession_(u.id), me: publicMe_(u) };
   },
 
@@ -296,6 +301,8 @@ var API = {
       dob: info.dob, phone: info.phone, email: info.email
     });
     table_('CTV').update(u, { status: 'signed' });
+    notify_(u.id, 'Đã ký hợp đồng', 'Bước tiếp theo: chọn 1 sản phẩm mẫu giảm 50%.', '/ctv/app.html');
+    notify_('admin', u.full_name + ' đã ký hợp đồng', 'Mã CTV ' + u.ref_code, '/ctv/admin.html');
     return true;
   },
 
@@ -329,6 +336,8 @@ var API = {
     t.insert(row);
     table_('CTV').update(u, { status: 'sample_ordered' });
     mailSample_(u, row);
+    notify_('admin', 'Đơn mẫu mới – ' + u.full_name, row.product_name + ' · ' + fmt_(row.sample_price), '/ctv/admin.html');
+    notify_(u.id, 'EYEMEDI đã nhận đơn mẫu', row.product_name + ' · ' + fmt_(row.sample_price) + '. EYEMEDI sẽ liên hệ giao hàng.', '/ctv/app.html');
     return row;
   },
 
@@ -343,6 +352,8 @@ var API = {
       ref_code: u.ref_code, url: url, note: clean_(r.note, 300), status: 'pending'
     });
     table_('CTV').update(u, { status: 'video_submitted' });
+    notify_('admin', 'Video mới chờ duyệt', u.full_name + ' (' + u.ref_code + ')', '/ctv/admin.html');
+    notify_(u.id, 'Đã gửi video', 'EYEMEDI sẽ duyệt trong 1–2 ngày làm việc.', '/ctv/app.html');
     return true;
   },
 
@@ -373,6 +384,21 @@ var API = {
   },
 
   /* ====================== QUẢN TRỊ ====================== */
+  /* Thông báo của tài khoản đang đăng nhập (admin nhận thêm thông báo quản trị). */
+  notifications: function (r) {
+    var u = auth_(r), isAdmin = u.is_admin === 'TRUE' || u.is_admin === 'true';
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('ThongBao');
+    if (!sh || sh.getLastRow() < 2) return { items: [], push: !!pushCfg_().app };
+    var n = Math.min(3000, sh.getLastRow() - 1), start = sh.getLastRow() - n + 1;
+    var vals = sh.getRange(start, 1, n, 6).getValues(), out = [];
+    for (var i = vals.length - 1; i >= 0 && out.length < 60; i--) {
+      var to = String(vals[i][2]);
+      if (to === u.id || (isAdmin && to === 'admin'))
+        out.push({ id: String(vals[i][0]), t: String(vals[i][1]), title: String(vals[i][3]), body: String(vals[i][4]), url: String(vals[i][5]), admin: to === 'admin' });
+    }
+    return { items: out, push: !!pushCfg_().app };
+  },
+
   adminData: function (r) {
     admin_(r);
     var ctv = table_('CTV').all().map(function (u) {
@@ -401,10 +427,20 @@ var API = {
       if (String(r.new_password).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
       ch.pw_salt = Utilities.getUuid(); ch.pw_hash = hash_(ch.pw_salt, r.new_password);
     }
-    var wasActive = u.status === 'active';
+    var wasActive = u.status === 'active', oldStatus = u.status, oldRate = String(u.commission_rate);
     t.update(u, ch);
     if (ch.status === 'active' && !wasActive) openCommission_(u.id);
     if (ch.commission_rate !== undefined) recalc_(u.id, month_(now_()));
+    var MSG = {
+      approved: ['Hồ sơ đã được duyệt', 'Mời bạn ký hợp đồng cộng tác online để tiếp tục.'],
+      rejected: ['Hồ sơ chưa được duyệt', ch.admin_note || u.admin_note || 'Vui lòng liên hệ EYEMEDI để biết thêm.'],
+      locked: ['Tài khoản đã bị khóa', ch.admin_note || u.admin_note || 'Vui lòng liên hệ EYEMEDI.'],
+      active: ['Tài khoản đang hoạt động', 'Hoa hồng của bạn đã được mở.']
+    };
+    if (ch.status && ch.status !== oldStatus && MSG[ch.status]) notify_(u.id, MSG[ch.status][0], MSG[ch.status][1], '/ctv/app.html');
+    if (ch.pw_hash) notify_(u.id, 'EYEMEDI đã cấp lại mật khẩu', 'Hãy đăng nhập bằng mật khẩu mới và đổi lại mật khẩu của riêng bạn.', '/ctv/app.html');
+    if (ch.commission_rate !== undefined && String(ch.commission_rate) !== oldRate)
+      notify_(u.id, 'Cập nhật % hoa hồng', ch.commission_rate === '' ? 'Bạn hưởng hoa hồng theo bậc doanh thu tháng.' : 'Bạn được hưởng mức cố định ' + ch.commission_rate + '%.', '/ctv/app.html');
     return true;
   },
 
@@ -413,6 +449,11 @@ var API = {
     var t = table_('DonMau');
     var s = t.find('id', r.id);
     if (!s) throw new Error('Không tìm thấy đơn mẫu');
+    var SM = { confirmed: ['Đơn mẫu đã được xác nhận', 'EYEMEDI đang chuẩn bị hàng cho bạn.'],
+      shipping: ['Đơn mẫu đang được giao', 'Bạn chú ý điện thoại để nhận hàng nhé.'],
+      delivered: ['Đã nhận hàng mẫu', 'Hãy quay video review và gửi link trong ' + VIDEO_DAYS + ' ngày để mở hoa hồng.'],
+      cancelled: ['Đơn mẫu đã hủy', 'Vui lòng liên hệ EYEMEDI nếu cần hỗ trợ.'] };
+    if (r.status !== s.status && SM[r.status]) notify_(s.ctv_id, SM[r.status][0], s.product_name + '. ' + SM[r.status][1], '/ctv/app.html');
     t.update(s, { status: r.status });
     if (r.status === 'delivered') {
       var c = table_('CTV'); var u = c.find('id', s.ctv_id);
@@ -429,6 +470,7 @@ var API = {
     t.update(v, { status: r.ok ? 'approved' : 'rejected', admin_note: clean_(r.note, 300) });
     var c = table_('CTV'); var u = c.find('id', v.ctv_id);
     if (u && u.status === 'video_submitted') { c.update(u, { status: r.ok ? 'active' : 'sample_received' }); if (r.ok) openCommission_(u.id); }
+    notify_(v.ctv_id, r.ok ? 'Video đạt – đã mở hoa hồng!' : 'Video chưa đạt', r.ok ? 'Chúc mừng bạn, từ giờ mọi đơn giao thành công đều được tính hoa hồng.' : (clean_(r.note, 300) || 'Vui lòng quay lại và gửi video mới.'), '/ctv/app.html');
     return true;
   },
 
@@ -443,8 +485,17 @@ var API = {
       ch.total = Math.round(num_(r.total));
     }
     if (r.paid !== undefined) { ch.paid = r.paid ? 'TRUE' : 'FALSE'; ch.paid_at = r.paid ? now_() : ''; }
+    var before = { status: o.status, paid: o.paid };
     t.update(o, ch);
     recalc_(o.ctv_id, month_(o.created_at));
+    var o2 = table_('DonHang').find('order_code', o.order_code) || o;
+    var OS = { confirmed: 'đã được xác nhận', delivered: 'đã giao thành công', cancelled: 'đã bị hủy', returned: 'bị hoàn trả' };
+    if (ch.status && ch.status !== before.status && OS[ch.status])
+      notify_(o.ctv_id, 'Đơn ' + o.order_code + ' ' + OS[ch.status], ch.status === 'delivered' ?
+        (eligible_(o2) ? 'Hoa hồng: ' + fmt_(o2.commission) + ' (' + o2.commission_rate + '%).' : 'Hoa hồng được mở sau khi video review được duyệt.') :
+        'Giá trị đơn ' + fmt_(o2.total) + '.', '/ctv/app.html');
+    if (ch.paid === 'TRUE' && before.paid !== 'TRUE')
+      notify_(o.ctv_id, 'EYEMEDI đã thanh toán hoa hồng', 'Đơn ' + o.order_code + ': ' + fmt_(o2.commission) + '.', '/ctv/app.html');
     return true;
   }
 };
@@ -535,7 +586,54 @@ function insertOrder_(u, code, r, at) {
     status: 'new', paid: 'FALSE', page: clean_(r.page, 200), eligible: on ? 'TRUE' : 'FALSE'
   });
   recalc_(u.id, month_(at));   // tính % và hoa hồng theo bậc của tháng
+  notify_(u.id, 'Có đơn hàng mới qua link của bạn', 'Mã ' + code + ' · ' + fmt_(total) + '. Hoa hồng tính khi đơn giao thành công.', '/ctv/app.html');
+  notify_('admin', 'Đơn mới từ CTV ' + u.full_name, 'Mã ' + code + ' · ' + fmt_(total), '/ctv/admin.html');
   return true;
+}
+
+/* ====================== THÔNG BÁO ====================== */
+function fmt_(n) { return String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + 'đ'; }
+function pushCfg_() {
+  var p = PropertiesService.getScriptProperties();
+  return { app: p.getProperty('ONESIGNAL_APP_ID') || '', key: p.getProperty('ONESIGNAL_KEY') || '' };
+}
+/** Ghi 1 thông báo cho 1 CTV (to = id) hoặc cho quản trị (to = 'admin'), và gửi thông báo đẩy nếu đã cài OneSignal. Không bao giờ làm hỏng thao tác chính. */
+function notify_(to, title, body, url) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet(), sh = ss.getSheetByName('ThongBao');
+    if (!sh) {
+      sh = ss.insertSheet('ThongBao');
+      sh.getRange(1, 1, 1, SHEETS.ThongBao.length).setValues([SHEETS.ThongBao]).setFontWeight('bold');
+      sh.setFrozenRows(1); sh.getRange('A:Z').setNumberFormat('@');
+    }
+    sh.appendRow(['TB' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase(),
+      now_(), String(to), cell_(clean_(title, 150)), cell_(clean_(body, 400)), String(url || '')]);
+  } catch (e) { Logger.log('Không ghi được thông báo: ' + e); }
+  try {
+    var cfg = pushCfg_();
+    if (!cfg.app || !cfg.key) return;
+    var ids = to === 'admin' ? table_('CTV').all().filter(function (x) { return x.is_admin === 'TRUE' || x.is_admin === 'true'; }).map(function (x) { return x.id; }) : [String(to)];
+    if (!ids.length) return;
+    UrlFetchApp.fetch('https://api.onesignal.com/notifications', {
+      method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+      headers: { Authorization: 'Key ' + cfg.key },
+      payload: JSON.stringify({ app_id: cfg.app, target_channel: 'push', include_aliases: { external_id: ids },
+        headings: { en: String(title) }, contents: { en: String(body || title) }, url: SITE + (url || '/ctv/app.html') })
+    });
+  } catch (e) { Logger.log('Không gửi được thông báo đẩy: ' + e); }
+}
+
+/**
+ * CÀI THÔNG BÁO ĐẨY (OneSignal): điền 2 dòng dưới (lấy trong OneSignal → Settings → Keys & IDs) → chọn hàm caiThongBaoDay → Chạy.
+ * Chạy xong XÓA khóa REST API khỏi code (khóa đã được lưu an toàn trong Thuộc tính tập lệnh). Không cần triển khai lại.
+ */
+function caiThongBaoDay() {
+  var ONESIGNAL_APP_ID = '';     // VD: 'a1b2c3d4-....'
+  var ONESIGNAL_REST_KEY = '';   // "REST API Key" (bắt đầu bằng os_v2_...)
+  if (!ONESIGNAL_APP_ID || !ONESIGNAL_REST_KEY) { Logger.log('Điền đủ ONESIGNAL_APP_ID và ONESIGNAL_REST_KEY rồi chạy lại.'); return; }
+  PropertiesService.getScriptProperties().setProperties({ ONESIGNAL_APP_ID: ONESIGNAL_APP_ID.trim(), ONESIGNAL_KEY: ONESIGNAL_REST_KEY.trim() });
+  notify_('admin', 'Đã bật thông báo đẩy', 'Từ giờ hoạt động của CTV sẽ báo về điện thoại.', '/ctv/admin.html');
+  Logger.log('Đã lưu. Đã gửi 1 thông báo thử tới tài khoản quản trị (nếu điện thoại đã bật thông báo). Nhớ xóa khóa khỏi code.');
 }
 
 /** Đơn có được tính hoa hồng không (đơn cũ không có cột eligible = được tính). */

@@ -47,3 +47,18 @@ canvas.sig{width:100%;height:170px;border:2px dashed var(--line);border-radius:1
 .hide{display:none!important}
 .center{max-width:460px;margin:30px auto}
 .scroll .tbl{min-width:640px}
+
+/* Chuông thông báo */
+.bell{position:relative;background:none;border:1px solid var(--line);border-radius:50%;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:#0b5558;padding:0}
+.bell svg{width:21px;height:21px}.bell.ring svg{animation:ring 1.2s ease 2}
+@keyframes ring{0%,100%{transform:rotate(0)}15%{transform:rotate(16deg)}30%{transform:rotate(-14deg)}45%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}}
+.bell .bd{position:absolute;top:-5px;right:-6px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#e0322f;color:#fff;font:700 11px/19px Arial,sans-serif;text-align:center;box-shadow:0 0 0 2px #fff}
+.np{position:fixed;top:60px;right:12px;width:min(380px,calc(100vw - 24px));max-height:calc(100vh - 80px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.18);z-index:20}
+.np h3{margin:0;padding:14px 16px 8px;font-size:16px;display:flex;align-items:center}.np h3 span{flex:1}.np h3 a{font-size:12px;font-weight:400;cursor:pointer}
+.np .todo{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;border-bottom:1px solid var(--line)}
+.np .todo button{border:0;border-radius:16px;padding:5px 10px;font-size:12px;background:#fff4e0;color:#8a5300;cursor:pointer}.np .todo button.z{background:#f1f5f5;color:#678}
+.np .it{display:flex;gap:10px;padding:10px 16px;border-bottom:1px solid #eef3f3;cursor:pointer;font-size:14px;line-height:1.35}.np .it:hover{background:#f5fafa}
+.np .it.un{background:#eef8f8}.np .it.un .ic{position:relative}.np .it.un .ic::after{content:'';position:absolute;top:0;right:-1px;width:9px;height:9px;border-radius:50%;background:#e0322f;box-shadow:0 0 0 2px #eef8f8}
+.np .ic{flex:0 0 32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:#e6f2f2}
+.np .t{flex:1}.np .t small{display:block;color:#789;margin-top:2px}.np .empty{padding:20px 16px;color:#789;font-size:14px}
+.np .push{display:flex;gap:10px;align-items:center;padding:10px 16px;background:#fff8e6;border-bottom:1px solid var(--line);font-size:13px}.np .push span{flex:1}
