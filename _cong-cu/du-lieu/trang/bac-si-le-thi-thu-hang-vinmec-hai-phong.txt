@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKI Lê Thị Thu Hằng – da liễu, laser thẩm mỹ Vinmec Hải Phòng
+TITLE: Bác sĩ Lê Thị Thu Hằng – da liễu Vinmec Hải Phòng | EYEMEDI
+SLUG: bac-si-le-thi-thu-hang-vinmec-hai-phong
+TU_KHOA_CHINH: bác sĩ Lê Thị Thu Hằng Vinmec Hải Phòng
+TU_KHOA_PHU: bác sĩ da liễu Hải Phòng, laser thẩm mỹ Hải Phòng, điều trị sẹo lõm bằng laser, da liễu Vinmec Hải Phòng
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKI Lê Thị Thu Hằng, bác sĩ da liễu tại Vinmec Hải Phòng: quá trình đào tạo trong nước và tại Pháp, bệnh da, laser thẩm mỹ và cách liên hệ bệnh viện.
+NGAY_DANG: 2026-11-25
+DOAN_MO_DAU: Người dân Hải Phòng tìm bác sĩ da liễu thường quan tâm cả hai mảng: chữa bệnh da và thẩm mỹ da bằng laser. Bài viết tóm tắt thông tin Vinmec công bố về BS.CKI Lê Thị Thu Hằng tại Bệnh viện Đa khoa Quốc tế Vinmec Hải Phòng để bạn đọc tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-le-thi-thu-hang-vinmec-hai-phong-1.jpg | Góc kiểm tra thị lực tại cửa hàng EYEMEDI
+anh-rieng/bac-si-le-thi-thu-hang-vinmec-hai-phong-2.jpg | Đo khúc xạ với gọng thử tại EYEMEDI
+anh-rieng/bac-si-le-thi-thu-hang-vinmec-hai-phong-3.jpg | Tư vấn chăm sóc mắt tại EYEMEDI
+H2_1: Hành trình nghề nghiệp từ Việt Tiệp đến Vinmec
+NOI_DUNG_1: <p>Theo hồ sơ trên website Vinmec, <b>BS.CKI Lê Thị Thu Hằng</b> là bác sĩ Da liễu thuộc Khoa Khám bệnh &amp; Nội khoa, Vinmec Hải Phòng, với 16 năm kinh nghiệm.</p>
+<p>Bác sĩ công tác tại khoa Da liễu Bệnh viện Hữu nghị Việt Tiệp (2008–2017), làm bác sĩ nội trú (FFI) tại khoa Da liễu Bệnh viện Avicenne, Pháp (2011–2012) và làm việc tại Vinmec Hải Phòng từ tháng 1/2018. Về đào tạo, hồ sơ ghi bằng DFMS Da liễu của Đại học Paris XIII (2012), bằng Chuyên khoa I Da liễu của Đại học Y Hà Nội (2013) cùng chứng chỉ laser, tế bào gốc và chăm sóc da thẩm mỹ tại Bệnh viện Da liễu Trung ương. Bác sĩ là hội viên Hội Da liễu Việt Nam.</p>
+H2_2: Bệnh da và thẩm mỹ da theo hồ sơ công bố
+NOI_DUNG_2: <ul><li><b>Bệnh da người lớn, trẻ em</b>: viêm da cơ địa, vảy nến, viêm da tiếp xúc, trứng cá, nám má, mày đay, nấm da, dị ứng thuốc.</li><li><b>Bệnh da tự miễn, hiếm gặp</b> và bệnh lây truyền qua đường tình dục.</li><li><b>Laser thẩm mỹ</b>: u lành tính ở da, trẻ hóa da, sẹo lõm bằng laser fractional kết hợp PRP.</li><li><b>Chăm sóc da</b>: phục hồi da sau laser, da nhạy cảm.</li></ul>
+<p>Hotline Vinmec Hải Phòng: 0225 7309 888. Nếu ở Hà Nội, bạn đọc có thể xem thêm <a href="/bac-si-nguyen-thi-to-anh-vinmec-times-city.html">BS.CKII Nguyễn Thị Tố Anh tại Vinmec Times City</a>.</p>
+H2_3: Bảo vệ mắt khi điều trị laser vùng mặt
+NOI_DUNG_3: <p>Khi chiếu laser vùng mặt, người bệnh thường được che mắt bằng kính hoặc miếng bảo hộ chuyên dụng. Sau liệu trình, da và mắt dễ nhạy sáng hơn nên cần chống nắng kỹ, đội mũ và đeo kính râm có chống tia UV khi ra ngoài. Tham khảo thêm <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu trị sẹo tại TP.HCM</a> nếu bạn sống ở phía Nam.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Sau laser, một chiếc kính râm chống UV giúp giảm chói khi ra nắng. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM tư vấn kính mát và đo mắt miễn phí.
+HOI_1: Bác sĩ Lê Thị Thu Hằng từng được đào tạo ở nước ngoài không?
+DAP_1: Có. Hồ sơ Vinmec ghi bác sĩ có bằng DFMS Da liễu của Đại học Paris XIII và từng là bác sĩ nội trú tại Bệnh viện Avicenne, Pháp.
+HOI_2: Bác sĩ có điều trị sẹo lõm không?
+DAP_2: Hồ sơ liệt kê điều trị sẹo lõm bằng laser fractional và huyết tương giàu tiểu cầu (PRP); phương pháp cụ thể do bác sĩ chỉ định sau khám.
+HOI_3: Đặt lịch khám với bác sĩ như thế nào?
+DAP_3: Gọi hotline Vinmec Hải Phòng 0225 7309 888, đặt lịch trên website Vinmec hoặc ứng dụng MyVinmec.
+SAN_PHAM: kinh-bao-ho-victor, kinh-mat-nam-g-style, kinh-mat-nam-rb-deo, kinh-mat-retro-y2k, p-sufiar-fc7721, p-sufiar-fc9885, razza-sports, tomy-9555
+LIEN_QUAN: bac-si-nguyen-thi-to-anh-vinmec-times-city | BS.CKII Nguyễn Thị Tố Anh – Vinmec Times City; bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo tại TP.HCM; cach-chon-kem-chong-nang-cho-da-nhay-cam | Cách chọn kem chống nắng cho da nhạy cảm
+LINK_TRONG_BAI: BS.CKII Nguyễn Thị Tố Anh tại Vinmec Times City → bac-si-nguyen-thi-to-anh-vinmec-times-city; bác sĩ da liễu trị sẹo tại TP.HCM → bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-nguyen-thi-to-anh-vinmec-times-city, bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5853, IMG_9106, IMG_9072)
+NGUON_THAM_KHAO: Vinmec – BSCK I Lê Thị Thu Hằng (https://www.vinmec.com/vie/chuyen-gia-y-te/le-thi-thu-hang-50883-vi); Vinmec – Lê Thị Thu Hằng, English profile (https://www.vinmec.com/eng/professionals/le-thi-thu-hang-50883-en)

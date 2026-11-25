@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKI Bế Thu Thủy – laser, tiêm thẩm mỹ da tại Tâm Anh Hà Nội
+TITLE: Bác sĩ Bế Thu Thủy – Thẩm mỹ da Tâm Anh Hà Nội | EYEMEDI
+SLUG: bac-si-be-thu-thuy-tham-my-tam-anh-ha-noi
+TU_KHOA_CHINH: bác sĩ Bế Thu Thủy Tâm Anh Hà Nội
+TU_KHOA_PHU: laser trẻ hóa da Hà Nội, trị nám Long Biên, xử lý biến chứng filler, khoa Thẩm mỹ Tâm Anh
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKI Bế Thu Thủy, khoa Thẩm mỹ BVĐK Tâm Anh Hà Nội: đào tạo, nơi từng công tác, laser trị mụn, sẹo, nám, tiêm thẩm mỹ và thông tin liên hệ bệnh viện.
+NGAY_DANG: 2026-11-25
+DOAN_MO_DAU: Mụn, sẹo, nám hay da nhiễm corticoid là những vấn đề khiến nhiều người tìm đến bác sĩ thẩm mỹ da. Bài viết tổng hợp thông tin Bệnh viện Đa khoa Tâm Anh công bố về BS.CKI Bế Thu Thủy, khoa Thẩm mỹ tại cơ sở Hà Nội, chỉ để tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-be-thu-thuy-tham-my-tam-anh-ha-noi-1.jpg | Không gian cửa hàng kính mắt EYEMEDI
+anh-rieng/bac-si-be-thu-thuy-tham-my-tam-anh-ha-noi-2.jpg | Đo khúc xạ tự động tại EYEMEDI
+anh-rieng/bac-si-be-thu-thuy-tham-my-tam-anh-ha-noi-3.jpg | Bàn tư vấn chăm sóc mắt và da tại EYEMEDI
+H2_1: Từ bác sĩ đa khoa đến chuyên khoa Da liễu
+NOI_DUNG_1: <p>Hồ sơ chuyên gia của Tâm Anh ghi <b>BS.CKI Bế Thu Thủy</b> có 8 năm kinh nghiệm lâm sàng, hiện là bác sĩ khoa Thẩm mỹ, BVĐK Tâm Anh Hà Nội từ năm 2025.</p>
+<p>Bác sĩ học Bác sĩ đa khoa tại Đại học Y Thái Nguyên (2010–2016) và Chuyên khoa I Da liễu tại Trường Đại học Y Hà Nội (2023–2025). Trước đó, bác sĩ làm việc tại Trung tâm Da Thẩm mỹ Quốc tế DND (2018–2019), sau đó tại các phòng khám da liễu ở Hà Nội (2019–2025). Các khóa ngắn hạn gồm laser và tế bào gốc, Botulinum toxin, căng chỉ tại Bệnh viện Da liễu Trung ương và tiêm chất làm đầy tại Bệnh viện Da liễu Hà Nội.</p>
+H2_2: Nhóm điều trị được liệt kê
+NOI_DUNG_2: <ul><li><b>Mụn, sẹo, nám, bớt sắc tố</b> và trẻ hóa da bằng laser, thiết bị năng lượng (Fotona, Pico, CO2 phân đoạn, RF, HIFU, Thermage, Ultherapy).</li><li><b>Tiêm thẩm mỹ</b>: mesotherapy, botox, filler.</li><li><b>Ca khó</b>: da nhiễm corticoid, tăng sắc tố sau laser, biến chứng sau tiêm filler/botox.</li></ul>
+<p>BVĐK Tâm Anh Hà Nội: 108 Hoàng Như Tiếp, Phường Bồ Đề. Hotline: 024 7106 6858 – 024 3872 3872. Cùng khoa còn có <a href="/bac-si-dam-thi-thuy-hong-tham-my-tam-anh-ha-noi.html">BS.CKII Đàm Thị Thúy Hồng</a>.</p>
+H2_3: Tiêm thẩm mỹ gần vùng mắt cần lưu ý gì?
+NOI_DUNG_3: <p>Vùng quanh mắt có nhiều mạch máu nhỏ, vì vậy tiêm filler hay botox ở đây cần bác sĩ có chuyên môn, tại cơ sở được cấp phép. Nếu sau tiêm thấy nhìn mờ, đau nhức mắt hay da đổi màu bất thường, cần đến cơ sở y tế ngay. Đọc thêm: <a href="/tiem-filler-co-an-toan-khong.html">tiêm filler có an toàn không</a>.</p>
+<p>Thông tin chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Mắt khô, nhạy sáng sau liệu trình thẩm mỹ? Hãy đeo kính chống UV khi ra ngoài. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM hỗ trợ đo mắt, chọn kính phù hợp.
+HOI_1: Bác sĩ Bế Thu Thủy làm việc ở khoa nào?
+DAP_1: Theo website Tâm Anh, bác sĩ thuộc khoa Thẩm mỹ, Bệnh viện Đa khoa Tâm Anh Hà Nội, công tác tại đây từ năm 2025.
+HOI_2: Bác sĩ có xử lý da nhiễm corticoid không?
+DAP_2: Hồ sơ có nêu xử lý da nhiễm corticoid, tăng sắc tố sau laser và biến chứng sau tiêm; hướng điều trị cụ thể do bác sĩ quyết định khi khám.
+HOI_3: Liên hệ BVĐK Tâm Anh Hà Nội bằng cách nào?
+DAP_3: Gọi 024 7106 6858 hoặc 024 3872 3872, hoặc đặt lịch trên website tamanhhospital.vn.
+SAN_PHAM: kinh-mat-nam-rb-deo, kinh-mat-nam-rb-tam, kinh-mat-nu-g-style, mayblass-s11890, p-sufiar-2804, panda-tr90, santino-one-0124, vidic-night-view-p8602
+LIEN_QUAN: bac-si-dam-thi-thuy-hong-tham-my-tam-anh-ha-noi | BS.CKII Đàm Thị Thúy Hồng – Thẩm mỹ Tâm Anh Hà Nội; tiem-filler-co-an-toan-khong | Tiêm filler có an toàn không?; bac-si-nguyen-hong-ha-benh-vien-viet-duc | PGS.TS Nguyễn Hồng Hà – BV Việt Đức
+LINK_TRONG_BAI: BS.CKII Đàm Thị Thúy Hồng → bac-si-dam-thi-thuy-hong-tham-my-tam-anh-ha-noi; tiêm filler có an toàn không → tiem-filler-co-an-toan-khong
+LINK_VAO_TU: bac-si-dam-thi-thuy-hong-tham-my-tam-anh-ha-noi, tiem-filler-co-an-toan-khong
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5852, IMG_9099, IMG_9076)
+NGUON_THAM_KHAO: Bệnh viện Đa khoa Tâm Anh – BS.CKI Bế Thu Thủy (https://tamanhhospital.vn/chuyen-gia/be-thu-thuy/)

@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKI Lưu Thị Tâm – bác sĩ Da liễu Vinmec Hạ Long, Quảng Ninh
+TITLE: Bác sĩ Lưu Thị Tâm – Da liễu Vinmec Hạ Long | EYEMEDI
+SLUG: bac-si-luu-thi-tam-vinmec-ha-long
+TU_KHOA_CHINH: bác sĩ Lưu Thị Tâm Vinmec Hạ Long
+TU_KHOA_PHU: bác sĩ da liễu Quảng Ninh, khám da liễu Hạ Long, điều trị nám Hạ Long, viêm da tiếp xúc
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKI Lưu Thị Tâm, bác sĩ Da liễu tại Vinmec Hạ Long, Quảng Ninh: quá trình đào tạo, công tác, các nhóm bệnh da, thẩm mỹ da và hotline đặt lịch.
+NGAY_DANG: 2026-11-25
+DOAN_MO_DAU: Ở Quảng Ninh, người bệnh da liễu có thêm lựa chọn khám tại bệnh viện quốc tế ngay trung tâm Hạ Long. Bài viết tóm lược thông tin Vinmec công bố về BS.CKI Lưu Thị Tâm, bác sĩ Da liễu tại Bệnh viện Đa khoa Quốc tế Vinmec Hạ Long, để bạn đọc tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-luu-thi-tam-vinmec-ha-long-1.jpg | Kỹ thuật viên đo khúc xạ tại EYEMEDI
+anh-rieng/bac-si-luu-thi-tam-vinmec-ha-long-2.jpg | Tư vấn sản phẩm chăm sóc mắt tại EYEMEDI
+anh-rieng/bac-si-luu-thi-tam-vinmec-ha-long-3.jpg | Máy đo khúc xạ tại cửa hàng EYEMEDI
+H2_1: Hơn một thập kỷ gắn bó với ngành da liễu Quảng Ninh
+NOI_DUNG_1: <p>Trang chuyên gia Vinmec ghi <b>BS.CKI Lưu Thị Tâm</b> là bác sĩ Da liễu, Khoa Khám bệnh &amp; Nội khoa, Vinmec Hạ Long, có 14 năm kinh nghiệm.</p>
+<p>Bác sĩ tốt nghiệp Bác sĩ đa khoa tại Trường Đại học Y Hải Phòng (2006–2012) và Chuyên khoa I Da liễu tại Trường Đại học Y Hà Nội (2021–2023). Bác sĩ làm việc tại Bệnh viện Đa khoa tỉnh Quảng Ninh (2012–2021), Bệnh viện Lão khoa – Phục hồi chức năng Quảng Ninh (từ 7/2025) và Vinmec Hạ Long từ tháng 3/2026.</p>
+H2_2: Bốn nhóm bệnh da trong hồ sơ
+NOI_DUNG_2: <ol><li><b>Viêm, dị ứng, nhiễm trùng da</b>: chàm, mày đay, viêm da dầu, viêm da tiếp xúc, trứng cá, zona, herpes, nấm da, ghẻ.</li><li><b>Bệnh da mạn tính, hệ thống</b>: vảy nến, lupus ban đỏ, xơ cứng bì, viêm da cơ.</li><li><b>Thẩm mỹ, rối loạn sắc tố</b>: nám, tàn nhang, tăng sắc tố sau viêm, sẹo lồi, sẹo lõm, viêm nang lông.</li><li><b>Tóc, móng, u da lành tính</b>: rụng tóc, nấm móng, nốt ruồi, u mềm treo.</li></ol>
+<p>Hotline Vinmec Hạ Long: 0203 3828 188. Ở miền Trung, hệ thống Vinmec có <a href="/bac-si-tran-van-trong-vinmec-da-nang.html">BS.CKII Trần Văn Trọng tại Vinmec Đà Nẵng</a>.</p>
+H2_3: Viêm da mí mắt – đừng tự xử lý
+NOI_DUNG_3: <p>Mí mắt là vùng da mỏng, dễ viêm da tiếp xúc do mỹ phẩm trang điểm, nước rửa hay dung dịch ngâm kính áp tròng. Khi mí đỏ, ngứa, bong vảy kéo dài, nên ngưng sản phẩm nghi ngờ và đi khám thay vì tự bôi thuốc có corticoid. Tham khảo <a href="/cach-chon-my-pham-cho-da-dau-mun.html">cách chọn mỹ phẩm cho da dầu mụn</a>.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Mí mắt kích ứng khi đeo lens? Hãy tạm chuyển sang kính gọng. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM tư vấn kính gọng và dung dịch kính áp tròng dịu nhẹ.
+HOI_1: Bác sĩ Lưu Thị Tâm làm việc tại Vinmec Hạ Long từ khi nào?
+DAP_1: Hồ sơ Vinmec ghi bác sĩ công tác tại Bệnh viện Đa khoa Quốc tế Vinmec Hạ Long từ tháng 3/2026.
+HOI_2: Bác sĩ có khám nám và sẹo không?
+DAP_2: Có. Nhóm thẩm mỹ và rối loạn sắc tố trong hồ sơ gồm nám, tàn nhang, tăng sắc tố sau viêm, sẹo lồi và sẹo lõm.
+HOI_3: Đặt lịch khám thế nào?
+DAP_3: Gọi hotline Vinmec Hạ Long 0203 3828 188, hoặc đăng ký khám trên website Vinmec, ứng dụng MyVinmec.
+SAN_PHAM: kinh-mat-retro-y2k, p-sufiar-2804, p-sufiar-fc9909, razza-sports, swallow-m2027, swallow-s12019, trong-trang-cung-156, vidic-ems
+LIEN_QUAN: bac-si-tran-van-trong-vinmec-da-nang | BS.CKII Trần Văn Trọng – Vinmec Đà Nẵng; cach-chon-my-pham-cho-da-dau-mun | Cách chọn mỹ phẩm cho da dầu mụn; bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh | TS.BS.CKII Đặng Thị Ngọc Bích – Da liễu Tâm Anh
+LINK_TRONG_BAI: BS.CKII Trần Văn Trọng tại Vinmec Đà Nẵng → bac-si-tran-van-trong-vinmec-da-nang; cách chọn mỹ phẩm cho da dầu mụn → cach-chon-my-pham-cho-da-dau-mun
+LINK_VAO_TU: bac-si-tran-van-trong-vinmec-da-nang, cach-chon-my-pham-cho-da-dau-mun
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_6638, IMG_9078, IMG_9100)
+NGUON_THAM_KHAO: Vinmec – BS.CKI Lưu Thị Tâm (https://www.vinmec.com/vie/chuyen-gia-y-te/luu-thi-tam)

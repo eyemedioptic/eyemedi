@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKI Võ Thị Tường Duy – Da liễu, Thẩm mỹ da Tâm Anh Quận 7
+TITLE: Bác sĩ Võ Thị Tường Duy – da liễu Tâm Anh Quận 7 | EYEMEDI
+SLUG: bac-si-vo-thi-tuong-duy-da-lieu-tam-anh-quan-7
+TU_KHOA_CHINH: bác sĩ Võ Thị Tường Duy Tâm Anh Quận 7
+TU_KHOA_PHU: bác sĩ da liễu Quận 7, thẩm mỹ da Tân Hưng, điều trị vảy nến TP.HCM, tiêm filler Quận 7
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKI Võ Thị Tường Duy, Đơn vị Da liễu – Thẩm mỹ da, Phòng khám Đa khoa Tâm Anh Quận 7: học vấn, quá trình làm việc, chứng chỉ và địa chỉ liên hệ.
+NGAY_DANG: 2026-11-25
+DOAN_MO_DAU: Khu Nam TP.HCM có nhu cầu khám da liễu ngày càng cao, từ bệnh da mạn tính đến chăm sóc da thẩm mỹ. Bài viết dưới đây tóm tắt thông tin Bệnh viện Đa khoa Tâm Anh công bố về BS.CKI Võ Thị Tường Duy tại Phòng khám Đa khoa Tâm Anh Quận 7, dùng để tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-vo-thi-tuong-duy-da-lieu-tam-anh-quan-7-1.jpg | Khách hàng thử gọng kính tại EYEMEDI
+anh-rieng/bac-si-vo-thi-tuong-duy-da-lieu-tam-anh-quan-7-2.jpg | Khu vực đo mắt tại EYEMEDI
+anh-rieng/bac-si-vo-thi-tuong-duy-da-lieu-tam-anh-quan-7-3.jpg | Chỉnh gọng thử khi đo mắt tại EYEMEDI
+H2_1: Học vấn và các nơi đã công tác
+NOI_DUNG_1: <p><b>BS.CKI Võ Thị Tường Duy</b> là bác sĩ Đơn vị Da liễu – Thẩm mỹ da, Phòng khám Đa khoa Tâm Anh Quận 7, theo trang chuyên gia của Tâm Anh.</p>
+<p>Bác sĩ tốt nghiệp Y đa khoa (2016) và Chuyên khoa I (2020) tại Đại học Y Dược TP.HCM; tu nghiệp tiêm chất làm đầy tại Đại học Mahidol, Thái Lan (2019) và học căng chỉ da (2021). Trước khi về Tâm Anh, bác sĩ làm việc tại Khoa Khám bệnh Bệnh viện An Bình (2016–2018), một số phòng khám da liễu, thẩm mỹ tại TP.HCM, và Trung tâm Y khoa Phước An (2021–02/2023).</p>
+H2_2: Chứng chỉ và lĩnh vực được nêu
+NOI_DUNG_2: <ul><li>Chứng chỉ hành nghề: Da liễu, Nội khoa; chứng chỉ Ứng dụng laser và ánh sáng, Thủ thuật tiểu phẫu da (Bệnh viện Da liễu TP.HCM).</li><li>Bệnh da mạn tính như vảy nến, lupus, bạch biến; hồng ban nút.</li><li>Thẩm mỹ da: tiêm chất làm đầy, căng chỉ, laser.</li></ul>
+<p>Địa chỉ: Sunrise City Central Tower, 25 Nguyễn Hữu Thọ, Phường Tân Hưng, TP.HCM. Hotline: 0287 102 6789 – 093 180 6858. Tại cơ sở Tâm Anh TP.HCM còn có <a href="/bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh.html">TS.BS.CKII Đặng Thị Ngọc Bích</a>.</p>
+H2_3: Bệnh da mạn tính và ánh nắng phương Nam
+NOI_DUNG_3: <p>Một số bệnh như lupus, bạch biến dễ nặng hơn khi tiếp xúc nắng gắt. Người bệnh nên tuân thủ phác đồ, che chắn da, dùng kem chống nắng phù hợp và đeo kính mát chống UV để bảo vệ cả vùng da quanh mắt. Xem thêm <a href="/cach-chon-kem-chong-nang-cho-da-nhay-cam.html">cách chọn kem chống nắng cho da nhạy cảm</a>.</p>
+<p>Bài viết chỉ mang tính tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Nắng TP.HCM gay gắt quanh năm, kính mát chống UV là phụ kiện nên có. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM tư vấn kính mát, kính đổi màu và đo mắt.
+HOI_1: Bác sĩ Võ Thị Tường Duy khám ở cơ sở nào của Tâm Anh?
+DAP_1: Trang chuyên gia ghi bác sĩ làm việc tại Phòng khám Đa khoa Tâm Anh Quận 7, Sunrise City Central Tower, 25 Nguyễn Hữu Thọ.
+HOI_2: Bác sĩ có khám bệnh da mạn tính không?
+DAP_2: Hồ sơ có nhắc đến vảy nến, lupus, bạch biến và hồng ban nút, bên cạnh các thủ thuật thẩm mỹ da.
+HOI_3: Số điện thoại đặt lịch là gì?
+DAP_3: Hotline Tâm Anh TP.HCM: 0287 102 6789 hoặc 093 180 6858; có thể đặt lịch trên website tamanhhospital.vn.
+SAN_PHAM: baby-2212, kinh-bao-ho-victor, kinh-xuyen-dem-night-view, mayblass-24030, p-ormegar-2207, tommy-gold-33029, vidic-night-view-p8602, vidic-sun-luxury-p29037
+LIEN_QUAN: bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh | TS.BS.CKII Đặng Thị Ngọc Bích – Da liễu Tâm Anh; cach-chon-kem-chong-nang-cho-da-nhay-cam | Cách chọn kem chống nắng cho da nhạy cảm; bac-si-nguyen-thanh-vinh-benh-vien-fv | BSCKII Nguyễn Thanh Vinh – Bệnh viện FV
+LINK_TRONG_BAI: TS.BS.CKII Đặng Thị Ngọc Bích → bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh; cách chọn kem chống nắng cho da nhạy cảm → cach-chon-kem-chong-nang-cho-da-nhay-cam
+LINK_VAO_TU: bac-si-dang-thi-ngoc-bich-da-lieu-tam-anh, cach-chon-kem-chong-nang-cho-da-nhay-cam
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có trong bất kỳ trang nào của web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_9081, IMG_9080, IMG_9101)
+NGUON_THAM_KHAO: Bệnh viện Đa khoa Tâm Anh – BS.CKI Võ Thị Tường Duy (https://tamanhhospital.vn/chuyen-gia/vo-thi-tuong-duy/)
