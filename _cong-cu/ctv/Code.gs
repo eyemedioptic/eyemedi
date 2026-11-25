@@ -115,6 +115,8 @@ var API = {
     if (String(r.password || '').length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
     var name = clean_(r.full_name, 80);
     if (name.length < 2) throw new Error('Vui lòng nhập họ tên');
+    var channels = clean_(r.channels, 500);
+    if (!/[a-z0-9-]\.[a-z]{2,}|@\w/i.test(channels)) throw new Error('Vui lòng nhập link kênh bán hàng (TikTok, Facebook, Instagram…)');
     var t = table_('CTV');
     if (t.find('phone', phone)) throw new Error('Số điện thoại này đã đăng ký, vui lòng đăng nhập');
     var email = clean_(r.email, 120).toLowerCase();
@@ -127,7 +129,7 @@ var API = {
     var kind = ['CTV', 'KOL', 'KOC'].indexOf(r.kind) >= 0 ? r.kind : 'CTV';
     var row = {
       id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone,
-      email: email, kind: kind, channels: clean_(r.channels, 500), ref_code: code,
+      email: email, kind: kind, channels: channels, ref_code: code,
       status: 'pending', commission_rate: '', is_admin: 'FALSE',
       pw_salt: salt, pw_hash: hash_(salt, r.password)
     };
