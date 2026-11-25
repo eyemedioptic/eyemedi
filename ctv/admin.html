@@ -40,6 +40,15 @@
     <div class="stats card" id="stats"></div>
     <div class="tabs" id="tabs"></div>
     <div id="mAd" class="msg"></div>
+    <details class="card hide" id="addOrd"><summary><b>＋ Thêm đơn thủ công</b> <span class="small muted">(đơn khách đặt qua link CTV nhưng chưa tự ghi nhận, xem cột "Mã CTV" trong Sheet đơn hàng)</span></summary>
+      <form id="fAdd" style="margin-top:10px"><div class="row">
+        <div><label>Mã CTV *</label><input name="ref" required placeholder="VD: EMH7JUZ" autocapitalize="characters"></div>
+        <div><label>Mã đơn</label><input name="order_code" placeholder="Mã đơn trong Sheet đơn hàng, để trống sẽ tự tạo"></div>
+        <div><label>Tên khách</label><input name="name"></div><div><label>SĐT khách</label><input name="phone" inputmode="tel"></div>
+        <div><label>Giá trị đơn (đ) *</label><input name="total" required inputmode="numeric" placeholder="VD: 1350000"></div>
+        <div><label>Ngày đặt</label><input name="date" type="date"></div></div>
+        <label>Sản phẩm</label><input name="items" placeholder="VD: MAYBLASS 24030 x1">
+        <button class="btn" style="margin-top:12px">Thêm đơn</button></form></details>
     <div class="card"><div class="copy" style="margin-bottom:12px"><input id="q" placeholder="Tìm theo tên, SĐT, mã CTV, mã đơn…"><select id="fs" style="width:auto"></select></div>
       <div class="scroll"><table class="tbl" id="tb"></table></div></div>
   </div>
@@ -105,6 +114,7 @@ function render(){
   var opts={ctv:CTV.STATUS,samples:SAMPLE,videos:VID,orders:CTV.ORDER}[TAB];
   if($('fs').dataset.t!==TAB){$('fs').dataset.t=TAB;$('fs').innerHTML='<option value="">Tất cả trạng thái</option>'+(opts?Object.keys(opts).map(function(k){return '<option value="'+k+'">'+opts[k][0]+'</option>'}).join(''):'');$('fs').classList.toggle('hide',!opts)}
   var fs=$('fs').value;var keep=function(o){return hit(o)&&(!fs||o.status===fs)};
+  $('addOrd').classList.toggle('hide',TAB!=='orders');
   ({ctv:tCtv,samples:tSamples,videos:tVideos,orders:tOrders,pay:tPay,contracts:tContracts})[TAB](keep);
 }
 function rev(a){return a.slice().reverse()}
@@ -176,6 +186,8 @@ function bind(onClick,onChange){$('tb').querySelectorAll('[data-a]').forEach(fun
   if(el.tagName!=='BUTTON'&&onChange)el.onchange=function(){onChange(tr,el)}})}
 function act(action,data,okText){CTV.msg($('mAd'),'Đang lưu…',true);
   return CTV.call(action,data).then(function(){CTV.msg($('mAd'),okText||'Đã cập nhật',true);return load()}).catch(function(e){CTV.msg($('mAd'),e.message);render()})}
+$('fAdd').onsubmit=function(e){e.preventDefault();var d={};new FormData(e.target).forEach(function(v,k){d[k]=String(v).trim()});d.total=d.total.replace(/\D/g,'');
+  act('adminAddOrder',d,'Đã thêm đơn cho CTV '+d.ref.toUpperCase()).then(function(){if(!$('mAd').classList.contains('err'))e.target.reset()})};
 load();
 </script>
 </body>

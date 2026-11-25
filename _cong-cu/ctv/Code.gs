@@ -356,19 +356,19 @@ var API = {
     rc.put(rk, String(n + 1), 3600);
     var u = table_('CTV').find('ref_code', String(r.ref || '').toUpperCase());
     if (!u || u.status === 'rejected' || u.status === 'locked') return false;
-    var t = table_('DonHang');
-    if (t.find('order_code', code)) return false;
-    var total = Math.max(0, Math.round(num_(r.total)));
-    var rate = fixedRate_(u);
-    if (rate === null) rate = monthSummary_(u, month_(now_())).rate;
-    t.insert({
-      order_code: code, created_at: now_(), ref_code: u.ref_code, ctv_id: u.id,
-      customer_name: clean_(r.name, 120), customer_phone: clean_(r.phone, 20),
-      items: clean_(r.items, 3000), total: total, commission_rate: rate,
-      commission: Math.round(total * rate / 100), status: 'new', paid: 'FALSE',
-      page: clean_(r.page, 200), eligible: u.status === 'active' ? 'TRUE' : 'FALSE'
-    });
-    recalc_(u.id, month_(now_()));
+    return insertOrder_(u, code, r, now_());
+  },
+
+  /* Quản trị thêm tay đơn khách đặt qua link CTV nhưng chưa được ghi nhận (lấy từ Sheet đơn hàng, cột "Mã CTV"). */
+  adminAddOrder: function (r) {
+    admin_(r);
+    var u = table_('CTV').find('ref_code', String(r.ref || '').trim().toUpperCase());
+    if (!u) throw new Error('Không tìm thấy CTV có mã ' + String(r.ref || ''));
+    var code = String(r.order_code || '').trim().toUpperCase() || ('EMTAY' + Date.now().toString(36).toUpperCase().slice(-6));
+    if (!/^EM[A-Z0-9]{4,14}$/.test(code)) throw new Error('Mã đơn phải bắt đầu bằng EM, VD: EMLX3K9P2A');
+    if (!(num_(r.total) > 0)) throw new Error('Nhập giá trị đơn');
+    var d = String(r.date || '').trim(), at = /^\d{4}-\d{2}-\d{2}$/.test(d) ? d + ' 12:00:00' : now_();
+    if (!insertOrder_(u, code, r, at)) throw new Error('Mã đơn ' + code + ' đã có trong danh sách');
     return true;
   },
 
@@ -523,6 +523,21 @@ function monthSummary_(u, m) {
     next: fixed !== null || !next ? null : { rate: next.rate, need: Math.max(0, next.from - rev + (next.above ? 1 : 0)) }
   };
 }
+function insertOrder_(u, code, r, at) {
+  var t = table_('DonHang');
+  if (t.find('order_code', code)) return false;
+  var total = Math.max(0, Math.round(num_(r.total)));
+  var on = u.status === 'active';
+  t.insert({
+    order_code: code, created_at: at, ref_code: u.ref_code, ctv_id: u.id,
+    customer_name: clean_(r.name, 120), customer_phone: clean_(r.phone, 20),
+    items: clean_(r.items, 3000), total: total, commission_rate: 0, commission: 0,
+    status: 'new', paid: 'FALSE', page: clean_(r.page, 200), eligible: on ? 'TRUE' : 'FALSE'
+  });
+  recalc_(u.id, month_(at));   // tính % và hoa hồng theo bậc của tháng
+  return true;
+}
+
 /** Đơn có được tính hoa hồng không (đơn cũ không có cột eligible = được tính). */
 function eligible_(o) { return o.eligible !== 'FALSE'; }
 /** Gọi khi CTV được mở hoa hồng: nếu RETRO_COMMISSION thì tính hoa hồng cho đơn chưa trả bán trước đó. */
