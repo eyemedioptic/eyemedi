@@ -265,7 +265,7 @@ let managerPendingImages = {};
 let managerPendingGallery = {};
 let managerPendingVariants = {};
 function normalizeProducts(){const seen={};PRODUCTS.forEach((p,i)=>{let id=String(p.id||'').trim()||('sp-'+(i+1));if(seen[id])id=id+'-'+(i+1);seen[id]=1;p.id=id;
- const g=[2,3,4,5].map(n=>String(p['image'+n]||'').trim()).filter(Boolean);if(g.length)p.gallery=g;
+ const g=[2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(n=>String(p['image'+n]||'').trim()).filter(Boolean);if(g.length)p.gallery=g;
  const v=[1,2,3,4,5,6].map(n=>({name:String(p['variant'+n]||'').trim(),image:String(p['variant'+n+'Image']||'').trim(),price:Number(p['variant'+n+'Price'])||0})).filter(x=>x.name);if(v.length)p.variants=v;
  if(!p.features)p.features=[];else if(typeof p.features==='string')p.features=p.features.split('\n').filter(Boolean);
  p.price=Number(p.price)||0;if(!p.category||p.category==='Gọng kính mắt')p.category='Gọng kính cận';if(p.category==='Tròng mắt kính')p.category='Tròng kính mắt';});}
