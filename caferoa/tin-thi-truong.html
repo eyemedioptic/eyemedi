@@ -665,11 +665,11 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
       <p>Giá cà phê nhân trong nước, Robusta London và Arabica New York, cập nhật từ báo chí chính thống. Tổng hợp để tham khảo, không phải khuyến nghị giao dịch.</p>
     </div>
     <div class="ticker" id="ticker"></div>
-    <p class="ticker-note">Đơn vị: đồng/kg. Giá trần = cao nhất, giá sàn = thấp nhất, giá tham chiếu = trung bình từ đầu tháng 11/2026. Robusta: giá nhân xô Tây Nguyên. Arabica: quy đổi từ giá Arabica New York kỳ hạn gần theo tỷ giá 25.600 đ/USD.</p>
+    <p class="ticker-note">Đơn vị: đồng/kg. Giá trần = cao nhất, giá sàn = thấp nhất, giá tham chiếu = trung bình từ đầu tháng 11/2026. Robusta: giá nhân xô Tây Nguyên. Arabica: quy đổi từ giá Arabica New York kỳ hạn gần theo tỷ giá 25.560 đ/USD.</p>
     <div class="market-grid">
       <div class="panel">
         <h4>Diễn biến giá cà phê tháng 11/2026 (đ/kg)</h4>
-        <div class="hint">Giá trần, giá sàn, giá tham chiếu trong tháng · cập nhật 22/11/2026</div>
+        <div class="hint">Giá trần, giá sàn, giá tham chiếu trong tháng · cập nhật 26/11/2026</div>
         <div class="chart-tabs" id="chartTabs"></div>
         <svg id="chart" viewBox="0 0 560 240" preserveAspectRatio="none" role="img" aria-label="Biểu đồ giá cà phê"></svg>
         <div class="chart-legend" id="chartLegend"></div>
@@ -679,8 +679,8 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
         <div class="hint">Tổng hợp từ các nguồn tin bên dưới</div>
         <ul style="margin-left:1.1rem;font-size:.92rem;line-height:1.75">
           <li>Vụ thu hoạch mới ở Tây Nguyên vào cao điểm cuối tháng 11, nguồn cung tăng tạo áp lực lên giá thu mua.</li>
-          <li>Giá nhân xô Tây Nguyên ngày 22/11 còn 71.200–72.000đ/kg, mức thấp nhất kể từ tháng 1/2024 và giảm khoảng 15.000đ/kg so với đầu tháng.</li>
-          <li>Robusta London rơi xuống dưới 2.900 USD/tấn sau chuỗi phiên giảm; Arabica New York dao động 269–287 cent/lb trong tháng.</li>
+          <li>Giá nhân xô Tây Nguyên ngày 26/11 còn 69.500–70.300đ/kg, bình quân 70.100đ/kg, giảm gần 17.000đ/kg so với đầu tháng; riêng tuần qua mất gần 7%.</li>
+          <li>Robusta London mất mốc 2.800 USD/tấn (kỳ hạn 1/2027: 2.798 USD/tấn); Arabica New York hồi lên 275,65 cent/lb, dao động 268–287 cent/lb trong tháng.</li>
           <li>Với người uống cà phê: giá nhân giảm không làm giá cà phê rang đặc sản giảm ngay, vì chi phí chế biến, rang và đóng gói chiếm phần lớn.</li>
         </ul>
       </div>
@@ -692,7 +692,7 @@ p,li,dd,.notes,.short,.desc,.lead,.msg,.co-done,.origin-text,.qr-note,.news p,.s
       <button class="chip" data-cat="quan">Cho chủ quán</button>
     </div>
     <div class="news-list" id="newsList"></div>
-    <p class="disclaimer">Số liệu cập nhật lần cuối: 22/11/2026. Giá nhân xô Tây Nguyên và giá sàn quốc tế tổng hợp từ giacaphe.com, chocaphe.vn và báo chí; tỷ giá theo Vietcombank. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
+    <p class="disclaimer">Số liệu cập nhật lần cuối: 26/11/2026. Giá nhân xô Tây Nguyên và giá sàn quốc tế tổng hợp từ giacaphe.com, chocaphe.vn và báo chí; tỷ giá USD/VND theo báo cáo thị trường ngày 26/11/2026. Giá thay đổi hằng ngày; vui lòng đối chiếu nguồn gốc trước khi giao dịch.</p>
   </div>
 </section>
 
@@ -952,14 +952,14 @@ const GRINDS = ['Hạt nguyên','Xay pha phin','Xay pha máy','Xay pour-over'];
 
 /* ---------- Market data (nguồn: báo chí 11/2026) ---------- */
 const MARKET = {
-  updated:'22/11/2026',
-  usdvnd:25600, /* Vietcombank mua chuyển khoản 22/11/2026 */
+  updated:'26/11/2026',
+  usdvnd:25560, /* tỷ giá USD/VND ngày 26/11/2026 */
   /* Giá trần = cao nhất tháng, giá sàn = thấp nhất tháng, giá tham chiếu = trung bình tháng (tự tính từ pts, đơn vị đ/kg) */
   series:{
     ar:{name:'Arabica', label:'Arabica · quy đổi từ giá New York', unit:'đ/kg',
-        src:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00],['15/11',279.65],['17/11',278.65],['18/11',287.30],['20/11',282.05],['22/11',274.85]]},
+        src:[['31/10',287.20],['05/11',279.75],['10/11',273.60],['13/11',269.00],['15/11',279.65],['17/11',278.65],['18/11',287.30],['20/11',282.05],['22/11',274.85],['24/11',268.55],['26/11',275.65]]},
     rb:{name:'Robusta', label:'Robusta · nhân xô Tây Nguyên', unit:'đ/kg',
-        pts:[['01/11',87000],['03/11',86000],['06/11',84100],['09/11',84700],['11/11',85000],['13/11',83700],['16/11',82700],['17/11',81700],['18/11',79700],['19/11',76900],['20/11',74700],['21/11',73900],['22/11',71900]]}
+        pts:[['01/11',87000],['03/11',86000],['06/11',84100],['09/11',84700],['11/11',85000],['13/11',83700],['16/11',82700],['17/11',81700],['18/11',79700],['19/11',76900],['20/11',74700],['21/11',73900],['22/11',71900],['23/11',71600],['24/11',71400],['25/11',71100],['26/11',70100]]}
   }
 };
 /* Arabica New York (cent/lb) → đ/kg: cent/100 × tỷ giá ÷ 0,45359237 kg/lb, làm tròn 100đ */
@@ -1399,7 +1399,7 @@ function renderChart(){
   const path = pts.map((p,i)=>`${i?'L':'M'}${x(i)},${y(p[1])}`).join(' ');
   const lines = LEVELS.map(l => { const yy = y(lv[l.k]); return `<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="${l.color}" stroke-width="1.5" stroke-dasharray="6 5" opacity=".9"/>`; }).join('');
   const area = path + ` L${x(pts.length-1)},${H-pb} L${x(0)},${H-pb} Z`;
-  const dots = pts.map((p,i)=>`<g class="pt" data-i="${i}" style="cursor:pointer"><circle cx="${x(i)}" cy="${y(p[1])}" r="14" fill="transparent"/><circle cx="${x(i)}" cy="${y(p[1])}" r="4.5" fill="#d8ad5f" stroke="#1f140e" stroke-width="2"/></g><text x="${x(i)}" y="${H-10}" fill="#9f8e78" font-size="11" text-anchor="middle">${p[0]}</text>`).join('');
+  const dots = pts.map((p,i)=>`<g class="pt" data-i="${i}" style="cursor:pointer"><circle cx="${x(i)}" cy="${y(p[1])}" r="14" fill="transparent"/><circle cx="${x(i)}" cy="${y(p[1])}" r="4.5" fill="#d8ad5f" stroke="#1f140e" stroke-width="2"/></g>${(pts.length<=10 || i%2===(pts.length-1)%2) ? `<text x="${x(i)}" y="${H-10}" fill="#9f8e78" font-size="11" text-anchor="middle">${p[0]}</text>` : ''}`).join('');
   $('#chart').innerHTML = `<defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8964f" stop-opacity=".35"/><stop offset="1" stop-color="#c8964f" stop-opacity="0"/></linearGradient></defs>${g}<path d="${area}" fill="url(#ga)"/>${lines}<path d="${path}" fill="none" stroke="#d8ad5f" stroke-width="2.5" stroke-linejoin="round"/>${dots}`;
   $('#chartLegend').innerHTML = LEVELS.map(l => `<span><i style="border-color:${l.color}"></i>${l.name}: <b>${s.fmt(lv[l.k])}</b></span>`).join('') + `<span class="u">${s.label} · ${s.unit}</span>`;
   const tip = $('#chartTip'); const last = pts[pts.length-1];
