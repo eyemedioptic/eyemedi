@@ -1180,6 +1180,47 @@ API.posSave = function (r) {
   return o;
 };
 
+// Nhập / cập nhật hàng loạt sản phẩm lấy từ trang web (khớp theo webId, rồi theo SKU).
+// Sản phẩm đã có: chỉ cập nhật giá bán (trừ khi keepPrice), tên, nhóm, thương hiệu; giữ giá vốn và tồn kho.
+API.posImportProducts = function (r) {
+  var nv = posAuth_(r, 'san_pham');
+  var items = r.items || [];
+  if (!items.length || items.length > 400) throw new Error('Danh sách sản phẩm không hợp lệ');
+  var t = posTable_('PosData'), rows = t.all(), byWeb = {}, bySku = {};
+  rows.forEach(function (row) {
+    if (row.kind !== 'product') return;
+    var p; try { p = JSON.parse(row.json); } catch (e) { return; }
+    var e = { row: row, p: p };
+    if (p.webId) byWeb[p.webId] = e;
+    bySku[String(p.sku).toLowerCase()] = e;
+  });
+  var add = [], upd = 0, same = 0, now = now_();
+  items.forEach(function (it) {
+    var o = posCleanItem_('product', it);
+    var e = (o.webId && byWeb[o.webId]) || bySku[String(o.sku).toLowerCase()];
+    if (e) {
+      var p = e.p, before = JSON.stringify(p);
+      p.webId = o.webId; p.name = o.name; p.cat = o.cat; p.brand = o.brand; p.service = o.service;
+      if (!(it.keepPrice && p.price > 0 && !p.pricePending)) { p.price = o.price; if (o.pricePending) p.pricePending = true; }
+      posNormStock_(p);
+      var json = JSON.stringify(p);
+      if (json === before) { same++; return; }
+      t.update(e.row, { updated_at: now, updated_by: nv.full_name, json: json }); upd++;
+    } else {
+      if (bySku[String(o.sku).toLowerCase()]) return;
+      o.stocks = {}; o.stock = o.service ? null : 0; delete o.keepPrice;
+      posNormStock_(o);
+      add.push(['product', o.id, now, nv.full_name, JSON.stringify(o)].map(cell_));
+      bySku[String(o.sku).toLowerCase()] = { p: o };
+    }
+  });
+  if (add.length) {
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PosData');
+    sh.getRange(sh.getLastRow() + 1, 1, add.length, SHEETS.PosData.length).setValues(add);
+  }
+  return { added: add.length, updated: upd, same: same, products: posData_('product') };
+};
+
 API.posDelete = function (r) {
   var need = { product: 'san_pham', ctv: 'khach_hang', customer: 'khach_hang' }[r.kind];
   if (!need) throw new Error('Loại dữ liệu không hợp lệ');

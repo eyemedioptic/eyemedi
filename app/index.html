@@ -198,7 +198,7 @@ a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
 <script>
 /* ============ Dữ liệu ============ */
 const KEY='eyemedi-pos-v1';
-const CATS=['Gọng kính','Tròng kính','Kính râm','Kính áp tròng','Phụ kiện','Dịch vụ'];
+const CATS=['Gọng kính','Tròng kính','Kính thời trang','Kính râm','Kính áp tròng','Phụ kiện','Thiết bị','Dịch vụ'];
 const METHODS={cash:'Tiền mặt',bank:'Chuyển khoản',card:'Quẹt thẻ',cod:'Thu hộ (COD)'};
 const CHANNELS={pos:'Tại quầy',facebook:'Facebook',zalo:'Zalo',chatbot:'Chatbot',ctv:'Cộng tác viên',web:'Website'};
 const STATUS={pending:['Chờ xác nhận','warn'],shipping:['Đang giao','neu'],done:['Hoàn thành','good'],cancelled:['Đã hủy','bad']};
@@ -384,7 +384,7 @@ function viewPOS(el){
   <div class="pos">
     <div style="min-width:0">
       <input id="posQ" placeholder="Tìm theo tên, mã SKU hoặc quét mã vạch rồi Enter" value="${esc(posQ)}" autocomplete="off">
-      <div class="chips" style="margin-top:10px" id="posCats">${['Tất cả',...CATS].map(c=>`<button class="chip${c===posCat?' on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+      <div class="chips" style="margin-top:10px" id="posCats">${['Tất cả',...CATS.filter(c=>S.products.some(p=>p.cat===c))].map(c=>`<button class="chip${c===posCat?' on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('')}</div>
       <div class="pgrid" id="pgrid"></div>
     </div>
     <div class="card cart" id="cart"></div>
@@ -570,20 +570,24 @@ function viewOrders(el){
 /* ============ Sản phẩm ============ */
 let prodFilter={q:'',cat:'Tất cả'};
 function viewProducts(el){
-  el.innerHTML=`<div class="head"><h1>Sản phẩm</h1><span class="grow"></span>${can('san_pham')?'<button class="btn pri" id="addP">+ Thêm sản phẩm</button>':''}</div>
+  el.innerHTML=`<div class="head"><h1>Sản phẩm</h1><span class="grow"></span>${can('san_pham')?'<button class="btn" id="webP">Lấy sản phẩm từ web</button><button class="btn pri" id="addP">+ Thêm sản phẩm</button>':''}</div>
+  ${S.products.some(p=>p.pricePending)?`<div class="banner"><span class="grow"><b>${S.products.filter(p=>p.pricePending).length}</b> mã tròng kính đang tạm dùng giá web, chờ cập nhật theo bảng báo giá.</span><button class="btn sm" id="pendP">Xem danh sách</button></div>`:''}
   <div class="card">
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><input id="pq" placeholder="Tìm tên, SKU, thương hiệu" style="flex:1;min-width:200px" value="${esc(prodFilter.q)}"><select id="pc" style="width:auto">${['Tất cả',...CATS].map(c=>`<option${c===prodFilter.cat?' selected':''}>${c}</option>`).join('')}</select></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><input id="pq" placeholder="Tìm tên, SKU, thương hiệu" style="flex:1;min-width:200px" value="${esc(prodFilter.q)}"><select id="pc" style="width:auto">${['Tất cả',...CATS,...(S.products.some(p=>p.pricePending)?['Chờ bảng giá']:[])].map(c=>`<option${c===prodFilter.cat?' selected':''}>${c}</option>`).join('')}</select></div>
     <div id="plist"></div>
   </div>`;
   const draw=()=>{
     const q=norm(prodFilter.q);
-    const list=S.products.filter(p=>(prodFilter.cat==='Tất cả'||p.cat===prodFilter.cat)&&(!q||norm(p.name+' '+p.sku+' '+p.brand).includes(q)));
-    $('#plist',el).innerHTML=list.length?`<div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th>Nhóm</th><th class="r">Giá bán</th><th class="r">Giá vốn</th><th class="r">Lãi gộp</th><th>Tồn kho</th></tr></thead><tbody>${list.map(p=>`<tr class="click" data-pid="${p.id}"><td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}${p.brand?' · '+esc(p.brand):''}</div></td><td>${esc(p.cat)}</td><td class="r num">${money(p.price)}</td><td class="r num muted">${money(p.cost)}</td><td class="r num">${p.price?Math.round((p.price-p.cost)/p.price*100)+'%':'—'}</td><td>${stockPill(p)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Không có sản phẩm nào.</div>';
+    const list=S.products.filter(p=>(prodFilter.cat==='Tất cả'||p.cat===prodFilter.cat||(prodFilter.cat==='Chờ bảng giá'&&p.pricePending))&&(!q||norm(p.name+' '+p.sku+' '+p.brand).includes(q)));
+    $('#plist',el).innerHTML=list.length?`<div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th>Nhóm</th><th class="r">Giá bán</th><th class="r">Giá vốn</th><th class="r">Lãi gộp</th><th>Tồn kho</th></tr></thead><tbody>${list.map(p=>`<tr class="click" data-pid="${p.id}"><td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}${p.brand?' · '+esc(p.brand):''}</div></td><td>${esc(p.cat)}</td><td class="r num">${money(p.price)}${p.pricePending?'<div><span class="pill warn">Chờ bảng giá</span></div>':''}</td><td class="r num muted">${money(p.cost)}</td><td class="r num">${p.price?Math.round((p.price-p.cost)/p.price*100)+'%':'—'}</td><td>${stockPill(p)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">Không có sản phẩm nào.${!S.products.length&&can('san_pham')?'<div style="margin-top:10px"><button class="btn pri" data-webp>Lấy toàn bộ sản phẩm từ trang web</button></div>':''}</div>`;
+    $$('[data-webp]',el).forEach(b=>b.onclick=importWebForm);
     $$('[data-pid]',el).forEach(r=>r.onclick=()=>editProduct(prod(r.dataset.pid)));
   };
   $('#pq',el).oninput=e=>{prodFilter.q=e.target.value;draw()};
   $('#pc',el).onchange=e=>{prodFilter.cat=e.target.value;draw()};
   const ap=$('#addP',el);ap&&(ap.onclick=()=>editProduct(null));
+  const wp=$('#webP',el);wp&&(wp.onclick=importWebForm);
+  const pp=$('#pendP',el);pp&&(pp.onclick=()=>{prodFilter.cat='Chờ bảng giá';route()});
   draw();
 }
 function editProduct(p){
@@ -603,6 +607,7 @@ function editProduct(p){
         const cat=$('#p_cat',m).value;
         const item={...p,name:$('#p_name',m).value.trim(),sku,barcode:$('#p_bar',m).value.trim(),cat,brand:$('#p_brand',m).value.trim(),price:parseNum($('#p_price',m).value),cost:parseNum($('#p_cost',m).value),service:cat==='Dịch vụ'};
         delete item.sample;
+        if(p.pricePending&&item.price!==p.price)item.pricePending=false;
         if(isNew){item.id=uid();item.stock=item.service?null:parseNum($('#p_stock',m).value)}
         else if(item.service)item.stock=null;else if(item.stock==null)item.stock=0;
         if(SERVER){try{upsert(S.products,await api('posSave',{kind:'product',item,branch:CUR_BR==='all'?'':CUR_BR}))}catch(err){toast(err.message);return}}
@@ -1443,6 +1448,91 @@ function branchForm(b,after){
   }}});
 }
 
+/* ============ Lấy sản phẩm từ trang web eyemedi.vn ============ */
+const WEB_CAT={'Gọng kính cận':'Gọng kính','Kính thời trang':'Kính thời trang','Tròng kính mắt':'Tròng kính','Kính áp tròng':'Kính áp tròng','Phụ kiện mắt kính':'Phụ kiện','Thiết bị ngành mắt kính':'Thiết bị'};
+async function fetchWebProducts(){
+  const r=await fetch('/index.html?t='+Date.now(),{cache:'no-store'});
+  if(!r.ok)throw new Error('Không tải được trang web ('+r.status+')');
+  const s=await r.text(),k='const PRODUCTS = ',i=s.indexOf(k);
+  if(i<0)throw new Error('Không tìm thấy danh sách sản phẩm trên trang web');
+  let line=s.slice(i+k.length,s.indexOf('\n',i)>0?s.indexOf('\n',i):s.length).trim();
+  if(line.endsWith(';'))line=line.slice(0,-1);
+  const P=JSON.parse(line);
+  if(!Array.isArray(P)||!P.length)throw new Error('Danh sách sản phẩm trên web đang trống');
+  return P;
+}
+function webItems(P,split){
+  const used=new Set(),out=[];
+  P.forEach(p=>{
+    if(!p||!p.id||!p.name)return;
+    const cat=WEB_CAT[p.category]||'Phụ kiện',lens=cat==='Tròng kính',price=Number(p.price)||0;
+    let base=String(p.code||p.id).trim().replace(/\s+/g,'');
+    if(!base||used.has(base.toLowerCase()))base=String(p.id).toUpperCase();
+    used.add(base.toLowerCase());
+    const vs=[1,2,3,4,5,6,7,8].map(n=>p['variant'+n]?{n:String(p['variant'+n]).trim(),pr:Number(p['variant'+n+'Price'])||price}:null).filter(Boolean);
+    const mk=(sku,name,pr,wid)=>({id:'web-'+wid.replace(/[^\w-]/g,'-'),webId:wid,sku,name,cat,brand:p.brand||'',price:pr,cost:0,stock:0,barcode:'',service:false,
+      ...(lens?{pricePending:true,keepPrice:true}:{})});
+    if(split&&vs.length>1)vs.forEach((v,n)=>out.push(mk(base+'-'+(n+1),p.name+' – '+v.n,v.pr,p.id+'#'+(n+1))));
+    else out.push(mk(base,p.name,price,p.id));
+  });
+  return out;
+}
+/* So với danh sách hiện có: thêm mới / cập nhật / giữ nguyên */
+function webPlan(items){
+  const byWeb={},bySku={};S.products.forEach(p=>{if(p.webId)byWeb[p.webId]=p;bySku[String(p.sku).toLowerCase()]=p});
+  const plan={add:[],upd:[],same:[]};
+  items.forEach(it=>{
+    const p=byWeb[it.webId]||bySku[it.sku.toLowerCase()];
+    if(!p){plan.add.push(it);return}
+    const keep=it.keepPrice&&p.price>0&&!p.pricePending;
+    const newPrice=keep?p.price:it.price;
+    (p.name!==it.name||p.cat!==it.cat||p.price!==newPrice||(p.brand||'')!==it.brand||p.webId!==it.webId?plan.upd:plan.same).push({it,p,newPrice,keep});
+  });
+  return plan;
+}
+function webApplyLocal(plan){
+  plan.add.forEach(it=>{const o={...it,stocks:{}};delete o.keepPrice;S.products.push(o)});
+  plan.upd.forEach(({it,p,newPrice,keep})=>{Object.assign(p,{webId:it.webId,name:it.name,cat:it.cat,brand:it.brand,price:newPrice});if(!keep&&it.pricePending)p.pricePending=true});
+  applyStockView();save();
+}
+async function importWebForm(){
+  if(!can('san_pham')){toast('Bạn chưa được cấp quyền sửa sản phẩm');return}
+  let P;
+  toast('Đang tải danh sách sản phẩm từ trang web…');
+  try{P=await fetchWebProducts()}catch(err){toast(err.message);return}
+  let split=true;
+  modal(`<h2>Lấy sản phẩm từ trang web</h2><div id="wi_body"></div>
+    <label class="chk"><input type="checkbox" id="wi_split" checked> Tách mỗi màu / phiên bản thành một mã riêng (để quản lý tồn kho từng màu)</label>
+    <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="wi_ok">Nhập vào phần mềm</button></div>`,
+  {wide:true,onMount:(m,close)=>{
+    let items,plan;
+    const draw=()=>{
+      items=webItems(P,split);plan=webPlan(items);
+      const cats={};items.forEach(it=>{cats[it.cat]=(cats[it.cat]||0)+1});
+      const lens=items.filter(it=>it.pricePending).length-[...plan.upd,...plan.same].filter(u=>u.keep).length;
+      $('#wi_body',m).innerHTML=`<div class="small muted" style="margin-bottom:10px">Trang web đang có <b>${P.length}</b> sản phẩm, tạo thành <b>${items.length}</b> mã hàng với giá bán đang hiển thị trên web. Giá vốn và tồn kho để trống, nhập sau ở Kho hàng.</div>
+        <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:12px">
+          <div class="card stat"><div class="lb">Thêm mới</div><div class="v num">${plan.add.length}</div></div>
+          <div class="card stat"><div class="lb">Cập nhật giá, tên</div><div class="v num">${plan.upd.length}</div></div>
+          <div class="card stat"><div class="lb">Đã đúng, giữ nguyên</div><div class="v num">${plan.same.length}</div></div></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Nhóm hàng</th><th class="r">Số mã</th></tr></thead><tbody>${Object.keys(cats).map(c=>`<tr><td>${esc(c)}${c==='Tròng kính'?' <span class="pill warn">Chờ bảng giá</span>':''}</td><td class="r num">${cats[c]}</td></tr>`).join('')}</tbody></table></div>
+        ${lens?`<div class="small muted" style="margin-top:10px">${lens} mã tròng kính tạm lấy giá web và gắn nhãn “Chờ bảng giá”. Khi sửa giá một tròng kính, nhãn tự bỏ và lần lấy giá web sau sẽ không ghi đè giá đó.</div>`:''}
+        ${plan.upd.length?`<details style="margin-top:10px"><summary class="small">Xem ${plan.upd.length} mã sẽ cập nhật</summary><div class="tbl-wrap"><table><tbody>${plan.upd.map(u=>`<tr><td>${esc(u.it.sku)} · ${esc(u.it.name)}</td><td class="r num">${u.p.price!==u.newPrice?money(u.p.price)+' → '+money(u.newPrice):'giữ giá '+money(u.p.price)}</td></tr>`).join('')}</tbody></table></div></details>`:''}`;
+      $('#wi_ok',m).disabled=!plan.add.length&&!plan.upd.length;
+    };
+    $('#wi_split',m).onchange=e=>{split=e.target.checked;draw()};
+    $('#wi_ok',m).onclick=async()=>{
+      const b=$('#wi_ok',m),n1=plan.add.length,n2=plan.upd.length;
+      if(SERVER){b.disabled=true;b.textContent='Đang nhập…';
+        try{const res=await api('posImportProducts',{items:[...plan.add,...plan.upd.map(u=>u.it)]});S.products=res.products;applyStockView();
+          close();route();toast(`Đã thêm ${res.added} và cập nhật ${res.updated} sản phẩm`)}
+        catch(err){toast(/Yêu cầu không hợp lệ/.test(err.message)?'Máy chủ chưa có chức năng này, vui lòng cập nhật Apps Script theo hướng dẫn':err.message);b.disabled=false;b.textContent='Nhập vào phần mềm'}
+        return}
+      webApplyLocal(plan);close();route();toast(`Đã thêm ${n1} và cập nhật ${n2} sản phẩm`);
+    };
+    draw();
+  }});
+}
 /* ============ Khởi động ============ */
 document.addEventListener('keydown',e=>{
   if(e.key==='F3'){e.preventDefault();if(location.hash!=='#ban-hang')location.hash='ban-hang';setTimeout(()=>$('#posQ')&&$('#posQ').focus(),0)}

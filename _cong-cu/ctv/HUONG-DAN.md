@@ -46,5 +46,6 @@ Tài khoản:
 - Vai trò: Admin (toàn quyền), Quản lý, Nhân viên bán hàng, Nhân viên kho. Quyền chi tiết: bán hàng, xem đơn mọi nhân viên, xử lý đơn, sản phẩm, kho, khách hàng, báo cáo, quản lý nhân viên.
 - Nhân viên không có quyền "Xem đơn của mọi nhân viên" chỉ thấy đơn do mình tạo.
 - Chi nhánh: mặc định có 5 chi nhánh của EYEMEDI, sửa hoặc thêm ở mục **Nhân viên → Chi nhánh** (chi nhánh có thể là cửa hàng hoặc kho riêng). Mỗi chi nhánh có tồn kho riêng; đơn, phiếu kho, phiếu quỹ gắn chi nhánh đang chọn ở khung trên cùng. Chuyển hàng giữa chi nhánh bằng **Kho hàng → Chuyển kho**.
+- Sản phẩm: bấm **Sản phẩm → Lấy sản phẩm từ web** để nạp toàn bộ sản phẩm đang bán trên eyemedi.vn với giá hiện tại (mỗi màu một mã riêng). Bấm lại bất cứ lúc nào để cập nhật giá theo web; giá vốn và tồn kho không bị đổi. Tròng kính được gắn nhãn “Chờ bảng giá” cho đến khi sửa giá; giá đã sửa sẽ không bị ghi đè.
 - Nhân viên chỉ làm việc ở các chi nhánh được phân công; Admin, Quản lý (quyền "Làm việc ở mọi chi nhánh") xem được tất cả và chọn "Tất cả chi nhánh" để xem tổng.
 - Tồn kho cũ (trước khi có chi nhánh) được tính vào chi nhánh đầu tiên.
