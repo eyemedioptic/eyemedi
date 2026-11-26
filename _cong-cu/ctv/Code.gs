@@ -939,3 +939,386 @@ function normPhone_(p) {
   return /^0\d{9}$/.test(s) ? s : '';
 }
 function esc_(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+/* ==========================================================================
+ * PHẦN MỀM BÁN HÀNG (eyemedi.vn/app) – tài khoản nhân viên, phân quyền,
+ * dữ liệu bán hàng dùng chung. Dùng chung Google Sheet với hệ thống CTV.
+ * Các tab mới (NhanVien, PhienNV, PosData, PosDon, PosKho) tự tạo khi cần.
+ * Admin đầu tiên: đăng nhập eyemedi.vn/app bằng tài khoản quản trị CTV
+ * (is_admin = TRUE) → hệ thống tự tạo tài khoản nhân viên quyền Admin.
+ * ========================================================================== */
+SHEETS.NhanVien = ['id', 'created_at', 'full_name', 'phone', 'username', 'role', 'perms', 'status',
+                   'pw_salt', 'pw_hash', 'note', 'last_login', 'ctv_id'];
+SHEETS.PhienNV = ['token', 'nv_id', 'expires'];
+SHEETS.PosData = ['kind', 'id', 'updated_at', 'updated_by', 'json'];
+SHEETS.PosDon = ['code', 'id', 'created_at', 'staff_id', 'staff_name', 'channel', 'status', 'customer_id',
+                 'total', 'updated_at', 'json'];
+SHEETS.PosKho = ['id', 'created_at', 'staff_id', 'staff_name', 'product_id', 'qty', 'type', 'note'];
+
+var POS_PERMS = ['ban_hang', 'don_tat_ca', 'xu_ly_don', 'san_pham', 'kho', 'khach_hang', 'bao_cao', 'quan_tri'];
+var POS_ROLES = {
+  admin: POS_PERMS,
+  quan_ly: ['ban_hang', 'don_tat_ca', 'xu_ly_don', 'san_pham', 'kho', 'khach_hang', 'bao_cao'],
+  ban_hang: ['ban_hang', 'xu_ly_don', 'khach_hang'],
+  kho: ['kho', 'san_pham']
+};
+var POS_STATUS = ['pending', 'shipping', 'done', 'cancelled'];
+
+function posTable_(name) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss.getSheetByName(name)) {
+    var sh = ss.insertSheet(name), head = SHEETS[name];
+    sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold');
+    sh.setFrozenRows(1); sh.getRange('A:Z').setNumberFormat('@');
+  }
+  return table_(name);
+}
+function posPerms_(nv) {
+  if (nv.role === 'admin') return POS_PERMS.slice();
+  var p = String(nv.perms || '').split(',').map(function (x) { return x.trim(); }).filter(function (x) { return POS_PERMS.indexOf(x) >= 0; });
+  return p.length ? p : (POS_ROLES[nv.role] || []).slice();
+}
+function posPublic_(nv) {
+  return { id: nv.id, full_name: nv.full_name, phone: nv.phone, username: nv.username, role: nv.role,
+           status: nv.status, perms: posPerms_(nv), note: nv.note, created_at: nv.created_at, last_login: nv.last_login };
+}
+function posAuth_(r, perm) {
+  var token = String(r.token || '');
+  if (token.length < 40) throw new Error('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
+  var cache = CacheService.getScriptCache(), id = cache.get('pn_' + token);
+  if (!id) {
+    var s = posTable_('PhienNV').find('token', token);
+    if (!s || Number(s.expires) < Date.now()) throw new Error('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
+    id = s.nv_id; cache.put('pn_' + token, id, 600);
+  }
+  var nv = posTable_('NhanVien').find('id', id);
+  if (!nv) throw new Error('Tài khoản không còn tồn tại, vui lòng đăng nhập lại');
+  if (nv.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng đăng nhập lại hoặc liên hệ quản lý');
+  if (nv.status !== 'active') throw new Error('Tài khoản đang chờ duyệt, vui lòng đăng nhập lại sau');
+  nv._perms = posPerms_(nv);
+  if (perm && nv._perms.indexOf(perm) < 0) throw new Error('Bạn chưa được cấp quyền cho việc này');
+  return nv;
+}
+function posCan_(nv, perm) { return nv._perms.indexOf(perm) >= 0; }
+function posNewSession_(id) {
+  var token = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
+  posTable_('PhienNV').insert({ token: token, nv_id: id, expires: Date.now() + SESSION_DAYS * 864e5 });
+  return token;
+}
+function posKill_(nvId) {
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PhienNV');
+  if (!sh) return;
+  var v = sh.getDataRange().getValues(), c = CacheService.getScriptCache();
+  for (var i = v.length - 1; i >= 1; i--) if (String(v[i][1]) === nvId) { c.remove('pn_' + v[i][0]); sh.deleteRow(i + 1); }
+}
+function posFindLogin_(v) {
+  var id = String(v || '').trim(), t = posTable_('NhanVien');
+  if (normPhone_(id)) return t.find('phone', normPhone_(id));
+  return id ? t.find('username', id.toLowerCase()) : null;
+}
+function posData_(kind) {
+  return posTable_('PosData').all().filter(function (x) { return x.kind === kind; })
+    .map(function (x) { try { return JSON.parse(x.json); } catch (e) { return null; } }).filter(Boolean);
+}
+function posPut_(kind, obj, nv) {
+  var t = posTable_('PosData'), rows = t.all(), row = null;
+  for (var i = 0; i < rows.length; i++) if (rows[i].kind === kind && rows[i].id === obj.id) { row = rows[i]; break; }
+  var json = JSON.stringify(obj);
+  if (json.length > 45000) throw new Error('Dữ liệu quá lớn');
+  if (row) t.update(row, { updated_at: now_(), updated_by: nv.full_name, json: json });
+  else t.insert({ kind: kind, id: obj.id, updated_at: now_(), updated_by: nv.full_name, json: json });
+}
+function posDel_(kind, id) {
+  var t = posTable_('PosData'), rows = t.all();
+  for (var i = 0; i < rows.length; i++) if (rows[i].kind === kind && rows[i].id === id) { t.remove(rows[i]); return true; }
+  return false;
+}
+function posOrders_(nv) {
+  var all = posTable_('PosDon').all();
+  if (!posCan_(nv, 'don_tat_ca')) all = all.filter(function (o) { return o.staff_id === nv.id; });
+  if (all.length > 3000) all = all.slice(all.length - 3000);
+  return all.map(function (o) { try { return JSON.parse(o.json); } catch (e) { return null; } }).filter(Boolean);
+}
+function posLog_(nv, pid, qty, type, note) {
+  posTable_('PosKho').insert({ id: Utilities.getUuid(), created_at: String(Date.now()), staff_id: nv.id,
+    staff_name: nv.full_name, product_id: pid, qty: qty, type: type, note: clean_(note, 200) });
+}
+function posStock_(nv, lines, sign, type, note) {
+  // lines: [{pid, qty}] ; sign -1 trừ kho, +1 cộng kho. Trả về danh sách sản phẩm đã cập nhật.
+  var prods = {}, out = [];
+  posData_('product').forEach(function (p) { prods[p.id] = p; });
+  lines.forEach(function (l) {
+    var p = prods[l.pid]; if (!p || p.service) return;
+    var q = Math.round(num_(l.qty)); if (!q) return;
+    p.stock = Math.round(num_(p.stock)) + sign * q;
+    posPut_('product', p, nv); posLog_(nv, p.id, sign * q, type, note); out.push(p);
+  });
+  return out;
+}
+function posCleanItem_(kind, o) {
+  o = JSON.parse(JSON.stringify(o || {}));
+  if (!o.id) o.id = Utilities.getUuid().slice(0, 12);
+  Object.keys(o).forEach(function (k) { if (typeof o[k] === 'string') o[k] = clean_(o[k], 500); });
+  if (kind === 'product') {
+    if (!o.name || !o.sku) throw new Error('Thiếu tên hoặc mã SKU');
+    o.price = Math.round(num_(o.price)); o.cost = Math.round(num_(o.cost));
+    o.service = o.cat === 'Dịch vụ';
+    o.stock = o.service ? null : Math.round(num_(o.stock));
+  }
+  if (kind === 'customer') {
+    o.phone = normPhone_(o.phone) || clean_(o.phone, 20);
+    if (!o.name || !o.phone) throw new Error('Thiếu tên hoặc số điện thoại khách');
+  }
+  if (kind === 'ctv') { o.rate = Math.max(0, Math.min(100, Number(o.rate) || 0)); }
+  delete o.sample;
+  return o;
+}
+function posNextCode_() {
+  var p = PropertiesService.getScriptProperties(), n = Number(p.getProperty('POS_SEQ') || 1000) + 1;
+  p.setProperty('POS_SEQ', String(n));
+  return 'DH' + n;
+}
+
+/* ---------------- API ---------------- */
+API.posPing = function () { return { pos: true, perms: POS_PERMS, roles: Object.keys(POS_ROLES) }; };
+
+API.posRegister = function (r) {
+  var phone = normPhone_(r.phone);
+  if (!phone) throw new Error('Số điện thoại không hợp lệ');
+  if (String(r.password || '').length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
+  var name = clean_(r.full_name, 80);
+  if (name.length < 2) throw new Error('Vui lòng nhập họ tên');
+  var t = posTable_('NhanVien');
+  if (t.find('phone', phone)) throw new Error('Số điện thoại này đã đăng ký. Vui lòng đăng nhập hoặc chờ quản lý duyệt');
+  var salt = Utilities.getUuid();
+  t.insert({ id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone, username: '',
+             role: 'ban_hang', perms: '', status: 'pending', pw_salt: salt, pw_hash: hash_(salt, r.password),
+             note: clean_(r.note, 200) });
+  notify_('admin', 'Nhân viên mới đăng ký phần mềm bán hàng', name + ' – ' + phone, '/app/#nhan-vien');
+  return { pending: true };
+};
+
+API.posLogin = function (r) {
+  var cache = CacheService.getScriptCache(), key = 'p' + loginKey_(r.login);
+  var fails = Number(cache.get(key) || 0);
+  if (fails >= 8) throw new Error('Bạn nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút');
+  var t = posTable_('NhanVien'), nv = posFindLogin_(r.login);
+  if (!nv) {
+    // Tài khoản quản trị CTV được tự tạo tài khoản Admin bán hàng ở lần đăng nhập đầu
+    var u = findLogin_(r.login);
+    if (u && (u.is_admin === 'TRUE' || u.is_admin === 'true') && pwOk_(u, r.password)) {
+      var row = { id: Utilities.getUuid(), created_at: now_(), full_name: u.full_name, phone: u.phone, username: '',
+                  role: 'admin', perms: '', status: 'active', pw_salt: u.pw_salt, pw_hash: u.pw_hash, note: 'Tạo từ tài khoản quản trị CTV', ctv_id: u.id };
+      t.insert(row); nv = posTable_('NhanVien').find('id', row.id);
+    }
+  }
+  if (!nv || !pwOk_(nv, r.password)) { cache.put(key, String(fails + 1), 900); throw new Error('Sai số điện thoại hoặc mật khẩu'); }
+  cache.remove(key);
+  if (nv.status === 'pending') throw new Error('Tài khoản đang chờ quản lý duyệt');
+  if (nv.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ quản lý');
+  t.update(nv, { last_login: now_() });
+  return { token: posNewSession_(nv.id), me: posPublic_(nv) };
+};
+
+API.posLogout = function (r) {
+  var t = posTable_('PhienNV'), s = t.find('token', String(r.token || ''));
+  if (s) t.remove(s);
+  CacheService.getScriptCache().remove('pn_' + r.token);
+  return true;
+};
+
+API.posChangePassword = function (r) {
+  var nv = posAuth_(r);
+  if (!pwOk_(nv, r.old_password)) throw new Error('Mật khẩu hiện tại không đúng');
+  if (String(r.new_password || '').length < 6) throw new Error('Mật khẩu mới tối thiểu 6 ký tự');
+  var salt = Utilities.getUuid();
+  posTable_('NhanVien').update(nv, { pw_salt: salt, pw_hash: hash_(salt, r.new_password) });
+  return true;
+};
+
+API.posLoad = function (r) {
+  var nv = posAuth_(r);
+  var out = { me: posPublic_(nv), products: posData_('product'), customers: posData_('customer'),
+              ctvs: posData_('ctv'), orders: posOrders_(nv), stockLog: [] };
+  if (posCan_(nv, 'kho') || posCan_(nv, 'bao_cao')) {
+    var k = posTable_('PosKho').all();
+    out.stockLog = k.slice(Math.max(0, k.length - 500)).map(function (x) {
+      return { id: x.id, date: Number(x.created_at), pid: x.product_id, qty: Number(x.qty), type: x.type, note: x.note, staff: x.staff_name };
+    });
+  }
+  return out;
+};
+
+API.posSave = function (r) {
+  var need = { product: 'san_pham', customer: null, ctv: 'khach_hang' }[r.kind];
+  if (need === undefined) throw new Error('Loại dữ liệu không hợp lệ');
+  var nv = posAuth_(r, need);
+  if (r.kind === 'customer' && !posCan_(nv, 'khach_hang') && !posCan_(nv, 'ban_hang')) throw new Error('Bạn chưa được cấp quyền cho việc này');
+  var o = posCleanItem_(r.kind, r.item);
+  var list = posData_(r.kind), old = null;
+  list.forEach(function (x) { if (x.id === o.id) old = x; });
+  if (r.kind === 'product') {
+    list.forEach(function (x) { if (x.id !== o.id && String(x.sku).toLowerCase() === String(o.sku).toLowerCase()) throw new Error('Mã SKU đã tồn tại'); });
+    if (old) o.stock = o.service ? null : Math.round(num_(old.stock));   // tồn kho chỉ đổi qua phiếu kho / đơn
+    else if (o.stock) posLog_(nv, o.id, o.stock, 'nhap', 'Tồn ban đầu');
+  }
+  if (r.kind === 'customer') {
+    list.forEach(function (x) { if (x.id !== o.id && x.phone === o.phone) throw new Error('Số điện thoại này đã có khách hàng'); });
+    if (!old) o.createdAt = Date.now(); else o.createdAt = old.createdAt;
+  }
+  posPut_(r.kind, o, nv);
+  return o;
+};
+
+API.posDelete = function (r) {
+  var need = { product: 'san_pham', ctv: 'khach_hang', customer: 'khach_hang' }[r.kind];
+  if (!need) throw new Error('Loại dữ liệu không hợp lệ');
+  posAuth_(r, need);
+  posDel_(r.kind, String(r.id || ''));
+  return true;
+};
+
+API.posCreateOrder = function (r) {
+  var nv = posAuth_(r, 'ban_hang');
+  var o = JSON.parse(JSON.stringify(r.order || {}));
+  if (!o.items || !o.items.length) throw new Error('Đơn chưa có sản phẩm');
+  var dt = posTable_('PosDon');
+  if (o.extCode && dt.all().some(function (x) { try { return JSON.parse(x.json).extCode === o.extCode; } catch (e) { return false; } }))
+    return { duplicate: true };
+  var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
+  o.items = o.items.map(function (i) {
+    var p = prods[i.pid]; if (!p) throw new Error('Sản phẩm "' + clean_(i.name, 80) + '" không còn trong danh mục');
+    var q = Math.max(1, Math.round(num_(i.qty)));
+    if (!p.service && !r.allowNegative && num_(p.stock) < q) throw new Error('"' + p.name + '" chỉ còn ' + p.stock + ' trong kho');
+    return { pid: p.id, name: p.name, sku: p.sku, price: Math.round(num_(i.price)), cost: Math.round(num_(p.cost)), qty: q };
+  });
+  o.subtotal = o.items.reduce(function (a, i) { return a + i.price * i.qty; }, 0);
+  o.discount = Math.max(0, Math.min(o.subtotal, Math.round(num_(o.discount))));
+  o.shipFee = Math.max(0, Math.round(num_(o.shipFee)));
+  o.total = o.subtotal - o.discount + o.shipFee;
+  o.channel = CHANNELS_OK_.indexOf(o.channel) >= 0 ? o.channel : 'pos';
+  o.status = o.channel === 'pos' ? 'done' : 'pending';
+  o.id = Utilities.getUuid().slice(0, 12); o.code = posNextCode_(); o.date = Date.now();
+  o.staffId = nv.id; o.staffName = nv.full_name;
+  o.history = [{ t: o.date, by: nv.full_name, status: o.status }];
+  ['note', 'address'].forEach(function (k) { o[k] = clean_(o[k], 500); });
+  if (o.channel === 'pos') o.paid = Math.max(o.total, Math.round(num_(o.paid))); else o.paid = 0;
+  var updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code);
+  dt.insert({ code: o.code, id: o.id, created_at: now_(), staff_id: nv.id, staff_name: nv.full_name, channel: o.channel,
+              status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o) });
+  return { order: o, products: updated };
+};
+var CHANNELS_OK_ = ['pos', 'facebook', 'zalo', 'chatbot', 'ctv', 'web'];
+
+API.posOrderStatus = function (r) {
+  var nv = posAuth_(r, 'xu_ly_don');
+  if (POS_STATUS.indexOf(r.status) < 0) throw new Error('Trạng thái không hợp lệ');
+  var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
+  if (!row) throw new Error('Không tìm thấy đơn');
+  if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn này do nhân viên khác phụ trách');
+  var o = JSON.parse(row.json), updated = [];
+  if (o.status === 'cancelled') throw new Error('Đơn đã hủy');
+  if (r.status === 'cancelled') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code);
+  o.status = r.status;
+  if (r.status === 'done') { o.paid = o.total; o.doneAt = Date.now(); }
+  o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: r.status }]);
+  t.update(row, { status: o.status, updated_at: now_(), json: JSON.stringify(o) });
+  return { order: o, products: updated };
+};
+
+API.posStock = function (r) {
+  var nv = posAuth_(r, 'kho');
+  var lines = (r.lines || []).slice(0, 200), updated = [];
+  if (r.type === 'nhap') {
+    var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
+    lines.forEach(function (l) { var p = prods[l.pid]; if (p && l.cost && Math.round(num_(l.cost)) !== p.cost) { p.cost = Math.round(num_(l.cost)); posPut_('product', p, nv); } });
+    updated = posStock_(nv, lines, 1, 'nhap', r.note);
+  } else if (r.type === 'kiem') {
+    var cur = {}; posData_('product').forEach(function (p) { cur[p.id] = p; });
+    updated = posStock_(nv, lines.map(function (l) { var p = cur[l.pid]; return { pid: l.pid, qty: p ? Math.round(num_(l.qty)) - Math.round(num_(p.stock)) : 0 }; }), 1, 'kiem', r.note);
+  } else throw new Error('Loại phiếu không hợp lệ');
+  return { products: posData_('product') };
+};
+
+/* Khung thông báo: đơn cần xử lý + đơn CTV mới từ trang cộng tác viên */
+API.posNotices = function (r) {
+  var nv = posAuth_(r), all = posCan_(nv, 'don_tat_ca');
+  var rows = posTable_('PosDon').all().filter(function (o) { return all || o.staff_id === nv.id; });
+  var out = { pending: 0, shipping: 0, today: 0, todayRevenue: 0, latest: [], ctvNew: 0, ctvConfirmed: 0, staffPending: 0, me: posPublic_(nv) };
+  var today = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
+  rows.forEach(function (o) {
+    if (o.status === 'pending') out.pending++;
+    if (o.status === 'shipping') out.shipping++;
+    if (String(o.created_at).slice(0, 10) === today && o.status !== 'cancelled') { out.today++; if (o.status === 'done') out.todayRevenue += num_(o.total); }
+  });
+  rows.slice(-8).reverse().forEach(function (o) {
+    out.latest.push({ id: o.id, code: o.code, created_at: o.created_at, staff_name: o.staff_name, channel: o.channel, status: o.status, total: num_(o.total) });
+  });
+  if (all) {
+    try {
+      table_('DonHang').all().forEach(function (o) { if (o.status === 'new') out.ctvNew++; if (o.status === 'confirmed') out.ctvConfirmed++; });
+    } catch (e) {}
+  }
+  if (posCan_(nv, 'quan_tri')) out.staffPending = posTable_('NhanVien').all().filter(function (x) { return x.status === 'pending'; }).length;
+  return out;
+};
+
+/* Đơn từ trang cộng tác viên (tab DonHang) để hiện trong phần mềm */
+API.posCtvOrders = function (r) {
+  posAuth_(r, 'don_tat_ca');
+  var ctv = {}; table_('CTV').all().forEach(function (u) { ctv[u.id] = u.full_name; });
+  return table_('DonHang').all().slice(-300).reverse().map(function (o) {
+    return { order_code: o.order_code, created_at: o.created_at, ctv: ctv[o.ctv_id] || o.ref_code, customer_name: o.customer_name,
+             customer_phone: o.customer_phone, items: o.items, total: num_(o.total), status: o.status, commission: num_(o.commission) };
+  });
+};
+
+/* ---------- Quản lý nhân viên (quyền quan_tri) ---------- */
+API.posStaffList = function (r) {
+  posAuth_(r, 'quan_tri');
+  return { staff: posTable_('NhanVien').all().map(posPublic_), perms: POS_PERMS, roles: POS_ROLES };
+};
+
+API.posStaffSet = function (r) {
+  var me = posAuth_(r, 'quan_tri');
+  var t = posTable_('NhanVien'), nv = t.find('id', String(r.id || ''));
+  if (!nv) throw new Error('Không tìm thấy nhân viên');
+  var ch = {};
+  if (r.role !== undefined) { if (!POS_ROLES[r.role]) throw new Error('Vai trò không hợp lệ'); ch.role = r.role; }
+  if (r.perms !== undefined) ch.perms = (r.perms || []).filter(function (p) { return POS_PERMS.indexOf(p) >= 0; }).join(',');
+  if (r.status !== undefined) { if (['pending', 'active', 'locked'].indexOf(r.status) < 0) throw new Error('Trạng thái không hợp lệ'); ch.status = r.status; }
+  if (r.note !== undefined) ch.note = clean_(r.note, 200);
+  if (r.full_name) ch.full_name = clean_(r.full_name, 80);
+  if (nv.id === me.id && ((ch.role && ch.role !== 'admin') || (ch.status && ch.status !== 'active')))
+    throw new Error('Không thể tự hạ quyền hoặc khóa chính mình');
+  if (nv.role === 'admin' && ((ch.role && ch.role !== 'admin') || (ch.status && ch.status !== 'active'))) {
+    var admins = t.all().filter(function (x) { return x.role === 'admin' && x.status === 'active'; });
+    if (admins.length <= 1) throw new Error('Cần giữ ít nhất 1 tài khoản Admin');
+  }
+  t.update(nv, ch);
+  if (ch.status === 'locked') posKill_(nv.id);
+  return posPublic_(t.find('id', nv.id));
+};
+
+API.posStaffDelete = function (r) {
+  var me = posAuth_(r, 'quan_tri');
+  var t = posTable_('NhanVien'), nv = t.find('id', String(r.id || ''));
+  if (!nv) throw new Error('Không tìm thấy nhân viên');
+  if (nv.id === me.id) throw new Error('Không thể tự xóa tài khoản của mình');
+  if (nv.role === 'admin' && t.all().filter(function (x) { return x.role === 'admin' && x.status === 'active'; }).length <= 1)
+    throw new Error('Cần giữ ít nhất 1 tài khoản Admin');
+  posKill_(nv.id);
+  t.remove(nv);
+  return true;
+};
+
+API.posStaffResetPw = function (r) {
+  posAuth_(r, 'quan_tri');
+  var t = posTable_('NhanVien'), nv = t.find('id', String(r.id || ''));
+  if (!nv) throw new Error('Không tìm thấy nhân viên');
+  var pw = Math.random().toString(36).slice(2, 6) + Math.floor(1000 + Math.random() * 9000);
+  var salt = Utilities.getUuid();
+  t.update(nv, { pw_salt: salt, pw_hash: hash_(salt, pw) });
+  posKill_(nv.id);
+  return { password: pw };
+};

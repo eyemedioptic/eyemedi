@@ -29,3 +29,19 @@ Sửa Code.gs sau này: **Triển khai → Quản lý triển khai → bút chì
 - Danh sách sản phẩm mẫu = các sản phẩm trên **trang chủ** (index.html). Đổi giá / thêm sản phẩm trên trang chủ: chạy `python _cong-cu/ctv/tao-ds-san-pham.py` để cập nhật `ctv/san-pham.json` rồi đẩy lên (máy chủ dùng file này để tính giá mẫu, lưu đệm 10 phút).
 - Trang mới phải có dòng `<script src="/ctv/ref.js" defer></script>` (đã thêm vào trang mẫu SEO) để nhận link `?ref=`.
 - CTV quên mật khẩu: trang quản trị → **Cấp lại MK**.
+
+## Phần mềm bán hàng (eyemedi.vn/app)
+Phần mềm bán hàng dùng chung máy chủ Apps Script và Google Sheet với trang CTV. Phần mã cho phần mềm nằm ở cuối `Code.gs` (mục "PHẦN MỀM BÁN HÀNG"). Các tab `NhanVien`, `PhienNV`, `PosData`, `PosDon`, `PosKho` tự tạo khi dùng lần đầu.
+
+Cập nhật máy chủ (mỗi khi Code.gs đổi):
+1. Mở Google Sheet "EYEMEDI - Cong tac vien" → **Tiện ích mở rộng → Apps Script**.
+2. Xóa toàn bộ code cũ trong Code.gs, dán toàn bộ `_cong-cu/ctv/Code.gs` mới, bấm **Lưu**.
+3. **Triển khai → Quản lý triển khai → bút chì → Phiên bản: Phiên bản mới → Triển khai**. URL giữ nguyên, không cần sửa `ctv/config.js`.
+
+Khi máy chủ chưa cập nhật, phần mềm vẫn mở được nhưng chạy chế độ một máy (dữ liệu lưu trên trình duyệt) và hiện dòng cảnh báo trên khung thông báo.
+
+Tài khoản:
+- Admin đầu tiên: đăng nhập eyemedi.vn/app bằng SĐT và mật khẩu của tài khoản quản trị trang CTV → tự có tài khoản Admin bán hàng.
+- Nhân viên bấm **Đăng ký nhân viên** ở màn hình đăng nhập → Admin vào mục **Nhân viên** để duyệt, chọn vai trò, bật tắt từng quyền, khóa, mở khóa, cấp lại mật khẩu hoặc xóa.
+- Vai trò: Admin (toàn quyền), Quản lý, Nhân viên bán hàng, Nhân viên kho. Quyền chi tiết: bán hàng, xem đơn mọi nhân viên, xử lý đơn, sản phẩm, kho, khách hàng, báo cáo, quản lý nhân viên.
+- Nhân viên không có quyền "Xem đơn của mọi nhân viên" chỉ thấy đơn do mình tạo.
