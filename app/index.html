@@ -6,6 +6,12 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#12343a">
 <link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/app/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/app/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Eyemedi">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Phần mềm bán hàng | EYEMEDI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
@@ -1035,7 +1041,7 @@ function showLogin(msg,tab){
       <button class="btn pri" style="padding:11px">Gửi đăng ký</button>
       <div class="small muted">Sau khi đăng ký, quản lý duyệt và cấp quyền thì bạn mới đăng nhập được.</div>
     </form>`}
-    <div class="small" style="text-align:center"><a href="/ctv/" target="_blank" rel="noopener">Trang cộng tác viên ↗</a></div>
+    <div class="small" style="text-align:center;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap">${installBtn()}<a href="/ctv/" target="_blank" rel="noopener">Trang cộng tác viên ↗</a></div>
   </div>`;
   $$('.tabs button',main).forEach(b=>b.onclick=()=>showLogin('',b.dataset.t));
   const say=t=>{const e=$('#lmsg');e.textContent=t;e.hidden=!t};
@@ -1080,7 +1086,7 @@ function noticeInner(){
   const ctvLink=SERVER&&can('don_tat_ca')?'/ctv/admin.html':'/ctv/';
   const chips=`<a class="nchip${pend?' warn':''}" href="#don-hang" data-go="pending">Chờ xác nhận <b class="num">${pend}</b></a>
     <a class="nchip${ship?' info':''}" href="#don-hang" data-go="shipping">Đang giao <b class="num">${ship}</b></a>`;
-  if(!SERVER)return `${branchSelect()}<div class="nchips">${chips}</div><span class="nmeta${SERVER_NOTE?' nwarn':''}">${esc(SERVER_NOTE||'Chế độ một máy: dữ liệu lưu trên trình duyệt này.')}</span><span class="grow"></span><a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>`;
+  if(!SERVER)return `${branchSelect()}<div class="nchips">${chips}</div><span class="nmeta${SERVER_NOTE?' nwarn':''}">${esc(SERVER_NOTE||'Chế độ một máy: dữ liệu lưu trên trình duyệt này.')}</span><span class="grow"></span>${installBtn()}<a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>`;
   const n=NOTICE||{};
   const latest=(n.latest||[]).slice(0,3);
   return `<div class="who"><b>${esc(ME.full_name)}</b> <span class="pill neu">${ROLE_LABEL[ME.role]||ME.role}</span></div>
@@ -1090,7 +1096,7 @@ function noticeInner(){
       ${can('bao_cao')&&NOTICE?`<span class="nchip ok">Hôm nay ${n.today} đơn · <b class="num">${money(n.todayRevenue)}</b></span>`:''}
     </div>
     <span class="grow"></span>
-    <a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>
+    ${installBtn()}<a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>
     <button class="btn sm" id="btnPw">Đổi mật khẩu</button><button class="btn sm" id="btnOut">Đăng xuất</button>
     ${latest.length?`<div class="nlatest">Mới nhất: ${latest.map(o=>`<a href="#" data-oid2="${esc(o.id)}">${esc(o.code)}</a> ${esc(CHANNELS[o.channel]||'')}, ${STATUS[o.status]?STATUS[o.status][0].toLowerCase():''}, ${esc(o.staff_name)}`).join(' · ')}</div>`:''}`;
 }
@@ -1533,6 +1539,33 @@ async function importWebForm(){
     draw();
   }});
 }
+/* ============ Cài lên màn hình điện thoại ============ */
+let INSTALL_EVT=null;
+const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}};
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function installBtn(){return isStandalone()?'':'<button class="btn sm" data-install>Cài lên điện thoại</button>'}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL_EVT=e});
+window.addEventListener('appinstalled',()=>{INSTALL_EVT=null;$$('[data-install]').forEach(b=>b.remove());toast('Đã cài Eyemedi lên màn hình chính')});
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-install]'))installApp()});
+async function installApp(){
+  if(INSTALL_EVT){const ev=INSTALL_EVT;INSTALL_EVT=null;try{await ev.prompt();const r=await ev.userChoice;if(r&&r.outcome==='accepted')return}catch(e){}}
+  const ios=isIOS(),inApp=/FBAN|FBAV|Zalo|Instagram|Line\//i.test(navigator.userAgent);
+  const step=(n,t)=>`<div style="display:flex;gap:10px;align-items:flex-start"><span class="pill neu" style="min-width:24px;text-align:center">${n}</span><div>${t}</div></div>`;
+  modal(`<h2>Cài Eyemedi lên màn hình chính</h2>
+    <div style="display:flex;gap:12px;align-items:center"><img src="/app/icon-192.png" alt="" width="56" height="56" style="border-radius:12px;border:1px solid var(--line)"><div class="small muted">Cài xong, biểu tượng Eyemedi nằm trên màn hình điện thoại, mở lên dùng toàn màn hình như một ứng dụng. Tài khoản và dữ liệu vẫn như trên web.</div></div>
+    ${inApp?`<div class="banner" style="margin:0">Bạn đang mở trong Facebook hoặc Zalo. Hãy bấm nút ⋯ ở góc trên, chọn <b>Mở bằng trình duyệt</b> (Safari trên iPhone, Chrome trên Android) rồi làm theo hướng dẫn dưới đây.</div>`:''}
+    ${ios?`<h3 style="margin:4px 0 0">iPhone, iPad (Safari)</h3>
+      ${step(1,'Mở <b>eyemedi.vn/app</b> bằng <b>Safari</b>.')}
+      ${step(2,'Bấm nút <b>Chia sẻ</b> (ô vuông có mũi tên đi lên) ở thanh dưới cùng hoặc trên cùng.')}
+      ${step(3,'Kéo xuống, chọn <b>Thêm vào MH chính</b> (Add to Home Screen), rồi bấm <b>Thêm</b>.')}`
+    :`<h3 style="margin:4px 0 0">Điện thoại Android (Chrome)</h3>
+      ${step(1,'Mở <b>eyemedi.vn/app</b> bằng <b>Chrome</b>.')}
+      ${step(2,'Bấm nút <b>⋮</b> ở góc trên bên phải.')}
+      ${step(3,'Chọn <b>Cài đặt ứng dụng</b> hoặc <b>Thêm vào màn hình chính</b>, rồi bấm <b>Cài đặt</b>.')}
+      <div class="small muted">iPhone: mở bằng Safari, bấm nút Chia sẻ rồi chọn Thêm vào MH chính. Máy tính: bấm biểu tượng cài đặt ở cuối thanh địa chỉ Chrome hoặc Edge.</div>`}
+    <div class="acts"><button class="btn pri" data-close>Đã hiểu</button></div>`);
+}
+if('serviceWorker' in navigator&&window.isSecureContext)window.addEventListener('load',()=>navigator.serviceWorker.register('/app/sw.js',{scope:'/app/'}).catch(()=>{}));
 /* ============ Khởi động ============ */
 document.addEventListener('keydown',e=>{
   if(e.key==='F3'){e.preventDefault();if(location.hash!=='#ban-hang')location.hash='ban-hang';setTimeout(()=>$('#posQ')&&$('#posQ').focus(),0)}

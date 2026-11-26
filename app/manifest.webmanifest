@@ -1,0 +1,22 @@
+{
+  "name": "Eyemedi Bán hàng",
+  "short_name": "Eyemedi",
+  "description": "Phần mềm bán hàng, kho, sổ quỹ của EYEMEDI",
+  "id": "/app/",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "vi",
+  "background_color": "#f3f5f6",
+  "theme_color": "#12343a",
+  "icons": [
+    {"src": "/app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Bán hàng", "url": "/app/#ban-hang", "icons": [{"src": "/app/icon-192.png", "sizes": "192x192"}]},
+    {"name": "Đơn hàng", "url": "/app/#don-hang", "icons": [{"src": "/app/icon-192.png", "sizes": "192x192"}]}
+  ]
+}
