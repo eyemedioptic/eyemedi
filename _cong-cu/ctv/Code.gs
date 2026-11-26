@@ -1206,6 +1206,7 @@ API.posCreateOrder = function (r) {
   var updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code);
   dt.insert({ code: o.code, id: o.id, created_at: now_(), staff_id: nv.id, staff_name: nv.full_name, channel: o.channel,
               status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o) });
+  if (o.status === 'done') posCashForOrder_(nv, o, 'done');
   return { order: o, products: updated };
 };
 var CHANNELS_OK_ = ['pos', 'facebook', 'zalo', 'chatbot', 'ctv', 'web'];
@@ -1216,13 +1217,16 @@ API.posOrderStatus = function (r) {
   var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
   if (!row) throw new Error('Không tìm thấy đơn');
   if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn này do nhân viên khác phụ trách');
-  var o = JSON.parse(row.json), updated = [];
+  var o = JSON.parse(row.json), updated = [], prev = o.status;
   if (o.status === 'cancelled') throw new Error('Đơn đã hủy');
+  if (o.status === r.status) throw new Error('Đơn đã ở trạng thái này');
   if (r.status === 'cancelled') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code);
   o.status = r.status;
   if (r.status === 'done') { o.paid = o.total; o.doneAt = Date.now(); }
   o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: r.status }]);
   t.update(row, { status: o.status, updated_at: now_(), json: JSON.stringify(o) });
+  if (r.status === 'done') posCashForOrder_(nv, o, 'done');
+  if (r.status === 'cancelled' && prev === 'done') posCashForOrder_(nv, o, 'refund');
   return { order: o, products: updated };
 };
 
@@ -1233,6 +1237,8 @@ API.posStock = function (r) {
     var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
     lines.forEach(function (l) { var p = prods[l.pid]; if (p && l.cost && Math.round(num_(l.cost)) !== p.cost) { p.cost = Math.round(num_(l.cost)); posPut_('product', p, nv); } });
     updated = posStock_(nv, lines, 1, 'nhap', r.note);
+    var pay = lines.reduce(function (a, l) { var p = prods[l.pid]; return a + Math.max(0, Math.round(num_(l.qty))) * Math.round(num_(l.cost || (p && p.cost))); }, 0);
+    if (r.payFund && pay > 0) posCashInsert_(nv, { type: 'chi', fund: r.payFund, category: 'Nhập hàng', amount: pay, note: 'Tiền hàng nhập' + (r.note ? ': ' + r.note : ''), auto: true });
   } else if (r.type === 'kiem') {
     var cur = {}; posData_('product').forEach(function (p) { cur[p.id] = p; });
     updated = posStock_(nv, lines.map(function (l) { var p = cur[l.pid]; return { pid: l.pid, qty: p ? Math.round(num_(l.qty)) - Math.round(num_(p.stock)) : 0 }; }), 1, 'kiem', r.note);
@@ -1321,4 +1327,86 @@ API.posStaffResetPw = function (r) {
   t.update(nv, { pw_salt: salt, pw_hash: hash_(salt, pw) });
   posKill_(nv.id);
   return { password: pw };
+};
+
+/* ---------------- SỔ QUỸ: phiếu thu, phiếu chi, quỹ ---------------- */
+SHEETS.PosQuy = ['id', 'code', 'created_at', 'date', 'type', 'fund', 'category', 'amount', 'note', 'ref',
+                 'staff_id', 'staff_name', 'status', 'auto'];
+POS_PERMS.push('so_quy');
+POS_ROLES.quan_ly.push('so_quy');
+var CASH_DEFAULT_FUNDS = [{ id: 'tien_mat', name: 'Tiền mặt', opening: 0 }, { id: 'ngan_hang', name: 'Ngân hàng', opening: 0 }];
+
+function posFunds_() {
+  var f = posData_('fund');
+  return f.length ? f : CASH_DEFAULT_FUNDS.slice();
+}
+function posCashNo_(type) {
+  var p = PropertiesService.getScriptProperties(), k = type === 'thu' ? 'POS_PT' : 'POS_PC';
+  var n = Number(p.getProperty(k) || 0) + 1; p.setProperty(k, String(n));
+  return (type === 'thu' ? 'PT' : 'PC') + ('00000' + n).slice(-5);
+}
+function posCashInsert_(nv, e) {
+  var row = { id: Utilities.getUuid().slice(0, 12), code: posCashNo_(e.type), created_at: now_(), date: String(e.date || Date.now()),
+    type: e.type, fund: e.fund, category: clean_(e.category, 60), amount: Math.round(num_(e.amount)), note: clean_(e.note, 300),
+    ref: clean_(e.ref, 40), staff_id: nv.id, staff_name: nv.full_name, status: 'ok', auto: e.auto ? 'TRUE' : '' };
+  posTable_('PosQuy').insert(row);
+  return posCashOut_(row);
+}
+function posCashOut_(x) {
+  return { id: x.id, code: x.code, date: Number(x.date), type: x.type, fund: x.fund, category: x.category, amount: num_(x.amount),
+           note: x.note, ref: x.ref, staff: x.staff_name, status: x.status, auto: x.auto === 'TRUE' };
+}
+function posFundFor_(method) { return method === 'cash' ? 'tien_mat' : 'ngan_hang'; }
+// Ghi thu khi đơn hoàn thành; hoàn tiền khi hủy đơn đã thu
+function posCashForOrder_(nv, o, ev) {
+  try {
+    if (ev === 'done') posCashInsert_(nv, { type: 'thu', fund: posFundFor_(o.method), category: 'Bán hàng', amount: o.total,
+      note: 'Thu tiền đơn ' + o.code + (o.channel && o.channel !== 'pos' ? ' (' + o.channel + ')' : ''), ref: o.code, auto: true });
+    if (ev === 'refund') posCashInsert_(nv, { type: 'chi', fund: posFundFor_(o.method), category: 'Hoàn tiền khách', amount: o.total,
+      note: 'Hoàn tiền đơn hủy ' + o.code, ref: o.code, auto: true });
+  } catch (e) { Logger.log('Không ghi được sổ quỹ: ' + e); }
+}
+
+API.posCashList = function (r) {
+  posAuth_(r, 'so_quy');
+  var rows = posTable_('PosQuy').all();
+  return { funds: posFunds_(), entries: rows.slice(Math.max(0, rows.length - 5000)).map(posCashOut_) };
+};
+
+API.posCashAdd = function (r) {
+  var nv = posAuth_(r, 'so_quy');
+  var funds = posFunds_().map(function (f) { return f.id; });
+  var amt = Math.round(num_(r.amount));
+  if (amt <= 0) throw new Error('Số tiền phải lớn hơn 0');
+  if (funds.indexOf(r.fund) < 0) throw new Error('Chưa chọn quỹ');
+  var date = Number(r.date) || Date.now(), out = [];
+  if (r.type === 'chuyen') {
+    if (funds.indexOf(r.toFund) < 0 || r.toFund === r.fund) throw new Error('Chọn quỹ nhận khác quỹ chuyển');
+    out.push(posCashInsert_(nv, { type: 'chi', fund: r.fund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'sang ' + r.toFund }));
+    out.push(posCashInsert_(nv, { type: 'thu', fund: r.toFund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'từ ' + r.fund }));
+  } else if (r.type === 'thu' || r.type === 'chi') {
+    if (!clean_(r.category, 60)) throw new Error('Chưa chọn khoản mục');
+    out.push(posCashInsert_(nv, { type: r.type, fund: r.fund, category: r.category, amount: amt, note: r.note, date: date, ref: r.ref }));
+  } else throw new Error('Loại phiếu không hợp lệ');
+  return out;
+};
+
+API.posCashVoid = function (r) {
+  var nv = posAuth_(r, 'so_quy');
+  var t = posTable_('PosQuy'), row = t.find('id', String(r.id || ''));
+  if (!row) throw new Error('Không tìm thấy phiếu');
+  if (row.status === 'void') throw new Error('Phiếu đã hủy');
+  t.update(row, { status: 'void', note: (row.note ? row.note + ' · ' : '') + 'Hủy bởi ' + nv.full_name + (r.reason ? ': ' + clean_(r.reason, 120) : '') });
+  return posCashOut_(t.find('id', row.id));
+};
+
+API.posFundSave = function (r) {
+  var nv = posAuth_(r, 'so_quy');
+  var f = r.fund || {}, list = posFunds_();
+  var name = clean_(f.name, 60);
+  if (!name) throw new Error('Nhập tên quỹ');
+  var item = { id: f.id || ('q' + Utilities.getUuid().slice(0, 8)), name: name, opening: Math.round(num_(f.opening)) };
+  if (!posData_('fund').length) CASH_DEFAULT_FUNDS.forEach(function (d) { if (d.id !== item.id) posPut_('fund', d, nv); });
+  posPut_('fund', item, nv);
+  return posFunds_();
 };
