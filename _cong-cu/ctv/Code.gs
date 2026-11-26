@@ -948,12 +948,12 @@ function esc_(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function
  * (is_admin = TRUE) → hệ thống tự tạo tài khoản nhân viên quyền Admin.
  * ========================================================================== */
 SHEETS.NhanVien = ['id', 'created_at', 'full_name', 'phone', 'username', 'role', 'perms', 'status',
-                   'pw_salt', 'pw_hash', 'note', 'last_login', 'ctv_id'];
+                   'pw_salt', 'pw_hash', 'note', 'last_login', 'ctv_id', 'branches'];
 SHEETS.PhienNV = ['token', 'nv_id', 'expires'];
 SHEETS.PosData = ['kind', 'id', 'updated_at', 'updated_by', 'json'];
 SHEETS.PosDon = ['code', 'id', 'created_at', 'staff_id', 'staff_name', 'channel', 'status', 'customer_id',
-                 'total', 'updated_at', 'json'];
-SHEETS.PosKho = ['id', 'created_at', 'staff_id', 'staff_name', 'product_id', 'qty', 'type', 'note'];
+                 'total', 'updated_at', 'json', 'branch'];
+SHEETS.PosKho = ['id', 'created_at', 'staff_id', 'staff_name', 'product_id', 'qty', 'type', 'note', 'branch'];
 
 var POS_PERMS = ['ban_hang', 'don_tat_ca', 'xu_ly_don', 'san_pham', 'kho', 'khach_hang', 'bao_cao', 'quan_tri'];
 var POS_ROLES = {
@@ -980,7 +980,7 @@ function posPerms_(nv) {
 }
 function posPublic_(nv) {
   return { id: nv.id, full_name: nv.full_name, phone: nv.phone, username: nv.username, role: nv.role,
-           status: nv.status, perms: posPerms_(nv), note: nv.note, created_at: nv.created_at, last_login: nv.last_login };
+           status: nv.status, perms: posPerms_(nv), branches: String(nv.branches || '').split(',').filter(String), note: nv.note, created_at: nv.created_at, last_login: nv.last_login };
 }
 function posAuth_(r, perm) {
   var token = String(r.token || '');
@@ -1017,6 +1017,10 @@ function posFindLogin_(v) {
   return id ? t.find('username', id.toLowerCase()) : null;
 }
 function posData_(kind) {
+  var list = posData0_(kind);
+  return kind === 'product' ? list.map(posNormStock_) : list;
+}
+function posData0_(kind) {
   return posTable_('PosData').all().filter(function (x) { return x.kind === kind; })
     .map(function (x) { try { return JSON.parse(x.json); } catch (e) { return null; } }).filter(Boolean);
 }
@@ -1036,22 +1040,23 @@ function posDel_(kind, id) {
 function posOrders_(nv) {
   var all = posTable_('PosDon').all();
   if (!posCan_(nv, 'don_tat_ca')) all = all.filter(function (o) { return o.staff_id === nv.id; });
+  if (!posCan_(nv, 'moi_chi_nhanh')) { var mine = posMyBranches_(nv); all = all.filter(function (o) { return mine.indexOf(o.branch) >= 0 || o.staff_id === nv.id; }); }
   if (all.length > 3000) all = all.slice(all.length - 3000);
   return all.map(function (o) { try { return JSON.parse(o.json); } catch (e) { return null; } }).filter(Boolean);
 }
-function posLog_(nv, pid, qty, type, note) {
+function posLog_(nv, pid, qty, type, note, br) {
   posTable_('PosKho').insert({ id: Utilities.getUuid(), created_at: String(Date.now()), staff_id: nv.id,
-    staff_name: nv.full_name, product_id: pid, qty: qty, type: type, note: clean_(note, 200) });
+    staff_name: nv.full_name, product_id: pid, qty: qty, type: type, note: clean_(note, 200), branch: br || '' });
 }
-function posStock_(nv, lines, sign, type, note) {
+function posStock_(nv, lines, sign, type, note, br) {
   // lines: [{pid, qty}] ; sign -1 trừ kho, +1 cộng kho. Trả về danh sách sản phẩm đã cập nhật.
   var prods = {}, out = [];
   posData_('product').forEach(function (p) { prods[p.id] = p; });
   lines.forEach(function (l) {
     var p = prods[l.pid]; if (!p || p.service) return;
     var q = Math.round(num_(l.qty)); if (!q) return;
-    p.stock = Math.round(num_(p.stock)) + sign * q;
-    posPut_('product', p, nv); posLog_(nv, p.id, sign * q, type, note); out.push(p);
+    br = br || posFirstBranch_(); p.stocks[br] = (p.stocks[br] || 0) + sign * q; posNormStock_(p);
+    posPut_('product', p, nv); posLog_(nv, p.id, sign * q, type, note, br); out.push(p);
   });
   return out;
 }
@@ -1080,7 +1085,7 @@ function posNextCode_() {
 }
 
 /* ---------------- API ---------------- */
-API.posPing = function () { return { pos: true, perms: POS_PERMS, roles: Object.keys(POS_ROLES) }; };
+API.posPing = function () { return { pos: true, perms: POS_PERMS, roles: Object.keys(POS_ROLES), branches: posBranches_().filter(function (b) { return b.active !== false; }).map(function (b) { return { id: b.id, name: b.name }; }) }; };
 
 API.posRegister = function (r) {
   var phone = normPhone_(r.phone);
@@ -1093,7 +1098,7 @@ API.posRegister = function (r) {
   var salt = Utilities.getUuid();
   t.insert({ id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone, username: '',
              role: 'ban_hang', perms: '', status: 'pending', pw_salt: salt, pw_hash: hash_(salt, r.password),
-             note: clean_(r.note, 200) });
+             note: clean_(r.note, 200), branches: posBranches_().some(function (b) { return b.id === r.branch; }) ? r.branch : '' });
   notify_('admin', 'Nhân viên mới đăng ký phần mềm bán hàng', name + ' – ' + phone, '/app/#nhan-vien');
   return { pending: true };
 };
@@ -1139,11 +1144,11 @@ API.posChangePassword = function (r) {
 API.posLoad = function (r) {
   var nv = posAuth_(r);
   var out = { me: posPublic_(nv), products: posData_('product'), customers: posData_('customer'),
-              ctvs: posData_('ctv'), orders: posOrders_(nv), stockLog: [] };
+              ctvs: posData_('ctv'), orders: posOrders_(nv), stockLog: [], branches: posBranches_(), myBranches: posMyBranches_(nv) };
   if (posCan_(nv, 'kho') || posCan_(nv, 'bao_cao')) {
     var k = posTable_('PosKho').all();
     out.stockLog = k.slice(Math.max(0, k.length - 500)).map(function (x) {
-      return { id: x.id, date: Number(x.created_at), pid: x.product_id, qty: Number(x.qty), type: x.type, note: x.note, staff: x.staff_name };
+      return { id: x.id, date: Number(x.created_at), pid: x.product_id, qty: Number(x.qty), type: x.type, note: x.note, staff: x.staff_name, branch: x.branch };
     });
   }
   return out;
@@ -1159,8 +1164,13 @@ API.posSave = function (r) {
   list.forEach(function (x) { if (x.id === o.id) old = x; });
   if (r.kind === 'product') {
     list.forEach(function (x) { if (x.id !== o.id && String(x.sku).toLowerCase() === String(o.sku).toLowerCase()) throw new Error('Mã SKU đã tồn tại'); });
-    if (old) o.stock = o.service ? null : Math.round(num_(old.stock));   // tồn kho chỉ đổi qua phiếu kho / đơn
-    else if (o.stock) posLog_(nv, o.id, o.stock, 'nhap', 'Tồn ban đầu');
+    if (old) { o.stocks = old.stocks; o.stock = old.stock; }   // tồn kho chỉ đổi qua phiếu kho / đơn
+    else {
+      var b0 = r.branch && posMyBranches_(nv).indexOf(r.branch) >= 0 ? r.branch : posFirstBranch_();
+      o.stocks = {}; if (!o.service) o.stocks[b0] = Math.round(num_(o.stock));
+      if (o.stock) posLog_(nv, o.id, o.stock, 'nhap', 'Tồn ban đầu', b0);
+    }
+    posNormStock_(o);
   }
   if (r.kind === 'customer') {
     list.forEach(function (x) { if (x.id !== o.id && x.phone === o.phone) throw new Error('Số điện thoại này đã có khách hàng'); });
@@ -1185,11 +1195,13 @@ API.posCreateOrder = function (r) {
   var dt = posTable_('PosDon');
   if (o.extCode && dt.all().some(function (x) { try { return JSON.parse(x.json).extCode === o.extCode; } catch (e) { return false; } }))
     return { duplicate: true };
+  var br = String(o.branchId || ''); posCheckBranch_(nv, br);
   var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
   o.items = o.items.map(function (i) {
     var p = prods[i.pid]; if (!p) throw new Error('Sản phẩm "' + clean_(i.name, 80) + '" không còn trong danh mục');
     var q = Math.max(1, Math.round(num_(i.qty)));
-    if (!p.service && !r.allowNegative && num_(p.stock) < q) throw new Error('"' + p.name + '" chỉ còn ' + p.stock + ' trong kho');
+    var have = p.service ? 0 : num_((p.stocks || {})[br]);
+    if (!p.service && !r.allowNegative && have < q) throw new Error('"' + p.name + '" chỉ còn ' + have + ' tại chi nhánh ' + posBranchName_(br));
     return { pid: p.id, name: p.name, sku: p.sku, price: Math.round(num_(i.price)), cost: Math.round(num_(p.cost)), qty: q };
   });
   o.subtotal = o.items.reduce(function (a, i) { return a + i.price * i.qty; }, 0);
@@ -1199,13 +1211,13 @@ API.posCreateOrder = function (r) {
   o.channel = CHANNELS_OK_.indexOf(o.channel) >= 0 ? o.channel : 'pos';
   o.status = o.channel === 'pos' ? 'done' : 'pending';
   o.id = Utilities.getUuid().slice(0, 12); o.code = posNextCode_(); o.date = Date.now();
-  o.staffId = nv.id; o.staffName = nv.full_name;
+  o.staffId = nv.id; o.staffName = nv.full_name; o.branchId = br; o.branchName = posBranchName_(br);
   o.history = [{ t: o.date, by: nv.full_name, status: o.status }];
   ['note', 'address'].forEach(function (k) { o[k] = clean_(o[k], 500); });
   if (o.channel === 'pos') o.paid = Math.max(o.total, Math.round(num_(o.paid))); else o.paid = 0;
-  var updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code);
+  var updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code, br);
   dt.insert({ code: o.code, id: o.id, created_at: now_(), staff_id: nv.id, staff_name: nv.full_name, channel: o.channel,
-              status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o) });
+              status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o), branch: br });
   if (o.status === 'done') posCashForOrder_(nv, o, 'done');
   return { order: o, products: updated };
 };
@@ -1217,10 +1229,11 @@ API.posOrderStatus = function (r) {
   var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
   if (!row) throw new Error('Không tìm thấy đơn');
   if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn này do nhân viên khác phụ trách');
+  if (!posCan_(nv, 'moi_chi_nhanh') && row.staff_id !== nv.id && posMyBranches_(nv).indexOf(row.branch) < 0) throw new Error('Đơn này thuộc chi nhánh khác');
   var o = JSON.parse(row.json), updated = [], prev = o.status;
   if (o.status === 'cancelled') throw new Error('Đơn đã hủy');
   if (o.status === r.status) throw new Error('Đơn đã ở trạng thái này');
-  if (r.status === 'cancelled') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code);
+  if (r.status === 'cancelled') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code, o.branchId);
   o.status = r.status;
   if (r.status === 'done') { o.paid = o.total; o.doneAt = Date.now(); }
   o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: r.status }]);
@@ -1232,16 +1245,24 @@ API.posOrderStatus = function (r) {
 
 API.posStock = function (r) {
   var nv = posAuth_(r, 'kho');
-  var lines = (r.lines || []).slice(0, 200), updated = [];
+  var lines = (r.lines || []).slice(0, 200), updated = [], br = String(r.branch || '');
+  posCheckBranch_(nv, br);
   if (r.type === 'nhap') {
     var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
     lines.forEach(function (l) { var p = prods[l.pid]; if (p && l.cost && Math.round(num_(l.cost)) !== p.cost) { p.cost = Math.round(num_(l.cost)); posPut_('product', p, nv); } });
-    updated = posStock_(nv, lines, 1, 'nhap', r.note);
+    updated = posStock_(nv, lines, 1, 'nhap', r.note, br);
     var pay = lines.reduce(function (a, l) { var p = prods[l.pid]; return a + Math.max(0, Math.round(num_(l.qty))) * Math.round(num_(l.cost || (p && p.cost))); }, 0);
-    if (r.payFund && pay > 0) posCashInsert_(nv, { type: 'chi', fund: r.payFund, category: 'Nhập hàng', amount: pay, note: 'Tiền hàng nhập' + (r.note ? ': ' + r.note : ''), auto: true });
+    if (r.payFund && pay > 0) posCashInsert_(nv, { type: 'chi', fund: r.payFund, category: 'Nhập hàng', amount: pay, note: 'Tiền hàng nhập ' + posBranchName_(br) + (r.note ? ': ' + r.note : ''), auto: true, branch: br });
   } else if (r.type === 'kiem') {
     var cur = {}; posData_('product').forEach(function (p) { cur[p.id] = p; });
-    updated = posStock_(nv, lines.map(function (l) { var p = cur[l.pid]; return { pid: l.pid, qty: p ? Math.round(num_(l.qty)) - Math.round(num_(p.stock)) : 0 }; }), 1, 'kiem', r.note);
+    updated = posStock_(nv, lines.map(function (l) { var p = cur[l.pid]; return { pid: l.pid, qty: p ? Math.round(num_(l.qty)) - Math.round(num_((p.stocks || {})[br])) : 0 }; }), 1, 'kiem', r.note, br);
+  } else if (r.type === 'chuyen') {
+    var to = String(r.toBranch || '');
+    if (!posBranches_().some(function (b) { return b.id === to; }) || to === br) throw new Error('Chọn chi nhánh nhận khác chi nhánh chuyển');
+    var cur2 = {}; posData_('product').forEach(function (p) { cur2[p.id] = p; });
+    lines.forEach(function (l) { var p = cur2[l.pid]; if (p && num_((p.stocks || {})[br]) < num_(l.qty)) throw new Error('"' + p.name + '" chỉ còn ' + num_((p.stocks || {})[br]) + ' tại ' + posBranchName_(br)); });
+    posStock_(nv, lines, -1, 'chuyen', 'Chuyển sang ' + posBranchName_(to) + (r.note ? ': ' + r.note : ''), br);
+    posStock_(nv, lines, 1, 'chuyen', 'Nhận từ ' + posBranchName_(br) + (r.note ? ': ' + r.note : ''), to);
   } else throw new Error('Loại phiếu không hợp lệ');
   return { products: posData_('product') };
 };
@@ -1249,7 +1270,8 @@ API.posStock = function (r) {
 /* Khung thông báo: đơn cần xử lý + đơn CTV mới từ trang cộng tác viên */
 API.posNotices = function (r) {
   var nv = posAuth_(r), all = posCan_(nv, 'don_tat_ca');
-  var rows = posTable_('PosDon').all().filter(function (o) { return all || o.staff_id === nv.id; });
+  var mineB = posMyBranches_(nv), allB = posCan_(nv, 'moi_chi_nhanh');
+  var rows = posTable_('PosDon').all().filter(function (o) { return (all || o.staff_id === nv.id) && (allB || mineB.indexOf(o.branch) >= 0 || o.staff_id === nv.id) && (!r.branch || o.branch === r.branch); });
   var out = { pending: 0, shipping: 0, today: 0, todayRevenue: 0, latest: [], ctvNew: 0, ctvConfirmed: 0, staffPending: 0, me: posPublic_(nv) };
   var today = Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'yyyy-MM-dd');
   rows.forEach(function (o) {
@@ -1282,7 +1304,7 @@ API.posCtvOrders = function (r) {
 /* ---------- Quản lý nhân viên (quyền quan_tri) ---------- */
 API.posStaffList = function (r) {
   posAuth_(r, 'quan_tri');
-  return { staff: posTable_('NhanVien').all().map(posPublic_), perms: POS_PERMS, roles: POS_ROLES };
+  return { staff: posTable_('NhanVien').all().map(posPublic_), perms: POS_PERMS, roles: POS_ROLES, branches: posBranches_() };
 };
 
 API.posStaffSet = function (r) {
@@ -1294,6 +1316,7 @@ API.posStaffSet = function (r) {
   if (r.perms !== undefined) ch.perms = (r.perms || []).filter(function (p) { return POS_PERMS.indexOf(p) >= 0; }).join(',');
   if (r.status !== undefined) { if (['pending', 'active', 'locked'].indexOf(r.status) < 0) throw new Error('Trạng thái không hợp lệ'); ch.status = r.status; }
   if (r.note !== undefined) ch.note = clean_(r.note, 200);
+  if (r.branches !== undefined) { var okB = posBranches_().map(function (b) { return b.id; }); ch.branches = (r.branches || []).map(String).filter(function (b) { return okB.indexOf(b) >= 0; }).join(','); }
   if (r.full_name) ch.full_name = clean_(r.full_name, 80);
   if (nv.id === me.id && ((ch.role && ch.role !== 'admin') || (ch.status && ch.status !== 'active')))
     throw new Error('Không thể tự hạ quyền hoặc khóa chính mình');
@@ -1331,7 +1354,7 @@ API.posStaffResetPw = function (r) {
 
 /* ---------------- SỔ QUỸ: phiếu thu, phiếu chi, quỹ ---------------- */
 SHEETS.PosQuy = ['id', 'code', 'created_at', 'date', 'type', 'fund', 'category', 'amount', 'note', 'ref',
-                 'staff_id', 'staff_name', 'status', 'auto'];
+                 'staff_id', 'staff_name', 'status', 'auto', 'branch'];
 POS_PERMS.push('so_quy');
 POS_ROLES.quan_ly.push('so_quy');
 var CASH_DEFAULT_FUNDS = [{ id: 'tien_mat', name: 'Tiền mặt', opening: 0 }, { id: 'ngan_hang', name: 'Ngân hàng', opening: 0 }];
@@ -1348,28 +1371,29 @@ function posCashNo_(type) {
 function posCashInsert_(nv, e) {
   var row = { id: Utilities.getUuid().slice(0, 12), code: posCashNo_(e.type), created_at: now_(), date: String(e.date || Date.now()),
     type: e.type, fund: e.fund, category: clean_(e.category, 60), amount: Math.round(num_(e.amount)), note: clean_(e.note, 300),
-    ref: clean_(e.ref, 40), staff_id: nv.id, staff_name: nv.full_name, status: 'ok', auto: e.auto ? 'TRUE' : '' };
+    ref: clean_(e.ref, 40), staff_id: nv.id, staff_name: nv.full_name, status: 'ok', auto: e.auto ? 'TRUE' : '', branch: e.branch || '' };
   posTable_('PosQuy').insert(row);
   return posCashOut_(row);
 }
 function posCashOut_(x) {
   return { id: x.id, code: x.code, date: Number(x.date), type: x.type, fund: x.fund, category: x.category, amount: num_(x.amount),
-           note: x.note, ref: x.ref, staff: x.staff_name, status: x.status, auto: x.auto === 'TRUE' };
+           note: x.note, ref: x.ref, staff: x.staff_name, status: x.status, auto: x.auto === 'TRUE', branch: x.branch };
 }
 function posFundFor_(method) { return method === 'cash' ? 'tien_mat' : 'ngan_hang'; }
 // Ghi thu khi đơn hoàn thành; hoàn tiền khi hủy đơn đã thu
 function posCashForOrder_(nv, o, ev) {
   try {
     if (ev === 'done') posCashInsert_(nv, { type: 'thu', fund: posFundFor_(o.method), category: 'Bán hàng', amount: o.total,
-      note: 'Thu tiền đơn ' + o.code + (o.channel && o.channel !== 'pos' ? ' (' + o.channel + ')' : ''), ref: o.code, auto: true });
+      note: 'Thu tiền đơn ' + o.code + (o.channel && o.channel !== 'pos' ? ' (' + o.channel + ')' : ''), ref: o.code, auto: true, branch: o.branchId });
     if (ev === 'refund') posCashInsert_(nv, { type: 'chi', fund: posFundFor_(o.method), category: 'Hoàn tiền khách', amount: o.total,
-      note: 'Hoàn tiền đơn hủy ' + o.code, ref: o.code, auto: true });
+      note: 'Hoàn tiền đơn hủy ' + o.code, ref: o.code, auto: true, branch: o.branchId });
   } catch (e) { Logger.log('Không ghi được sổ quỹ: ' + e); }
 }
 
 API.posCashList = function (r) {
-  posAuth_(r, 'so_quy');
+  var nv = posAuth_(r, 'so_quy');
   var rows = posTable_('PosQuy').all();
+  if (!posCan_(nv, 'moi_chi_nhanh')) { var mine = posMyBranches_(nv); rows = rows.filter(function (x) { return mine.indexOf(x.branch) >= 0; }); }
   return { funds: posFunds_(), entries: rows.slice(Math.max(0, rows.length - 5000)).map(posCashOut_) };
 };
 
@@ -1379,14 +1403,15 @@ API.posCashAdd = function (r) {
   var amt = Math.round(num_(r.amount));
   if (amt <= 0) throw new Error('Số tiền phải lớn hơn 0');
   if (funds.indexOf(r.fund) < 0) throw new Error('Chưa chọn quỹ');
-  var date = Number(r.date) || Date.now(), out = [];
+  var date = Number(r.date) || Date.now(), out = [], br = String(r.branch || '');
+  if (br || !posCan_(nv, 'moi_chi_nhanh')) posCheckBranch_(nv, br);
   if (r.type === 'chuyen') {
     if (funds.indexOf(r.toFund) < 0 || r.toFund === r.fund) throw new Error('Chọn quỹ nhận khác quỹ chuyển');
-    out.push(posCashInsert_(nv, { type: 'chi', fund: r.fund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'sang ' + r.toFund }));
-    out.push(posCashInsert_(nv, { type: 'thu', fund: r.toFund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'từ ' + r.fund }));
+    out.push(posCashInsert_(nv, { type: 'chi', fund: r.fund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'sang ' + r.toFund, branch: br }));
+    out.push(posCashInsert_(nv, { type: 'thu', fund: r.toFund, category: 'Chuyển quỹ', amount: amt, note: r.note, date: date, ref: 'từ ' + r.fund, branch: br }));
   } else if (r.type === 'thu' || r.type === 'chi') {
     if (!clean_(r.category, 60)) throw new Error('Chưa chọn khoản mục');
-    out.push(posCashInsert_(nv, { type: r.type, fund: r.fund, category: r.category, amount: amt, note: r.note, date: date, ref: r.ref }));
+    out.push(posCashInsert_(nv, { type: r.type, fund: r.fund, category: r.category, amount: amt, note: r.note, date: date, ref: r.ref, branch: br }));
   } else throw new Error('Loại phiếu không hợp lệ');
   return out;
 };
@@ -1405,8 +1430,56 @@ API.posFundSave = function (r) {
   var f = r.fund || {}, list = posFunds_();
   var name = clean_(f.name, 60);
   if (!name) throw new Error('Nhập tên quỹ');
-  var item = { id: f.id || ('q' + Utilities.getUuid().slice(0, 8)), name: name, opening: Math.round(num_(f.opening)) };
+  var item = { id: f.id || ('q' + Utilities.getUuid().slice(0, 8)), name: name, opening: Math.round(num_(f.opening)), branch: clean_(f.branch, 40) };
   if (!posData_('fund').length) CASH_DEFAULT_FUNDS.forEach(function (d) { if (d.id !== item.id) posPut_('fund', d, nv); });
   posPut_('fund', item, nv);
   return posFunds_();
+};
+
+/* ---------------- CHI NHÁNH: kho riêng, đơn và sổ quỹ theo chi nhánh ---------------- */
+POS_PERMS.push('moi_chi_nhanh');
+POS_ROLES.quan_ly.push('moi_chi_nhanh');
+var DEFAULT_BRANCHES = [
+  { id: 'cn1', name: '63C Lạc Long Quân', address: '63C Lạc Long Quân, P. Hòa Bình, TP.HCM', phone: '0967 190 005', active: true },
+  { id: 'cn2', name: '169 Nguyễn Đức Thiệu', address: '169 Nguyễn Đức Thiệu, P. Dĩ An, TP.HCM', phone: '0967 190 005', active: true },
+  { id: 'cn3', name: '19C Đường số 5D', address: '19C Đường số 5D, P. Bình Hưng Hòa A, TP.HCM', phone: '0967 190 005', active: true },
+  { id: 'cn4', name: '634 Cách Mạng Tháng 8', address: '634 Cách Mạng Tháng 8, P. Nhiêu Lộc, TP.HCM', phone: '0967 190 005', active: true },
+  { id: 'cn5', name: '169 Nghĩa Lộ, Hà Nội', address: '169 Nghĩa Lộ, P. Yên Nghĩa, Hà Nội', phone: '0967 190 005', active: true }
+];
+var _posBr = null;
+function posBranches_() {
+  if (_posBr) return _posBr;
+  var b = posData0_('branch');
+  _posBr = b.length ? b : JSON.parse(JSON.stringify(DEFAULT_BRANCHES));
+  return _posBr;
+}
+function posFirstBranch_() { return posBranches_()[0].id; }
+function posBranchName_(id) { var b = posBranches_().filter(function (x) { return x.id === id; })[0]; return b ? b.name : (id || 'chưa rõ'); }
+function posMyBranches_(nv) {
+  var all = posBranches_().filter(function (b) { return b.active !== false; }).map(function (b) { return b.id; });
+  if (posCan_(nv, 'moi_chi_nhanh')) return all;
+  return String(nv.branches || '').split(',').filter(function (x) { return all.indexOf(x) >= 0; });
+}
+function posCheckBranch_(nv, br) {
+  if (!br) throw new Error('Chưa chọn chi nhánh');
+  if (posMyBranches_(nv).indexOf(br) < 0) throw new Error('Bạn chưa được phân công ở chi nhánh ' + posBranchName_(br));
+}
+function posNormStock_(p) {
+  if (p.service) { p.stocks = null; p.stock = null; return p; }
+  if (!p.stocks || typeof p.stocks !== 'object') { p.stocks = {}; p.stocks[posFirstBranch_()] = Math.round(num_(p.stock)); }
+  var sum = 0; Object.keys(p.stocks).forEach(function (k) { p.stocks[k] = Math.round(num_(p.stocks[k])); sum += p.stocks[k]; });
+  p.stock = sum; return p;
+}
+
+API.posBranchSave = function (r) {
+  var nv = posAuth_(r, 'quan_tri');
+  var b = r.branch || {}, name = clean_(b.name, 80);
+  if (!name) throw new Error('Nhập tên chi nhánh');
+  var list = posBranches_();
+  var item = { id: b.id || ('cn' + Utilities.getUuid().slice(0, 6)), name: name, address: clean_(b.address, 200), phone: clean_(b.phone, 30), active: b.active !== false };
+  if (item.active === false && list.filter(function (x) { return x.active !== false && x.id !== item.id; }).length === 0) throw new Error('Cần giữ ít nhất 1 chi nhánh đang hoạt động');
+  if (!posData0_('branch').length) list.forEach(function (x) { if (x.id !== item.id) posPut_('branch', x, nv); });
+  posPut_('branch', item, nv);
+  _posBr = null;
+  return posBranches_();
 };
