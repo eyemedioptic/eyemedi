@@ -923,7 +923,7 @@ function importSheet(){
   modal(`<h2>Nhập đơn cộng tác viên từ Google Sheet</h2>
     <div class="small muted">Mở Google Sheet đơn hàng, chọn các dòng cần nhập (kèm dòng tiêu đề), bấm Ctrl+C rồi dán vào ô dưới. Phần mềm tự nhận các cột Mã đơn, CTV, Tên khách, SĐT, Địa chỉ, Sản phẩm (tên hoặc mã SKU), Số lượng, Phí ship, Ghi chú. Các dòng cùng Mã đơn gộp thành một đơn, mã đơn đã nhập trước đó sẽ được bỏ qua.</div>
     <textarea id="sh_txt" rows="6" placeholder="Dán dữ liệu từ Google Sheet vào đây"></textarea>
-    <div><button class="btn sm" id="sh_try">Dùng dữ liệu ví dụ</button></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${SERVER?'<button class="btn sm pri" id="sh_srv">Lấy từ Sheet đơn hàng</button>':''}<button class="btn sm" id="sh_try">Dùng dữ liệu ví dụ</button></div>
     <div id="sh_res" class="tbl-wrap"></div>
     <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="sh_ok" disabled>Nhập đơn</button></div>`,
   {wide:true,onMount:(m,close)=>{
@@ -938,6 +938,9 @@ function importSheet(){
     };
     $('#sh_txt',m).oninput=run;
     $('#sh_try',m).onclick=()=>{$('#sh_txt',m).value=sample;run()};
+    const srv=$('#sh_srv',m);srv&&(srv.onclick=async()=>{srv.disabled=true;srv.textContent='Đang tải…';
+      try{const d=await api('posOrderSheet',{limit:300});if(!d.tsv){toast('Sheet đơn hàng đang trống')}else{$('#sh_txt',m).value=d.tsv;run();toast(`Đã lấy ${d.rows} dòng gần nhất từ tab ${d.name}`)}}
+      catch(err){toast(err.message)}srv.disabled=false;srv.textContent='Lấy từ Sheet đơn hàng'});
     $('#sh_ok',m).onclick=async()=>{
       if(SERVER){await importSheetServer(res,close);return}
       const ok=res.list.filter(o=>!o.errs.length&&!o.dup);let n=0;const short=[];

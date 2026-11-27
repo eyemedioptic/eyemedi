@@ -1336,7 +1336,7 @@ API.posNotices = function (r) {
   });
   if (all) {
     try {
-      table_('DonHang').all().forEach(function (o) { if (o.status === 'new') out.ctvNew++; if (o.status === 'confirmed') out.ctvConfirmed++; });
+      posCtvRows_('DonHang').forEach(function (o) { if (o.status === 'new') out.ctvNew++; if (o.status === 'confirmed') out.ctvConfirmed++; });
     } catch (e) {}
   }
   if (posCan_(nv, 'quan_tri')) out.staffPending = posTable_('NhanVien').all().filter(function (x) { return x.status === 'pending'; }).length;
@@ -1346,12 +1346,43 @@ API.posNotices = function (r) {
 /* Đơn từ trang cộng tác viên (tab DonHang) để hiện trong phần mềm */
 API.posCtvOrders = function (r) {
   posAuth_(r, 'don_tat_ca');
-  if (!SpreadsheetApp.getActiveSpreadsheet().getSheetByName('DonHang')) throw new Error('Máy chủ phần mềm bán hàng đang dùng Google Sheet riêng, chưa nối với dữ liệu đơn của trang cộng tác viên');
-  var ctv = {}; table_('CTV').all().forEach(function (u) { ctv[u.id] = u.full_name; });
-  return table_('DonHang').all().slice(-300).reverse().map(function (o) {
+  var ctv = {}; posCtvRows_('CTV').forEach(function (u) { ctv[u.id] = u.full_name; });
+  return posCtvRows_('DonHang').slice(-300).reverse().map(function (o) {
     return { order_code: o.order_code, created_at: o.created_at, ctv: ctv[o.ctv_id] || o.ref_code, customer_name: o.customer_name,
              customer_phone: o.customer_phone, items: o.items, total: num_(o.total), status: o.status, commission: num_(o.commission) };
   });
+};
+
+/* ---------- Đọc Google Sheet bên ngoài (Sheet cộng tác viên, Sheet đơn hàng) ----------
+   Mã Sheet khai báo trong tệp riêng TaiKhoanAdmin.gs: POS_CTV_SHEET_ID, POS_ORDER_SHEET_ID, POS_ORDER_SHEET_GID. */
+function posCfg_(name) {
+  var c = { POS_CTV_SHEET_ID: typeof POS_CTV_SHEET_ID === 'undefined' ? '' : POS_CTV_SHEET_ID,
+            POS_ORDER_SHEET_ID: typeof POS_ORDER_SHEET_ID === 'undefined' ? '' : POS_ORDER_SHEET_ID,
+            POS_ORDER_SHEET_GID: typeof POS_ORDER_SHEET_GID === 'undefined' ? '' : POS_ORDER_SHEET_GID };
+  return c[name] || '';
+}
+function posCtvRows_(name) {
+  var id = posCfg_('POS_CTV_SHEET_ID'), ss = id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(name);
+  if (!sh) throw new Error('Chưa nối với Google Sheet của trang cộng tác viên (thiếu tab ' + name + ')');
+  var v = sh.getDataRange().getDisplayValues(), head = v.shift() || [];
+  return v.map(function (row) { var o = {}; head.forEach(function (h, j) { o[h] = row[j]; }); return o; });
+}
+// Sheet đơn hàng: trả về dòng tiêu đề + các dòng gần nhất dạng TSV để phần mềm tự nhận cột
+API.posOrderSheet = function (r) {
+  posAuth_(r, 'ban_hang');
+  var id = posCfg_('POS_ORDER_SHEET_ID');
+  if (!id) throw new Error('Chưa khai báo Sheet đơn hàng trong tệp TaiKhoanAdmin');
+  var ss = SpreadsheetApp.openById(id), gid = String(posCfg_('POS_ORDER_SHEET_GID') || ''), sh = null;
+  ss.getSheets().forEach(function (x) { if (gid && String(x.getSheetId()) === gid) sh = x; });
+  sh = sh || ss.getSheets()[0];
+  var v = sh.getDataRange().getDisplayValues();
+  if (v.length < 2) return { name: sh.getName(), tsv: '', rows: 0 };
+  var head = v[0], body = v.slice(1).filter(function (row) { return row.join('').trim(); });
+  var limit = Math.min(Number(r.limit) || 300, 1000);
+  body = body.slice(-limit);
+  var cell = function (x) { return String(x).replace(/[\t\r\n]+/g, ' ').trim(); };
+  return { name: sh.getName(), rows: body.length, tsv: [head].concat(body).map(function (row) { return row.map(cell).join('\t'); }).join('\n') };
 };
 
 /* ---------- Quản lý nhân viên (quyền quan_tri) ---------- */
