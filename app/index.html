@@ -752,13 +752,16 @@ function editCustomer(c,after){
 }
 
 /* ============ Báo cáo ============ */
-let repRange=14;
+let repRange=14,repD1=dayKey(Date.now()-6*86400000),repD2=dayKey(Date.now());
 function viewReports(el){
-  const D=86400000,oneDay=repRange==='d0'||repRange==='d1';
-  const now=new Date(),curM='m:'+now.getFullYear()+'-'+(now.getMonth()+1),curY='y:'+now.getFullYear();
-  const isM=/^m:/.test(repRange),isY=/^y:/.test(repRange);
+  const D=86400000,now=new Date(),curM='m:'+now.getFullYear()+'-'+(now.getMonth()+1),curY='y:'+now.getFullYear();
+  const pm=new Date(now.getFullYear(),now.getMonth()-1,1),prevM='m:'+pm.getFullYear()+'-'+(pm.getMonth()+1);
+  const isC=repRange==='custom',isM=/^m:/.test(repRange);
+  let cDays=0;if(isC){cDays=Math.round((pDay(repD1<=repD2?repD2:repD1)-pDay(repD1<=repD2?repD1:repD2))/D)+1}
+  const isY=/^y:/.test(repRange)||(isC&&cDays>92),oneDay=repRange==='d0'||repRange==='d1'||(isC&&cDays===1);
   let from,to=Infinity,rangeLb;
-  if(isM){const [Y,M]=repRange.slice(2).split('-').map(Number);from=new Date(Y,M-1,1).getTime();to=new Date(Y,M,1).getTime();rangeLb='Tháng '+M+'/'+Y}
+  if(isC){const a=repD1<=repD2?repD1:repD2,b=repD1<=repD2?repD2:repD1;from=pDay(a);const t=new Date(pDay(b));t.setDate(t.getDate()+1);to=t.getTime();rangeLb=a===b?fmtDate(from):fmtDate(from)+' – '+fmtDate(pDay(b))}
+  else if(isM){const [Y,M]=repRange.slice(2).split('-').map(Number);from=new Date(Y,M-1,1).getTime();to=new Date(Y,M,1).getTime();rangeLb='Tháng '+M+'/'+Y}
   else if(isY){const Y=Number(repRange.slice(2));from=new Date(Y,0,1).getTime();to=new Date(Y+1,0,1).getTime();rangeLb='Năm '+Y}
   else{from=repRange==='d0'?startOfDay():repRange==='d1'?startOfDay()-D:startOfDay()-(repRange-1)*D;if(repRange==='d1')to=startOfDay();rangeLb={d0:'Hôm nay',d1:'Hôm qua'}[repRange]||repRange+' ngày qua'}
   const inR=o=>o.date>=from&&o.date<to;
@@ -770,8 +773,10 @@ function viewReports(el){
   const disc=os.reduce((a,o)=>a+o.discount,0);
   const days=[];
   if(oneDay){for(let h=0;h<24;h++)days.push({t:from+h*3600000,lb:h+'h',tl:h+'h–'+(h+1)+'h',v:0,n:0});os.forEach(o=>{const d=days[Math.floor((o.date-from)/3600000)];if(d){d.v+=o.total;d.n++}})}
-  else if(isY){for(let m=0;m<12;m++){const t=new Date(new Date(from).getFullYear(),m,1).getTime();days.push({t,lb:'T'+(m+1),tl:'Tháng '+(m+1),v:0,n:0})}os.forEach(o=>{const d=days[new Date(o.date).getMonth()];d.v+=o.total;d.n++})}
-  else{const nd=isM?Math.round((to-from)/D):repRange;for(let i=0;i<nd;i++){const t=new Date(new Date(from).getFullYear(),new Date(from).getMonth(),new Date(from).getDate()+i).getTime();days.push({t,k:dayKey(t),v:0,n:0})}
+  else if(isY){const f=new Date(from),mk=t=>{const d=new Date(t);return d.getFullYear()*12+d.getMonth()},m0=mk(from),m1=isC?mk(to-1):m0+11;
+    for(let m=m0;m<=m1;m++){const y=Math.floor(m/12),mo=m%12;days.push({t:new Date(y,mo,1).getTime(),lb:'T'+(mo+1)+(isC&&m1-m0>11?'/'+String(y).slice(2):''),tl:'Tháng '+(mo+1)+'/'+y,v:0,n:0})}
+    os.forEach(o=>{const d=days[mk(o.date)-m0];if(d){d.v+=o.total;d.n++}})}
+  else{const nd=isM||isC?Math.round((to-from)/D):repRange;for(let i=0;i<nd;i++){const t=new Date(new Date(from).getFullYear(),new Date(from).getMonth(),new Date(from).getDate()+i).getTime();days.push({t,k:dayKey(t),v:0,n:0})}
     const idx=Object.fromEntries(days.map((d,i)=>[d.k,i]));
     os.forEach(o=>{const i=idx[dayKey(o.date)];if(i!=null){days[i].v+=o.total;days[i].n++}})}
   const prodMap={};os.forEach(o=>o.items.forEach(i=>{const k=i.pid;prodMap[k]=prodMap[k]||{name:i.name,qty:0,rev:0};prodMap[k].qty+=i.qty;prodMap[k].rev+=i.qty*i.price}));
@@ -787,7 +792,7 @@ function viewReports(el){
   const brMap={};allOs.forEach(o=>{const k=o.branchId||firstBr();const x=brMap[k]=brMap[k]||{id:k,n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
   const brRows=Object.values(brMap).sort((a,b)=>b.rev-a.rev),brTotal=brRows.reduce((a,x)=>a+x.rev,0);
   const ctvMap={};os.filter(o=>o.ctvId).forEach(o=>{const x=ctvMap[o.ctvId]=ctvMap[o.ctvId]||{n:0,rev:0,com:0};x.n++;x.rev+=o.total;x.com+=o.commission||0});
-  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[['d0','Hôm nay'],['d1','Hôm qua'],[7,'7 ngày'],[30,'30 ngày'],[curM,'Tháng này'],[curY,'Năm nay']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}<select id="rrSel" style="width:auto"><option value="">Chọn tháng, năm…</option><optgroup label="Theo tháng">${opts.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup><optgroup label="Theo năm">${years.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup></select></div></div>
+  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[['d0','Hôm nay'],['d1','Hôm qua'],[7,'7 ngày'],[30,'30 ngày'],[curM,'Tháng này'],[prevM,'Tháng trước'],[curY,'Năm nay'],['custom','Tùy chọn']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}<select id="rrSel" style="width:auto"><option value="">Chọn tháng, năm…</option><optgroup label="Theo tháng">${opts.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup><optgroup label="Theo năm">${years.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup></select></div>${isC?`<div style="flex-basis:100%;display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap"><span class="small muted">Từ ngày</span><input type="date" id="rpD1" value="${repD1}" style="width:auto"><span class="small muted">đến ngày</span><input type="date" id="rpD2" value="${repD2}" style="width:auto"></div>`:''}</div>
   <div class="stats">
     <div class="card stat"><div class="lb">Doanh thu thuần</div><div class="v num">${money(rev)}</div><div class="d muted">${os.length} đơn hoàn thành</div></div>
     <div class="card stat"><div class="lb">Lợi nhuận gộp</div><div class="v num" style="color:var(--good)">${money(rev-cost)}</div><div class="d muted">Biên ${rev?Math.round((rev-cost)/rev*100):0}%</div></div>
@@ -795,7 +800,7 @@ function viewReports(el){
     <div class="card stat"><div class="lb">Giá trị TB / đơn</div><div class="v num">${money(os.length?rev/os.length:0)}</div><div class="d muted">${rangeLb}</div></div>
   </div>
   <div class="two">
-    <div class="card chart"><h2>Doanh thu theo ${oneDay?'giờ · '+rangeLb.toLowerCase():isY?'tháng · '+rangeLb.toLowerCase():isM?'ngày · '+rangeLb.toLowerCase():'ngày'}</h2>${barChart(days)}</div>
+    <div class="card chart"><h2>Doanh thu theo ${oneDay?'giờ':isY?'tháng':'ngày'}${isM||isY||isC||oneDay?' · '+rangeLb.toLowerCase():''}</h2>${barChart(days)}</div>
     <div class="card"><h2>Theo phương thức thanh toán</h2>${barList(Object.entries(methMap).map(([k,v])=>[METHODS[k],v]),rev)}</div>
   </div>
   <div class="two" style="margin-top:16px">
@@ -810,8 +815,9 @@ function viewReports(el){
     <div class="card"><h2>Hoa hồng cộng tác viên</h2>${Object.keys(ctvMap).length?`<div class="tbl-wrap"><table><thead><tr><th>Cộng tác viên</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Hoa hồng</th></tr></thead><tbody>${Object.entries(ctvMap).map(([id,x])=>`<tr><td>${esc(S.ctvs.find(c=>c.id===id)?.name||'(đã xóa)')}</td><td class="r num">${x.n}</td><td class="r num">${money(x.rev)}</td><td class="r num"><b>${money(x.com)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có đơn từ cộng tác viên trong kỳ này.</div>'}</div>
     <div class="card"><h2>Theo kênh bán</h2>${barList(Object.entries(chMap).sort((a,b)=>b[1]-a[1]),rev)}</div>
   </div>`;
-  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=/^[dmy]/.test(b.dataset.v)?b.dataset.v:Number(b.dataset.v);viewReports(el)});
+  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=/^[dmyc]/.test(b.dataset.v)?b.dataset.v:Number(b.dataset.v);viewReports(el)});
   $('#rrSel',el).onchange=e=>{if(e.target.value){repRange=e.target.value;viewReports(el)}};
+  const r1=$('#rpD1',el),r2=$('#rpD2',el);r1&&(r1.onchange=()=>{if(r1.value){repD1=r1.value;viewReports(el)}});r2&&(r2.onchange=()=>{if(r2.value){repD2=r2.value;viewReports(el)}});
 }
 function barList(rows,total){
   if(!rows.length)return '<div class="empty">Chưa có dữ liệu.</div>';
@@ -1273,7 +1279,7 @@ const DEFAULT_FUNDS=[{id:'tien_mat',name:'Tiền mặt',opening:0},{id:'ngan_han
 const THU_CATS=['Bán hàng','Thu nợ khách','Thu chiết khấu nhà cung cấp','Góp vốn','Thu khác'];
 const CHI_CATS=['Nhập hàng','Lương nhân viên','Thuê mặt bằng','Điện, nước, internet','Quảng cáo, marketing','Hoa hồng cộng tác viên','Vận chuyển','Sửa chữa, mua sắm','Hoàn tiền khách','Chi khác'];
 const NOT_EXPENSE=['Nhập hàng','Chuyển quỹ','Hoàn tiền khách'];
-let CASH=null,cashRange='thang',cashFund='all',cashType='all',cashQ='';
+let CASH=null,cashRange='thang',cashD1=dayKey(Date.now()),cashD2=dayKey(Date.now()),cashFund='all',cashType='all',cashQ='';
 const fundsNow=()=>(CASH&&CASH.funds)||(!SERVER&&S.funds)||DEFAULT_FUNDS;
 const fundName=id=>(fundsNow().find(f=>f.id===id)||{name:id}).name;
 const fundForMethod=m=>m==='cash'?'tien_mat':'ngan_hang';
@@ -1287,11 +1293,20 @@ function cashForOrderLocal(o,ev){
   if(ev==='done')cashLocal({type:'thu',fund:fundForMethod(o.method),category:'Bán hàng',amount:o.total,note:'Thu tiền đơn '+o.code,ref:o.code,auto:true,branch:o.branchId});
   if(ev==='refund')cashLocal({type:'chi',fund:fundForMethod(o.method),category:'Hoàn tiền khách',amount:o.total,note:'Hoàn tiền đơn hủy '+o.code,ref:o.code,auto:true,branch:o.branchId});
 }
+const pDay=k=>{const [y,m,d]=String(k).split('-').map(Number);return new Date(y,(m||1)-1,d||1).getTime()};
 function cashFrom(){
   if(cashRange==='all')return 0;
   if(cashRange==='thang'){const d=new Date();d.setDate(1);d.setHours(0,0,0,0);return d.getTime()}
+  if(cashRange==='d1')return startOfDay()-86400000;
+  if(cashRange==='custom')return pDay(cashD1<=cashD2?cashD1:cashD2);
   return startOfDay()-(Number(cashRange)-1)*86400000;
 }
+function cashTo(){
+  if(cashRange==='d1')return startOfDay();
+  if(cashRange==='custom'){const k=cashD1<=cashD2?cashD2:cashD1;const t=new Date(pDay(k));t.setDate(t.getDate()+1);return t.getTime()}
+  return Infinity;
+}
+const CASH_RANGES=[['1','Hôm nay'],['d1','Hôm qua'],['7','7 ngày qua'],['30','30 ngày qua'],['thang','Tháng này'],['custom','Tùy chọn']];
 async function viewCash(el){
   el.innerHTML=`<div class="head"><h1>Sổ quỹ${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><button class="btn" id="cCopy">Sao chép sổ để dán vào Excel</button><button class="btn" id="cMove">Chuyển quỹ</button><button class="btn" id="cChi">+ Phiếu chi</button><button class="btn pri" id="cThu">+ Phiếu thu</button></div><div id="cbody"><div class="empty">Đang tải sổ quỹ…</div></div>`;
   $('#cThu',el).onclick=()=>cashForm('thu',el);$('#cChi',el).onclick=()=>cashForm('chi',el);$('#cMove',el).onclick=()=>cashForm('chuyen',el);
@@ -1302,27 +1317,29 @@ async function viewCash(el){
 function drawCash(el){
   const box=$('#cbody',el);if(!box)return;
   const funds=CASH.funds.filter(f=>CUR_BR==='all'||!f.branch||f.branch===CUR_BR),live=CASH.entries.filter(e=>e.status!=='void');
-  const from=cashFrom();const inBr=e=>CUR_BR==='all'||(e.branch||'')===CUR_BR;const inFund=e=>(cashFund==='all'||e.fund===cashFund)&&inBr(e);
+  const from=cashFrom(),to=cashTo(),inP=e=>e.date>=from&&e.date<to;const inBr=e=>CUR_BR==='all'||(e.branch||'')===CUR_BR;const inFund=e=>(cashFund==='all'||e.fund===cashFund)&&inBr(e);
   const opn=f=>CUR_BR==='all'||f.branch===CUR_BR?f.opening:0;
   const sign=e=>e.type==='thu'?e.amount:-e.amount;
   const bal=f=>opn(f)+live.filter(e=>e.fund===f.id&&inBr(e)).reduce((a,e)=>a+sign(e),0);
   const openAll=funds.filter(f=>cashFund==='all'||f.id===cashFund).reduce((a,f)=>a+opn(f),0);
   const before=openAll+live.filter(e=>inFund(e)&&e.date<from).reduce((a,e)=>a+sign(e),0);
-  const per=live.filter(e=>inFund(e)&&e.date>=from);
+  const per=live.filter(e=>inFund(e)&&inP(e));
   const isMove=e=>e.category==='Chuyển quỹ';
   const thu=per.filter(e=>e.type==='thu'&&(cashFund!=='all'||!isMove(e))).reduce((a,e)=>a+e.amount,0);
   const chi=per.filter(e=>e.type==='chi'&&(cashFund!=='all'||!isMove(e))).reduce((a,e)=>a+e.amount,0);
   const after=before+per.reduce((a,e)=>a+sign(e),0);
   const byCat=t=>{const m={};per.filter(e=>e.type===t&&!isMove(e)).forEach(e=>m[e.category]=(m[e.category]||0)+e.amount);return Object.entries(m).sort((a,b)=>b[1]-a[1])};
   // kết quả kinh doanh trong kỳ
-  const os=validOrders().filter(o=>(o.doneAt||o.date)>=from);
+  const os=validOrders().filter(o=>{const t=o.doneAt||o.date;return t>=from&&t<to});
   const rev=os.reduce((a,o)=>a+o.total-(o.shipFee||0),0),cogs=os.reduce((a,o)=>a+o.items.reduce((b,i)=>b+(i.cost||0)*i.qty,0),0);
-  const opex=live.filter(e=>inBr(e)&&e.date>=from&&e.type==='chi'&&!NOT_EXPENSE.includes(e.category)).reduce((a,e)=>a+e.amount,0);
+  const opex=live.filter(e=>inBr(e)&&inP(e)&&e.type==='chi'&&!NOT_EXPENSE.includes(e.category)).reduce((a,e)=>a+e.amount,0);
   const q=norm(cashQ);
-  const list=CASH.entries.filter(e=>inFund(e)&&e.date>=from&&(cashType==='all'||e.type===cashType)&&(!q||norm(e.code+' '+e.category+' '+e.note+' '+e.ref+' '+e.staff).includes(q))).sort((a,b)=>b.date-a.date);
+  const list=CASH.entries.filter(e=>inFund(e)&&inP(e)&&(cashType==='all'||e.type===cashType)&&(!q||norm(e.code+' '+e.category+' '+e.note+' '+e.ref+' '+e.staff).includes(q))).sort((a,b)=>b.date-a.date);
   box.innerHTML=`
-  <div class="card" style="margin-bottom:16px"><div class="grid4">
-    <select id="cfRange"><option value="thang">Tháng này</option><option value="1">Hôm nay</option><option value="7">7 ngày qua</option><option value="30">30 ngày qua</option><option value="all">Từ đầu</option></select>
+  <div class="card" style="margin-bottom:16px">
+    <div class="chips" id="cfRange" style="margin-bottom:10px">${CASH_RANGES.map(([v,l])=>`<button class="chip${v===cashRange?' on':''}" data-v="${v}">${l}</button>`).join('')}</div>
+    ${cashRange==='custom'?`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px"><span class="small muted">Từ ngày</span><input type="date" id="cfD1" value="${cashD1}" style="width:auto"><span class="small muted">đến ngày</span><input type="date" id="cfD2" value="${cashD2}" style="width:auto"></div>`:''}
+    <div class="grid3">
     <select id="cfFund"><option value="all">Tất cả quỹ</option>${funds.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('')}</select>
     <select id="cfType"><option value="all">Thu và chi</option><option value="thu">Chỉ phiếu thu</option><option value="chi">Chỉ phiếu chi</option></select>
     <input id="cfQ" placeholder="Tìm mã phiếu, nội dung" value="${esc(cashQ)}">
@@ -1349,8 +1366,9 @@ function drawCash(el){
       <div class="card"><h2>Thu theo khoản mục</h2>${barList(byCat('thu'),thu)}</div>
     </div>
   </div>`;
-  $('#cfRange',box).value=cashRange;$('#cfFund',box).value=cashFund;$('#cfType',box).value=cashType;
-  $('#cfRange',box).onchange=e=>{cashRange=e.target.value;drawCash(el)};
+  $('#cfFund',box).value=cashFund;$('#cfType',box).value=cashType;
+  $$('#cfRange .chip',box).forEach(b=>b.onclick=()=>{cashRange=b.dataset.v;drawCash(el)});
+  const d1=$('#cfD1',box),d2=$('#cfD2',box);d1&&(d1.onchange=()=>{if(d1.value){cashD1=d1.value;drawCash(el)}});d2&&(d2.onchange=()=>{if(d2.value){cashD2=d2.value;drawCash(el)}});
   $('#cfFund',box).onchange=e=>{cashFund=e.target.value;drawCash(el)};
   $('#cfType',box).onchange=e=>{cashType=e.target.value;drawCash(el)};
   $('#cfQ',box).onchange=e=>{cashQ=e.target.value;drawCash(el)};
