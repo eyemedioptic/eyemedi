@@ -62,3 +62,8 @@ canvas.sig{width:100%;height:170px;border:2px dashed var(--line);border-radius:1
 .np .ic{flex:0 0 32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:#e6f2f2}
 .np .t{flex:1}.np .t small{display:block;color:#789;margin-top:2px}.np .empty{padding:20px 16px;color:#789;font-size:14px}
 .np .push{display:flex;gap:10px;align-items:center;padding:10px 16px;background:#fff8e6;border-bottom:1px solid var(--line);font-size:13px}.np .push span{flex:1}
+
+/* Nút POS (phần mềm bán hàng) cho admin */
+header.top .pos{background:#ff6a3d;color:#fff;white-space:nowrap}
+@media(max-width:480px){header.top{gap:8px;padding:10px 12px}header.top .btn.sm{padding:6px 9px}header.top b.ttl{display:none}}
+@media(max-width:360px){header.top{gap:6px;padding:8px 10px}header.top img{height:28px}header.top .btn.sm{padding:5px 7px;font-size:12px;white-space:nowrap}header.top .bell{width:34px;height:34px}}
