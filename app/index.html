@@ -978,7 +978,7 @@ function editCtv(x,after){
 /* ============ Máy chủ, đăng nhập, phân quyền nhân viên ============ */
 let SERVER=false,ME=null,NOTICE=null,SERVER_NOTE='',seenOrders=null,pollT=null;
 const TKEY='eyemedi_pos_token';
-const PERM_LABEL={ban_hang:'Bán hàng, tạo đơn',don_tat_ca:'Xem đơn của mọi nhân viên',xu_ly_don:'Xác nhận, giao, hủy đơn',san_pham:'Thêm, sửa, xóa sản phẩm',kho:'Nhập hàng, kiểm kho',khach_hang:'Sửa khách hàng, cộng tác viên',bao_cao:'Xem báo cáo doanh thu',moi_chi_nhanh:'Làm việc ở mọi chi nhánh',so_quy:'Sổ quỹ: phiếu thu, phiếu chi, số dư',quan_tri:'Quản lý nhân viên, cấp quyền'};
+const PERM_LABEL={ban_hang:'Bán hàng, tạo đơn',don_tat_ca:'Xem đơn của mọi nhân viên',xu_ly_don:'Xác nhận, giao, hủy đơn',san_pham:'Thêm, sửa, xóa sản phẩm',kho:'Nhập hàng, kiểm kho',khach_hang:'Sửa khách hàng, cộng tác viên',bao_cao:'Xem báo cáo doanh thu',moi_chi_nhanh:'Làm việc ở mọi chi nhánh',so_quy:'Sổ quỹ: phiếu thu, phiếu chi, số dư',quan_tri:'Tạo chi nhánh, tạo, duyệt và cấp quyền nhân viên (chỉ Admin)'};
 const ROLE_LABEL={admin:'Admin',quan_ly:'Quản lý',ban_hang:'Nhân viên bán hàng',kho:'Nhân viên kho'};
 const NV_STATUS={pending:['Chờ duyệt','warn'],active:['Đang hoạt động','good'],locked:['Đã khóa','bad']};
 const tok=()=>{try{return localStorage.getItem(TKEY)||''}catch(e){return ''}};
@@ -1028,7 +1028,7 @@ function showLogin(msg,tab){
     <div class="tabs"><button data-t="in" class="${tab==='in'?'on':''}">Đăng nhập</button><button data-t="up" class="${tab==='up'?'on':''}">Đăng ký nhân viên</button></div>
     <div class="banner" id="lmsg" ${msg?'':'hidden'} style="margin:0">${esc(msg||'')}</div>
     ${tab==='in'?`<form id="lf" class="lform">
-      <label class="f">Số điện thoại<input id="l_login" required autocomplete="username" inputmode="tel"></label>
+      <label class="f">Số điện thoại hoặc tên đăng nhập<input id="l_login" required autocomplete="username" autocapitalize="none" spellcheck="false"></label>
       <label class="f">Mật khẩu<input id="l_pw" type="password" required autocomplete="current-password"></label>
       <button class="btn pri" style="padding:11px">Đăng nhập</button>
       <div class="small muted">Quên mật khẩu: nhờ quản lý cấp lại trong mục Nhân viên. Tài khoản quản trị trang cộng tác viên đăng nhập được ngay với quyền Admin.</div>
@@ -1157,15 +1157,16 @@ async function importSheetServer(res,close){
 
 /* ---- Quản lý nhân viên ---- */
 async function viewStaff(el){
-  el.innerHTML=`<div class="head"><h1>Nhân viên</h1><span class="grow"></span><span class="small muted">Nhân viên tự đăng ký ở màn hình đăng nhập, Admin duyệt và cấp quyền tại đây.</span></div><div class="card" id="stf"><div class="empty">Đang tải…</div></div>`;
+  el.innerHTML=`<div class="head"><h1>Nhân viên</h1><span class="grow"></span><span class="small muted">Chỉ Admin tạo, duyệt và cấp quyền nhân viên.</span>${SERVER?'<button class="btn pri" id="newStaff">+ Tạo nhân viên</button>':''}</div><div class="card" id="stf"><div class="empty">Đang tải…</div></div>`;
   const box=$('#stf',el);
   if(!SERVER){box.innerHTML='<div class="empty">Quản lý nhân viên cần kết nối máy chủ. '+esc(SERVER_NOTE)+'</div>';box.insertAdjacentHTML('afterend',branchCard());bindBranchCard(el,()=>viewStaff(el));return}
   let d;try{d=await api('posStaffList')}catch(e){box.innerHTML=`<div class="empty">${esc(e.message)}</div>`;return}
   const order={pending:0,active:1,locked:2};
   const list=d.staff.sort((a,b)=>order[a.status]-order[b.status]||String(a.full_name).localeCompare(b.full_name));
   const again=()=>{viewStaff(el);pollNotices()};
+  const ns=$('#newStaff',el);ns&&(ns.onclick=()=>staffCreate(d,again));
   box.innerHTML=`<div class="tbl-wrap"><table><thead><tr><th>Nhân viên</th><th>Vai trò</th><th>Chi nhánh</th><th>Quyền</th><th>Trạng thái</th><th>Đăng nhập gần nhất</th><th></th></tr></thead><tbody>${list.map(s=>{const me=s.id===ME.id;return `<tr>
-    <td><b>${esc(s.full_name)}</b>${me?' <span class="small muted">(bạn)</span>':''}<div class="small muted num">${esc(s.phone)}${s.note?' · '+esc(s.note):''}</div></td>
+    <td><b>${esc(s.full_name)}</b>${me?' <span class="small muted">(bạn)</span>':''}<div class="small muted num">${esc(s.phone||s.username||'')}${s.note?' · '+esc(s.note):''}</div></td>
     <td>${esc(ROLE_LABEL[s.role]||s.role)}</td><td class="small">${s.role==='admin'||s.perms.includes('moi_chi_nhanh')?'Mọi chi nhánh':(s.branches||[]).map(b=>esc(brName(b))).join('<br>')||'<span style="color:var(--warn)">Chưa phân công</span>'}</td>
     <td class="small">${s.role==='admin'?'Toàn quyền':s.perms.map(p=>esc(PERM_LABEL[p]||p)).join('<br>')||'<span class="muted">Chưa có quyền</span>'}</td>
     <td><span class="pill ${NV_STATUS[s.status][1]}">${NV_STATUS[s.status][0]}</span></td>
@@ -1188,6 +1189,34 @@ async function viewStaff(el){
       modal(`<h2>Mật khẩu mới của ${esc(s.full_name)}</h2><div class="receipt" style="font-size:22px;text-align:center;letter-spacing:2px" id="npw">${esc(r.password)}</div><div class="small muted">Gửi mật khẩu này cho nhân viên. Họ nên đổi lại sau khi đăng nhập (nút Đổi mật khẩu trên khung thông báo).</div><div class="acts"><button class="btn" id="cpw">Sao chép</button><button class="btn pri" data-close>Xong</button></div>`,{onMount:m=>{$('#cpw',m).onclick=()=>navigator.clipboard.writeText(r.password).then(()=>toast('Đã sao chép')).catch(()=>toast('Hãy chọn và sao chép bằng tay'))}})}catch(e){toast(e.message)}});
   });
 }
+function staffCreate(d,after){
+  const roles=d.roles;let role='ban_hang',perms=roles[role].slice();
+  modal(`<h2>Tạo nhân viên</h2><form id="scf" style="display:flex;flex-direction:column;gap:12px">
+    <label class="f">Họ tên *<input id="sc_name" required></label>
+    <div class="grid2"><label class="f">Số điện thoại<input id="sc_phone" inputmode="tel" placeholder="Dùng để đăng nhập"></label><label class="f">Hoặc tên đăng nhập<input id="sc_user" autocapitalize="none" spellcheck="false" placeholder="VD: lan.cn1 hoặc email"></label></div>
+    <label class="f">Mật khẩu * (tối thiểu 6 ký tự)<input id="sc_pw" required minlength="6" autocomplete="new-password"></label>
+    <label class="f">Vai trò<select id="sp_role">${Object.keys(roles).map(r=>`<option value="${r}"${r===role?' selected':''}>${ROLE_LABEL[r]||r}</option>`).join('')}</select></label>
+    <div><div class="small" style="font-weight:600;margin-bottom:6px">Quyền chi tiết</div><div id="sp_perms" class="permgrid"></div></div>
+    <div><div class="small" style="font-weight:600;margin-bottom:6px">Chi nhánh làm việc</div><div id="sp_br" class="permgrid">${(d.branches||BR()).filter(b=>b.active!==false).map(b=>`<label class="chk"><input type="checkbox" value="${b.id}"${b.id===CUR_BR?' checked':''}> ${esc(b.name)}</label>`).join('')}</div></div>
+    <label class="f">Ghi chú (ca làm…)<input id="sc_note"></label>
+    <div class="acts"><button type="button" class="btn" data-close>Thôi</button><button class="btn pri" id="sc_ok">Tạo tài khoản</button></div></form>`,
+  {onMount:(m,close)=>{
+    const draw=()=>{const adm=role==='admin';$('#sp_perms',m).innerHTML=d.perms.filter(p=>adm||p!=='quan_tri').map(p=>`<label class="chk"><input type="checkbox" value="${p}"${adm||perms.includes(p)?' checked':''}${adm?' disabled':''}> ${esc(PERM_LABEL[p]||p)}</label>`).join('');
+      $$('#sp_perms input',m).forEach(i=>i.onchange=()=>{perms=$$('#sp_perms input:checked',m).map(x=>x.value)})};
+    $('#sp_role',m).onchange=e=>{role=e.target.value;perms=roles[role].slice();draw()};
+    $('#scf',m).onsubmit=async e=>{e.preventDefault();const b=$('#sc_ok',m);
+      const phone=$('#sc_phone',m).value.trim(),username=$('#sc_user',m).value.trim();
+      if(!phone&&!username){toast('Nhập số điện thoại hoặc tên đăng nhập');return}
+      const brs=$$('#sp_br input:checked',m).map(x=>x.value);
+      if(role!=='admin'&&!perms.includes('moi_chi_nhanh')&&!brs.length){toast('Chọn ít nhất 1 chi nhánh cho nhân viên');return}
+      b.disabled=true;
+      try{const pw=$('#sc_pw',m).value;const nv=await api('posStaffCreate',{full_name:$('#sc_name',m).value,phone,username,password:pw,role,perms:role==='admin'?[]:perms,branches:brs,note:$('#sc_note',m).value});
+        close();after();
+        modal(`<h2>Đã tạo tài khoản ${esc(nv.full_name)}</h2><div class="receipt" style="font-size:16px;line-height:1.7">Đăng nhập: <b>${esc(nv.phone||nv.username)}</b><br>Mật khẩu: <b>${esc(pw)}</b><br>Trang: <b>eyemedi.vn/app</b></div><div class="small muted">Gửi thông tin này cho nhân viên. Họ nên đổi mật khẩu sau khi đăng nhập.</div><div class="acts"><button class="btn pri" data-close>Xong</button></div>`)}
+      catch(err){toast(err.message);b.disabled=false}};
+    draw();
+  }});
+}
 function staffPerm(s,d,approve,after){
   const roles=d.roles;let role=s.role,perms=s.role==='admin'?roles.admin.slice():s.perms.slice();
   modal(`<h2>${approve?'Duyệt và cấp quyền':'Phân quyền'}: ${esc(s.full_name)}</h2>
@@ -1197,7 +1226,7 @@ function staffPerm(s,d,approve,after){
     <label class="f">Ghi chú (ca làm…)<input id="sp_note" value="${esc(s.note||'')}"></label>
     <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="sp_ok">${approve?'Duyệt tài khoản':'Lưu quyền'}</button></div>`,
   {onMount:(m,close)=>{
-    const draw=()=>{const adm=role==='admin';$('#sp_perms',m).innerHTML=d.perms.map(p=>`<label class="chk"><input type="checkbox" value="${p}"${adm||perms.includes(p)?' checked':''}${adm?' disabled':''}> ${esc(PERM_LABEL[p]||p)}</label>`).join('');
+    const draw=()=>{const adm=role==='admin';$('#sp_perms',m).innerHTML=d.perms.filter(p=>adm||p!=='quan_tri').map(p=>`<label class="chk"><input type="checkbox" value="${p}"${adm||perms.includes(p)?' checked':''}${adm?' disabled':''}> ${esc(PERM_LABEL[p]||p)}</label>`).join('');
       $$('#sp_perms input',m).forEach(i=>i.onchange=()=>{perms=$$('#sp_perms input:checked',m).map(x=>x.value)})};
     $('#sp_role',m).onchange=e=>{role=e.target.value;perms=roles[role].slice();draw()};
     $('#sp_ok',m).onclick=async()=>{const b=$('#sp_ok',m);b.disabled=true;

@@ -976,7 +976,8 @@ function posTable_(name) {
 function posPerms_(nv) {
   if (nv.role === 'admin') return POS_PERMS.slice();
   var p = String(nv.perms || '').split(',').map(function (x) { return x.trim(); }).filter(function (x) { return POS_PERMS.indexOf(x) >= 0; });
-  return p.length ? p : (POS_ROLES[nv.role] || []).slice();
+  p = p.length ? p : (POS_ROLES[nv.role] || []).slice();
+  return p.filter(function (x) { return x !== 'quan_tri'; });   // tạo chi nhánh, tạo/duyệt/cấp quyền nhân viên: chỉ Admin
 }
 function posPublic_(nv) {
   return { id: nv.id, full_name: nv.full_name, phone: nv.phone, username: nv.username, role: nv.role,
@@ -1108,6 +1109,7 @@ API.posLogin = function (r) {
   var fails = Number(cache.get(key) || 0);
   if (fails >= 8) throw new Error('Bạn nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút');
   var t = posTable_('NhanVien'), nv = posFindLogin_(r.login);
+  if (!nv) nv = posSeedAdmin_(r.login, r.password);
   if (!nv) {
     // Tài khoản quản trị CTV được tự tạo tài khoản Admin bán hàng ở lần đăng nhập đầu
     var u = findLogin_(r.login);
@@ -1117,13 +1119,29 @@ API.posLogin = function (r) {
       t.insert(row); nv = posTable_('NhanVien').find('id', row.id);
     }
   }
-  if (!nv || !pwOk_(nv, r.password)) { cache.put(key, String(fails + 1), 900); throw new Error('Sai số điện thoại hoặc mật khẩu'); }
+  if (!nv || !pwOk_(nv, r.password)) { cache.put(key, String(fails + 1), 900); throw new Error('Sai tên đăng nhập hoặc mật khẩu'); }
   cache.remove(key);
   if (nv.status === 'pending') throw new Error('Tài khoản đang chờ quản lý duyệt');
   if (nv.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng liên hệ quản lý');
   t.update(nv, { last_login: now_() });
   return { token: posNewSession_(nv.id), me: posPublic_(nv) };
 };
+
+// Tài khoản Admin khai báo trong tệp TaiKhoanAdmin.gs (biến POS_SEED_ADMINS: username, full_name, salt, hash).
+// Lần đăng nhập đầu đúng mật khẩu thì tự tạo dòng Admin trong tab NhanVien.
+function posSeedAdmin_(login, pw) {
+  if (typeof POS_SEED_ADMINS === 'undefined' || !POS_SEED_ADMINS) return null;
+  var id = String(login || '').trim().toLowerCase(), t = posTable_('NhanVien');
+  for (var i = 0; i < POS_SEED_ADMINS.length; i++) {
+    var a = POS_SEED_ADMINS[i];
+    if (String(a.username).toLowerCase() !== id || hash_(a.salt, pw) !== a.hash) continue;
+    var row = { id: Utilities.getUuid(), created_at: now_(), full_name: a.full_name || 'Admin EYEMEDI', phone: '', username: id,
+                role: 'admin', perms: '', status: 'active', pw_salt: a.salt, pw_hash: a.hash, note: 'Tài khoản Admin chính' };
+    t.insert(row);
+    return posTable_('NhanVien').find('id', row.id);
+  }
+  return null;
+}
 
 API.posLogout = function (r) {
   var t = posTable_('PhienNV'), s = t.find('token', String(r.token || ''));
@@ -1354,7 +1372,7 @@ API.posStaffSet = function (r) {
   if (!nv) throw new Error('Không tìm thấy nhân viên');
   var ch = {};
   if (r.role !== undefined) { if (!POS_ROLES[r.role]) throw new Error('Vai trò không hợp lệ'); ch.role = r.role; }
-  if (r.perms !== undefined) ch.perms = (r.perms || []).filter(function (p) { return POS_PERMS.indexOf(p) >= 0; }).join(',');
+  if (r.perms !== undefined) ch.perms = (r.perms || []).filter(function (p) { return p !== 'quan_tri' && POS_PERMS.indexOf(p) >= 0; }).join(',');
   if (r.status !== undefined) { if (['pending', 'active', 'locked'].indexOf(r.status) < 0) throw new Error('Trạng thái không hợp lệ'); ch.status = r.status; }
   if (r.note !== undefined) ch.note = clean_(r.note, 200);
   if (r.branches !== undefined) { var okB = posBranches_().map(function (b) { return b.id; }); ch.branches = (r.branches || []).map(String).filter(function (b) { return okB.indexOf(b) >= 0; }).join(','); }
@@ -1368,6 +1386,29 @@ API.posStaffSet = function (r) {
   t.update(nv, ch);
   if (ch.status === 'locked') posKill_(nv.id);
   return posPublic_(t.find('id', nv.id));
+};
+
+// Admin tạo tài khoản nhân viên (đăng nhập bằng số điện thoại hoặc tên đăng nhập)
+API.posStaffCreate = function (r) {
+  posAuth_(r, 'quan_tri');
+  var t = posTable_('NhanVien'), name = clean_(r.full_name, 80);
+  if (name.length < 2) throw new Error('Vui lòng nhập họ tên');
+  var phone = r.phone ? normPhone_(r.phone) : '';
+  if (r.phone && !phone) throw new Error('Số điện thoại không hợp lệ');
+  var user = String(r.username || '').trim().toLowerCase();
+  if (user && !/^[a-z0-9._@-]{3,60}$/.test(user)) throw new Error('Tên đăng nhập chỉ gồm chữ không dấu, số và . _ @ -');
+  if (!phone && !user) throw new Error('Cần số điện thoại hoặc tên đăng nhập');
+  if (phone && t.find('phone', phone)) throw new Error('Số điện thoại này đã có tài khoản');
+  if (user && t.all().some(function (x) { return String(x.username).toLowerCase() === user; })) throw new Error('Tên đăng nhập đã có người dùng');
+  if (String(r.password || '').length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
+  if (!POS_ROLES[r.role]) throw new Error('Vai trò không hợp lệ');
+  var okB = posBranches_().map(function (b) { return b.id; });
+  var salt = Utilities.getUuid(), row = { id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone, username: user,
+    role: r.role, perms: r.role === 'admin' ? '' : (r.perms || []).filter(function (p) { return p !== 'quan_tri' && POS_PERMS.indexOf(p) >= 0; }).join(','),
+    status: 'active', pw_salt: salt, pw_hash: hash_(salt, r.password), note: clean_(r.note, 200),
+    branches: (r.branches || []).map(String).filter(function (b) { return okB.indexOf(b) >= 0; }).join(',') };
+  t.insert(row);
+  return posPublic_(posTable_('NhanVien').find('id', row.id));
 };
 
 API.posStaffDelete = function (r) {
