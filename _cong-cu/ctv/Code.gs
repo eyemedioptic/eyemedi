@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-27d';
+var POS_CODE_VERSION = '2026-11-28a';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -981,7 +981,9 @@ var POS_ROLES = {
   ban_hang: ['ban_hang', 'xu_ly_don', 'khach_hang'],
   kho: ['kho', 'san_pham']
 };
-var POS_STATUS = ['pending', 'shipping', 'done', 'cancelled'];
+var POS_STATUS = ['draft', 'pending', 'pushed', 'shipping', 'done', 'cancelled'];
+// Đơn đã ghi thu vào sổ quỹ chưa (đơn cũ hoàn thành trước bản này coi như đã ghi)
+function posCashed_(o) { return o.cashed === true || (o.cashed === undefined && o.status === 'done'); }
 
 function posTable_(name) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -1305,12 +1307,18 @@ API.posCreateOrder = function (r) {
   if (o.extCode && dt.all().some(function (x) { try { return JSON.parse(x.json).extCode === o.extCode; } catch (e) { return false; } }))
     return { duplicate: true };
   var br = String(o.branchId || ''); posCheckBranch_(nv, br);
+  var draftRow = null, isDraft = o.status === 'draft';
+  if (o.draftId) {
+    draftRow = dt.find('id', String(o.draftId));
+    if (!draftRow || draftRow.status !== 'draft') throw new Error('Đơn nháp không còn, có thể đã được chốt hoặc xóa');
+    if (!posCan_(nv, 'don_tat_ca') && draftRow.staff_id !== nv.id) throw new Error('Đơn nháp này do nhân viên khác tạo');
+  }
   var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
   o.items = o.items.map(function (i) {
     var p = prods[i.pid]; if (!p) throw new Error('Sản phẩm "' + clean_(i.name, 80) + '" không còn trong danh mục');
     var q = Math.max(1, Math.round(num_(i.qty)));
     var have = p.service ? 0 : num_((p.stocks || {})[br]);
-    if (!p.service && !r.allowNegative && have < q) throw new Error('"' + p.name + '" chỉ còn ' + have + ' tại chi nhánh ' + posBranchName_(br));
+    if (!p.service && !isDraft && !r.allowNegative && have < q) throw new Error('"' + p.name + '" chỉ còn ' + have + ' tại chi nhánh ' + posBranchName_(br));
     return { pid: p.id, name: p.name, sku: p.sku, price: Math.round(num_(i.price)), cost: Math.round(num_(p.cost)), qty: q };
   });
   o.subtotal = o.items.reduce(function (a, i) { return a + i.price * i.qty; }, 0);
@@ -1318,19 +1326,64 @@ API.posCreateOrder = function (r) {
   o.shipFee = Math.max(0, Math.round(num_(o.shipFee)));
   o.total = o.subtotal - o.discount + o.shipFee;
   o.channel = CHANNELS_OK_.indexOf(o.channel) >= 0 ? o.channel : 'pos';
-  o.status = o.channel === 'pos' ? 'done' : 'pending';
-  o.id = Utilities.getUuid().slice(0, 12); o.code = posNextCode_(); o.date = Date.now();
+  var want = String(o.status || '');
+  o.status = ['draft', 'pending', 'pushed', 'shipping', 'done'].indexOf(want) >= 0 ? want : (o.channel === 'pos' ? 'done' : 'pending');
+  if (['cash', 'bank', 'card', 'cod'].indexOf(o.method) < 0) o.method = 'cash';
+  var paidNow = o.status === 'done' || o.paidNow === true; delete o.paidNow; delete o.draftId;
+  if (draftRow) { o.id = draftRow.id; o.code = draftRow.code; } else { o.id = Utilities.getUuid().slice(0, 12); o.code = posNextCode_(); }
+  o.date = Date.now();
   o.staffId = nv.id; o.staffName = nv.full_name; o.branchId = br; o.branchName = posBranchName_(br);
   o.history = [{ t: o.date, by: nv.full_name, status: o.status }];
   ['note', 'address'].forEach(function (k) { o[k] = clean_(o[k], 500); });
-  if (o.channel === 'pos') o.paid = Math.max(o.total, Math.round(num_(o.paid))); else o.paid = 0;
-  var updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code, br);
-  dt.insert({ code: o.code, id: o.id, created_at: now_(), staff_id: nv.id, staff_name: nv.full_name, channel: o.channel,
-              status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o), branch: br });
-  if (o.status === 'done') posCashForOrder_(nv, o, 'done');
+  if (o.status === 'draft') { o.paid = 0; o.cashed = false; }
+  else if (paidNow) { o.paid = Math.max(o.total, Math.round(num_(o.paid))); o.paidAt = o.date; o.cashed = true; if (o.status === 'done') o.doneAt = o.date; }
+  else { o.paid = 0; o.cashed = false; }
+  var updated = o.status === 'draft' ? [] : posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), -1, 'ban', o.code, br);
+  var rec = { code: o.code, id: o.id, staff_id: nv.id, staff_name: nv.full_name, channel: o.channel,
+              status: o.status, customer_id: o.customerId || '', total: o.total, updated_at: now_(), json: JSON.stringify(o), branch: br };
+  if (draftRow) dt.update(draftRow, rec); else { rec.created_at = now_(); dt.insert(rec); }
+  if (o.cashed) posCashForOrder_(nv, o, 'done');
   return { order: o, products: updated };
 };
 var CHANNELS_OK_ = ['pos', 'facebook', 'zalo', 'chatbot', 'ctv', 'web'];
+
+// Ghi nhận khách đã thanh toán (tiền mặt / chuyển khoản) trước khi giao xong
+API.posOrderPay = function (r) {
+  var nv = posAuth_(r, 'xu_ly_don');
+  var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
+  if (!row) throw new Error('Không tìm thấy đơn');
+  if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn này do nhân viên khác phụ trách');
+  var o = JSON.parse(row.json);
+  if (o.status === 'cancelled' || o.status === 'draft') throw new Error('Đơn chưa chốt hoặc đã hủy');
+  if (posCashed_(o)) throw new Error('Đơn đã ghi nhận thanh toán');
+  if (['cash', 'bank', 'card', 'cod'].indexOf(r.method) >= 0) o.method = r.method;
+  o.paid = o.total; o.paidAt = Date.now(); o.cashed = true;
+  o.history = (o.history || []).concat([{ t: o.paidAt, by: nv.full_name, status: o.status, paid: true }]);
+  t.update(row, { updated_at: now_(), json: JSON.stringify(o) });
+  posCashForOrder_(nv, o, 'done');
+  return { order: o };
+};
+// Cài đặt kết nối SPX: lưu ở Script Properties, không trả lại khóa đầy đủ
+var POS_SPX_KEYS = ['SPX_APP_ID', 'SPX_APP_SECRET', 'SPX_USER_ID', 'SPX_SHOP_ID', 'SPX_ENV'];
+function posMask_(v) { v = String(v || ''); return !v ? '' : v.length <= 4 ? '••••' : '••••' + v.slice(-4); }
+API.posSpxGet = function (r) {
+  posAuth_(r, 'quan_tri');
+  var p = PropertiesService.getScriptProperties(), out = {};
+  POS_SPX_KEYS.forEach(function (k) { var v = p.getProperty(k) || ''; out[k] = (k === 'SPX_ENV' || k === 'SPX_SHOP_ID' || k === 'SPX_USER_ID') ? v : posMask_(v); });
+  out.saved = !!(p.getProperty('SPX_APP_ID') && p.getProperty('SPX_APP_SECRET'));
+  return out;
+};
+API.posSpxSave = function (r) {
+  posAuth_(r, 'quan_tri');
+  var p = PropertiesService.getScriptProperties(), v = r.values || {};
+  POS_SPX_KEYS.forEach(function (k) {
+    if (v[k] === undefined || v[k] === null) return;
+    var x = String(v[k]).trim().slice(0, 500);
+    if (x.indexOf('••••') === 0) return;   // ô chưa sửa, giữ khóa cũ
+    if (x) p.setProperty(k, x); else if (r.clear) p.deleteProperty(k);
+  });
+  return API.posSpxGet(r);
+};
 
 API.posOrderStatus = function (r) {
   var nv = posAuth_(r, 'xu_ly_don');
@@ -1342,13 +1395,18 @@ API.posOrderStatus = function (r) {
   var o = JSON.parse(row.json), updated = [], prev = o.status;
   if (o.status === 'cancelled') throw new Error('Đơn đã hủy');
   if (o.status === r.status) throw new Error('Đơn đã ở trạng thái này');
-  if (r.status === 'cancelled') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code, o.branchId);
+  if (r.status === 'draft') throw new Error('Không chuyển đơn về nháp được');
+  if (prev === 'draft' && r.status !== 'cancelled') throw new Error('Mở đơn nháp ở màn Bán hàng để chốt đơn');
+  var wasCashed = posCashed_(o);
+  if (r.status === 'cancelled' && prev !== 'draft') updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Hủy ' + o.code, o.branchId);
   o.status = r.status;
-  if (r.status === 'done') { o.paid = o.total; o.doneAt = Date.now(); }
+  var cashNow = false;
+  if (r.status === 'done') { o.doneAt = Date.now(); if (!wasCashed) { o.paid = o.total; o.paidAt = o.doneAt; o.cashed = true; cashNow = true; } }
+  if (r.status === 'done' && wasCashed) o.cashed = true;
   o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: r.status }]);
   t.update(row, { status: o.status, updated_at: now_(), json: JSON.stringify(o) });
-  if (r.status === 'done') posCashForOrder_(nv, o, 'done');
-  if (r.status === 'cancelled' && prev === 'done') posCashForOrder_(nv, o, 'refund');
+  if (cashNow) posCashForOrder_(nv, o, 'done');
+  if (r.status === 'cancelled' && wasCashed) posCashForOrder_(nv, o, 'refund');
   return { order: o, products: updated };
 };
 
@@ -1386,7 +1444,7 @@ API.posNotices = function (r) {
   rows.forEach(function (o) {
     if (o.status === 'pending') out.pending++;
     if (o.status === 'shipping') out.shipping++;
-    if (String(o.created_at).slice(0, 10) === today && o.status !== 'cancelled') { out.today++; if (o.status === 'done') out.todayRevenue += num_(o.total); }
+    if (String(o.created_at).slice(0, 10) === today && o.status !== 'cancelled' && o.status !== 'draft') { out.today++; if (o.status === 'done') out.todayRevenue += num_(o.total); }
   });
   rows.slice(-8).reverse().forEach(function (o) {
     out.latest.push({ id: o.id, code: o.code, created_at: o.created_at, staff_name: o.staff_name, channel: o.channel, status: o.status, total: num_(o.total) });
