@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKII Võ Đức Tuấn – Trưởng khoa Tạo hình thẩm mỹ hàm mặt, BV Răng Hàm Mặt TP.HCM
+TITLE: Bác sĩ Võ Đức Tuấn – BV Răng Hàm Mặt TP.HCM | EYEMEDI
+SLUG: bac-si-vo-duc-tuan-benh-vien-rang-ham-mat
+TU_KHOA_CHINH: bác sĩ Võ Đức Tuấn Bệnh viện Răng Hàm Mặt
+TU_KHOA_PHU: phẫu thuật hàm hô móm TP.HCM, hạ gò má bệnh viện, gọt góc hàm V-line, sửa biến chứng thẩm mỹ mũi mắt môi
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKII Võ Đức Tuấn, Trưởng khoa Phẫu thuật tạo hình thẩm mỹ hàm mặt, BV Răng Hàm Mặt TP.HCM: dịch vụ chỉnh hàm, gò má, V-line, địa chỉ và tổng đài.
+NGAY_DANG: 2026-11-27
+DOAN_MO_DAU: Hàm hô, móm hay khuôn mặt lệch không chỉ là chuyện thẩm mỹ mà còn ảnh hưởng khớp cắn và việc ăn nhai. Tại TP.HCM, Bệnh viện Răng Hàm Mặt có riêng một khoa phẫu thuật tạo hình thẩm mỹ hàm mặt, do BS.CKII Võ Đức Tuấn làm Trưởng khoa. Dưới đây là thông tin bệnh viện công bố, chỉ để tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-vo-duc-tuan-benh-vien-rang-ham-mat-1.jpg | Khách hàng chọn kính tại cửa hàng EYEMEDI
+anh-rieng/bac-si-vo-duc-tuan-benh-vien-rang-ham-mat-2.jpg | Trao kính cho khách hàng tại EYEMEDI
+anh-rieng/bac-si-vo-duc-tuan-benh-vien-rang-ham-mat-3.jpg | Đo mắt bằng máy khúc xạ tại EYEMEDI
+H2_1: Khoa chuyên sâu về đường nét xương mặt
+NOI_DUNG_1: <p>Trang Bệnh viện Răng Hàm Mặt TP.HCM ghi <b>BSCKII Võ Đức Tuấn</b> là Trưởng khoa Phẫu thuật tạo hình thẩm mỹ hàm mặt; điều dưỡng trưởng là ĐD Trần Thị Cẩm Dung. Khoa được thành lập từ tháng 5/2011.</p>
+<p>Xem hồ sơ khoa và hình ảnh bác sĩ trên <a href="https://bvranghammat.vn/chuyen-khoa/khoa-phau-thuat-tao-hinh-tham-my-ham-mat/" target="_blank" rel="noopener">trang chính thức của Bệnh viện Răng Hàm Mặt TP.HCM</a>.</p>
+H2_2: Ba nhóm dịch vụ khoa công bố
+NOI_DUNG_2: <ul><li><b>Chỉnh xương mặt</b>: phẫu thuật chỉnh hàm hô, móm; hạ thấp gò má cao; gọt góc hàm; tạo hình V-line; chỉnh khuôn mặt không cân xứng.</li><li><b>Sửa biến chứng thẩm mỹ</b>: chỉnh sửa sau phẫu thuật tạo hình mũi, mắt, môi, căng da mặt.</li><li><b>Di chứng bẩm sinh</b>: tạo hình môi, mũi cho người từng bị sứt môi, hở vòm miệng.</li></ul>
+<p><b>Địa chỉ:</b> Bệnh viện Răng Hàm Mặt TP.HCM, 263-265 Trần Hưng Đạo, Phường Cầu Ông Lãnh, TP.HCM. <b>Tổng đài đặt hẹn:</b> 1900 9489. Đây là bệnh viện công; bác sĩ cũng có phòng khám tư riêng, khi đặt lịch nên hỏi rõ nơi khám.</p>
+H2_3: Phẫu thuật hàm thường đi cùng chỉnh nha
+NOI_DUNG_3: <p>Với hàm hô, móm do xương, bác sĩ thường phối hợp chỉnh nha trước và sau mổ để khớp cắn ổn định, nên thời gian điều trị có thể kéo dài. Bạn có thể đọc thêm về <a href="/bac-si-nieng-rang-gioi-tai-tphcm.html">bác sĩ niềng răng tại TP.HCM</a> và danh sách <a href="/bac-si-phau-thuat-tham-my-quan-10-tphcm.html">bác sĩ phẫu thuật thẩm mỹ Quận 10</a> gần khu vực bệnh viện.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Trong thời gian sưng nề sau phẫu thuật vùng mặt, gọng kính nhẹ, ôm vừa giúp đỡ tì lên sống mũi. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM tư vấn gọng và chỉnh càng kính miễn phí.
+HOI_1: BS.CKII Võ Đức Tuấn làm việc tại khoa nào?
+DAP_1: Bác sĩ là Trưởng khoa Phẫu thuật tạo hình thẩm mỹ hàm mặt, Bệnh viện Răng Hàm Mặt TP.HCM, theo trang chính thức của bệnh viện.
+HOI_2: Khoa có nhận chỉnh sửa mũi, mắt hỏng sau thẩm mỹ không?
+DAP_2: Danh mục khoa có chỉnh sửa biến chứng sau phẫu thuật tạo hình mũi, mắt, môi và căng da mặt; chỉ định cụ thể do bác sĩ quyết định sau khi khám.
+HOI_3: Đặt hẹn khám bằng cách nào?
+DAP_3: Gọi tổng đài 1900 9489 của Bệnh viện Răng Hàm Mặt TP.HCM, 263-265 Trần Hưng Đạo, Phường Cầu Ông Lãnh.
+SAN_PHAM: gold-optic-2231, kinh-mat-nam-rb-deo, kinh-mat-noi8, p-ormegar-2207, p-sufiar-fc7721, sun-luxury, vidic-night-view-p8602, vidic-sun-luxury-p29037
+LIEN_QUAN: bac-si-nieng-rang-gioi-tai-tphcm | Bác sĩ niềng răng tại TP.HCM; bac-si-phau-thuat-tham-my-quan-10-tphcm | Bác sĩ phẫu thuật thẩm mỹ Quận 10; bac-si-tham-my | Bác sĩ thẩm mỹ
+LINK_TRONG_BAI: bác sĩ niềng răng tại TP.HCM → bac-si-nieng-rang-gioi-tai-tphcm; bác sĩ phẫu thuật thẩm mỹ Quận 10 → bac-si-phau-thuat-tham-my-quan-10-tphcm
+LINK_VAO_TU: bac-si-nieng-rang-gioi-tai-tphcm, bac-si-phau-thuat-tham-my-quan-10-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_9094, IMG_6107, IMG_9095)
+NGUON_THAM_KHAO: Bệnh viện Răng Hàm Mặt TP.HCM – Khoa Phẫu thuật tạo hình thẩm mỹ hàm mặt (https://bvranghammat.com/chuyen-khoa/khoa-phau-thuat-tao-hinh-tham-my-ham-mat/ ; bản https://bvranghammat.vn/chuyen-khoa/khoa-phau-thuat-tao-hinh-tham-my-ham-mat/); Medpro – Hạ gò má (https://medpro.vn/tin-tuc/ha-go-ma-gia-bao-nhieu)

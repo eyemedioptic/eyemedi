@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKII Nguyễn Mạnh Đôn – Khoa Tạo hình Thẩm mỹ, BV Đại học Y Dược TP.HCM
+TITLE: BS Nguyễn Mạnh Đôn – Tạo hình BV Đại học Y Dược | EYEMEDI
+SLUG: bac-si-nguyen-manh-don-dai-hoc-y-duoc
+TU_KHOA_CHINH: bác sĩ Nguyễn Mạnh Đôn Đại học Y Dược
+TU_KHOA_PHU: khoa tạo hình thẩm mỹ bệnh viện Đại học Y Dược, tạo hình thành bụng TP.HCM, căng da mặt Quận 5, điều trị vết thương mạn tính
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKII Nguyễn Mạnh Đôn, Khoa Tạo hình Thẩm mỹ BV Đại học Y Dược TP.HCM: đào tạo trong và ngoài nước, dịch vụ khoa, lịch khám, địa chỉ 215 Hồng Bàng.
+NGAY_DANG: 2026-11-27
+DOAN_MO_DAU: Có bác sĩ đi lên từ chuyên ngành Tai Mũi Họng rồi chuyển hẳn sang phẫu thuật tạo hình. BS.CKII Nguyễn Mạnh Đôn là một trường hợp như vậy, hiện làm việc tại Khoa Tạo hình – Thẩm mỹ, Bệnh viện Đại học Y Dược TP.HCM. Bài viết dựa trên hồ sơ bệnh viện công bố, chỉ mang tính tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-nguyen-manh-don-dai-hoc-y-duoc-1.jpg | Mặt tiền cửa hàng EYEMEDI tại 63C Lạc Long Quân
+anh-rieng/bac-si-nguyen-manh-don-dai-hoc-y-duoc-2.jpg | Nhân viên EYEMEDI tại cửa hàng
+anh-rieng/bac-si-nguyen-manh-don-dai-hoc-y-duoc-3.jpg | Khách hàng tại cửa hàng EYEMEDI
+H2_1: Chặng đường đào tạo hơn 30 năm
+NOI_DUNG_1: <p>Theo trang bác sĩ của Bệnh viện Đại học Y Dược TP.HCM, <b>BS.CKII Nguyễn Mạnh Đôn</b> tốt nghiệp bác sĩ đa khoa năm 1992, Thạc sĩ Tai Mũi Họng năm 1998, học phẫu thuật tạo hình vùng mặt tại Nice và Lyon (Pháp, 2009), tu nghiệp tại Bệnh viện Đại học Quốc gia Seoul (2014) và hoàn thành Chuyên khoa II Tạo hình Thẩm mỹ năm 2022.</p>
+<p>Bác sĩ làm việc tại khoa từ năm 2009, giảng dạy bộ môn Tạo hình Thẩm mỹ từ năm 2012; tại Tuần lễ đào tạo liên tục 8/2023, bác sĩ báo cáo đề tài tạo hình thành bụng theo phương pháp Saldanha. Xem hồ sơ và hình ảnh bác sĩ trên <a href="https://bvdaihoc.com.vn/en/doctors/nguyen-manh-don-id-59" target="_blank" rel="noopener">trang chính thức của Bệnh viện Đại học Y Dược TP.HCM</a>.</p>
+H2_2: Lĩnh vực của khoa Tạo hình – Thẩm mỹ
+NOI_DUNG_2: <ul><li>Căng da mặt; thẩm mỹ mũi, mí mắt.</li><li>Thẩm mỹ vùng ngực; điều trị phì đại tuyến vú.</li><li>Tạo hình thành bụng, hút mỡ bụng, lấy lại vóc dáng sau sinh.</li><li>Chăm sóc vết thương bằng áp lực âm (VAC), che phủ khuyết hổng mô mềm.</li></ul>
+<p><b>Địa chỉ:</b> Bệnh viện Đại học Y Dược TP.HCM, 215 Hồng Bàng, Phường Chợ Lớn (Phường 11, Quận 5 cũ), TP.HCM. <b>Hotline:</b> (028) 3855 4269. Lịch khám theo hồ sơ: sáng thứ Năm, chiều thứ Sáu. Ở khu Nam Sài Gòn, bạn đọc có thể xem thêm <a href="/bac-si-daniel-bialeoko-benh-vien-fv.html">BS Daniel Bialeoko tại Bệnh viện FV</a>.</p>
+H2_3: Sẹo và vết thương lâu lành cũng thuộc tạo hình
+NOI_DUNG_3: <p>Nhiều người nghĩ khoa tạo hình chỉ làm đẹp, nhưng các đề tài của bác sĩ Đôn còn gồm loét mạn tính, sẹo co rút cổ tay và biến chứng sau tiêm chất làm đầy không rõ nguồn gốc. Với sẹo mụn, sẹo thâm, có thể bắt đầu từ <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu trị sẹo</a>.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Bảo vệ vùng da mắt sau thủ thuật bằng kính chống tia UV khi ra nắng. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM có nhiều mẫu kính mát và tròng đổi màu chống UV.
+HOI_1: Bác sĩ Nguyễn Mạnh Đôn khám vào thời gian nào?
+DAP_1: Hồ sơ trên website Bệnh viện Đại học Y Dược TP.HCM ghi lịch khám Tạo hình – Thẩm mỹ vào sáng thứ Năm và chiều thứ Sáu; nên gọi hotline để xác nhận trước.
+HOI_2: Bác sĩ được đào tạo ở nước ngoài không?
+DAP_2: Có. Bác sĩ học phẫu thuật tạo hình vùng mặt tại Nice và Lyon (Pháp) năm 2009 và tu nghiệp tại Bệnh viện Đại học Quốc gia Seoul năm 2014.
+HOI_3: Khoa Tạo hình – Thẩm mỹ nằm ở cơ sở nào?
+DAP_3: Khoa đặt tại cơ sở 215 Hồng Bàng của Bệnh viện Đại học Y Dược TP.HCM; hotline (028) 3855 4269.
+SAN_PHAM: da-trong-156-hsmc-asx, eyemedi-korea-metal-style, kingbraver-6413, kinh-mat-nam-g-style, kinh-mat-noi8, kinh-mat-retro-y2k, razza-sports, tommy-gold-titanium-ip
+LIEN_QUAN: bac-si-daniel-bialeoko-benh-vien-fv | BS Daniel Bialeoko – Bệnh viện FV; bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo tại TP.HCM; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín tại TP.HCM
+LINK_TRONG_BAI: BS Daniel Bialeoko tại Bệnh viện FV → bac-si-daniel-bialeoko-benh-vien-fv; bác sĩ da liễu trị sẹo → bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm, tiem-filler-co-an-toan-khong
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5859, IMG_8060, IMG_9089)
+NGUON_THAM_KHAO: Bệnh viện Đại học Y Dược TP.HCM – BS.CKII Nguyễn Mạnh Đôn (https://bvdaihoc.com.vn/en/doctors/nguyen-manh-don-id-59); BV Đại học Y Dược – Khoa Tạo hình Thẩm mỹ (https://bvdaihoc.com.vn/en/health-library/plastic-and-aesthetic-surgery-department); Chương trình CME Tạo hình Thẩm mỹ 22/8/2023 (https://www.bvdaihoc.com.vn/upload/BanTinBV/HoiThao/2023/Tuan%20le%20CME/2023_08_22%20_%20THTM%20final.pdf)

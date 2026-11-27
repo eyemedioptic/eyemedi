@@ -1,0 +1,39 @@
+TIEU_DE: BS.CKII Nguyễn Đức Long – Phó Trưởng khoa Tạo hình thẩm mỹ, BV Thống Nhất
+TITLE: BS Nguyễn Đức Long – Tạo hình BV Thống Nhất | EYEMEDI
+SLUG: bac-si-nguyen-duc-long-tao-hinh-tham-my-thong-nhat
+TU_KHOA_CHINH: bác sĩ Nguyễn Đức Long tạo hình thẩm mỹ
+TU_KHOA_PHU: phẫu thuật mi mắt trên TP.HCM, nhổ răng khôn mọc lệch bệnh viện, gãy xương hàm nẹp vít, phẫu thuật hàm mặt Tân Sơn Nhất
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKII Nguyễn Đức Long, Phó Trưởng khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ BV Thống Nhất: kỹ thuật điều trị, dịch vụ thẩm mỹ, địa chỉ và điện thoại.
+NGAY_DANG: 2026-11-27
+DOAN_MO_DAU: Không phải ca phẫu thuật vùng mặt nào cũng vì làm đẹp: răng khôn mọc lệch, nang xương hàm hay gãy gò má sau tai nạn đều cần bác sĩ hàm mặt. BS.CKII Nguyễn Đức Long là Phó Trưởng khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ tại Bệnh viện Thống Nhất, nơi xử lý cả hai mảng điều trị và thẩm mỹ.
+ANH_RIENG:
+anh-rieng/bac-si-nguyen-duc-long-tao-hinh-tham-my-thong-nhat-1.jpg | Không gian cửa hàng kính mắt EYEMEDI
+anh-rieng/bac-si-nguyen-duc-long-tao-hinh-tham-my-thong-nhat-2.jpg | Kỹ thuật viên đo mắt cho khách tại EYEMEDI
+anh-rieng/bac-si-nguyen-duc-long-tao-hinh-tham-my-thong-nhat-3.jpg | Khách hàng nhận kính tại EYEMEDI
+H2_1: Vị trí công tác theo bệnh viện công bố
+NOI_DUNG_1: <p>Trang khoa của Bệnh viện Thống Nhất ghi <b>BS.CKII Nguyễn Đức Long</b> là Phó Trưởng khoa, cùng Trưởng khoa TS.BS Đỗ Thành Trí điều hành đơn vị gồm 6 bác sĩ, 6 điều dưỡng. Thông tin về quá trình đào tạo chi tiết được bệnh viện đăng trên trang hồ sơ riêng.</p>
+<p>Xem hồ sơ và hình ảnh bác sĩ trên <a href="https://bvtn.org.vn/chuyen-gia/nguyen-duc-long/" target="_blank" rel="noopener">trang chính thức của Bệnh viện Thống Nhất</a>.</p>
+H2_2: Danh mục kỹ thuật điều trị và thẩm mỹ
+NOI_DUNG_2: <p>Bản tóm tắt thông tin điều trị (cập nhật 12/2025) liệt kê nhiều kỹ thuật, trong đó có:</p>
+<ol><li>Cắt nang xương hàm trên do răng.</li><li>Điều trị gãy xương hàm dưới bằng nẹp vít; gãy gò má; gãy Lefort I, II, III.</li><li>Nhổ răng khôn mọc lệch có cắt thân răng.</li><li>Phẫu thuật mi mắt trên.</li><li>Thẩm mỹ: nâng mũi, nâng ngực, tạo hình môi, căng da, hút mỡ, cấy mỡ, tiêm chất làm đầy.</li></ol>
+<p><b>Địa chỉ:</b> Lầu 6 – Nhà A6, Bệnh viện Thống Nhất, số 1 Lý Thường Kiệt, Phường Tân Sơn Nhất, TP.HCM. <b>Điện thoại:</b> (028) 3869 0277 (nhánh 742). Nếu cần bác sĩ chuyên về mũi, xem thêm <a href="/bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm.html">chuyên gia sửa mũi tại TP.HCM</a>.</p>
+H2_3: Chuẩn bị gì trước buổi khám hàm mặt?
+NOI_DUNG_3: <p>Nên mang theo phim X-quang hoặc CT cũ, đơn thuốc đang dùng và kể rõ tiền sử dị ứng thuốc tê. Người hay đeo kính áp tròng nên tháo lens trước khi khám vùng mắt, mí. Bạn có thể tham khảo thêm quy trình tư vấn của <a href="/bac-si-nguyen-thanh-vinh-benh-vien-fv.html">BS.CKII Nguyễn Thanh Vinh tại Bệnh viện FV</a>.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Cần kính gọng thay lens trong thời gian điều trị vùng mắt, mí? EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM đo khúc xạ và cắt kính trong ngày.
+HOI_1: BS.CKII Nguyễn Đức Long giữ chức vụ gì?
+DAP_1: Bác sĩ là Phó Trưởng khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ, Bệnh viện Thống Nhất, theo trang khoa của bệnh viện.
+HOI_2: Khoa có nhổ răng khôn mọc lệch không?
+DAP_2: Có. Danh mục điều trị của khoa có kỹ thuật nhổ răng khôn mọc lệch có cắt thân răng, cùng cắt nang xương hàm do răng.
+HOI_3: Khoa nằm ở khu nào trong bệnh viện?
+DAP_3: Khoa đặt tại Lầu 6 – Nhà A6, Bệnh viện Thống Nhất, số 1 Lý Thường Kiệt; điện thoại (028) 3869 0277, nhánh 742.
+SAN_PHAM: da-trong-156-hsmc, da-trong-156-hsmc-asx, king-braver-61006-9670, kinh-mat-nam-g-style, p-rrolexr, p-sufiar-lv28018, panda-tr90, vidic-ems
+LIEN_QUAN: bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm | Chuyên gia sửa mũi tại TP.HCM; bac-si-nguyen-thanh-vinh-benh-vien-fv | BS.CKII Nguyễn Thanh Vinh – Bệnh viện FV; bac-si-phau-thuat-tham-my-quan-10-tphcm | Bác sĩ phẫu thuật thẩm mỹ Quận 10
+LINK_TRONG_BAI: chuyên gia sửa mũi tại TP.HCM → bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm; BS.CKII Nguyễn Thanh Vinh tại Bệnh viện FV → bac-si-nguyen-thanh-vinh-benh-vien-fv
+LINK_VAO_TU: bac-si-tham-my-gioi-uy-tin-chuyen-gia-sua-mui-tai-tphcm, bac-si-daniel-bialeoko-benh-vien-fv
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_8057, IMG_6020, IMG_9084)
+NGUON_THAM_KHAO: Bệnh viện Thống Nhất – Khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ (https://bvtn.org.vn/chuyen-khoa/khoa-phau-thuat-tao-hinh-tham-my/); Bệnh viện Thống Nhất – Tóm tắt thông tin điều trị của khoa (https://bvtn.org.vn/dich-vu/tom-tat-thong-tin-dieu-tri-cua-khoa-phau-thuat-ham-mat-tao-hinh-tham-my/); Bệnh viện Thống Nhất – BS.CKII Nguyễn Đức Long (https://bvtn.org.vn/chuyen-gia/nguyen-duc-long/)

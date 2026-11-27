@@ -1,0 +1,39 @@
+TIEU_DE: TS.BS Đỗ Thành Trí – Trưởng khoa Hàm mặt, Tạo hình thẩm mỹ BV Thống Nhất
+TITLE: BS Đỗ Thành Trí – Tạo hình thẩm mỹ BV Thống Nhất | EYEMEDI
+SLUG: bac-si-do-thanh-tri-benh-vien-thong-nhat
+TU_KHOA_CHINH: bác sĩ Đỗ Thành Trí Bệnh viện Thống Nhất
+TU_KHOA_PHU: khoa phẫu thuật hàm mặt tạo hình thẩm mỹ Thống Nhất, phẫu thuật thẩm mỹ Tân Bình, chỉnh hình xương hàm mặt, nâng mũi bệnh viện công TP.HCM
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: TS.BS Đỗ Thành Trí, Trưởng khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ, Bệnh viện Thống Nhất: địa chỉ khoa, dịch vụ hàm mặt, thẩm mỹ và cách liên hệ.
+NGAY_DANG: 2026-11-27
+DOAN_MO_DAU: Nhiều người tìm phẫu thuật thẩm mỹ ở bệnh viện công vì muốn có đủ phòng mổ, gây mê hồi sức và hồ sơ bệnh án rõ ràng. Bệnh viện Thống Nhất (TP.HCM) có một khoa vừa xử lý chấn thương hàm mặt vừa làm tạo hình thẩm mỹ, do TS.BS Đỗ Thành Trí phụ trách. Bài viết tóm tắt thông tin bệnh viện công bố để bạn đọc tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-do-thanh-tri-benh-vien-thong-nhat-1.jpg | Đội ngũ cửa hàng kính mắt EYEMEDI
+anh-rieng/bac-si-do-thanh-tri-benh-vien-thong-nhat-2.jpg | Đo khúc xạ bằng máy tự động tại EYEMEDI
+anh-rieng/bac-si-do-thanh-tri-benh-vien-thong-nhat-3.jpg | Khách hàng kiểm tra mắt tại EYEMEDI
+H2_1: Người đứng đầu khoa Hàm mặt – Tạo hình thẩm mỹ
+NOI_DUNG_1: <p>Theo trang Khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ của Bệnh viện Thống Nhất (cập nhật 2026), <b>TS.BS Đỗ Thành Trí</b> là Trưởng khoa; Phó Trưởng khoa là BSCKII Nguyễn Đức Long. Khoa có 12 nhân sự gồm 6 bác sĩ và 6 điều dưỡng, làm việc tại Lầu 6 – Nhà A6.</p>
+<p>Xem hồ sơ và hình ảnh bác sĩ trên <a href="https://bvtn.org.vn/chuyen-gia/do-thanh-tri/" target="_blank" rel="noopener">trang chính thức của Bệnh viện Thống Nhất</a>.</p>
+H2_2: Dịch vụ khoa đang thực hiện
+NOI_DUNG_2: <p>Bệnh viện chia danh mục thành hai nhóm:</p>
+<ul><li><b>Thẩm mỹ</b>: chỉnh hình xương hàm mặt và đường nét khuôn mặt; nâng ngực, nâng mũi; tạo hình mắt, mí và môi; căng da, hút mỡ, cấy mỡ; tiêm chất làm đầy, xóa nếp nhăn, laser.</li><li><b>Hàm mặt</b>: gãy xương hàm trên, hàm dưới, gò má, vỡ sàn ổ mắt; vết thương phần mềm; sứt môi, hở hàm ếch; u bướu vùng hàm mặt; cấy ghép implant.</li></ul>
+<p><b>Địa chỉ:</b> Bệnh viện Thống Nhất, số 1 Lý Thường Kiệt, Phường Tân Sơn Nhất, TP.HCM. <b>Điện thoại:</b> (028) 3869 0277 – nhánh 742 (khoa); tổng đài CSKH 1900 2345 47. Ở khu vực Quận 10 cũ có thêm <a href="/bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong.html">PGS.TS.BS Phạm Trịnh Quốc Khanh tại BV Trưng Vương</a>.</p>
+H2_3: Khi nào nên chọn khoa có thế mạnh hàm mặt
+NOI_DUNG_3: <p>Các can thiệp liên quan xương hàm, gò má hay ổ mắt cần đánh giá khớp cắn, phim chụp và đường thở trước mổ, nên phù hợp với khoa có kinh nghiệm chấn thương hàm mặt. Với thủ thuật nhẹ như tiêm làm đầy, bạn vẫn nên đọc kỹ <a href="/tiem-filler-co-an-toan-khong.html">tiêm filler có an toàn không</a> trước khi quyết định.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Sau phẫu thuật vùng mắt, mí, nên tạm ngưng kính áp tròng theo hướng dẫn bác sĩ. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM đo mắt và cắt kính gọng nhẹ để bạn dùng trong thời gian hồi phục.
+HOI_1: TS.BS Đỗ Thành Trí đang công tác ở đâu?
+DAP_1: Theo trang khoa cập nhật 2026, bác sĩ là Trưởng khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ, Bệnh viện Thống Nhất, số 1 Lý Thường Kiệt, Phường Tân Sơn Nhất, TP.HCM.
+HOI_2: Khoa có xử lý gãy xương gò má, vỡ sàn ổ mắt không?
+DAP_2: Có. Danh mục hàm mặt của khoa gồm gãy xương hàm trên, hàm dưới, gò má và vỡ sàn ổ mắt, bên cạnh vết thương phần mềm vùng mặt.
+HOI_3: Muốn hỏi lịch khám của khoa thì gọi số nào?
+DAP_3: Gọi (028) 3869 0277, nhánh 742, hoặc tổng đài chăm sóc khách hàng 1900 2345 47 của Bệnh viện Thống Nhất.
+SAN_PHAM: king-braver-61006-9670, kinh-bao-ho-victor, kinh-mat-nam-g-style, kinh-mat-noi8, p-ormegar-2207, panda-tr90, swallow-s12019, vidic-ems
+LIEN_QUAN: bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong | PGS.TS.BS Phạm Trịnh Quốc Khanh – BV Trưng Vương; tiem-filler-co-an-toan-khong | Tiêm filler có an toàn không?; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín tại TP.HCM
+LINK_TRONG_BAI: PGS.TS.BS Phạm Trịnh Quốc Khanh tại BV Trưng Vương → bac-si-pham-trinh-quoc-khanh-benh-vien-trung-vuong; tiêm filler có an toàn không → tiem-filler-co-an-toan-khong
+LINK_VAO_TU: bac-si-phau-thuat-tham-my-gioi-tai-tphcm, cach-chon-tham-my-vien-uy-tin-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_5978, IMG_6015, IMG_9096)
+NGUON_THAM_KHAO: Bệnh viện Thống Nhất – Khoa Phẫu thuật hàm mặt – Tạo hình thẩm mỹ (https://bvtn.org.vn/chuyen-khoa/khoa-phau-thuat-tao-hinh-tham-my/); Bệnh viện Thống Nhất – Tóm tắt thông tin điều trị của khoa (https://bvtn.org.vn/dich-vu/tom-tat-thong-tin-dieu-tri-cua-khoa-phau-thuat-ham-mat-tao-hinh-tham-my/); Bệnh viện Thống Nhất – TS.BS Đỗ Thành Trí (https://bvtn.org.vn/chuyen-gia/do-thanh-tri/)
