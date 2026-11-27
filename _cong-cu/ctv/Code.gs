@@ -81,9 +81,28 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
+var POS_CODE_VERSION = '2026-11-27d';
 function doGet(e) {
-  return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION });
+  if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
+  return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
 }
+// Chẩn đoán: mở <link Apps Script>?kiemtra=1&ten=<tên đăng nhập> trên trình duyệt
+function posDiag_(ten) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), out = { ban_ma_pos: POS_CODE_VERSION };
+  if (!ss) { out.loi = 'Apps Script này không gắn với Google Sheet nào'; return out; }
+  out.bang_tinh = ss.getName(); out.ma_bang_tinh_cuoi = ss.getId().slice(-6);
+  out.co_tab_NhanVien = !!ss.getSheetByName('NhanVien');
+  out.co_khai_bao_admin = typeof POS_SEED_ADMINS !== 'undefined';
+  if (ten) {
+    var nv = out.co_tab_NhanVien ? posFindLogin_(ten) : null;
+    out.tim_thay_tai_khoan = !!nv;
+    if (nv) { out.trang_thai = nv.status; out.vai_tro = nv.role; out.co_mat_khau = !!(nv.pw_salt && nv.pw_hash); out.bi_vo_hieu_do_ctv = !!nv.ctv_id; }
+    out.dang_tam_khoa = Number(CacheService.getScriptCache().get('p' + loginKey_(ten)) || 0) >= 8;
+  }
+  return out;
+}
+/** KIỂM TRA: chọn hàm kiemTraBanHang → Chạy, so Nhật ký với kết quả mở link ?kiemtra=1 */
+function kiemTraBanHang() { Logger.log(JSON.stringify(posDiag_('eyemedi.group@gmail.com'), null, 1)); }
 
 function doPost(e) {
   var req = {};
