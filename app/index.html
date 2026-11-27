@@ -54,6 +54,27 @@ nav.side a.on{background:rgba(255,255,255,.12);color:var(--nav-active)}
 nav.side a svg{width:18px;height:18px;flex:none}
 nav.side .spacer{flex:1}
 nav.side .foot{font-size:11px;padding:8px 10px;opacity:.8}
+nav.side a.mobonly{display:none}
+.more-hero{background:var(--accent);color:var(--accent-fg);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.more-hero .acc{display:flex;align-items:center;gap:12px}
+.more-hero .av{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-weight:700;font-size:18px;flex:none}
+.more-hero .acc small{display:block;opacity:.85;font-size:12px}
+.more-hero .acc b{font-size:18px}
+.more-hero .brbox{margin-top:12px;background:rgba(0,0,0,.14);border-radius:8px;padding:8px 12px}
+.more-hero .brbox .brsel{display:flex;align-items:center;gap:8px}
+.more-hero .brbox .brsel span{color:inherit!important;opacity:.85}
+.more-hero .brbox select{flex:1;min-width:0}
+.more-search{margin-bottom:12px}
+.more-grp{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.more-grp h3{font-size:14px;margin:0;padding:12px 14px 4px}
+.more-row{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:0;background:none;text-align:left;color:var(--fg)!important;text-decoration:none;cursor:pointer;font-size:15px}
+.more-row:hover{background:var(--surface-2)}
+.more-row .ic{width:34px;height:34px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;flex:none}
+.more-row .ic svg{width:19px;height:19px}
+.more-row .t{flex:1;min-width:0}
+.more-row .cnt{font-size:12px;padding:1px 8px;border-radius:99px;background:var(--warn-soft);color:var(--warn)}
+.more-row .chev{color:var(--muted);flex:none}
+.more-row.out{color:var(--bad)!important}.more-row.out .ic{background:var(--bad-soft,#fde8e8);color:var(--bad)}
 main{min-width:0;padding-block:20px 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 h1{font-size:22px;margin:0;text-wrap:balance}
 h2{font-size:16px;margin:0 0 10px}
@@ -170,7 +191,11 @@ a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
   .app{grid-template-columns:1fr}
   nav.side{position:fixed;top:auto;bottom:0;left:0;right:0;height:auto;flex-direction:row;padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));z-index:40;overflow-x:auto;gap:2px}
   .brand,nav.side .spacer,nav.side .foot{display:none}
-  nav.side a{flex-direction:column;gap:2px;font-size:10px;padding:6px 8px;flex:1;min-width:58px}
+  nav.side a{flex-direction:column;gap:2px;font-size:11px;padding:6px 4px;flex:1;min-width:0}
+  nav.side a:not([data-mob]){display:none}
+  nav.side a.mobonly{display:flex}
+  nav.side a svg{width:22px;height:22px}
+  .notice #btnPw,.notice #btnOut{display:none}
   main{padding-bottom:90px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .pos{grid-template-columns:minmax(0,1fr)}
   .cart{position:static}
@@ -190,15 +215,16 @@ a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
       <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="17" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="23" cy="17" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 16q.5-2 1 0" stroke="currentColor" stroke-width="2.4" fill="none"/></svg>
       <div><b>Eyemedi</b><small>Quản lý bán hàng</small></div>
     </div>
-    <a href="#tong-quan" data-r="tong-quan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Tổng quan</a>
-    <a href="#ban-hang" data-r="ban-hang" data-perm="ban_hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11.2L21 7H6.2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Bán hàng</a>
-    <a href="#don-hang" data-r="don-hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Đơn hàng</a>
-    <a href="#san-pham" data-r="san-pham"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M3 13 2 9M21 13l1-4"/></svg>Sản phẩm</a>
+    <a href="#tong-quan" data-mob data-r="tong-quan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Tổng quan</a>
+    <a href="#ban-hang" data-mob data-r="ban-hang" data-perm="ban_hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11.2L21 7H6.2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>Bán hàng</a>
+    <a href="#don-hang" data-mob data-r="don-hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Đơn hàng</a>
+    <a href="#san-pham" data-mob data-r="san-pham"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M3 13 2 9M21 13l1-4"/></svg>Sản phẩm</a>
     <a href="#kho" data-r="kho" data-perm="kho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9 12 4l9 5v11H3z"/><path d="M8 20v-6h8v6"/></svg>Kho hàng</a>
     <a href="#so-quy" data-r="so-quy" data-perm="so_quy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M16 15h2M6 6V4h12v2"/></svg>Sổ quỹ</a>
     <a href="#khach-hang" data-r="khach-hang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8M19 15c2 1 3 3 3 6"/></svg>Khách hàng</a>
     <a href="#bao-cao" data-r="bao-cao" data-perm="bao_cao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Báo cáo</a>
     <a href="#nhan-vien" data-r="nhan-vien" data-perm="quan_tri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/><path d="M17 3l2 2 3-3"/></svg>Nhân viên</a>
+    <a href="#them" data-mob data-r="them" class="mobonly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Thêm</a>
     <div class="spacer"></div>
     <div class="foot" id="navFoot">Dữ liệu lưu trên trình duyệt này</div>
   </nav>
@@ -334,14 +360,15 @@ function stockPill(p){
 const validOrders=()=>ords().filter(o=>o.status==='done');
 
 /* ============ Router ============ */
-const ROUTES={'so-quy':viewCash,'nhan-vien':viewStaff,'tong-quan':viewDashboard,'ban-hang':viewPOS,'don-hang':viewOrders,'san-pham':viewProducts,'kho':viewStock,'khach-hang':viewCustomers,'bao-cao':viewReports};
+const ROUTES={'them':viewMore,'so-quy':viewCash,'nhan-vien':viewStaff,'tong-quan':viewDashboard,'ban-hang':viewPOS,'don-hang':viewOrders,'san-pham':viewProducts,'kho':viewStock,'khach-hang':viewCustomers,'bao-cao':viewReports};
 function route(){
   if(SERVER&&!ME){showLogin();return}
   const r=(location.hash||'').slice(1);let key=ROUTES[r]?r:defaultRoute();
   if(!routeAllowed(key))key=defaultRoute();
   $('#nav').hidden=false;updateNav();
   $$('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.r===key));
-  const main=$('#main');main.innerHTML=noticeBar()+(S.sample&&!SERVER?sampleBanner():'');
+  const mb=$('#nav a[data-r="them"]');mb&&mb.classList.toggle('on',key==='them'||!['tong-quan','ban-hang','don-hang','san-pham'].includes(key));
+  const main=$('#main');main.innerHTML=(key==='them'?'<div hidden id="noticeBar"></div>':noticeBar())+(S.sample&&!SERVER?sampleBanner():'');
   bindNotice($('#noticeBar'));
   const box=document.createElement('div');main.appendChild(box);
   ROUTES[key](box);
@@ -1683,6 +1710,71 @@ function bulkStockForm(){
         applyStockView();close();stockTab='ton';route();toast(`Đã đặt tồn ${qty} cho ${n} mã ${cat.toLowerCase()}`)}
       catch(err){toast(err.message);b.disabled=false;b.textContent='Cập nhật tồn kho';if(SERVER){try{await refreshData();route()}catch(e){}}}};
   }});
+}
+/* Màn "Thêm": gom các chức năng phụ theo nhóm (dùng cho thanh điều hướng dưới cùng trên điện thoại) */
+const MI={
+  cart:'<path d="M3 4h2l2.4 11h11.2L21 7H6.2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>',
+  list:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  truck:'<path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+  users:'<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8M19 15c2 1 3 3 3 6"/>',
+  ctv:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/><path d="M19 8h4M21 6v4"/>',
+  glasses:'<circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M3 13 2 9M21 13l1-4"/>',
+  home:'<path d="M3 9 12 4l9 5v11H3z"/><path d="M8 20v-6h8v6"/>',
+  boxin:'<path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M12 8v7M9 12l3 3 3-3"/>',
+  check:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M9 13l2 2 4-4"/>',
+  swap:'<path d="M4 8h14l-3-3M20 16H6l3 3"/>',
+  layers:'<path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/>',
+  web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  cash:'<rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M16 15h2M6 6V4h12v2"/>',
+  staff:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/><path d="M17 3l2 2 3-3"/>',
+  ext:'<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>',
+  phone:'<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
+  key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3"/>',
+  out:'<path d="M9 21H4V3h5M16 17l5-5-5-5M21 12H9"/>'};
+function goTo(h,fn){if(location.hash!=='#'+h){if(fn)window.addEventListener('hashchange',()=>setTimeout(fn,0),{once:true});location.hash=h}else{route();fn&&fn()}}
+function viewMore(el){
+  const pend=ords().filter(o=>o.status==='pending').length,ship=ords().filter(o=>o.status==='shipping').length;
+  const ctvLink=SERVER&&can('don_tat_ca')?'/ctv/admin.html':'/ctv/';
+  const ordGo=st=>()=>{ordFilter={q:'',range:'all',status:st,ch:'all'};goTo('don-hang')};
+  const G=[
+    ['Quản lý đơn hàng',[
+      ['cart','Bán hàng tại quầy',()=>goTo('ban-hang'),can('ban_hang')],
+      ['list','Danh sách đơn hàng',ordGo('all'),1],
+      ['clock','Đơn chờ xác nhận',ordGo('pending'),1,pend],
+      ['truck','Đơn đang giao',ordGo('shipping'),1,ship],
+      ['users','Khách hàng',()=>goTo('khach-hang'),1],
+      ['ctv','Đơn cộng tác viên',ctvLink,SERVER&&can('don_tat_ca'),(NOTICE||{}).ctvNew]]],
+    ['Quản lý sản phẩm',[
+      ['glasses','Sản phẩm',()=>goTo('san-pham'),1],
+      ['home','Tồn kho',()=>{stockTab='ton';goTo('kho')},can('kho')],
+      ['boxin','Nhập hàng',()=>goTo('kho',()=>stockForm('nhap')),can('kho')],
+      ['check','Kiểm kho',()=>goTo('kho',()=>stockForm('kiem')),can('kho')],
+      ['swap','Chuyển kho',()=>goTo('kho',transferForm),can('kho')],
+      ['layers','Đặt tồn hàng loạt',()=>goTo('kho',bulkStockForm),can('kho')],
+      ['web','Lấy sản phẩm từ website',()=>goTo('san-pham',importWebForm),can('san_pham')]]],
+    ['Tài chính và báo cáo',[
+      ['chart','Báo cáo doanh thu',()=>goTo('bao-cao'),can('bao_cao')],
+      ['cash','Sổ quỹ',()=>goTo('so-quy'),can('so_quy')]]],
+    ['Hệ thống',[
+      ['staff','Nhân viên và chi nhánh',()=>goTo('nhan-vien'),can('quan_tri')],
+      ['ext','Trang cộng tác viên',ctvLink,1],
+      ['phone','Cài lên điện thoại',()=>installApp(),!isStandalone()],
+      ['key','Đổi mật khẩu',()=>changePw(),SERVER&&ME],
+      ['out','Đăng xuất',()=>logout(),SERVER&&ME]]]];
+  const acts=[];
+  const row=([ic,t,act,ok,cnt])=>{if(!ok)return '';const i=acts.push(act)-1;const inner=`<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${MI[ic]}</svg></span><span class="t">${t}</span>${cnt?`<span class="cnt num">${cnt}</span>`:''}<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>`;
+    return typeof act==='string'?`<a class="more-row" href="${act}" target="_blank" rel="noopener" data-k="${esc(t.toLowerCase())}">${inner}</a>`:`<button class="more-row${ic==='out'?' out':''}" data-mi="${i}" data-k="${esc(t.toLowerCase())}">${inner}</button>`};
+  const name=ME?ME.full_name:'Eyemedi',ini=name.split(/\s+/).filter(Boolean).slice(-2).map(w=>w[0]).join('').toUpperCase();
+  el.innerHTML=`<div class="more-hero"><div class="acc"><div class="av">${esc(ini)}</div><div><small>${ME?esc(ROLE_LABEL[ME.role]||ME.role):'Tài khoản'}</small><b>${esc(name)}</b></div></div>
+    ${BR().length?`<div class="brbox">${branchSelect()}</div>`:''}</div>
+    <input class="more-search" id="mq" type="search" placeholder="Tìm chức năng…">
+    ${G.map(([h,items])=>{const r=items.map(row).join('');return r?`<div class="more-grp"><h3>${h}</h3>${r}</div>`:''}).join('')}
+    <div class="small muted" style="text-align:center">${SERVER?'Đã kết nối máy chủ, dữ liệu dùng chung':'Dữ liệu lưu trên trình duyệt này'}</div>`;
+  $$('[data-mi]',el).forEach(b=>b.onclick=()=>acts[b.dataset.mi]());
+  const bs=$('#brSel',el);bs&&(bs.onchange=()=>setBranch(bs.value));
+  $('#mq',el).oninput=e=>{const q=e.target.value.trim().toLowerCase();$$('.more-grp',el).forEach(g=>{let any=0;$$('.more-row',g).forEach(r=>{const v=!q||r.dataset.k.includes(q);r.hidden=!v;any+=v});g.hidden=!any})};
 }
 /* ============ Khởi động ============ */
 document.addEventListener('keydown',e=>{
