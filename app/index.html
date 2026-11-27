@@ -634,7 +634,7 @@ let stockTab='ton';
 function viewStock(el){
   const goods=S.products.filter(p=>!p.service);
   const val=goods.reduce((a,p)=>a+p.stock*p.cost,0);
-  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
+  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><button class="btn" id="bulkKho">Đặt tồn hàng loạt</button><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
   <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
     <div class="card stat"><div class="lb">Tổng số lượng tồn</div><div class="v num">${goods.reduce((a,p)=>a+Math.max(0,p.stock),0).toLocaleString('vi-VN')}</div></div>
     <div class="card stat"><div class="lb">Giá trị tồn (giá vốn)</div><div class="v num">${money(val)}</div></div>
@@ -652,7 +652,7 @@ function viewStock(el){
   }
   $('#nhap',el).onclick=()=>stockForm('nhap');
   $('#kiem',el).onclick=()=>stockForm('kiem');
-  $('#chuyenKho',el).onclick=transferForm;
+  $('#chuyenKho',el).onclick=transferForm;$('#bulkKho',el).onclick=bulkStockForm;
 }
 function stockForm(type){
   if(needBranch('lập phiếu kho'))return;
@@ -1652,6 +1652,38 @@ async function installApp(){
     <div class="acts"><button class="btn pri" data-close>Đã hiểu</button></div>`);
 }
 if('serviceWorker' in navigator&&window.isSecureContext)window.addEventListener('load',()=>navigator.serviceWorker.register('/app/sw.js',{scope:'/app/'}).catch(()=>{}));
+/* Đặt tồn kho hàng loạt theo nhóm hàng (ghi thành phiếu kiểm kho) */
+function bulkStockForm(){
+  const cats=CATS.filter(c=>c!=='Dịch vụ'&&S.products.some(p=>p.cat===c&&!p.service));
+  if(!cats.length){toast('Chưa có sản phẩm nào');return}
+  const brs=myBR();if(!brs.length){toast('Bạn chưa được phân công chi nhánh');return}
+  modal(`<h2>Đặt tồn kho hàng loạt</h2>
+    <div class="small muted">Đặt cùng một số lượng tồn cho mọi mã trong nhóm hàng. Phần mềm ghi thành phiếu kiểm kho để xem lại trong lịch sử kho.</div>
+    <div class="grid2"><label class="f">Nhóm hàng<select id="bk_cat">${cats.map(c=>`<option${c==='Gọng kính'?' selected':''}>${esc(c)}</option>`).join('')}</select></label>
+      <label class="f">Số lượng tồn mỗi mã<input id="bk_qty" inputmode="numeric" value="1"></label></div>
+    <label class="f">Chi nhánh<select id="bk_br">${brs.map(b=>`<option value="${b.id}"${b.id===CUR_BR?' selected':''}>${esc(b.name)}</option>`).join('')}${brs.length>1?'<option value="__all">Tất cả chi nhánh ('+brs.length+')</option>':''}</select></label>
+    <label class="chk"><input type="checkbox" id="bk_zero"> Chỉ đặt cho mã đang hết hàng (tồn 0 hoặc âm)</label>
+    <div id="bk_info" class="small muted"></div>
+    <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="bk_ok">Cập nhật tồn kho</button></div>`,
+  {onMount:(m,close)=>{
+    const pick=()=>{const cat=$('#bk_cat',m).value,qty=Math.max(0,parseNum($('#bk_qty',m).value)),zero=$('#bk_zero',m).checked,bv=$('#bk_br',m).value;
+      const targets=bv==='__all'?brs.map(b=>b.id):[bv];
+      const jobs=targets.map(br=>({br,lines:S.products.filter(p=>p.cat===cat&&!p.service).filter(p=>{const cur=Number((p.stocks||{})[br])||0;return zero?cur<=0:cur!==qty}).map(p=>({pid:p.id,qty}))})).filter(j=>j.lines.length);
+      return {cat,qty,jobs}};
+    const info=()=>{const {cat,qty,jobs}=pick();const n=jobs.reduce((a,j)=>a+j.lines.length,0);
+      $('#bk_info',m).textContent=n?`Sẽ đặt tồn = ${qty} cho ${n} mã ${cat.toLowerCase()} tại ${jobs.map(j=>brName(j.br)).join(', ')}.`:'Không có mã nào cần thay đổi.';$('#bk_ok',m).disabled=!n};
+    ['#bk_cat','#bk_qty','#bk_br','#bk_zero'].forEach(k=>{$(k,m).onchange=info;$(k,m).oninput=info});info();
+    $('#bk_ok',m).onclick=async()=>{const {cat,qty,jobs}=pick();const b=$('#bk_ok',m);b.disabled=true;let n=0;
+      const note=`Đặt tồn hàng loạt: ${cat} = ${qty}`;
+      try{
+        for(const j of jobs){
+          if(SERVER){for(let i=0;i<j.lines.length;i+=150){b.textContent=`Đang cập nhật ${brName(j.br)}…`;const r=await api('posStock',{type:'kiem',branch:j.br,lines:j.lines.slice(i,i+150),note});if(r&&r.products){S.products=r.products}}}
+          else{const now=Date.now();j.lines.forEach(l=>{const p=prod(l.pid);const cur=Number((p.stocks||{})[j.br])||0;if(cur!==l.qty){adjStock(p,l.qty-cur,j.br);S.stockLog.push({id:uid(),date:now,pid:p.id,qty:l.qty-cur,type:'kiem',note,branch:j.br})}});save()}
+          n+=j.lines.length}
+        applyStockView();close();stockTab='ton';route();toast(`Đã đặt tồn ${qty} cho ${n} mã ${cat.toLowerCase()}`)}
+      catch(err){toast(err.message);b.disabled=false;b.textContent='Cập nhật tồn kho';if(SERVER){try{await refreshData();route()}catch(e){}}}};
+  }});
+}
 /* ============ Khởi động ============ */
 document.addEventListener('keydown',e=>{
   if(e.key==='F3'){e.preventDefault();if(location.hash!=='#ban-hang')location.hash='ban-hang';setTimeout(()=>$('#posQ')&&$('#posQ').focus(),0)}
