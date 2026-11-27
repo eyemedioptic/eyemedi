@@ -256,11 +256,8 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
   </div>
 </header>
 <main>
-<section class="hero pb-slider" id="pbSlider" aria-roledescription="carousel" aria-label="Các mẫu gọng kính cận">
+<section class="hero pb-slider" id="pbSlider" aria-roledescription="carousel" aria-label="Video và ưu đãi EYEMEDI">
 <div class="pb-track" id="pbTrack"></div>
-<button class="pb-arrow pb-prev" type="button" aria-label="Mẫu trước" onclick="pbGo(pbI-1,true)">‹</button>
-<button class="pb-arrow pb-next" type="button" aria-label="Mẫu tiếp theo" onclick="pbGo(pbI+1,true)">›</button>
-<div class="pb-count" id="pbCount"></div>
 </section>
 <h1 style="margin:18px 5% 6px;font-size:clamp(20px,2.6vw,28px);line-height:1.3;text-align:center;color:#073a3c">EYEMEDI – Trung tâm thị lực nhãn kính chuyên sâu tại TP.HCM</h1>
 <div class="benefits"><div class="benefit"><strong>Sản phẩm chất lượng tốt</strong>Dịch vụ bảo hành trọn thời gian sử dụng</div><div class="benefit"><strong>Tư vấn tận tâm</strong>Hỗ trợ chọn sản phẩm phù hợp đúng nhu cầu</div><div class="benefit"><strong>Cắt lắp tròng kính theo toa</strong>Nhận cắt lắp, gia công tròng kính độ theo toa BS</div></div>
@@ -593,19 +590,9 @@ function pbInit(){var tr=document.getElementById('pbTrack');if(!tr||tr.children.
  var list=PRODUCTS.filter(function(p){return p.image&&(p.category||window.PAGE_CATEGORY)===window.PAGE_CATEGORY});
  var vc=document.createElement('div');vc.className='pb-cell pb-video';vc.innerHTML='<div id="pbYT"></div><button type="button" class="pv-nav pv-prev" aria-label="Video trước">‹</button><button type="button" class="pv-nav pv-next" aria-label="Video tiếp">›</button><div class="pv-dots"></div>';tr.appendChild(vc);pbVideo(vc);
  var ad=document.createElement('a');ad.className='pb-cell pb-ad';ad.href='/ctv/tham-gia.html';ad.setAttribute('aria-label','Tuyển cộng tác viên EYEMEDI – đăng ký tham gia');ad.innerHTML='<div class="pb-bg" style="background-image:url(\'/images/ctv/banner-ctv.webp\')"></div><video src="/images/ctv/banner-ctv.mp4" poster="/images/ctv/banner-ctv.webp" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>';tr.appendChild(ad);
- var K=1,cells=[];pbN=Math.max(1,Math.ceil(list.length/K));
- for(var c=0;c<K;c++){var cell=document.createElement('div');cell.className='pb-cell';cells.push(cell);tr.appendChild(cell);}
- list.forEach(function(p,n){var a=document.createElement('a');a.className='pb-slide';a.href='/san-pham.html?sp='+p.id;a.setAttribute('aria-label','Xem chi tiết '+p.name);a.dataset.r=Math.floor(n/K);
-  a.onclick=function(e){if(typeof openDetail==='function'){e.preventDefault();openDetail(p.id)}};
-  var bg=document.createElement('div');bg.className='pb-bg';bg.style.backgroundImage='url("'+p.image+'")';
-  var im=document.createElement('img');im.src=p.image;im.alt=p.name;im.loading=n<K?'eager':'lazy';
-    a.appendChild(bg);a.appendChild(im);cells[n%K].appendChild(a);});
- window.pbGo=function(i,user){pbI=(i+pbN)%pbN;cells.forEach(function(cell){var sl=cell.children,m=sl.length;if(!m)return;var r=pbI%m;for(var k=0;k<m;k++)sl[k].classList.toggle('on',k===r)});var c=document.getElementById('pbCount');if(c)c.textContent=(pbI+1)+' / '+pbN;if(user)pbStart();};
- pbGo(0);pbStart();
- var sl=document.getElementById('pbSlider'),sx=0;
- sl.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
- sl.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)pbGo(pbI+(dx<0?1:-1),true)},{passive:true});
- sl.addEventListener('mouseenter',function(){clearInterval(pbT)});sl.addEventListener('mouseleave',pbStart);}
+ var dl=document.createElement('a');dl.className='pb-cell pb-ad';dl.href='/dat-lich-do-mat.html';dl.setAttribute('aria-label','Đo thị lực miễn phí – đặt lịch đo mắt');dl.innerHTML='<div class="pb-bg" style="background-image:url(\'/images/quang-cao/do-thi-luc.webp\')"></div><video src="/images/quang-cao/do-thi-luc.mp4" poster="/images/quang-cao/do-thi-luc.webp" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>';dl.onclick=function(e){if(typeof window.moDatLich==='function'){e.preventDefault();window.moDatLich()}};tr.appendChild(dl);
+ pbN=1;window.pbGo=function(){};
+}
 pbInit();
 </script>
 
@@ -671,7 +658,7 @@ var f=m.querySelector('form'),ok=m.querySelector('.dl-ok'),bt=f.querySelector('b
 function gioRender(){var s=f.elements['Giờ'],cur=s.value,n=f.elements['Ngày'].value,now=new Date(),h='<option value="">Chọn giờ</option>',c=0;for(var t=510;t<=1260;t+=30){if(n===today()&&t<now.getHours()*60+now.getMinutes()+30)continue;var x=('0'+Math.floor(t/60)).slice(-2)+':'+('0'+t%60).slice(-2);h+='<option'+(x===cur?' selected':'')+'>'+x+'</option>';c++}if(!c)h='<option value="">Hôm nay đã hết giờ – chọn ngày khác</option>';s.innerHTML=h}
 f.elements['Ngày'].addEventListener('change',gioRender);
 function dong(){m.classList.remove('mo');document.body.classList.remove('dl-khoa')}
-function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value||n.value<today())n.value=today();gioRender();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
+window.moDatLich=function(){mo()};function mo(){f.style.display='';ok.style.display='none';bt.disabled=false;bt.textContent='GỬI ĐẶT LỊCH';var n=f.elements['Ngày'];n.min=today();if(!n.value||n.value<today())n.value=today();gioRender();m.classList.add('mo');document.body.classList.add('dl-khoa');setTimeout(function(){f.elements['Họ và Tên'].focus()},50);window.fbq&&fbq('track','InitiateCheckout')}
 m.querySelector('.dl-dong').onclick=dong;m.addEventListener('click',function(e){if(e.target===m)dong()});document.addEventListener('keydown',function(e){if(e.key==='Escape')dong()});
 document.querySelectorAll('a.cta[href*="dat-lich-do-mat"],header a[href*="dat-lich-do-mat"],nav a[href*="dat-lich-do-mat"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var d=a.closest('details');if(d)d.removeAttribute('open');if(window.closeMainMenu)try{closeMainMenu()}catch(x){}mo()})});
 f.addEventListener('submit',function(e){e.preventDefault();
