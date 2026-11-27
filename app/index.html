@@ -141,7 +141,8 @@ main a:not(.btn){color:var(--accent)}
 .receipt{font-size:13px;border:1px dashed var(--line);padding:16px;border-radius:6px;background:var(--surface-2)}
 .receipt .c{text-align:center}
 .notice{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;margin-bottom:16px}
-.notice .who{display:flex;align-items:center;gap:6px}
+.notice .who{display:flex;align-items:center;gap:6px;flex-basis:100%;min-width:0}
+.notice .who .ctvtop{margin-left:auto;white-space:nowrap}
 .nchips{display:flex;flex-wrap:wrap;gap:6px}
 .nchip{display:inline-flex;gap:6px;align-items:center;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--fg)!important;text-decoration:none;font-size:13px}
 .nchip.warn{background:var(--warn-soft);color:var(--warn)!important}
@@ -1112,15 +1113,14 @@ function noticeInner(){
   if(!SERVER)return `${branchSelect()}<div class="nchips">${chips}</div><span class="nmeta${SERVER_NOTE?' nwarn':''}">${esc(SERVER_NOTE||'Chế độ một máy: dữ liệu lưu trên trình duyệt này.')}</span><span class="grow"></span>${installBtn()}<a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>`;
   const n=NOTICE||{};
   const latest=(n.latest||[]).slice(0,3);
-  return `<div class="who"><b>${esc(ME.full_name)}</b> <span class="pill neu">${ROLE_LABEL[ME.role]||ME.role}</span></div>
+  return `<div class="who"><b>${esc(ME.full_name)}</b> <span class="pill neu">${ROLE_LABEL[ME.role]||ME.role}</span><a class="btn sm ctvtop" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a></div>
     ${branchSelect()}<div class="nchips">${chips}
       ${can('don_tat_ca')?`<a class="nchip${n.ctvNew?' warn':''}" href="/ctv/admin.html" target="_blank" rel="noopener">Đơn CTV mới <b class="num">${n.ctvNew||0}</b></a>`:''}
       ${can('quan_tri')&&n.staffPending?`<a class="nchip warn" href="#nhan-vien">Nhân viên chờ duyệt <b class="num">${n.staffPending}</b></a>`:''}
       ${can('bao_cao')&&NOTICE?`<span class="nchip ok">Hôm nay ${n.today} đơn · <b class="num">${money(n.todayRevenue)}</b></span>`:''}
     </div>
     <span class="grow"></span>
-    ${installBtn()}<a class="btn sm" href="${ctvLink}" target="_blank" rel="noopener">Trang cộng tác viên ↗</a>
-    <button class="btn sm" id="btnPw">Đổi mật khẩu</button><button class="btn sm" id="btnOut">Đăng xuất</button>
+    ${installBtn()}<button class="btn sm" id="btnPw">Đổi mật khẩu</button><button class="btn sm" id="btnOut">Đăng xuất</button>
     ${latest.length?`<div class="nlatest">Mới nhất: ${latest.map(o=>`<a href="#" data-oid2="${esc(o.id)}">${esc(o.code)}</a> ${esc(CHANNELS[o.channel]||'')}, ${STATUS[o.status]?STATUS[o.status][0].toLowerCase():''}, ${esc(o.staff_name)}`).join(' · ')}</div>`:''}`;
 }
 function bindNotice(el){
