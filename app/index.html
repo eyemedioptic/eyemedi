@@ -1029,7 +1029,7 @@ function showLogin(msg,tab){
   const main=$('#main');
   main.innerHTML=`<div class="login card">
     <div class="lbrand"><svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="17" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="23" cy="17" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 16q.5-2 1 0" stroke="currentColor" stroke-width="2.4" fill="none"/></svg><div><b>EYEMEDI</b><div class="small muted">Phần mềm bán hàng</div></div></div>
-    <div class="tabs"><button data-t="in" class="${tab==='in'?'on':''}">Đăng nhập</button><button data-t="up" class="${tab==='up'?'on':''}">Đăng ký nhân viên</button></div>
+    <div class="tabs"><button data-t="in" class="${tab==='in'?'on':''}">Đăng nhập</button><button data-t="up" class="${tab==='up'?'on':''}">Đăng ký</button></div>
     <div class="banner" id="lmsg" ${msg?'':'hidden'} style="margin:0">${esc(msg||'')}</div>
     ${tab==='in'?`<form id="lf" class="lform">
       <label class="f">Số điện thoại hoặc tên đăng nhập<input id="l_login" required autocomplete="username" autocapitalize="none" spellcheck="false"></label>
