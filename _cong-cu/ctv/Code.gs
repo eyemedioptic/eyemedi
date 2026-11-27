@@ -1137,6 +1137,28 @@ function posSeedAdmin_(login, pw) {
 }
 
 /**
+ * ĐẶT MẬT KHẨU ADMIN PHẦN MỀM BÁN HÀNG (cách chắc chắn nhất để vào được):
+ * gõ mật khẩu mới vào MAT_KHAU bên dưới → chọn hàm datMatKhauBanHang → Chạy → xem Nhật ký.
+ * Chạy xong nên xóa mật khẩu khỏi dòng MAT_KHAU rồi lưu lại.
+ */
+function datMatKhauBanHang() {
+  var TEN = 'eyemedi.group@gmail.com';   // tên đăng nhập (hoặc số điện thoại)
+  var MAT_KHAU = '';                      // gõ mật khẩu mới vào giữa hai dấu nháy
+  var HO_TEN = 'Admin EYEMEDI';
+  if (String(MAT_KHAU).length < 6) { Logger.log('Hãy gõ mật khẩu mới (tối thiểu 6 ký tự) vào dòng MAT_KHAU rồi chạy lại.'); return; }
+  var t = posTable_('NhanVien'), nv = posFindLogin_(TEN), salt = Utilities.getUuid();
+  var ch = { pw_salt: salt, pw_hash: hash_(salt, MAT_KHAU), role: 'admin', status: 'active', ctv_id: '' };
+  if (nv) t.update(nv, ch);
+  else {
+    var phone = normPhone_(TEN);
+    t.insert({ id: Utilities.getUuid(), created_at: now_(), full_name: HO_TEN, phone: phone, username: phone ? '' : TEN.trim().toLowerCase(),
+               role: 'admin', perms: '', status: 'active', pw_salt: salt, pw_hash: ch.pw_hash, note: 'Tài khoản Admin chính', ctv_id: '', branches: '' });
+  }
+  CacheService.getScriptCache().remove('p' + loginKey_(TEN));
+  Logger.log('Xong: ' + (nv ? 'đã đặt lại mật khẩu' : 'đã tạo tài khoản Admin') + ' cho ' + TEN + ' và gỡ tạm khóa. Đăng nhập eyemedi.vn/app bằng tên này và mật khẩu vừa gõ.');
+}
+
+/**
  * MỞ KHÓA ĐĂNG NHẬP PHẦN MỀM BÁN HÀNG: chọn hàm moKhoaBanHang → Chạy.
  * Gỡ tạm khóa 15 phút do nhập sai nhiều lần cho tài khoản Admin chính (hoặc tên/SĐT ghi ở TEN), và ghi kết quả kiểm tra vào Nhật ký.
  */
