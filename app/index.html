@@ -353,7 +353,8 @@ const prod=id=>S.products.find(p=>p.id===id);
 const cust=id=>S.customers.find(c=>c.id===id);
 function stockPill(p){
   if(p.service)return '<span class="pill neu">Dịch vụ</span>';
-  if(p.stock<=0)return '<span class="pill bad">Hết hàng</span>';
+  if(p.stock<0)return `<span class="pill bad">Âm ${-p.stock} · cần nhập</span>`;
+  if(p.stock===0)return '<span class="pill bad">Hết hàng</span>';
   if(p.stock<=3)return `<span class="pill warn">Còn ${p.stock}</span>`;
   return `<span class="pill good">Còn ${p.stock}</span>`;
 }
@@ -448,7 +449,7 @@ function addToCart(p){
   if(!p)return;
   const inCart=cart.items.find(i=>i.pid===p.id);
   const want=(inCart?inCart.qty:0)+1;
-  if(!p.service&&want>p.stock){toast(`"${p.name}" chỉ còn ${p.stock} trong kho`);return}
+  if(!p.service&&want>p.stock)toast(`"${p.name}" ${p.stock>0?'chỉ còn '+p.stock:'đang hết hàng'}: vẫn bán được, nhớ nhập kho bổ sung`);
   if(inCart)inCart.qty++;else cart.items.push({pid:p.id,name:p.name,sku:p.sku,price:p.price,cost:p.cost,qty:1});
   renderCart();
 }
@@ -467,7 +468,7 @@ function renderCart(){
     </div>
     <div>
       <h2 style="margin:0 0 4px">Giỏ hàng <span class="muted small">(${cart.items.reduce((a,i)=>a+i.qty,0)} món)</span></h2>
-      ${cart.items.length?cart.items.map((i,ix)=>`<div class="cline"><div class="nm">${esc(i.name)}<div class="small muted num">${money(i.price)}</div></div><div style="text-align:right"><b class="num">${money(i.price*i.qty)}</b></div><div class="qty"><button data-m="${ix}" aria-label="Giảm">−</button><input data-q="${ix}" value="${i.qty}" inputmode="numeric" aria-label="Số lượng"><button data-p="${ix}" aria-label="Tăng">+</button></div><div style="text-align:right"><button class="btn sm danger" data-rm="${ix}">Xóa</button></div></div>`).join(''):'<div class="empty">Chọn sản phẩm bên trái để thêm vào giỏ.</div>'}
+      ${cart.items.length?cart.items.map((i,ix)=>{const pp=prod(i.pid),sh=pp&&!pp.service?i.qty-Math.max(0,pp.stock):0;return `<div class="cline"><div class="nm">${esc(i.name)}<div class="small muted num">${money(i.price)}${sh>0?` <span class="pill warn">Bán trước ${sh}</span>`:''}</div></div><div style="text-align:right"><b class="num">${money(i.price*i.qty)}</b></div><div class="qty"><button data-m="${ix}" aria-label="Giảm">−</button><input data-q="${ix}" value="${i.qty}" inputmode="numeric" aria-label="Số lượng"><button data-p="${ix}" aria-label="Tăng">+</button></div><div style="text-align:right"><button class="btn sm danger" data-rm="${ix}">Xóa</button></div></div>`}).join(''):'<div class="empty">Chọn sản phẩm bên trái để thêm vào giỏ.</div>'}
     </div>
     <div>
       <div class="sumrow"><span>Tạm tính</span><span class="num">${money(t.sub)}</span></div>
@@ -486,7 +487,7 @@ function renderCart(){
   // bindings
   $$('[data-m]',c).forEach(b=>b.onclick=()=>{const i=cart.items[b.dataset.m];i.qty--;if(i.qty<=0)cart.items.splice(b.dataset.m,1);renderCart()});
   $$('[data-p]',c).forEach(b=>b.onclick=()=>{addToCart(prod(cart.items[b.dataset.p].pid))});
-  $$('[data-q]',c).forEach(inp=>inp.onchange=()=>{const i=cart.items[inp.dataset.q];const p=prod(i.pid);let v=Math.max(0,parseNum(inp.value));if(p&&!p.service&&v>p.stock){toast(`Chỉ còn ${p.stock} trong kho`);v=p.stock}if(v===0)cart.items.splice(inp.dataset.q,1);else i.qty=v;renderCart()});
+  $$('[data-q]',c).forEach(inp=>inp.onchange=()=>{const i=cart.items[inp.dataset.q];const p=prod(i.pid);let v=Math.max(0,parseNum(inp.value));if(p&&!p.service&&v>p.stock)toast(`Tồn chỉ còn ${p.stock}: vẫn bán được, nhớ nhập kho bổ sung`);if(v===0)cart.items.splice(inp.dataset.q,1);else i.qty=v;renderCart()});
   $$('[data-rm]',c).forEach(b=>b.onclick=()=>{cart.items.splice(b.dataset.rm,1);renderCart()});
   const d=$('#disc',c);d.onchange=()=>{cart.discount=parseNum(d.value);renderCart()};
   $('#discType',c).onchange=e=>{cart.discType=e.target.value;renderCart()};
@@ -517,7 +518,7 @@ async function checkout(){
   if(needBranch('bán hàng'))return;
   const t=cartTotals();
   if(cart.method==='cash'&&cart.given&&parseNum(cart.given)<t.total){toast('Khách đưa chưa đủ tiền');return}
-  for(const i of cart.items){const p=prod(i.pid);if(p&&!p.service&&i.qty>p.stock){toast(`"${p.name}" không đủ tồn kho`);return}}
+  const preSold=cart.items.filter(i=>{const p=prod(i.pid);return p&&!p.service&&i.qty>p.stock}).length;
   const online=cart.channel!=='pos';
   if(online&&!cart.customerId){toast('Đơn online cần chọn khách hàng');return}
   if(cart.channel==='ctv'&&!cart.ctvId){toast('Hãy chọn cộng tác viên');return}
@@ -527,7 +528,7 @@ async function checkout(){
   let fin=o;
   if(SERVER){
     const b=$('#checkout');b&&(b.disabled=true,b.textContent='Đang lưu đơn…');
-    try{const d=await api('posCreateOrder',{order:o});fin=d.order;S.orders.push(fin);seenOrders&&seenOrders.add(fin.id);mergeProducts(d.products)}
+    try{const d=await api('posCreateOrder',{order:o,allowNegative:true});fin=d.order;S.orders.push(fin);seenOrders&&seenOrders.add(fin.id);mergeProducts(d.products)}
     catch(e){toast(e.message);renderCart();return}
   }else{
     o.items.forEach(i=>{const p=prod(i.pid);if(p&&!p.service){adjStock(p,-i.qty,o.branchId);S.stockLog.push({id:uid(),date:o.date,pid:p.id,qty:-i.qty,type:'ban',note:o.code})}});
@@ -535,6 +536,7 @@ async function checkout(){
   }
   resetCart();renderCart();renderGrid();renderNotice();
   if(online){toast('Đã tạo đơn '+fin.code+', đang chờ xác nhận');showReceipt(fin)}else showReceipt(fin,true);
+  if(preSold)setTimeout(()=>toast(`Có ${preSold} mã bán trước khi có hàng, xem ở Kho hàng › Cần nhập bổ sung`),online?2600:300);
 }
 function rxTable(rx){
   if(!rx)return '';
@@ -667,10 +669,14 @@ function viewStock(el){
     <div class="card stat"><div class="lb">Giá trị tồn (giá vốn)</div><div class="v num">${money(val)}</div></div>
     <div class="card stat"><div class="lb">Hết / sắp hết</div><div class="v num" style="color:var(--warn)">${goods.filter(p=>p.stock<=3).length}</div></div>
   </div>
-  <div class="card"><div class="tabs"><button data-t="ton" class="${stockTab==='ton'?'on':''}">Tồn kho</button><button data-t="ls" class="${stockTab==='ls'?'on':''}">Lịch sử xuất nhập</button></div><div id="sbody"></div></div>`;
+  <div class="card"><div class="tabs"><button data-t="ton" class="${stockTab==='ton'?'on':''}">Tồn kho</button><button data-t="am" class="${stockTab==='am'?'on':''}">Cần nhập bổ sung${goods.some(p=>p.stock<0)?' ('+goods.filter(p=>p.stock<0).length+')':''}</button><button data-t="ls" class="${stockTab==='ls'?'on':''}">Lịch sử xuất nhập</button></div><div id="sbody"></div></div>`;
   $$('.tabs button',el).forEach(b=>b.onclick=()=>{stockTab=b.dataset.t;viewStock(el)});
   const body=$('#sbody',el);
-  if(stockTab==='ton'){
+  if(stockTab==='am'){
+    const negOf=p=>CUR_BR==='all'?activeBR().reduce((t,b)=>t+Math.min(0,Number((p.stocks||{})[b.id])||0),0):Math.min(0,p.stock);
+    const neg=goods.filter(p=>negOf(p)<0).sort((a,b)=>negOf(a)-negOf(b));
+    body.innerHTML=neg.length?`<div class="small muted" style="margin:8px 0">Các mã đã bán trước khi có hàng. Nhập kho đủ số lượng cần nhập để tồn về 0.</div><div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th>Nhóm</th>${CUR_BR==='all'?activeBR().map(b=>`<th class="r">${esc(b.name)}</th>`).join(''):''}<th class="r">Cần nhập</th></tr></thead><tbody>${neg.map(p=>`<tr><td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}</div></td><td>${esc(p.cat)}</td>${CUR_BR==='all'?activeBR().map(b=>{const v=(p.stocks||{})[b.id]||0;return `<td class="r num"${v<0?' style="color:var(--bad)"':''}>${v}</td>`}).join(''):''}<td class="r num"><b style="color:var(--bad)">${-negOf(p)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Không có mã nào bán trước. Tồn kho đang đủ.</div>';
+  }else if(stockTab==='ton'){
     body.innerHTML=goods.length?`<div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th>Nhóm</th>${CUR_BR==='all'?activeBR().map(b=>`<th class="r">${esc(b.name)}</th>`).join(''):''}<th class="r">${CUR_BR==='all'?'Tổng tồn':'Tồn'}</th><th class="r">Giá trị tồn</th><th>Trạng thái</th></tr></thead><tbody>${[...goods].sort((a,b)=>a.stock-b.stock).map(p=>`<tr><td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}</div></td><td>${esc(p.cat)}</td>${CUR_BR==='all'?activeBR().map(b=>`<td class="r num">${(p.stocks||{})[b.id]||0}</td>`).join(''):''}<td class="r num">${p.stock}</td><td class="r num">${money(p.stock*p.cost)}</td><td>${stockPill(p)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có hàng hóa.</div>';
   }else{
     const TY={nhap:['Nhập hàng','good'],ban:['Bán hàng','neu'],huy:['Hủy đơn','warn'],kiem:['Kiểm kho','warn'],chuyen:['Chuyển kho','neu']};
@@ -925,10 +931,10 @@ function pasteOrder(){
       resetCart();
       Object.assign(cart,{channel:$('#pm_ch',m).value,customerId:c.id,address:$('#pm_addr',m).value.trim(),shipFee:parseNum($('#pm_ship',m).value),method:'cod',note:'Đơn từ tin nhắn '+CHANNELS[$('#pm_ch',m).value]});
       const short=[];
-      r.items.forEach(i=>{const q=i.p.service?i.qty:Math.min(i.qty,Math.max(0,i.p.stock));if(q<i.qty)short.push(i.p.name);if(q>0)cart.items.push({pid:i.p.id,name:i.p.name,sku:i.p.sku,price:i.p.price,cost:i.p.cost,qty:q})});
+      r.items.forEach(i=>{const q=i.qty;if(!i.p.service&&q>i.p.stock)short.push(i.p.name);if(q>0)cart.items.push({pid:i.p.id,name:i.p.name,sku:i.p.sku,price:i.p.price,cost:i.p.cost,qty:q})});
       save();close();
       if(location.hash!=='#ban-hang')location.hash='ban-hang';else route();
-      toast(short.length?'Không đủ hàng: '+short.join(', '):'Đã đưa đơn vào giỏ, kiểm tra rồi bấm Tạo đơn');
+      toast(short.length?'Bán trước, cần nhập bổ sung: '+short.join(', '):'Đã đưa đơn vào giỏ, kiểm tra rồi bấm Tạo đơn');
     };
   }});
 }
@@ -1749,6 +1755,7 @@ function viewMore(el){
     ['Quản lý sản phẩm',[
       ['glasses','Sản phẩm',()=>goTo('san-pham'),1],
       ['home','Tồn kho',()=>{stockTab='ton';goTo('kho')},can('kho')],
+      ['boxin','Cần nhập bổ sung',()=>{stockTab='am';goTo('kho')},can('kho'),S.products.filter(p=>!p.service&&p.stock<0).length],
       ['boxin','Nhập hàng',()=>goTo('kho',()=>stockForm('nhap')),can('kho')],
       ['check','Kiểm kho',()=>goTo('kho',()=>stockForm('kiem')),can('kho')],
       ['swap','Chuyển kho',()=>goTo('kho',transferForm),can('kho')],
