@@ -41,7 +41,7 @@ Cập nhật máy chủ (mỗi khi Code.gs đổi):
 Khi máy chủ chưa cập nhật, phần mềm vẫn mở được nhưng chạy chế độ một máy (dữ liệu lưu trên trình duyệt) và hiện dòng cảnh báo trên khung thông báo.
 
 Tài khoản:
-- Admin đầu tiên: đăng nhập eyemedi.vn/app bằng SĐT và mật khẩu của tài khoản quản trị trang CTV → tự có tài khoản Admin bán hàng.
+- Tài khoản phần mềm bán hàng (tab NhanVien) tách riêng hoàn toàn với tài khoản trang CTV (tab CTV): đăng ký, đăng nhập, mật khẩu riêng. Admin đầu tiên khai báo trong tệp TaiKhoanAdmin.gs (xem dưới).
 - Nhân viên bấm **Đăng ký nhân viên** ở màn hình đăng nhập → Admin vào mục **Nhân viên** để duyệt, chọn vai trò, bật tắt từng quyền, khóa, mở khóa, cấp lại mật khẩu hoặc xóa.
 - Vai trò: Admin (toàn quyền), Quản lý, Nhân viên bán hàng, Nhân viên kho. Quyền chi tiết: bán hàng, xem đơn mọi nhân viên, xử lý đơn, sản phẩm, kho, khách hàng, báo cáo, quản lý nhân viên.
 - Nhân viên không có quyền "Xem đơn của mọi nhân viên" chỉ thấy đơn do mình tạo.

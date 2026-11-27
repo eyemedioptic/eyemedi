@@ -993,7 +993,7 @@ function posAuth_(r, perm) {
     id = s.nv_id; cache.put('pn_' + token, id, 600);
   }
   var nv = posTable_('NhanVien').find('id', id);
-  if (!nv) throw new Error('Tài khoản không còn tồn tại, vui lòng đăng nhập lại');
+  if (!nv || nv.ctv_id) throw new Error('Tài khoản không còn tồn tại, vui lòng đăng nhập lại');
   if (nv.status === 'locked') throw new Error('Tài khoản đã bị khóa, vui lòng đăng nhập lại hoặc liên hệ quản lý');
   if (nv.status !== 'active') throw new Error('Tài khoản đang chờ duyệt, vui lòng đăng nhập lại sau');
   nv._perms = posPerms_(nv);
@@ -1110,15 +1110,8 @@ API.posLogin = function (r) {
   if (fails >= 8) throw new Error('Bạn nhập sai quá nhiều lần. Vui lòng thử lại sau 15 phút');
   var t = posTable_('NhanVien'), nv = posFindLogin_(r.login);
   if (!nv) nv = posSeedAdmin_(r.login, r.password);
-  if (!nv) {
-    // Tài khoản quản trị CTV được tự tạo tài khoản Admin bán hàng ở lần đăng nhập đầu
-    var u = findLogin_(r.login);
-    if (u && (u.is_admin === 'TRUE' || u.is_admin === 'true') && pwOk_(u, r.password)) {
-      var row = { id: Utilities.getUuid(), created_at: now_(), full_name: u.full_name, phone: u.phone, username: '',
-                  role: 'admin', perms: '', status: 'active', pw_salt: u.pw_salt, pw_hash: u.pw_hash, note: 'Tạo từ tài khoản quản trị CTV', ctv_id: u.id };
-      t.insert(row); nv = posTable_('NhanVien').find('id', row.id);
-    }
-  }
+  // Tài khoản phần mềm bán hàng tách riêng khỏi tài khoản trang CTV: dòng NhanVien cũ tạo từ tài khoản CTV không còn dùng được
+  if (nv && nv.ctv_id) nv = null;
   if (!nv || !pwOk_(nv, r.password)) { cache.put(key, String(fails + 1), 900); throw new Error('Sai tên đăng nhập hoặc mật khẩu'); }
   cache.remove(key);
   if (nv.status === 'pending') throw new Error('Tài khoản đang chờ quản lý duyệt');
