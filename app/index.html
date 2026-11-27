@@ -157,6 +157,7 @@ main a:not(.btn){color:var(--accent)}
 a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
 .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:max(20px,env(safe-area-inset-right,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:6px;z-index:60;font-weight:500}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+.login .tabs{flex-wrap:wrap;overflow:visible}
 .tabs button{border:0;background:none;padding:8px 12px;cursor:pointer;border-bottom:2px solid transparent;font-weight:500;color:var(--muted);white-space:nowrap}
 .tabs button.on{border-color:var(--accent);color:var(--fg)}
 .kbd{font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 4px;color:var(--muted)}
@@ -986,7 +987,7 @@ const setTok=t=>{try{t?localStorage.setItem(TKEY,t):localStorage.removeItem(TKEY
 const can=p=>!SERVER||!!(ME&&ME.perms&&ME.perms.includes(p));
 async function api(action,data){
   let j;
-  try{const res=await fetch(window.CTV_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,token:tok()},data||{}))});j=await res.json()}
+  try{const res=await fetch(window.POS_API||window.CTV_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,token:tok()},data||{}))});j=await res.json()}
   catch(e){throw new Error('Mất kết nối máy chủ, vui lòng thử lại')}
   if(!j.ok){const e=new Error(j.error||'Có lỗi xảy ra');if(/đăng nhập lại/.test(j.error||'')&&action!=='posLogin'){setTok('');ME=null;setTimeout(()=>showLogin(j.error),0)}throw e}
   return j.data;
@@ -1000,7 +1001,7 @@ async function refreshData(){
   BRANCHES=d.branches||DEFAULT_BRANCHES;MY_BR=d.myBranches||[];pickBranch();applyStockView();
 }
 async function boot(){
-  const hasApi=window.CTV_API&&/^https?:/.test(window.CTV_API);
+  const API_URL=window.POS_API||window.CTV_API,hasApi=API_URL&&/^https?:/.test(API_URL);
   if(hasApi){
     try{const pg=await api('posPing');PING_BR=pg.branches||[];SERVER=true}
     catch(e){SERVER_NOTE=/không hợp lệ/i.test(e.message)?'Máy chủ chưa được cập nhật mã mới cho phần mềm bán hàng, nên phần mềm đang chạy chế độ một máy: dữ liệu chỉ lưu trên trình duyệt này.':'Chưa kết nối được máy chủ. Phần mềm đang chạy chế độ một máy: dữ liệu chỉ lưu trên trình duyệt này.'}

@@ -1346,6 +1346,7 @@ API.posNotices = function (r) {
 /* Đơn từ trang cộng tác viên (tab DonHang) để hiện trong phần mềm */
 API.posCtvOrders = function (r) {
   posAuth_(r, 'don_tat_ca');
+  if (!SpreadsheetApp.getActiveSpreadsheet().getSheetByName('DonHang')) throw new Error('Máy chủ phần mềm bán hàng đang dùng Google Sheet riêng, chưa nối với dữ liệu đơn của trang cộng tác viên');
   var ctv = {}; table_('CTV').all().forEach(function (u) { ctv[u.id] = u.full_name; });
   return table_('DonHang').all().slice(-300).reverse().map(function (o) {
     return { order_code: o.order_code, created_at: o.created_at, ctv: ctv[o.ctv_id] || o.ref_code, customer_name: o.customer_name,
