@@ -1035,6 +1035,15 @@ async function refreshData(){
   S={products:d.products||[],customers:d.customers||[],ctvs:d.ctvs||[],orders:(d.orders||[]).sort((a,b)=>a.date-b.date),stockLog:d.stockLog||[],seq:0,sample:false};
   seenOrders=new Set(S.orders.map(o=>o.id));
   BRANCHES=d.branches||DEFAULT_BRANCHES;MY_BR=d.myBranches||[];pickBranch();applyStockView();
+  if(!S.products.length&&can('san_pham')&&!AUTO_WEB){AUTO_WEB=true;setTimeout(autoImportWeb,300)}
+}
+// Máy chủ chưa có sản phẩm nào: tự nạp toàn bộ sản phẩm, mã và giá đang bán trên eyemedi.vn
+let AUTO_WEB=false;
+async function autoImportWeb(){
+  try{toast('Đang nạp sản phẩm từ trang web…');const P=await fetchWebProducts();const items=webItems(P,true);
+    const res=await api('posImportProducts',{items});S.products=res.products;applyStockView();route();
+    toast(`Đã nạp ${res.added} sản phẩm từ trang web với giá bán hiện tại`)}
+  catch(e){toast('Chưa nạp được sản phẩm từ web: '+e.message)}
 }
 async function boot(){
   const API_URL=window.POS_API||window.CTV_API,hasApi=API_URL&&/^https?:/.test(API_URL);
