@@ -1136,6 +1136,22 @@ function posSeedAdmin_(login, pw) {
   return null;
 }
 
+/**
+ * MỞ KHÓA ĐĂNG NHẬP PHẦN MỀM BÁN HÀNG: chọn hàm moKhoaBanHang → Chạy.
+ * Gỡ tạm khóa 15 phút do nhập sai nhiều lần cho tài khoản Admin chính (hoặc tên/SĐT ghi ở TEN), và ghi kết quả kiểm tra vào Nhật ký.
+ */
+function moKhoaBanHang() {
+  var TEN = '';   // để trống = tài khoản Admin chính khai báo cuối tệp
+  var ids = TEN ? [TEN] : (typeof POS_SEED_ADMINS === 'undefined' ? [] : POS_SEED_ADMINS.map(function (a) { return a.username; }));
+  if (!ids.length) { Logger.log('Tệp Code.gs đang dán CHƯA có phần khai báo tài khoản Admin ở cuối. Hãy dán lại bản Code.gs đầy đủ rồi triển khai Phiên bản mới.'); return; }
+  var c = CacheService.getScriptCache();
+  ids.forEach(function (id) {
+    c.remove('p' + loginKey_(id));
+    var nv = posFindLogin_(id);
+    Logger.log(id + ': đã gỡ tạm khóa. ' + (nv ? 'Đã có tài khoản trong tab NhanVien (trạng thái ' + nv.status + ', vai trò ' + nv.role + ').' : 'Chưa có trong tab NhanVien, sẽ tự tạo ở lần đăng nhập đúng mật khẩu đầu tiên.'));
+  });
+}
+
 API.posLogout = function (r) {
   var t = posTable_('PhienNV'), s = t.find('token', String(r.token || ''));
   if (s) t.remove(s);
