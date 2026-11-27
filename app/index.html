@@ -764,6 +764,12 @@ function viewReports(el){
   const cats=Object.entries(catMap).sort((a,b)=>b[1]-a[1]);
   const methMap={};os.forEach(o=>methMap[o.method]=(methMap[o.method]||0)+o.total);
   const chMap={};os.forEach(o=>{const k=CHANNELS[o.channel||'pos'];chMap[k]=(chMap[k]||0)+o.total});
+  const oCost=o=>o.items.reduce((b,i)=>b+(i.cost||0)*i.qty,0);
+  const stMap={};os.forEach(o=>{const k=o.staffId||o.staffName||'_';const x=stMap[k]=stMap[k]||{name:o.staffName||(SERVER?'Chưa rõ':'Máy này'),n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
+  const staffRows=Object.values(stMap).sort((a,b)=>b.rev-a.rev);
+  const allOs=S.orders.filter(o=>o.status==='done'&&o.date>=from);
+  const brMap={};allOs.forEach(o=>{const k=o.branchId||firstBr();const x=brMap[k]=brMap[k]||{id:k,n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
+  const brRows=Object.values(brMap).sort((a,b)=>b.rev-a.rev),brTotal=brRows.reduce((a,x)=>a+x.rev,0);
   const ctvMap={};os.filter(o=>o.ctvId).forEach(o=>{const x=ctvMap[o.ctvId]=ctvMap[o.ctvId]||{n:0,rev:0,com:0};x.n++;x.rev+=o.total;x.com+=o.commission||0});
   el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[[7,'7 ngày'],[14,'14 ngày'],[30,'30 ngày']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}</div></div>
   <div class="stats">
@@ -779,6 +785,10 @@ function viewReports(el){
   <div class="two" style="margin-top:16px">
     <div class="card"><h2>Sản phẩm bán chạy</h2>${top.length?`<div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th class="r">SL</th><th class="r">Doanh thu</th></tr></thead><tbody>${top.map(t=>`<tr><td>${esc(t.name)}</td><td class="r num">${t.qty}</td><td class="r num"><b>${money(t.rev)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có dữ liệu.</div>'}</div>
     <div class="card"><h2>Theo nhóm hàng</h2>${barList(cats,cats.reduce((a,c)=>a+c[1],0))}</div>
+  </div>
+  <div class="two" style="margin-top:16px">
+    <div class="card"><h2>Doanh thu theo nhân viên tạo đơn${CUR_BR&&CUR_BR!=='all'?' <span class="small muted">· '+esc(brName(CUR_BR))+'</span>':''}</h2>${staffRows.length?`<div class="tbl-wrap"><table id="repStaff"><thead><tr><th>Nhân viên</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Lãi gộp</th><th class="r">TB / đơn</th></tr></thead><tbody>${staffRows.map(x=>`<tr><td>${esc(x.name)}</td><td class="r num">${x.n}</td><td class="r num"><b>${money(x.rev)}</b> <span class="small muted">${rev?Math.round(x.rev/rev*100):0}%</span></td><td class="r num">${money(x.gp)}</td><td class="r num">${money(x.rev/x.n)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có đơn hoàn thành.</div>'}</div>
+    <div class="card"><h2>Doanh thu theo chi nhánh</h2>${brRows.length?`<div class="tbl-wrap"><table id="repBr"><thead><tr><th>Chi nhánh</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Lãi gộp</th></tr></thead><tbody>${brRows.map(x=>`<tr${x.id===CUR_BR?' style="background:var(--accent-soft)"':''}><td>${esc(brName(x.id))}</td><td class="r num">${x.n}</td><td class="r num"><b>${money(x.rev)}</b> <span class="small muted">${brTotal?Math.round(x.rev/brTotal*100):0}%</span></td><td class="r num">${money(x.gp)}</td></tr>`).join('')}</tbody><tfoot><tr><td><b>Tổng</b></td><td class="r num"><b>${brRows.reduce((a,x)=>a+x.n,0)}</b></td><td class="r num"><b>${money(brTotal)}</b></td><td class="r num"><b>${money(brRows.reduce((a,x)=>a+x.gp,0))}</b></td></tr></tfoot></table></div>${SERVER&&!canAllBr()?'<div class="small muted" style="margin-top:8px">Chỉ tính các chi nhánh bạn được phân công.</div>':''}`:'<div class="empty">Chưa có đơn hoàn thành.</div>'}</div>
   </div>
   <div class="two" style="margin-top:16px">
     <div class="card"><h2>Hoa hồng cộng tác viên</h2>${Object.keys(ctvMap).length?`<div class="tbl-wrap"><table><thead><tr><th>Cộng tác viên</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Hoa hồng</th></tr></thead><tbody>${Object.entries(ctvMap).map(([id,x])=>`<tr><td>${esc(S.ctvs.find(c=>c.id===id)?.name||'(đã xóa)')}</td><td class="r num">${x.n}</td><td class="r num">${money(x.rev)}</td><td class="r num"><b>${money(x.com)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có đơn từ cộng tác viên trong kỳ này.</div>'}</div>
