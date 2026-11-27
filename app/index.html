@@ -750,14 +750,20 @@ function editCustomer(c,after){
 /* ============ Báo cáo ============ */
 let repRange=14;
 function viewReports(el){
-  const from=startOfDay()-(repRange-1)*86400000;
-  const os=validOrders().filter(o=>o.date>=from);
+  const D=86400000,oneDay=repRange==='d0'||repRange==='d1';
+  const from=repRange==='d0'?startOfDay():repRange==='d1'?startOfDay()-D:startOfDay()-(repRange-1)*D;
+  const to=repRange==='d1'?startOfDay():Infinity;
+  const inR=o=>o.date>=from&&o.date<to;
+  const rangeLb={d0:'Hôm nay',d1:'Hôm qua'}[repRange]||repRange+' ngày qua';
+  const os=validOrders().filter(inR);
   const rev=os.reduce((a,o)=>a+o.total,0);
   const cost=os.reduce((a,o)=>a+o.items.reduce((b,i)=>b+(i.cost||0)*i.qty,0),0);
   const disc=os.reduce((a,o)=>a+o.discount,0);
-  const days=[];for(let i=0;i<repRange;i++){const t=from+i*86400000;days.push({t,k:dayKey(t),v:0,n:0})}
-  const idx=Object.fromEntries(days.map((d,i)=>[d.k,i]));
-  os.forEach(o=>{const i=idx[dayKey(o.date)];if(i!=null){days[i].v+=o.total;days[i].n++}});
+  const days=[];
+  if(oneDay){for(let h=0;h<24;h++)days.push({t:from+h*3600000,lb:h+'h',tl:h+'h–'+(h+1)+'h',v:0,n:0});os.forEach(o=>{const d=days[Math.floor((o.date-from)/3600000)];if(d){d.v+=o.total;d.n++}})}
+  else{for(let i=0;i<repRange;i++){const t=from+i*D;days.push({t,k:dayKey(t),v:0,n:0})}
+    const idx=Object.fromEntries(days.map((d,i)=>[d.k,i]));
+    os.forEach(o=>{const i=idx[dayKey(o.date)];if(i!=null){days[i].v+=o.total;days[i].n++}})}
   const prodMap={};os.forEach(o=>o.items.forEach(i=>{const k=i.pid;prodMap[k]=prodMap[k]||{name:i.name,qty:0,rev:0};prodMap[k].qty+=i.qty;prodMap[k].rev+=i.qty*i.price}));
   const top=Object.values(prodMap).sort((a,b)=>b.rev-a.rev).slice(0,6);
   const catMap={};os.forEach(o=>o.items.forEach(i=>{const p=prod(i.pid);const c=p?p.cat:'Khác';catMap[c]=(catMap[c]||0)+i.qty*i.price}));
@@ -767,19 +773,19 @@ function viewReports(el){
   const oCost=o=>o.items.reduce((b,i)=>b+(i.cost||0)*i.qty,0);
   const stMap={};os.forEach(o=>{const k=o.staffId||o.staffName||'_';const x=stMap[k]=stMap[k]||{name:o.staffName||(SERVER?'Chưa rõ':'Máy này'),n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
   const staffRows=Object.values(stMap).sort((a,b)=>b.rev-a.rev);
-  const allOs=S.orders.filter(o=>o.status==='done'&&o.date>=from);
+  const allOs=S.orders.filter(o=>o.status==='done'&&inR(o));
   const brMap={};allOs.forEach(o=>{const k=o.branchId||firstBr();const x=brMap[k]=brMap[k]||{id:k,n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
   const brRows=Object.values(brMap).sort((a,b)=>b.rev-a.rev),brTotal=brRows.reduce((a,x)=>a+x.rev,0);
   const ctvMap={};os.filter(o=>o.ctvId).forEach(o=>{const x=ctvMap[o.ctvId]=ctvMap[o.ctvId]||{n:0,rev:0,com:0};x.n++;x.rev+=o.total;x.com+=o.commission||0});
-  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[[7,'7 ngày'],[14,'14 ngày'],[30,'30 ngày']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}</div></div>
+  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[['d0','Hôm nay'],['d1','Hôm qua'],[7,'7 ngày'],[14,'14 ngày'],[30,'30 ngày']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}</div></div>
   <div class="stats">
     <div class="card stat"><div class="lb">Doanh thu thuần</div><div class="v num">${money(rev)}</div><div class="d muted">${os.length} đơn hoàn thành</div></div>
     <div class="card stat"><div class="lb">Lợi nhuận gộp</div><div class="v num" style="color:var(--good)">${money(rev-cost)}</div><div class="d muted">Biên ${rev?Math.round((rev-cost)/rev*100):0}%</div></div>
     <div class="card stat"><div class="lb">Giảm giá đã áp</div><div class="v num">${money(disc)}</div><div class="d muted">Trên ${os.filter(o=>o.discount).length} đơn</div></div>
-    <div class="card stat"><div class="lb">Giá trị TB / đơn</div><div class="v num">${money(os.length?rev/os.length:0)}</div><div class="d muted">${repRange} ngày qua</div></div>
+    <div class="card stat"><div class="lb">Giá trị TB / đơn</div><div class="v num">${money(os.length?rev/os.length:0)}</div><div class="d muted">${rangeLb}</div></div>
   </div>
   <div class="two">
-    <div class="card chart"><h2>Doanh thu theo ngày</h2>${barChart(days)}</div>
+    <div class="card chart"><h2>Doanh thu theo ${oneDay?'giờ · '+rangeLb.toLowerCase():'ngày'}</h2>${barChart(days)}</div>
     <div class="card"><h2>Theo phương thức thanh toán</h2>${barList(Object.entries(methMap).map(([k,v])=>[METHODS[k],v]),rev)}</div>
   </div>
   <div class="two" style="margin-top:16px">
@@ -794,7 +800,7 @@ function viewReports(el){
     <div class="card"><h2>Hoa hồng cộng tác viên</h2>${Object.keys(ctvMap).length?`<div class="tbl-wrap"><table><thead><tr><th>Cộng tác viên</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Hoa hồng</th></tr></thead><tbody>${Object.entries(ctvMap).map(([id,x])=>`<tr><td>${esc(S.ctvs.find(c=>c.id===id)?.name||'(đã xóa)')}</td><td class="r num">${x.n}</td><td class="r num">${money(x.rev)}</td><td class="r num"><b>${money(x.com)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có đơn từ cộng tác viên trong kỳ này.</div>'}</div>
     <div class="card"><h2>Theo kênh bán</h2>${barList(Object.entries(chMap).sort((a,b)=>b[1]-a[1]),rev)}</div>
   </div>`;
-  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=Number(b.dataset.v);viewReports(el)});
+  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=/^d/.test(b.dataset.v)?b.dataset.v:Number(b.dataset.v);viewReports(el)});
 }
 function barList(rows,total){
   if(!rows.length)return '<div class="empty">Chưa có dữ liệu.</div>';
@@ -808,7 +814,7 @@ function barChart(days){
   let g='';for(let v=0;v<=top;v+=step){g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${short(v)}</text>`}
   const every=Math.ceil(days.length/10);
   const bars=days.map((d,i)=>{const x=L+i*bw+bw*.18,w=bw*.64,h=y(0)-y(d.v);const last=i===days.length-1;
-    return `<rect x="${x}" y="${y(d.v)}" width="${w}" height="${Math.max(0,h)}" rx="2" fill="var(--accent)" opacity="${last?1:.72}"><title>${fmtDate(d.t)}: ${money(d.v)} (${d.n} đơn)</title></rect>${i%every===0||last?`<text x="${x+w/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--muted)">${new Date(d.t).getDate()}/${new Date(d.t).getMonth()+1}</text>`:''}`}).join('');
+    return `<rect x="${x}" y="${y(d.v)}" width="${w}" height="${Math.max(0,h)}" rx="2" fill="var(--accent)" opacity="${last?1:.72}"><title>${d.tl||fmtDate(d.t)}: ${money(d.v)} (${d.n} đơn)</title></rect>${i%every===0||last?`<text x="${x+w/2}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--muted)">${d.lb||new Date(d.t).getDate()+'/'+(new Date(d.t).getMonth()+1)}</text>`:''}`}).join('');
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Biểu đồ doanh thu theo ngày">${g}${bars}</svg>`;
 }
 function niceStep(x){const p=Math.pow(10,Math.floor(Math.log10(x||1)));const f=x/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p}
