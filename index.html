@@ -200,6 +200,10 @@ footer#contact #footerEmail{overflow-wrap:normal;word-break:normal}
 #pbSlider .pb-count{right:calc(5% + 12px);bottom:12px}
 @media(max-width:600px){#pbSlider.hero.pb-slider{padding:12px 4% 0 !important}#pbSlider .pb-track{grid-template-columns:1fr;gap:12px}#pbSlider .pb-cell{aspect-ratio:9/16}#pbSlider .pb-arrow{display:none}#pbSlider .pb-count{display:none}}
 #pbSlider .pb-video{background:#000}
+#pbSlider .pb-ad{display:block;cursor:pointer}
+#pbSlider .pb-ad video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:transform .3s}
+#pbSlider .pb-ad:hover video{transform:scale(1.02)}
+@media(max-width:600px){#pbSlider .pb-ad{aspect-ratio:4/5}}
 #pbSlider .pb-video iframe,#pbSlider .pb-video #pbYT{position:absolute;inset:0;width:100%;height:100%;border:0}
 #pbSlider .pv-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.85);color:#073a3c;font-size:22px;line-height:1;cursor:pointer}
 #pbSlider .pv-prev{left:8px}#pbSlider .pv-next{right:8px}
@@ -588,7 +592,8 @@ function pbVideo(box){var dots=box.querySelector('.pv-dots'),cur=0,pl=null;
 function pbInit(){var tr=document.getElementById('pbTrack');if(!tr||tr.children.length)return;
  var list=PRODUCTS.filter(function(p){return p.image&&(p.category||window.PAGE_CATEGORY)===window.PAGE_CATEGORY});
  var vc=document.createElement('div');vc.className='pb-cell pb-video';vc.innerHTML='<div id="pbYT"></div><button type="button" class="pv-nav pv-prev" aria-label="Video trước">‹</button><button type="button" class="pv-nav pv-next" aria-label="Video tiếp">›</button><div class="pv-dots"></div>';tr.appendChild(vc);pbVideo(vc);
- var K=2,cells=[];pbN=Math.max(1,Math.ceil(list.length/K));
+ var ad=document.createElement('a');ad.className='pb-cell pb-ad';ad.href='/ctv/tham-gia.html';ad.setAttribute('aria-label','Tuyển cộng tác viên EYEMEDI – đăng ký tham gia');ad.innerHTML='<div class="pb-bg" style="background-image:url(\'/images/ctv/banner-ctv.webp\')"></div><video src="/images/ctv/banner-ctv.mp4" poster="/images/ctv/banner-ctv.webp" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>';tr.appendChild(ad);
+ var K=1,cells=[];pbN=Math.max(1,Math.ceil(list.length/K));
  for(var c=0;c<K;c++){var cell=document.createElement('div');cell.className='pb-cell';cells.push(cell);tr.appendChild(cell);}
  list.forEach(function(p,n){var a=document.createElement('a');a.className='pb-slide';a.href='/san-pham.html?sp='+p.id;a.setAttribute('aria-label','Xem chi tiết '+p.name);a.dataset.r=Math.floor(n/K);
   a.onclick=function(e){if(typeof openDetail==='function'){e.preventDefault();openDetail(p.id)}};
