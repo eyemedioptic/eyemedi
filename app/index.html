@@ -755,17 +755,23 @@ function editCustomer(c,after){
 let repRange=14;
 function viewReports(el){
   const D=86400000,oneDay=repRange==='d0'||repRange==='d1';
-  const from=repRange==='d0'?startOfDay():repRange==='d1'?startOfDay()-D:startOfDay()-(repRange-1)*D;
-  const to=repRange==='d1'?startOfDay():Infinity;
+  const now=new Date(),curM='m:'+now.getFullYear()+'-'+(now.getMonth()+1),curY='y:'+now.getFullYear();
+  const isM=/^m:/.test(repRange),isY=/^y:/.test(repRange);
+  let from,to=Infinity,rangeLb;
+  if(isM){const [Y,M]=repRange.slice(2).split('-').map(Number);from=new Date(Y,M-1,1).getTime();to=new Date(Y,M,1).getTime();rangeLb='Tháng '+M+'/'+Y}
+  else if(isY){const Y=Number(repRange.slice(2));from=new Date(Y,0,1).getTime();to=new Date(Y+1,0,1).getTime();rangeLb='Năm '+Y}
+  else{from=repRange==='d0'?startOfDay():repRange==='d1'?startOfDay()-D:startOfDay()-(repRange-1)*D;if(repRange==='d1')to=startOfDay();rangeLb={d0:'Hôm nay',d1:'Hôm qua'}[repRange]||repRange+' ngày qua'}
   const inR=o=>o.date>=from&&o.date<to;
-  const rangeLb={d0:'Hôm nay',d1:'Hôm qua'}[repRange]||repRange+' ngày qua';
+  const opts=[];for(let i=0;i<24;i++){const d=new Date(now.getFullYear(),now.getMonth()-i,1);opts.push(['m:'+d.getFullYear()+'-'+(d.getMonth()+1),'Tháng '+(d.getMonth()+1)+'/'+d.getFullYear()])}
+  const years=[];for(let y=now.getFullYear();y>=now.getFullYear()-4;y--)years.push(['y:'+y,'Năm '+y]);
   const os=validOrders().filter(inR);
   const rev=os.reduce((a,o)=>a+o.total,0);
   const cost=os.reduce((a,o)=>a+o.items.reduce((b,i)=>b+(i.cost||0)*i.qty,0),0);
   const disc=os.reduce((a,o)=>a+o.discount,0);
   const days=[];
   if(oneDay){for(let h=0;h<24;h++)days.push({t:from+h*3600000,lb:h+'h',tl:h+'h–'+(h+1)+'h',v:0,n:0});os.forEach(o=>{const d=days[Math.floor((o.date-from)/3600000)];if(d){d.v+=o.total;d.n++}})}
-  else{for(let i=0;i<repRange;i++){const t=from+i*D;days.push({t,k:dayKey(t),v:0,n:0})}
+  else if(isY){for(let m=0;m<12;m++){const t=new Date(new Date(from).getFullYear(),m,1).getTime();days.push({t,lb:'T'+(m+1),tl:'Tháng '+(m+1),v:0,n:0})}os.forEach(o=>{const d=days[new Date(o.date).getMonth()];d.v+=o.total;d.n++})}
+  else{const nd=isM?Math.round((to-from)/D):repRange;for(let i=0;i<nd;i++){const t=new Date(new Date(from).getFullYear(),new Date(from).getMonth(),new Date(from).getDate()+i).getTime();days.push({t,k:dayKey(t),v:0,n:0})}
     const idx=Object.fromEntries(days.map((d,i)=>[d.k,i]));
     os.forEach(o=>{const i=idx[dayKey(o.date)];if(i!=null){days[i].v+=o.total;days[i].n++}})}
   const prodMap={};os.forEach(o=>o.items.forEach(i=>{const k=i.pid;prodMap[k]=prodMap[k]||{name:i.name,qty:0,rev:0};prodMap[k].qty+=i.qty;prodMap[k].rev+=i.qty*i.price}));
@@ -781,7 +787,7 @@ function viewReports(el){
   const brMap={};allOs.forEach(o=>{const k=o.branchId||firstBr();const x=brMap[k]=brMap[k]||{id:k,n:0,rev:0,gp:0};x.n++;x.rev+=o.total;x.gp+=o.total-oCost(o)});
   const brRows=Object.values(brMap).sort((a,b)=>b.rev-a.rev),brTotal=brRows.reduce((a,x)=>a+x.rev,0);
   const ctvMap={};os.filter(o=>o.ctvId).forEach(o=>{const x=ctvMap[o.ctvId]=ctvMap[o.ctvId]||{n:0,rev:0,com:0};x.n++;x.rev+=o.total;x.com+=o.commission||0});
-  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[['d0','Hôm nay'],['d1','Hôm qua'],[7,'7 ngày'],[14,'14 ngày'],[30,'30 ngày']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}</div></div>
+  el.innerHTML=`<div class="head"><h1>Báo cáo doanh thu${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><div class="chips" id="rr">${[['d0','Hôm nay'],['d1','Hôm qua'],[7,'7 ngày'],[30,'30 ngày'],[curM,'Tháng này'],[curY,'Năm nay']].map(([v,l])=>`<button class="chip${v===repRange?' on':''}" data-v="${v}">${l}</button>`).join('')}<select id="rrSel" style="width:auto"><option value="">Chọn tháng, năm…</option><optgroup label="Theo tháng">${opts.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup><optgroup label="Theo năm">${years.map(([v,l])=>`<option value="${v}"${v===repRange?' selected':''}>${l}</option>`).join('')}</optgroup></select></div></div>
   <div class="stats">
     <div class="card stat"><div class="lb">Doanh thu thuần</div><div class="v num">${money(rev)}</div><div class="d muted">${os.length} đơn hoàn thành</div></div>
     <div class="card stat"><div class="lb">Lợi nhuận gộp</div><div class="v num" style="color:var(--good)">${money(rev-cost)}</div><div class="d muted">Biên ${rev?Math.round((rev-cost)/rev*100):0}%</div></div>
@@ -789,7 +795,7 @@ function viewReports(el){
     <div class="card stat"><div class="lb">Giá trị TB / đơn</div><div class="v num">${money(os.length?rev/os.length:0)}</div><div class="d muted">${rangeLb}</div></div>
   </div>
   <div class="two">
-    <div class="card chart"><h2>Doanh thu theo ${oneDay?'giờ · '+rangeLb.toLowerCase():'ngày'}</h2>${barChart(days)}</div>
+    <div class="card chart"><h2>Doanh thu theo ${oneDay?'giờ · '+rangeLb.toLowerCase():isY?'tháng · '+rangeLb.toLowerCase():isM?'ngày · '+rangeLb.toLowerCase():'ngày'}</h2>${barChart(days)}</div>
     <div class="card"><h2>Theo phương thức thanh toán</h2>${barList(Object.entries(methMap).map(([k,v])=>[METHODS[k],v]),rev)}</div>
   </div>
   <div class="two" style="margin-top:16px">
@@ -804,7 +810,8 @@ function viewReports(el){
     <div class="card"><h2>Hoa hồng cộng tác viên</h2>${Object.keys(ctvMap).length?`<div class="tbl-wrap"><table><thead><tr><th>Cộng tác viên</th><th class="r">Số đơn</th><th class="r">Doanh thu</th><th class="r">Hoa hồng</th></tr></thead><tbody>${Object.entries(ctvMap).map(([id,x])=>`<tr><td>${esc(S.ctvs.find(c=>c.id===id)?.name||'(đã xóa)')}</td><td class="r num">${x.n}</td><td class="r num">${money(x.rev)}</td><td class="r num"><b>${money(x.com)}</b></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Chưa có đơn từ cộng tác viên trong kỳ này.</div>'}</div>
     <div class="card"><h2>Theo kênh bán</h2>${barList(Object.entries(chMap).sort((a,b)=>b[1]-a[1]),rev)}</div>
   </div>`;
-  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=/^d/.test(b.dataset.v)?b.dataset.v:Number(b.dataset.v);viewReports(el)});
+  $$('#rr .chip',el).forEach(b=>b.onclick=()=>{repRange=/^[dmy]/.test(b.dataset.v)?b.dataset.v:Number(b.dataset.v);viewReports(el)});
+  $('#rrSel',el).onchange=e=>{if(e.target.value){repRange=e.target.value;viewReports(el)}};
 }
 function barList(rows,total){
   if(!rows.length)return '<div class="empty">Chưa có dữ liệu.</div>';
