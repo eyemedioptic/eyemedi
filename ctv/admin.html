@@ -120,7 +120,7 @@ function tCtv(keep){
     a+=u.status==='locked'?'<button class="btn sm" data-a="st" data-v="active">Mở khóa</button>':'<button class="btn ghost sm" data-a="st" data-v="locked">Khóa</button>';
     a+='<button class="btn ghost sm" data-a="pw">Cấp lại MK</button><select data-a="force"><option value="">Đổi trạng thái…</option>'+Object.keys(CTV.STATUS).map(function(k){return '<option value="'+k+'">'+CTV.STATUS[k][0]+'</option>'}).join('')+'</select>';
     return '<tr data-id="'+E(u.id)+'"><td class="small">'+E(String(u.created_at).slice(0,10))+'</td><td>'+name(u.id)+(u.is_admin==='TRUE'?' <span class="pill">Admin</span>':'')+'</td>'+
-      '<td class="small">'+E(u.kind)+'<br>'+linkify(u.channels)+'</td><td>'+CTV.pill(CTV.STATUS,u.status)+'</td>'+
+      '<td class="small"><select data-a="kind" title="Loại tài khoản">'+['CTV','KOC','KOL','Đại lý'].map(function(k){return '<option'+(k===(u.kind||'CTV')?' selected':'')+'>'+k+'</option>'}).join('')+'</select><br>'+linkify(u.channels)+'</td><td>'+CTV.pill(CTV.STATUS,u.status)+'</td>'+
       '<td><input data-a="rate" type="number" min="0" max="100" step="0.5" style="width:70px" value="'+E(u.commission_rate)+'" placeholder="Bậc" title="Để trống = hoa hồng theo bậc doanh thu tháng; nhập số = % cố định cho CTV này"></td>'+
       '<td><input data-a="note" style="width:160px" value="'+E(u.admin_note)+'" placeholder="Ghi chú cho CTV"></td><td>'+a+'</td></tr>'}).join('');
   bind(function(tr,el){var id=tr.dataset.id,a=el.dataset.a;
@@ -129,6 +129,7 @@ function tCtv(keep){
   },function(tr,el){var id=tr.dataset.id,a=el.dataset.a;
     if(a==='rate')return act('adminSetCtv',{id:id,commission_rate:el.value},(el.value===''?'CTV này hưởng hoa hồng theo bậc doanh thu tháng':'Đã đặt % cố định cho CTV này')+' (tính lại đơn chưa trả của tháng này)');
     if(a==='note')return act('adminSetCtv',{id:id,admin_note:el.value},'Đã lưu ghi chú');
+    if(a==='kind')return act('adminSetCtv',{id:id,kind:el.value},'Đã đổi loại tài khoản thành '+el.value);
     if(a==='force'&&el.value&&confirm('Đổi trạng thái CTV này thành "'+CTV.STATUS[el.value][0]+'"?'))return act('adminSetCtv',{id:id,status:el.value});
   });
 }
