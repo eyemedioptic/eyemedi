@@ -491,7 +491,7 @@ function viewPOS(el){
 }
 function filterProducts(){
   const q=norm(posQ);
-  return S.products.filter(p=>(posCat==='Tất cả'||p.cat===posCat)&&(!q||norm(p.name+' '+p.sku+' '+p.brand+' '+(p.barcode||'')).includes(q)));
+  return S.products.filter(p=>p.inBr!==false&&(posCat==='Tất cả'||p.cat===posCat)&&(!q||norm(p.name+' '+p.sku+' '+p.brand+' '+(p.barcode||'')).includes(q)));
 }
 function renderGrid(){
   const g=$('#pgrid');if(!g)return;const list=filterProducts();
@@ -783,9 +783,9 @@ function editProduct(p){
 /* ============ Kho hàng ============ */
 let stockTab='ton';
 function viewStock(el){
-  const goods=S.products.filter(p=>!p.service);
+  const goods=S.products.filter(p=>!p.service&&p.inBr!==false);const sub=!isMainBr(CUR_BR);
   const val=goods.reduce((a,p)=>a+p.stock*p.cost,0);
-  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span><button class="btn" id="bulkKho">Đặt tồn hàng loạt</button><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
+  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span>${sub?'<button class="btn pri" id="addToBr">+ Thêm sản phẩm vào kho</button>':''}${(!SERVER||can('quan_tri'))&&BR().length>1?'<button class="btn" id="resetSub">Đặt lại kho phụ</button>':''}<button class="btn" id="bulkKho">Đặt tồn hàng loạt</button><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
   <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
     <div class="card stat"><div class="lb">Tổng số lượng tồn</div><div class="v num">${goods.reduce((a,p)=>a+Math.max(0,p.stock),0).toLocaleString('vi-VN')}</div></div>
     <div class="card stat"><div class="lb">Giá trị tồn (giá vốn)</div><div class="v num">${money(val)}</div></div>
@@ -808,6 +808,8 @@ function viewStock(el){
   $('#nhap',el).onclick=()=>stockForm('nhap');
   $('#kiem',el).onclick=()=>stockForm('kiem');
   $('#chuyenKho',el).onclick=transferForm;$('#bulkKho',el).onclick=bulkStockForm;
+  const ab=$('#addToBr',el);ab&&(ab.onclick=addToBranchForm);const rs=$('#resetSub',el);rs&&(rs.onclick=resetSubForm);
+  if(sub&&!goods.length&&stockTab==='ton')$('#sbody',el).innerHTML='<div class="empty">Kho này chưa có sản phẩm. Bấm <b>+ Thêm sản phẩm vào kho</b> để chọn từng mã từ danh mục (danh mục lấy từ web, có đủ ở kho chính).</div>';
 }
 function stockForm(type){
   if(needBranch('lập phiếu kho'))return;
@@ -1319,7 +1321,7 @@ function deleteOrder(o){
       S.cash=(S.cash||[]).filter(e=>!(e.ref===o.code&&e.auto));save()}
     S.orders=S.orders.filter(x=>x.id!==o.id);seenOrders&&seenOrders.delete(o.id);route();renderNotice();toast('Đã xóa đơn '+o.code)});
 }
-const NEED_SERVER='2026-11-28e';let SRV_VER=null;
+const NEED_SERVER='2026-11-28f';let SRV_VER=null;
 async function serverVersion(){if(SRV_VER)return SRV_VER;try{const r=await fetch(window.POS_API||window.CTV_API);const j=await r.json();SRV_VER=j.pos||'cũ'}catch(e){SRV_VER=''}return SRV_VER}
 async function oldServerToast(e){
   if(!/không hợp lệ/i.test(e.message)){toast(e.message);return}
@@ -1647,8 +1649,11 @@ function applyStockView(){
     if(p.service){p.stock=null;return}
     if(!p.stocks||typeof p.stocks!=='object')p.stocks={[firstBr()]:Number(p.stock)||0};
     p.stock=CUR_BR==='all'?Object.values(p.stocks).reduce((a,b)=>a+(Number(b)||0),0):(Number(p.stocks[CUR_BR])||0);
+    p.inBr=inBranch(p,CUR_BR);
   });
 }
+const isMainBr=br=>!br||br==='all'||br===firstBr();
+const inBranch=(p,br)=>p.service||isMainBr(br)||!!(p.stocks&&Object.prototype.hasOwnProperty.call(p.stocks,br));
 function adjStock(p,delta,br){
   br=br||CUR_BR||firstBr();
   if(!p.stocks)p.stocks={[firstBr()]:Number(p.stock)||0};
@@ -1851,7 +1856,7 @@ function bulkStockForm(){
   {onMount:(m,close)=>{
     const pick=()=>{const cat=$('#bk_cat',m).value,qty=Math.max(0,parseNum($('#bk_qty',m).value)),zero=$('#bk_zero',m).checked,bv=$('#bk_br',m).value;
       const targets=bv==='__all'?brs.map(b=>b.id):[bv];
-      const jobs=targets.map(br=>({br,lines:S.products.filter(p=>p.cat===cat&&!p.service).filter(p=>{const cur=Number((p.stocks||{})[br])||0;return zero?cur<=0:cur!==qty}).map(p=>({pid:p.id,qty}))})).filter(j=>j.lines.length);
+      const jobs=targets.map(br=>({br,lines:S.products.filter(p=>p.cat===cat&&!p.service&&inBranch(p,br)).filter(p=>{const cur=Number((p.stocks||{})[br])||0;return zero?cur<=0:cur!==qty}).map(p=>({pid:p.id,qty}))})).filter(j=>j.lines.length);
       return {cat,qty,jobs}};
     const info=()=>{const {cat,qty,jobs}=pick();const n=jobs.reduce((a,j)=>a+j.lines.length,0);
       $('#bk_info',m).textContent=n?`Sẽ đặt tồn = ${qty} cho ${n} mã ${cat.toLowerCase()} tại ${jobs.map(j=>brName(j.br)).join(', ')}.`:'Không có mã nào cần thay đổi.';$('#bk_ok',m).disabled=!n};
@@ -1950,6 +1955,50 @@ async function spxForm(){
     <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="sxOk">Lưu</button></div>`,
   {onMount:(m,close)=>{$('#sxOk',m).onclick=async()=>{const values={SPX_ENV:$('#sx_SPX_ENV',m).value};F.forEach(([k])=>{const v=$('#sx_'+k,m).value.trim();if(v)values[k]=v});
     try{await api('posSpxSave',{values});close();toast('Đã lưu mã SPX trên máy chủ')}catch(e){toast(e.message)}}}});
+}
+/* Kho phụ: thêm từng sản phẩm từ danh mục; Admin đặt lại kho phụ về chưa có sản phẩm */
+function addToBranchForm(){
+  const br=CUR_BR;if(isMainBr(br)){toast('Kho chính đã có đủ sản phẩm');return}
+  const pool=S.products.filter(p=>!p.service&&!inBranch(p,br));
+  if(!pool.length){toast('Kho này đã có đủ mọi sản phẩm trong danh mục');return}
+  const pick={};let q='',cat='Tất cả';
+  const cats=['Tất cả',...CATS.filter(c=>pool.some(p=>p.cat===c))];
+  modal(`<h2>Thêm sản phẩm vào kho ${esc(brName(br))}</h2>
+    <div class="small muted">Chọn mã cần bán ở kho này, nhập số lượng đang có (để 0 nếu chưa có hàng). Danh mục gồm ${pool.length} mã chưa có ở kho này.</div>
+    <div class="grid2"><input id="ab_q" placeholder="Tìm tên, mã SKU"><select id="ab_cat">${cats.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div>
+    <div style="display:flex;gap:8px;align-items:center"><button class="btn sm" id="ab_all">Chọn tất cả đang lọc</button><button class="btn sm" id="ab_none">Bỏ chọn</button><span class="grow"></span><span class="small" id="ab_n"></span></div>
+    <div id="ab_list" style="max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:6px"></div>
+    <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="ab_ok">Thêm vào kho</button></div>`,
+  {wide:true,onMount:(m,close)=>{
+    const shown=()=>pool.filter(p=>(cat==='Tất cả'||p.cat===cat)&&(!q||norm(p.name+' '+p.sku).includes(q)));
+    const cnt=()=>{const n=Object.keys(pick).length;$('#ab_n',m).textContent=n?'Đã chọn '+n+' mã':'';$('#ab_ok',m).disabled=!n};
+    const draw=()=>{const l=shown();$('#ab_list',m).innerHTML=l.length?l.slice(0,300).map(p=>`<label style="display:flex;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--line)"><input type="checkbox" data-pid="${p.id}"${p.id in pick?' checked':''} style="width:auto"><span style="flex:1;min-width:0"><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)} · ${esc(p.cat)} · ${money(p.price)}</div></span><input data-qty="${p.id}" inputmode="numeric" value="${p.id in pick?pick[p.id]:1}" style="width:64px;text-align:right" aria-label="Số lượng"></label>`).join('')+(l.length>300?'<div class="small muted" style="padding:8px">Hiện 300 mã đầu, hãy tìm để lọc thêm.</div>':''):'<div class="empty">Không có mã phù hợp.</div>';
+      $$('[data-pid]',m).forEach(c=>c.onchange=()=>{const id=c.dataset.pid;if(c.checked)pick[id]=Math.max(0,parseNum($(`[data-qty="${id}"]`,m).value));else delete pick[id];cnt()});
+      $$('[data-qty]',m).forEach(i=>i.oninput=()=>{const id=i.dataset.qty;if(id in pick)pick[id]=Math.max(0,parseNum(i.value))});cnt()};
+    $('#ab_q',m).oninput=e=>{q=norm(e.target.value.trim());draw()};$('#ab_cat',m).onchange=e=>{cat=e.target.value;draw()};
+    $('#ab_all',m).onclick=()=>{shown().forEach(p=>{if(!(p.id in pick)){const i=$(`[data-qty="${p.id}"]`,m);pick[p.id]=i?Math.max(0,parseNum(i.value)):1}});draw()};
+    $('#ab_none',m).onclick=()=>{Object.keys(pick).forEach(k=>delete pick[k]);draw()};draw();
+    $('#ab_ok',m).onclick=async()=>{const lines=Object.entries(pick).map(([pid,qty])=>({pid,qty}));const b=$('#ab_ok',m);b.disabled=true;b.textContent='Đang thêm…';
+      try{
+        if(SERVER){for(let i=0;i<lines.length;i+=400){const d=await api('posBranchAdd',{branch:br,lines:lines.slice(i,i+400)});mergeProducts(d.products)}}
+        else{lines.forEach(l=>{const p=prod(l.pid);if(!p)return;p.stocks=p.stocks||{};p.stocks[br]=l.qty;if(l.qty)S.stockLog.push({id:uid(),date:Date.now(),pid:p.id,qty:l.qty,type:'nhap',note:'Thêm vào kho '+brName(br),branch:br})});save()}
+        applyStockView();close();stockTab='ton';route();toast(`Đã thêm ${lines.length} mã vào kho ${brName(br)}`)}
+      catch(e){b.disabled=false;b.textContent='Thêm vào kho';oldServerToast(e)}};
+  }});
+}
+function resetSubForm(){
+  const subs=BR().filter(b=>!isMainBr(b.id));if(!subs.length){toast('Chưa có kho phụ');return}
+  modal(`<h2>Đặt lại kho phụ</h2>
+    <div class="small muted">Kho chính <b>${esc(brName(firstBr()))}</b> giữ toàn bộ sản phẩm. Các kho phụ được chọn sẽ trở về <b>chưa có sản phẩm nào</b>; tồn còn lại được ghi phiếu kiểm kho. Sau đó thêm từng mã bằng nút "+ Thêm sản phẩm vào kho".</div>
+    ${subs.map(b=>`<label class="chk"><input type="checkbox" data-br="${b.id}" checked> ${esc(b.name)} <span class="small muted">(${S.products.filter(p=>!p.service&&inBranch(p,b.id)).length} mã)</span></label>`).join('')}
+    <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn danger" id="rs_ok">Đặt lại</button></div>`,
+  {onMount:(m,close)=>{$('#rs_ok',m).onclick=async()=>{const list=$$('[data-br]',m).filter(c=>c.checked).map(c=>c.dataset.br);if(!list.length){toast('Chọn ít nhất 1 kho');return}
+    const b=$('#rs_ok',m);b.disabled=true;b.textContent='Đang đặt lại…';
+    try{
+      if(SERVER){const d=await api('posBranchReset',{branches:list});S.products=d.products}
+      else{const main=firstBr();S.products.forEach(p=>{if(p.service||!p.stocks)return;if(!(main in p.stocks))p.stocks[main]=0;list.forEach(br=>{if(br in p.stocks){const q=Number(p.stocks[br])||0;if(q)S.stockLog.push({id:uid(),date:Date.now(),pid:p.id,qty:-q,type:'kiem',note:'Đặt lại kho phụ',branch:br});delete p.stocks[br]}})});save()}
+      applyStockView();close();route();toast('Đã đặt lại '+list.length+' kho phụ')}
+    catch(e){b.disabled=false;b.textContent='Đặt lại';oldServerToast(e)}}}});
 }
 /* ============ Khởi động ============ */
 document.addEventListener('keydown',e=>{

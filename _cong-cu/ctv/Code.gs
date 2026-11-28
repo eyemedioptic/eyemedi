@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28e';
+var POS_CODE_VERSION = '2026-11-28f';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -1457,6 +1457,58 @@ API.posOrderDelete = function (r) {
   q.all().slice().reverse().forEach(function (x) { if (x.ref === o.code && String(x.auto).toUpperCase() === 'TRUE') { q.remove(x); removed++; } });
   t.remove(row);
   return { id: o.id, products: updated, cashRemoved: removed };
+};
+
+/* ---------- Danh mục hàng theo kho: kho chính (chi nhánh đầu) có mọi sản phẩm; kho phụ chỉ có mã đã thêm (có khóa trong stocks) ---------- */
+// Ghi nhiều sản phẩm một lần (đọc/ghi Sheet 1 lần cho nhanh)
+function posPutMany_(objs, nv) {
+  if (!objs.length) return;
+  posTable_('PosData');
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PosData'), head = SHEETS.PosData, n = sh.getLastRow() - 1;
+  var vals = n > 0 ? sh.getRange(2, 1, n, head.length).getValues() : [];
+  var ik = head.indexOf('kind'), ii = head.indexOf('id'), ij = head.indexOf('json'), iu = head.indexOf('updated_at'), ib = head.indexOf('updated_by');
+  var by = {}; objs.forEach(function (o) { by[o.id] = o; });
+  var now = now_(), seen = {};
+  vals.forEach(function (v) { var o = String(v[ik]) === 'product' && by[String(v[ii])]; if (o) { v[ij] = JSON.stringify(o); v[iu] = now; v[ib] = nv.full_name; seen[o.id] = 1; } });
+  if (vals.length) sh.getRange(2, 1, vals.length, head.length).setValues(vals);
+  objs.forEach(function (o) { if (!seen[o.id]) posPut_('product', o, nv); });
+}
+function posLogMany_(nv, logs) {
+  if (!logs.length) return;
+  posTable_('PosKho');
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PosKho'), head = SHEETS.PosKho, t = String(Date.now());
+  var rows = logs.map(function (l) { var o = { id: Utilities.getUuid(), created_at: t, staff_id: nv.id, staff_name: nv.full_name, product_id: l.pid, qty: l.qty, type: l.type, note: clean_(l.note, 200), branch: l.br || '' };
+    return head.map(function (h) { return o[h] === undefined ? '' : String(o[h]); }); });
+  sh.getRange(sh.getLastRow() + 1, 1, rows.length, head.length).setValues(rows);
+}
+// Admin: đặt lại kho phụ về "chưa có sản phẩm" (bỏ mã khỏi kho, ghi phiếu kiểm nếu còn tồn); kho chính giữ đủ mọi mã
+API.posBranchReset = function (r) {
+  var nv = posAuth_(r, 'quan_tri'), main = posFirstBranch_();
+  var list = (r.branches || []).map(String).filter(function (b) { return b && b !== main; });
+  if (!list.length) throw new Error('Chọn kho phụ cần đặt lại');
+  var changed = [], logs = [], removed = 0;
+  posData_('product').forEach(function (p) {
+    if (p.service) return; var ch = false;
+    if (!(main in p.stocks)) { p.stocks[main] = 0; ch = true; }
+    list.forEach(function (b) { if (b in p.stocks) { var q = Math.round(num_(p.stocks[b])); if (q) logs.push({ pid: p.id, qty: -q, type: 'kiem', note: 'Đặt lại kho phụ', br: b }); delete p.stocks[b]; removed++; ch = true; } });
+    if (ch) { posNormStock_(p); changed.push(p); }
+  });
+  posPutMany_(changed, nv); posLogMany_(nv, logs);
+  return { products: posData_('product'), removed: removed };
+};
+// Thêm sản phẩm vào kho phụ (chọn từ danh mục), kèm số lượng ban đầu
+API.posBranchAdd = function (r) {
+  var nv = posAuth_(r, 'kho'), br = String(r.branch || '');
+  posCheckBranch_(nv, br);
+  var want = {}; (r.lines || []).slice(0, 500).forEach(function (l) { want[String(l.pid)] = Math.max(0, Math.round(num_(l.qty))); });
+  var changed = [], logs = [];
+  posData_('product').forEach(function (p) {
+    if (p.service || !(p.id in want) || (br in p.stocks)) return;
+    p.stocks[br] = want[p.id]; posNormStock_(p); changed.push(p);
+    if (want[p.id]) logs.push({ pid: p.id, qty: want[p.id], type: 'nhap', note: 'Thêm vào kho ' + posBranchName_(br), br: br });
+  });
+  posPutMany_(changed, nv); posLogMany_(nv, logs);
+  return { products: changed, added: changed.length };
 };
 
 API.posOrderStatus = function (r) {
