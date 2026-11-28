@@ -290,7 +290,7 @@ function bankForm(){
       else{S.bank=v;save()}
       close();toast('Đã lưu tài khoản nhận chuyển khoản')}}});
 }
-const CARRIERS={spx:'SPX Express',ghn:'Giao Hàng Nhanh',self:'Shop tự giao'};
+const CARRIERS={spx:'SPX Express',ghn:'Giao Hàng Nhanh',chu_dong:'Vận chuyển chủ động',self:'Shop tự giao'};
 const isPaid=o=>o.cashed===true||(o.cashed===undefined&&o.status==='done');
 const NEW_STATUS={done:'Hoàn thành, đã giao cho khách',pending:'Chờ xác nhận',pushed:'Đẩy vận chuyển',shipping:'Đang giao hàng'};
 const statusPill=s=>`<span class="pill ${STATUS[s][1]}">${STATUS[s][0]}</span>`;
@@ -1319,7 +1319,7 @@ function deleteOrder(o){
       S.cash=(S.cash||[]).filter(e=>!(e.ref===o.code&&e.auto));save()}
     S.orders=S.orders.filter(x=>x.id!==o.id);seenOrders&&seenOrders.delete(o.id);route();renderNotice();toast('Đã xóa đơn '+o.code)});
 }
-const NEED_SERVER='2026-11-28d';let SRV_VER=null;
+const NEED_SERVER='2026-11-28e';let SRV_VER=null;
 async function serverVersion(){if(SRV_VER)return SRV_VER;try{const r=await fetch(window.POS_API||window.CTV_API);const j=await r.json();SRV_VER=j.pos||'cũ'}catch(e){SRV_VER=''}return SRV_VER}
 async function oldServerToast(e){
   if(!/không hợp lệ/i.test(e.message)){toast(e.message);return}

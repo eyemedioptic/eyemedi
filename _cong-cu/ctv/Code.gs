@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28d';
+var POS_CODE_VERSION = '2026-11-28e';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -983,7 +983,7 @@ var POS_ROLES = {
 };
 var POS_STATUS = ['draft', 'pending', 'pushed', 'shipping', 'done', 'cancelled'];
 // Đơn đã ghi thu vào sổ quỹ chưa (đơn cũ hoàn thành trước bản này coi như đã ghi)
-var POS_CARRIERS = ['', 'spx', 'ghn', 'self'];
+var POS_CARRIERS = ['', 'spx', 'ghn', 'chu_dong', 'self'];
 function posShipInfo_(o, src) {
   o.carrier = POS_CARRIERS.indexOf(String(src.carrier || '')) >= 0 ? String(src.carrier || '') : '';
   o.trackingCode = clean_(src.trackingCode, 60);
