@@ -123,7 +123,8 @@ tr.click:hover td{background:var(--surface-2)}
 .pcard .nm{font-weight:600;line-height:1.3}
 .pcard .pr{font-weight:700;color:var(--accent);margin-top:auto}
 .pcard .meta{font-size:12px;color:var(--muted)}
-.cart{position:sticky;top:16px;display:flex;flex-direction:column;gap:12px}
+.cart{scroll-padding-bottom:96px;position:sticky;top:16px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+.cart .cacts{position:sticky;bottom:-16px;margin:0 -16px -16px;padding:12px 16px 16px;background:var(--surface);border-top:1px solid var(--line);z-index:2}
 .cline{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;border-bottom:1px dashed var(--line)}
 .cline .nm{font-weight:600}
 main a:not(.btn){color:var(--accent)}
@@ -202,7 +203,8 @@ a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
   .notice #btnPw,.notice #btnOut{display:none}
   main{padding-bottom:90px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .pos{grid-template-columns:minmax(0,1fr)}
-  .cart{position:static}
+  .cart{position:static;max-height:none;overflow:visible}
+  .cart .cacts{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
   .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   .grid3,.grid4{grid-template-columns:1fr 1fr}
 }
@@ -467,7 +469,9 @@ function renderCart(){
   const change=parseNum(cart.given)-t.total;
   const online=cart.channel!=='pos';
   c.innerHTML=`
-    <label class="f">Kênh bán<select id="chan">${Object.entries(CHANNELS).map(([k,v])=>`<option value="${k}"${k===cart.channel?' selected':''}>${v}</option>`).join('')}</select></label>
+    <div class="grid2" style="gap:10px"><label class="f">Kênh bán<select id="chan">${Object.entries(CHANNELS).map(([k,v])=>`<option value="${k}"${k===cart.channel?' selected':''}>${v}</option>`).join('')}</select></label>
+      <label class="f" style="margin:0${cart.editId?';display:none':''}">Trạng thái đơn<select id="ostat">${Object.entries(NEW_STATUS).map(([k,v])=>`<option value="${k}"${k===curStat()?' selected':''}>${v}</option>`).join('')}</select></label></div>
+      ${shipNeeded()?`<label class="f" style="margin:0">Đơn vị vận chuyển<select id="carrier"><option value="">— Chọn đơn vị vận chuyển —</option>${Object.entries(CARRIERS).map(([k,v])=>`<option value="${k}"${k===cart.carrier?' selected':''}>${v}</option>`).join('')}</select></label>`:''}
     ${cart.channel==='ctv'?`<label class="f">Cộng tác viên<select id="ctvSel"><option value="">— Chọn cộng tác viên —</option>${S.ctvs.map(x=>`<option value="${x.id}"${x.id===cart.ctvId?' selected':''}>${esc(x.name)} · hoa hồng ${x.rate}%</option>`).join('')}</select></label>${S.ctvs.length?'':'<div class="small muted">Chưa có cộng tác viên. Thêm ở mục Khách hàng, thẻ Cộng tác viên.</div>'}`:''}
     <div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h2 style="margin:0">Khách hàng</h2>${cu?'<button class="btn sm" id="rmCust">Bỏ chọn</button>':''}</div>
@@ -488,17 +492,15 @@ function renderCart(){
     <div>
       ${cart.draftId?`<div class="banner" style="margin-bottom:8px">Đang sửa đơn nháp <b>${esc(cart.draftCode)}</b></div>`:''}
       ${cart.editId?`<div class="banner" style="margin-bottom:8px">Đang sửa đơn <b>${esc(cart.editCode)}</b>. Kho tự cộng/trừ phần thay đổi.</div>`:''}
-      <label class="f" style="margin-bottom:10px${cart.editId?';display:none':''}">Trạng thái đơn<select id="ostat">${Object.entries(NEW_STATUS).map(([k,v])=>`<option value="${k}"${k===curStat()?' selected':''}>${v}</option>`).join('')}</select></label>
       <div class="small muted" style="margin-bottom:6px">Hình thức thanh toán</div>
       <div class="seg" id="methods">${Object.entries(PAY_METHODS).map(([k,v])=>`<button data-k="${k}" class="${cart.method===k?'on':''}">${v}</button>`).join('')}</div>
       ${curStat()!=='done'&&cart.method!=='cod'&&!cart.editId?`<label class="chk" style="margin-top:10px"><input type="checkbox" id="paidNow"${cart.paidNow?' checked':''}> Khách đã thanh toán</label>`:''}
       ${cart.method==='cod'?'<div class="small muted" style="margin-top:6px">Đơn vị vận chuyển thu tiền khi giao. Đơn được ghi đã thanh toán khi chuyển sang Hoàn thành.</div>':''}
-      ${shipNeeded()?`<label class="f" style="margin-top:10px">Đơn vị vận chuyển<select id="carrier"><option value="">— Chọn đơn vị vận chuyển —</option>${Object.entries(CARRIERS).map(([k,v])=>`<option value="${k}"${k===cart.carrier?' selected':''}>${v}</option>`).join('')}</select></label>`:''}
       ${online||shipNeeded()?`<label class="f" style="margin-top:10px">Địa chỉ giao hàng<input id="addr" value="${esc(cart.address)}" placeholder="Số nhà, đường, phường, quận, tỉnh"></label>`:''}
       ${cart.method==='cash'&&!online&&(curStat()==='done'||cart.paidNow)?`<div class="grid2" style="margin-top:10px"><label class="f">Khách đưa<input id="given" value="${esc(cart.given)}" inputmode="numeric" placeholder="${t.total.toLocaleString('vi-VN')}"></label><label class="f">Tiền thừa trả khách<input disabled value="${cart.given?(change>=0?change.toLocaleString('vi-VN')+'₫':'Thiếu '+(-change).toLocaleString('vi-VN')+'₫'):''}"></label></div>`:''}
       <label class="f" style="margin-top:10px">Ghi chú đơn<input id="cnote" value="${esc(cart.note)}" placeholder="VD: hẹn lấy kính thứ 7"></label>
     </div>
-    <div style="display:flex;gap:8px"><button class="btn" id="clearCart" ${cart.items.length?'':'disabled'}>Hủy</button>${cart.editId?'':`<button class="btn" id="saveDraft" ${cart.items.length?'':'disabled'}>Lưu nháp</button>`}<button class="btn pri" style="flex:1;padding:12px" id="checkout" ${cart.items.length?'':'disabled'}>${cart.editId?'Lưu sửa đơn · '+money(t.total):({done:'Thanh toán ',pending:'Tạo đơn ',pushed:'Đẩy vận chuyển · ',shipping:'Tạo đơn đang giao · '})[curStat()]+money(t.total)}</button></div>`;
+    <div class="cacts" style="display:flex;gap:8px"><button class="btn" id="clearCart" ${cart.items.length?'':'disabled'}>Hủy</button>${cart.editId?'':`<button class="btn" id="saveDraft" ${cart.items.length?'':'disabled'}>Lưu nháp</button>`}<button class="btn pri" style="flex:1;padding:12px" id="checkout" ${cart.items.length?'':'disabled'}>${cart.editId?'Lưu sửa đơn · '+money(t.total):({done:'Thanh toán ',pending:'Tạo đơn ',pushed:'Đẩy vận chuyển · ',shipping:'Tạo đơn đang giao · '})[curStat()]+money(t.total)}</button></div>`;
   // bindings
   $$('[data-m]',c).forEach(b=>b.onclick=()=>{const i=cart.items[b.dataset.m];i.qty--;if(i.qty<=0)cart.items.splice(b.dataset.m,1);renderCart()});
   $$('[data-p]',c).forEach(b=>b.onclick=()=>{addToCart(prod(cart.items[b.dataset.p].pid))});
