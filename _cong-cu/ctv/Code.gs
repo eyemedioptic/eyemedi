@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28f';
+var POS_CODE_VERSION = '2026-11-28g';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -1495,6 +1495,33 @@ API.posBranchReset = function (r) {
   });
   posPutMany_(changed, nv); posLogMany_(nv, logs);
   return { products: posData_('product'), removed: removed };
+};
+// Xóa nhiều sản phẩm khỏi danh mục (đơn cũ vẫn giữ tên, giá trong đơn)
+API.posDeleteMany = function (r) {
+  posAuth_(r, 'san_pham');
+  var set = {}; (r.ids || []).slice(0, 2000).forEach(function (id) { set[String(id)] = 1; });
+  posTable_('PosData');
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('PosData'), head = SHEETS.PosData, n = sh.getLastRow() - 1;
+  if (n < 1) return { deleted: 0 };
+  var vals = sh.getRange(2, 1, n, head.length).getValues(), ik = head.indexOf('kind'), ii = head.indexOf('id'), rows = [];
+  vals.forEach(function (v, i) { if (String(v[ik]) === 'product' && set[String(v[ii])]) rows.push(i + 2); });
+  for (var k = rows.length - 1; k >= 0;) { var end = rows[k], start = end; while (k > 0 && rows[k - 1] === start - 1) { start--; k--; } sh.deleteRows(start, end - start + 1); k--; }
+  return { deleted: rows.length };
+};
+// Bỏ các mã đã chọn khỏi kho phụ (tồn còn lại ghi phiếu kiểm kho)
+API.posBranchRemove = function (r) {
+  var nv = posAuth_(r, 'kho'), br = String(r.branch || '');
+  posCheckBranch_(nv, br);
+  if (br === posFirstBranch_()) throw new Error('Kho chính luôn có đủ sản phẩm. Muốn bỏ hẳn mã, hãy xóa ở mục Sản phẩm.');
+  var set = {}; (r.pids || []).forEach(function (id) { set[String(id)] = 1; });
+  var changed = [], logs = [];
+  posData_('product').forEach(function (p) {
+    if (p.service || !set[p.id] || !(br in p.stocks)) return;
+    var q = Math.round(num_(p.stocks[br])); if (q) logs.push({ pid: p.id, qty: -q, type: 'kiem', note: 'Bỏ khỏi kho ' + posBranchName_(br), br: br });
+    delete p.stocks[br]; posNormStock_(p); changed.push(p);
+  });
+  posPutMany_(changed, nv); posLogMany_(nv, logs);
+  return { products: changed, removed: changed.length };
 };
 // Thêm sản phẩm vào kho phụ (chọn từ danh mục), kèm số lượng ban đầu
 API.posBranchAdd = function (r) {

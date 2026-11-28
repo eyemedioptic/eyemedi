@@ -136,6 +136,9 @@ main a:not(.btn){color:var(--accent)}
 .seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .qrimg{width:170px;height:170px;margin:6px auto;background:#fff;padding:4px;border-radius:6px}.qrimg svg{width:100%;height:100%;display:block}
 @media print{body.printing .qrimg{width:44mm;height:44mm}}
+.selbar{position:sticky;bottom:0;z-index:5;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid var(--accent);border-radius:var(--r);padding:10px 12px;margin-top:10px;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+@media (max-width:820px){.selbar{bottom:calc(64px + env(safe-area-inset-bottom,0px))}}
+td.selc,th.selc{width:34px}td.selc input,th.selc input{width:18px;height:18px}
 .dtype{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex:none}
 .dtype button{border:0;background:var(--surface);padding:8px 12px;min-width:40px;cursor:pointer;font-weight:600;color:var(--muted)}
 .dtype button+button{border-left:1px solid var(--line)}
@@ -731,20 +734,37 @@ function viewOrders(el){
 
 /* ============ Sản phẩm ============ */
 let prodFilter={q:'',cat:'Tất cả'};
+let prodSel=false;
+function deleteProducts(ids,after){
+  if(!ids.length)return;
+  confirmBox(`Xóa ${ids.length} sản phẩm khỏi danh mục (ở mọi kho)? Đơn hàng cũ vẫn giữ nguyên tên và giá. Không khôi phục được.`,'Xóa sản phẩm',async()=>{
+    if(SERVER){try{for(let i=0;i<ids.length;i+=1000)await api('posDeleteMany',{kind:'product',ids:ids.slice(i,i+1000)})}catch(e){oldServerToast(e);return}}
+    const set=new Set(ids);S.products=S.products.filter(p=>!set.has(p.id));if(!SERVER)save();
+    toast('Đã xóa '+ids.length+' sản phẩm');after&&after();
+  });
+}
 function viewProducts(el){
-  el.innerHTML=`<div class="head"><h1>Sản phẩm</h1><span class="grow"></span>${can('san_pham')?'<button class="btn" id="webP">Lấy sản phẩm từ web</button><button class="btn pri" id="addP">+ Thêm sản phẩm</button>':''}</div>
+  el.innerHTML=`<div class="head"><h1>Sản phẩm</h1><span class="grow"></span>${can('san_pham')?`<button class="btn${prodSel?' pri':''}" id="selP">${prodSel?'Thôi chọn':'Chọn để xóa'}</button>`:''}${can('san_pham')?'<button class="btn" id="webP">Lấy sản phẩm từ web</button><button class="btn pri" id="addP">+ Thêm sản phẩm</button>':''}</div>
   ${S.products.some(p=>p.pricePending)?`<div class="banner"><span class="grow"><b>${S.products.filter(p=>p.pricePending).length}</b> mã tròng kính đang tạm dùng giá web, chờ cập nhật theo bảng báo giá.</span><button class="btn sm" id="pendP">Xem danh sách</button></div>`:''}
   <div class="card">
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><input id="pq" placeholder="Tìm tên, SKU, thương hiệu" style="flex:1;min-width:200px" value="${esc(prodFilter.q)}"><select id="pc" style="width:auto">${['Tất cả',...CATS,...(S.products.some(p=>p.pricePending)?['Chờ bảng giá']:[])].map(c=>`<option${c===prodFilter.cat?' selected':''}>${c}</option>`).join('')}</select></div>
     <div id="plist"></div>
   </div>`;
+  const picked=new Set();
   const draw=()=>{
     const q=norm(prodFilter.q);
     const list=S.products.filter(p=>(prodFilter.cat==='Tất cả'||p.cat===prodFilter.cat||(prodFilter.cat==='Chờ bảng giá'&&p.pricePending))&&(!q||norm(p.name+' '+p.sku+' '+p.brand).includes(q)));
-    $('#plist',el).innerHTML=list.length?`<div class="tbl-wrap"><table><thead><tr><th>Sản phẩm</th><th>Nhóm</th><th class="r">Giá bán</th><th class="r">Giá vốn</th><th class="r">Lãi gộp</th><th>Tồn kho</th></tr></thead><tbody>${list.map(p=>`<tr class="click" data-pid="${p.id}"><td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}${p.brand?' · '+esc(p.brand):''}</div></td><td>${esc(p.cat)}</td><td class="r num">${money(p.price)}${p.pricePending?'<div><span class="pill warn">Chờ bảng giá</span></div>':''}</td><td class="r num muted">${money(p.cost)}</td><td class="r num">${p.price?Math.round((p.price-p.cost)/p.price*100)+'%':'—'}</td><td>${stockPill(p)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">Không có sản phẩm nào.${!S.products.length&&can('san_pham')?'<div style="margin-top:10px"><button class="btn pri" data-webp>Lấy toàn bộ sản phẩm từ trang web</button></div>':''}</div>`;
+    const ck=p=>prodSel?`<td class="selc"><input type="checkbox" data-sel="${p.id}"${picked.has(p.id)?' checked':''} aria-label="Chọn"></td>`:'';
+    $('#plist',el).innerHTML=list.length?`<div class="tbl-wrap"><table><thead><tr>${prodSel?`<th class="selc"><input type="checkbox" id="selAll"${list.length&&list.every(p=>picked.has(p.id))?' checked':''} aria-label="Chọn tất cả"></th>`:''}<th>Sản phẩm</th><th>Nhóm</th><th class="r">Giá bán</th><th class="r">Giá vốn</th><th class="r">Lãi gộp</th><th>Tồn kho</th></tr></thead><tbody>${list.map(p=>`<tr class="click" data-pid="${p.id}">${ck(p)}<td><b>${esc(p.name)}</b><div class="small muted">${esc(p.sku)}${p.brand?' · '+esc(p.brand):''}</div></td><td>${esc(p.cat)}</td><td class="r num">${money(p.price)}${p.pricePending?'<div><span class="pill warn">Chờ bảng giá</span></div>':''}</td><td class="r num muted">${money(p.cost)}</td><td class="r num">${p.price?Math.round((p.price-p.cost)/p.price*100)+'%':'—'}</td><td>${stockPill(p)}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty">Không có sản phẩm nào.${!S.products.length&&can('san_pham')?'<div style="margin-top:10px"><button class="btn pri" data-webp>Lấy toàn bộ sản phẩm từ trang web</button></div>':''}</div>`;
     $$('[data-webp]',el).forEach(b=>b.onclick=importWebForm);
-    $$('[data-pid]',el).forEach(r=>r.onclick=()=>editProduct(prod(r.dataset.pid)));
+    $$('[data-pid]',el).forEach(r=>r.onclick=e=>{if(prodSel){const id=r.dataset.pid;picked.has(id)?picked.delete(id):picked.add(id);draw();return}editProduct(prod(r.dataset.pid))});
+    const sa=$('#selAll',el);sa&&(sa.onclick=e=>{e.stopPropagation();const all=list.every(p=>picked.has(p.id));list.forEach(p=>all?picked.delete(p.id):picked.add(p.id));draw()});
+    $$('[data-sel]',el).forEach(c=>c.onclick=e=>e.stopPropagation()||(c.checked?picked.add(c.dataset.sel):picked.delete(c.dataset.sel),draw()));
+    if(prodSel)$('#plist',el).insertAdjacentHTML('beforeend',`<div class="selbar"><b>Đã chọn ${picked.size} sản phẩm</b><span class="grow"></span><button class="btn" id="selClr"${picked.size?'':' disabled'}>Bỏ chọn</button><button class="btn danger" id="selDel"${picked.size?'':' disabled'}>Xóa ${picked.size||''} sản phẩm đã chọn</button></div>`);
+    const sc=$('#selClr',el);sc&&(sc.onclick=()=>{picked.clear();draw()});
+    const sd=$('#selDel',el);sd&&(sd.onclick=()=>deleteProducts([...picked],()=>{picked.clear();draw()}));
   };
+  const sp=$('#selP',el);sp&&(sp.onclick=()=>{prodSel=!prodSel;viewProducts(el)});
   $('#pq',el).oninput=e=>{prodFilter.q=e.target.value;draw()};
   $('#pc',el).onchange=e=>{prodFilter.cat=e.target.value;draw()};
   const ap=$('#addP',el);ap&&(ap.onclick=()=>editProduct(null));
@@ -781,11 +801,18 @@ function editProduct(p){
 }
 
 /* ============ Kho hàng ============ */
-let stockTab='ton';
+let stockTab='ton',stockSel=false;const stockPicked=new Set();
+function removeFromBranch(ids,br,after){
+  confirmBox(`Bỏ ${ids.length} mã khỏi kho ${brName(br)}? Tồn còn lại ở kho này được ghi phiếu kiểm kho về 0. Sản phẩm vẫn còn trong danh mục và ở kho chính.`,'Bỏ khỏi kho',async()=>{
+    if(SERVER){try{const d=await api('posBranchRemove',{branch:br,pids:ids});mergeProducts(d.products)}catch(e){oldServerToast(e);return}}
+    else{ids.forEach(id=>{const p=prod(id);if(!p||!p.stocks||!(br in p.stocks))return;const q=Number(p.stocks[br])||0;if(q)S.stockLog.push({id:uid(),date:Date.now(),pid:id,qty:-q,type:'kiem',note:'Bỏ khỏi kho '+brName(br),branch:br});delete p.stocks[br]});save()}
+    applyStockView();toast('Đã bỏ '+ids.length+' mã khỏi kho '+brName(br));after&&after();
+  });
+}
 function viewStock(el){
   const goods=S.products.filter(p=>!p.service&&p.inBr!==false);const sub=!isMainBr(CUR_BR);
   const val=goods.reduce((a,p)=>a+p.stock*p.cost,0);
-  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span>${sub?'<button class="btn pri" id="addToBr">+ Thêm sản phẩm vào kho</button>':''}${(!SERVER||can('quan_tri'))&&BR().length>1?'<button class="btn" id="resetSub">Đặt lại kho phụ</button>':''}<button class="btn" id="bulkKho">Đặt tồn hàng loạt</button><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
+  el.innerHTML=`<div class="head"><h1>Kho hàng${CUR_BR&&CUR_BR!=='all'?' · '+esc(brName(CUR_BR)):''}</h1><span class="grow"></span>${sub&&goods.length&&can('kho')?`<button class="btn${stockSel?' pri':''}" id="selK">${stockSel?'Thôi chọn':'Chọn để bỏ khỏi kho'}</button>`:''}${sub?'<button class="btn pri" id="addToBr">+ Thêm sản phẩm vào kho</button>':''}${(!SERVER||can('quan_tri'))&&BR().length>1?'<button class="btn" id="resetSub">Đặt lại kho phụ</button>':''}<button class="btn" id="bulkKho">Đặt tồn hàng loạt</button><button class="btn" id="chuyenKho">Chuyển kho</button><button class="btn" id="kiem">Kiểm kho</button><button class="btn pri" id="nhap">+ Nhập hàng</button></div>
   <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
     <div class="card stat"><div class="lb">Tổng số lượng tồn</div><div class="v num">${goods.reduce((a,p)=>a+Math.max(0,p.stock),0).toLocaleString('vi-VN')}</div></div>
     <div class="card stat"><div class="lb">Giá trị tồn (giá vốn)</div><div class="v num">${money(val)}</div></div>
@@ -808,7 +835,18 @@ function viewStock(el){
   $('#nhap',el).onclick=()=>stockForm('nhap');
   $('#kiem',el).onclick=()=>stockForm('kiem');
   $('#chuyenKho',el).onclick=transferForm;$('#bulkKho',el).onclick=bulkStockForm;
-  const ab=$('#addToBr',el);ab&&(ab.onclick=addToBranchForm);const rs=$('#resetSub',el);rs&&(rs.onclick=resetSubForm);
+  const ab=$('#addToBr',el);ab&&(ab.onclick=addToBranchForm);
+  const sk=$('#selK',el);sk&&(sk.onclick=()=>{stockSel=!stockSel;stockPicked.clear();stockTab='ton';viewStock(el)});
+  if(sub&&stockSel&&stockTab==='ton'&&goods.length){
+    const tb=$('#sbody table',el);
+    if(tb){const sorted=[...goods].sort((a,b)=>a.stock-b.stock);
+      tb.querySelector('thead tr').insertAdjacentHTML('afterbegin',`<th class="selc"><input type="checkbox" id="kAll"${goods.every(p=>stockPicked.has(p.id))?' checked':''}></th>`);
+      [...tb.querySelectorAll('tbody tr')].forEach((tr,i)=>{const p=sorted[i];tr.classList.add('click');tr.insertAdjacentHTML('afterbegin',`<td class="selc"><input type="checkbox"${stockPicked.has(p.id)?' checked':''}></td>`);tr.onclick=()=>{stockPicked.has(p.id)?stockPicked.delete(p.id):stockPicked.add(p.id);viewStock(el)}});
+      $('#kAll',el).onclick=e=>{e.stopPropagation();const all=goods.every(p=>stockPicked.has(p.id));goods.forEach(p=>all?stockPicked.delete(p.id):stockPicked.add(p.id));viewStock(el)};
+      $('#sbody',el).insertAdjacentHTML('beforeend',`<div class="selbar"><b>Đã chọn ${stockPicked.size} mã</b><span class="grow"></span><button class="btn danger" id="kRm"${stockPicked.size?'':' disabled'}>Bỏ ${stockPicked.size||''} mã khỏi kho ${esc(brName(CUR_BR))}</button></div>`);
+      $('#kRm',el).onclick=()=>removeFromBranch([...stockPicked],CUR_BR,()=>{stockPicked.clear();stockSel=false;viewStock(el)});
+    }
+  }const rs=$('#resetSub',el);rs&&(rs.onclick=resetSubForm);
   if(sub&&!goods.length&&stockTab==='ton')$('#sbody',el).innerHTML='<div class="empty">Kho này chưa có sản phẩm. Bấm <b>+ Thêm sản phẩm vào kho</b> để chọn từng mã từ danh mục (danh mục lấy từ web, có đủ ở kho chính).</div>';
 }
 function stockForm(type){
@@ -1321,7 +1359,7 @@ function deleteOrder(o){
       S.cash=(S.cash||[]).filter(e=>!(e.ref===o.code&&e.auto));save()}
     S.orders=S.orders.filter(x=>x.id!==o.id);seenOrders&&seenOrders.delete(o.id);route();renderNotice();toast('Đã xóa đơn '+o.code)});
 }
-const NEED_SERVER='2026-11-28f';let SRV_VER=null;
+const NEED_SERVER='2026-11-28g';let SRV_VER=null;
 async function serverVersion(){if(SRV_VER)return SRV_VER;try{const r=await fetch(window.POS_API||window.CTV_API);const j=await r.json();SRV_VER=j.pos||'cũ'}catch(e){SRV_VER=''}return SRV_VER}
 async function oldServerToast(e){
   if(!/không hợp lệ/i.test(e.message)){toast(e.message);return}
