@@ -1,0 +1,70 @@
+{
+  "name": "Sàn Nông Sản Việt",
+  "short_name": "Nông Sản Việt",
+  "description": "Sàn giao dịch nông sản: nhà xuất khẩu tìm vùng nguyên liệu, nông dân tìm nơi tiêu thụ.",
+  "lang": "vi",
+  "id": "./",
+  "start_url": "./#san",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1d6b43",
+  "theme_color": "#1d6b43",
+  "categories": [
+    "business",
+    "shopping",
+    "food"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Đăng tin",
+      "url": "./#dang-tin",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Giao dịch",
+      "url": "./#giao-dich",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Truy xuất",
+      "url": "./#truy-xuat",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
