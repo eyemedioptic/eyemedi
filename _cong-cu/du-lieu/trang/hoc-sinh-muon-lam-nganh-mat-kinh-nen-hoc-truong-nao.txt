@@ -1,0 +1,39 @@
+TIEU_DE: Học sinh muốn làm ngành mắt kính nên học trường nào?
+TITLE: Học sinh làm ngành mắt kính nên học trường nào? | EYEMEDI
+SLUG: hoc-sinh-muon-lam-nganh-mat-kinh-nen-hoc-truong-nao
+TU_KHOA_CHINH: ngành mắt kính nên học trường nào
+TU_KHOA_PHU: ngành khúc xạ nhãn khoa, trường đào tạo khúc xạ, khối thi ngành khúc xạ, chọn ngành mắt kính, hướng nghiệp ngành mắt kính
+DANH_MUC: Kiến thức mắt
+SLUG_DANH_MUC: kien-thuc-mat
+Y_KHOA: không
+MO_TA_SEO: Học sinh muốn làm ngành mắt kính nên học trường nào? So sánh đại học, cao đẳng và khóa thực hành, khối thi xét tuyển, giúp bạn chọn đúng hướng đi ngay từ đầu.
+NGAY_DANG: 2026-11-28
+DOAN_MO_DAU: Học sinh muốn làm ngành mắt kính có ba hướng học chính: đại học ngành Khúc xạ nhãn khoa, cao đẳng y tế, hoặc khóa thực hành nghề tại trung tâm, cửa hàng kính. Chọn trường nào tùy vào việc bạn muốn làm bệnh viện, đi làm sớm hay mở tiệm kính riêng.
+ANH_RIENG:
+anh-rieng/hoc-sinh-muon-lam-nganh-mat-kinh-nen-hoc-truong-nao-card.jpg | Học sinh muốn làm ngành mắt kính nên học trường nào – EYEMEDI
+kho-anh/EYEMEDI-1.webp | Thực hành kiểm tra thị lực bằng tròng kính thử, kỹ năng cơ bản của ngành mắt kính
+kho-anh/EYEMEDI-7.webp | Chuyên viên tư vấn kính cho khách, công việc thường ngày của người làm nghề mắt kính
+H2_1: Học đại học ngành Khúc xạ nhãn khoa
+NOI_DUNG_1: <p>Đây là con đường bài bản nhất nếu bạn muốn làm kỹ thuật viên khúc xạ tại bệnh viện, phòng khám mắt. Hiện có hai trường đào tạo cử nhân Khúc xạ nhãn khoa được nhiều thí sinh quan tâm:</p>
+<ul><li><b>Trường Đại học Y Hà Nội</b> (phía Bắc): xét tổ hợp A00, B00.</li><li><b>Trường Đại học Y khoa Phạm Ngọc Thạch</b> (TP.HCM): xét tổ hợp B00, A00, A01, D07.</li></ul>
+<p>Điểm chuẩn năm 2026 theo điểm thi tốt nghiệp THPT ở mức khoảng 22–23 điểm.</p>
+H2_2: Học cao đẳng y tế hoặc khóa thực hành nghề
+NOI_DUNG_2: <p>Một số trường cao đẳng y tế có đào tạo kỹ thuật liên quan đến khúc xạ, thời gian học ngắn hơn và điểm đầu vào vừa sức hơn.</p>
+<p>Nếu bạn muốn làm ở cửa hàng kính hoặc sau này mở tiệm riêng, khóa thực hành nghề là lựa chọn nhanh: học đo khúc xạ, soi bóng đồng tử, mài lắp tròng kính, gọng kính và kính áp tròng trên máy thật. Bạn có thể tham khảo <a href="/dao-tao-ky-thuat-khuc-xa-mai-lap-kinh.html">chương trình hướng dẫn và thực hành kỹ thuật khúc xạ, mài lắp kính</a> hoặc tìm hiểu thêm <a href="/co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm.html">tiêu chí chọn nơi luyện tay nghề mài lắp</a>.</p>
+H2_3: Chọn hướng nào cho phù hợp?
+NOI_DUNG_3: <ul><li><b>Muốn làm bệnh viện, đi đường dài:</b> học đại học Khúc xạ nhãn khoa.</li><li><b>Muốn đi làm sớm:</b> học cao đẳng y tế, rồi học thêm kỹ năng thực hành.</li><li><b>Muốn kinh doanh, mở tiệm kính:</b> học khóa thực hành, vừa làm vừa nâng cao.</li></ul>
+<p>Lưu ý: kỹ thuật viên khúc xạ làm trong cơ sở khám chữa bệnh cần có giấy phép hành nghề theo Luật Khám bệnh, chữa bệnh 2023. Tỷ lệ <a href="/can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat.html">cận thị ở trẻ em</a> ngày càng tăng nên nhu cầu người đo mắt giỏi nghề còn rất lớn. Muốn biết thêm các hướng học cho người đã đi làm, xem bài <a href="/hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe.html">học khúc xạ mắt kính ở đâu chuẩn nghề</a>.</p>
+<p><i>Thông tin tuyển sinh có thể thay đổi theo từng năm, bạn nên xem đề án tuyển sinh mới nhất của từng trường.</i></p>
+LOI_KEU_GOI: Muốn trải nghiệm thực tế nghề đo mắt, làm kính trước khi chọn trường? Liên hệ EYEMEDI qua hotline 0967 190 005 để được tư vấn.
+HOI_1: Ngành khúc xạ nhãn khoa thi khối nào?
+DAP_1: Trường Đại học Y Hà Nội xét tổ hợp A00, B00; Trường Đại học Y khoa Phạm Ngọc Thạch xét B00, A00, A01, D07. Tổ hợp có thể thay đổi, bạn nên xem đề án tuyển sinh từng năm.
+HOI_2: Không đỗ đại học có làm ngành mắt kính được không?
+DAP_2: Được. Bạn có thể học cao đẳng y tế hoặc khóa thực hành nghề để làm tại cửa hàng kính. Muốn làm kỹ thuật viên khúc xạ trong bệnh viện thì cần bằng cấp và giấy phép hành nghề phù hợp.
+HOI_3: Học sinh lớp 12 cần chuẩn bị gì nếu muốn theo ngành này?
+DAP_3: Học chắc các môn trong tổ hợp xét tuyển, tìm hiểu đề án tuyển sinh, và nếu có thể hãy đến một cửa hàng kính để xem công việc đo mắt, làm kính thực tế.
+SAN_PHAM: tb-may-do-khuc-xa-cam-tay, tb-may-mai-trong-kinh-tu-dong, tb-may-dinh-tam-trong-kinh, tb-may-khoan-trong-kinh, tb-may-xe-ranh-trong-kinh, tb-may-danh-bong-trong-kinh-tu-dong, p-sufiar-2804, santino-one-0124
+LIEN_QUAN: hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe | Học khúc xạ mắt kính ở đâu chuẩn nghề?; dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam | Đào tạo khúc xạ, nhãn kính chuyên sâu; can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat | Cận thị ở trẻ em: dấu hiệu và cách kiểm soát
+LINK_TRONG_BAI: chương trình hướng dẫn và thực hành kỹ thuật khúc xạ, mài lắp kính → dao-tao-ky-thuat-khuc-xa-mai-lap-kinh; tiêu chí chọn nơi luyện tay nghề mài lắp → co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm; cận thị ở trẻ em → can-thi-o-tre-em-dau-hieu-va-cach-kiem-soat; học khúc xạ mắt kính ở đâu chuẩn nghề → hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe
+LINK_VAO_TU: hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe, dao-tao-chuyen-nganh-khuc-xa-mat-kinh-tai-viet-nam, co-so-thuc-hanh-mai-lap-kinh-mat-chuan-nghe-tphcm
+KIEM_TRA_TRUNG: Gần trùng (Jaccard 0,45) với "Muốn làm nghề mắt kính, nên học ở đâu?" so với hoc-khuc-xa-mat-kinh-o-dau-chuan-nghe; sếp chọn đổi góc cho học sinh chọn trường. Tiêu đề mới so với bài cũ: 0,2. Từ khóa chính khác bài cũ.
+NGUON_THAM_KHAO: diemthi.tuyensinh247.com (ngành Khúc xạ nhãn khoa: trường, tổ hợp, điểm chuẩn 2026); pnt.edu.vn (thông tin tuyển sinh ĐH chính quy); huongnghiep.hocmai.vn (ngành Khúc xạ nhãn khoa).
