@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28c';
+var POS_CODE_VERSION = '2026-11-28d';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -1441,6 +1441,22 @@ API.posBankSave = function (r) {
   var v = { bin: bin, bankName: clean_(b.bankName, 60), account: acc, name: clean_(b.name, 60).toUpperCase() };
   PropertiesService.getScriptProperties().setProperty('POS_BANK', JSON.stringify(v));
   return { bank: v };
+};
+
+// Xóa hẳn đơn: đơn nháp do người tạo xóa; đơn khác chỉ Admin. Hàng trả về kho, phiếu thu/chi tự động của đơn bị xóa khỏi sổ quỹ.
+API.posOrderDelete = function (r) {
+  var nv = posAuth_(r, 'ban_hang');
+  var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
+  if (!row) throw new Error('Không tìm thấy đơn');
+  var o = JSON.parse(row.json), updated = [];
+  if (o.status === 'draft') { if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn nháp này do nhân viên khác tạo'); }
+  else if (!posCan_(nv, 'quan_tri')) throw new Error('Chỉ Admin được xóa đơn đã chốt. Nhân viên dùng Hủy đơn.');
+  if (o.status !== 'draft' && o.status !== 'cancelled')
+    updated = posStock_(nv, o.items.map(function (i) { return { pid: i.pid, qty: i.qty }; }), 1, 'huy', 'Xóa đơn ' + o.code, o.branchId);
+  var q = posTable_('PosQuy'), removed = 0;
+  q.all().slice().reverse().forEach(function (x) { if (x.ref === o.code && String(x.auto).toUpperCase() === 'TRUE') { q.remove(x); removed++; } });
+  t.remove(row);
+  return { id: o.id, products: updated, cashRemoved: removed };
 };
 
 API.posOrderStatus = function (r) {

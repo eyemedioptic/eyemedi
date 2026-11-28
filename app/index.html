@@ -680,12 +680,13 @@ function showReceipt(o,justPaid){
       ${bankQrBlock(o)}
       <div class="c small" style="margin-top:10px">Cảm ơn quý khách!</div>
     </div>
-    <div class="acts" style="flex-wrap:wrap">${o.status==='draft'?`${can('ban_hang')?'<button class="btn danger" id="cancelO" style="margin-right:auto">Xóa nháp</button><button class="btn pri" id="openDraft">Tiếp tục đơn nháp</button>':''}`
-      :`${can('xu_ly_don')&&!justPaid&&o.status!=='cancelled'?'<button class="btn danger" id="cancelO" style="margin-right:auto">Hủy đơn, trả hàng về kho</button>':''}${can('xu_ly_don')&&!['done','cancelled'].includes(o.status)&&!isPaid(o)?'<button class="btn" id="payO">Đã thanh toán</button>':''}${can('xu_ly_don')&&o.status==='pending'?'<button class="btn" data-ns="shipping">Đang giao hàng</button><button class="btn pri" data-ns="pushed">Đẩy vận chuyển</button>':''}${can('xu_ly_don')&&o.status==='pushed'?'<button class="btn pri" data-ns="shipping">Đang giao hàng</button>':''}${can('xu_ly_don')&&o.status==='shipping'?`<button class="btn pri" data-ns="done">${isPaid(o)?'Đã giao xong':'Đã giao, đã thu tiền'}</button>`:''}`}${o.status!=='draft'&&o.status!=='cancelled'&&!justPaid&&(can('xu_ly_don')||o.staffId===(ME&&ME.id)||!SERVER)?'<button class="btn" id="editO">Sửa đơn</button>':''}<button class="btn" id="copyR">Sao chép</button><button class="btn" id="printR">In hóa đơn</button><button class="btn pri" data-close>${justPaid?'Đơn mới':'Đóng'}</button></div>`,
+    <div class="acts" style="flex-wrap:wrap">${o.status==='draft'?`${can('ban_hang')?'<button class="btn danger" id="delO" style="margin-right:auto">Xóa nháp</button><button class="btn pri" id="openDraft">Tiếp tục đơn nháp</button>':''}`
+      :`${(!SERVER||can('quan_tri'))&&!justPaid?'<button class="btn danger" id="delO">Xóa đơn</button>':''}${can('xu_ly_don')&&!justPaid&&o.status!=='cancelled'?'<button class="btn danger" id="cancelO" style="margin-right:auto">Hủy đơn, trả hàng về kho</button>':'<span style="margin-right:auto"></span>'}${can('xu_ly_don')&&!['done','cancelled'].includes(o.status)&&!isPaid(o)?'<button class="btn" id="payO">Đã thanh toán</button>':''}${can('xu_ly_don')&&o.status==='pending'?'<button class="btn" data-ns="shipping">Đang giao hàng</button><button class="btn pri" data-ns="pushed">Đẩy vận chuyển</button>':''}${can('xu_ly_don')&&o.status==='pushed'?'<button class="btn pri" data-ns="shipping">Đang giao hàng</button>':''}${can('xu_ly_don')&&o.status==='shipping'?`<button class="btn pri" data-ns="done">${isPaid(o)?'Đã giao xong':'Đã giao, đã thu tiền'}</button>`:''}`}${o.status!=='draft'&&o.status!=='cancelled'&&!justPaid&&(can('xu_ly_don')||o.staffId===(ME&&ME.id)||!SERVER)?'<button class="btn" id="editO">Sửa đơn</button>':''}<button class="btn" id="copyR">Sao chép</button><button class="btn" id="printR">In hóa đơn</button><button class="btn pri" data-close>${justPaid?'Đơn mới':'Đóng'}</button></div>`,
   {onMount:(m,close)=>{
     $('#copyR',m).onclick=()=>{const txt=$('#rcpt',m).innerText;navigator.clipboard.writeText(txt).then(()=>toast('Đã sao chép hóa đơn')).catch(()=>{const r=document.createRange();r.selectNodeContents($('#rcpt',m));const s=getSelection();s.removeAllRanges();s.addRange(r);toast('Đã chọn nội dung, nhấn Ctrl+C để sao chép')})};
     $$('[data-ns]',m).forEach(b=>b.onclick=()=>{close();setOrderStatus(o,b.dataset.ns)});
     $('#printR',m).onclick=printReceipt;
+    const dl=$('#delO',m);dl&&(dl.onclick=()=>{close();deleteOrder(o)});
     const eo=$('#editO',m);eo&&(eo.onclick=()=>{close();editOrder(o)});
     const od=$('#openDraft',m);od&&(od.onclick=()=>{close();loadDraft(o)});
     const po=$('#payO',m);po&&(po.onclick=()=>{close();payOrder(o)});
@@ -1310,6 +1311,14 @@ function bindNotice(el){
 function renderNotice(){const el=$('#noticeBar');if(el){el.innerHTML=noticeInner();bindNotice(el)}}
 
 /* ---- Trạng thái đơn ---- */
+function deleteOrder(o){
+  const live=o.status!=='draft'&&o.status!=='cancelled';
+  confirmBox(o.status==='draft'?`Xóa đơn nháp ${o.code}?`:`Xóa hẳn đơn ${o.code}? ${live?'Hàng được cộng lại vào kho. ':''}Phiếu thu/chi tự động của đơn này cũng bị xóa khỏi sổ quỹ. Không khôi phục được.`,'Xóa đơn',async()=>{
+    if(SERVER){try{const d=await api('posOrderDelete',{id:o.id});mergeProducts(d.products);CASH=null}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);return}}
+    else{if(live)o.items.forEach(i=>{const p=prod(i.pid);if(p&&!p.service){adjStock(p,i.qty,o.branchId);S.stockLog.push({id:uid(),date:Date.now(),pid:p.id,qty:i.qty,type:'huy',note:'Xóa đơn '+o.code})}});
+      S.cash=(S.cash||[]).filter(e=>!(e.ref===o.code&&e.auto));save()}
+    S.orders=S.orders.filter(x=>x.id!==o.id);seenOrders&&seenOrders.delete(o.id);route();renderNotice();toast('Đã xóa đơn '+o.code)});
+}
 function printReceipt(){document.body.classList.add('printing');const off=()=>{document.body.classList.remove('printing');window.removeEventListener('afterprint',off)};window.addEventListener('afterprint',off);window.print();setTimeout(off,60000)}
 function payOrder(o){
   modal(`<h2>Ghi nhận thanh toán · ${esc(o.code)}</h2><div>Số tiền: <b class="num">${money(o.total)}</b></div>
