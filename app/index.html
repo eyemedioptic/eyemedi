@@ -849,6 +849,16 @@ function viewStock(el){
   }const rs=$('#resetSub',el);rs&&(rs.onclick=resetSubForm);
   if(sub&&!goods.length&&stockTab==='ton')$('#sbody',el).innerHTML='<div class="empty">Kho này chưa có sản phẩm. Bấm <b>+ Thêm sản phẩm vào kho</b> để chọn từng mã từ danh mục (danh mục lấy từ web, có đủ ở kho chính).</div>';
 }
+/* Ô tìm sản phẩm (tên, mã SKU, mã vạch) dùng trong phiếu kho */
+function prodSearchBox(id){return `<div style="position:relative"><input id="${id}" placeholder="Tìm tên, mã SKU hoặc quét mã vạch rồi Enter" autocomplete="off"><div id="${id}_s"></div></div>`}
+function bindProdSearch(m,id,pool,onPick,lb){
+  const inp=$('#'+id,m),box=$('#'+id+'_s',m);let res=[];
+  const find=v=>{const q=norm(v.trim());if(!q)return [];const ex=pool.filter(p=>p.barcode&&p.barcode===v.trim()||norm(p.sku)===q);return ex.length?ex:pool.filter(p=>norm(p.name+' '+p.sku+' '+(p.brand||'')+' '+(p.barcode||'')).includes(q)).slice(0,30)};
+  const pick=p=>{onPick(p);inp.value='';box.innerHTML='';inp.focus()};
+  inp.oninput=()=>{res=find(inp.value);box.innerHTML=inp.value.trim()?`<div class="sugg">${res.length?res.map((p,i)=>`<div data-i="${i}"><b>${esc(p.name)}</b> <span class="muted small">${esc(p.sku)} · ${lb} ${p.stock}</span></div>`).join(''):'<div class="muted">Không tìm thấy sản phẩm</div>'}</div>`:'';
+    $$('[data-i]',box).forEach(d=>d.onclick=()=>pick(res[d.dataset.i]))};
+  inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();res=find(inp.value);if(res.length)pick(res[0])}};
+}
 function stockForm(type){
   if(needBranch('lập phiếu kho'))return;
   const goods=S.products.filter(p=>!p.service);
@@ -857,7 +867,7 @@ function stockForm(type){
   const isN=type==='nhap';
   modal(`<h2>${isN?'Phiếu nhập hàng':'Phiếu kiểm kho'}</h2>
     <div class="small muted">${isN?'Chọn sản phẩm và số lượng nhập thêm. Có thể cập nhật giá vốn mới.':'Nhập số lượng thực tế đếm được. Hệ thống sẽ điều chỉnh tồn kho theo số thực tế.'}</div>
-    <select id="sp"><option value="">— Chọn sản phẩm để thêm —</option>${goods.map(p=>`<option value="${p.id}">${esc(p.sku)} · ${esc(p.name)} (tồn ${p.stock})</option>`).join('')}</select>
+    ${prodSearchBox('sp')}
     <div id="sl" class="tbl-wrap"></div>
     ${isN?`<label class="f">Ghi sổ quỹ tiền hàng<select id="spay"><option value="">Không ghi (trả sau, công nợ)</option>${fundsNow().map(f=>`<option value="${f.id}">Chi từ quỹ ${esc(f.name)}</option>`).join('')}</select></label>`:''}
     <label class="f">Ghi chú<input id="snote" placeholder="${isN?'VD: Nhập từ NCC Chemi, HĐ 0123':'VD: Kiểm kho cuối tháng'}"></label>
@@ -867,7 +877,7 @@ function stockForm(type){
       $$('[data-i]',m).forEach(inp=>inp.onchange=()=>{lines[inp.dataset.i][inp.dataset.k]=parseNum(inp.value)});
       $$('[data-x]',m).forEach(b=>b.onclick=()=>{lines.splice(b.dataset.x,1);draw()});
     };
-    $('#sp',m).onchange=e=>{const p=prod(e.target.value);if(p&&!lines.some(l=>l.pid===p.id))lines.push({pid:p.id,qty:isN?1:p.stock,cost:p.cost});e.target.value='';draw()};
+    bindProdSearch(m,'sp',goods,p=>{if(!lines.some(l=>l.pid===p.id))lines.push({pid:p.id,qty:isN?1:p.stock,cost:p.cost});draw()},'tồn');
     $('#sOk',m).onclick=async()=>{
       if(!lines.length){toast('Chưa chọn sản phẩm');return}
       const note=$('#snote',m).value.trim();const now=Date.now();
@@ -1722,7 +1732,7 @@ function transferForm(){
   let lines=[];
   modal(`<h2>Phiếu chuyển kho</h2>
     <div class="grid2"><label class="f">Từ chi nhánh<input disabled value="${esc(brName(CUR_BR))}"></label><label class="f">Đến chi nhánh<select id="tf_to">${targets.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></label></div>
-    <select id="tf_sp"><option value="">— Chọn sản phẩm để chuyển —</option>${goods.map(p=>`<option value="${p.id}">${esc(p.sku)} · ${esc(p.name)} (còn ${p.stock})</option>`).join('')}</select>
+    ${prodSearchBox('tf_sp')}
     <div id="tf_l" class="tbl-wrap"></div>
     <label class="f">Ghi chú<input id="tf_note" placeholder="VD: Bổ sung gọng cho chi nhánh Dĩ An"></label>
     <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="tf_ok">Chuyển kho</button></div>`,
@@ -1730,7 +1740,7 @@ function transferForm(){
     const draw=()=>{$('#tf_l',m).innerHTML=lines.length?`<table><thead><tr><th>Sản phẩm</th><th class="r">Còn tại đây</th><th class="r">SL chuyển</th><th></th></tr></thead><tbody>${lines.map((l,i)=>{const p=prod(l.pid);return `<tr><td>${esc(p.name)}</td><td class="r num">${p.stock}</td><td class="r"><input data-i="${i}" value="${l.qty}" inputmode="numeric" style="width:80px;text-align:right"></td><td><button class="btn sm danger" data-x="${i}">Bỏ</button></td></tr>`}).join('')}</tbody></table>`:'<div class="empty">Chưa chọn sản phẩm nào.</div>';
       $$('[data-i]',m).forEach(inp=>inp.onchange=()=>{const l=lines[inp.dataset.i];l.qty=Math.max(1,Math.min(prod(l.pid).stock,parseNum(inp.value)));draw()});
       $$('[data-x]',m).forEach(b=>b.onclick=()=>{lines.splice(b.dataset.x,1);draw()})};
-    $('#tf_sp',m).onchange=e=>{const p=prod(e.target.value);if(p&&!lines.some(l=>l.pid===p.id))lines.push({pid:p.id,qty:1});e.target.value='';draw()};
+    bindProdSearch(m,'tf_sp',goods,p=>{if(!lines.some(l=>l.pid===p.id))lines.push({pid:p.id,qty:1});draw()},'còn');
     $('#tf_ok',m).onclick=async()=>{
       if(!lines.length){toast('Chưa chọn sản phẩm');return}
       const to=$('#tf_to',m).value,note=$('#tf_note',m).value.trim();
