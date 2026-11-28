@@ -134,6 +134,10 @@ main a:not(.btn){color:var(--accent)}
 .sumrow{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
 .sumrow.total{font-size:20px;font-weight:700;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
 .seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.dtype{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex:none}
+.dtype button{border:0;background:var(--surface);padding:8px 12px;min-width:40px;cursor:pointer;font-weight:600;color:var(--muted)}
+.dtype button+button{border-left:1px solid var(--line)}
+.dtype button.on{background:var(--accent);color:var(--accent-fg)}
 #methods,#pm{grid-template-columns:repeat(3,1fr)}
 .seg button{border:1px solid var(--line);background:var(--surface);padding:8px 4px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500}
 .seg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
@@ -423,7 +427,7 @@ let posCat='Tất cả',posQ='';
 function cartTotals(){
   const sub=cart.items.reduce((a,i)=>a+i.price*i.qty,0);
   let disc=cart.discType==='pct'?Math.round(sub*Math.min(100,cart.discount)/100):Math.min(sub,cart.discount);
-  const ship=cart.channel==='pos'?0:cart.shipFee||0;
+  const ship=cart.channel!=='pos'||shipNeeded()?cart.shipFee||0:0;
   return {sub,disc,ship,total:sub-disc+ship};
 }
 function viewPOS(el){
@@ -484,7 +488,7 @@ function renderCart(){
     </div>
     <div>
       <div class="sumrow"><span>Tạm tính</span><span class="num">${money(t.sub)}</span></div>
-      <div class="sumrow" style="align-items:center"><span>Giảm giá</span><span style="display:flex;gap:6px;align-items:center"><input id="disc" value="${cart.discount||''}" inputmode="numeric" placeholder="0" style="width:96px;text-align:right"><select id="discType" style="width:68px"><option value="vnd"${cart.discType==='vnd'?' selected':''}>₫</option><option value="pct"${cart.discType==='pct'?' selected':''}>%</option></select></span></div>
+      <div class="sumrow" style="align-items:center"><span>Giảm giá</span><span style="display:flex;gap:6px;align-items:center"><input id="disc" value="${cart.discount||''}" inputmode="numeric" placeholder="${cart.discType==='pct'?'Nhập %':'Nhập số tiền'}" style="width:120px;text-align:right"><span class="dtype" id="discType"><button data-t="vnd" class="${cart.discType!=='pct'?'on':''}">₫</button><button data-t="pct" class="${cart.discType==='pct'?'on':''}">%</button></span></span></div>
       ${t.disc?`<div class="sumrow small muted"><span></span><span class="num">−${money(t.disc)}</span></div>`:''}
       ${online||shipNeeded()?`<div class="sumrow" style="align-items:center"><span>Phí giao hàng</span><input id="shipFee" value="${cart.shipFee||''}" inputmode="numeric" placeholder="0" style="width:170px;text-align:right"></div>`:''}
       <div class="sumrow total"><span>Khách cần trả</span><span class="num">${money(t.total)}</span></div>
@@ -507,7 +511,8 @@ function renderCart(){
   $$('[data-q]',c).forEach(inp=>inp.onchange=()=>{const i=cart.items[inp.dataset.q];const p=prod(i.pid);let v=Math.max(0,parseNum(inp.value));if(p&&!p.service&&v>p.stock)toast(`Tồn chỉ còn ${p.stock}: vẫn bán được, nhớ nhập kho bổ sung`);if(v===0)cart.items.splice(inp.dataset.q,1);else i.qty=v;renderCart()});
   $$('[data-rm]',c).forEach(b=>b.onclick=()=>{cart.items.splice(b.dataset.rm,1);renderCart()});
   const d=$('#disc',c);d.onchange=()=>{cart.discount=parseNum(d.value);renderCart()};
-  $('#discType',c).onchange=e=>{cart.discType=e.target.value;renderCart()};
+  d.oninput=()=>{cart.discount=parseNum(d.value)};
+  $$('#discType button',c).forEach(b=>b.onmousedown=b.ontouchstart=e=>{e.preventDefault();cart.discount=parseNum(d.value);cart.discType=b.dataset.t;if(cart.discType==='pct'&&cart.discount>100)cart.discount=0;renderCart()});
   $$('#methods button',c).forEach(b=>b.onclick=()=>{cart.method=b.dataset.k;renderCart()});
   $('#chan',c).onchange=e=>{cart.channel=e.target.value;cart.status='';if(!PAY_METHODS[cart.method])cart.method='cash';renderCart()};
   const cs=$('#ctvSel',c);cs&&(cs.onchange=e=>cart.ctvId=e.target.value);
