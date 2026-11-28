@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28a';
+var POS_CODE_VERSION = '2026-11-28b';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -983,6 +983,11 @@ var POS_ROLES = {
 };
 var POS_STATUS = ['draft', 'pending', 'pushed', 'shipping', 'done', 'cancelled'];
 // Đơn đã ghi thu vào sổ quỹ chưa (đơn cũ hoàn thành trước bản này coi như đã ghi)
+var POS_CARRIERS = ['', 'spx', 'ghn', 'self'];
+function posShipInfo_(o, src) {
+  o.carrier = POS_CARRIERS.indexOf(String(src.carrier || '')) >= 0 ? String(src.carrier || '') : '';
+  o.trackingCode = clean_(src.trackingCode, 60);
+}
 function posCashed_(o) { return o.cashed === true || (o.cashed === undefined && o.status === 'done'); }
 
 function posTable_(name) {
@@ -1335,6 +1340,7 @@ API.posCreateOrder = function (r) {
   o.staffId = nv.id; o.staffName = nv.full_name; o.branchId = br; o.branchName = posBranchName_(br);
   o.history = [{ t: o.date, by: nv.full_name, status: o.status }];
   ['note', 'address'].forEach(function (k) { o[k] = clean_(o[k], 500); });
+  posShipInfo_(o, o);
   if (o.status === 'draft') { o.paid = 0; o.cashed = false; }
   else if (paidNow) { o.paid = Math.max(o.total, Math.round(num_(o.paid))); o.paidAt = o.date; o.cashed = true; if (o.status === 'done') o.doneAt = o.date; }
   else { o.paid = 0; o.cashed = false; }
@@ -1383,6 +1389,45 @@ API.posSpxSave = function (r) {
     if (x) p.setProperty(k, x); else if (r.clear) p.deleteProperty(k);
   });
   return API.posSpxGet(r);
+};
+
+// Sửa đơn: đơn chưa thanh toán sửa được hàng và tiền (kho tự cộng/trừ phần chênh); đơn đã thanh toán chỉ sửa thông tin giao hàng
+API.posOrderUpdate = function (r) {
+  var nv = posAuth_(r, 'ban_hang');
+  var t = posTable_('PosDon'), row = t.find('id', String(r.id || ''));
+  if (!row) throw new Error('Không tìm thấy đơn');
+  if (!posCan_(nv, 'don_tat_ca') && row.staff_id !== nv.id) throw new Error('Đơn này do nhân viên khác phụ trách');
+  var o = JSON.parse(row.json), n = r.order || {}, updated = [];
+  if (o.status === 'cancelled' || o.status === 'draft') throw new Error('Đơn đã hủy hoặc là đơn nháp');
+  ['note', 'address'].forEach(function (k) { if (n[k] !== undefined) o[k] = clean_(n[k], 500); });
+  if (n.customerId !== undefined) o.customerId = n.customerId || null;
+  posShipInfo_(o, { carrier: n.carrier !== undefined ? n.carrier : o.carrier, trackingCode: n.trackingCode !== undefined ? n.trackingCode : o.trackingCode });
+  if (!r.infoOnly) {
+    if (posCashed_(o) || o.status === 'done') throw new Error('Đơn đã thanh toán, chỉ sửa được thông tin giao hàng');
+    if (!n.items || !n.items.length) throw new Error('Đơn chưa có sản phẩm');
+    var prods = {}; posData_('product').forEach(function (p) { prods[p.id] = p; });
+    var items = n.items.map(function (i) {
+      var p = prods[i.pid]; if (!p) throw new Error('Sản phẩm "' + clean_(i.name, 80) + '" không còn trong danh mục');
+      return { pid: p.id, name: p.name, sku: p.sku, price: Math.round(num_(i.price)), cost: Math.round(num_(p.cost)), qty: Math.max(1, Math.round(num_(i.qty))) };
+    });
+    var d = {};
+    o.items.forEach(function (i) { d[i.pid] = (d[i.pid] || 0) + i.qty; });
+    items.forEach(function (i) { d[i.pid] = (d[i.pid] || 0) - i.qty; });
+    var back = [], take = [];
+    Object.keys(d).forEach(function (pid) { if (d[pid] > 0) back.push({ pid: pid, qty: d[pid] }); if (d[pid] < 0) take.push({ pid: pid, qty: -d[pid] }); });
+    updated = posStock_(nv, back, 1, 'huy', 'Sửa đơn ' + o.code, o.branchId).concat(posStock_(nv, take, -1, 'ban', 'Sửa đơn ' + o.code, o.branchId));
+    o.items = items;
+    o.subtotal = items.reduce(function (a, i) { return a + i.price * i.qty; }, 0);
+    o.discount = Math.max(0, Math.min(o.subtotal, Math.round(num_(n.discount))));
+    o.shipFee = Math.max(0, Math.round(num_(n.shipFee)));
+    o.total = o.subtotal - o.discount + o.shipFee;
+    if (['cash', 'bank', 'card', 'cod'].indexOf(n.method) >= 0) o.method = n.method;
+    if (CHANNELS_OK_.indexOf(n.channel) >= 0) o.channel = n.channel;
+    if (o.ctvId && o.commission) { var c = posData_('ctv').filter(function (x) { return x.id === o.ctvId; })[0]; if (c) o.commission = Math.round((o.subtotal - o.discount) * num_(c.rate) / 100); }
+  }
+  o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: o.status, edited: true }]);
+  t.update(row, { total: o.total, channel: o.channel, customer_id: o.customerId || '', updated_at: now_(), json: JSON.stringify(o) });
+  return { order: o, products: updated };
 };
 
 API.posOrderStatus = function (r) {
