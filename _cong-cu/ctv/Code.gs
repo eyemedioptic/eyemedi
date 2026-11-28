@@ -81,7 +81,7 @@ function folder_() {
 }
 
 /* ====================== CỔNG API ====================== */
-var POS_CODE_VERSION = '2026-11-28b';
+var POS_CODE_VERSION = '2026-11-28c';
 function doGet(e) {
   if (e && e.parameter && e.parameter.kiemtra !== undefined) return json_(posDiag_(e.parameter.ten));
   return json_({ ok: true, service: 'eyemedi-ctv', version: CONTRACT_VERSION, pos: POS_CODE_VERSION });
@@ -1219,7 +1219,7 @@ API.posChangePassword = function (r) {
 API.posLoad = function (r) {
   var nv = posAuth_(r);
   var out = { me: posPublic_(nv), products: posData_('product'), customers: posData_('customer'),
-              ctvs: posData_('ctv'), orders: posOrders_(nv), stockLog: [], branches: posBranches_(), myBranches: posMyBranches_(nv) };
+              ctvs: posData_('ctv'), orders: posOrders_(nv), stockLog: [], branches: posBranches_(), myBranches: posMyBranches_(nv), bank: posBank_() };
   if (posCan_(nv, 'kho') || posCan_(nv, 'bao_cao')) {
     var k = posTable_('PosKho').all();
     out.stockLog = k.slice(Math.max(0, k.length - 500)).map(function (x) {
@@ -1428,6 +1428,19 @@ API.posOrderUpdate = function (r) {
   o.history = (o.history || []).concat([{ t: Date.now(), by: nv.full_name, status: o.status, edited: true }]);
   t.update(row, { total: o.total, channel: o.channel, customer_id: o.customerId || '', updated_at: now_(), json: JSON.stringify(o) });
   return { order: o, products: updated };
+};
+
+// Tài khoản ngân hàng in mã VietQR trên hóa đơn chuyển khoản (Admin cài đặt)
+function posBank_() { try { return JSON.parse(PropertiesService.getScriptProperties().getProperty('POS_BANK') || 'null'); } catch (e) { return null; } }
+API.posBankSave = function (r) {
+  posAuth_(r, 'quan_tri');
+  var b = r.bank || {}, bin = String(b.bin || '').replace(/\D/g, ''), acc = String(b.account || '').replace(/[^0-9A-Za-z]/g, '');
+  if (!bin && !acc) { PropertiesService.getScriptProperties().setProperty('POS_BANK', 'null'); return { bank: null }; }
+  if (bin.length !== 6) throw new Error('Mã ngân hàng (BIN) phải gồm 6 số');
+  if (acc.length < 4 || acc.length > 19) throw new Error('Số tài khoản không hợp lệ');
+  var v = { bin: bin, bankName: clean_(b.bankName, 60), account: acc, name: clean_(b.name, 60).toUpperCase() };
+  PropertiesService.getScriptProperties().setProperty('POS_BANK', JSON.stringify(v));
+  return { bank: v };
 };
 
 API.posOrderStatus = function (r) {

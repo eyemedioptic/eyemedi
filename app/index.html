@@ -134,6 +134,8 @@ main a:not(.btn){color:var(--accent)}
 .sumrow{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
 .sumrow.total{font-size:20px;font-weight:700;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
 .seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.qrimg{width:170px;height:170px;margin:6px auto;background:#fff;padding:4px;border-radius:6px}.qrimg svg{width:100%;height:100%;display:block}
+@media print{body.printing .qrimg{width:44mm;height:44mm}}
 .dtype{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex:none}
 .dtype button{border:0;background:var(--surface);padding:8px 12px;min-width:40px;cursor:pointer;font-weight:600;color:var(--muted)}
 .dtype button+button{border-left:1px solid var(--line)}
@@ -242,6 +244,7 @@ a.btn{color:var(--fg)}a.btn.pri{color:var(--accent-fg)}
 </div>
 
 <script src="/ctv/config.js"></script>
+<script src="qrcode.js" defer></script>
 <script>
 /* ============ Dữ liệu ============ */
 const KEY='eyemedi-pos-v1';
@@ -250,6 +253,43 @@ const METHODS={cash:'Tiền mặt',bank:'Chuyển khoản',card:'Quẹt thẻ',c
 const CHANNELS={pos:'Tại quầy',facebook:'Facebook',zalo:'Zalo',chatbot:'Chatbot',ctv:'Cộng tác viên',web:'Website'};
 const STATUS={draft:['Đơn nháp','neu'],pending:['Chờ xác nhận','warn'],pushed:['Đã đẩy vận chuyển','neu'],shipping:['Đang giao hàng','neu'],done:['Hoàn thành','good'],cancelled:['Đã hủy','bad']};
 const PAY_METHODS={cash:'Tiền mặt',bank:'Chuyển khoản',cod:'COD (thu hộ)'};
+let BANK=null;
+const BANKS=[['970436','Vietcombank'],['970415','VietinBank'],['970418','BIDV'],['970405','Agribank'],['970407','Techcombank'],['970422','MB Bank'],['970416','ACB'],['970432','VPBank'],['970423','TPBank'],['970403','Sacombank'],['970441','VIB'],['970443','SHB'],['970437','HDBank'],['970448','OCB'],['970426','MSB'],['970440','SeABank'],['970431','Eximbank'],['970449','LPBank'],['970428','Nam A Bank'],['970454','Bản Việt (BVBank, Timo)'],['970452','KienlongBank'],['970425','ABBANK'],['970412','PVcomBank'],['970427','VietABank'],['970409','Bac A Bank'],['970424','Shinhan Bank'],['546034','CAKE by VPBank']];
+const bankInfo=()=>SERVER?BANK:(S.bank||null);
+/* Mã VietQR (chuẩn EMVCo/NAPAS) có sẵn số tiền và nội dung chuyển khoản */
+function vietqrPayload(b,amount,info){
+  const f=(id,v)=>id+String(v.length).padStart(2,'0')+v;
+  const ascii=String(info||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').replace(/[^A-Za-z0-9 ]/g,' ').trim().slice(0,25);
+  let p=f('00','01')+f('01',amount?'12':'11')+f('38',f('00','A000000727')+f('01',f('00',b.bin)+f('01',b.account))+f('02','QRIBFTTA'))+f('53','704')+(amount?f('54',String(Math.round(amount))):'')+f('58','VN')+(ascii?f('62',f('08',ascii)):'')+'6304';
+  let c=0xFFFF;for(let i=0;i<p.length;i++){c^=p.charCodeAt(i)<<8;for(let k=0;k<8;k++)c=c&0x8000?((c<<1)^0x1021)&0xFFFF:(c<<1)&0xFFFF}
+  return p+c.toString(16).toUpperCase().padStart(4,'0');
+}
+function qrSvg(text,size){if(typeof qrcode!=='function')return '';const q=qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag({cellSize:Math.max(2,Math.floor((size||180)/(q.getModuleCount()+8))),margin:4,scalable:true})}
+function bankQrBlock(o){
+  const b=bankInfo();if(!b||o.method!=='bank')return '';
+  const svg=qrSvg(vietqrPayload(b,o.total,o.code),180);
+  return `<div class="c qrpay" style="margin-top:10px;border-top:1px dashed var(--line);padding-top:10px">${svg?`<div class="qrimg">${svg}</div>`:''}<div class="num" style="font-weight:700">${esc(b.account)}</div><div class="small">${esc(b.bankName||'')}</div><div class="small">${esc(b.name||'')}</div></div>`;
+}
+function bankForm(){
+  const b=bankInfo()||{};const known=BANKS.some(x=>x[0]===b.bin);
+  modal(`<h2>Tài khoản nhận chuyển khoản</h2>
+    <div class="small muted">Hóa đơn của đơn chọn Chuyển khoản sẽ in kèm mã VietQR có sẵn số tiền và mã đơn. Khách quét bằng app ngân hàng bất kỳ.</div>
+    <label class="f">Ngân hàng<select id="bk_bin">${BANKS.map(([v,l])=>`<option value="${v}"${v===b.bin?' selected':''}>${l}</option>`).join('')}<option value=""${b.bin&&!known?' selected':''}>Ngân hàng khác (nhập mã BIN)</option></select></label>
+    <label class="f" id="bk_binw"${b.bin&&!known?'':' hidden'}>Mã BIN ngân hàng (6 số)<input id="bk_bin2" inputmode="numeric" value="${b.bin&&!known?esc(b.bin):''}"></label>
+    <label class="f">Số tài khoản<input id="bk_acc" inputmode="numeric" value="${esc(b.account||'')}"></label>
+    <label class="f">Tên chủ tài khoản<input id="bk_name" value="${esc(b.name||'')}" placeholder="VD: CONG TY TNHH EYEMEDI"></label>
+    <div id="bk_prev" class="c"></div>
+    <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="bk_save">Lưu</button></div>`,
+  {onMount:(m,close)=>{
+    const val=()=>{const sel=$('#bk_bin',m).value;const bin=sel||$('#bk_bin2',m).value.replace(/\D/g,'');return {bin,bankName:sel?BANKS.find(x=>x[0]===sel)[1]:'Ngân hàng '+bin,account:$('#bk_acc',m).value.replace(/[^0-9A-Za-z]/g,''),name:$('#bk_name',m).value.trim().toUpperCase()}};
+    const prev=()=>{const v=val();$('#bk_binw',m).hidden=!!$('#bk_bin',m).value;$('#bk_prev',m).innerHTML=v.bin.length===6&&v.account.length>=4?`<div class="qrimg" style="margin:auto">${qrSvg(vietqrPayload(v,10000,'THU QR'),160)}</div><div class="small muted">Mã thử 10.000₫. Quét bằng app ngân hàng để kiểm tra tên chủ tài khoản trước khi lưu.</div>`:''};
+    ['#bk_bin','#bk_bin2','#bk_acc','#bk_name'].forEach(k=>{$(k,m).oninput=prev;$(k,m).onchange=prev});prev();
+    $('#bk_save',m).onclick=async()=>{const v=val();
+      if(v.bin.length!==6){toast('Chọn ngân hàng hoặc nhập đủ 6 số BIN');return}if(v.account.length<4){toast('Nhập số tài khoản');return}
+      if(SERVER){try{BANK=(await api('posBankSave',{bank:v})).bank}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);return}}
+      else{S.bank=v;save()}
+      close();toast('Đã lưu tài khoản nhận chuyển khoản')}}});
+}
 const CARRIERS={spx:'SPX Express',ghn:'Giao Hàng Nhanh',self:'Shop tự giao'};
 const isPaid=o=>o.cashed===true||(o.cashed===undefined&&o.status==='done');
 const NEW_STATUS={done:'Hoàn thành, đã giao cho khách',pending:'Chờ xác nhận',pushed:'Đẩy vận chuyển',shipping:'Đang giao hàng'};
@@ -499,6 +539,7 @@ function renderCart(){
       <div class="small muted" style="margin-bottom:6px">Hình thức thanh toán</div>
       <div class="seg" id="methods">${Object.entries(PAY_METHODS).map(([k,v])=>`<button data-k="${k}" class="${cart.method===k?'on':''}">${v}</button>`).join('')}</div>
       ${curStat()!=='done'&&cart.method!=='cod'&&!cart.editId?`<label class="chk" style="margin-top:10px"><input type="checkbox" id="paidNow"${cart.paidNow?' checked':''}> Khách đã thanh toán</label>`:''}
+      ${cart.method==='bank'&&!bankInfo()?`<div class="small muted" style="margin-top:6px">Chưa cài tài khoản nhận tiền nên hóa đơn chưa có mã QR.${can('quan_tri')||!SERVER?' <a href="#" id="setBank">Cài đặt ngay</a>':' Nhờ Admin cài ở Thêm › Tài khoản ngân hàng.'}</div>`:''}
       ${cart.method==='cod'?'<div class="small muted" style="margin-top:6px">Đơn vị vận chuyển thu tiền khi giao. Đơn được ghi đã thanh toán khi chuyển sang Hoàn thành.</div>':''}
       ${online||shipNeeded()?`<label class="f" style="margin-top:10px">Địa chỉ giao hàng<input id="addr" value="${esc(cart.address)}" placeholder="Số nhà, đường, phường, quận, tỉnh"></label>`:''}
       ${cart.method==='cash'&&!online&&(curStat()==='done'||cart.paidNow)?`<div class="grid2" style="margin-top:10px"><label class="f">Khách đưa<input id="given" value="${esc(cart.given)}" inputmode="numeric" placeholder="${t.total.toLocaleString('vi-VN')}"></label><label class="f">Tiền thừa trả khách<input disabled value="${cart.given?(change>=0?change.toLocaleString('vi-VN')+'₫':'Thiếu '+(-change).toLocaleString('vi-VN')+'₫'):''}"></label></div>`:''}
@@ -522,6 +563,7 @@ function renderCart(){
   $('#cnote',c).oninput=e=>cart.note=e.target.value;
   $('#clearCart',c).onclick=()=>{const ed=cart.editId;resetCart();renderCart();if(ed)toast('Đã thôi sửa đơn')};
   $('#checkout',c).onclick=()=>cart.editId?saveEdit():checkout(false);const sd=$('#saveDraft',c);sd&&(sd.onclick=()=>checkout(true));
+  const sbk=$('#setBank',c);sbk&&(sbk.onclick=e=>{e.preventDefault();bankForm()});
   const ca=$('#carrier',c);ca&&(ca.onchange=e=>{cart.carrier=e.target.value});
   $('#ostat',c).onchange=e=>{cart.status=e.target.value;renderCart()};
   const pn=$('#paidNow',c);pn&&(pn.onchange=()=>{cart.paidNow=pn.checked;renderCart()});
@@ -635,6 +677,7 @@ function showReceipt(o,justPaid){
       ${o.rx?`<div style="margin-top:10px"><div class="small" style="font-weight:600;margin-bottom:4px">Đơn kính</div>${rxTable(o.rx)}</div>`:''}
       ${o.note?`<div class="small" style="margin-top:8px">Ghi chú: ${esc(o.note)}</div>`:''}
       ${o.history&&o.history.length>1?`<div class="small" style="margin-top:8px">Xử lý: ${o.history.map(h=>`${fmtDT(h.t)} ${esc(h.by)}: ${STATUS[h.status]?STATUS[h.status][0]:''}`).join(' → ')}</div>`:''}
+      ${bankQrBlock(o)}
       <div class="c small" style="margin-top:10px">Cảm ơn quý khách!</div>
     </div>
     <div class="acts" style="flex-wrap:wrap">${o.status==='draft'?`${can('ban_hang')?'<button class="btn danger" id="cancelO" style="margin-right:auto">Xóa nháp</button><button class="btn pri" id="openDraft">Tiếp tục đơn nháp</button>':''}`
@@ -1145,7 +1188,7 @@ async function refreshData(){
   const d=await api('posLoad');ME=d.me;
   S={products:d.products||[],customers:d.customers||[],ctvs:d.ctvs||[],orders:(d.orders||[]).sort((a,b)=>a.date-b.date),stockLog:d.stockLog||[],seq:0,sample:false};
   seenOrders=new Set(S.orders.map(o=>o.id));
-  BRANCHES=d.branches||DEFAULT_BRANCHES;MY_BR=d.myBranches||[];pickBranch();applyStockView();
+  BRANCHES=d.branches||DEFAULT_BRANCHES;MY_BR=d.myBranches||[];BANK=d.bank||null;pickBranch();applyStockView();
   if(!S.products.length&&can('san_pham')&&!AUTO_WEB){AUTO_WEB=true;setTimeout(autoImportWeb,300)}
 }
 // Máy chủ chưa có sản phẩm nào: tự nạp toàn bộ sản phẩm, mã và giá đang bán trên eyemedi.vn
@@ -1326,8 +1369,8 @@ async function importSheetServer(res,close){
 
 /* ---- Quản lý nhân viên ---- */
 async function viewStaff(el){
-  el.innerHTML=`<div class="head"><h1>Nhân viên</h1><span class="grow"></span><span class="small muted">Chỉ Admin tạo, duyệt và cấp quyền nhân viên.</span>${SERVER?'<button class="btn" id="spxBtn">Kết nối SPX</button><button class="btn pri" id="newStaff">+ Tạo nhân viên</button>':''}</div><div class="card" id="stf"><div class="empty">Đang tải…</div></div>`;
-  const box=$('#stf',el);const sb=$('#spxBtn',el);sb&&(sb.onclick=spxForm);
+  el.innerHTML=`<div class="head"><h1>Nhân viên</h1><span class="grow"></span><span class="small muted">Chỉ Admin tạo, duyệt và cấp quyền nhân viên.</span>${SERVER?'<button class="btn" id="bankBtn">Tài khoản QR</button><button class="btn" id="spxBtn">Kết nối SPX</button><button class="btn pri" id="newStaff">+ Tạo nhân viên</button>':''}</div><div class="card" id="stf"><div class="empty">Đang tải…</div></div>`;
+  const box=$('#stf',el);const sb=$('#spxBtn',el);sb&&(sb.onclick=spxForm);const bb=$('#bankBtn',el);bb&&(bb.onclick=bankForm);
   if(!SERVER){box.innerHTML='<div class="empty">Quản lý nhân viên cần kết nối máy chủ. '+esc(SERVER_NOTE)+'</div>';box.insertAdjacentHTML('afterend',branchCard());bindBranchCard(el,()=>viewStaff(el));return}
   let d;try{d=await api('posStaffList')}catch(e){box.innerHTML=`<div class="empty">${esc(e.message)}</div>`;return}
   const order={pending:0,active:1,locked:2};
@@ -1859,6 +1902,7 @@ function viewMore(el){
       ['cash','Sổ quỹ',()=>goTo('so-quy'),can('so_quy')]]],
     ['Hệ thống',[
       ['staff','Nhân viên và chi nhánh',()=>goTo('nhan-vien'),can('quan_tri')],
+      ['cash','Tài khoản ngân hàng (mã QR)',()=>bankForm(),!SERVER||can('quan_tri')],
       ['truck','Kết nối SPX (mã API)',()=>spxForm(),SERVER&&can('quan_tri')],
       ['ext','Trang cộng tác viên',ctvLink,1],
       ['phone','Cài lên điện thoại',()=>installApp(),!isStandalone()],
