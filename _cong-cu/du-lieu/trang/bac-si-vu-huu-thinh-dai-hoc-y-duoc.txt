@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKII Vũ Hữu Thịnh – Trưởng khoa Tạo hình Thẩm mỹ, BV Đại học Y Dược TP.HCM
+TITLE: Bác sĩ Vũ Hữu Thịnh – Tạo hình BV Đại học Y Dược | EYEMEDI
+SLUG: bac-si-vu-huu-thinh-dai-hoc-y-duoc
+TU_KHOA_CHINH: bác sĩ Vũ Hữu Thịnh Đại học Y Dược
+TU_KHOA_PHU: trưởng khoa tạo hình thẩm mỹ Đại học Y Dược, vi phẫu tạo hình đầu mặt cổ, tái tạo vú TP.HCM, phẫu thuật thẩm mỹ Quận 5
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKII Vũ Hữu Thịnh, Trưởng khoa Tạo hình Thẩm mỹ BV Đại học Y Dược TP.HCM: quá trình đào tạo vi phẫu, lịch khám, dịch vụ và địa chỉ 215 Hồng Bàng.
+NGAY_DANG: 2026-11-28
+DOAN_MO_DAU: Vi phẫu là kỹ thuật nối mạch máu, thần kinh dưới kính hiển vi, nền tảng của nhiều ca tái tạo khó. BS.CKII Vũ Hữu Thịnh, Trưởng khoa Tạo hình – Thẩm mỹ, Bệnh viện Đại học Y Dược TP.HCM, là bác sĩ có quá trình học vi phẫu tạo hình ở nhiều nơi. Bài viết tổng hợp thông tin bệnh viện công bố, chỉ để tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-vu-huu-thinh-dai-hoc-y-duoc-1.jpg | Khách đến thăm cửa hàng EYEMEDI tại 63C Lạc Long Quân
+anh-rieng/bac-si-vu-huu-thinh-dai-hoc-y-duoc-2.jpg | Đo khúc xạ bằng máy tự động tại EYEMEDI
+anh-rieng/bac-si-vu-huu-thinh-dai-hoc-y-duoc-3.jpg | Khu trưng bày gọng kính tại EYEMEDI
+H2_1: Từ chấn thương chỉnh hình đến tạo hình thẩm mỹ
+NOI_DUNG_1: <p>Theo hồ sơ trên website Bệnh viện Đại học Y Dược TP.HCM, <b>BS.CKII Vũ Hữu Thịnh</b> tốt nghiệp bác sĩ đa khoa năm 2002, làm việc tại khoa Chấn thương chỉnh hình Bệnh viện Chợ Rẫy (2002–2007), sau đó hoàn thành Chuyên khoa I Chấn thương chỉnh hình (2007) và Chuyên khoa II Ngoại tổng quát tại Học viện Quân y (2015).</p>
+<p>Bác sĩ học vi phẫu tạo hình đầu mặt cổ tại Cathay Hospital (Đài Bắc, 2008), tạo hình – thẩm mỹ tại ASAN Hospital (Seoul, 2009) và khóa vạt da tạo hình tại San Francisco (2010). Bác sĩ làm việc tại khoa từ 2008, là Phó Trưởng khoa giai đoạn 2020–2024 và Trưởng khoa từ 2024. Xem hồ sơ và hình ảnh bác sĩ trên <a href="https://bvdaihoc.com.vn/en/doctors/vu-huu-thinh-id-1801" target="_blank" rel="noopener">trang chính thức của Bệnh viện Đại học Y Dược TP.HCM</a>.</p>
+H2_2: Dịch vụ và lịch khám tại cơ sở Hồng Bàng
+NOI_DUNG_2: <ul><li>Phẫu thuật thẩm mỹ vùng ngực, tạo hình bụng, hút mỡ và cấy mỡ.</li><li>Thẩm mỹ mũi, mí mắt, cằm; căng da mặt.</li><li>Vi phẫu tái tạo, tái tạo vú, vạt da che phủ khuyết hổng.</li><li>Điều trị vết thương, vết loét mạn tính.</li></ul>
+<p><b>Địa chỉ:</b> Khoa Tạo hình – Thẩm mỹ, Bệnh viện Đại học Y Dược TP.HCM, 215 Hồng Bàng, Phường Chợ Lớn (Quận 5 cũ), TP.HCM. <b>Tổng đài:</b> (028) 3855 4269. Lịch khám ghi trên hồ sơ: sáng thứ Hai, sáng thứ Tư. Cùng khoa có <a href="/bac-si-nguyen-manh-don-dai-hoc-y-duoc.html">BS.CKII Nguyễn Mạnh Đôn</a>.</p>
+H2_3: Chuẩn bị gì trước buổi tư vấn?
+NOI_DUNG_3: <p>Nên mang theo kết quả xét nghiệm, đơn thuốc đang dùng, ghi rõ tiền sử dị ứng và các lần can thiệp thẩm mỹ trước đây. Bạn có thể tham khảo thêm <a href="/cach-chon-tham-my-vien-uy-tin-tai-tphcm.html">cách chọn cơ sở thẩm mỹ uy tín</a> để biết nên hỏi những gì.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Sau phẫu thuật vùng mặt, gọng kính nhẹ giúp giảm tì đè lên sống mũi. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM tư vấn gọng nhẹ và chỉnh đệm mũi miễn phí.
+HOI_1: BS.CKII Vũ Hữu Thịnh giữ vị trí gì tại bệnh viện?
+DAP_1: Theo hồ sơ Bệnh viện Đại học Y Dược TP.HCM, bác sĩ là Trưởng khoa Tạo hình – Thẩm mỹ từ năm 2024 và là giảng viên Bộ môn Tạo hình – Thẩm mỹ từ năm 2010.
+HOI_2: Bác sĩ khám vào những buổi nào?
+DAP_2: Hồ sơ ghi lịch khám sáng thứ Hai và sáng thứ Tư; lịch có thể thay đổi nên nên gọi (028) 3855 4269 để xác nhận.
+HOI_3: Khoa có nhận điều trị vết thương lâu lành không?
+DAP_3: Có. Bên cạnh thẩm mỹ, khoa còn điều trị vết thương, vết loét mạn tính và che phủ khuyết hổng bằng vạt da; chỉ định do bác sĩ quyết định sau khi khám.
+SAN_PHAM: p-sufiar-2804, shengdluo-62203, kinh-mat-nam-oxfrd, kinh-mat-nu-oval, vidic-8840, trong-trang-cung-156, pk-dem-mui-silicon, kinh-mat-nu-g-style
+LIEN_QUAN: bac-si-nguyen-manh-don-dai-hoc-y-duoc | BS.CKII Nguyễn Mạnh Đôn – BV Đại học Y Dược; cach-chon-tham-my-vien-uy-tin-tai-tphcm | Cách chọn thẩm mỹ viện uy tín tại TP.HCM; bac-si-phau-thuat-tham-my-gioi-tai-tphcm | Bác sĩ phẫu thuật thẩm mỹ tại TP.HCM
+LINK_TRONG_BAI: BS.CKII Nguyễn Mạnh Đôn → bac-si-nguyen-manh-don-dai-hoc-y-duoc; cách chọn cơ sở thẩm mỹ uy tín → cach-chon-tham-my-vien-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-nguyen-manh-don-dai-hoc-y-duoc, bac-si-phau-thuat-tham-my-gioi-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh thư mục Google Drive của EYEMEDI (IMG_7614, IMG_6015, IMG_9092)
+NGUON_THAM_KHAO: Bệnh viện Đại học Y Dược TP.HCM – BS.CKII Vũ Hữu Thịnh (https://bvdaihoc.com.vn/en/doctors/vu-huu-thinh-id-1801); Chương trình đào tạo thực hành chăm sóc người bệnh chuyên khoa Tạo hình – Thẩm mỹ (https://www.bvdaihoc.com.vn/upload/BanTinBV/HoiThao/2024/02/TMCT.pdf)

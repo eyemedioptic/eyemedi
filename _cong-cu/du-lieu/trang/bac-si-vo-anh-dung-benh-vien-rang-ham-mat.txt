@@ -1,0 +1,38 @@
+TIEU_DE: TS.BS Võ Anh Dũng – Trưởng khoa Phẫu thuật Hàm mặt, BV Răng Hàm Mặt TP.HCM
+TITLE: Bác sĩ Võ Anh Dũng – Phẫu thuật hàm mặt TP.HCM | EYEMEDI
+SLUG: bac-si-vo-anh-dung-benh-vien-rang-ham-mat
+TU_KHOA_CHINH: bác sĩ Võ Anh Dũng Răng Hàm Mặt
+TU_KHOA_PHU: khoa phẫu thuật hàm mặt TP.HCM, khe hở môi vòm miệng, chấn thương hàm mặt, tạo hình vi phẫu hàm mặt
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: TS.BS Võ Anh Dũng, Trưởng khoa Phẫu thuật Hàm mặt BV Răng Hàm Mặt TP.HCM: khe hở môi – vòm miệng, chấn thương, tạo hình vi phẫu, địa chỉ và tổng đài.
+NGAY_DANG: 2026-11-28
+DOAN_MO_DAU: Tạo hình vùng mặt không chỉ là làm đẹp: trẻ sinh ra với khe hở môi, người bị chấn thương hàm mặt cũng cần bác sĩ phẫu thuật tạo hình. Tại Bệnh viện Răng Hàm Mặt TP.HCM, TS.BS Võ Anh Dũng là Trưởng khoa Phẫu thuật Hàm mặt. Thông tin dưới đây lấy từ trang chính thức của bệnh viện, chỉ để tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-vo-anh-dung-benh-vien-rang-ham-mat-1.jpg | Quầy kính và khu đo mắt tại cửa hàng EYEMEDI
+anh-rieng/bac-si-vo-anh-dung-benh-vien-rang-ham-mat-2.jpg | Kiểm tra khúc xạ bằng máy tự động tại EYEMEDI
+anh-rieng/bac-si-vo-anh-dung-benh-vien-rang-ham-mat-3.jpg | Khách hàng thử kính tại EYEMEDI
+H2_1: Ban lãnh đạo Khoa Phẫu thuật Hàm mặt
+NOI_DUNG_1: <p>Trang Bệnh viện Răng Hàm Mặt TP.HCM ghi <b>TS.BS Võ Anh Dũng</b> là Trưởng khoa Phẫu thuật Hàm mặt; Phó Trưởng khoa là BS.CKII Dương Minh Tùng và TS. Nguyễn Đức Tuấn. Theo trang khoa, đội ngũ có 31 người, gồm 3 tiến sĩ, 3 thạc sĩ và các bác sĩ chuyên khoa.</p>
+<p>Đây là khoa khác với Khoa Phẫu thuật tạo hình thẩm mỹ hàm mặt do <a href="/bac-si-vo-duc-tuan-benh-vien-rang-ham-mat.html">BS.CKII Võ Đức Tuấn</a> phụ trách. Xem thông tin khoa và hình ảnh bác sĩ trên <a href="https://bvranghammat.com/chuyen-khoa/khoa-phau-thuat-ham-mat/" target="_blank" rel="noopener">trang chính thức của Bệnh viện Răng Hàm Mặt TP.HCM</a>.</p>
+H2_2: Khoa điều trị những gì?
+NOI_DUNG_2: <ul><li>Dị tật khe hở môi, khe hở vòm miệng; khoa có Trung tâm quản lý trẻ dị tật khe hở môi – vòm miệng.</li><li>Chấn thương vùng hàm mặt.</li><li>U, nang và viêm nhiễm vùng hàm mặt.</li><li>Phục hồi chức năng, thẩm mỹ hàm mặt qua Đơn vị tạo hình – vi phẫu.</li></ul>
+<p><b>Địa chỉ:</b> Bệnh viện Răng Hàm Mặt TP.HCM, 263-265 Trần Hưng Đạo, Phường Cầu Ông Lãnh (Quận 1 cũ), TP.HCM. <b>Tổng đài đặt hẹn:</b> 1900 9489.</p>
+H2_3: Khi nào nên đến khoa hàm mặt?
+NOI_DUNG_3: <p>Sau tai nạn vùng mặt, khi há miệng khó, khớp cắn lệch hay mặt sưng kéo dài, nên được khám chuyên khoa hàm mặt sớm. Với trẻ có khe hở môi – vòm miệng, gia đình nên hỏi bệnh viện về lộ trình điều trị theo từng giai đoạn. Nếu băn khoăn về chỉnh răng, có thể đọc thêm bài <a href="/bac-si-nieng-rang-gioi-tai-tphcm.html">bác sĩ niềng răng tại TP.HCM</a>.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Chấn thương vùng mặt đôi khi kèm va chạm quanh mắt; nếu nhìn mờ, nhìn đôi, hãy khám mắt. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM hỗ trợ đo thị lực và tư vấn kính.
+HOI_1: TS.BS Võ Anh Dũng làm việc ở khoa nào?
+DAP_1: Theo trang Bệnh viện Răng Hàm Mặt TP.HCM, bác sĩ là Trưởng khoa Phẫu thuật Hàm mặt của bệnh viện.
+HOI_2: Khoa Phẫu thuật Hàm mặt có điều trị khe hở môi cho trẻ không?
+DAP_2: Có. Trang khoa ghi khoa điều trị dị tật khe hở môi, khe hở vòm miệng và có trung tâm quản lý trẻ dị tật này; nên gọi tổng đài để được hướng dẫn thủ tục.
+HOI_3: Đặt hẹn khám tại bệnh viện như thế nào?
+DAP_3: Gọi tổng đài 1900 9489 của Bệnh viện Răng Hàm Mặt TP.HCM, địa chỉ 263-265 Trần Hưng Đạo, Phường Cầu Ông Lãnh.
+SAN_PHAM: p-rrolexr, kinh-bao-ho-victor, kinh-mat-nam-rb-deo, panda-tr90, trong-167-blue-protect, tomy-9555, pk-combo-ve-sinh, kinh-mat-retro-y2k
+LIEN_QUAN: bac-si-vo-duc-tuan-benh-vien-rang-ham-mat | BS.CKII Võ Đức Tuấn – BV Răng Hàm Mặt; bac-si-nieng-rang-gioi-tai-tphcm | Bác sĩ niềng răng tại TP.HCM; bac-si-do-thanh-tri-benh-vien-thong-nhat | TS.BS Đỗ Thành Trí – BV Thống Nhất
+LINK_TRONG_BAI: BS.CKII Võ Đức Tuấn → bac-si-vo-duc-tuan-benh-vien-rang-ham-mat; bác sĩ niềng răng tại TP.HCM → bac-si-nieng-rang-gioi-tai-tphcm
+LINK_VAO_TU: bac-si-vo-duc-tuan-benh-vien-rang-ham-mat, bac-si-do-thanh-tri-benh-vien-thong-nhat
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh kho EYEMEDI (EYEMEDI-5); ảnh thư mục Google Drive của EYEMEDI (IMG_6020, IMG_9083)
+NGUON_THAM_KHAO: Bệnh viện Răng Hàm Mặt TP.HCM – Khoa Phẫu thuật Hàm mặt (https://bvranghammat.com/chuyen-khoa/khoa-phau-thuat-ham-mat/)

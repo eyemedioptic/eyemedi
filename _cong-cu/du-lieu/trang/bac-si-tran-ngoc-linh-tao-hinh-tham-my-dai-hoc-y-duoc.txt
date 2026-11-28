@@ -1,0 +1,38 @@
+TIEU_DE: BS.CKI Trần Ngọc Lĩnh – Bác sĩ Tạo hình Thẩm mỹ, BV Đại học Y Dược TP.HCM
+TITLE: Bác sĩ Trần Ngọc Lĩnh – Tạo hình thẩm mỹ TP.HCM | EYEMEDI
+SLUG: bac-si-tran-ngoc-linh-tao-hinh-tham-my-dai-hoc-y-duoc
+TU_KHOA_CHINH: bác sĩ Trần Ngọc Lĩnh tạo hình thẩm mỹ
+TU_KHOA_PHU: khám tạo hình thẩm mỹ thứ Bảy TP.HCM, điều trị vết thương bệnh viện Đại học Y Dược, phẫu thuật tạo hình Quận 5, bác sĩ thẩm mỹ học tại Hàn Quốc
+DANH_MUC: Bác sĩ – phòng khám
+SLUG_DANH_MUC: bac-si-phong-kham
+Y_KHOA: có
+MO_TA_SEO: BS.CKI Trần Ngọc Lĩnh, Khoa Tạo hình Thẩm mỹ BV Đại học Y Dược TP.HCM: đào tạo tại Hàn Quốc, chuyên môn, lịch khám thứ Hai, thứ Bảy và địa chỉ đặt hẹn.
+NGAY_DANG: 2026-11-28
+DOAN_MO_DAU: Người đi làm giờ hành chính thường khó sắp xếp buổi khám ngày thường. Tại Khoa Tạo hình – Thẩm mỹ, Bệnh viện Đại học Y Dược TP.HCM, BS.CKI Trần Ngọc Lĩnh có lịch khám chiều thứ Hai và sáng thứ Bảy. Dưới đây là thông tin bệnh viện công bố về bác sĩ, chỉ mang tính tham khảo.
+ANH_RIENG:
+anh-rieng/bac-si-tran-ngoc-linh-tao-hinh-tham-my-dai-hoc-y-duoc-1.jpg | Chuyên viên EYEMEDI tư vấn kính cho khách hàng
+anh-rieng/bac-si-tran-ngoc-linh-tao-hinh-tham-my-dai-hoc-y-duoc-2.jpg | Bàn tư vấn chọn kính tại EYEMEDI
+anh-rieng/bac-si-tran-ngoc-linh-tao-hinh-tham-my-dai-hoc-y-duoc-3.jpg | Khách hàng đo mắt tại EYEMEDI
+H2_1: Hơn 15 năm gắn bó với khoa
+NOI_DUNG_1: <p>Hồ sơ trên website bệnh viện cho biết <b>BS.CKI Trần Ngọc Lĩnh</b> tốt nghiệp bác sĩ đa khoa năm 2003, là bác sĩ nội trú và hoàn thành Chuyên khoa I Chấn thương chỉnh hình năm 2007. Năm 2008, bác sĩ học phẫu thuật tạo hình thẩm mỹ tại Asan Medical Center và Samsung Medical Center (Seoul, Hàn Quốc); năm 2009 học vi phẫu tạo hình tại Bệnh viện Chấn thương Chỉnh hình TP.HCM; năm 2011 học chuyên sâu phẫu thuật thẩm mỹ tại Đại học Y Dược TP.HCM.</p>
+<p>Từ năm 2008 đến nay, bác sĩ làm việc tại Khoa Tạo hình – Thẩm mỹ và là hội viên các hội Phẫu thuật Thẩm mỹ, Chấn thương Chỉnh hình, Phẫu thuật Tạo hình, Điều trị Vết thương TP.HCM. Xem hồ sơ và hình ảnh bác sĩ trên <a href="https://bvdaihoc.com.vn/en/doctors/tran-ngoc-linh-id-1800" target="_blank" rel="noopener">trang chính thức của Bệnh viện Đại học Y Dược TP.HCM</a>.</p>
+H2_2: Lĩnh vực chuyên môn và nơi khám
+NOI_DUNG_2: <ul><li>Phẫu thuật tạo hình.</li><li>Phẫu thuật thẩm mỹ.</li><li>Điều trị vết thương.</li></ul>
+<p><b>Địa chỉ:</b> Bệnh viện Đại học Y Dược TP.HCM, 215 Hồng Bàng, Phường Chợ Lớn (Quận 5 cũ), TP.HCM. <b>Tổng đài:</b> (028) 3855 4269. Lịch khám theo hồ sơ: chiều thứ Hai và sáng thứ Bảy. Cùng khoa có <a href="/bac-si-nguyen-manh-don-dai-hoc-y-duoc.html">BS.CKII Nguyễn Mạnh Đôn</a>.</p>
+H2_3: Nền tảng chỉnh hình hữu ích gì cho tạo hình?
+NOI_DUNG_3: <p>Kiến thức về xương, gân và mạch máu từ chuyên ngành chấn thương chỉnh hình giúp bác sĩ tạo hình xử lý tốt hơn các tổn thương sâu, sẹo co kéo hay vết thương khó lành. Với sẹo nông, sẹo mụn, bạn có thể bắt đầu từ <a href="/bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm.html">bác sĩ da liễu trị sẹo</a>.</p>
+<p>Nội dung chỉ để tham khảo, không thay thế chẩn đoán của bác sĩ chuyên khoa.</p>
+LOI_KEU_GOI: Vết sẹo mới trên mặt dễ thâm khi ra nắng. EYEMEDI tại 63C Lạc Long Quân, Phường Hòa Bình, TP.HCM có kính mát chống UV400 và tròng đổi màu cho người cần che chắn khi ra ngoài.
+HOI_1: Bác sĩ Trần Ngọc Lĩnh có khám thứ Bảy không?
+DAP_1: Có. Hồ sơ trên website Bệnh viện Đại học Y Dược TP.HCM ghi lịch khám Tạo hình – Thẩm mỹ chiều thứ Hai và sáng thứ Bảy; nên gọi tổng đài để xác nhận trước.
+HOI_2: Bác sĩ được đào tạo tạo hình ở đâu?
+DAP_2: Bác sĩ học tại Asan Medical Center và Samsung Medical Center (Hàn Quốc) năm 2008, học vi phẫu tạo hình năm 2009 và chuyên sâu phẫu thuật thẩm mỹ năm 2011.
+HOI_3: Thông tin trên có thay đổi không?
+DAP_3: Lịch khám và vị trí công tác có thể cập nhật theo thời gian, vì vậy nên kiểm tra lại trên website hoặc tổng đài (028) 3855 4269 của bệnh viện.
+SAN_PHAM: p-sufiar-lv28018, santino-one-0124, kinh-mat-nam-rb-tam, kinh-mat-nu-kmtt, da-trong-156-photo-gray, vidic-p9602, pk-nuoc-xit-ao, kinh-xuyen-dem-night-view
+LIEN_QUAN: bac-si-nguyen-manh-don-dai-hoc-y-duoc | BS.CKII Nguyễn Mạnh Đôn – BV Đại học Y Dược; bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm | Bác sĩ da liễu trị sẹo tại TP.HCM; bac-si-tham-my | Bác sĩ thẩm mỹ
+LINK_TRONG_BAI: BS.CKII Nguyễn Mạnh Đôn → bac-si-nguyen-manh-don-dai-hoc-y-duoc; bác sĩ da liễu trị sẹo → bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm
+LINK_VAO_TU: bac-si-da-lieu-tri-seo-uy-tin-tai-tphcm, cach-chon-tham-my-vien-uy-tin-tai-tphcm
+KIEM_TRA_TRUNG: không trùng tiêu đề/từ khóa chính với danh-sach-trang.csv; bác sĩ chưa có bài riêng trên web
+NGUON_ANH: Ảnh kho EYEMEDI (EYEMEDI-7); ảnh thư mục Google Drive của EYEMEDI (IMG_9070, IMG_9096)
+NGUON_THAM_KHAO: Bệnh viện Đại học Y Dược TP.HCM – BS.CKI Trần Ngọc Lĩnh (https://bvdaihoc.com.vn/en/doctors/tran-ngoc-linh-id-1800)
