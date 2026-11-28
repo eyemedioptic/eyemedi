@@ -22,7 +22,7 @@
 <main>
   <div class="card">
     <h1>Bán hàng cùng EYEMEDI, nhận hoa hồng</h1>
-    <p class="muted">Dành cho cộng tác viên, KOL, KOC. Đăng ký xong bạn có ngay tài khoản và link bán hàng để theo dõi đơn hàng, hoa hồng được mở sau khi gửi video review sản phẩm mẫu.</p>
+    <p class="muted">Dành cho cộng tác viên, KOL, KOC và đại lý. Đăng ký xong bạn có ngay tài khoản và link bán hàng để theo dõi đơn hàng, hoa hồng được mở sau khi gửi video review sản phẩm mẫu.</p>
     <div class="steps">
       <div class="step"><b>1</b>Đăng ký</div>
       <div class="step"><b>2</b>Được duyệt</div>
@@ -39,10 +39,10 @@
       <label>Họ và tên *</label><input name="full_name" required maxlength="80" autocomplete="name">
       <div class="row">
         <div><label>Số điện thoại (dùng để đăng nhập) *</label><input name="phone" required inputmode="tel" autocomplete="tel"></div>
-        <div><label>Bạn là *</label><select name="kind"><option>CTV</option><option>KOC</option><option>KOL</option></select></div>
+        <div><label>Bạn là *</label><select name="kind" id="kind"><option>CTV</option><option>KOC</option><option>KOL</option><option value="Đại lý">Đại lý (cửa hàng, shop)</option></select></div>
       </div>
       <label>Email</label><input name="email" type="email" autocomplete="email">
-      <label>Link kênh bán hàng (TikTok, Facebook, Instagram…) *</label><input name="channels" required maxlength="300" inputmode="url" autocapitalize="off" autocorrect="off" placeholder="VD: tiktok.com/@tenkenh hoặc facebook.com/tenban">
+      <label id="chLbl">Link kênh bán hàng (TikTok, Facebook, Instagram…) *</label><input name="channels" id="channels" required maxlength="300" inputmode="url" autocapitalize="off" autocorrect="off" placeholder="VD: tiktok.com/@tenkenh hoặc facebook.com/tenban">
       <label>Mật khẩu *</label><input name="password" type="password" required minlength="6" autocomplete="new-password">
       <label class="small" style="font-weight:400"><input type="checkbox" required style="width:auto"> Tôi đồng ý để EYEMEDI lưu thông tin trên nhằm xét duyệt và quản lý cộng tác viên.</label>
       <div id="mReg" class="msg"></div>
@@ -90,6 +90,10 @@ function go(form,action,m){
     CTV.call(action,d).then(function(r){CTV.setToken(r.token);location.href='app.html'})
       .catch(function(err){CTV.msg(m,err.message)}).finally(function(){CTV.busy(b,false)})}
 }
+(function(){var k=document.getElementById('kind'),l=document.getElementById('chLbl'),c=document.getElementById('channels');
+  function upd(){var dl=k.value==='Đại lý';l.textContent=dl?'Tên, địa chỉ cửa hàng và link fanpage (nếu có) *':'Link kênh bán hàng (TikTok, Facebook, Instagram…) *';
+    c.placeholder=dl?'VD: Kính mắt An Bình, 12 Lê Lợi, Q.1, TP.HCM – facebook.com/kinhanbinh':'VD: tiktok.com/@tenkenh hoặc facebook.com/tenban';c.inputMode=dl?'text':'url'}
+  k.onchange=upd;if(/dai-ly/.test(location.hash)){k.value='Đại lý'}upd()})();
 go(fReg,'register',document.getElementById('mReg'));
 go(fLog,'login',document.getElementById('mLog'));
 </script>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lập hợp đồng mua bán / ký gửi | EYEMEDI</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="ctv.css">
+<style>
+main{max-width:1280px}
+.wrap{display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start}
+@media(max-width:980px){.wrap{grid-template-columns:1fr}}
+.wrap>*{min-width:0}@media(max-width:640px){#doc{padding:14px;font-size:10pt;overflow-x:auto}#doc table.sp{min-width:520px}}
+.panel .card{padding:16px}.panel h2{font-size:16px;margin:0 0 4px}
+.panel label{margin:9px 0 3px;font-size:13px}.panel input,.panel select{padding:8px 10px;font-size:14px}
+.seg{display:flex;gap:6px}.seg button{flex:1;padding:10px;border:1px solid var(--line);background:#fff;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.it{border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:8px;font-size:13px}
+.it .r{display:grid;grid-template-columns:1fr 70px 110px 28px;gap:6px;align-items:center;margin-top:6px}
+.it input{padding:6px 8px;font-size:13px}.x{border:0;background:none;color:var(--bad);font-size:18px;cursor:pointer}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+#doc{background:#fff;border:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.06);padding:14mm 15mm;max-width:210mm;margin:0 auto;color:#000;
+  font-family:"Times New Roman",Times,serif;font-size:11pt;line-height:1.35}
+#doc p{margin:0 0 4pt;text-align:justify}#doc .c{text-align:center}#doc h1{font-size:14pt;text-align:center;margin:6pt 0 2pt}
+#doc table.sp{width:100%;border-collapse:collapse;margin:4pt 0 6pt;font-size:10pt}
+#doc table.sp th,#doc table.sp td{border:1px solid #000;padding:3pt 4pt;vertical-align:top}#doc table.sp th{background:#f0f0f0}
+#doc td.n{text-align:right;white-space:nowrap}#doc table.sig{width:100%;margin-top:10pt}#doc table.sig td{width:50%;text-align:center;vertical-align:top}
+@media print{@page{size:A4;margin:12mm 14mm}body{background:#fff}header.top,.panel{display:none!important}main{padding:0;max-width:none}.wrap{display:block}
+  #doc{border:0;box-shadow:none;padding:0;max-width:none}#doc table.sp tr{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="top"><a href="/"><img src="/images/logo-eyemedi.png" alt="EYEMEDI"></a><b class="ttl">Lập hợp đồng mua bán / ký gửi</b><span class="sp"></span><a class="btn sm ghost" href="admin.html">← Quản trị</a></header>
+<main><div class="wrap">
+<div class="panel">
+  <div class="card">
+    <div class="seg"><button type="button" data-t="mb" class="on">Mua bán</button><button type="button" data-t="kg">Ký gửi</button></div>
+    <div class="row"><div><label>Số hợp đồng</label><input id="so"></div><div><label>Ngày ký</label><input id="ngay" type="date"></div></div>
+    <label>Căn cứ hợp đồng đại lý số (nếu có)</label><input id="hddl" placeholder="VD: HD-DL-2026.1/EMABC12">
+  </div>
+  <div class="card">
+    <h2>Bên B (đại lý)</h2>
+    <label>Tên cửa hàng / hộ kinh doanh / công ty *</label><input id="b_ten">
+    <div class="row"><div><label>Mã số thuế</label><input id="b_mst"></div><div><label>Mã đại lý</label><input id="b_ma"></div></div>
+    <label>Địa chỉ *</label><input id="b_dc">
+    <div class="row"><div><label>Người đại diện *</label><input id="b_dd"></div><div><label>Chức vụ</label><input id="b_cv" placeholder="Chủ hộ kinh doanh"></div></div>
+    <div class="row"><div><label>Số CCCD</label><input id="b_cccd" inputmode="numeric"></div><div><label>Điện thoại *</label><input id="b_sdt" inputmode="tel"></div></div>
+    <div class="row"><div><label>Ngân hàng</label><input id="b_nh"></div><div><label>Số tài khoản</label><input id="b_stk" inputmode="numeric"></div></div>
+  </div>
+  <div class="card">
+    <h2>Danh sách sản phẩm</h2>
+    <p class="small muted" style="margin:0">Chọn sản phẩm trên web hoặc thêm dòng tự nhập. Đơn giá đã gồm VAT, sửa trực tiếp được.</p>
+    <div class="row"><div><label>Chiết khấu đại lý (%)</label><input id="ck" type="number" min="0" max="90" value="30"></div><div><label>Danh mục</label><select id="cat"></select></div></div>
+    <label>Sản phẩm</label><select id="sp"></select>
+    <div class="row"><div id="varBox"><label>Phân loại / màu</label><select id="var"></select></div><div><label>Số lượng</label><input id="sl" type="number" min="1" value="1"></div></div>
+    <div class="bar"><button type="button" class="btn sm" id="add">+ Thêm sản phẩm</button><button type="button" class="btn sm ghost" id="addFree">+ Dòng tự nhập</button></div>
+    <div id="items"></div>
+  </div>
+  <div class="card" id="optMb">
+    <h2>Giao hàng, thanh toán</h2>
+    <label>Hình thức thanh toán</label>
+    <select id="tt"><option value="full">Thanh toán 100% trước khi giao hàng</option><option value="coc">Đặt cọc, phần còn lại trước khi giao hàng</option><option value="sau">Đặt cọc, phần còn lại sau khi nhận hàng</option></select>
+    <div class="row"><div><label>Tỷ lệ đặt cọc (%)</label><input id="coc" type="number" min="0" max="100" value="50"></div><div><label>Trả phần còn lại trong (ngày)</label><input id="ngaytra" type="number" min="1" value="15"></div></div>
+    <div class="row"><div><label>Giao hàng trong (ngày)</label><input id="ngaygiao" type="number" min="1" value="7"></div><div><label>Phí vận chuyển</label><select id="ship"><option value="B">Bên B chịu</option><option value="A">Bên A chịu</option></select></div></div>
+  </div>
+  <div class="card hide" id="optKg">
+    <h2>Điều kiện ký gửi</h2>
+    <div class="row"><div><label>Thời hạn ký gửi (ngày)</label><input id="hanKg" type="number" min="15" value="90"></div><div><label>Kỳ đối soát</label><select id="ky"><option value="thang">Ngày 05 hằng tháng</option><option value="15">Ngày 01 và 16 hằng tháng</option><option value="tuan">Thứ Hai hằng tuần</option></select></div></div>
+    <div class="row"><div><label>Tiền ký quỹ (đ, để trống = 30%)</label><input id="kyquy" inputmode="numeric"></div><div><label>Phí vận chuyển</label><select id="shipKg"><option value="B">Bên B chịu</option><option value="A">Bên A chịu chiều giao</option></select></div></div>
+  </div>
+  <div class="bar"><button type="button" class="btn" id="print">🖨 In / Lưu PDF</button><button type="button" class="btn ghost" id="reset">Làm mới</button></div>
+  <p class="small muted">Thông tin được lưu tạm trên máy này để làm tiếp. Khi in, chọn “Lưu dưới dạng PDF” để gửi đại lý ký.</p>
+</div>
+<div><div id="doc"></div></div>
+</div></main>
+<script>
+var A={ten:'HỘ KINH DOANH EYEMEDI',mst:'035193007533',dc:'63C Lạc Long Quân, Phường Hòa Bình, TP. Hồ Chí Minh',dd:'Trần Thị Huế',cv:'Chủ hộ kinh doanh',sdt:'0967 190 005',zalo:'0869 222 638'};
+var $=function(i){return document.getElementById(i)},KEY='em_hdhh_v1';
+var ST={t:'mb',items:[]},LIST=[];
+var FIELDS=['so','ngay','hddl','b_ten','b_mst','b_ma','b_dc','b_dd','b_cv','b_cccd','b_sdt','b_nh','b_stk','ck','tt','coc','ngaytra','ngaygiao','ship','hanKg','ky','kyquy','shipKg'];
+function E(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function V(i){return ($(i).value||'').trim()}
+function D(i){var v=V(i);return v?E(v):'…………………'}
+function N(n){return Math.round(n||0).toLocaleString('vi-VN')}
+function int(i,d){var n=parseInt(String($(i).value).replace(/\D/g,''),10);return isFinite(n)?n:d}
+function pad(n){return(n<10?'0':'')+n}
+function today(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+/* đọc số thành chữ */
+var DIG=['không','một','hai','ba','bốn','năm','sáu','bảy','tám','chín'];
+function read3(n,full){var h=Math.floor(n/100),t=Math.floor(n%100/10),u=n%10,s=[];
+  if(full||h){s.push(DIG[h]+' trăm')}
+  if(t>1){s.push(DIG[t]+' mươi');if(u===1)s.push('mốt');else if(u===5)s.push('lăm');else if(u)s.push(DIG[u])}
+  else if(t===1){s.push('mười');if(u===5)s.push('lăm');else if(u)s.push(DIG[u])}
+  else if(u){if(full||h)s.push('lẻ');s.push(DIG[u])}
+  return s.join(' ')}
+function words(n){n=Math.round(n);if(!n)return'Không đồng';var U=['',' nghìn',' triệu',' tỷ'],g=[],i=0;
+  while(n>0){g.push(n%1000);n=Math.floor(n/1000)}var out=[];
+  for(i=g.length-1;i>=0;i--){if(!g[i])continue;
+    out.push(read3(g[i],i<g.length-1)+(i%3===0&&i>0?' tỷ':U[i%3]))}
+  var s=out.join(' ').replace(/\s+/g,' ').trim();return s.charAt(0).toUpperCase()+s.slice(1)+' đồng'}
+function total(){return ST.items.reduce(function(s,x){return s+(+x.qty||0)*(+x.price||0)},0)}
+
+function save(){var o={t:ST.t,items:ST.items,f:{}};FIELDS.forEach(function(k){o.f[k]=$(k).value});try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+function restore(){try{var o=JSON.parse(localStorage.getItem(KEY)||'null');if(!o)return;ST.t=o.t||'mb';ST.items=o.items||[];Object.keys(o.f||{}).forEach(function(k){if($(k))$(k).value=o.f[k]})}catch(e){}}
+function autoNo(){var d=(V('ngay')||today()).replace(/-/g,'');return(ST.t==='mb'?'MB':'KG')+'-'+d+'-'+(V('b_ma')||'01')}
+
+function renderItems(){
+  $('items').innerHTML=ST.items.map(function(x,i){return '<div class="it"><input data-i="'+i+'" data-k="name" value="'+E(x.name)+'" placeholder="Tên sản phẩm, mã, phân loại">'+
+    '<div class="r"><span class="muted">Niêm yết: '+(x.list?N(x.list)+'đ':'–')+'</span><input data-i="'+i+'" data-k="qty" type="number" min="1" value="'+E(x.qty)+'" title="Số lượng">'+
+    '<input data-i="'+i+'" data-k="price" inputmode="numeric" value="'+E(x.price)+'" title="Đơn giá đã gồm VAT"><button class="x" data-del="'+i+'" title="Xóa">×</button></div></div>'}).join('')+
+    (ST.items.length?'<p class="small" style="margin:8px 0 0"><b>Tổng: '+N(total())+'đ</b> ('+ST.items.length+' dòng)</p>':'');
+}
+$('items').addEventListener('input',function(e){var t=e.target,i=t.getAttribute('data-i');if(i==null)return;var k=t.getAttribute('data-k');
+  ST.items[i][k]=k==='name'?t.value:(parseInt(String(t.value).replace(/\D/g,''),10)||0);doc();save()});
+$('items').addEventListener('change',renderItems);
+$('items').addEventListener('click',function(e){var d=e.target.getAttribute('data-del');if(d==null)return;ST.items.splice(+d,1);renderItems();doc();save()});
+
+function cur(){var id=$('sp').value;return LIST.filter(function(p){return p.id===id})[0]}
+function fillSp(){var c=$('cat').value;$('sp').innerHTML=LIST.filter(function(p){return p.category===c}).map(function(p){return '<option value="'+E(p.id)+'">'+E(p.name)+' – '+N(p.price)+'đ</option>'}).join('');fillVar()}
+function fillVar(){var p=cur(),v=(p&&p.variants)||[];$('varBox').style.visibility=v.length?'visible':'hidden';
+  $('var').innerHTML=v.map(function(x,i){return '<option value="'+i+'">'+E(x.name)+'</option>'}).join('')}
+$('cat').onchange=fillSp;$('sp').onchange=fillVar;
+$('add').onclick=function(){var p=cur();if(!p)return;var v=(p.variants||[])[+$('var').value],list=(v&&v.price)||p.price,ck=Math.min(90,Math.max(0,+$('ck').value||0));
+  var name=p.name+(p.code&&p.name.indexOf(p.code)<0?' ('+p.code+')':'')+(v?' – '+v.name:'');
+  var same=ST.items.filter(function(x){return x.name===name})[0],q=Math.max(1,int('sl',1));
+  if(same)same.qty=(+same.qty||0)+q;else ST.items.push({name:name,qty:q,list:list,price:Math.round(list*(100-ck)/100/1000)*1000});
+  renderItems();doc();save()};
+$('addFree').onclick=function(){ST.items.push({name:'',qty:1,list:0,price:0});renderItems();doc();save();var l=$('items').querySelectorAll('input[data-k=name]');if(l.length)l[l.length-1].focus()};
+
+function table(kg){
+  var rows=ST.items.map(function(x,i){return '<tr><td class="c">'+(i+1)+'</td><td>'+E(x.name||'……')+'</td><td class="c">Cái</td><td class="n">'+N(x.qty)+'</td>'+
+    '<td class="n">'+(x.list?N(x.list):'')+'</td><td class="n">'+N(x.price)+'</td><td class="n">'+N((+x.qty||0)*(+x.price||0))+'</td></tr>'}).join('');
+  if(!ST.items.length)for(var i=0;i<5;i++)rows+='<tr><td class="c">'+(i+1)+'</td><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>';
+  var q=ST.items.reduce(function(s,x){return s+(+x.qty||0)},0),t=total();
+  return '<table class="sp"><thead><tr><th style="width:5%">STT</th><th>Tên sản phẩm, mã, phân loại</th><th style="width:6%">ĐVT</th><th style="width:6%">SL</th><th style="width:13%">Giá bán lẻ niêm yết (đ)</th><th style="width:13%">'+(kg?'Giá ký gửi':'Đơn giá')+' (đ)</th><th style="width:15%">Thành tiền (đ)</th></tr></thead><tbody>'+rows+
+    '<tr><td colspan="3" class="c"><b>TỔNG CỘNG</b></td><td class="n"><b>'+(q?N(q):'')+'</b></td><td></td><td></td><td class="n"><b>'+(t?N(t):'')+'</b></td></tr></tbody></table>'+
+    '<p><i>Bằng chữ: '+(t?words(t):'…………………………………………')+'.</i> Đơn giá và thành tiền <b>đã bao gồm thuế giá trị gia tăng (VAT)</b> và chiết khấu đại lý; giá bán lẻ niêm yết theo eyemedi.vn tại ngày ký.</p>'}
+
+function doc(){
+  var kg=ST.t==='kg',d=(V('ngay')||today()).split('-'),t=total(),so=V('so')||autoNo();
+  var head='<p class="c"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập – Tự do – Hạnh phúc</b></p>'+
+    '<h1>'+(kg?'HỢP ĐỒNG KÝ GỬI HÀNG HÓA':'HỢP ĐỒNG MUA BÁN HÀNG HÓA')+'</h1><p class="c">Số: '+E(so)+'</p>'+
+    '<p><i>Căn cứ Bộ luật Dân sự 2015, Luật Thương mại 2005'+(V('hddl')?', Hợp đồng đại lý số '+E(V('hddl')):'')+' và nhu cầu của hai bên. Hôm nay, ngày '+d[2]+' tháng '+d[1]+' năm '+d[0]+', chúng tôi gồm:</i></p>'+
+    '<p><b>BÊN A ('+(kg?'Bên ký gửi':'Bên bán')+'): '+A.ten+'</b> – MST: '+A.mst+'<br>Địa chỉ: '+A.dc+'<br>Đại diện: '+A.dd+' – Chức vụ: '+A.cv+' – Điện thoại: '+A.sdt+'</p>'+
+    '<p><b>BÊN B ('+(kg?'Bên nhận ký gửi':'Bên mua')+'): '+D('b_ten')+'</b> – MST: '+D('b_mst')+(V('b_ma')?' – Mã đại lý: '+E(V('b_ma')):'')+'<br>Địa chỉ: '+D('b_dc')+
+    '<br>Đại diện: '+D('b_dd')+' – Chức vụ: '+(V('b_cv')?E(V('b_cv')):'Chủ hộ kinh doanh')+' – CCCD: '+D('b_cccd')+' – Điện thoại: '+D('b_sdt')+
+    (V('b_stk')?'<br>Tài khoản: '+E(V('b_stk'))+' – Ngân hàng: '+D('b_nh'):'')+'</p>'+
+    '<p>Hai bên thống nhất ký hợp đồng với các điều khoản sau:</p>'+
+    '<p><b>Điều 1. Hàng hóa'+(kg?' ký gửi':'')+'.</b> Danh sách, số lượng và giá do Bên B tự chọn như sau:</p>'+table(kg);
+  var body=kg?bodyKg(t):bodyMb(t);
+  var sig='<table class="sig"><tr><td><b>ĐẠI DIỆN BÊN A</b><br><i>(Ký, ghi rõ họ tên)</i><br><br><br><br><br>'+A.dd+'</td><td><b>ĐẠI DIỆN BÊN B</b><br><i>(Ký, ghi rõ họ tên, đóng dấu nếu có)</i><br><br><br><br><br>'+(V('b_dd')?E(V('b_dd')):'')+'</td></tr></table>';
+  $('doc').innerHTML=head+body+sig;
+  document.title=(kg?'Hop dong ky gui ':'Hop dong mua ban ')+so;
+}
+function bodyMb(t){
+  var tt=$('tt').value,coc=Math.min(100,Math.max(0,int('coc',50))),n=int('ngaytra',15),ship=$('ship').value==='A'?'Bên A':'Bên B',P=function(x){return '<p>'+x+'</p>'};
+  var pay=tt==='full'?'Bên B thanh toán <b>100% giá trị hợp đồng ('+(t?N(t)+'đ':'……')+') trước khi Bên A giao hàng</b>.':
+    'Bên B đặt cọc <b>'+coc+'% giá trị hợp đồng'+(t?' ('+N(t*coc/100)+'đ)':'')+'</b> ngay khi ký; phần còn lại'+(t?' ('+N(t-Math.round(t*coc/100))+'đ)':'')+' thanh toán '+
+    (tt==='coc'?'<b>trước khi Bên A giao hàng</b>':'<b>trong '+n+' ngày kể từ ngày Bên B nhận hàng</b>')+'. Nếu Bên B từ chối nhận hàng hoặc không thanh toán đúng hạn khiến hợp đồng bị hủy, Bên B mất khoản tiền đặt cọc (Điều 328 Bộ luật Dân sự); nếu Bên A không giao hàng do lỗi của mình, Bên A hoàn trả tiền cọc.';
+  return P('<b>Điều 2. Giao nhận.</b> Bên A giao hàng trong <b>'+int('ngaygiao',7)+' ngày</b> kể từ khi nhận đủ khoản thanh toán đến hạn theo Điều 3, tại địa chỉ của Bên B nêu trên (hoặc địa chỉ Bên B báo bằng văn bản/tin nhắn). Phí vận chuyển do <b>'+ship+'</b> chịu. Bên B kiểm tra số lượng, tình trạng bên ngoài khi nhận và quay video lúc mở hàng; khiếu nại thiếu, sai, lỗi trong <b>03 ngày</b> kể từ ngày nhận, quá hạn được coi là đã nhận đủ và đúng chất lượng. Rủi ro đối với hàng hóa chuyển sang Bên B kể từ khi hàng được giao cho Bên B hoặc cho đơn vị vận chuyển.')+
+    P('<b>Điều 3. Thanh toán.</b> '+pay+' Thanh toán bằng chuyển khoản vào tài khoản do Bên A chỉ định hoặc tiền mặt có phiếu thu. <b>Quyền sở hữu hàng hóa chỉ chuyển cho Bên B khi Bên B thanh toán đủ.</b> Chậm thanh toán chịu lãi <b>0,05%/ngày</b> trên số tiền chậm trả; quá 15 ngày, Bên A được thu hồi hàng chưa thanh toán và cấn trừ các khoản Bên B đã trả, hoa hồng chưa chi trả để bù thiệt hại.')+
+    P('<b>Điều 4. Chất lượng, bảo hành, đổi trả.</b> Bên A bảo đảm hàng chính hãng, đúng chủng loại, còn nguyên tem, hộp. Hàng lỗi do nhà sản xuất được đổi mới trong 07 ngày kể từ ngày nhận và được bảo hành theo chính sách Bên A công bố. Bên A <b>không nhận trả lại hàng không lỗi</b>, kể cả hàng chậm bán, trừ khi Bên A đồng ý bằng văn bản. Hư hỏng do bảo quản, vận chuyển của Bên B hoặc do người dùng sử dụng sai không thuộc trách nhiệm bảo hành.')+
+    P('<b>Điều 5. Giá bán lại, thương hiệu.</b> Bên B tự bán lại hàng nhưng <b>không bán thấp hơn giá bán lẻ niêm yết</b> của Bên A khi chưa được Bên A đồng ý; được dùng tên, hình ảnh EYEMEDI để bán đúng hàng do Bên A cung cấp; không trộn lẫn hàng không phải của Bên A dưới tên EYEMEDI.')+
+    P('<b>Điều 6. Hóa đơn, thuế.</b> Giá trong hợp đồng đã bao gồm thuế GTGT. Bên A xuất hóa đơn theo quy định áp dụng cho Bên A khi Bên B yêu cầu. Mỗi bên tự kê khai, nộp các khoản thuế phát sinh từ hoạt động kinh doanh của mình.')+
+    P('<b>Điều 7. Vi phạm, tranh chấp, hiệu lực.</b> Bên vi phạm chịu phạt <b>8% giá trị phần nghĩa vụ bị vi phạm</b> và bồi thường thiệt hại thực tế. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh. Hợp đồng có hiệu lực từ ngày ký đến khi hai bên hoàn thành nghĩa vụ, lập thành 02 bản có giá trị như nhau, mỗi bên giữ 01 bản; bản scan/ảnh chụp có chữ ký gửi qua Zalo, email có giá trị như bản gốc.');
+}
+function bodyKg(t){
+  var han=int('hanKg',90),ky={thang:'ngày 05 hằng tháng',15:'ngày 01 và ngày 16 hằng tháng',tuan:'thứ Hai hằng tuần'}[$('ky').value],
+    kq=V('kyquy')?int('kyquy',0):Math.round(t*0.3/1000)*1000,ship=$('shipKg').value==='A'?'Bên A chịu phí vận chuyển chiều giao hàng; Bên B chịu phí chiều trả hàng':'Bên B chịu phí vận chuyển giao hàng và trả hàng',P=function(x){return '<p>'+x+'</p>'};
+  return P('<b>Điều 2. Giao nhận và quyền sở hữu.</b> Bên A giao hàng tại địa chỉ Bên B nêu trên; hai bên ký biên bản giao nhận (hoặc xác nhận qua Zalo/email kèm danh sách hàng). '+ship+'. <b>Hàng ký gửi luôn thuộc quyền sở hữu của Bên A</b> cho đến khi Bên B bán và thanh toán đủ tiền cho Bên A; Bên B không được cầm cố, thế chấp, cho mượn hoặc chuyển hàng cho bên thứ ba ký gửi lại. Kể từ khi nhận hàng, Bên B chịu trách nhiệm bảo quản; hàng mất mát, hư hỏng, móp hộp, mất tem do bất kỳ nguyên nhân nào (trừ lỗi nhà sản xuất) Bên B bồi thường theo giá ký gửi.')+
+    P('<b>Điều 3. Giá bán và thù lao.</b> Bên B bán lẻ <b>đúng giá niêm yết đã bao gồm VAT</b> (cột Giá bán lẻ niêm yết), không bán thấp hơn khi chưa có đồng ý của Bên A. Với mỗi sản phẩm bán được, Bên B thanh toán cho Bên A <b>giá ký gửi</b> tại Điều 1; phần chênh lệch là thù lao của Bên B, Bên B tự kê khai và nộp thuế đối với khoản thu nhập này. Chương trình khuyến mãi do Bên A công bố được áp dụng theo hướng dẫn riêng của Bên A.')+
+    P('<b>Điều 4. Đối soát, thanh toán.</b> Vào <b>'+ky+'</b>, Bên B gửi báo cáo số hàng đã bán, hàng tồn và <b>thanh toán toàn bộ tiền hàng đã bán trong kỳ chậm nhất 03 ngày</b> sau ngày đối soát, bằng chuyển khoản vào tài khoản Bên A chỉ định. Bên A được kiểm kê hàng ký gửi bất kỳ lúc nào (báo trước 01 ngày); hàng thiếu khi kiểm kê được coi là đã bán và Bên B phải thanh toán ngay. Chậm thanh toán chịu lãi <b>0,05%/ngày</b> trên số tiền chậm trả.')+
+    P('<b>Điều 5. Ký quỹ.</b> Bên B nộp cho Bên A khoản ký quỹ <b>'+(kq?N(kq)+'đ ('+words(kq).toLowerCase()+')':'……………… đồng')+'</b> khi nhận hàng để bảo đảm nghĩa vụ. Bên A được cấn trừ ký quỹ khi Bên B chậm thanh toán, làm mất, hỏng hàng hoặc vi phạm hợp đồng; Bên B bổ sung đủ trong 05 ngày. Ký quỹ không tính lãi và được hoàn trả trong 07 ngày sau khi hai bên thanh lý hợp đồng và Bên B hoàn thành mọi nghĩa vụ.')+
+    P('<b>Điều 6. Thời hạn ký gửi, trả hàng.</b> Thời hạn ký gửi là <b>'+han+' ngày</b> kể từ ngày nhận hàng, có thể gia hạn bằng tin nhắn xác nhận của Bên A. Hết hạn, Bên B thanh toán hàng đã bán và trả lại hàng chưa bán <b>còn nguyên vẹn, đủ tem, hộp, phụ kiện</b> trong 05 ngày; hàng trả lại không nguyên vẹn hoặc không trả đúng hạn được tính là đã bán theo giá ký gửi. Bên A được thu hồi một phần hoặc toàn bộ hàng ký gửi bất kỳ lúc nào, báo trước 03 ngày.')+
+    P('<b>Điều 7. Bảo hành, thương hiệu.</b> Bên A bảo hành cho người mua theo chính sách Bên A công bố; Bên B tiếp nhận và gửi sản phẩm lỗi về Bên A. Bên B được dùng tên, hình ảnh EYEMEDI để bán hàng ký gửi, trưng bày hàng đúng hướng dẫn, không trộn lẫn hàng không phải của Bên A dưới tên EYEMEDI.')+
+    P('<b>Điều 8. Vi phạm, tranh chấp, hiệu lực.</b> Bên vi phạm chịu phạt <b>8% giá trị phần nghĩa vụ bị vi phạm</b> và bồi thường thiệt hại thực tế. Bên B chậm thanh toán quá 07 ngày, bán dưới giá niêm yết hoặc cố ý báo cáo sai, Bên A được chấm dứt hợp đồng ngay, thu hồi toàn bộ hàng và cấn trừ ký quỹ. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh. Hợp đồng có hiệu lực từ ngày ký, lập thành 02 bản có giá trị như nhau, mỗi bên giữ 01 bản; bản scan/ảnh chụp có chữ ký gửi qua Zalo, email có giá trị như bản gốc.');
+}
+function setType(t){ST.t=t;document.querySelectorAll('.seg button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-t')===t)});
+  $('optMb').classList.toggle('hide',t!=='mb');$('optKg').classList.toggle('hide',t!=='kg');$('so').placeholder=autoNo();doc();save()}
+document.querySelectorAll('.seg button').forEach(function(b){b.onclick=function(){setType(b.getAttribute('data-t'))}});
+FIELDS.forEach(function(k){$(k).addEventListener('input',function(){$('so').placeholder=autoNo();doc();save()});$(k).addEventListener('change',function(){doc();save()})});
+$('print').onclick=function(){doc();window.print()};
+$('reset').onclick=function(){if(!ST.items.length&&!V('b_ten'))return;try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
+
+restore();if(!$('ngay').value)$('ngay').value=today();
+setType(ST.t);renderItems();
+fetch('san-pham.json').then(function(r){return r.json()}).then(function(l){LIST=l.filter(function(p){return p.price>0});var cats=[];
+  LIST.forEach(function(p){if(cats.indexOf(p.category)<0)cats.push(p.category)});$('cat').innerHTML=cats.map(function(c){return '<option>'+E(c)+'</option>'}).join('');fillSp()})
+  .catch(function(){$('cat').innerHTML='<option>Không tải được danh sách</option>'});
+</script>
+</body>
+</html>
