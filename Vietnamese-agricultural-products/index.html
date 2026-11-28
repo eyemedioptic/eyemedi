@@ -434,7 +434,7 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
       <div class="panel"><h3>Máy tính (Chrome, Edge)</h3><ol><li>Mở sàn trên trình duyệt.</li><li>Bấm biểu tượng cài đặt <span class="kbd">⊕</span> ở cuối thanh địa chỉ.</li><li>Chọn <b>Cài đặt</b>. Sàn mở trong cửa sổ riêng.</li></ol></div>
     </div>
     <div class="gap"></div>
-    <div class="notice info" id="installNote">Bản đang xem chạy trên claude.ai nên biểu tượng khi thêm vào màn hình chính là của claude.ai. Bản ứng dụng riêng với logo Sàn Nông Sản Việt cần đưa lên tên miền của sàn.</div>
+    <div class="notice info" id="installNote">Bản đang xem chạy trên claude.ai nên biểu tượng khi thêm vào màn hình chính là của claude.ai. Để cài ứng dụng có logo Sàn Nông Sản Việt, mở <a href="https://eyemedi.vn/Vietnamese-agricultural-products/" target="_blank" rel="noopener">eyemedi.vn/Vietnamese-agricultural-products</a> trên điện thoại rồi làm theo các bước trên.</div>
   </section>
 
   <datalist id="productList"></datalist>
@@ -457,6 +457,7 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
     "san-xuat": ["Giấy chứng nhận đăng ký hợp tác xã","Giấy chứng nhận đăng ký doanh nghiệp","Giấy chứng nhận VietGAP / GlobalGAP","Quyết định cấp mã số vùng trồng"],
     "nong-ho": ["Căn cước công dân","Giấy chứng nhận quyền sử dụng đất","Xác nhận của UBND xã"],
     "cung-cap": ["Giấy đăng ký hộ kinh doanh","Căn cước công dân","Giấy chứng nhận đăng ký doanh nghiệp"],
+    "xuc-tien": ["Quyết định thành lập đơn vị","Giấy phép thành lập hiệp hội","Giấy chứng nhận đăng ký doanh nghiệp"],
   };
   const ASSOCIATIONS = [
     { id:"vinafruit", short:"VINAFRUIT", name:"Hiệp hội Rau quả Việt Nam", products:["Sầu riêng","Thanh long","Xoài","Chuối","Mít","Bưởi","Chanh leo","Vải thiều","Nhãn","Dừa","Rau ăn lá","Khoai lang"] },
@@ -508,6 +509,12 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
         ["contact","Họ tên / tên đầu mối",true,"text"],["org","Tên cơ sở (nếu có)",false,"text"],["phone","Số điện thoại",true,"tel"],
         ["province","Khu vực hoạt động",true,"province"],["address","Địa chỉ",false,"text"],["kindOf","Loại hình",false,"select",["Thương lái","Đại lý thu gom","Cơ sở sơ chế, đóng gói","Khác"]],
         ["products","Mặt hàng cung cấp",true,"text"],["capacity","Khả năng cung ứng (tấn/tháng)",false,"number"]]},
+    "xuc-tien": { name: "Xúc tiến thương mại", desc: "Trung tâm xúc tiến, hiệp hội ngành hàng, đơn vị tổ chức hội chợ và kết nối giao thương.", side: "mua", tag: "Đăng sự kiện, bản tin, kết nối cung cầu",
+      fields: [
+        ["org","Tên đơn vị",true,"text"],["kindOf","Loại hình",true,"select",["Trung tâm xúc tiến thương mại","Hiệp hội ngành hàng","Đơn vị tổ chức hội chợ, triển lãm","Doanh nghiệp tư vấn xuất khẩu","Khác"]],
+        ["taxId","Mã số thuế / số quyết định thành lập",false,"text"],["contact","Người liên hệ",true,"text"],["phone","Số điện thoại",true,"tel"],
+        ["province","Tỉnh thành",true,"province"],["address","Địa chỉ",false,"text"],
+        ["products","Ngành hàng phụ trách",false,"text","Rau quả, cà phê, thủy sản…"],["markets","Thị trường hỗ trợ",false,"checks",MARKETS]]},
   };
 
   const SAMPLES = [
@@ -1212,7 +1219,7 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
     }
     if(a==="ev-join" && state.uid){ b.disabled = true; try { await state.db.collection("eventRegs").doc(b.dataset.id + "__" + state.uid).set({ eventId: b.dataset.id, uid: state.uid, at: now() }); toast("Đã đăng ký tham gia."); } catch(err){ toast(writeErr(err)); b.disabled=false; } return; }
     if(a==="ev-cancel" && state.uid){ b.disabled = true; try { await state.db.collection("eventRegs").doc(b.dataset.id + "__" + state.uid).delete(); } catch(err){ toast(writeErr(err)); b.disabled=false; } return; }
-    if((a==="ev-del" || a==="news-del") && state.isAdmin){
+    if(a==="ev-del" || a==="news-del"){
       if(b.dataset.armed!=="1"){ b.dataset.armed="1"; b.textContent="Bấm lần nữa để xóa"; return; }
       try { await state.db.collection(a==="ev-del"?"events":"news").doc(b.dataset.id).delete(); toast("Đã xóa."); } catch(err){ toast(writeErr(err)); }
       return;
@@ -1358,7 +1365,7 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
       }
       if(kind==="event-new"){
         const e2 = { title: $("#evn-title").value.trim(), kind: $("#evn-kind").value, place: $("#evn-place").value.trim(), from: $("#evn-from").value, to: $("#evn-to").value,
-          organizer: $("#evn-org").value.trim(), products: $("#evn-prod").value.trim(), link: $("#evn-link").value.trim(), desc: $("#evn-desc").value.trim(), createdAt: now(), by: state.uid };
+          organizer: $("#evn-org").value.trim() || (state.me?.displayName||""), products: $("#evn-prod").value.trim(), link: $("#evn-link").value.trim(), desc: $("#evn-desc").value.trim(), createdAt: now(), by: state.uid };
         if(!e2.title || !e2.place || !e2.from){ say("Điền tên, địa điểm và ngày bắt đầu."); return; }
         if(e2.link && !e2.link.startsWith("https://")){ say("Đường dẫn phải bắt đầu bằng https://"); return; }
         if(e2.to && e2.to < e2.from){ say("Ngày kết thúc phải sau ngày bắt đầu."); return; }
@@ -1385,6 +1392,8 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
 
   // ---------- trade promotion & associations ----------
   document.querySelectorAll('input[name="xt"]').forEach(i => i.addEventListener("change", () => preserve(renderPromo)));
+  const canPromo = () => state.isAdmin || (state.me?.role==="xuc-tien" && isVerified(state.uid));
+  const promoHint = () => (!state.isAdmin && state.me?.role==="xuc-tien" && !isVerified(state.uid)) ? `<div class="gap"></div><div class="notice">Đơn vị xúc tiến thương mại đăng được sự kiện và bản tin sau khi được sàn xác minh. <a href="#ho-so">Gửi giấy tờ xác minh</a>.</div>` : "";
   const evMonth = d => { const [y,m,dd] = String(d||"").split("-"); return dd ? `<b>${esc(dd)}</b><span>Th ${esc(Number(m))}</span>` : "<b>?</b>"; };
   function renderPromo(){
     const tab = document.querySelector('input[name="xt"]:checked').value, box = $("#promo");
@@ -1400,13 +1409,13 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
           ${e.organizer?`<dt>Đơn vị tổ chức</dt><dd>${esc(e.organizer)}</dd>`:""}${e.products?`<dt>Ngành hàng</dt><dd>${esc(e.products)}</dd>`:""}</dl>
           ${e.desc?`<p style="font-size:14px">${esc(e.desc)}</p>`:""}
           <div class="by"><span>${e.sample?"":`${regs.length} thành viên đăng ký`}${link?` · <a href="${esc(link)}" target="_blank" rel="noopener">Trang sự kiện</a>`:""}</span>
-          ${e.sample||!state.me?"":`<span class="actions">${mine?`<span class="pill ok">Đã đăng ký</span><button class="btn ghost small" data-act="ev-cancel" data-id="${esc(e.id)}">Hủy</button>`:`<button class="btn small" data-act="ev-join" data-id="${esc(e.id)}">Đăng ký tham gia</button>`}${state.isAdmin?`<button class="btn danger small" data-act="ev-del" data-id="${esc(e.id)}">Xóa</button>`:""}</span>`}</div>
-          ${state.isAdmin && regs.length ? `<details><summary class="hint">Danh sách đăng ký</summary><ul class="hist">${regs.map(r=>`<li>${esc(memberName(r.uid))} · ${esc(state.members[r.uid]?.phone||"")}</li>`).join("")}</ul></details>` : ""}
+          ${e.sample||!state.me?"":`<span class="actions">${mine?`<span class="pill ok">Đã đăng ký</span><button class="btn ghost small" data-act="ev-cancel" data-id="${esc(e.id)}">Hủy</button>`:`<button class="btn small" data-act="ev-join" data-id="${esc(e.id)}">Đăng ký tham gia</button>`}${(state.isAdmin||e.by===state.uid)?`<button class="btn danger small" data-act="ev-del" data-id="${esc(e.id)}">Xóa</button>`:""}</span>`}</div>
+          ${(state.isAdmin||e.by===state.uid) && regs.length ? `<details><summary class="hint">Danh sách đăng ký</summary><ul class="hist">${regs.map(r=>`<li>${esc(memberName(r.uid))} · ${esc(state.members[r.uid]?.phone||"")}</li>`).join("")}</ul></details>` : ""}
         </div></div></article>`; };
       box.innerHTML = (state.eventsLoaded && !real.length ? `<div class="notice" style="margin-bottom:14px">Chưa có sự kiện thật. Các thẻ viền đứt là ví dụ minh họa.</div>` : "")
         + (!state.eventsLoaded ? `<div class="empty">Đang tải sự kiện…</div>` : list.length ? `<div class="list">${list.map(card).join("")}</div>` : `<div class="empty">Chưa có sự kiện sắp tới.</div>`)
         + (past.length ? `<div class="gap"></div><h2 style="margin-bottom:12px">Đã diễn ra (${past.length})</h2><div class="list">${past.reverse().map(card).join("")}</div>` : "")
-        + (state.isAdmin ? `<div class="gap"></div><form class="card" data-form="event-new" novalidate><h2>Đăng sự kiện xúc tiến</h2><div class="grid2">
+        + promoHint() + (canPromo() ? `<div class="gap"></div><form class="card" data-form="event-new" novalidate><h2>Đăng sự kiện xúc tiến</h2><div class="grid2">
             <div class="field full"><label for="evn-title">Tên sự kiện *</label><input type="text" id="evn-title"></div>
             <div class="field"><label for="evn-kind">Loại</label><select id="evn-kind">${options(EVENT_KINDS, EVENT_KINDS[0])}</select></div>
             <div class="field"><label for="evn-place">Địa điểm *</label><input type="text" id="evn-place" placeholder="Tỉnh thành, hoặc Trực tuyến"></div>
@@ -1426,8 +1435,8 @@ footer.foot .wrap { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items:
         + (!state.newsLoaded ? `<div class="empty">Đang tải bản tin…</div>` : `<div style="display:flex;flex-direction:column;gap:12px">${list.map(n => { const link = safeUrl(n.link); const cls = n.kind==="Cảnh báo thị trường" ? "bad" : n.kind==="Cơ hội giao thương" ? "sell" : "std";
             return `<article class="item${n.sample?" sample":""}"><div class="item-top"><span class="pill ${cls}">${esc(n.kind)}</span>${n.sample?`<span class="pill ex">Ví dụ</span>`:""}<span class="hint">${esc(fmtDate(n.date))}</span></div>
               <div class="prod">${esc(n.title)}</div><p style="font-size:14.5px;max-width:70ch">${esc(n.summary)}</p>
-              <div class="by"><span>${n.source?"Nguồn: "+esc(n.source):""}${link?` · <a href="${esc(link)}" target="_blank" rel="noopener">Đọc thêm</a>`:""}</span>${state.isAdmin&&!n.sample?`<button class="btn danger small" data-act="news-del" data-id="${esc(n.id)}">Xóa</button>`:""}</div></article>`; }).join("")}</div>`)
-        + (state.isAdmin ? `<div class="gap"></div><form class="card" data-form="news-new" novalidate><h2>Đăng bản tin</h2><div class="grid2">
+              <div class="by"><span>${n.source?"Nguồn: "+esc(n.source):""}${link?` · <a href="${esc(link)}" target="_blank" rel="noopener">Đọc thêm</a>`:""}</span>${(state.isAdmin||n.by===state.uid)&&!n.sample?`<button class="btn danger small" data-act="news-del" data-id="${esc(n.id)}">Xóa</button>`:""}</div></article>`; }).join("")}</div>`)
+        + promoHint() + (canPromo() ? `<div class="gap"></div><form class="card" data-form="news-new" novalidate><h2>Đăng bản tin</h2><div class="grid2">
             <div class="field full"><label for="nw-title">Tiêu đề *</label><input type="text" id="nw-title"></div>
             <div class="field"><label for="nw-kind">Loại tin</label><select id="nw-kind">${options(NEWS_KINDS, NEWS_KINDS[0])}</select></div>
             <div class="field"><label for="nw-source">Nguồn</label><input type="text" id="nw-source" placeholder="Bộ Công Thương, hiệp hội…"></div>
