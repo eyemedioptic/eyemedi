@@ -18,6 +18,7 @@ var SITE = 'https://eyemedi.vn';
 var CONTRACT_VERSION = 'HD-CTV-2026.3';
 var DEALER_CONTRACT_VERSION = 'HD-DL-2026.1';   // hợp đồng Đại lý
 var DEALER = 'Đại lý';
+var DEALER_MODES = { mua_ban: 'Mua bán', ky_gui: 'Ký gửi' };   // hình thức hợp đồng đại lý
 function isDealer_(u) { return u && u.kind === DEALER; }
 function contractVersion_(u) { return isDealer_(u) ? DEALER_CONTRACT_VERSION : CONTRACT_VERSION; }
 var SAMPLE_DISCOUNT = 0.5;          // đơn mẫu = 50% giá web
@@ -39,7 +40,7 @@ var SHEETS = {
         'commission_rate', 'bank_name', 'bank_account', 'bank_holder', 'admin_note', 'is_admin',
         'pw_salt', 'pw_hash', 'username'],
   HopDong: ['ctv_id', 'ref_code', 'signed_at', 'version', 'full_name', 'id_number', 'id_issued',
-            'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email', 'shop_name', 'tax_code', 'shop_address'],
+            'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email', 'shop_name', 'tax_code', 'shop_address', 'dealer_mode'],
   DonMau: ['id', 'created_at', 'ctv_id', 'ref_code', 'product_id', 'product_name', 'variant',
            'web_price', 'sample_price', 'receiver', 'phone', 'address', 'note', 'status'],
   Video: ['id', 'created_at', 'ctv_id', 'ref_code', 'url', 'note', 'status', 'admin_note'],
@@ -284,7 +285,8 @@ var API = {
   contractPreview: function (r) {
     var u = auth_(r);
     return { version: contractVersion_(u), html: contractHtml_(u, {
-      full_name: u.full_name, id_number: '……………', id_issued: '……………', address: '……………' }, null) };
+      full_name: u.full_name, id_number: '……………', id_issued: '……………', address: '……………',
+      mode: DEALER_MODES[r.mode] ? r.mode : '' }, null) };
   },
 
   signContract: function (r) {
@@ -296,7 +298,11 @@ var API = {
       dob: clean_(r.dob, 10), phone: normPhone_(r.phone), email: clean_(r.email, 120),
       shop_name: clean_(r.shop_name, 120), tax_code: clean_(r.tax_code, 20), shop_address: clean_(r.shop_address, 200)
     };
-    if (isDealer_(u) && !info.shop_address) throw new Error('Vui lòng nhập địa chỉ cửa hàng / điểm bán');
+    if (isDealer_(u)) {
+      info.mode = DEALER_MODES[r.mode] ? r.mode : '';
+      if (!info.mode) throw new Error('Vui lòng chọn hình thức hợp đồng: Mua bán hoặc Ký gửi');
+      if (!info.shop_address) throw new Error('Vui lòng nhập địa chỉ cửa hàng / điểm bán');
+    }
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(info.dob);
     if (!m) throw new Error('Vui lòng nhập ngày sinh');
     var age = (Date.now() - new Date(+m[1], +m[2] - 1, +m[3]).getTime()) / (365.25 * 864e5);
@@ -318,7 +324,7 @@ var API = {
     var signedAt = now_();
     var html = contractHtml_(u, info, { sig: sig, at: signedAt });
     var pdf = Utilities.newBlob(html, 'text/html', 'hd.html').getAs('application/pdf')
-      .setName((isDealer_(u) ? 'Hop dong Dai ly - ' : 'Hop dong CTV - ') + u.ref_code + ' - ' + u.full_name + '.pdf');
+      .setName((isDealer_(u) ? (info.mode === 'ky_gui' ? 'Hop dong Dai ly ky gui - ' : 'Hop dong Dai ly mua ban - ') : 'Hop dong CTV - ') + u.ref_code + ' - ' + u.full_name + '.pdf');
     var file = folder_().createFile(pdf);
     folder_().createFile(Utilities.newBlob(Utilities.base64Decode(sig.split(',')[1]), 'image/png',
       'Chu ky - ' + u.ref_code + '.png'));
@@ -327,7 +333,8 @@ var API = {
       full_name: info.full_name, id_number: info.id_number, id_issued: info.id_issued,
       address: info.address, pdf_url: file.getUrl(), user_agent: clean_(r.user_agent, 300),
       dob: info.dob, phone: info.phone, email: info.email,
-      shop_name: info.shop_name, tax_code: info.tax_code, shop_address: info.shop_address
+      shop_name: info.shop_name, tax_code: info.tax_code, shop_address: info.shop_address,
+      dealer_mode: info.mode ? DEALER_MODES[info.mode] : ''
     });
     if (isDealer_(u)) {
       // Đại lý: không qua bước đặt mẫu / video, ký xong là hoạt động
@@ -460,6 +467,7 @@ var API = {
     if (r.status) { if (STATUSES.indexOf(r.status) < 0) throw new Error('Trạng thái sai'); ch.status = r.status; }
     if (r.commission_rate !== undefined) ch.commission_rate = String(r.commission_rate).trim() === '' ? '' : num_(r.commission_rate);
     if (r.admin_note !== undefined) ch.admin_note = clean_(r.admin_note, 500);
+    if (r.kind) { if (['CTV', 'KOL', 'KOC', DEALER].indexOf(r.kind) < 0) throw new Error('Loại tài khoản sai'); ch.kind = r.kind; }
     if (r.new_password) {
       if (String(r.new_password).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
       ch.pw_salt = Utilities.getUuid(); ch.pw_hash = hash_(ch.pw_salt, r.new_password);
@@ -608,6 +616,15 @@ function dealerContractHtml_(u, info, signed) {
   var hh = f !== null ? 'tỷ lệ cố định <b>' + f + '%</b>' :
     'tỷ lệ theo doanh thu tháng: ' + TIERS.map(function (t) { return t.label.replace(/\.000\.000đ/g, ' triệu').replace(/đ$/, '') + ': ' + t.rate + '%'; }).join('; ');
   var A = BEN_A, P = function (t) { return '<p>' + t + '</p>'; };
+  var kg = info.mode === 'ky_gui', mb = info.mode === 'mua_ban';
+  var tieuDe = kg ? 'HỢP ĐỒNG ĐẠI LÝ KÝ GỬI HÀNG HÓA' : mb ? 'HỢP ĐỒNG ĐẠI LÝ MUA BÁN HÀNG HÓA' : 'HỢP ĐỒNG ĐẠI LÝ';
+  var hinhThuc = kg ?
+    '<b>Điều 2. Hình thức: KÝ GỬI.</b> Bên A giao hàng cho Bên B bán theo hình thức <b>ký gửi</b>: <b>hàng hóa luôn thuộc quyền sở hữu của Bên A</b> cho đến khi Bên B bán và thanh toán đủ tiền; Bên B không được cầm cố, thế chấp, cho mượn hoặc giao cho bên thứ ba ký gửi lại. Mỗi lần giao hàng, hai bên lập <b>Hợp đồng ký gửi hàng hóa</b> kèm danh sách sản phẩm do Bên B tự chọn (số lượng, giá ký gửi, giá bán lẻ), là bộ phận không tách rời của Hợp đồng này. Bên B bán lẻ đúng giá niêm yết; phần chênh lệch giữa giá bán lẻ và giá ký gửi là thù lao của Bên B. Thời hạn mỗi đợt ký gửi tối đa 90 ngày, hết hạn Bên B trả lại hàng chưa bán còn nguyên tem, hộp; hàng không trả được tính như đã bán. Bên A được thu hồi hàng bất kỳ lúc nào, báo trước 03 ngày, và được kiểm kê đột xuất; hàng thiếu được coi là đã bán.' :
+    mb ? '<b>Điều 2. Hình thức: MUA BÁN.</b> Bên B <b>mua đứt, bán đoạn</b> hàng của Bên A và tự bán lại cho khách. Mỗi lần lấy hàng, hai bên lập <b>Hợp đồng mua bán hàng hóa</b> (hoặc đơn đặt hàng được Bên A xác nhận qua Zalo, email) kèm danh sách sản phẩm do Bên B tự chọn, là bộ phận không tách rời của Hợp đồng này. Quyền sở hữu hàng hóa chuyển cho Bên B khi Bên B thanh toán đủ; rủi ro chuyển cho Bên B khi hàng được giao cho Bên B hoặc đơn vị vận chuyển. Bên A <b>không nhận trả lại hàng không lỗi</b>, kể cả hàng chậm bán.' :
+    '<b>Điều 2. Hình thức.</b> (Bên B chọn hình thức Mua bán hoặc Ký gửi ở bước ký hợp đồng.)';
+  var thanhToan = kg ?
+    '<b>Điều 5. Ký quỹ, đối soát, thanh toán.</b> Trước khi nhận hàng, Bên B nộp ký quỹ tối thiểu <b>30% giá trị hàng ký gửi</b> (hoặc mức ghi tại từng hợp đồng ký gửi); ký quỹ không tính lãi, được hoàn trả trong 07 ngày sau khi thanh lý. Vào <b>ngày 05 hằng tháng</b> (hoặc kỳ ghi tại hợp đồng ký gửi), Bên B báo cáo hàng đã bán, hàng tồn và thanh toán toàn bộ tiền hàng đã bán theo giá ký gửi chậm nhất 03 ngày sau ngày đối soát. Hàng mất mát, hư hỏng kể từ khi Bên B nhận, Bên B bồi thường theo giá ký gửi. Chậm thanh toán chịu lãi <b>0,05%/ngày</b>; Bên A được cấn trừ ký quỹ, hoa hồng chưa chi trả, tạm ngưng giao hàng và thu hồi toàn bộ hàng ký gửi.' :
+    '<b>Điều 5. Thanh toán.</b> Bên B thanh toán <b>100% giá trị đơn hàng trước khi Bên A giao hàng</b>, trừ khi hợp đồng mua bán từng lần cho phép đặt cọc hoặc trả sau. Thanh toán bằng chuyển khoản vào tài khoản do Bên A chỉ định. Chậm thanh toán chịu lãi <b>0,05%/ngày</b> trên số tiền chậm trả; Bên A được tạm ngưng giao hàng và cấn trừ vào hoa hồng chưa chi trả của Bên B cho đến khi Bên B thanh toán đủ.';
   return '<html><head><meta charset="utf-8"><style>' +
     '@page{size:A4;margin:11mm 14mm}' +
     'body{font-family:"Times New Roman",Times,serif;font-size:10.5pt;line-height:1.3;margin:0;color:#000}' +
@@ -615,7 +632,7 @@ function dealerContractHtml_(u, info, signed) {
     'table{width:100%;border-collapse:collapse}td{vertical-align:top;padding:0}' +
     '</style></head><body>' +
     '<p class="c"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập – Tự do – Hạnh phúc</b></p>' +
-    '<h1>HỢP ĐỒNG ĐẠI LÝ</h1>' +
+    '<h1>' + tieuDe + '</h1>' +
     '<p class="c">Số: ' + e(DEALER_CONTRACT_VERSION + '/' + u.ref_code) + '</p>' +
     '<p><i>Căn cứ Bộ luật Dân sự 2015, Luật Thương mại 2005 (Mục 4 Chương V về đại lý thương mại), Luật Giao dịch điện tử 2023 và nhu cầu của hai bên. Hôm nay, ' + ngay + ', chúng tôi gồm:</i></p>' +
     '<p><b>BÊN A (Bên giao đại lý): ' + e(A.ten) + '</b> – MST: ' + e(A.mst) + ' – Địa chỉ: ' + e(A.dia_chi) +
@@ -625,11 +642,11 @@ function dealerContractHtml_(u, info, signed) {
     '<br>Địa chỉ thường trú: ' + e(info.address) + ' – Điện thoại: ' + e(info.phone || u.phone) + ' – Email: ' + e(info.email) + ' – Mã đại lý: <b>' + e(u.ref_code) + '</b>' +
     '<br>Tài khoản ngân hàng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
     P('<b>Điều 1. Chỉ định đại lý.</b> Bên A chỉ định Bên B làm đại lý <b>không độc quyền</b> phân phối các sản phẩm mắt kính, gọng kính, tròng kính, kính áp tròng và phụ kiện do Bên A kinh doanh (“Sản phẩm”) tại điểm bán nêu trên và trên các kênh bán hàng online của Bên B. Bên A được quyền chỉ định đại lý khác, tự bán hàng trực tiếp tại cùng khu vực.') +
-    P('<b>Điều 2. Hình thức giao dịch.</b> Bên B lấy hàng theo một hoặc cả hai hình thức: (a) <b>Mua bán</b> (mua đứt, bán đoạn): Bên B mua hàng của Bên A và tự bán lại; (b) <b>Ký gửi</b>: Bên A giao hàng cho Bên B bán, hàng vẫn thuộc sở hữu của Bên A cho tới khi Bên B bán và thanh toán đủ. Mỗi lần lấy hàng, hai bên lập <b>Hợp đồng mua bán</b> hoặc <b>Hợp đồng ký gửi hàng hóa</b> kèm danh sách sản phẩm do Bên B tự chọn; các hợp đồng đó là bộ phận không tách rời của Hợp đồng này. Đơn đặt hàng được Bên A xác nhận qua Zalo, email hoặc trang đại lý cũng có giá trị như hợp đồng mua bán.') +
-    P('<b>Điều 3. Giá và chiết khấu.</b> Giá bán lẻ do Bên A niêm yết trên eyemedi.vn và <b>đã bao gồm thuế giá trị gia tăng (VAT)</b>. Giá giao cho Bên B bằng giá niêm yết trừ chiết khấu đại lý theo chính sách của Bên A từng thời kỳ hoặc ghi tại từng hợp đồng mua bán/ký gửi, <b>đã bao gồm VAT</b>. Bên B <b>không bán thấp hơn giá niêm yết</b> và không tự chạy khuyến mãi giảm giá khi chưa có đồng ý bằng văn bản hoặc tin nhắn của Bên A. Bên A được điều chỉnh giá, chính sách chiết khấu, thông báo trước 07 ngày; đơn đã xác nhận giữ nguyên giá. Ngoài ra, đơn khách đặt trực tiếp với Bên A qua link/mã đại lý của Bên B và đã giao thành công được tính hoa hồng theo ' + hh + '; đối soát, chi trả như chính sách cộng tác viên đăng trên trang đại lý. Bên B tự kê khai, nộp các khoản thuế phát sinh từ hoạt động kinh doanh và thu nhập của mình.') +
+    P(hinhThuc) +
+    P('<b>Điều 3. Giá và chiết khấu.</b> Giá bán lẻ do Bên A niêm yết trên eyemedi.vn và <b>đã bao gồm thuế giá trị gia tăng (VAT)</b>. Giá giao cho Bên B (giá mua hoặc giá ký gửi) bằng giá niêm yết trừ chiết khấu đại lý theo chính sách của Bên A từng thời kỳ hoặc ghi tại từng hợp đồng mua bán/ký gửi, <b>đã bao gồm VAT</b>. Bên B <b>không bán thấp hơn giá niêm yết</b> và không tự chạy khuyến mãi giảm giá khi chưa có đồng ý bằng văn bản hoặc tin nhắn của Bên A. Bên A được điều chỉnh giá, chính sách chiết khấu, thông báo trước 07 ngày; đơn đã xác nhận giữ nguyên giá. Ngoài ra, đơn khách đặt trực tiếp với Bên A qua link/mã đại lý của Bên B và đã giao thành công được tính hoa hồng theo ' + hh + '; đối soát, chi trả như chính sách cộng tác viên đăng trên trang đại lý. Bên B tự kê khai, nộp các khoản thuế phát sinh từ hoạt động kinh doanh và thu nhập của mình.') +
     P('<b>Điều 4. Đặt hàng, giao nhận.</b> Bên B đặt hàng qua Zalo ' + '0869 222 638' + ', email hoặc trang đại lý. Bên A giao hàng trong 03–07 ngày làm việc kể từ khi xác nhận đơn (hàng đặt riêng theo thỏa thuận). Phí vận chuyển do Bên B chịu, trừ khi hợp đồng từng lần ghi khác. Bên B kiểm hàng khi nhận (quay video mở hàng); khiếu nại thiếu, sai, lỗi trong <b>03 ngày</b> kể từ ngày nhận, quá hạn được coi là đã nhận đủ và đúng chất lượng. Rủi ro đối với hàng hóa chuyển sang Bên B kể từ khi hàng được giao cho Bên B hoặc đơn vị vận chuyển do Bên B chỉ định.') +
-    P('<b>Điều 5. Thanh toán.</b> Hàng mua bán: Bên B thanh toán <b>100% trước khi giao hàng</b>, trừ khi hợp đồng từng lần cho phép trả sau. Hàng ký gửi: đối soát và thanh toán theo hợp đồng ký gửi. Thanh toán bằng chuyển khoản vào tài khoản do Bên A chỉ định. Quyền sở hữu hàng mua bán chỉ chuyển cho Bên B khi Bên B thanh toán đủ. Chậm thanh toán chịu lãi <b>0,05%/ngày</b> trên số tiền chậm trả; Bên A được tạm ngưng giao hàng, thu hồi hàng ký gửi và cấn trừ vào khoản ký quỹ, hoa hồng chưa chi trả của Bên B cho đến khi Bên B thanh toán đủ.') +
-    P('<b>Điều 6. Bảo hành, đổi trả.</b> Sản phẩm được bảo hành theo chính sách Bên A công bố. Bên B tiếp nhận yêu cầu của khách và gửi sản phẩm lỗi về Bên A; Bên A đổi mới sản phẩm lỗi do nhà sản xuất trong 07 ngày kể từ ngày Bên B nhận hàng. Bên A <b>không nhận trả lại hàng mua bán không lỗi</b> (kể cả hàng chậm bán), trừ khi Bên A đồng ý. Hư hỏng do bảo quản, vận chuyển của Bên B, hoặc do khách sử dụng sai không được bảo hành.') +
+    P(thanhToan) +
+    P('<b>Điều 6. Bảo hành, đổi trả.</b> Sản phẩm được bảo hành theo chính sách Bên A công bố. Bên B tiếp nhận yêu cầu của khách và gửi sản phẩm lỗi về Bên A; Bên A đổi mới sản phẩm lỗi do nhà sản xuất trong 07 ngày kể từ ngày Bên B nhận hàng. Hàng mua bán không lỗi không được trả lại (kể cả hàng chậm bán), trừ khi Bên A đồng ý; hàng ký gửi xử lý theo Điều 2. Hư hỏng do bảo quản, vận chuyển của Bên B, hoặc do khách sử dụng sai không được bảo hành.') +
     P('<b>Điều 7. Thương hiệu.</b> Bên B được dùng tên, logo EYEMEDI và hình ảnh sản phẩm do Bên A cung cấp để bán Sản phẩm trong thời hạn hợp đồng; không đăng ký nhãn hiệu, tên miền, tên cửa hàng, fanpage, tài khoản gây nhầm lẫn là của Bên A; ngừng sử dụng và gỡ bỏ trong 07 ngày sau khi chấm dứt hợp đồng.') +
     imageClause_('Điều 8', 'hình ảnh cửa hàng, video, livestream và mọi nội dung Bên B đăng trên các kênh của mình', 'chính sách chiết khấu đại lý') +
     P('<b>Điều 9. Trách nhiệm Bên B.</b> Chỉ bán hàng chính hãng do Bên A cung cấp dưới tên EYEMEDI, không trộn lẫn hàng giả, hàng nhái; bảo quản, trưng bày hàng đúng hướng dẫn; với hàng ký gửi, chịu trách nhiệm mất mát, hư hỏng kể từ khi nhận; tuân thủ quy định pháp luật về kinh doanh, thuế, quảng cáo và quy định chuyên môn đối với kính thuốc, kính áp tròng; không quảng cáo sai sự thật, không hứa công dụng chữa bệnh; bảo mật giá nhập, chính sách đại lý; báo cáo tồn kho, doanh số khi Bên A yêu cầu.') +
