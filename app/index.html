@@ -286,7 +286,7 @@ function bankForm(){
     ['#bk_bin','#bk_bin2','#bk_acc','#bk_name'].forEach(k=>{$(k,m).oninput=prev;$(k,m).onchange=prev});prev();
     $('#bk_save',m).onclick=async()=>{const v=val();
       if(v.bin.length!==6){toast('Chọn ngân hàng hoặc nhập đủ 6 số BIN');return}if(v.account.length<4){toast('Nhập số tài khoản');return}
-      if(SERVER){try{BANK=(await api('posBankSave',{bank:v})).bank}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);return}}
+      if(SERVER){try{BANK=(await api('posBankSave',{bank:v})).bank}catch(e){oldServerToast(e);return}}
       else{S.bank=v;save()}
       close();toast('Đã lưu tài khoản nhận chuyển khoản')}}});
 }
@@ -602,7 +602,7 @@ async function saveEdit(){
   if(cart.channel!=='pos'&&!cart.customerId){toast('Đơn online cần chọn khách hàng');return}
   const n={items:cart.items.map(i=>({...i})),discount:t.disc,shipFee:t.ship,method:cart.method,channel:cart.channel,customerId:cart.customerId,address:cart.address,note:cart.note,carrier:cart.carrier};
   if(SERVER){const b=$('#checkout');b&&(b.disabled=true,b.textContent='Đang lưu…');
-    try{const d=await api('posOrderUpdate',{id:o.id,order:n});upsert(S.orders,d.order);mergeProducts(d.products)}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);renderCart();return}}
+    try{const d=await api('posOrderUpdate',{id:o.id,order:n});upsert(S.orders,d.order);mergeProducts(d.products)}catch(e){oldServerToast(e);renderCart();return}}
   else{
     const d={};o.items.forEach(i=>d[i.pid]=(d[i.pid]||0)+i.qty);n.items.forEach(i=>d[i.pid]=(d[i.pid]||0)-i.qty);
     Object.entries(d).forEach(([pid,q])=>{const p=prod(pid);if(q&&p&&!p.service){adjStock(p,q,o.branchId);S.stockLog.push({id:uid(),date:Date.now(),pid,qty:q,type:q>0?'huy':'ban',note:'Sửa đơn '+o.code})}});
@@ -620,7 +620,7 @@ function editShipInfo(o){
     <div class="acts"><button class="btn" data-close>Thôi</button><button class="btn pri" id="ei_ok">Lưu</button></div>`,
   {onMount:(m,close)=>{$('#ei_ok',m).onclick=async()=>{
     const n={carrier:$('#ei_car',m).value,trackingCode:$('#ei_trk',m).value.trim(),address:$('#ei_addr',m).value.trim(),note:$('#ei_note',m).value.trim()};
-    if(SERVER){try{const d=await api('posOrderUpdate',{id:o.id,order:n,infoOnly:true});upsert(S.orders,d.order)}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);return}}
+    if(SERVER){try{const d=await api('posOrderUpdate',{id:o.id,order:n,infoOnly:true});upsert(S.orders,d.order)}catch(e){oldServerToast(e);return}}
     else{Object.assign(o,n);save()}
     close();route();toast('Đã lưu đơn '+o.code);showReceipt(S.orders.find(x=>x.id===o.id))}}});
 }
@@ -1314,10 +1314,17 @@ function renderNotice(){const el=$('#noticeBar');if(el){el.innerHTML=noticeInner
 function deleteOrder(o){
   const live=o.status!=='draft'&&o.status!=='cancelled';
   confirmBox(o.status==='draft'?`Xóa đơn nháp ${o.code}?`:`Xóa hẳn đơn ${o.code}? ${live?'Hàng được cộng lại vào kho. ':''}Phiếu thu/chi tự động của đơn này cũng bị xóa khỏi sổ quỹ. Không khôi phục được.`,'Xóa đơn',async()=>{
-    if(SERVER){try{const d=await api('posOrderDelete',{id:o.id});mergeProducts(d.products);CASH=null}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ':e.message);return}}
+    if(SERVER){try{const d=await api('posOrderDelete',{id:o.id});mergeProducts(d.products);CASH=null}catch(e){oldServerToast(e);return}}
     else{if(live)o.items.forEach(i=>{const p=prod(i.pid);if(p&&!p.service){adjStock(p,i.qty,o.branchId);S.stockLog.push({id:uid(),date:Date.now(),pid:p.id,qty:i.qty,type:'huy',note:'Xóa đơn '+o.code})}});
       S.cash=(S.cash||[]).filter(e=>!(e.ref===o.code&&e.auto));save()}
     S.orders=S.orders.filter(x=>x.id!==o.id);seenOrders&&seenOrders.delete(o.id);route();renderNotice();toast('Đã xóa đơn '+o.code)});
+}
+const NEED_SERVER='2026-11-28d';let SRV_VER=null;
+async function serverVersion(){if(SRV_VER)return SRV_VER;try{const r=await fetch(window.POS_API||window.CTV_API);const j=await r.json();SRV_VER=j.pos||'cũ'}catch(e){SRV_VER=''}return SRV_VER}
+async function oldServerToast(e){
+  if(!/không hợp lệ/i.test(e.message)){toast(e.message);return}
+  const v=await serverVersion();
+  toast(`Máy chủ đang chạy Code.gs bản ${v||'cũ'}, cần bản ${NEED_SERVER}. Dán Code.gs mới rồi vào Triển khai › Quản lý triển khai › Sửa › Phiên bản mới.`);
 }
 function printReceipt(){document.body.classList.add('printing');const off=()=>{document.body.classList.remove('printing');window.removeEventListener('afterprint',off)};window.addEventListener('afterprint',off);window.print();setTimeout(off,60000)}
 function payOrder(o){
@@ -1925,14 +1932,15 @@ function viewMore(el){
     ${BR().length?`<div class="brbox">${branchSelect()}</div>`:''}</div>
     <input class="more-search" id="mq" type="search" placeholder="Tìm chức năng…">
     ${G.map(([h,items])=>{const r=items.map(row).join('');return r?`<div class="more-grp"><h3>${h}</h3>${r}</div>`:''}).join('')}
-    <div class="small muted" style="text-align:center">${SERVER?'Đã kết nối máy chủ, dữ liệu dùng chung':'Dữ liệu lưu trên trình duyệt này'}</div>`;
+    <div class="small muted" style="text-align:center">${SERVER?'Đã kết nối máy chủ, dữ liệu dùng chung':'Dữ liệu lưu trên trình duyệt này'}<div id="srvVer"></div></div>`;
+  if(SERVER)serverVersion().then(v=>{const x=$('#srvVer',el);if(x)x.textContent=v?'Máy chủ: Code.gs bản '+v+(v<NEED_SERVER?' (cần cập nhật lên '+NEED_SERVER+')':''):''});
   $$('[data-mi]',el).forEach(b=>b.onclick=()=>acts[b.dataset.mi]());
   const bs=$('#brSel',el);bs&&(bs.onchange=()=>setBranch(bs.value));
   $('#mq',el).oninput=e=>{const q=e.target.value.trim().toLowerCase();$$('.more-grp',el).forEach(g=>{let any=0;$$('.more-row',g).forEach(r=>{const v=!q||r.dataset.k.includes(q);r.hidden=!v;any+=v});g.hidden=!any})};
 }
 /* Cài đặt kết nối SPX: mã lưu ở máy chủ Apps Script (Script Properties), app chỉ hiện 4 ký tự cuối */
 async function spxForm(){
-  let cur;try{cur=await api('posSpxGet')}catch(e){toast(/không hợp lệ|Unknown|action/i.test(e.message)?'Cần cập nhật Code.gs mới lên máy chủ trước':e.message);return}
+  let cur;try{cur=await api('posSpxGet')}catch(e){oldServerToast(e);return}
   const F=[['SPX_APP_ID','App ID','text'],['SPX_APP_SECRET','App Secret / API Key','password'],['SPX_USER_ID','User ID (mã khách hàng SPX)','text'],['SPX_SHOP_ID','Shop ID / mã kho lấy hàng','text']];
   modal(`<h2>Kết nối SPX Express</h2>
     <div class="small muted">Nhập mã SPX cấp khi mở API. Mã được lưu trên máy chủ Apps Script, không lưu trên điện thoại hay trình duyệt. Sau khi lưu, app chỉ hiện 4 ký tự cuối. Để trống ô nào thì giữ nguyên mã cũ.</div>
