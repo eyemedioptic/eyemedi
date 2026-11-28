@@ -1,5 +1,5 @@
 /**
- * EYEMEDI – Máy chủ Cộng tác viên (CTV / KOL / KOC) chạy trên Google Apps Script.
+ * EYEMEDI – Máy chủ Cộng tác viên (CTV / KOL / KOC / Đại lý) chạy trên Google Apps Script.
  *
  * CÀI ĐẶT (làm 1 lần):
  *  1. Tạo 1 Google Sheet mới, đặt tên "EYEMEDI - Cong tac vien".
@@ -15,7 +15,11 @@
  */
 
 var SITE = 'https://eyemedi.vn';
-var CONTRACT_VERSION = 'HD-CTV-2026.2';
+var CONTRACT_VERSION = 'HD-CTV-2026.3';
+var DEALER_CONTRACT_VERSION = 'HD-DL-2026.1';   // hợp đồng Đại lý
+var DEALER = 'Đại lý';
+function isDealer_(u) { return u && u.kind === DEALER; }
+function contractVersion_(u) { return isDealer_(u) ? DEALER_CONTRACT_VERSION : CONTRACT_VERSION; }
 var SAMPLE_DISCOUNT = 0.5;          // đơn mẫu = 50% giá web
 // Hoa hồng theo DOANH THU THÁNG (tổng giá trị đơn ĐÃ GIAO trong tháng của CTV).
 // Bậc đạt được áp dụng cho TẤT CẢ đơn trong tháng đó. Mỗi bậc kéo dài tới ngưỡng bậc sau.
@@ -35,7 +39,7 @@ var SHEETS = {
         'commission_rate', 'bank_name', 'bank_account', 'bank_holder', 'admin_note', 'is_admin',
         'pw_salt', 'pw_hash', 'username'],
   HopDong: ['ctv_id', 'ref_code', 'signed_at', 'version', 'full_name', 'id_number', 'id_issued',
-            'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email'],
+            'address', 'pdf_url', 'user_agent', 'dob', 'phone', 'email', 'shop_name', 'tax_code', 'shop_address'],
   DonMau: ['id', 'created_at', 'ctv_id', 'ref_code', 'product_id', 'product_name', 'variant',
            'web_price', 'sample_price', 'receiver', 'phone', 'address', 'note', 'status'],
   Video: ['id', 'created_at', 'ctv_id', 'ref_code', 'url', 'note', 'status', 'admin_note'],
@@ -134,8 +138,10 @@ var API = {
     if (String(r.password || '').length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
     var name = clean_(r.full_name, 80);
     if (name.length < 2) throw new Error('Vui lòng nhập họ tên');
+    var kind = ['CTV', 'KOL', 'KOC', DEALER].indexOf(r.kind) >= 0 ? r.kind : 'CTV';
     var channels = clean_(r.channels, 500);
-    if (!/[a-z0-9-]\.[a-z]{2,}|@\w/i.test(channels)) throw new Error('Vui lòng nhập link kênh bán hàng (TikTok, Facebook, Instagram…)');
+    if (kind === DEALER) { if (channels.length < 8) throw new Error('Vui lòng nhập địa chỉ cửa hàng hoặc link kênh bán hàng'); }
+    else if (!/[a-z0-9-]\.[a-z]{2,}|@\w/i.test(channels)) throw new Error('Vui lòng nhập link kênh bán hàng (TikTok, Facebook, Instagram…)');
     var t = table_('CTV');
     if (t.find('phone', phone)) throw new Error('Số điện thoại này đã đăng ký, vui lòng đăng nhập');
     var email = clean_(r.email, 120).toLowerCase();
@@ -145,7 +151,6 @@ var API = {
       do { code = 'EM' + Math.random().toString(36).slice(2, 7).toUpperCase(); } while (t.find('ref_code', code));
     }
     var salt = Utilities.getUuid();
-    var kind = ['CTV', 'KOL', 'KOC'].indexOf(r.kind) >= 0 ? r.kind : 'CTV';
     var row = {
       id: Utilities.getUuid(), created_at: now_(), full_name: name, phone: phone,
       email: email, kind: kind, channels: channels, ref_code: code,
@@ -278,7 +283,7 @@ var API = {
   /* ---------- Bước 2: hợp đồng online ---------- */
   contractPreview: function (r) {
     var u = auth_(r);
-    return { version: CONTRACT_VERSION, html: contractHtml_(u, {
+    return { version: contractVersion_(u), html: contractHtml_(u, {
       full_name: u.full_name, id_number: '……………', id_issued: '……………', address: '……………' }, null) };
   },
 
@@ -288,8 +293,10 @@ var API = {
     var info = {
       full_name: clean_(r.full_name, 80), id_number: clean_(r.id_number, 20),
       id_issued: clean_(r.id_issued, 120), address: clean_(r.address, 200),
-      dob: clean_(r.dob, 10), phone: normPhone_(r.phone), email: clean_(r.email, 120)
+      dob: clean_(r.dob, 10), phone: normPhone_(r.phone), email: clean_(r.email, 120),
+      shop_name: clean_(r.shop_name, 120), tax_code: clean_(r.tax_code, 20), shop_address: clean_(r.shop_address, 200)
     };
+    if (isDealer_(u) && !info.shop_address) throw new Error('Vui lòng nhập địa chỉ cửa hàng / điểm bán');
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(info.dob);
     if (!m) throw new Error('Vui lòng nhập ngày sinh');
     var age = (Date.now() - new Date(+m[1], +m[2] - 1, +m[3]).getTime()) / (365.25 * 864e5);
@@ -311,18 +318,26 @@ var API = {
     var signedAt = now_();
     var html = contractHtml_(u, info, { sig: sig, at: signedAt });
     var pdf = Utilities.newBlob(html, 'text/html', 'hd.html').getAs('application/pdf')
-      .setName('Hop dong CTV - ' + u.ref_code + ' - ' + u.full_name + '.pdf');
+      .setName((isDealer_(u) ? 'Hop dong Dai ly - ' : 'Hop dong CTV - ') + u.ref_code + ' - ' + u.full_name + '.pdf');
     var file = folder_().createFile(pdf);
     folder_().createFile(Utilities.newBlob(Utilities.base64Decode(sig.split(',')[1]), 'image/png',
       'Chu ky - ' + u.ref_code + '.png'));
     table_('HopDong').insert({
-      ctv_id: u.id, ref_code: u.ref_code, signed_at: signedAt, version: CONTRACT_VERSION,
+      ctv_id: u.id, ref_code: u.ref_code, signed_at: signedAt, version: contractVersion_(u),
       full_name: info.full_name, id_number: info.id_number, id_issued: info.id_issued,
       address: info.address, pdf_url: file.getUrl(), user_agent: clean_(r.user_agent, 300),
-      dob: info.dob, phone: info.phone, email: info.email
+      dob: info.dob, phone: info.phone, email: info.email,
+      shop_name: info.shop_name, tax_code: info.tax_code, shop_address: info.shop_address
     });
-    table_('CTV').update(u, { status: 'signed' });
-    notify_(u.id, 'Đã ký hợp đồng', 'Bước tiếp theo: chọn 1 sản phẩm mẫu giảm 50%.', '/ctv/app.html');
+    if (isDealer_(u)) {
+      // Đại lý: không qua bước đặt mẫu / video, ký xong là hoạt động
+      table_('CTV').update(u, { status: 'active' });
+      openCommission_(u.id);
+      notify_(u.id, 'Đã ký hợp đồng đại lý', 'Chào mừng đại lý mới của EYEMEDI. Liên hệ Zalo 0869 222 638 để đặt hàng hoặc ký gửi.', '/ctv/app.html');
+    } else {
+      table_('CTV').update(u, { status: 'signed' });
+      notify_(u.id, 'Đã ký hợp đồng', 'Bước tiếp theo: chọn 1 sản phẩm mẫu giảm 50%.', '/ctv/app.html');
+    }
     notify_('admin', u.full_name + ' đã ký hợp đồng', 'Mã CTV ' + u.ref_code, '/ctv/admin.html');
     return true;
   },
@@ -332,6 +347,7 @@ var API = {
 
   placeSample: function (r) {
     var u = auth_(r);
+    if (isDealer_(u)) throw new Error('Đại lý đặt hàng theo hợp đồng mua bán / ký gửi, vui lòng liên hệ EYEMEDI');
     if (u.status !== 'signed') throw new Error('Chỉ đặt hàng mẫu được sau khi ký hợp đồng');
     var t = table_('DonMau');
     if (t.find('ctv_id', u.id)) throw new Error('Bạn đã dùng quyền đặt hàng mẫu (chỉ 1 lần)');
@@ -534,7 +550,16 @@ var BEN_A = {
 };
 var VIDEO_DAYS = 15;                  // số ngày phải gửi video sau khi nhận mẫu
 
+/** Điều khoản quyền sử dụng hình ảnh, video (dùng chung cho hợp đồng CTV/KOC/KOL và Đại lý). */
+function imageClause_(so, nguon, doiUng) {
+  return '<p><b>' + so + '. Quyền sử dụng hình ảnh, video.</b> Bên B đồng ý để Bên A <b>sử dụng hình ảnh, video, giọng nói, bài viết</b> có Bên B xuất hiện hoặc do Bên B thực hiện khi sử dụng, review, giới thiệu sản phẩm của Bên A (gồm ' + nguon + ') để <b>đăng tải trên website, fanpage, kênh mạng xã hội, sàn thương mại điện tử của Bên A và chạy quảng cáo</b> (Facebook, Instagram, TikTok, Google, YouTube, Zalo…) nhằm giới thiệu và bán sản phẩm. ' +
+    'Quyền sử dụng là <b>miễn phí</b> (đã bao gồm trong ' + doiUng + '), không giới hạn số lần, lãnh thổ, có hiệu lực trong thời hạn hợp đồng và <b>24 tháng sau khi hợp đồng chấm dứt</b>; nội dung đã đăng trước thời điểm đó được tiếp tục lưu giữ trên các kênh của Bên A. ' +
+    'Bên A được biên tập (cắt ghép, thêm chữ, phụ đề, nhạc, logo, thông tin giá, khuyến mãi) nhưng không làm sai lệch nội dung, không xúc phạm danh dự, uy tín của Bên B, không dùng cho sản phẩm không phải của Bên A và không chuyển giao cho bên thứ ba ngoài mục đích quảng cáo của Bên A. ' +
+    'Bên B bảo đảm có đủ quyền đối với nội dung đã cung cấp (kể cả nhạc, hình ảnh người khác xuất hiện trong video) và không yêu cầu thù lao, gỡ bỏ trong thời gian nêu trên. Điều khoản này là sự đồng ý của Bên B về việc sử dụng hình ảnh theo Điều 32 Bộ luật Dân sự và về việc xử lý dữ liệu cá nhân (hình ảnh, giọng nói) cho mục đích nêu trên.</p>';
+}
+
 function contractHtml_(u, info, signed) {
+  if (isDealer_(u)) return dealerContractHtml_(u, info, signed);
   var e = function (s) { var v = String(s == null ? '' : s).trim(); return v ? esc_(v) : '…………'; };
   var d = signed ? signed.at : now_();
   var ngay = 'ngày ' + d.slice(8, 10) + ' tháng ' + d.slice(5, 7) + ' năm ' + d.slice(0, 4);
@@ -560,15 +585,60 @@ function contractHtml_(u, info, signed) {
     '<br>Địa chỉ: ' + e(info.address) + ' – Điện thoại: ' + e(info.phone || u.phone) + ' – Email: ' + e(info.email) + ' – Mã CTV: <b>' + e(u.ref_code) + '</b>' +
     '<br>Tài khoản nhận hoa hồng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
     '<p><b>Điều 1. Nội dung.</b> Bên B giới thiệu, quảng bá sản phẩm của Bên A đến khách hàng bằng đường link/mã CTV riêng; khách đặt hàng và thanh toán trực tiếp với Bên A. Bên B tự chủ thời gian, phương tiện làm việc. Hợp đồng này là hợp đồng dịch vụ, <b>không phải hợp đồng lao động</b>; Bên A không đóng bảo hiểm xã hội cho Bên B.</p>' +
-    '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video' + (RETRO_COMMISSION ? ' (khi đó các đơn đã giao trước đó, chưa thanh toán, cũng được tính hoa hồng). ' : '; đơn hàng phát sinh trước thời điểm duyệt video không được tính hoa hồng. ') + 'Bên B đồng ý cho Bên A chia sẻ lại video này trên các kênh của Bên A, có ghi nguồn.</p>' +
+    '<p><b>Điều 2. Sản phẩm mẫu và điều kiện kích hoạt.</b> Sau khi ký, Bên B được mua <b>01 lần duy nhất</b> 01 sản phẩm mẫu bằng 50% giá niêm yết trên eyemedi.vn. Trong ' + VIDEO_DAYS + ' ngày kể từ khi nhận hàng, Bên B đăng video trải nghiệm sản phẩm trên kênh của mình và gửi link cho Bên A. Quyền hưởng hoa hồng chỉ phát sinh sau khi Bên A duyệt video' + (RETRO_COMMISSION ? ' (khi đó các đơn đã giao trước đó, chưa thanh toán, cũng được tính hoa hồng). ' : '; đơn hàng phát sinh trước thời điểm duyệt video không được tính hoa hồng.') + '</p>' +
     '<p><b>Điều 3. Hoa hồng và thanh toán.</b> Hoa hồng tính trên giá trị thực thu (sau giảm giá, không gồm phí vận chuyển) của đơn hàng phát sinh từ link/mã của Bên B và <b>đã giao thành công</b>; đơn hủy, hoàn trả không tính. Mức hoa hồng: ' + hh + '. Hai bên đối soát trên trang CTV trước ngày 10 hằng tháng; Bên A chuyển khoản hoa hồng tháng trước vào tài khoản nêu trên trước ngày 15.</p>' +
     '<p><b>Điều 4. Thuế.</b> Hoa hồng là thu nhập của Bên B. <b>Bên B tự kê khai và nộp thuế thu nhập cá nhân (và các khoản thuế khác nếu có) theo đúng quy định của pháp luật</b>, tự chịu trách nhiệm về nghĩa vụ thuế của mình. Trường hợp pháp luật bắt buộc Bên A khấu trừ thuế tại nguồn, Bên A sẽ khấu trừ trước khi chi trả và cấp chứng từ khấu trừ thuế cho Bên B; Bên B cung cấp mã số thuế cá nhân khi Bên A yêu cầu.</p>' +
-    '<p><b>Điều 5. Trách nhiệm Bên B.</b> Cung cấp thông tin trung thực theo tài liệu Bên A công bố; không quảng cáo sai sự thật, không tự hứa giá, khuyến mãi hay công dụng chữa bệnh; tuân thủ Luật Quảng cáo và quy định ghi rõ nội dung quảng cáo trên mạng xã hội; không spam, không gian lận, không tự đặt hàng qua mã của mình để hưởng hoa hồng; bảo mật thông tin khách hàng; giữ uy tín thương hiệu EYEMEDI.</p>' +
-    '<p><b>Điều 6. Trách nhiệm Bên A.</b> Cung cấp thông tin, hình ảnh sản phẩm; chịu trách nhiệm về chất lượng, giao hàng, bảo hành và chăm sóc khách hàng; cập nhật đơn hàng, hoa hồng minh bạch trên trang CTV; chi trả hoa hồng đúng hạn.</p>' +
-    '<p><b>Điều 7. Chấm dứt.</b> Mỗi bên được đơn phương chấm dứt hợp đồng bằng thông báo trước 07 ngày; hoa hồng của đơn đã giao trước ngày chấm dứt vẫn được thanh toán. Nếu Bên B vi phạm Điều 5, Bên A được chấm dứt ngay, khóa tài khoản và không chi trả hoa hồng cho các đơn vi phạm.</p>' +
-    '<p><b>Điều 8. Hiệu lực.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy, hiệu lực 12 tháng kể từ ngày ký và tự động gia hạn nếu không bên nào có ý kiến khác. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh. Mỗi bên lưu 01 bản điện tử.</p>' +
+    imageClause_('Điều 5', 'video gửi duyệt và mọi nội dung đăng trên kênh của Bên B', 'ưu đãi sản phẩm mẫu và hoa hồng') +
+    '<p><b>Điều 6. Trách nhiệm Bên B.</b> Cung cấp thông tin trung thực theo tài liệu Bên A công bố; không quảng cáo sai sự thật, không tự hứa giá, khuyến mãi hay công dụng chữa bệnh; tuân thủ Luật Quảng cáo và quy định ghi rõ nội dung quảng cáo trên mạng xã hội; không spam, không gian lận, không tự đặt hàng qua mã của mình để hưởng hoa hồng; bảo mật thông tin khách hàng; giữ uy tín thương hiệu EYEMEDI.</p>' +
+    '<p><b>Điều 7. Trách nhiệm Bên A.</b> Cung cấp thông tin, hình ảnh sản phẩm; chịu trách nhiệm về chất lượng, giao hàng, bảo hành và chăm sóc khách hàng; cập nhật đơn hàng, hoa hồng minh bạch trên trang CTV; chi trả hoa hồng đúng hạn.</p>' +
+    '<p><b>Điều 8. Chấm dứt.</b> Mỗi bên được đơn phương chấm dứt hợp đồng bằng thông báo trước 07 ngày; hoa hồng của đơn đã giao trước ngày chấm dứt vẫn được thanh toán. Nếu Bên B vi phạm Điều 5 hoặc Điều 6, Bên A được chấm dứt ngay, khóa tài khoản và không chi trả hoa hồng cho các đơn vi phạm.</p>' +
+    '<p><b>Điều 9. Hiệu lực.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy, hiệu lực 12 tháng kể từ ngày ký và tự động gia hạn nếu không bên nào có ý kiến khác. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh. Mỗi bên lưu 01 bản điện tử.</p>' +
     '<table style="margin-top:6pt"><tr><td class="c" style="width:50%"><b>ĐẠI DIỆN BÊN A</b><br><i style="font-size:9pt">' + (signed ? 'Đã chấp thuận điện tử lúc ' + esc_(signed.at) : '') + '</i><br><br>' + e(A.dai_dien) + '</td>' +
     '<td class="c"><b>BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:56px"><br>' : '<br><br>') + e(info.full_name) +
+    (signed ? '<br><i style="font-size:9pt">Ký điện tử lúc ' + esc_(signed.at) + '</i>' : '') + '</td></tr></table>' +
+    '</body></html>';
+}
+
+/** Hợp đồng ĐẠI LÝ (khung). Từng lần mua / ký gửi lập hợp đồng riêng tại /ctv/hop-dong-hang-hoa.html */
+function dealerContractHtml_(u, info, signed) {
+  var e = function (s) { var v = String(s == null ? '' : s).trim(); return v ? esc_(v) : '…………'; };
+  var d = signed ? signed.at : now_();
+  var ngay = 'ngày ' + d.slice(8, 10) + ' tháng ' + d.slice(5, 7) + ' năm ' + d.slice(0, 4);
+  var f = fixedRate_(u);
+  var hh = f !== null ? 'tỷ lệ cố định <b>' + f + '%</b>' :
+    'tỷ lệ theo doanh thu tháng: ' + TIERS.map(function (t) { return t.label.replace(/\.000\.000đ/g, ' triệu').replace(/đ$/, '') + ': ' + t.rate + '%'; }).join('; ');
+  var A = BEN_A, P = function (t) { return '<p>' + t + '</p>'; };
+  return '<html><head><meta charset="utf-8"><style>' +
+    '@page{size:A4;margin:11mm 14mm}' +
+    'body{font-family:"Times New Roman",Times,serif;font-size:10.5pt;line-height:1.3;margin:0;color:#000}' +
+    'p{margin:0 0 3pt;text-align:justify}.c{text-align:center}h1{font-size:13pt;text-align:center;margin:5pt 0 1pt}' +
+    'table{width:100%;border-collapse:collapse}td{vertical-align:top;padding:0}' +
+    '</style></head><body>' +
+    '<p class="c"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b><br><b>Độc lập – Tự do – Hạnh phúc</b></p>' +
+    '<h1>HỢP ĐỒNG ĐẠI LÝ</h1>' +
+    '<p class="c">Số: ' + e(DEALER_CONTRACT_VERSION + '/' + u.ref_code) + '</p>' +
+    '<p><i>Căn cứ Bộ luật Dân sự 2015, Luật Thương mại 2005 (Mục 4 Chương V về đại lý thương mại), Luật Giao dịch điện tử 2023 và nhu cầu của hai bên. Hôm nay, ' + ngay + ', chúng tôi gồm:</i></p>' +
+    '<p><b>BÊN A (Bên giao đại lý): ' + e(A.ten) + '</b> – MST: ' + e(A.mst) + ' – Địa chỉ: ' + e(A.dia_chi) +
+    '<br>Đại diện: ' + e(A.dai_dien) + ' – Chức vụ: ' + e(A.chuc_vu) + ' – Điện thoại: ' + e(A.dien_thoai) + '</p>' +
+    '<p><b>BÊN B (Đại lý): ' + e(info.shop_name || info.full_name) + '</b> – MST (nếu có): ' + e(info.tax_code) + ' – Địa chỉ điểm bán: ' + e(info.shop_address) +
+    '<br>Người đại diện: <b>' + e(info.full_name) + '</b> – Ngày sinh: ' + e(info.dob) + ' – CCCD số: ' + e(info.id_number) + ', cấp ngày/nơi cấp: ' + e(info.id_issued) +
+    '<br>Địa chỉ thường trú: ' + e(info.address) + ' – Điện thoại: ' + e(info.phone || u.phone) + ' – Email: ' + e(info.email) + ' – Mã đại lý: <b>' + e(u.ref_code) + '</b>' +
+    '<br>Tài khoản ngân hàng: ' + e(u.bank_account) + ' – Ngân hàng: ' + e(u.bank_name) + ' – Chủ TK: ' + e(u.bank_holder) + '</p>' +
+    P('<b>Điều 1. Chỉ định đại lý.</b> Bên A chỉ định Bên B làm đại lý <b>không độc quyền</b> phân phối các sản phẩm mắt kính, gọng kính, tròng kính, kính áp tròng và phụ kiện do Bên A kinh doanh (“Sản phẩm”) tại điểm bán nêu trên và trên các kênh bán hàng online của Bên B. Bên A được quyền chỉ định đại lý khác, tự bán hàng trực tiếp tại cùng khu vực.') +
+    P('<b>Điều 2. Hình thức giao dịch.</b> Bên B lấy hàng theo một hoặc cả hai hình thức: (a) <b>Mua bán</b> (mua đứt, bán đoạn): Bên B mua hàng của Bên A và tự bán lại; (b) <b>Ký gửi</b>: Bên A giao hàng cho Bên B bán, hàng vẫn thuộc sở hữu của Bên A cho tới khi Bên B bán và thanh toán đủ. Mỗi lần lấy hàng, hai bên lập <b>Hợp đồng mua bán</b> hoặc <b>Hợp đồng ký gửi hàng hóa</b> kèm danh sách sản phẩm do Bên B tự chọn; các hợp đồng đó là bộ phận không tách rời của Hợp đồng này. Đơn đặt hàng được Bên A xác nhận qua Zalo, email hoặc trang đại lý cũng có giá trị như hợp đồng mua bán.') +
+    P('<b>Điều 3. Giá và chiết khấu.</b> Giá bán lẻ do Bên A niêm yết trên eyemedi.vn và <b>đã bao gồm thuế giá trị gia tăng (VAT)</b>. Giá giao cho Bên B bằng giá niêm yết trừ chiết khấu đại lý theo chính sách của Bên A từng thời kỳ hoặc ghi tại từng hợp đồng mua bán/ký gửi, <b>đã bao gồm VAT</b>. Bên B <b>không bán thấp hơn giá niêm yết</b> và không tự chạy khuyến mãi giảm giá khi chưa có đồng ý bằng văn bản hoặc tin nhắn của Bên A. Bên A được điều chỉnh giá, chính sách chiết khấu, thông báo trước 07 ngày; đơn đã xác nhận giữ nguyên giá. Ngoài ra, đơn khách đặt trực tiếp với Bên A qua link/mã đại lý của Bên B và đã giao thành công được tính hoa hồng theo ' + hh + '; đối soát, chi trả như chính sách cộng tác viên đăng trên trang đại lý. Bên B tự kê khai, nộp các khoản thuế phát sinh từ hoạt động kinh doanh và thu nhập của mình.') +
+    P('<b>Điều 4. Đặt hàng, giao nhận.</b> Bên B đặt hàng qua Zalo ' + '0869 222 638' + ', email hoặc trang đại lý. Bên A giao hàng trong 03–07 ngày làm việc kể từ khi xác nhận đơn (hàng đặt riêng theo thỏa thuận). Phí vận chuyển do Bên B chịu, trừ khi hợp đồng từng lần ghi khác. Bên B kiểm hàng khi nhận (quay video mở hàng); khiếu nại thiếu, sai, lỗi trong <b>03 ngày</b> kể từ ngày nhận, quá hạn được coi là đã nhận đủ và đúng chất lượng. Rủi ro đối với hàng hóa chuyển sang Bên B kể từ khi hàng được giao cho Bên B hoặc đơn vị vận chuyển do Bên B chỉ định.') +
+    P('<b>Điều 5. Thanh toán.</b> Hàng mua bán: Bên B thanh toán <b>100% trước khi giao hàng</b>, trừ khi hợp đồng từng lần cho phép trả sau. Hàng ký gửi: đối soát và thanh toán theo hợp đồng ký gửi. Thanh toán bằng chuyển khoản vào tài khoản do Bên A chỉ định. Quyền sở hữu hàng mua bán chỉ chuyển cho Bên B khi Bên B thanh toán đủ. Chậm thanh toán chịu lãi <b>0,05%/ngày</b> trên số tiền chậm trả; Bên A được tạm ngưng giao hàng, thu hồi hàng ký gửi và cấn trừ vào khoản ký quỹ, hoa hồng chưa chi trả của Bên B cho đến khi Bên B thanh toán đủ.') +
+    P('<b>Điều 6. Bảo hành, đổi trả.</b> Sản phẩm được bảo hành theo chính sách Bên A công bố. Bên B tiếp nhận yêu cầu của khách và gửi sản phẩm lỗi về Bên A; Bên A đổi mới sản phẩm lỗi do nhà sản xuất trong 07 ngày kể từ ngày Bên B nhận hàng. Bên A <b>không nhận trả lại hàng mua bán không lỗi</b> (kể cả hàng chậm bán), trừ khi Bên A đồng ý. Hư hỏng do bảo quản, vận chuyển của Bên B, hoặc do khách sử dụng sai không được bảo hành.') +
+    P('<b>Điều 7. Thương hiệu.</b> Bên B được dùng tên, logo EYEMEDI và hình ảnh sản phẩm do Bên A cung cấp để bán Sản phẩm trong thời hạn hợp đồng; không đăng ký nhãn hiệu, tên miền, tên cửa hàng, fanpage, tài khoản gây nhầm lẫn là của Bên A; ngừng sử dụng và gỡ bỏ trong 07 ngày sau khi chấm dứt hợp đồng.') +
+    imageClause_('Điều 8', 'hình ảnh cửa hàng, video, livestream và mọi nội dung Bên B đăng trên các kênh của mình', 'chính sách chiết khấu đại lý') +
+    P('<b>Điều 9. Trách nhiệm Bên B.</b> Chỉ bán hàng chính hãng do Bên A cung cấp dưới tên EYEMEDI, không trộn lẫn hàng giả, hàng nhái; bảo quản, trưng bày hàng đúng hướng dẫn; với hàng ký gửi, chịu trách nhiệm mất mát, hư hỏng kể từ khi nhận; tuân thủ quy định pháp luật về kinh doanh, thuế, quảng cáo và quy định chuyên môn đối với kính thuốc, kính áp tròng; không quảng cáo sai sự thật, không hứa công dụng chữa bệnh; bảo mật giá nhập, chính sách đại lý; báo cáo tồn kho, doanh số khi Bên A yêu cầu.') +
+    P('<b>Điều 10. Trách nhiệm Bên A.</b> Cung cấp hàng đúng chủng loại, chất lượng, có nguồn gốc rõ ràng; cung cấp hình ảnh, thông tin sản phẩm, hướng dẫn bán hàng; thực hiện bảo hành theo Điều 6; xuất hóa đơn theo quy định áp dụng cho Bên A khi Bên B yêu cầu.') +
+    P('<b>Điều 11. Vi phạm.</b> Bên vi phạm nghĩa vụ chịu phạt <b>8% giá trị phần nghĩa vụ bị vi phạm</b> và bồi thường thiệt hại thực tế. Nếu Bên B bán hàng giả, hàng nhái dưới tên EYEMEDI, bán phá giá, hoặc chậm thanh toán quá 15 ngày, Bên A được đơn phương chấm dứt hợp đồng ngay, thu hồi hàng ký gửi và không chi trả hoa hồng phát sinh từ vi phạm.') +
+    P('<b>Điều 12. Thời hạn, chấm dứt.</b> Hợp đồng có hiệu lực 12 tháng kể từ ngày ký, tự động gia hạn nếu không bên nào có ý kiến khác. Mỗi bên được chấm dứt bằng thông báo trước <b>30 ngày</b>. Bên A được chấm dứt nếu Bên B không phát sinh đơn hàng trong 03 tháng liên tiếp. Khi chấm dứt, Bên B thanh toán hết công nợ và hoàn trả nguyên vẹn hàng ký gửi chưa bán trong 07 ngày (Bên B chịu phí vận chuyển); hàng không trả được tính như đã bán.') +
+    P('<b>Điều 13. Điều khoản chung.</b> Hợp đồng được giao kết bằng phương tiện điện tử, có giá trị pháp lý như bản giấy; mỗi bên lưu 01 bản. Mọi sửa đổi phải được hai bên đồng ý bằng văn bản hoặc tin nhắn xác nhận. Tranh chấp được thương lượng; nếu không thành, đưa ra Tòa án có thẩm quyền nơi Bên A đăng ký kinh doanh.') +
+    '<table style="margin-top:6pt"><tr><td class="c" style="width:50%"><b>ĐẠI DIỆN BÊN A</b><br><i style="font-size:9pt">' + (signed ? 'Đã chấp thuận điện tử lúc ' + esc_(signed.at) : '') + '</i><br><br>' + e(A.dai_dien) + '</td>' +
+    '<td class="c"><b>ĐẠI DIỆN BÊN B</b><br>' + (signed ? '<img src="' + signed.sig + '" style="height:56px"><br>' : '<br><br>') + e(info.full_name) +
     (signed ? '<br><i style="font-size:9pt">Ký điện tử lúc ' + esc_(signed.at) + '</i>' : '') + '</td></tr></table>' +
     '</body></html>';
 }
